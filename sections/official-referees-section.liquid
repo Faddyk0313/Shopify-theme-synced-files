@@ -1,0 +1,259 @@
+<style>
+  /* CSS Variables */
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #shopify-section-{{ section.id }} .section::before {
+    content: none;
+  }
+
+  /* Referees Section */
+  #shopify-section-{{ section.id }} .referees-section {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .referees-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .referees-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #000000;
+    margin-bottom: 1.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .referees-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  #shopify-section-{{ section.id }} .referees-badges {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .certification-badges {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+  }
+
+  #shopify-section-{{ section.id }} .badge-item {
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .badge-item img {
+    width: 100%;
+    height: auto;
+    max-width: 120px;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .referees-section {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    #shopify-section-{{ section.id }} .referees-badges {
+      align-items: center;
+    }
+
+    #shopify-section-{{ section.id }} .certification-badges {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      max-width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .badge-item img {
+      max-width: 100px;
+    }
+  }
+</style>
+
+<div class="section referees-section-wrapper">
+  <div class="referees-section section--padding page-width">
+    <div class="referees-content">
+      <p>{{ section.settings.paragraph_1 }}</p>
+      <p>{{ section.settings.paragraph_2 }}</p>
+    </div>
+    <div class="referees-badges">
+      <div class="certification-badges">
+        {% if section.settings.badge_1_image != blank %}
+          <div class="badge-item">
+            <img
+              src="{{ section.settings.badge_1_image | img_url: '240x240' }}"
+              alt="Badge 1"
+            >
+          </div>
+        {% endif %}
+        {% if section.settings.badge_2_image != blank %}
+          <div class="badge-item">
+            <img
+              src="{{ section.settings.badge_2_image | img_url: '240x240' }}"
+              alt="Badge 2"
+            >
+          </div>
+        {% endif %}
+        {% if section.settings.badge_3_image != blank %}
+          <div class="badge-item">
+            <img
+              src="{{ section.settings.badge_3_image | img_url: '240x240' }}"
+              alt="Badge 3"
+            >
+          </div>
+        {% endif %}
+        {% if section.settings.badge_4_image != blank %}
+          <div class="badge-item">
+            <img
+              src="{{ section.settings.badge_4_image | img_url: '240x240' }}"
+              alt="Badge 4"
+            >
+          </div>
+        {% endif %}
+      </div>
+      {%- render 'button',
+        label: section.settings.button_label,
+        link: section.settings.button_link,
+        size: section.settings.button_size,
+        style: section.settings.button_style,
+        textSize: section.settings.button_font_size,
+      -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Official Referees Section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_1",
+      "label": "Paragraph 1",
+      "default": "From players to officials, Titan delivers the A9-rated protection and performance trusted at every level of the game."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_2",
+      "label": "Paragraph 2",
+      "default": "Built with professional-grade cut resistance, the Titan BattleGear cut-resistant baselayer provides the same elite protection trusted by top players and leagues – now chosen by referees who hold themselves to the same standard. Designed for comfort, mobility, and focus, it keeps you cool, confident, and protected from puck drop to final whistle."
+    },
+    {
+      "type": "header",
+      "content": "Certification Badges"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_1_image",
+      "label": "Badge 1 Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_2_image",
+      "label": "Badge 2 Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_3_image",
+      "label": "Badge 3 Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_4_image",
+      "label": "Badge 4 Image"
+    },
+    {
+      "type": "header",
+      "content": "Button Settings"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "VIEW ALL SAFETY APPROVALS"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "label": "Button Size",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "options": [
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" },
+        { "value": "outline", "label": "Outline" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "select",
+      "id": "button_font_size",
+      "label": "Button Font Size",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ],
+      "default": "medium"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Official Referees Section"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,600 @@
+{% comment %} TBG Custom Code {% endcomment %}
+<style>
+  #shopify-section-{{ section.id }} .page-width {
+    padding-right: 0;
+  }
+  .reviews-wrapper {
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+  }
+  .reviews-wrapper .slides {
+    display: flex;
+    gap: 13px;
+    transition: transform 0.35s ease;
+    will-change: transform;
+  }
+  .reviews-wrapper .review-card {
+    background: #fff;
+    border-radius: 16px;
+    flex: 0 0 90%; /* fixed basis so JS can compute exact offset */
+    display: flex;
+    overflow: clip;
+    box-shadow: 0 13px 32px -8px rgba(0, 0, 0, 0.15);
+    position: relative;
+    margin-bottom: 20px;
+    max-height: 300px;
+    border: 1px solid #cacaca;
+  }
+  .reviews-wrapper .review-card.opened {
+    max-height: none;
+  }
+  .reviews-wrapper .review-card.collapsed {
+    max-height: 280px;
+    overflow: hidden;
+  }
+
+  .reviews-wrapper .review-image {
+    flex: 0 0 40%;
+    position: relative;
+    background: #e6e6e6;
+  }
+  .reviews-wrapper .review-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .reviews-wrapper .review-content {
+    padding: 14px;
+    flex: 0 0 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+  }
+  .reviews-wrapper .rating-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .reviews-wrapper .stars {
+    display: inline-flex;
+    gap: 1px;
+    line-height: 1;
+  }
+  .reviews-wrapper .star {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    position: relative;
+  }
+  .reviews-wrapper .star svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    fill: #000;
+  }
+  .reviews-wrapper .verified-badge {
+    background: #e5fd00;
+    padding: 5px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+  .reviews-wrapper .title {
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .reviews-wrapper .bodyWrapper {
+    position: relative;
+  }
+
+  .reviews-wrapper .body {
+    font-size: 12px;
+    margin: 0;
+    color: #111;
+    flex: 1;
+    line-height: 1.3;
+  }
+
+  .reviews-wrapper .read-more-btn {
+    background: none;
+    border: none;
+    padding: 8px 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    font-style: italic;
+    text-decoration: underline;
+    font-size: 12px;
+    display: block;
+    text-align: left;
+  }
+
+  .reviews-wrapper .read-more-btn:hover {
+    opacity: 0.7;
+  }
+
+  .reviews-wrapper .review-card.collapsed .read-more-btn {
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    background: linear-gradient(to bottom, transparent, #fff 30%, #fff);
+    width: 100%;
+    padding-left: 14px;
+  }
+  .reviews-wrapper .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    margin-top: auto;
+    font-weight: 600;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .reviews-wrapper .dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 13px;
+  }
+  .reviews-wrapper .dot {
+    width: 13px;
+    height: 13px;
+    border: none;
+  }
+  .reviews-wrapper .nav-btn {
+    position: absolute;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .reviews-wrapper .prev {
+    left: 4px;
+  }
+  .reviews-wrapper .next {
+    right: var(--page-padding);
+  }
+  .reviews-wrapper .nav-btn:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  .reviews-wrapper .left {
+    transform: rotate(-135deg);
+  }
+  .reviews-wrapper .right {
+    transform: rotate(45deg);
+  }
+
+  @media (min-width: 1024px) {
+    .reviews-wrapper .rating-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .reviews-wrapper .stars {
+      gap: 2px;
+    }
+    .reviews-wrapper .star {
+      width: 16px;
+      height: 16px;
+    }
+    .reviews-wrapper .verified-badge {
+      font-size: 14px;
+    }
+    .reviews-wrapper .title {
+      font-weight: 900;
+      font-size: 16px;
+      gap: 8px;
+    }
+
+    .reviews-wrapper .body {
+      font-size: 14px;
+      margin: 0;
+      color: #111;
+    }
+
+    .reviews-wrapper .read-more-btn {
+      font-size: 14px;
+    }
+    .reviews-wrapper .slides {
+      gap: 16px;
+      overflow: visible;
+    }
+    /* two-up: (100% - one gap) / 2 */
+    .reviews-wrapper .review-card {
+      flex: 0 0 calc((100% - 16px) / 2);
+    }
+  }
+
+  .flickity-page-dot:before {
+    background-color: #000 !important;
+  }
+  .flickity-page-dot[aria-current="true"]:before {
+    background-color: white !important;
+    box-shadow: 0 0 0 2px black !important;
+  }
+</style>
+
+<div class="section">
+  <div class="page-width relative">
+    <div class="reviews-wrapper" aria-label="Customer reviews">
+      <div class="slides" id="slides">
+        <!-- JS will populate -->
+      </div>
+      <!-- Prev / Next -->
+      <button class="nav-btn prev" aria-label="Previous slide" id="prevBtn">
+        <svg
+          style="width: 30px; height: 30px"
+          class="icon icon-arrow-left-long icon-md transform"
+          viewBox="0 0 37 24"
+          stroke="currentColor"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M10 5L3 11.9999M3 11.9999L10 18.9999M3 11.9999H33.5"
+          ></path>
+        </svg>
+      </button>
+      <button class="nav-btn next" aria-label="Next slide" id="nextBtn">
+        <svg
+          style="width: 30px; height: 30px"
+          class="icon icon-arrow-right-long icon-md transform"
+          viewBox="0 0 37 24"
+          stroke="currentColor"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M26.5 5L33.5 11.9999M33.5 11.9999L26.5 18.9999M33.5 11.9999H3"
+          ></path>
+        </svg>
+      </button>
+
+      <!-- Dots -->
+      <div class="dots" id="dotsContainer" aria-label="Slide indicators"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // TBG Custom Code
+  document.addEventListener('DOMContentLoaded', () => {
+    let reviewsData = [];
+    let current = 0;
+    let lastIsDesktop = null;
+    let cardObserver = null;
+
+    const slidesEl = document.querySelector('.reviews-wrapper #slides');
+    const dotsContainer = document.querySelector('.reviews-wrapper #dotsContainer');
+    const prevBtn = document.querySelector('.reviews-wrapper #prevBtn');
+    const nextBtn = document.querySelector('.reviews-wrapper #nextBtn');
+
+    function formatDate(iso) {
+      if (!iso) return '';
+      const d = new Date(iso);
+      const opts = { month: 'numeric', day: 'numeric', year: 'numeric' };
+      return d.toLocaleDateString('en-US', opts);
+    }
+
+    function createStarSVG(filled) {
+      const fillColor = filled ? '#000' : 'rgba(0,0,0,0.2)';
+      return `
+  <div class="star" aria-hidden="true">
+    <svg viewBox="0 0 24 24" aria-label="${filled ? 'filled star' : 'empty star'}">
+      <path fill="${fillColor}" d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.782 1.402 8.184L12 18.896l-6.336 3.88 1.402-8.184L1.132 9.21l8.2-1.192z"/>
+    </svg>
+  </div>`;
+    }
+
+    function isDesktop() {
+      return window.matchMedia('(min-width:1024px)').matches;
+    }
+
+    function perPage() {
+      return isDesktop() ? 2 : 1;
+    }
+
+    async function fetchReviews() {
+      try {
+        const res = await fetch('https://hocky-name-generator-seven.vercel.app/api/mostRecentReviews');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        reviewsData = Array.isArray(data.groupedReviews['With Pictures'])
+          ? data.groupedReviews['With Pictures'].filter((r) => r.rating >= 4)
+          : [];
+      } catch (err) {
+        console.error('Failed to load reviews:', err);
+        reviewsData = [];
+      }
+      current = 0;
+      lastIsDesktop = isDesktop();
+      buildSlides();
+      updateUI();
+    }
+
+    function buildDots() {
+      dotsContainer.innerHTML = '';
+      const total = reviewsData.length;
+      const p = perPage();
+      const totalDots = Math.max(1, total - (p - 1)); // desktop(3): total - 2
+      for (let i = 0; i < totalDots; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'dot flickity-page-dot';
+        dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+        dot.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    // Setup Intersection Observer to auto-collapse cards when out of view
+    function setupCardObserver() {
+      // Disconnect previous observer if exists
+      if (cardObserver) {
+        cardObserver.disconnect();
+      }
+
+      // Create new observer with threshold to detect when card is mostly out of view
+      cardObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const card = entry.target;
+            const readMoreBtn = card.querySelector('.read-more-btn');
+
+            // Only auto-collapse if card is expanded and going out of view
+            if (!entry.isIntersecting && card.classList.contains('opened') && readMoreBtn) {
+              // Card is out of view and expanded, collapse it
+              card.classList.add('collapsed');
+              card.classList.remove('opened');
+              readMoreBtn.textContent = 'Read more';
+              readMoreBtn.setAttribute('aria-label', 'Read full review');
+
+              // Smoothly scroll carousel to top
+              const carouselWrapper = document.querySelector('.reviews-wrapper');
+              if (carouselWrapper) {
+                const offsetPx = 100; // offset from top
+                const topY = carouselWrapper.getBoundingClientRect().top + window.pageYOffset - offsetPx;
+                window.scrollTo({ top: topY, behavior: 'smooth' });
+              }
+            }
+          });
+        },
+        {
+          root: null, // viewport
+          rootMargin: '-50px', // trigger when card is 50px outside viewport
+          threshold: 0, // trigger as soon as any part goes out of view
+        }
+      );
+    }
+
+    function buildSlides() {
+      slidesEl.innerHTML = '';
+      dotsContainer.innerHTML = '';
+
+      // Setup observer for auto-collapsing
+      setupCardObserver();
+
+      const formatName = (name) => {
+        const parts = name.trim().split(' ');
+        if (parts.length > 1) {
+          return `${parts[0]} ${parts[parts.length - 1][0]}.`;
+        } else {
+          return parts[0]; // only first name, no dot
+        }
+      };
+
+      reviewsData.forEach((r) => {
+        const card = document.createElement('div');
+        card.className = 'review-card';
+        card.setAttribute('role', 'group');
+
+        const reviewerName =
+          (r.reviewer && (r.reviewer.name || `${r.reviewer.first_name || ''} ${r.reviewer.last_name || ''}`.trim())) ||
+          'Anonymous';
+        card.setAttribute('aria-label', `Review by ${reviewerName}`);
+
+        const imgUrl = (r.pictures && r.pictures[0]?.urls?.original) || '';
+        const reviewerImageHTML = `
+    <div class="review-image">
+      ${
+        imgUrl
+          ? `<img alt="Reviewer image" src="${imgUrl}">`
+          : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666;">No Image</div>`
+      }
+    </div>
+  `;
+
+        let starsHTML = '';
+        for (let i = 1; i <= 5; i++) {
+          starsHTML += createStarSVG(i <= (typeof r.rating === 'number' ? r.rating : 0));
+        }
+
+        const verifiedHTML =
+          r.verified && r.verified.toString().toLowerCase().includes('verified')
+            ? `<div class="verified-badge" aria-label="Verified purchase">Verified</div>`
+            : '';
+
+        card.innerHTML = `
+    ${reviewerImageHTML}
+    <div class="review-content">
+      <div class="rating-row">
+        <div class="stars" aria-label="Rating: ${r.rating} out of 5">${starsHTML}</div>
+        ${verifiedHTML}
+      </div>
+      <div class="title">
+        <div>${r.title || ''}</div>
+      </div>
+      <div class="bodyWrapper"><p class="body">${r.body || ''}</p></div>
+      <div class="footer">
+        <div>${formatName(reviewerName)}</div>
+        <div style="font-size:12px;">${formatDate(r.created_at)}</div>
+      </div>
+    </div>
+  `;
+        slidesEl.appendChild(card);
+
+        // Check if card height exceeds 400px and add "Read more" button
+        setTimeout(() => {
+          const cardHeight = card.scrollHeight;
+          const cardVisibleHeight = card.offsetHeight;
+
+          // Only add button if content is actually overflowing (scrollHeight > actual height when unconstrained)
+          if (cardHeight > 280) {
+            // Temporarily add collapsed class to check if it causes overflow
+            card.classList.add('collapsed');
+            card.classList.remove('opened');
+
+            // Check again after collapse - only show button if content is cut off
+            setTimeout(() => {
+              const collapsedHeight = card.offsetHeight;
+              const fullHeight = card.scrollHeight;
+
+              if (fullHeight > collapsedHeight) {
+                // Content is actually being cut off, show the button
+                const readMoreBtn = document.createElement('button');
+                readMoreBtn.className = 'read-more-btn';
+                readMoreBtn.textContent = 'Read more';
+                readMoreBtn.setAttribute('aria-label', 'Read full review');
+
+                readMoreBtn.addEventListener('click', (e) => {
+                  e.stopPropagation();
+                  if (card.classList.contains('collapsed')) {
+                    card.classList.remove('collapsed');
+                    card.classList.add('opened');
+                    readMoreBtn.textContent = 'Read less';
+                    readMoreBtn.setAttribute('aria-label', 'Collapse review');
+                  } else {
+                    card.classList.add('collapsed');
+                    card.classList.remove('opened');
+                    readMoreBtn.textContent = 'Read more';
+                    readMoreBtn.setAttribute('aria-label', 'Read full review');
+                  }
+                });
+
+                const reviewContent = card.querySelector('.review-content');
+                reviewContent.appendChild(readMoreBtn);
+
+                // Observe this card for auto-collapse when out of view
+                cardObserver.observe(card);
+              } else {
+                // Content fits, remove collapsed class
+                card.classList.remove('collapsed');
+              }
+            }, 0);
+          }
+        }, 0);
+      });
+
+      buildDots();
+    }
+
+    function updateUI() {
+      const firstCard = slidesEl.children[0];
+      if (!firstCard) return;
+
+      const gap = parseInt(getComputedStyle(slidesEl).gap) || 12;
+      const cardWidth = firstCard.offsetWidth;
+      const total = reviewsData.length;
+      const p = perPage();
+      const maxIndex = Math.max(0, total - p);
+
+      // clamp current to a valid "start"
+      const idx = Math.min(current, maxIndex);
+      current = idx;
+
+      const offsetPx = idx * (cardWidth + gap);
+      slidesEl.style.transform = `translateX(-${offsetPx}px)`;
+
+      prevBtn.disabled = idx === 0;
+      nextBtn.disabled = idx >= maxIndex;
+
+      // reflect clamped index on the reduced dot set
+      Array.from(dotsContainer.children).forEach((d, i) => {
+        d.setAttribute('aria-current', i === idx ? 'true' : 'false');
+      });
+    }
+
+    function goTo(i) {
+      if (i < 0) return;
+      const total = reviewsData.length;
+      const p = perPage();
+      const maxIndex = Math.max(0, total - p);
+      if (i > maxIndex) i = maxIndex;
+      current = i;
+      updateUI();
+    }
+
+    // Arrow navigation (step by page)
+    // Arrow navigation (step by 1)
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+
+    // Swipe for mobile (only when 1-up)
+    let startX = null;
+    slidesEl.addEventListener('touchstart', (e) => {
+      if (isDesktop()) return;
+      startX = e.touches[0].clientX;
+    });
+    slidesEl.addEventListener('touchend', (e) => {
+      if (isDesktop() || startX === null) return;
+      const endX = e.changedTouches[0].clientX;
+      const delta = endX - startX;
+      const threshold = 50;
+      if (delta > threshold) goTo(current - 1);
+      else if (delta < -threshold) goTo(current + 1);
+      startX = null;
+    });
+
+    // Rebuild dots when switching 1-up ↔ 3-up
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      const nowIsDesktop = isDesktop();
+      if (nowIsDesktop !== lastIsDesktop) {
+        lastIsDesktop = nowIsDesktop;
+
+        // Debounce to avoid rebuilding too frequently
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          buildSlides();
+          updateUI();
+        }, 150);
+      }
+    });
+
+    // initial fetch + render
+    fetchReviews();
+  });
+  // End TBG Custom Code
+</script>
+
+{% schema %}
+{
+  "name": "Reviews Card Carousel",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Reviews Card Carousel"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,630 @@
+<style>
+  .product__rating {
+    font-weight: 600;
+    color: #4e4e4e;
+  }
+  .rating.text-lg.leading-none {
+    font-size: 1.2rem;
+  }
+  .rating-star:before {
+    content: "\2605\2605\2605\2605\2605";
+    background: black;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  .cus_sub_header {
+    font-weight: 700;
+    margin: 0 !important;
+    padding: 0 !important;
+    padding-top: 0.5rem !important;
+    color: #5b5b5b;
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+  }
+  .h1.heading {
+     font-size: 1.5rem;
+  }
+  {% comment %} @media (max-width: 500px) {
+    .h1.heading {
+      font-size: 1.7rem !important;
+    }
+  } {% endcomment %}
+  .customStyle {
+    font-family: Armourxbd !important;
+    font-size: 1.5rem;
+  }
+  .customStyle.diagonal-strike {
+    font-size: 1rem;
+  }
+
+  .h1.heading {
+    font-size: 1.5rem;
+  }
+
+  .subheader .price__sale::before {
+    border-block-end: 2px solid red !important;
+  }
+
+  /* TBG Custom Code */
+  .tbg-payment-terms-source {
+    position: relative;
+    min-height: 0;
+  }
+
+  
+
+  .tbg-payment-terms-source shopify-payment-terms,
+  .tbg-payment-terms-source .shopify-payment-terms,
+  .tbg-payment-terms-source iframe {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .tbg-installment-row {
+    display: flex;
+    justify-content: flex-start;
+    max-width: 150px;
+       }
+
+  .tbg-installment-row .installment {
+    text-align: left;
+  }
+
+  .tbg-installment-row .installment strong {
+    font-weight: 700;
+  }
+
+  .tbg-installment-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    margin-left: 6px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: currentColor;
+    cursor: pointer;
+    vertical-align: middle;
+  }
+
+  .tbg-installment-trigger svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+  }
+
+  .tbg-installment-trigger:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    border-radius: 999px;
+  }
+
+  .tbg-installment-row {
+      margin-top: 6px;
+    }
+
+    @media (min-width:768px) {
+      .product__price {
+        margin-left: auto;
+        align-self: end;
+      }
+      .tbg-installment-row {
+        display: flex;
+        justify-content: flex-end;
+        max-width: unset;
+      }
+    }
+   /* End TBG Custom Code */
+</style>
+
+{% assign skip_ids = '8555370119346,8542630183090,8361286369458,7879698153650' | split: ',' %}
+
+<!-- TBG Custom Code -->
+{%- assign product_form_installment_id = 'ProductFormInstallment-'
+  | append: section.id
+  | append: '-'
+  | append: product.id
+-%}
+{%- assign tbg_custom_installment_id = 'TBG-CustomInstallment-'
+  | append: section.id
+  | append: '-'
+  | append: product.id
+-%}
+{%- assign tbg_variant_data_id = 'TBG-InstallmentVariantData-'
+  | append: section.id
+  | append: '-'
+  | append: product.id
+-%}
+
+{% assign title_parts = product.title | split: ' - ' %}
+{% assign title_without_last = '' %}
+{% for part in title_parts %}
+  {% if forloop.index < title_parts.size %}
+    {% if title_without_last != '' %}
+      {% assign title_without_last = title_without_last | append: ' - ' %}
+    {% endif %}
+    {% assign title_without_last = title_without_last | append: part %}
+  {% endif %}
+{% endfor %}
+
+<div class="subheader flex flex-col lg:flex-row gap-1">
+  <div class="product__title flex gap-3" style="align-items: end; !important;">
+    <div>
+      {%- render 'product-rating', product: product, ignoreBlock: true -%}
+      <p class="cus_sub_header">
+        {% if product.template_suffix == "rinkwear-feb-2025" %}
+          {{ title_without_last }}
+        {% else %}
+          {% if skip_ids contains product.id %}
+            {%- if product.metafields.custom.collection_name != blank -%}
+              {{ product.metafields.custom.collection_name }}
+            {%- endif -%}
+          {% else %}
+            {{ product.metafields.custom.collection_name | default: 'HECC Certified' }}
+          {% endif %}
+        {% endif %}
+      </p>
+      <h1
+        class="h1 heading leading-none product-title-sm mobile:product-title-sm"
+        style="
+          margin: 0 !important;
+          font-family: Armourxbd !important;
+        "
+      >
+        <split-words class="split-words block" data-animate="fade-up">
+          {% if skip_ids contains product.id %}
+            {{ product.title }}
+          {% else %}
+            {% if title_parts.size > 1 %}
+              {% if product.template_suffix == 'custom-team-pdp' %}
+                {{ title_parts | last }}
+              {% elsif product.template_suffix == 'rinkwear-feb-2025' %}
+                {{ title_parts | last }}
+              {% else %}
+                {{ title_without_last }}
+              {% endif %}
+            {% else %}
+              {{ product.title }}
+            {% endif %}
+          {% endif %}
+        </split-words>
+      </h1>
+    </div>
+  </div>
+  <div class="product__price grid gap-3">
+    <div class="no-js-hidden" id="Price-{{ section.id }}-{{ product.id }}">
+      {%- render 'product-price',
+        product: product,
+        use_variant: true,
+        class: 'flex flex-row md:flex-col-reverse flex-wrap items-baseline gap-2 lg:gap-1',
+        style: 'ml-2 flex-row md:flex-col-reverse ',
+        boldPrice: true,
+        saleFontSize: 'normal',
+        source: 'sub-header'
+      -%}
+
+      {%- if product.quantity_price_breaks_configured? -%}
+        <div
+          class="text-opacity text-sm font-medium leading-tight"
+          id="VolumeNote-{{ section.id }}-{{ product.id }}"
+        >
+          {{- 'products.volume_pricing.note' | t -}}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- TBG Custom Code -->
+    {%- form 'product',
+      product,
+      id: product_form_installment_id,
+      class: 'installment text-sm leading-tight tbg-payment-terms-source'
+    -%}
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      {{ form | payment_terms }}
+    {%- endform -%}
+
+    <script type="application/json" id="{{ tbg_variant_data_id }}">
+      [
+        {%- for variant in product.variants -%}
+          { "id": {{ variant.id | json }}, "price": {{ variant.price | json }} }{%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+      ]
+    </script>
+
+    <script>
+      // TBG Custom Code
+      (function () {
+        var sourceFormId = {{ product_form_installment_id | json }};
+        var customInstallmentId = {{ tbg_custom_installment_id | json }};
+        var variantDataId = {{ tbg_variant_data_id | json }};
+        var minPriceCents = 3500;
+        var monthlyThresholdCents = 5000;
+        var currencyCode = {{ cart.currency.iso_code | default: shop.currency | json }};
+
+        window.TBGCustomInstallments = window.TBGCustomInstallments || {};
+        if (window.TBGCustomInstallments[customInstallmentId]) return;
+        window.TBGCustomInstallments[customInstallmentId] = true;
+
+        /* TBG Custom Code */
+        var refreshFrame = 0;
+        var delayedRefreshTimer = 0;
+        var lastVariantId = '';
+        /* End TBG Custom Code */
+        var variantPriceMap = {};
+
+        try {
+          var variantDataEl = document.getElementById(variantDataId);
+          var variantData = variantDataEl ? JSON.parse(variantDataEl.textContent) : [];
+          variantData.forEach(function (variant) {
+            variantPriceMap[String(variant.id)] = Number(variant.price || 0);
+          });
+        } catch (e) {}
+
+        function getSourceForm() {
+          return document.getElementById(sourceFormId);
+        }
+
+        function getCustomLine() {
+          return document.getElementById(customInstallmentId);
+        }
+
+        function getScopeRoot() {
+          var sourceForm = getSourceForm();
+          if (!sourceForm) return document;
+          return (
+            sourceForm.closest('[data-section-id]') ||
+            sourceForm.closest('product-info') ||
+            sourceForm.closest('section') ||
+            document
+          );
+        }
+
+        function formatMoney(cents) {
+          var amount = Number(cents || 0) / 100;
+
+          try {
+            return new Intl.NumberFormat(undefined, {
+              style: 'currency',
+              currency: currencyCode,
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            }).format(amount);
+          } catch (e) {
+            return '$' + amount.toFixed(2);
+          }
+        }
+
+        function getSelectedVariantId() {
+          var sourceForm = getSourceForm();
+          if (!sourceForm) return '';
+
+          var scopeRoot = getScopeRoot();
+          var primaryInputs = scopeRoot.querySelectorAll(
+            'form[action*="/cart/add"] input[name="id"], product-form input[name="id"], .product-form input[name="id"]'
+          );
+
+          for (var i = 0; i < primaryInputs.length; i++) {
+            var input = primaryInputs[i];
+            var parentForm = input.closest('form');
+
+            if (parentForm && parentForm.id !== sourceFormId && input.value) {
+              return String(input.value);
+            }
+          }
+
+          var sourceInput = sourceForm.querySelector('input[name="id"]');
+          if (sourceInput && sourceInput.value) {
+            return String(sourceInput.value);
+          }
+
+          var urlVariant = new URLSearchParams(window.location.search).get('variant');
+          return urlVariant ? String(urlVariant) : '';
+        }
+
+        function syncSourceFormVariant(variantId) {
+          var sourceForm = getSourceForm();
+          if (!sourceForm || !variantId) return;
+
+          var input = sourceForm.querySelector('input[name="id"]');
+          if (!input || input.value === variantId) return;
+
+          input.value = variantId;
+          input.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+
+        function getVariantPriceCents(variantId) {
+          if (!variantId) return null;
+          var price = variantPriceMap[String(variantId)];
+          return typeof price === 'number' && !isNaN(price) ? price : null;
+        }
+
+        function getNativePaymentTermsElement() {
+          var sourceForm = getSourceForm();
+          return sourceForm ? sourceForm.querySelector('shopify-payment-terms') : null;
+        }
+
+        function getNativePaymentText() {
+          var paymentTermsEl = getNativePaymentTermsElement();
+          if (!paymentTermsEl) return '';
+
+          var textParts = [];
+
+          if (paymentTermsEl.textContent) {
+            textParts.push(paymentTermsEl.textContent);
+          }
+
+          if (paymentTermsEl.innerText) {
+            textParts.push(paymentTermsEl.innerText);
+          }
+
+          if (paymentTermsEl.shadowRoot) {
+            if (paymentTermsEl.shadowRoot.textContent) {
+              textParts.push(paymentTermsEl.shadowRoot.textContent);
+            }
+            if (paymentTermsEl.shadowRoot.innerText) {
+              textParts.push(paymentTermsEl.shadowRoot.innerText);
+            }
+          }
+
+          return textParts.join(' ').replace(/\s+/g, ' ').trim();
+        }
+
+        function extractInstallmentValue(text) {
+          if (!text) return null;
+
+          var normalizedText = text.replace(/\s+/g, ' ').trim();
+
+          var monthlyMatch = normalizedText.match(/([€£$]\s?\d[\d,]*(?:\.\d{2})?)\/mo\b/i);
+          if (monthlyMatch) {
+            return {
+              amount: monthlyMatch[1].replace(/\s+/g, ' ').trim(),
+              suffix: '/mo'
+            };
+          }
+
+          var installmentMatch = normalizedText.match(/(?:pay in|or pay in)?\s*(\d+)\s+interest-free installments? of\s+([€£$]\s?\d[\d,]*(?:\.\d{2})?)/i);
+          if (installmentMatch) {
+            return {
+              amount: installmentMatch[2].replace(/\s+/g, ' ').trim(),
+              suffix: ''
+            };
+          }
+
+          return null;
+        }
+
+        function getNativePopupTrigger() {
+          var paymentTermsEl = getNativePaymentTermsElement();
+          if (!paymentTermsEl) return null;
+
+          var candidates = [];
+
+          function collectClickableElements(root) {
+            if (!root || !root.querySelectorAll) return [];
+            return Array.prototype.slice.call(
+              root.querySelectorAll('a, button, [role="button"], [tabindex]')
+            );
+          }
+
+          candidates = candidates.concat(collectClickableElements(paymentTermsEl));
+
+          if (paymentTermsEl.shadowRoot) {
+            candidates = candidates.concat(collectClickableElements(paymentTermsEl.shadowRoot));
+          }
+
+          var preferredTexts = [
+            'check your purchasing power',
+            'learn more'
+          ];
+
+          for (var i = 0; i < preferredTexts.length; i++) {
+            var preferredText = preferredTexts[i];
+
+            for (var j = 0; j < candidates.length; j++) {
+              var el = candidates[j];
+              var text = (el.textContent || el.innerText || '').replace(/\s+/g, ' ').trim().toLowerCase();
+
+              if (text.indexOf(preferredText) !== -1) {
+                return el;
+              }
+            }
+          }
+
+          return candidates.length ? candidates[0] : null;
+        }
+
+        function openNativeInstallmentPopup() {
+          var trigger = getNativePopupTrigger();
+          if (!trigger) return;
+          trigger.click();
+        }
+
+        /* TBG Custom Code */
+        function renderCustomInstallment(variantId) {
+          var customLine = getCustomLine();
+          if (!customLine) return;
+
+          variantId = variantId || getSelectedVariantId();
+          var variantPriceCents = getVariantPriceCents(variantId);
+
+          if (variantPriceCents !== null && variantPriceCents < minPriceCents) {
+            customLine.innerHTML = '';
+            customLine.hidden = true;
+            return;
+          }
+
+          var installmentData = extractInstallmentValue(getNativePaymentText());
+
+          if (!installmentData && variantPriceCents !== null) {
+            var divisor = variantPriceCents >= monthlyThresholdCents ? 4 : 2;
+            installmentData = {
+              amount: formatMoney(Math.round(variantPriceCents / divisor)),
+              suffix: divisor === 4 ? '/mo' : ''
+            };
+          }
+
+          if (!installmentData || !installmentData.amount) {
+            customLine.innerHTML = '';
+            customLine.hidden = true;
+            return;
+          }
+
+          customLine.innerHTML =
+            'or from <strong>' +
+            installmentData.amount +
+            '</strong>' +
+            installmentData.suffix +
+            '<button type="button" class="tbg-installment-trigger" aria-label="Learn more about payment options">' +
+              '<svg viewBox="0 0 20 20" fill="none" aria-hidden="true">' +
+                '<circle cx="10" cy="10" r="8.25" stroke="currentColor" stroke-width="1.5"></circle>' +
+                '<path d="M10 8.2V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>' +
+                '<circle cx="10" cy="5.8" r="0.9" fill="currentColor"></circle>' +
+              '</svg>' +
+            '</button>';
+
+          customLine.hidden = false;
+        }
+
+        function clearScheduledRefreshes() {
+          if (refreshFrame) {
+            cancelAnimationFrame(refreshFrame);
+            refreshFrame = 0;
+          }
+
+          if (delayedRefreshTimer) {
+            clearTimeout(delayedRefreshTimer);
+            delayedRefreshTimer = 0;
+          }
+        }
+
+        function refreshInstallment(options) {
+          options = options || {};
+
+          var variantId = getSelectedVariantId();
+          var variantChanged = variantId !== lastVariantId;
+          lastVariantId = variantId;
+
+          syncSourceFormVariant(variantId);
+          renderCustomInstallment(variantId);
+
+          if (!options.delayedPass && !variantChanged) {
+            return;
+          }
+
+          delayedRefreshTimer = window.setTimeout(function () {
+            delayedRefreshTimer = 0;
+            renderCustomInstallment(variantId);
+          }, 250);
+        }
+
+        function scheduleRefresh(options) {
+          clearScheduledRefreshes();
+
+          refreshFrame = requestAnimationFrame(function () {
+            refreshFrame = 0;
+            refreshInstallment(options);
+          });
+        }
+        /* End TBG Custom Code */
+
+        function bindVariantListeners() {
+          var scopeRoot = getScopeRoot();
+
+          function handleVariantInteraction(event) {
+            var target = event.target;
+            if (!target || !scopeRoot.contains(target)) return;
+
+            if (
+              target.name === 'id' ||
+              target.matches('select[name^="options["]') ||
+              target.matches('input[name^="options["]') ||
+              target.closest('variant-selects') ||
+              target.closest('variant-radios')
+            ) {
+              /* TBG Custom Code */
+              scheduleRefresh({ delayedPass: true });
+              /* End TBG Custom Code */
+            }
+          }
+
+          scopeRoot.addEventListener('change', handleVariantInteraction);
+          scopeRoot.addEventListener('input', handleVariantInteraction);
+
+          scopeRoot.addEventListener('click', function (event) {
+            var trigger = event.target.closest('.tbg-installment-trigger');
+            if (!trigger) return;
+
+            event.preventDefault();
+            openNativeInstallmentPopup();
+          });
+
+          /* TBG Custom Code */
+          document.addEventListener('variant:change', function () {
+            scheduleRefresh({ delayedPass: true });
+          });
+          document.addEventListener('product:variant-change', function () {
+            scheduleRefresh({ delayedPass: true });
+          });
+          document.addEventListener('product-info:variant-change', function () {
+            scheduleRefresh({ delayedPass: true });
+          });
+          /* End TBG Custom Code */
+        }
+
+        /* TBG Custom Code */
+        function init() {
+          scheduleRefresh({ delayedPass: true });
+          bindVariantListeners();
+        }
+        /* End TBG Custom Code */
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init, { once: true });
+        } else {
+          init();
+        }
+      })();
+      // End TBG Custom Code
+    </script>
+    <!-- End TBG Custom Code -->
+
+    {%- if block.settings.show_taxes_notice -%}
+      {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
+        <div class="product__tax rte text-sm">
+          {%- liquid
+            if cart.taxes_included
+              echo 'products.product.include_taxes' | t
+            endif
+            if shop.shipping_policy.body != blank
+              echo 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url
+            endif
+          -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>
+
+  <!-- TBG Custom Code -->
+  <div class="tbg-installment-row">
+    <div
+      id="{{ tbg_custom_installment_id }}"
+      class="installment text-sm leading-tight"
+      aria-live="polite"
+      hidden
+    ></div>
+  </div>
+<!-- End TBG Custom Code -->

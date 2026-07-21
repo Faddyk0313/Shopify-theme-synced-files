@@ -1,0 +1,634 @@
+{%- comment -%}
+  sections/state-configuration.liquid
+  A standalone “State Configuration” UI with:
+   • dynamic add/edit/delete rows
+   • policy dropdown
+   • messaging field
+   • password + Run Sync → POST JSON
+{%- endcomment -%}
+
+<style>
+  /* always allow horizontal scroll */
+  #state-config .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* let table expand past 100% if needed */
+  #config-table {
+    width: max-content;
+    min-width: 100%;
+  }
+
+  /* MOBILE STACKED CARDS */
+  @media (max-width: 1060px) {
+    /* hide the real header */
+    #config-table thead {
+      display: none;
+    }
+
+    /* make every row and cell a block so they stack */
+    #config-table,
+    #config-table tbody,
+    #config-table tr,
+    #config-table td {
+      display: block;
+      width: 100%;
+    }
+
+    /* spacing between “cards” */
+    #config-table tr {
+      margin-bottom: 1rem;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    /* each cell is right-aligned, with space on the left for its label */
+    #config-table td {
+      position: relative;
+      padding-left: 50%;
+      text-align: right;
+    }
+    /* inject the column name via data-label */
+    #config-table td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 1.2rem;
+      top: -0.2rem;
+      width: 45%;
+      white-space: nowrap;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+  }
+
+  /* Container */
+  #state-config { padding: 2rem; margin: 0 auto; box-sizing: border-box; }
+  #state-config h1 { font-size: 1.5rem; margin-bottom: 1rem; }
+
+  /* Table */
+  /* #config-table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+  #config-table th, #config-table td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    text-align: left;
+    box-sizing: border-box;
+  } */
+  /* ensure the table inside is as wide as needed */
+  #config-table {
+    width: 100%;
+    margin-bottom: 1rem;
+    min-width: 100%; /* but never smaller than the viewport/form width */
+    border-collapse: collapse;
+    box-shadow: none;
+  }
+
+  /* Header row: single bottom border */
+  #config-table thead th {
+    padding-block: 1rem;
+    padding-inline: 0;
+    padding-right: 0.5rem;
+    font-size: 0.68rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    border-bottom: 1px solid #e5e5e5;
+    background-color: transparent;
+  }
+  /* Body rows: only horizontal dividers */
+  #config-table tbody tr {
+    /* border: none; */
+
+  }
+
+  #config-table tbody * {
+    font-size: 0.9rem;
+
+  }
+  #config-table tbody td {
+    padding-inline: 0;
+    padding-right: 0.5rem;
+  }
+
+  #state-config input[type="text"],
+  #state-config select,
+  #state-config input[type="password"] {
+    border: 1px solid #f2f2f2;
+    box-sizing: border-box;
+  }
+
+
+  /* Button row layout */
+  #state-config .controls { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+  /* Buttons */
+  /* #add-row-button { background: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer; padding: 0.5rem 1rem; }
+  #run-sync-button { background: #6f42c1; color: #fff; border: none; border-radius: 4px; cursor: pointer; padding: 0.5rem 1rem; } */
+  .delete-row-button { background: transparent; color: #dc3545; border: none; cursor: pointer; }
+
+  /* Password input */
+  /* #sync-password { background: #fff; color: #000; border: 1px solid #ccc; border-radius: 4px; } */
+
+  #state-config .group{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+  }
+  #state-config .group .label {
+   font-family: TITANFONT;
+    margin: 0
+  }
+  #state-config .error_msg {
+    color: red;
+    font-size: 12px;
+    opacity: 0%;
+    transition: all 0.5s ease-in-out;
+  }
+  #state-config .input_field {
+    padding-block: 0.7rem;
+    padding-inline: 1rem;
+    border-radius: 15px;
+    border: 2px solid rgb(210, 209, 209);
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    outline: none;
+  }
+  #state-config .input_field {
+    cursor: text;
+  }
+
+  #state-config .input_field:focus {
+    border-color: black;
+  }
+
+  #state-config .inputContainer {
+    border-radius: 15px;
+    overflow: clip;
+  }
+
+  #state-config .inputContainer input {
+    border-radius: 15px;
+    padding-block: 0.7rem;
+    padding-inline: 1rem;
+    transition: all 0.3s ease-in-out;
+    border: 2px solid rgb(210, 209, 209);
+    cursor: text;
+    outline: none;
+    width: calc(100% - 1rem);
+  }
+  #state-config .inputContainer input:focus {
+    border-color: black;
+    outline: none;
+  }
+
+  #state-config .custom-dropdown {
+    position: relative;
+    width: 100%;
+    display: inline-block;
+    /* Adjust width as needed */
+  }
+
+  #state-config .my_dropdown {
+    padding-block: 0.7rem;
+    padding-inline: 1rem;
+    border-radius: 15px;
+    border: 2px solid rgb(210, 209, 209);
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    width: calc(100% - 1rem);
+    /* Removes default arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  #state-config .my_dropdown:focus {
+    border-color: black;
+  }
+
+  #state-config .custom-arrow {
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+    /* Prevents interaction with the arrow */
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve"><defs></defs><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >	<path d="M 90 24.25 c 0 -0.896 -0.342 -1.792 -1.025 -2.475 c -1.366 -1.367 -3.583 -1.367 -4.949 0 L 45 60.8 L 5.975 21.775 c -1.367 -1.367 -3.583 -1.367 -4.95 0 c -1.366 1.367 -1.366 3.583 0 4.95 l 41.5 41.5 c 1.366 1.367 3.583 1.367 4.949 0 l 41.5 -41.5 C 89.658 26.042 90 25.146 90 24.25 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" /></g></svg>')
+        no-repeat center;
+    background-size: contain;
+  }
+
+  #run-sync-button {
+    background: white !important;
+    color: black;
+  }
+  #run-sync-button:hover {
+    color: white;
+  }
+  #run-sync-button .btn-fill {
+    background-color: black !important;
+  }
+
+  #authenticating-modal .drawer__title {
+    font-size:20px !important;
+
+  }
+  @media (min-width: 786px) {
+    #authenticating-modal .drawer__title {
+      font-size:40px !important;
+
+    }
+  }
+  #authenticating-modal[active] .drawer__inner {
+    opacity: 1;
+    transform: scale(1);
+    transition: all .8s cubic-bezier(.7,0,.2,1);
+    pointer-events: all !important;
+
+  }
+
+  #authenticating-modal:not([active]) .drawer__inner {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+  }
+
+  #authenticating-modal-overlay {
+    background-color: rgb(var(--color-overlay) / .7);
+    transition: all .8s cubic-bezier(.7,0,.2,1);
+    opacity: 0;
+    pointer-events: none;
+
+  }
+
+  #authenticating-modal[active] #authenticating-modal-overlay {
+    opacity: 1;
+    pointer-events: all;
+    cursor: default !important;
+  }
+
+  @media (max-width: 640px) {
+    #authenticating-modal {
+      transition: all .8s cubic-bezier(.7,0,.2,1);
+      opacity: 1;
+      transform: translateY(100%);
+    }
+
+    #authenticating-modal:not([active]) .drawer__inner {
+      opacity: 1;
+      pointer-events: none;
+    }
+
+    #authenticating-modal[active] {
+      pointer-events: all;
+      transform: translateY(0);
+    }
+
+    #authenticating-modal #authenticating-modal-overlay {
+    transition: all 2s cubic-bezier(.7,0,.2,1);
+      transform: translate(0px);
+    }
+    #authenticating-modal[active] #authenticating-modal-overlay {
+      opacity: 1;
+
+    }
+  }
+
+  .modal-visible * { pointer-events: none; }
+  .modal-visible #authenticating-modal,
+  .modal-visible #authenticating-modal * { pointer-events: auto; }
+
+  .animatingBtn {
+    width: 120px;
+    min-width: 120px;
+  }
+
+  .noPadding {
+    padding: 0 !important;
+  }
+</style>
+
+<div class="table-wrapper">
+  <div id="state-config">
+    <h1>{{ section.settings.heading }}</h1>
+    <table id="config-table">
+      <thead>
+        <tr>
+          <th>State</th>
+          <th>ATC Label</th>
+          <th>Policy</th>
+          <th>Messaging</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody style="padding: 0.1rem;">
+        <!-- rows will be injected here -->
+      </tbody>
+    </table>
+
+    <div class="controls">
+      <button
+        id="add-row-button"
+        class="button button--primary icon-with-text col-span-full"
+        type="submit"
+        name="checkout"
+        is="hover-button"
+      >
+        <span class="btn-fill" data-fill></span>
+        <span class="btn-text">Add State</span>
+      </button>
+      <button
+        id="run-sync-button"
+        class="button button--primary icon-with-text col-span-full"
+        type="submit"
+        name="checkout"
+        is="hover-button"
+      >
+        <span class="btn-fill" data-fill></span>
+        <span class="btn-text">Run Sync</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let intervalId;
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const modalHTML =`
+      <x-modal
+        id="authenticating-modal"
+        class="profile-modal x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+        role="dialog"
+        aria-modal="true"
+        active
+      >
+        <overlay-element
+          id="authenticating-modal-overlay"
+          class="overlay fixed-modal fixed bottom-0 left-0 w-full h-screen transition-opacity duration-300"
+          aria-expanded="false"
+        ></overlay-element>
+        <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+          <gesture-element class="drawer__header flex justify-between relative">
+            <span class="drawer__title heading">
+              This product is for your team only.<br>
+              Enter Password to continue.
+            </span>
+          </gesture-element>
+          <div class="drawer__content flex flex-col h-full grow shrink">
+            <div class="drawer__scrollable relative flex flex-col gap-5 md:gap-4 grow shrink">
+              <form id="auth-form" class="grid gap-4d5 md:gap-6">
+                <div class="field">
+                  <input
+                    id="sync-password"
+                    class="input is-floating"
+                    type="password"
+                    autocapitalize="off"
+                    autocomplete="current-password"
+                    required
+                    placeholder="Password"
+                    style="background-color: #e2e8f0;"
+                  />
+                  <label class="label is-floating" for="sync-password">
+                    Enter Password
+                  </label>
+                </div>
+                <div class="field">
+                  <label for="customPopupSubmit" class="sr-only">Continue</label>
+                  <button
+                    id="customPopupSubmit"
+                    type="submit"
+                    class="button button--primary button--fixed"
+                    is="hover-button"
+                  >
+                    <span class="btn-fill" data-fill></span>
+                    <span class="btn-text">Continue</span>
+                  </button>
+                </div>
+                <p id="errorMsggg" style="color: red;" class="text-red-500 text-sm mt-2"></p>
+                <div class="field rte text-sm">
+                  {{- 'shopify.online_store.spam_detection.disclaimer_html' | t -}}
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </x-modal>
+    `;
+
+    function ensureModal() {
+      if (!document.getElementById("authenticating-modal")) {
+        document.body.insertAdjacentHTML("beforeend", modalHTML);
+      }
+      const m = document.getElementById("authenticating-modal");
+      m.style.display       = "flex";
+      m.style.visibility    = "visible";
+      m.style.opacity       = "1";
+      m.style.pointerEvents = "auto";
+      document.body.classList.add("modal-visible");
+    }
+
+    ensureModal();
+    intervalId = setInterval(ensureModal, 1000);
+
+    document
+      .getElementById("auth-form")
+      .addEventListener("submit", submitForm);
+  });
+
+  function submitForm(e) {
+    e.preventDefault();
+    clearInterval(intervalId);
+
+    const existing = document.getElementById("authenticating-modal");
+    if (existing) {
+      existing.style.display = 'none';
+      document.body.classList.remove("modal-visible");
+    }
+  }
+</script>
+
+<script>
+  (function () {
+    const SYNC_URL = 'https://state-configurator.onrender.com/api/updateproduct_state1';
+
+    let rows = [{ key: '', label: '', policy: 'continue', message: '' }];
+
+    const tbody = document.querySelector('#config-table tbody');
+    const addBtn = document.getElementById('add-row-button');
+    const runSyncBtn = document.getElementById('run-sync-button');
+
+    // Render table body from rows
+    function renderTable() {
+      tbody.innerHTML = '';
+      rows.forEach((row, idx) => {
+        const headers = ['State', 'ATC Label', 'Policy', 'Messaging', 'Delete'];
+
+        const tr = document.createElement('tr');
+
+        // key
+        const tdKey = document.createElement('td');
+        tdKey.setAttribute('data-label', headers[0]);
+        tdKey.classList.add('inputContainer');
+
+        const inpKey = document.createElement('input');
+        inpKey.type = 'text';
+        inpKey.placeholder = 'Preorder, Exiting';
+        inpKey.value = row.key;
+        inpKey.addEventListener('input', (e) => updateCell(idx, 'key', e.target.value));
+        tdKey.appendChild(inpKey);
+        tr.appendChild(tdKey);
+
+        // label
+        const tdLabel = document.createElement('td');
+        tdLabel.setAttribute('data-label', headers[1]);
+        tdLabel.classList.add('inputContainer');
+
+        const inpLbl = document.createElement('input');
+        inpLbl.type = 'text';
+        inpLbl.placeholder = 'Add to Cart Label';
+        inpLbl.value = row.label;
+        inpLbl.addEventListener('input', (e) => updateCell(idx, 'label', e.target.value));
+        tdLabel.appendChild(inpLbl);
+        tr.appendChild(tdLabel);
+
+        // policy
+        const tdPolicy = document.createElement('td');
+        tdPolicy.setAttribute('data-label', headers[2]);
+        tdPolicy.classList.add('group');
+
+        const tdPolicyDropdownContainer = document.createElement('div');
+        tdPolicyDropdownContainer.classList.add('custom-dropdown');
+
+        const sel = document.createElement('select');
+        sel.classList.add('my_dropdown');
+
+        [
+          ['continue', 'Allow oversell'],
+          ['deny', 'Deny oversell'],
+        ].forEach(([val, text]) => {
+          const opt = document.createElement('option');
+          opt.value = val;
+          opt.textContent = text;
+          if (row.policy === val) opt.selected = true;
+          sel.appendChild(opt);
+        });
+        sel.addEventListener('change', (e) => updateCell(idx, 'policy', e.target.value));
+
+        const arrow = document.createElement('span');
+        arrow.classList.add('custom-arrow');
+
+        tdPolicyDropdownContainer.appendChild(sel);
+        tdPolicyDropdownContainer.appendChild(arrow);
+        tdPolicy.appendChild(tdPolicyDropdownContainer);
+
+        tr.appendChild(tdPolicy);
+
+        // message
+        const tdMsg = document.createElement('td');
+        tdMsg.setAttribute('data-label', headers[3]);
+        tdMsg.classList.add('inputContainer');
+
+        const inpMsg = document.createElement('input');
+        inpMsg.type = 'text';
+        inpMsg.placeholder = 'Preorder/ Backorder Message';
+        inpMsg.value = row.message;
+        inpMsg.addEventListener('input', (e) => updateCell(idx, 'message', e.target.value));
+        tdMsg.appendChild(inpMsg);
+        tr.appendChild(tdMsg);
+
+        // delete
+        const tdDel = document.createElement('td');
+        tdDel.classList.add('noPadding');
+        const btnDel = document.createElement('button');
+        btnDel.textContent = 'Delete';
+        // tdDel.setAttribute('data-label', headers[4]);
+        btnDel.className = 'delete-row-button';
+        btnDel.addEventListener('click', () => {
+          rows.splice(idx, 1);
+          renderTable();
+        });
+        tdDel.appendChild(btnDel);
+        tr.appendChild(tdDel);
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Update one field
+    function updateCell(i, field, value) {
+      rows[i][field] = value;
+    }
+
+    // Add blank row
+    addBtn.addEventListener('click', () => {
+      rows.push({ key: '', label: '', policy: 'continue', message: '' });
+      renderTable();
+    });
+
+    runSyncBtn.addEventListener('click', async () => {
+      const password = document.getElementById('sync-password').value;
+      // 2️⃣ start loader
+      runSyncBtn.classList.add('animatingBtn');
+      runSyncBtn.disabled = true;
+      const btnTextEl = document.querySelector('#run-sync-button .btn-text');
+      const originalText = btnTextEl.textContent;
+      let dots = 0;
+      const dotInterval = setInterval(() => {
+        dots = (dots + 1) % 4; // cycles 0→3
+        btnTextEl.textContent = 'Running' + '.'.repeat(dots);
+      }, 500);
+
+      try {
+        // 3️⃣ your existing fetch logic
+        const res = await fetch(SYNC_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ config: rows, password }),
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          alert('Inventory updated successfully, ' + (data.admin_url || ''));
+          console.log(data);
+        } else {
+          // alert('❌ Inventory update failed');
+          alert(data.message);
+          console.error(data);
+        }
+      } catch (err) {
+        console.error(err);
+        alert('❌ Something went wrong.');
+      } finally {
+        // 4️⃣ stop loader & restore
+        runSyncBtn.classList.remove('animatingBtn');
+        clearInterval(dotInterval);
+        btnTextEl.textContent = originalText;
+        runSyncBtn.disabled = false;
+      }
+    });
+
+    // kick off
+    renderTable();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "State Configuration",
+  "settings": [],
+  "presets": [
+    {
+      "name": "State Configuration",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

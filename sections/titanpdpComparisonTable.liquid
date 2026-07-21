@@ -1,0 +1,639 @@
+{% assign gray_row_color = section.settings.gray_row_color %}
+{% assign white_row_color = section.settings.white_row_color %}
+{% if section.settings.swap_row_color_order %}
+  {% assign gray_row_color = section.settings.white_row_color %}
+  {% assign white_row_color = section.settings.gray_row_color %}
+{% endif %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --color-background: {{ section.settings.color_background.rgb }};
+  }
+  #compareTablePDP {
+      margin-top: {{ section.settings.margin_top }}px;
+      margin-bottom: {{ section.settings.margin_bottom }}px;
+    }
+
+  #compareTablePDP {
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    width: 100vw;
+    max-width: 100vw;
+  }
+  #titanLogoImg {
+    padding-block: 0 !important;
+  }
+
+    .cs-page-width {
+      margin: 0 auto;
+      padding-inline: var(--page-padding);
+      padding-right: 0;
+    }
+
+    @media (min-width: 1900px) {
+      .cs-page-width {
+        padding-inline: 50px;
+      }
+    }
+
+    #compareTablePDP .custom_header {
+      font-size: 20px !important;
+      color: white;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    @media (min-width: 500px) {
+      #compareTablePDP .custom_header {
+        font-size: 26px !important;
+      }
+    }
+
+    #compareTablePDP .row {
+      font-weight: 600;
+      height: 42px;
+      display: flex;
+      text-align: center;
+      align-items: center;
+    }
+    @media (min-width: 500px) {
+      #compareTablePDP .row {
+        height: 60px;
+      }
+    }
+
+    #compareTablePDP #features .row {
+      font-size: 12px;
+      text-align: start !important;
+    }
+    @media (min-width: 500px) {
+      #compareTablePDP #features .row {
+        font-size: 18px;
+      }
+    }
+
+    #compareTablePDP .column {
+      justify-content: center;
+      width: 100%;
+      min-width: 115px;
+    }
+    #compareTablePDP .cs-bg-black {
+      background-color: black;
+    }
+    #compareTablePDP .cs-bg-gray {
+      background-color: {{ gray_row_color }};
+    }
+    #compareTablePDP .cs-bg-white {
+      background-color: {{ white_row_color }};
+    }
+    #compareTablePDP .small-text {
+      font-size: 10px;
+      font-weight: 400;
+    }
+    #compareTablePDP .flex-direction-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #compareTablePDP .row.column img {
+      width: 20px;
+      height: 20px;
+    }
+    #compareTablePDP .row.column {
+      padding: 0;
+    }
+    @media (min-width: 786px) {
+      #compareTablePDP .row.column {
+        font-size: 20px;
+      }
+    }
+    #compareTablePDP .row.column.custom_header img {
+      width: 100%;
+      height: 100%;
+      padding: 5px;
+      object-fit: contain;
+    }
+    @media (min-width: 1000px) {
+      #compareTablePDP .row.column.custom_header img {
+        padding: 5px;
+        padding-block: 0;
+      }
+    }
+
+    #compareTablePDP {
+      position: relative;
+    }
+
+    /* #compareTablePDP #features {
+      padding: 1rem 0;
+    } */
+
+    #compareTablePDP #columns {
+      position: absolute;
+      top: -15px;
+      /* left: 130px; */
+      right: 0;
+      display: flex;
+      align-items: center;
+
+      transform: translateY(-2rem);
+    }
+    @media (min-width: 500px) {
+      #compareTablePDP #columns {
+        left: 180px;
+        right: 0;
+        width: calc(100vw - 180px);
+      }
+    }
+    @media (min-width: 1000px) {
+      #compareTablePDP #columns {
+        left: 220px;
+        right: 0;
+        width: calc(100vw - 220px);
+      }
+    }
+    @media (min-width: 1400px) {
+      #compareTablePDP #columns {
+        left: 250px;
+        right: 0;
+        width: calc(100vw - 250px);
+      }
+    }
+
+    #compareTablePDP .card-wrapper {
+      flex: 0 0 100%;
+      border-radius: 15px;
+      scroll-snap-align: start;
+      overflow: visible;
+  max-width: 120px;
+    }
+
+    @media (min-width: 500px) {
+      #compareTablePDP .card-wrapper {
+        max-width: calc(25% - 10px) !important;
+        min-width: 130px;
+        width: 25%;
+      }
+    }
+
+    @media (max-width: 500px) {
+      #compareTablePDP .card-wrapper:last-child {
+        margin-right: 30px;
+      }
+    }
+
+    #compareTablePDP .card-wrapper-titan {
+      z-index: 10;
+      overflow: visible;
+      border-radius: 15px;
+      min-width: 115px;
+      width: fit-content;
+    }
+
+    @media (min-width: 500px) {
+      #compareTablePDP .card-wrapper-titan {
+        min-width: 130px;
+      }
+    }
+
+    @media (min-width: 786px) {
+      #compareTablePDP .card-wrapper-titan {
+        min-width: 20%;
+      }
+    }
+
+
+    #compareTablePDP #titan {
+      box-shadow: 0px 5px 20px rgba(107, 107, 107, 0.4);
+    }
+    #compareTablePDP #titan,
+    #compareTablePDP .competitor {
+      padding: 15px 0;
+      background: linear-gradient(to bottom, #fff, #f2f2f2);
+      border-radius: 15px;
+      box-shadow: 0px 5px 20px rgba(107, 107, 107, 0.4);
+      width: fit-content;
+    }
+    @media (min-width: 500px) {
+      #compareTablePDP #titan,
+      #compareTablePDP .competitor {
+        padding: 1rem 0;
+        min-width: 100%;
+      }
+    }
+
+    #compareTablePDP .competitor-grp {
+      display: flex;
+      padding-right: 0.7rem;
+      border-radius: 15px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-padding-left: 0;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      scroll-snap-stop: always;
+      scroll-behavior: smooth;
+      padding-block: 2rem;
+    }
+  .competitor-grp .card-wrapper {
+  padding-left: 5px;
+  }
+    @media (min-width: 500px) {
+      #compareTablePDP .competitor-grp {
+        flex-grow: 1;
+      }
+  .competitor-grp .card-wrapper {
+  padding-left: 10px;
+  }
+    }
+  @media (max-width: 500px) {
+  #compareTablePDP #columns
+   {
+      left: 130px;
+  }
+   }
+
+  @media (min-width: 1024px) {
+      #compareTablePDP .card-wrapper-titan {
+  max-width: calc(150px + 2rem - 10px) !important;
+     min-width: calc(150px + 2rem - 10px) !important;
+  padding-left: 2rem !important;
+      }
+  #compareTablePDP .card-wrapper {
+     max-width: 150px !important;
+  min-width: 150px !important;
+      }
+      #compareTablePDP #columns {
+          left: 180px;
+          right: 0;
+          width: auto;
+      }
+
+  #compareTablePDP {
+      position: relative;
+      left: auto;
+      right: auto;
+      margin-left: auto;
+      margin-right: auto;
+      width: auto;
+      max-width: none;
+  }
+      #compareTablePDP .competitor-grp {
+          justify-content: space-evenly;
+      }
+      #compareTablePDP .row.column.custom_header img {
+          padding-inline:7px !important;
+          padding-block: 0 !important;
+      }
+  div#titanLogoImgCont img#titanLogoImg {
+  padding-right: 10px !important;
+  padding-block: 5px !important;
+  }
+  div#shockDocImgCont img#shockDocImg {
+  padding-inline: 15px !important;
+  }
+  }
+  @media (min-width: 1400px) {
+  #compareTablePDP #columns {
+          left: 250px;
+          right: 0;
+          width: auto;
+      }
+  }
+  @media (min-width: 1500px) {
+  div#titanLogoImgCont img#titanLogoImg {
+  padding-block: 0px !important;
+  }
+
+      #compareTablePDP .card-wrapper-titan {
+  max-width: calc(190px + 3rem - 10px) !important;
+  min-width: calc(190px + 3rem - 10px) !important;
+  padding-left: 3rem !important;
+  }
+  #compareTablePDP .card-wrapper {
+     max-width: 190px !important;
+  min-width: 190px !important;
+      }
+  }
+</style>
+
+<div class="section section--padding">
+  <div class="page-width ">
+    <div id="compareTablePDP">
+      <div id="features">
+        <div class="row cs-page-width cs-bg-black custom_header">FEATURE</div>
+        <div class="row cs-page-width cs-bg-gray">
+          Cut-Resistance <br>
+          (Neck)
+        </div>
+        <div class="row cs-page-width cs-bg-white">
+          Cut-Resistance <br>
+          (Wrist)
+        </div>
+        <div class="row cs-page-width cs-bg-gray">
+          Collar <br>
+          Closure
+        </div>
+        <div class="row cs-page-width cs-bg-white">HECC Certified</div>
+        <div class="row cs-page-width cs-bg-gray">Made in USA</div>
+        <div class="row cs-page-width cs-bg-white">
+          Colors & Custom <br>
+          Team Designs
+        </div>
+        <div class="row cs-page-width cs-bg-gray">Price</div>
+        <div class="row cs-page-width cs-bg-white">
+          Price/Level of <br>
+          Cut Resistance
+        </div>
+        <div class="row cs-page-width cs-bg-gray">Warranty</div>
+      </div>
+      <div id="columns">
+        <div class="card-wrapper-titan">
+          <div id="titan">
+            <div id="titanLogoImgCont" class="row column cs-bg-white custom_header ">
+              <img
+                id="titanLogoImg"
+                src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/compare_table_logo.png?v=1751108904"
+                alt="Titan Logo"
+                style="padding-right: 8px; padding-left: 5px;"
+              >
+            </div>
+            <div class="row column cs-bg-gray">A9</div>
+            <div class="row column cs-bg-white">A9</div>
+            <div class="row column cs-bg-gray">
+              <div class="flex-direction-column">
+                <p>Velcro-Free</p>
+                <p class="small-text">Stretch ProCurve™️</p>
+              </div>
+            </div>
+            <div class="row column cs-bg-white">
+              <img
+                src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/check.svg?v=1748772157"
+                alt="check icon"
+              >
+            </div>
+            <div class="row column cs-bg-gray">
+              <img
+                src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/check.svg?v=1748772157"
+                alt="check icon"
+              >
+            </div>
+            <div class="row column cs-bg-white">
+              <img
+                src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/check.svg?v=1748772157"
+                alt="cross icon"
+              >
+            </div>
+            <div class="row column cs-bg-gray">$159</div>
+            <div class="row column cs-bg-white">$18</div>
+            <div class="row column cs-bg-gray">1 Year</div>
+          </div>
+        </div>
+        <div class="competitor-grp">
+          <div class="card-wrapper">
+            <div class="competitor">
+              <div class="row column cs-bg-white custom_header">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/BAUER.svg?v=1749870562"
+                  alt="Bauer Logo"
+                >
+              </div>
+              <div class="row column cs-bg-gray" style="color: red;">A3</div>
+              <div class="row column cs-bg-white">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/x_99c266e0-6173-45c4-a337-7e5666b6f8d0.svg?v=1748772157"
+                  alt="cross icon"
+                >
+              </div>
+              <div class="row column cs-bg-gray">
+                <div class="flex-direction-column">
+                  <p>Velcro</p>
+                </div>
+              </div>
+              <div class="row column cs-bg-white">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/x_99c266e0-6173-45c4-a337-7e5666b6f8d0.svg?v=1748772157"
+                  alt="cross icon"
+                >
+              </div>
+              <div class="row column cs-bg-gray">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/x_99c266e0-6173-45c4-a337-7e5666b6f8d0.svg?v=1748772157"
+                  alt="cross icon"
+                >
+              </div>
+              <div class="row column cs-bg-white">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/x_99c266e0-6173-45c4-a337-7e5666b6f8d0.svg?v=1748772157"
+                  alt="cross icon"
+                >
+              </div>
+              <div class="row column cs-bg-gray">$99</div>
+              <div class="row column cs-bg-white">$33</div>
+              <div class="row column cs-bg-gray">90 days</div>
+            </div>
+          </div>
+          <div class="card-wrapper">
+            <div class="competitor">
+              <div class="row column cs-bg-white custom_header">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/CCM.svg?v=1749870562"
+                  alt="CCM Logo"
+                >
+              </div>
+              <div class="row column cs-bg-gray">
+                <div class="flex-direction-column">
+                  <p style="color: red;">A3</p>
+                  <p class="small-text">A6 (Pro Line)</p>
+                </div>
+              </div>
+              <div class="row column cs-bg-white" style="color: red;">A3</div>
+              <div class="row column cs-bg-gray">
+                <div class="flex-direction-column">
+                  <p>Velcro</p>
+                </div>
+              </div>
+              <div class="row column cs-bg-white">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/x_99c266e0-6173-45c4-a337-7e5666b6f8d0.svg?v=1748772157"
+                  alt="check icon"
+                >
+              </div>
+              <div class="row column cs-bg-gray">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/x_99c266e0-6173-45c4-a337-7e5666b6f8d0.svg?v=1748772157"
+                  alt="check icon"
+                >
+              </div>
+              <div class="row column cs-bg-white">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/x_99c266e0-6173-45c4-a337-7e5666b6f8d0.svg?v=1748772157"
+                  alt="cross icon"
+                >
+              </div>
+              <div class="row column cs-bg-gray">
+                <div class="flex-direction-column">
+                  <p>$139</p>
+                  <p class="small-text">$200 (Pro Line)</p>
+                </div>
+              </div>
+              <div class="row column cs-bg-white">
+                <div class="flex-direction-column">
+                  <p>$46</p>
+                  <p class="small-text">$33 (Pro Line)</p>
+                </div>
+              </div>
+              <div class="row column cs-bg-gray">30 days</div>
+            </div>
+          </div>
+          <div class="card-wrapper">
+            <div class="competitor">
+              <div class="row column cs-bg-white custom_header">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/WARROAD.svg?v=1749870562"
+                  alt="Warroad Logo"
+                >
+              </div>
+              <div class="row column cs-bg-gray">A7</div>
+              <div class="row column cs-bg-white" style="color: red;">A3</div>
+              <div class="row column cs-bg-gray">
+                <div class="flex-direction-column">
+                  <p>Velcro</p>
+                </div>
+              </div>
+              <div class="row column cs-bg-white">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/x_99c266e0-6173-45c4-a337-7e5666b6f8d0.svg?v=1748772157"
+                  alt="cross icon"
+                >
+              </div>
+              <div class="row column cs-bg-gray">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/x_99c266e0-6173-45c4-a337-7e5666b6f8d0.svg?v=1748772157"
+                  alt="cross icon"
+                >
+              </div>
+              <div class="row column cs-bg-white">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/x_99c266e0-6173-45c4-a337-7e5666b6f8d0.svg?v=1748772157"
+                  alt="cross icon"
+                >
+              </div>
+              <div class="row column cs-bg-gray">$200</div>
+              <div class="row column cs-bg-white">$29</div>
+              <div class="row column cs-bg-gray">30 days</div>
+            </div>
+          </div>
+          <div class="card-wrapper">
+            <div class="competitor">
+              <div id="shockDocImgCont" class="row column cs-bg-white custom_header">
+                <img
+                  id="shockDocImg"
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/SHOCK_DR.svg?v=1749870562"
+                  alt="Shock Doctor Logo"
+                >
+              </div>
+              <div class="row column cs-bg-gray" style="color: red;">A2</div>
+              <div class="row column cs-bg-white">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/x_99c266e0-6173-45c4-a337-7e5666b6f8d0.svg?v=1748772157"
+                  alt="cross icon"
+                >
+              </div>
+              <div class="row column cs-bg-gray">
+                <div class="flex-direction-column">
+                  <p>Velcro</p>
+                </div>
+              </div>
+              <div class="row column cs-bg-white">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/x_99c266e0-6173-45c4-a337-7e5666b6f8d0.svg?v=1748772157"
+                  alt="cross icon"
+                >
+              </div>
+              <div class="row column cs-bg-gray">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/x_99c266e0-6173-45c4-a337-7e5666b6f8d0.svg?v=1748772157"
+                  alt="cross icon"
+                >
+              </div>
+              <div class="row column cs-bg-white">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/x_99c266e0-6173-45c4-a337-7e5666b6f8d0.svg?v=1748772157"
+                  alt="cross icon"
+                >
+              </div>
+              <div class="row column cs-bg-gray">$79</div>
+              <div class="row column cs-bg-white">$40</div>
+              <div class="row column cs-bg-gray">60 days</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Titan PDP Compare Table",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Margin",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Margin",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "t:sections.global.settings.color_background.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "swap_row_color_order",
+      "label": "Swap Row Color Order",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "gray_row_color",
+      "label": "Odd Row Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "white_row_color",
+      "label": "Even Row Color",
+      "default": "#f2f2f2"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Titan PDP Compare Table"
+    }
+  ]
+}
+{% endschema %}

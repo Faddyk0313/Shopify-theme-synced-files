@@ -1,0 +1,1579 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {%- render 'section-variables', section: section -%}
+  }
+
+  #shopify-section-{{ section.id }} .title-wrapper {
+    margin-bottom: var(--sp-4) !important;
+  }
+
+  .size-products-container .product-card[data-sizes] {
+    display: none;
+  }
+
+  @media (min-width: 786px) {
+    .size-products-container .product-card.show {
+      margin-top: 2rem !important;
+    }
+  }
+
+  .size-products-container .product-card.show {
+    display: block;
+  }
+
+  /* Custom Size Selector Styles */
+  .custom-size-selector-{{ section.id }} .trigger {
+    background-color: black;
+    border-radius: 10px;
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    min-width: 170px;
+    text-align: center;
+    user-select: none;
+  }
+  .custom-size-selector-{{ section.id }} .options {
+    background-color: black;
+    border-radius: 10px;
+    color: white;
+    max-height: 0;
+    {% comment %} max-width: 0; {% endcomment %}
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    z-index: 100;
+  }
+  .custom-size-selector-{{ section.id }} .options.show {
+    padding: 1.5rem !important;
+    padding-bottom: 0.7rem;
+    max-height: 600px !important;
+    {% comment %} max-width: 180px !important; {% endcomment %}
+    top: 0px;
+    left: 0px;
+  }
+  .custom-size-selector-{{ section.id }} .options .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5rem;
+    padding-bottom: 1rem;
+  }
+  .custom-size-selector-{{ section.id }} .options .title {
+    font-size: 15px;
+    color: gray;
+    font-weight: 600;
+  }
+  .custom-size-selector-{{ section.id }} .close-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 0.4rem;
+    border-radius: 20px;
+    color: black;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease-in-out;
+  }
+  .custom-size-selector-{{ section.id }} .close-btn:hover {
+    transform: scale(1.1);
+  }
+  .custom-size-selector-{{ section.id }} .options .option {
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+    margin-bottom: 0.8rem;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .custom-size-selector-{{ section.id }} .options .option:hover {
+    text-decoration: underline;
+  }
+  .custom-size-selector-{{ section.id }} .options .option.selected {
+    color: gray;
+  }
+
+  .sizeContainer .title-wrapper {
+    justify-content: center;
+  }
+  #size-products-carousel {
+    display: none;
+  }
+
+  /* Carousel Navigation Buttons */
+  /*.carousel-nav-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .carousel-nav-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid rgb(23,23,23);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .carousel-nav-btn:hover {
+    background: rgb(23,23,23);
+    border-color: rgb(23,23,23);
+  }
+
+  .carousel-nav-btn:hover svg {
+    stroke: #fff;
+  }
+
+  .carousel-nav-btn:disabled {
+    opacity: .3;
+    pointer-events: none;
+  }
+
+  .carousel-nav-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: rgb(23,23,23);
+    stroke-width: 2;
+    transition: stroke 0.3s ease;
+  }*/
+
+  .title-wrapper.with-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  @media (max-width: 1024px) {
+    .carousel-nav-buttons {
+      display: none;
+    }
+  }
+
+  /* Force carousel to scroll */
+  #Slider-{{ section.id }} motion-list {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+
+  #Slider-{{ section.id }} motion-list::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+  #Slider-{{ section.id }} motion-list .product-card {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+</style>
+
+{% comment %} Size chart Css {% endcomment %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+  [id^="SizeChart"] .drawer__title {
+    font-family: 'Armourxbd';
+    margin: auto;
+  }
+  [id^="SizeChart"] .drawer__close {
+    margin-inline-start: 0 !important;
+  }
+  [id^="SizeChart"] .drawer__scrollable {
+    padding-block: 1rem;
+  }
+  .cusheader {
+    margin-block: 1rem;
+  }
+  .sizechartContent .heading {
+    font-size: 1rem;
+    font-family: 'Armourxbd';
+    margin: 0 !important;
+    text-transform: uppercase;
+
+  }
+  .sizechartContent .sub_heading {
+    font-size: 1rem;
+    font-family: 'Armourmd';
+    margin: 0 !important;
+  }
+  .sizechartContent .chartHeading {
+    background-color: black;
+    width:100%;
+    font-size: 1rem;
+    font-family: 'Armourxbd';
+    color:white;
+    padding:10px;
+    text-align: center;
+
+  }
+  .boldText {
+    font-weight: 700;
+  }
+  .sizechartContent .tableOuter {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .sizechartContent .tableOuter.neckGuardVersion {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .sizechartContent .tableOuter {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background-color: #f2f2f2;
+    padding: 10px;
+    font-family: "Rajdhani", sans-serif;
+    text-align: center;
+    font-weight: 500;
+  }
+  .tableOuter > * {
+    border-bottom: 1px solid gray;
+    padding-inline: 10px;
+    padding-block: 5px;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+  .tableOuter.neckGuardVersion > * {
+    font-size: 12px;
+  }
+  .noBorder {
+    border-bottom: none !important;
+  }
+  .borderLeft {
+    border-left: 1px solid gray;
+  }
+  .cus_disclaimer {
+    background-color: #f2f2f2;
+    padding: 10px;
+    padding-top: 0;
+    width: 100%;
+    text-align: end;
+    font-size: 12px;
+    font-family: "Roboto", sans-serif;
+    margin-bottom: 1rem;
+  }
+  .cus_disclaimer p {
+    margin: 0 !important;
+  }
+
+  @media (min-width: 786px) {
+    [id^="SizeChart"] .drawer__title {transform: translateX(24px);}
+    .sizechartContent .heading {font-size: 1.5rem;}
+    .sizechartContent .sub_heading {font-size: 1.5rem;}
+    .sizechartContent .chartHeading {font-size: 1.5rem;}
+    .tableOuter > *, .tableOuter.neckGuardVersion > * {font-size: 19px;}
+    .cus_disclaimer {font-size: 14px;}
+  }
+</style>
+
+<div class="sizeContainerOuter section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+  <div class="sizeContainer page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
+    {%- render 'section-heading', section: section -%}
+
+    <!-- Size Selection Area -->
+    <div class="size-selection-container mb-8">
+      <div class="flex flex-col gap-4">
+        {% comment %}
+          <div style="text-align: center;">
+            <h3 class="text-lg font-medium mb-2">{{ section.settings.tagline }}</h3>
+          </div>
+        {% endcomment %}
+        <div style="align-self: center;" class="size-chart-btn flex items-center gap-2">
+          <svg
+            class="icon icon-ruler icon-xs stroke-1"
+            viewBox="0 0 16 16"
+            stroke="currentColor"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12.5 13.5v-3m-3 3v-3m-3 3v-3M4 6.5c1.933 0 3.5-.895 3.5-2s-1.567-2-3.5-2-3.5.895-3.5 2 1.567 2 3.5 2Z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M.5 11.5c0 1.105 1.567 2 3.5 2h11.5v-7H4c-1.933 0-3.5-.895-3.5-2v7Z"></path>
+          </svg>
+          <button
+            type="button"
+            class="link text-sm leading-tight cursor-pointer"
+            aria-controls="SizeChart"
+            aria-expanded="false"
+          >
+            Size chart
+          </button>
+          <x-modal
+            id="SizeChart"
+            class="x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Battlegear 2.0 Size Chart"
+            hidden=""
+          >
+            <overlay-element
+              class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none"
+              aria-controls="SizeChart"
+              aria-expanded="false"
+            ></overlay-element>
+            <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+              <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
+                <span class="drawer__title heading title-md">Battlegear 2.0 Size Chart</span>
+                <button
+                  class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center"
+                  type="button"
+                  is="hover-button"
+                  aria-controls="SizeChart"
+                  aria-expanded="false"
+                  aria-label="Close"
+                >
+                  <span class="btn-fill" data-fill=""></span>
+                  <span class="btn-text">
+                    <svg
+                      class="icon icon-close icon-sm"
+                      viewBox="0 0 20 20"
+                      stroke="currentColor"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 15L15 5M5 5L15 15"></path>
+                    </svg>
+                  </span>
+                </button>
+              </gesture-element>
+              <div class="drawer__content opacity-0 invisible flex flex-col h-full grow shrink">
+                <div class="drawer__scrollable relative flex flex-col gap-5 md:gap-7 grow shrink">
+                  <div class="sizechartContent">
+                    <div class="cusheader" style="margint-top: 0 !important;">
+                      <p class="heading">Step 1:</p>
+                      <p class="sub_heading">TAKE YOUR MEASUREMENTS</p>
+                    </div>
+                    <img src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/size_chart_step_one_desktop.png?v=1770494013">
+                    <div class="cusheader" style="margin-block: 2rem;">
+                      <p class="heading">Step 2:</p>
+                      <p class="sub_heading">FIND YOUR SIZE</p>
+                    </div>
+                    <div class="chartHeading">YOUTH SIZE</div>
+
+                    <div class="tableOuter">
+                      <div class="boldText">SIZE</div>
+                      <div class="boldText">NECK*</div>
+                      <div class="boldText">HEAD</div>
+                      <div class="boldText">CHEST</div>
+                      <div class="boldText">ARM</div>
+                      <div class="boldText">YTH-XS</div>
+                      <div>10.5"</div>
+                      <div>18"</div>
+                      <div>22"</div>
+                      <div>18"</div>
+                      <div class="boldText">YTH-SM</div>
+                      <div>11"</div>
+                      <div>19"</div>
+                      <div>26"</div>
+                      <div>19"</div>
+                      <div class="boldText">YTH-MD</div>
+                      <div>11.5"</div>
+                      <div>20"</div>
+                      <div>30"</div>
+                      <div>20"</div>
+                      <div class="boldText">YTH-LG</div>
+                      <div>12"</div>
+                      <div>21"</div>
+                      <div>34"</div>
+                      <div>22"</div>
+                      <div class="boldText noBorder">YTH-XL</div>
+                      <div class="noBorder">12.5"</div>
+                      <div class="noBorder">22"</div>
+                      <div class="noBorder">38"</div>
+                      <div class="noBorder">24"</div>
+                    </div>
+
+                    <div class="cus_disclaimer">
+                      <p>Measure in inches</p>
+                      <p>*Neck is the primary measurement for sizing</p>
+                    </div>
+
+                    <div class="chartHeading">SENIOR SIZE</div>
+
+                    <div class="tableOuter">
+                      <div class="boldText">SIZE</div>
+                      <div class="boldText">NECK*</div>
+                      <div class="boldText">HEAD</div>
+                      <div class="boldText">CHEST</div>
+                      <div class="boldText">ARM</div>
+                      <div class="boldText">SR-XS</div>
+                      <div>13"</div>
+                      <div>22"</div>
+                      <div>38"</div>
+                      <div>27"</div>
+                      <div class="boldText">SR-SM</div>
+                      <div>13.5"</div>
+                      <div>22.5"</div>
+                      <div>40"</div>
+                      <div>28"</div>
+                      <div class="boldText">SR-MD</div>
+                      <div>14"</div>
+                      <div>23"</div>
+                      <div>42"</div>
+                      <div>29"</div>
+                      <div class="boldText">SR-LG</div>
+                      <div>15"</div>
+                      <div>23.5"</div>
+                      <div>44"</div>
+                      <div>30"</div>
+                      <div class="boldText">SR-XL</div>
+                      <div>16"</div>
+                      <div>24"</div>
+                      <div>46"</div>
+                      <div>31"</div>
+                      <div class="boldText">SR-2XL</div>
+                      <div>17"</div>
+                      <div>24.5"</div>
+                      <div>50"</div>
+                      <div>32"</div>
+                      <div class="boldText noBorder">SR-3XL</div>
+                      <div class="noBorder">18"</div>
+                      <div class="noBorder">25"</div>
+                      <div class="noBorder">54"</div>
+                      <div class="noBorder">33"</div>
+                    </div>
+
+                    <div class="cus_disclaimer">
+                      <p>Measure in inches</p>
+                      <p>*Neck is the primary measurement for sizing</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </x-modal>
+        </div>
+        <div class="flex-shrink-0 flex flex-row items-center gap-4 md:gap-8" style="justify-content: center;">
+          <div class="custom-size-selector-{{ section.id }}" style="position: relative">
+            <div class="trigger" id="size-trigger-{{ section.id }}">{{ section.settings['button-text'] }}</div>
+            <div class="options" id="size-options-{{ section.id }}">
+              <div class="head">
+                <div class="title">Size</div>
+                <button class="close-btn" id="close-btn-{{ section.id }}" type="button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </button>
+              </div>
+              <div
+                class="option"
+                data-size="YTH-XS"
+                {% if section.settings.preselected_size == 'YTH-XS' %}
+                  data-preselected="true"
+                {% endif %}
+              >
+                YTH-XS
+              </div>
+              <div
+                class="option"
+                data-size="YTH-SM"
+                {% if section.settings.preselected_size == 'YTH-SM' %}
+                  data-preselected="true"
+                {% endif %}
+              >
+                YTH-SM
+              </div>
+              <div
+                class="option"
+                data-size="YTH-MD"
+                {% if section.settings.preselected_size == 'YTH-MD' %}
+                  data-preselected="true"
+                {% endif %}
+              >
+                YTH-MD
+              </div>
+              <div
+                class="option"
+                data-size="YTH-LG"
+                {% if section.settings.preselected_size == 'YTH-LG' %}
+                  data-preselected="true"
+                {% endif %}
+              >
+                YTH-LG
+              </div>
+              <div
+                class="option"
+                data-size="YTH-XL"
+                {% if section.settings.preselected_size == 'YTH-XL' %}
+                  data-preselected="true"
+                {% endif %}
+              >
+                YTH-XL
+              </div>
+              <div
+                class="option"
+                data-size="SR-SM"
+                {% if section.settings.preselected_size == 'SR-SM' %}
+                  data-preselected="true"
+                {% endif %}
+              >
+                SR-SM
+              </div>
+              <div
+                class="option"
+                data-size="SR-MD"
+                {% if section.settings.preselected_size == 'SR-MD' %}
+                  data-preselected="true"
+                {% endif %}
+              >
+                SR-MD
+              </div>
+              <div
+                class="option"
+                data-size="SR-LG"
+                {% if section.settings.preselected_size == 'SR-LG' %}
+                  data-preselected="true"
+                {% endif %}
+              >
+                SR-LG
+              </div>
+              <div
+                class="option"
+                data-size="SR-XL"
+                {% if section.settings.preselected_size == 'SR-XL' %}
+                  data-preselected="true"
+                {% endif %}
+              >
+                SR-XL
+              </div>
+              <div
+                class="option"
+                data-size="SR-2XL"
+                {% if section.settings.preselected_size == 'SR-2XL' %}
+                  data-preselected="true"
+                {% endif %}
+              >
+                SR-2XL
+              </div>
+              <div
+                class="option"
+                data-size="SR-3XL"
+                {% if section.settings.preselected_size == 'SR-3XL' %}
+                  data-preselected="true"
+                {% endif %}
+              >
+                SR-3XL
+              </div>
+            </div>
+          </div>
+          <p id="cus_count_prods" class="font-medium text-gray-600"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Products Message -->
+    <div id="no-products-{{ section.id }}" class="no-products-message text-center py-8" style="display: none;">
+      <p class="text-gray-600">
+        {{ section.settings.no_products_text | default: 'Sorry, no products are currently available in this size.' }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<section
+  id="size-products-carousel"
+  class="section--padding page-width{% if section.settings.full_width %} page-width--full{% endif %} relative"
+  style="background-color: {{ section.settings.color_background_carousel | default: 'white' }}; padding-bottom: 0 !important;"
+>
+  <div id="size-products-{{ section.id }}" class="size-products-container" style="display: none;">
+    {%- if section.settings.heading_2 != blank or section.settings.subheading_2 != blank -%}
+      <div
+        style="margin-bottom: 0;"
+        class="title-wrapper with-nav{% if section.settings.heading_size_2 == 'title-xl' %} title-wrapper-lg{% endif %} leading-none gap-4 lg:gap-8 {{ section.settings.heading_alignment_2 }} md:justify-between relative z-1"
+      >
+        <div class="heading-content">
+          {%- if section.settings.heading_2 != blank or section.settings.subheading_2 != blank -%}
+            <div class="grid gap-4">
+              {%- if section.settings.subheading_2 != blank -%}
+                {%- liquid
+                  if section.settings.heading_size_2 == 'title-sm'
+                    assign subtext_size = 'subtext-md'
+                  else
+                    assign subtext_size = 'subtext-lg'
+                  endif
+                -%}
+                <p class="heading normal-case font-medium {{ subtext_size }} leading-none tracking-none">
+                  {{- section.settings.subheading_2 | escape -}}
+                </p>
+              {%- endif -%}
+
+              {%- if section.settings.heading_2 != blank -%}
+                <{{ section.settings.heading_tag_2 }} class="heading {{ section.settings.heading_size_2 }}">
+                  <split-words class="split-words block" data-animate="fade-up-large">
+                    <span id="carousel-heading-{{ section.id }}">{{- section.settings.heading_2 -}}</span>
+                  </split-words>
+                </{{ section.settings.heading_tag_2 }}>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.button_label != blank -%}
+            <p>
+              {%- render 'button',
+                style: 'secondary',
+                label: section.settings.button_label,
+                link: section.settings.button_link,
+                external: section.settings.button_external,
+                show_icon: section.settings.button_icon
+              -%}
+            </p>
+          {%- endif -%}
+
+          {%- liquid
+            if section_button != blank
+              echo section_button
+            endif
+          -%}
+        </div>
+
+        <!-- Carousel Navigation Buttons -->
+        <div class="carousel-nav-buttons indicators hidden lg:flex gap-2d5">
+          <button
+            class="carousel-nav-btn button button--secondary"
+            type="button"
+            is="previous-button"
+            id="carousel-prev-{{ section.id }}"
+            aria-label="Previous"
+          >
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">
+              {%- render 'icon', icon: 'chevron-left', class: 'transform' -%}
+            </span>
+          </button>
+          <button
+            class="carousel-nav-btn button button--secondary"
+            type="button"
+            is="next-button"
+            id="carousel-next-{{ section.id }}"
+            aria-label="Next"
+          >
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">
+              {%- render 'icon', icon: 'chevron-right', class: 'transform' -%}
+            </span>
+          </button>
+        </div>
+      </div>
+    {%- endif -%}
+
+    <slider-element
+      id="Slider-{{ section.id }}"
+      class="grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}"
+      selector=".card-grid>.card"
+    >
+      <motion-list class="product-grid card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid">
+        {%- assign size_options = 'YTH-XS,YTH-SM,YTH-MD,YTH-LG,YTH-XL,YTH-SM/MD,YTH-LG/XL,SR-XS,SR-SM,SR-MD,SR-LG,SR-XL,SR-2XL,SR-3XL,SR-SM/MD,SR-LG/XL,SR-2XL/3XL'
+          | split: ','
+        -%}
+
+        {%- comment -%} Target collections from section settings {%- endcomment -%}
+        {%- assign selected_collections = section.settings.source_collections -%}
+        {%- assign fallback_collection_handles = 'cut-resistant-battlegear,battlegear-3-0' | split: ',' -%}
+        {%- assign last_chance_collection_id = 343124541618 -%}
+
+        {%- assign other_products_markup = '' -%}
+        {%- assign last_chance_products_markup = '' -%}
+        {%- assign neckguard_products_markup = '' -%}
+        {%- assign rendered_product_ids = '' -%}
+
+        {%- assign source_collection_handles = '' -%}
+        {%- if selected_collections != blank -%}
+          {%- for current_collection in selected_collections -%}
+            {%- if current_collection != blank -%}
+              {%- if source_collection_handles != blank -%}
+                {%- assign source_collection_handles = source_collection_handles | append: ',' -%}
+              {%- endif -%}
+              {%- assign source_collection_handles = source_collection_handles | append: current_collection.handle -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- assign source_collection_handles = fallback_collection_handles | join: ',' -%}
+        {%- endif -%}
+
+        {% assign source_collection_handles_arr = source_collection_handles | split: ',' %}
+
+        {%- for collection_handle in source_collection_handles_arr -%}
+          {%- assign current_collection = collections[collection_handle] -%}
+          {%- if current_collection != blank -%}
+            {%- paginate current_collection.products by 250 -%}
+              {%- for product in current_collection.products -%}
+                {%- assign product_id_token = ',' | append: product.id | append: ',' -%}
+                {%- if rendered_product_ids contains product_id_token -%}
+                  {%- continue -%}
+                {%- endif -%}
+                {%- assign rendered_product_ids = rendered_product_ids | append: product_id_token -%}
+
+              {%- assign found_sizes = '' -%}
+
+              {%- for variant in product.variants -%}
+                {%- if variant.inventory_policy == 'continue' or variant.inventory_quantity > 0 -%}
+                  {%- for i in (1..3) -%}
+                    {%- case i -%}
+                      {%- when 1 -%}
+                        {%- assign option_value = variant.option1 -%}
+                      {%- when 2 -%}
+                        {%- assign option_value = variant.option2 -%}
+                      {%- when 3 -%}
+                        {%- assign option_value = variant.option3 -%}
+                    {%- endcase -%}
+
+                    {%- if option_value != blank and size_options contains option_value -%}
+                      {%- unless found_sizes contains option_value -%}
+                        {%- if found_sizes == blank -%}
+                          {%- assign found_sizes = option_value -%}
+                        {%- else -%}
+                          {%- assign found_sizes = found_sizes | append: ',' | append: option_value -%}
+                        {%- endif -%}
+                      {%- endunless -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endif -%}
+              {%- endfor -%}
+
+                {%- if found_sizes != blank -%}
+                {%- comment -%} Build size-to-variant mapping {%- endcomment -%}
+                {%- assign size_variant_map = '' -%}
+                {%- for variant in product.variants -%}
+                  {%- if variant.inventory_policy == 'continue' or variant.inventory_quantity > 0 -%}
+                    {%- for i in (1..3) -%}
+                      {%- case i -%}
+                        {%- when 1 -%}
+                          {%- assign option_value = variant.option1 -%}
+                        {%- when 2 -%}
+                          {%- assign option_value = variant.option2 -%}
+                        {%- when 3 -%}
+                          {%- assign option_value = variant.option3 -%}
+                      {%- endcase -%}
+                      {%- if option_value != blank and size_options contains option_value -%}
+                        {%- if size_variant_map == blank -%}
+                          {%- assign size_variant_map = option_value | append: ':' | append: variant.id -%}
+                        {%- else -%}
+                          {%- assign size_variant_map = size_variant_map
+                            | append: ','
+                            | append: option_value
+                            | append: ':'
+                            | append: variant.id
+                          -%}
+                        {%- endif -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endif -%}
+                {%- endfor -%}
+
+                {%- capture product_card_markup -%}
+                  <div
+                    class="product-card"
+                    style="background-color: transparent !important;"
+                    data-sizes="{{ found_sizes }}"
+                    data-size-variants="{{ size_variant_map }}"
+                  >
+                    {%- render 'product-card',
+                      product: product,
+                      product_id: product.id,
+                      section_id: section.id,
+                      lazy_load: false,
+                      image_ratio: settings.product_image_ratio,
+                      image_fill: settings.product_image_fill,
+                      show_secondary_image: settings.product_secondary_image,
+                      show_vendor: settings.product_vendor,
+                      show_rating: settings.product_rating,
+                      show_color_swatches: settings.product_color_swatches,
+                      show_countdown: settings.product_countdown,
+                      show_quick_add: settings.product_quick_add,
+                      show_quick_view: settings.product_quick_view,
+                      show_save_amount: settings.product_save_amount,
+                      save_type: settings.product_save_type,
+                      show_icon_list: settings.product_icon_list
+                    -%}
+                  </div>
+                {%- endcapture -%}
+
+                  {%- assign is_neckguard = false -%}
+                  {%- if product.type == 'Neck Guard' or product.type == 'Neck Guard 3.0' -%}
+                    {%- assign is_neckguard = true -%}
+                  {%- endif -%}
+                {%- assign is_last_chance = false -%}
+                {%- for product_collection in product.collections -%}
+                  {%- if product_collection.id == last_chance_collection_id -%}
+                    {%- assign is_last_chance = true -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+
+                {%- if is_neckguard -%}
+                  {%- assign neckguard_products_markup = neckguard_products_markup | append: product_card_markup -%}
+                {%- elsif is_last_chance -%}
+                  {%- assign last_chance_products_markup = last_chance_products_markup | append: product_card_markup -%}
+                {%- else -%}
+                  {%- assign other_products_markup = other_products_markup | append: product_card_markup -%}
+                {%- endif -%}
+              {%- endif -%}
+              {%- endfor -%}
+            {%- endpaginate -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {{- other_products_markup -}}
+        {{- last_chance_products_markup -}}
+        {{- neckguard_products_markup -}}
+      </motion-list>
+    </slider-element>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const productsContainer = document.getElementById('size-products-{{ section.id }}');
+    const noProductsElement = document.getElementById('no-products-{{ section.id }}');
+    const trigger = document.getElementById('size-trigger-{{ section.id }}');
+    const optionsContainer = document.getElementById('size-options-{{ section.id }}');
+    const closeBtn = document.getElementById('close-btn-{{ section.id }}');
+    const sizeOptions = document.querySelectorAll('.custom-size-selector-{{ section.id }} .option');
+
+    // Variable to store the currently selected size
+    let currentSelectedSize = null;
+    // Flag to track if this is the initial page load
+    let isInitialLoad = true;
+
+    // Toggle dropdown open
+    trigger.addEventListener('click', function() {
+      optionsContainer.classList.add('show');
+    });
+
+    // Close dropdown
+    closeBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      optionsContainer.classList.remove('show');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function (e) {
+      const customSelector = document.querySelector('.custom-size-selector-{{ section.id }}');
+      if (customSelector && !customSelector.contains(e.target)) {
+        optionsContainer.classList.remove('show');
+      }
+    });
+
+    // Function to add variant parameter to product links
+    function updateProductLinks() {
+      if (!currentSelectedSize) return;
+
+      const allProductCards = productsContainer.querySelectorAll('.product-card[data-size-variants]');
+
+      allProductCards.forEach(function(card) {
+        const sizeVariantMap = card.getAttribute('data-size-variants');
+        if (!sizeVariantMap) return;
+
+        // Parse the size-variant mapping (format: "SR-SM:123,SR-MD:456")
+        const variantPairs = sizeVariantMap.split(',');
+        let variantId = null;
+
+        // First try direct match
+        for (let i = 0; i < variantPairs.length; i++) {
+          const [size, vid] = variantPairs[i].split(':');
+          if (size === currentSelectedSize) {
+            variantId = vid;
+            break;
+          }
+        }
+
+        // If no direct match, try combined sizes
+        if (!variantId && sizeMapping[currentSelectedSize]) {
+          const combinedSizes = sizeMapping[currentSelectedSize];
+          for (let j = 0; j < combinedSizes.length; j++) {
+            for (let i = 0; i < variantPairs.length; i++) {
+              const [size, vid] = variantPairs[i].split(':');
+              if (size === combinedSizes[j]) {
+                variantId = vid;
+                break;
+              }
+            }
+            if (variantId) break;
+          }
+        }
+
+        if (variantId) {
+          // Find all links within the product card
+          const links = card.querySelectorAll('a[href*="/products/"]');
+          links.forEach(function(link) {
+            const url = new URL(link.href);
+            // Only update if it's a product page link and doesn't already have a variant
+            if (url.pathname.includes('/products/')) {
+              url.searchParams.set('variant', variantId);
+              url.searchParams.set('size_selected', 'true');
+              link.href = url.toString();
+            }
+          });
+        }
+      });
+    }
+
+    // Map of single sizes to their combined size equivalents
+    const sizeMapping = {
+      'YTH-SM': ['YTH-SM/MD'],
+      'YTH-MD': ['YTH-SM/MD'],
+      'YTH-LG': ['YTH-LG/XL'],
+      'YTH-XL': ['YTH-LG/XL'],
+      'SR-SM': ['SR-SM/MD'],
+      'SR-MD': ['SR-SM/MD'],
+      'SR-LG': ['SR-LG/XL'],
+      'SR-XL': ['SR-LG/XL'],
+      'SR-2XL': ['SR-2XL/3XL'],
+      'SR-3XL': ['SR-2XL/3XL']
+    };
+
+    // Function to check if a product matches the selected size
+    function matchesSelectedSize(productSizes, selectedSize) {
+      // Direct match
+      if (productSizes.includes(selectedSize)) {
+        return true;
+      }
+
+      // Check for combined size matches
+      if (sizeMapping[selectedSize]) {
+        const combinedSizes = sizeMapping[selectedSize];
+        for (let i = 0; i < combinedSizes.length; i++) {
+          if (productSizes.includes(combinedSizes[i])) {
+            return true;
+          }
+        }
+      }
+
+      return false;
+    }
+
+    // Function to handle size selection
+    function handleSizeSelection(selectedSize) {
+      currentSelectedSize = selectedSize;
+
+      // Save selected size to localStorage
+      if (selectedSize) {
+        localStorage.setItem('userSize', selectedSize);
+      }
+
+      // Update the display text and carousel heading
+      if (selectedSize) {
+        trigger.textContent = selectedSize;
+
+        // Update carousel heading with selected size
+        const carouselHeading = document.getElementById('carousel-heading-{{ section.id }}');
+        {% if section.settings.heading_2_template != blank %}
+          const headingTemplate = '{{ section.settings.heading_2_template }}';
+          if (carouselHeading && headingTemplate.includes('{size}')) {
+            carouselHeading.textContent = headingTemplate.replace('{size}', selectedSize);
+          }
+        {% elsif section.settings.show_size_in_heading %}
+          // Fallback: append size to original heading
+          if (carouselHeading) {
+            carouselHeading.textContent = '{{ section.settings.heading_2 }} - ' + selectedSize;
+          }
+        {% endif %}
+      } else {
+        trigger.textContent = '{{ section.settings["button-text"] }}';
+
+        // Reset carousel heading to original
+        const carouselHeading = document.getElementById('carousel-heading-{{ section.id }}');
+        if (carouselHeading) {
+          carouselHeading.textContent = '{{ section.settings.heading_2 }}';
+        }
+      }
+
+      // Close dropdown after selection
+      optionsContainer.classList.remove('show');
+
+      // Show the carousel section
+      const sizeProductsCarousel = document.getElementById('size-products-carousel');
+      sizeProductsCarousel.style.display = 'block';
+
+      // Hide containers
+      productsContainer.style.display = 'none';
+      noProductsElement.style.display = 'none';
+
+      if (!selectedSize) {
+        return;
+      }
+
+      const allProductCards = productsContainer.querySelectorAll('.product-card[data-sizes]');
+      let visibleCount = 0;
+
+      allProductCards.forEach(function (card) {
+        const productSizes = card.getAttribute('data-sizes').split(',');
+
+        if (matchesSelectedSize(productSizes, selectedSize)) {
+          card.classList.add('show');
+          visibleCount++;
+        } else {
+          card.classList.remove('show');
+        }
+      });
+
+      const countElement = document.querySelector('#cus_count_prods');
+      if (countElement) {
+        countElement.innerText = visibleCount + ' Products';
+      }
+
+      if (visibleCount > 0) {
+        productsContainer.style.display = 'block';
+        // Update product links with the selected variant
+        updateProductLinks();
+
+        // Smooth scroll to the carousel section (only if not initial load)
+        if (!isInitialLoad) {
+          const carouselSection = document.getElementById('size-products-carousel');
+          if (carouselSection) {
+            setTimeout(function() {
+              carouselSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+          }
+        }
+      } else {
+        noProductsElement.style.display = 'block';
+      }
+
+      // After first selection, set flag to false
+      isInitialLoad = false;
+    }
+
+    // Add click handlers to size options
+    sizeOptions.forEach(function(option) {
+      option.addEventListener('click', function() {
+        const selectedSize = this.getAttribute('data-size');
+
+        // Remove selected class from all options
+        sizeOptions.forEach(function(opt) {
+          opt.classList.remove('selected');
+        });
+
+        // Add selected class to clicked option
+        this.classList.add('selected');
+
+        // Handle the selection
+        handleSizeSelection(selectedSize);
+      });
+    });
+
+    // Handle preselected size on page load
+    const preselectedOption = document.querySelector('.custom-size-selector-{{ section.id }} .option[data-preselected="true"]');
+    if (preselectedOption) {
+      const preselectedSize = preselectedOption.getAttribute('data-size');
+      preselectedOption.classList.add('selected');
+      handleSizeSelection(preselectedSize);
+    }
+
+    // Carousel Navigation Functionality
+    function initCarouselNavigation() {
+      const carouselPrevBtn = document.getElementById('carousel-prev-{{ section.id }}');
+      const carouselNextBtn = document.getElementById('carousel-next-{{ section.id }}');
+      const slider = document.getElementById('Slider-{{ section.id }}');
+
+      if (!carouselPrevBtn || !carouselNextBtn || !slider) {
+        return;
+      }
+
+      const motionList = slider.querySelector('motion-list');
+
+      if (!motionList) {
+        return;
+      }
+
+      function updateCarouselButtons() {
+        const scrollLeft = motionList.scrollLeft;
+        const scrollWidth = motionList.scrollWidth;
+        const clientWidth = motionList.clientWidth;
+
+        // Disable prev button if at start
+        if (scrollLeft <= 0) {
+          carouselPrevBtn.disabled = true;
+        } else {
+          carouselPrevBtn.disabled = false;
+        }
+
+        // Disable next button if at end
+        if (scrollLeft + clientWidth >= scrollWidth - 10) {
+          carouselNextBtn.disabled = true;
+        } else {
+          carouselNextBtn.disabled = false;
+        }
+      }
+
+      function scrollCarousel(direction) {
+        const visibleCards = motionList.querySelectorAll('.product-card.show');
+
+        if (visibleCards.length === 0) return;
+
+        // Calculate how many cards are visible per screen
+        const containerWidth = motionList.clientWidth;
+        const cardWidth = visibleCards[0].offsetWidth || 300;
+        const computedStyle = window.getComputedStyle(motionList);
+        const gap = parseInt(computedStyle.gap) || 20;
+
+        const cardsPerScreen = Math.floor(containerWidth / (cardWidth + gap));
+
+        // Scroll logic: if 3 or 4 cards per screen -> scroll 3, if 5 cards -> scroll 4
+        let cardsToScroll;
+        if (cardsPerScreen === 2 || cardsPerScreen === 3) {
+          cardsToScroll = 3;
+        } else {
+          cardsToScroll = 4;
+        }
+
+        const scrollAmount = cardsToScroll * (cardWidth + gap);
+
+        if (direction === 'next') {
+          motionList.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        } else {
+          motionList.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        }
+
+        // Update button states after scroll animation
+        setTimeout(updateCarouselButtons, 300);
+      }
+
+      carouselPrevBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        scrollCarousel('prev');
+      });
+
+      carouselNextBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        scrollCarousel('next');
+      });
+
+      // Update buttons on scroll
+      motionList.addEventListener('scroll', updateCarouselButtons);
+
+      // Initial button state
+      setTimeout(updateCarouselButtons, 500);
+
+      // Update button states when products are loaded/filtered
+      const observer = new MutationObserver(function() {
+        setTimeout(updateCarouselButtons, 100);
+      });
+
+      observer.observe(motionList, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
+    }
+
+    // Initialize carousel navigation after products are displayed
+    const originalHandleSizeSelection = handleSizeSelection;
+    handleSizeSelection = function(selectedSize) {
+      originalHandleSizeSelection(selectedSize);
+      setTimeout(initCarouselNavigation, 200);
+    };
+
+    // Also init on page load if preselected
+    if (document.querySelector('.custom-size-selector-{{ section.id }} .option[data-preselected="true"]')) {
+      setTimeout(initCarouselNavigation, 500);
+    }
+  });
+</script>
+
+<script>
+  // Track size selector clicks Posthog Metric
+  document.addEventListener('click', function(e) {  
+    if (e.target.closest('.template-collection .size-selection-container .options .option')) {  
+      posthog.capture('Size Selector Option Clicked', {  
+        page_type: 'collection'  
+      });  
+    }  
+  });  
+</script>
+
+{% schema %}
+{
+  "name": "Size-Based Products",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find Products in Your Size"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "Small"
+        },
+        {
+          "value": "title-md",
+          "label": "Medium"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "Large"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "Extra Large"
+        }
+      ],
+      "default": "title-md",
+      "label": "Heading size"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "options": [
+        {
+          "value": "text-left md:items-end md:flex-row",
+          "label": "Left"
+        },
+        {
+          "value": "text-center md:items-center",
+          "label": "Center"
+        },
+        {
+          "value": "text-right md:items-end md:flex-row-reverse",
+          "label": "Right"
+        }
+      ],
+      "default": "text-left md:items-end md:flex-row"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H6"
+        }
+      ],
+      "default": "h2",
+      "label": "Heading tag"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "button-text",
+      "label": "Button Text"
+    },
+    {
+      "type": "select",
+      "id": "preselected_size",
+      "label": "Preselected Size",
+      "options": [
+        {
+          "value": "",
+          "label": "None (No preselection)"
+        },
+        {
+          "value": "YTH-XS",
+          "label": "YTH-XS"
+        },
+        {
+          "value": "YTH-SM",
+          "label": "YTH-SM"
+        },
+        {
+          "value": "YTH-MD",
+          "label": "YTH-MD"
+        },
+        {
+          "value": "YTH-LG",
+          "label": "YTH-LG"
+        },
+        {
+          "value": "YTH-XL",
+          "label": "YTH-XL"
+        },
+        {
+          "value": "SR-SM",
+          "label": "SR-SM"
+        },
+        {
+          "value": "SR-MD",
+          "label": "SR-MD"
+        },
+        {
+          "value": "SR-LG",
+          "label": "SR-LG"
+        },
+        {
+          "value": "SR-XL",
+          "label": "SR-XL"
+        },
+        {
+          "value": "SR-2XL",
+          "label": "SR-2XL"
+        },
+        {
+          "value": "SR-3XL",
+          "label": "SR-3XL"
+        }
+      ],
+      "default": "SR-3XL",
+      "info": "Select which size should be preselected when the page loads"
+    },
+    {
+      "type": "header",
+      "content": "Carousel Settings"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading_2",
+      "label": "Carousel Heading"
+    },
+    {
+      "type": "collection_list",
+      "id": "source_collections",
+      "label": "Source collections",
+      "info": "Select one or more collections to load products from. If none are selected, it falls back to cut-resistant-battlegear and battlegear-3-0."
+    },
+    {
+      "type": "select",
+      "id": "heading_size_2",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "Small"
+        },
+        {
+          "value": "title-md",
+          "label": "Medium"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "Large"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "Extra Large"
+        }
+      ],
+      "default": "title-md",
+      "label": "Heading size"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment_2",
+      "label": "Carousel Heading alignment",
+      "options": [
+        {
+          "value": "text-left md:items-end md:flex-row",
+          "label": "Left"
+        },
+        {
+          "value": "text-center md:items-center",
+          "label": "Center"
+        },
+        {
+          "value": "text-right md:items-end md:flex-row-reverse",
+          "label": "Right"
+        }
+      ],
+      "default": "text-left md:items-end md:flex-row"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag_2",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H6"
+        }
+      ],
+      "default": "h2",
+      "label": "Carousel Heading tag"
+    },
+    {
+      "type": "text",
+      "id": "heading_2_template",
+      "label": "Heading Template (optional)",
+      "default": "Products available in {size}",
+      "info": "Use {size} where you want the selected size to appear. Leave blank to disable."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_size_in_heading",
+      "label": "Show selected size in heading",
+      "default": true,
+      "info": "When enabled and no template is provided, the size will be appended to the heading"
+    },
+    {
+      "type": "text",
+      "id": "subheading_2",
+      "label": "Carousel Subheading"
+    },
+    {
+      "type": "color",
+      "id": "color_background_carousel",
+      "label": "Carousel Background color"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "Desktop columns"
+    },
+    {
+      "type": "checkbox",
+      "id": "carousel_on_desktop",
+      "label": "Enable carousel on desktop",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1 column"
+        },
+        {
+          "value": "2",
+          "label": "2 columns"
+        }
+      ],
+      "default": "1",
+      "label": "Mobile columns"
+    },
+    {
+      "type": "checkbox",
+      "id": "swipe_on_mobile",
+      "label": "Enable swipe on mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "Text color"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "Banner Background color"
+    },
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 72
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "Show section divider",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "Rounded corners"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Size-Based Products"
+    }
+  ],
+  "disabled_on": {
+    "templates": ["password"]
+  }
+}
+{% endschema %}

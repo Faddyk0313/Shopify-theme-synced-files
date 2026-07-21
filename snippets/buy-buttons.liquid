@@ -1,0 +1,1285 @@
+{%- doc -%}
+  Renders a comprehensive product purchase form with quantity controls, pricing, and checkout options.
+
+  Handles add-to-cart, dynamic checkout, volume pricing, inventory rules, and back-in-stock notifications.
+
+  @param {object} block - Block settings and configuration
+  @param {object} product - Shopify product object
+  @param {string} product_form_id - Unique form identifier for cart submission
+  @param {string} product_id - Product identifier for component IDs
+  @param {string} section_id - Section identifier for component IDs
+  @param {object} section - Parent section for block detection
+
+  @example
+  {% render 'buy-buttons',
+     block: block,
+     product: product,
+     product_form_id: 'product-form-123',
+     product_id: product.id,
+     section_id: section.id,
+     section: section
+  %}
+{%- enddoc -%}
+
+{% comment %} TBG custom code {% endcomment %}
+
+<style>
+  /* .nonOrderWindowButton {
+    opacity: 0.8;
+  }
+  .nonOrderWindowButton .btn-text {
+    opacity: 0.8;
+  }
+  .nonOrderWindowButton::after {
+    opacity: 0.8;
+  } */
+</style>
+
+<style>
+  form.product-form.grid.gap-8 {
+    gap: 0 !important;
+  }
+  .padding-right {
+    padding-right: 0 !important;
+    padding-inline-end: 0 !important;
+  }
+  .padding-left {
+    padding-left: 0 !important;
+    padding-inline-start: 0 !important;
+  }
+  .button.button--primary.button--fixed {
+    font-size: 15px;
+  }
+  @media (max-width: 1320px) {
+    .max-width {
+      max-width: 22px !important;
+    }
+
+  }
+  @media (max-width: 500px) {
+    .product-form__alert  {
+      padding-inline: 10px !important;
+    }
+    #soldOutText {
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .button.button--primary.button--fixed {
+      font-size: 12px;
+    }
+    .product-form__alert
+    {
+      min-height: 52px !important;
+    }
+  }
+  @media (min-width: 1020px) {
+    #soldOutText {
+      font-size: 12px;
+      white-space: nowrap;
+    }
+  }
+  @media (min-width: 1400px) {
+    #soldOutText {
+      font-size: 15px;
+      white-space: nowrap;
+    }
+  }
+
+  .product-form__alert[disabled] {
+    display: none;
+  }
+  .product-form__alert
+  {
+    min-height: 60px;
+  }
+  .button .btn-text {
+    white-space: nowrap;
+  }
+  .buy-buttons .quantity {
+    background-color: white;
+  }
+
+  @media (max-width: 768px) {
+    .buy-buttons .quantity .quantity__button {
+      padding-inline: var(--sp-2);
+    }
+    .buy-buttons .quantity .quantity__input {
+      max-width: var(--sp-5) !important;
+    }
+
+  }
+</style>
+
+<!-- TBG Custom Code -->
+{% if product.template_suffix == 'custom-team-pdp' %}
+  <style>
+    .product-form__submit.button,
+    .nonOrderWindowButton.button {
+      position: relative;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .product-form__submit.button {
+      padding: 12px 16px !important;
+    }
+
+    .product-form__submit .btn-text,
+    .nonOrderWindowButton .btn-text {
+      white-space: pre-wrap !important;
+      text-align: center;
+      width: 100%;
+    }
+
+    .product-form__submit .cus-btn-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      line-height: 1.2;
+    }
+
+    .product-form__submit .cus-atc-sale-msg {
+      font-size: 14px;
+    }
+  </style>
+  <!-- End TBG Custom Code -->
+{% endif %}
+{% comment %} TBG custom code {% endcomment %}
+<div class="product-form-wrapper" style="{{ cus_style_wrapper | default: 'margin-top: var(--sp-2) !important;' }}" {{ block.shopify_attributes }}>
+  {%- liquid
+    assign gift_card_recipient_feature_active = false
+    if block.settings.show_gift_card_recipient and product.gift_card?
+      assign gift_card_recipient_feature_active = true
+    endif
+
+    assign show_dynamic_checkout = false
+    if block.settings.show_dynamic_checkout
+      assign show_dynamic_checkout = true
+    endif
+
+    assign quantity_block = section.blocks | where: 'type', 'quantity_selector' | first
+    assign show_quantity_selector = block.settings.show_quantity_selector
+    if quantity_block
+      assign show_quantity_selector = false
+    endif
+
+    assign back_in_stock_block = section.blocks | where: 'type', 'back_in_stock' | first
+    assign enable_back_in_stock = block.settings.enable_back_in_stock
+    if back_in_stock_block
+      assign enable_back_in_stock = false
+    endif
+
+    assign show_price = block.settings.show_price
+  -%}
+  {%- form 'product',
+    product,
+    id: product_form_id,
+    data-type: 'add-to-cart-form',
+    data-hide-errors: gift_card_recipient_feature_active,
+    class: 'product-form grid gap-8',
+    is: 'product-form'
+  -%}
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>
+
+    {%- liquid
+      if gift_card_recipient_feature_active
+        render 'gift-card-recipient-form', product: product, form: form, section_id: section_id, product_id: product_id
+      endif
+
+      assign check_against_inventory = true
+      if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
+        assign check_against_inventory = false
+      endif
+      if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
+        assign quantity_rule_soldout = true
+      endif
+    -%}
+
+    {% comment %} TBG CUSTOM COde {% endcomment %}
+    <div
+      class="product-form__buttons grid gap-4 "{% if product.template_suffix == 'gift-card' %} style="margin-top: var(--sp-2) !important;" {% endif %}
+      {% unless product.quantity_price_breaks_configured? and show_quantity_selector %}
+        id="QuantityForm-{{ section_id }}-{{ product_id }}"
+      {% endunless %}
+    >
+      {%- if product.quantity_price_breaks_configured? and show_quantity_selector -%}
+        <div id="QuantityForm-{{ section_id }}-{{ product_id }}" class="field">
+          {%- assign cart_qty = cart | item_count_for_variant: product.selected_or_first_available_variant.id -%}
+          <label for="Quantity-{{ section_id }}-{{ product_id }}" class="quantity__label label" is="quantity-label">
+            {{ 'products.quantity.label' | t }}
+            <span
+              id="QuantityRulesCart-{{ section_id }}-{{ product_id }}"
+              class="quantity__rules-cart{% if cart_qty == 0 %} hidden{% endif %} relative"
+            >
+              <span class="quantity-cart font-medium"
+                >({{ 'products.quantity.in_cart_html' | t: quantity: cart_qty }})</span
+              >
+            </span>
+          </label>
+          <div class="flex items-center gap-4">
+            <quantity-input
+              class="quantity inline-flex relative"
+              data-section-id="{{ section_id }}"
+              data-product-id="{{ product_id }}"
+            >
+              <button
+                type="button"
+                name="minus"
+                class="quantity__button"
+                aria-label="{{ 'products.quantity.decrease' | t: product: product.title | escape }}"
+              >
+                {%- render 'icon', icon: 'chevron-left', size: 'sm', class: 'stroke-2 transform' -%}
+              </button>
+              <input
+                id="Quantity-{{ section_id }}-{{ product_id }}"
+                class="quantity__input text-sm sm:text-base font-medium text-center"
+                type="number"
+                name="quantity"
+                inputmode="numeric"
+                autocomplete="off"
+                data-quantity-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                data-cart-quantity="{{ cart_qty }}"
+                data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+                  data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                  max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                {% endif %}
+                step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+                value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                form="{{ product_form_id }}"
+              >
+              <button
+                type="button"
+                name="plus"
+                class="quantity__button"
+                aria-label="{{ 'products.quantity.increase' | t: product: product.title | escape }}"
+              >
+                {%- render 'icon', icon: 'chevron-right', size: 'sm', class: 'stroke-2 transform' -%}
+              </button>
+            </quantity-input>
+
+            {%- if product.quantity_price_breaks_configured? -%}
+              {%- liquid
+                assign volume_pricing_array = product.selected_or_first_available_variant.quantity_price_breaks | sort: 'quantity' | reverse
+                assign current_qty_for_volume_pricing = cart_qty | plus: product.selected_or_first_available_variant.quantity_rule.min
+                if cart_qty > 0
+                  assign current_qty_for_volume_pricing = cart_qty | plus: product.selected_or_first_available_variant.quantity_rule.increment
+                endif
+                assign variant_price_compare = product.selected_or_first_available_variant.compare_at_price
+              -%}
+              <price-per-item
+                id="PricePerItem-{{ section_id }}-{{ product_id }}"
+                class="price flex flex-wrap items-center gap-2 lg:gap-1d5"
+                data-section-id="{{ section_id }}"
+                data-product-id="{{ product_id }}"
+                data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+              >
+                {%- if variant_price_compare -%}
+                  <span class="sr-only">{{ 'products.price.regular_price' | t }}</span>
+                  <span class="price__sale inline-flex items-center h-auto relative">
+                    {%- liquid
+                      if settings.currency_code_enabled
+                        echo variant_price_compare | money_with_currency
+                      else
+                        echo variant_price_compare | money
+                      endif
+                    -%}
+                  </span>
+                  <span class="sr-only">{{ 'products.price.sale_price' | t }}</span>
+                {%- endif -%}
+
+                {%- if product.selected_or_first_available_variant.quantity_price_breaks.size > 0 -%}
+                  {%- if current_qty_for_volume_pricing < volume_pricing_array.last.minimum_quantity -%}
+                    {%- liquid
+                      if settings.currency_code_enabled
+                        assign variant_price = product.selected_or_first_available_variant.price | money_with_currency
+                      else
+                        assign variant_price = product.selected_or_first_available_variant.price | money
+                      endif
+                    -%}
+                    <span class="price-per-item--current price__regular whitespace-nowrap">
+                      {{- 'products.volume_pricing.price_at_each' | t: price: variant_price -}}
+                    </span>
+                  {%- else -%}
+                    {%- for price_break in volume_pricing_array -%}
+                      {%- if current_qty_for_volume_pricing >= price_break.minimum_quantity -%}
+                        {%- liquid
+                          if settings.currency_code_enabled
+                            assign price_break_price = price_break.price | money_with_currency
+                          else
+                            assign price_break_price = price_break.price | money
+                          endif
+                        -%}
+                        <span class="price-per-item--current price__regular whitespace-nowrap">
+                          {{- 'products.volume_pricing.price_at_each' | t: price: price_break_price -}}
+                        </span>
+                        {%- break -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endif -%}
+                {%- else -%}
+                  <span class="price-per-item--current price__regular whitespace-nowrap">
+                    {%- liquid
+                      if settings.currency_code_enabled
+                        assign variant_price = product.selected_or_first_available_variant.price | money_with_currency
+                      else
+                        assign variant_price = product.selected_or_first_available_variant.price | money
+                      endif
+                    -%}
+                    {{- 'products.volume_pricing.price_at_each' | t: price: variant_price -}}
+                  </span>
+                {%- endif -%}
+              </price-per-item>
+            {%- endif -%}
+          </div>
+
+          {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1
+            or product.selected_or_first_available_variant.quantity_rule.min > 1
+            or product.selected_or_first_available_variant.quantity_rule.max != null
+          -%}
+            <div
+              class="quantity__rules text-sm font-medium leading-tight"
+              id="QuantityRules-{{ section_id }}-{{ product_id }}"
+            >
+              {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 -%}
+                <span class="divider">
+                  {{-
+                    'products.quantity.multiples_of'
+                    | t: quantity: product.selected_or_first_available_variant.quantity_rule.increment
+                  -}}
+                </span>
+              {%- endif -%}
+              {%- if product.selected_or_first_available_variant.quantity_rule.min > 1 -%}
+                <span class="divider">
+                  {{-
+                    'products.quantity.minimum_of'
+                    | t: quantity: product.selected_or_first_available_variant.quantity_rule.min
+                  -}}
+                </span>
+              {%- endif -%}
+              {%- if product.selected_or_first_available_variant.quantity_rule.max != null -%}
+                <span class="divider">
+                  {{-
+                    'products.quantity.maximum_of'
+                    | t: quantity: product.selected_or_first_available_variant.quantity_rule.max
+                  -}}
+                </span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      <div class="buy-buttons relative {% if enable_back_in_stock %} back-in-stock{% endif %}{% if product.quantity_price_breaks_configured? != true and show_quantity_selector or show_price %} flex{% else %} grid{% endif %} {% comment %} TBG custom Code {% endcomment %} gap-2 {% comment %} TBG custom Code {% endcomment %}">
+        {% if show_dynamic_checkout == true %}
+          <div class="min-w-0">
+            {%- render 'product-variant-picker',
+              block: block,
+              product: product,
+              product_id: product.id,
+              section_id: section.id,
+              product_form_id: product_form_id,
+              image_ratio: section.settings.image_ratio,
+              image_ratio_mobile: section.settings.image_ratio_mobile,
+              image_fill: settings.product_image_fill,
+              cus_style: 'flex-direction:column;'
+            -%}
+          </div>
+        {% endif %}
+
+        {%- assign now = 'now' | date: '%s' -%}
+        {%- assign start_date = product.metafields.custom.order_window_start | date: '%s' -%}
+        {%- assign end_date = product.metafields.custom.order_window_end | date: '%s' -%}
+        {%- assign now_human = 'now' | date: '%Y-%m-%d %H:%M' -%}
+        {%- assign start_human = product.metafields.custom.order_window_start | date: '%Y-%m-%d %H:%M' -%}
+        {%- assign end_human = product.metafields.custom.order_window_end | date: '%Y-%m-%d %H:%M' -%}
+
+        {%- if product.quantity_price_breaks_configured? != true and show_quantity_selector -%}
+          <div>
+            {%- assign cart_qty = cart | item_count_for_variant: product.selected_or_first_available_variant.id -%}
+            <label for="Quantity-{{ section_id }}-{{ product_id }}" class="label sr-only">
+              {{- 'products.quantity.label' | t -}}
+            </label>
+
+            {% comment %} TBG custom Code {% endcomment %}
+            {%- if start_date and now < start_date -%}
+            {% elsif end_date and now > end_date %}
+
+            {% else %}
+              {% comment %} TBG custom Code {% endcomment %}
+              <quantity-input
+                class="quantity inline-flex shrink-0 relative h-full"
+                data-section-id="{{ section_id }}"
+                data-product-id="{{ product_id }}"
+              >
+                <button
+                  type="button"
+                  name="minus"
+                  class="quantity__button {% comment %} TBG custom code {% endcomment %} padding-right {% comment %} TBG custom code {% endcomment %}"
+                  aria-label="{{ 'products.quantity.decrease' | t: product: product.title | escape }}"
+                >
+                  {%- render 'icon', icon: 'chevron-left', size: 'sm', class: 'stroke-2 transform' -%}
+                </button>
+                <input
+                  id="Quantity-{{ section_id }}-{{ product_id }}"
+                  class="quantity__input text-sm sm:text-base font-medium text-center"
+                  type="number"
+                  name="quantity"
+                  inputmode="numeric"
+                  autocomplete="off"
+                  data-quantity-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                  data-cart-quantity="{{ cart_qty }}"
+                  data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                  min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                  {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+                    data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                    max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                  {% endif %}
+                  step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+                  value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                  form="{{ product_form_id }}"
+                >
+                <button
+                  type="button"
+                  name="plus"
+                  class="quantity__button padding-left"
+                  aria-label="{{ 'products.quantity.increase' | t: product: product.title | escape }}"
+                >
+                  {%- render 'icon', icon: 'chevron-right', size: 'sm', class: 'stroke-2 transform' -%}
+                </button>
+              </quantity-input>
+            {%- endif -%}
+            {% comment %} TBG custom code {% endcomment %}
+          </div>
+        {%- endif -%}
+
+        <div
+          style="
+            flex-grow: 1;
+            display: flex;
+            position: relative;
+          "
+        >
+          {% comment %} TBG custom Code {% endcomment %}
+          {%- if start_date and now < start_date -%}
+            <button
+              type="button"
+              class="nonOrderWindowButton product-form__alert button button--primary button--fixed w-full"
+              {% comment %} B - Test START {% endcomment %}
+              style="min-width:auto !important; background: black !important;"
+              {% comment %} B - Test END {% endcomment %}
+              aria-controls="BackInStockDrawer-{{ section_id }}-{{ product_id }}"
+              aria-expanded="false"
+              is="hover-button"
+            >
+              <span class="btn-fill" data-fill></span>
+              <span class="btn-text 1--{{ now_human }} 2--{{ start_human }} 3--{{ end_human }}"
+                >ORDER WINDOW NOT OPEN YET</span
+              >
+            </button>
+
+          {%- elsif end_date and now > end_date -%}
+            <button
+              type="button"
+              class="nonOrderWindowButton product-form__alert button button--primary button--fixed w-full"
+              {% comment %} B - Test START {% endcomment %}
+              style="min-width:auto !important; background: black !important;"
+              {% comment %} B - Test END {% endcomment %}
+              aria-controls="BackInStockDrawer-{{ section_id }}-{{ product_id }}"
+              aria-expanded="false"
+              is="hover-button"
+            >
+              <span class="btn-fill" data-fill></span>
+              <span class="btn-text 1--{{ now_human }} 2--{{ start_human }} 3--{{ end_human }}"
+                >ORDER WINDOW CLOSED – NOTIFY ME WHEN AVAILABLE</span
+              >
+            </button>
+          {% else %}
+            {% comment %}
+            {% endcomment %}
+
+            <button
+              type="submit"
+              name="add"
+              form="{{ product_form_id }}"
+              class="product-form__submit button button--primary button--fixed w-full"
+              {% comment %} B - Test START {% endcomment %}
+              style="min-width:auto !important; background: black !important; {% if product.metafields.custom.product_state1 == 'discontinued ' %} display:flex !important; {% endif %}"
+              {% comment %} B - Test END {% endcomment %}
+              is="hover-button"
+              {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
+                disabled
+              {% endif -%}
+              {%- if product.template_suffix == 'pre-order' %}
+                data-pre-order="true"
+              {% endif -%}
+              {% comment %} TBG custom code {% endcomment %}
+              {% if product.metafields.custom.product_state1 != 'discontinued ' %}
+                {%- if enable_back_in_stock %}
+                  data-back-in-stock
+                {% endif -%}
+              {% endif -%}
+              {% comment %} TBG custom code {% endcomment %}
+            >
+              {% comment %} TBG custom code {% endcomment %}
+              <span
+                style="{% if product.metafields.custom.product_state1 == 'discontinued ' %} display:block !important; {% endif %}"
+                class="btn-fill"
+                data-fill
+              ></span>
+
+              <!-- TBG Custom Code -->
+              <div class="cus-btn-content">
+                <span class="btn-text uppercase">
+                  {%- liquid
+                    assign button_text = product.selected_or_first_available_variant.metafields.custom.button_text
+
+                    if product.selected_or_first_available_variant.available == false or quantity_rule_soldout
+                      echo 'products.product.sold_out' | t
+                    elsif button_text != blank
+                      echo button_text
+                    else
+                      echo 'products.product.add_to_cart' | t
+                    endif
+                  -%}
+                </span>
+                <span class="cus-atc-sale-msg"> </span>
+              </div>
+              <!-- End TBG Custom Code -->
+              {% comment %}
+                elsif product.template_suffix != 'pre-order'
+                echo 'products.product.add_to_cart' | t
+              {% endcomment %}
+              {% comment %} echo 'products.product.pre_order' | t {% endcomment %}
+            </button>
+
+            {% if product.metafields.custom.product_state1 != 'discontinued ' %}
+              {%- if enable_back_in_stock -%}
+                <button
+                  type="button"
+                  class=" product-form__alert backInStock button button--primary button--fixed w-full"
+                  is="hover-button"
+                  aria-controls="BackInStockDrawer-{{ section_id }}-{{ product_id }}"
+                  aria-expanded="false"
+                  {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
+                    disabled
+                  {% endif -%}
+                >
+                  <span class="btn-fill" data-fill></span>
+
+                  <span class="btn-text">
+                    {{- 'products.product.sold_out' | t }} - {{ 'products.back_in_stock.label' | t -}}
+                  </span>
+                </button>
+              {%- endif -%}
+            {%- endif -%}
+
+              {%- liquid
+                unless product.quantity_price_breaks_configured? != true and show_quantity_selector
+                  if show_dynamic_checkout
+                    echo form | payment_button
+                  endif
+                endunless
+              -%}
+
+          {% endif %}
+        </div>
+      </div>
+      <div
+        class="product-form__error-message alert alert--error text-sm font-medium leading-tight"
+        role="alert"
+        hidden
+      ></div>
+
+      {%- if product.quantity_price_breaks_configured? != true and show_quantity_selector -%}
+        {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1
+          or product.selected_or_first_available_variant.quantity_rule.min > 1
+          or product.selected_or_first_available_variant.quantity_rule.max != null
+        -%}
+          <div
+            class="quantity__rules text-sm font-medium leading-tight"
+            id="QuantityRules-{{ section_id }}-{{ product_id }}"
+          >
+            {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 -%}
+              <span class="divider">
+                {{-
+                  'products.quantity.multiples_of'
+                  | t: quantity: product.selected_or_first_available_variant.quantity_rule.increment
+                -}}
+              </span>
+            {%- endif -%}
+            {%- if product.selected_or_first_available_variant.quantity_rule.min > 1 -%}
+              <span class="divider">
+                {{-
+                  'products.quantity.minimum_of'
+                  | t: quantity: product.selected_or_first_available_variant.quantity_rule.min
+                -}}
+              </span>
+            {%- endif -%}
+            {%- if product.selected_or_first_available_variant.quantity_rule.max != null -%}
+              <span class="divider">
+                {{-
+                  'products.quantity.maximum_of'
+                  | t: quantity: product.selected_or_first_available_variant.quantity_rule.max
+                -}}
+              </span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- liquid
+        if product.quantity_price_breaks_configured? != true and show_quantity_selector
+          if show_dynamic_checkout
+            echo form | payment_button
+          endif
+        endif
+      -%}
+    </div>
+  {%- endform -%}
+
+  {% comment %} TBG custom code {% endcomment %}
+  {% if product.metafields.custom.product_state1 != 'discontinued ' %}
+    {%- if enable_back_in_stock -%}
+      <div id="BackInStock-{{ section_id }}-{{ product_id }}">
+        {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+          <back-in-stock-drawer
+            id="BackInStockDrawer-{{ section_id }}-{{ product_id }}"
+            class="drawer drawer--end z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+            role="dialog"
+            aria-modal="true"
+            aria-label="{{ product.title | escape }}"
+            shopify-design-mode
+            hidden
+          >
+            <overlay-element
+              class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none"
+              aria-controls="BackInStockDrawer-{{ section_id }}-{{ product_id }}"
+              aria-expanded="false"
+            ></overlay-element>
+            <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+              <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
+                <span class="drawer__title heading lg:text-3xl text-2xl leading-none tracking-tight grid gap-4">
+                  {{ product.title | escape }}
+                  {%- unless product.has_only_default_variant -%}
+                    <dl class="grid gap-1d5">
+                      {%- for option in product.options_with_values -%}
+                        <div class="flex gap-2 text-sm text-opacity leading-tight">
+                          <dt>{{ option.name | escape }}:</dt>
+                          <dd>
+                            {%- for value in option.values -%}
+                              {%- if option.selected_value == value -%}
+                                <span class="font-medium">{{ value | escape }}</span>
+                              {%- endif -%}
+                            {%- endfor -%}
+                          </dd>
+                        </div>
+                      {%- endfor -%}
+                    </dl>
+                  {%- endunless -%}
+                </span>
+                <button
+                  class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center"
+                  type="button"
+                  is="hover-button"
+                  aria-controls="BackInStockDrawer-{{ section_id }}-{{ product_id }}"
+                  aria-expanded="false"
+                  aria-label="{{ 'general.accessibility.close' | t | escape }}"
+                >
+                  <span class="btn-fill" data-fill></span>
+                  <span class="btn-text">
+                    {%- render 'icon', icon: 'close', size: 'sm' -%}
+                  </span>
+                </button>
+              </gesture-element>
+              <div class="drawer__content opacity-0 invisible flex flex-col h-full grow shrink">
+                <div class="drawer__scrollable relative flex flex-col gap-5 md:gap-7 grow shrink">
+                  <div class="form-content">
+                    {% comment %}
+                      {%- render 'back-in-stock',
+                        product: product,
+                        product_id: product_id,
+                        description: 'Submit your email to secure your spot on the waitlist to purchase from the restock.',
+                        section_id: section_id,
+                        show_name: block.settings.show_back_in_stock_name,
+                        show_phone: block.settings.show_back_in_stock_phone
+                      -%}
+                    {% endcomment %}
+                    <div class="field">
+                      <input
+                        class="input is-floating"
+                        autocomplete="email"
+                        type="email"
+                        id="ContactFormEmail-{{ section_id }}"
+                        name="contact[email]"
+                        spellcheck="false"
+                        autocapitalize="off"
+                        placeholder="{{ 'products.back_in_stock.form.email' | t | escape }}"
+                        required
+                      >
+                      <label class="label is-floating" for="ContactFormEmail-{{ section_id }}">
+                        {{- 'products.back_in_stock.form.email' | t -}}
+                      </label>
+                    </div>
+
+                    {% comment %} <div class="desc field rte text-base"></div> {% endcomment %}
+
+                    <div class="field" style="margin-top:15px;">
+                      <label for="ContactSubmit-{{ section_id }}" class="sr-only">
+                        {{- 'products.back_in_stock.form.send' | t -}}
+                      </label>
+                      <button
+                        type="submit"
+                        id="ContactSubmit-{{ section_id }}"
+                        class="button button--primary button--fixed"
+                        is="hover-button"
+                      >
+                        <span class="btn-fill" data-fill></span>
+                        <span class="btn-text">{{ 'products.back_in_stock.form.send' | t }}</span>
+                      </button>
+                    </div>
+
+                    <div class="klaviyo-form-Uc74fE" style="display: none;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </back-in-stock-drawer>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if start_date and now < start_date -%}
+    <back-in-stock-drawer
+      id="BackInStockDrawer-{{ section_id }}-{{ product_id }}"
+      class="drawer drawer--end z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+      role="dialog"
+      aria-modal="true"
+      aria-label="{{ product.title | escape }}"
+      shopify-design-mode
+      hidden
+    >
+      <overlay-element
+        class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none"
+        aria-controls="BackInStockDrawer-{{ section_id }}-{{ product_id }}"
+        aria-expanded="false"
+      ></overlay-element>
+      <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+        <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
+          <span class="drawer__title heading lg:text-3xl text-2xl leading-none tracking-tight grid gap-4">
+            {{ product.title | escape }}
+            {%- unless product.has_only_default_variant -%}
+              <dl class="grid gap-1d5">
+                {%- for option in product.options_with_values -%}
+                  <div class="flex gap-2 text-sm text-opacity leading-tight">
+                    <dt>{{ option.name | escape }}:</dt>
+                    <dd>
+                      {%- for value in option.values -%}
+                        {%- if option.selected_value == value -%}
+                          <span class="font-medium">{{ value | escape }}</span>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </dd>
+                  </div>
+                {%- endfor -%}
+              </dl>
+            {%- endunless -%}
+          </span>
+          <button
+            class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center"
+            type="button"
+            is="hover-button"
+            aria-controls="BackInStockDrawer-{{ section_id }}-{{ product_id }}"
+            aria-expanded="false"
+            aria-label="{{ 'general.accessibility.close' | t | escape }}"
+          >
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">
+              {%- render 'icon', icon: 'close', size: 'sm' -%}
+            </span>
+          </button>
+        </gesture-element>
+        <div class="drawer__content opacity-0 invisible flex flex-col h-full grow shrink">
+          <div class="drawer__scrollable relative flex flex-col gap-5 md:gap-7 grow shrink">
+            {%- render 'back-in-stock',
+              product: product,
+              product_id: product_id,
+              section_id: section_id,
+              show_name: block.settings.show_back_in_stock_name,
+              show_phone: block.settings.show_back_in_stock_phone
+            -%}
+          </div>
+        </div>
+      </div>
+    </back-in-stock-drawer>
+  {%- endif -%}
+
+  {%- if end_date and now > end_date -%}
+    <back-in-stock-drawer
+      id="BackInStockDrawer-{{ section_id }}-{{ product_id }}"
+      class="drawer drawer--end z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+      role="dialog"
+      aria-modal="true"
+      aria-label="{{ product.title | escape }}"
+      shopify-design-mode
+      hidden
+    >
+      <overlay-element
+        class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none"
+        aria-controls="BackInStockDrawer-{{ section_id }}-{{ product_id }}"
+        aria-expanded="false"
+      ></overlay-element>
+      <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+        <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
+          <span class="drawer__title heading lg:text-3xl text-2xl leading-none tracking-tight grid gap-4">
+            {{ product.title | escape }}
+            {%- unless product.has_only_default_variant -%}
+              <dl class="grid gap-1d5">
+                {%- for option in product.options_with_values -%}
+                  <div class="flex gap-2 text-sm text-opacity leading-tight">
+                    <dt>{{ option.name | escape }}:</dt>
+                    <dd>
+                      {%- for value in option.values -%}
+                        {%- if option.selected_value == value -%}
+                          <span class="font-medium">{{ value | escape }}</span>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </dd>
+                  </div>
+                {%- endfor -%}
+              </dl>
+            {%- endunless -%}
+          </span>
+          <button
+            class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center"
+            type="button"
+            is="hover-button"
+            aria-controls="BackInStockDrawer-{{ section_id }}-{{ product_id }}"
+            aria-expanded="false"
+            aria-label="{{ 'general.accessibility.close' | t | escape }}"
+          >
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">
+              {%- render 'icon', icon: 'close', size: 'sm' -%}
+            </span>
+          </button>
+        </gesture-element>
+        <div class="drawer__content opacity-0 invisible flex flex-col h-full grow shrink">
+          <div class="drawer__scrollable relative flex flex-col gap-5 md:gap-7 grow shrink">
+            {%- render 'back-in-stock',
+              product: product,
+              product_id: product_id,
+              section_id: section_id,
+              show_name: block.settings.show_back_in_stock_name,
+              show_phone: block.settings.show_back_in_stock_phone
+            -%}
+          </div>
+        </div>
+      </div>
+    </back-in-stock-drawer>
+  {%- endif -%}
+  {% comment %} TBG custom Code {% endcomment %}
+</div>
+
+{% comment %} back in stock script {% endcomment %}
+
+<script>
+  (function () {
+    const observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        mutation.addedNodes.forEach(function (node) {
+          if (node.nodeType === 1 && node.matches && node.matches('back-in-stock-drawer')) {
+            initSync();
+          }
+        });
+      });
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const drawer = document.querySelector('back-in-stock-drawer');
+      if (drawer && !drawer.hasAttribute('hidden')) {
+        initSync();
+      }
+
+      const drawerButtons = document.querySelectorAll('[aria-controls^="BackInStockDrawer"]');
+      drawerButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          setTimeout(initSync, 500);
+        });
+      });
+    });
+
+    function initSync() {
+      const customInput = document.querySelector('#ContactFormEmail-{{ section_id }}');
+      const customSubmit = document.querySelector('#ContactSubmit-{{ section_id }}');
+      {% comment %} const descDiv = document.querySelector('.desc'); {% endcomment %}
+
+      function getKlaviyoElements() {
+        const formRows = document.querySelectorAll('[data-testid="form-row"]');
+        const emailInput = formRows[0]?.querySelector('input[type="email"]');
+        {% comment %} const infoText = formRows[2]?.querySelector('p'); {% endcomment %}
+        const submitBtn = formRows[6]?.querySelector('button[type="button"]');
+        return { emailInput, submitBtn };
+      }
+
+      function fillHiddenFields() {
+        // Product URL
+        const productUrlInput = document.querySelector('input[id*="product_url"]');
+        if (productUrlInput) {
+          productUrlInput.value = window.location.href;
+          productUrlInput.dispatchEvent(new Event('input', { bubbles: true }));
+          productUrlInput.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+
+        // Product Image URL
+        const imageUrlInput = document.querySelector('input[id*="image_url"]');
+        if (imageUrlInput) {
+          const productImg = document.querySelector('.product__media-container img');
+          if (productImg) {
+            imageUrlInput.value = productImg.src;
+            imageUrlInput.dispatchEvent(new Event('input', { bubbles: true }));
+            imageUrlInput.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        }
+
+        // Preferred Size - get from drawer header display
+        const sizeInput = document.querySelector('input[id*="preferred_size"]');
+        if (sizeInput) {
+          const drawerHeader = document.querySelector('.drawer__title dl');
+          if (drawerHeader) {
+            const sizeOption = Array.from(drawerHeader.querySelectorAll('div')).find(function(div) {
+              return div.textContent.includes('Size:');
+            });
+            if (sizeOption) {
+              const sizeValue = sizeOption.querySelector('.font-medium');
+              if (sizeValue) {
+                sizeInput.value = sizeValue.textContent.trim();
+                sizeInput.dispatchEvent(new Event('input', { bubbles: true }));
+                sizeInput.dispatchEvent(new Event('change', { bubbles: true }));
+              }
+            }
+          }
+        }
+
+        // Product Name
+        const productNameInput = document.querySelector('input[id*="Product_Name"]');
+        if (productNameInput) {
+          productNameInput.value = '{{ product.title | escape }}';
+          productNameInput.dispatchEvent(new Event('input', { bubbles: true }));
+          productNameInput.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        // Product SKU
+        const productSkuInput = document.querySelector('input[id*="Variant_SKU"]');
+        if (productSkuInput) {
+          productSkuInput.value = '{{ product.selected_or_first_available_variant.sku | escape }}';
+          productSkuInput.dispatchEvent(new Event('input', { bubbles: true }));
+          productSkuInput.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      }
+
+      // Auto-fill when Klaviyo form loads
+      const checkInterval = setInterval(function() {
+        const klaviyoDiv = document.querySelector('.klaviyo-form-Uc74fE');
+        if (klaviyoDiv && klaviyoDiv.innerHTML.trim() !== '') {
+          fillHiddenFields();
+          clearInterval(checkInterval);
+        }
+      }, 100);
+
+      if (customInput && !customInput.dataset.syncAttached) {
+        customInput.dataset.syncAttached = 'true';
+        customInput.addEventListener('input', function (e) {
+          const { emailInput } = getKlaviyoElements();
+          if (emailInput) {
+            emailInput.value = e.target.value;
+            emailInput.dispatchEvent(new Event('input', { bubbles: true }));
+            emailInput.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        });
+      }
+
+      if (customSubmit && !customSubmit.dataset.syncAttached) {
+        customSubmit.dataset.syncAttached = 'true';
+        customSubmit.addEventListener('click', function (e) {
+          e.preventDefault();
+
+          // Check if Klaviyo div is empty, reload if needed
+          const klaviyoDiv = document.querySelector('.klaviyo-form-Uc74fE');
+          if (!klaviyoDiv || klaviyoDiv.innerHTML.trim() === '') {
+            const currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set('size_selected', 'true');
+            window.location.href = currentUrl.toString();
+            return;
+          }
+
+          fillHiddenFields();
+
+          // Add success message to DOM immediately
+          setTimeout(function() {
+            const formContent = document.querySelector('.form-content');
+            if (formContent && !document.querySelector('.success-message')) {
+              const successDiv = document.createElement('div');
+              successDiv.className = 'success-message';
+              successDiv.innerHTML = `
+                <div class="alert alert--success flex items-start gap-3 text-sm md:text-base leading-tight" style="margin-bottom:10px;" role="alert"> 
+                  <svg class="icon icon-icon icon-sm shrink-0" viewBox="0 0 24 24" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12L11 14L16 9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"></path>
+                  </svg>
+                  Your email has been received.
+                </div>
+              `;
+              {% comment %} formContent.appendChild(successDiv); {% endcomment %}
+              formContent.insertBefore(successDiv, formContent.firstChild);
+
+
+              // Empty the custom input field
+              if (customInput) {
+                customInput.value = '';
+              }
+            }
+          }, 100);
+
+          // Click Klaviyo submit button
+          setTimeout(function() {
+            const { submitBtn } = getKlaviyoElements();
+            if (submitBtn) {
+              submitBtn.click();
+            }
+          }, 150);
+        });
+      }
+
+      // Wait 5 seconds before starting checks
+      setTimeout(function() {
+        let wasFilledBefore = false;
+        let hasReloaded = false;
+
+        // Check if Klaviyo form is empty and reload page once
+        setInterval(function() {
+          const klaviyoDiv = document.querySelector('.klaviyo-form-Uc74fE');
+          const customSuccessMsg = document.querySelector('.success-message');
+
+          if (klaviyoDiv && klaviyoDiv.innerHTML.trim() !== '') {
+            wasFilledBefore = true;
+          }
+
+          // Only reload if form becomes empty AND no custom success message exists
+          if (klaviyoDiv && klaviyoDiv.innerHTML.trim() === '' && wasFilledBefore && !hasReloaded && !customSuccessMsg) {
+            hasReloaded = true;
+            const currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set('size_selected', 'true');
+            window.location.href = currentUrl.toString();
+          }
+        }, 500);
+      }, 5000);
+    }
+  })();
+</script>
+
+<script>
+  (function () {
+    if (window.__klaviyoBisConsentDefaultChecked) return;
+    window.__klaviyoBisConsentDefaultChecked = true;
+
+    const consentSelectors = ['#opt_in_promotional_email__31__32', '[class*="klaviyo-form"] input[type="checkbox"]'];
+
+    function defaultCheckKlaviyoConsent(root) {
+      const scope = root && root.querySelectorAll ? root : document;
+      const checkboxes = [];
+      const selector = consentSelectors.join(',');
+
+      if (scope.matches && scope.matches(selector)) {
+        checkboxes.push(scope);
+      }
+
+      scope.querySelectorAll(selector).forEach(function (checkbox) {
+        checkboxes.push(checkbox);
+      });
+
+      checkboxes.forEach(function (checkbox) {
+        if (checkbox.dataset.klaviyoDefaultChecked === 'true') return;
+
+        checkbox.dataset.klaviyoDefaultChecked = 'true';
+
+        if (!checkbox.checked) {
+          checkbox.checked = true;
+          checkbox.dispatchEvent(new Event('input', { bubbles: true }));
+          checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      });
+    }
+
+    const observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        mutation.addedNodes.forEach(function (node) {
+          if (node.nodeType !== 1) return;
+          defaultCheckKlaviyoConsent(node);
+        });
+      });
+    });
+
+    defaultCheckKlaviyoConsent(document);
+    document.addEventListener('DOMContentLoaded', function () {
+      defaultCheckKlaviyoConsent(document);
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+  })();
+</script>
+
+{% if product.template_suffix == 'og-battlegear' %}
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    setInterval(() => {
+      const addToCartButton = document.querySelector('.buy-buttons .product-form__submit');
+      const addToCartButtonText = document.querySelector('.buy-buttons .product-form__submit .btn-text');
+      {% comment %} addToCartButton.classList.add(`${addToCartButtonText.innerText.trim().toLowerCase()}hi`) {% endcomment %}
+      if(addToCartButtonText.innerText.trim().toLowerCase() == 'sold out') {
+        addToCartButton.disabled = true;
+        addToCartButton.loading = true;
+      } else {
+        addToCartButton.disabled = false;
+        addToCartButton.loading = false;
+      }
+    }, 200);
+  })
+  </script>
+{% endif %}
+
+{% if product.metafields.custom.product_state1 == 'preorder-august' %}
+  <script>
+    // Store all custom button texts and availability
+    window.variantButtonTexts = {
+      {% for variant in product.variants %}
+        "{{ variant.id }}": "{{ variant.metafields.custom.button_text | escape }}"{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    };
+
+    // expose true/false based on real stock
+    window.variantAvailabilityId = {
+      {% for variant in product.variants %}
+        "{{ variant.id }}": {% if variant.inventory_quantity > 0 %}true{% else %}false{% endif %}{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    };
+
+    function getVariantId() {
+      const input = document.querySelector('form[action^="/cart/add"] [name="id"]');
+      return input ? input.value : null;
+    }
+
+    // Initialize watcher
+    document.addEventListener('DOMContentLoaded', function() {
+      const btnTextEl = document.querySelector('.buy-buttons .product-form__submit .btn-text');
+      const atcBackorderSaleEl = document.querySelector('.buy-buttons .product-form__submit .cus-atc-sale-msg');
+      const shipMsgEl = document.getElementById('estimatedShippingMsg');
+      if (!btnTextEl) return;
+
+      const root = btnTextEl.closest('.buy-buttons');
+      const metafieldState = "{{ product.metafields.custom.product_state1 | escape }}";
+
+      let lastVariantId = 0;
+      let expectedLabel = '';
+      let expectedSaleLabel = '';
+      let expectedShipMsg = '';
+
+      function updateButtonText(variantId) {
+        const available = window.variantAvailabilityId[variantId];
+        const hasDiscountLabel = "{{ product.metafields.custom.atc_discount_label }}" === "true";
+        const trimmedState = window.product_state1.trim();
+        let label, saleLabel, shipMsg;
+
+        // 1) PREORDER state
+        if (trimmedState.startsWith('preorder')) {
+          if (!available) {
+            label   = "{{ product.metafields.custom.add_to_cart_button_label }}" || "PREORDER";
+            saleLabel = hasDiscountLabel ? "SAVE 25%" : "";
+            shipMsg = "{{ product.metafields.custom.estimated_shipping2 }}";
+          } else {
+            label   = "ADD TO CART";
+            saleLabel = "";
+            shipMsg = "";
+          }
+        }
+        // 2) CURRENT state
+        else if (trimmedState === 'current') {
+          if (!available) {
+            label   = "BACKORDER";
+            saleLabel = hasDiscountLabel ? "SAVE 15%" : "";
+            shipMsg = "Save 15% when you backorder today and reserve your unit from the next restock.<br>Shipping priority is based on order date and restocks often sell out before production completes.";
+          } else {
+            label   = "ADD TO CART";
+            saleLabel = "";
+            shipMsg = "";
+          }
+        }
+        // 3) DISCONTINUED state
+        else if (trimmedState === 'discontinued') {
+          if (available) {
+            label   = "{{ product.metafields.custom.add_to_cart_button_label }}" || "ADD TO CART";
+            saleLabel = "";
+            shipMsg = "{{ product.metafields.custom.estimated_shipping2 }}";
+          } else {
+            label   = "SOLD OUT";
+            saleLabel = "";
+            shipMsg = "Discontinued Color - stock will not be replenished";
+          }
+        }
+        // fallback
+        else {
+          label   = "{{ product.metafields.custom.add_to_cart_button_label }}" || "ADD TO CART";
+          saleLabel = "";
+          shipMsg = "";
+        }
+
+        // Store expected values
+        expectedLabel = label;
+        expectedSaleLabel = saleLabel;
+        expectedShipMsg = shipMsg;
+
+        if (shipMsgEl) shipMsgEl.innerHTML = shipMsg;
+        btnTextEl.textContent = label;
+        atcBackorderSaleEl.textContent = saleLabel;
+      }
+
+      // Watch for external changes and immediately override them
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'characterData' || mutation.type === 'childList') {
+            const currentText = btnTextEl.textContent;
+            // If text doesn't match what we expect, force it back
+            if (expectedLabel && currentText !== expectedLabel) {
+              btnTextEl.textContent = expectedLabel;
+              atcBackorderSaleEl.textContent = expectedSaleLabel;
+              if (shipMsgEl) shipMsgEl.innerHTML = expectedShipMsg;
+            }
+          }
+        });
+      });
+      observer.observe(btnTextEl, { childList: true, characterData: true, subtree: true });
+
+      // Initialize button text for the currently selected variant on page load
+      const initialVariantId = getVariantId();
+      if (initialVariantId) {
+        lastVariantId = initialVariantId;
+        updateButtonText(initialVariantId);
+      }
+
+      // Check for changes every 200ms
+      setInterval(() => {
+        const currentVariantId = getVariantId();
+        if (currentVariantId && currentVariantId !== lastVariantId) {
+          lastVariantId = currentVariantId;
+          updateButtonText(currentVariantId);
+        }
+      }, 200);
+    });
+  </script>
+{% endif %}

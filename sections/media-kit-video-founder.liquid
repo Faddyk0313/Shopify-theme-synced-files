@@ -1,0 +1,432 @@
+<style>
+  /* CSS Variables */
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #shopify-section-{{ section.id }} .section::before {
+    content: none;
+  }
+
+  #shopify-section-{{ section.id }} .section {
+    background-color: {{ section.settings.background_color }};
+  }
+
+  /* Video & Founder Section */
+  #shopify-section-{{ section.id }} .video-founder-section {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    gap: 0;
+  }
+
+  #shopify-section-{{ section.id }} .video-section {
+    background-color: {{ section.settings.video_section_bg_color }};
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #shopify-section-{{ section.id }} .video-section h2 {
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .video-wrapper {
+    aspect-ratio: 16/9;
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .video-wrapper iframe,
+  #shopify-section-{{ section.id }} .video-wrapper video {
+    width: 100%;
+    height: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .founder-section {
+    background-color: {{ section.settings.founder_section_bg_color }};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .founder-section h2 {
+    font-size: var(--title-md);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .founder-section .description {
+    font-size: 16px;
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  #shopify-section-{{ section.id }} .founder-section a {
+    color: #0066cc;
+    text-decoration: underline;
+  }
+
+  #shopify-section-{{ section.id }} .founder-photo {
+    margin-top: 0.5rem;
+    aspect-ratio: 5/6;
+    background-color: transparent;
+    overflow: hidden;
+    width: 30vw;
+    max-width: 300px;
+  }
+
+  #shopify-section-{{ section.id }} .founder-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  #shopify-section-{{ section.id }} .founder-downloads {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  #shopify-section-{{ section.id }} .founder-download-btn {
+    color: #000000 !important;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none  !important;
+  }
+
+  #shopify-section-{{ section.id }} .founder-download-btn:hover {
+    color: #000000 !important;
+    text-decoration: underline !important;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .video-founder-section {
+      grid-template-columns: 1fr;
+    }
+
+    #shopify-section-{{ section.id }} .founder-photo {
+      width: 100%;
+    }
+
+    h2.title-lg.tracking-heading {
+      font-size: var(--title-md) !important;
+    }
+  }
+
+  @media (min-width: 1450px) {
+    #shopify-section-{{ section.id }} .founder-photo {
+      width: 400px;
+      max-width: 400px;
+    }
+  }
+
+  @media (min-width: 2200px) {
+    .video-section.page-width {
+      padding-inline-end: 170px !important;
+    }
+
+    .founder-section.page-width {
+      padding-inline-start: 170px !important;
+    }
+  }
+</style>
+
+<div class="section video-founder-section-wrapper">
+  <!-- Video & Founder Section -->
+  <div class="video-founder-section">
+    <div class="video-section section--padding page-width" style="margin: 0;">
+      <{{ section.settings.heading_tag }} class="{{ section.settings.heading_size }}">
+        {{- section.settings.video_heading -}}
+      </{{ section.settings.heading_tag }}>
+      <div class="video-wrapper">
+        {% if section.settings.video_url != blank %}
+          {% if section.settings.video_url contains 'youtube.com' or section.settings.video_url contains 'youtu.be' %}
+            {% assign video_id = section.settings.video_url
+              | split: 'v='
+              | last
+              | split: '/'
+              | last
+              | split: '&'
+              | first
+            %}
+            <iframe
+              src="https://www.youtube.com/embed/{{ video_id }}"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            >
+            </iframe>
+          {% elsif section.settings.video_url contains 'vimeo.com' %}
+            {% assign video_id = section.settings.video_url | split: '/' | last %}
+            <iframe
+              src="https://player.vimeo.com/video/{{ video_id }}"
+              frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowfullscreen
+            >
+            </iframe>
+          {% else %}
+            <video controls>
+              <source src="{{ section.settings.video_url }}" type="video/mp4">
+            </video>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="founder-section section--padding page-width">
+      <div>
+        <h2 class="title-md tracking-heading">
+          {{- section.settings.founder_heading -}}
+        </h2>
+        <p class="description">
+          {{ section.settings.founder_description }}
+          {% if section.settings.founder_story_link != blank %}
+            <a href="{{ section.settings.founder_story_link }}">{{ section.settings.founder_story_link_text }}</a>
+          {% endif %}
+        </p>
+      </div>
+      <div class="founder-photo">
+        {% if section.settings.founder_photo != blank %}
+          <img
+            src="{{ section.settings.founder_photo | img_url: '800x1000' }}"
+            alt="{{ section.settings.founder_heading }}"
+            width="800"
+            height="1000"
+          >
+        {% endif %}
+      </div>
+      {% if section.settings.founder_photo_png_file != blank %}
+        <div class="founder-downloads">
+          <a href="{{ section.settings.founder_photo_png_file }}" class="download-link founder-download-btn">PNG</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // Handle download links
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('download-link')) {
+        e.preventDefault();
+        const url = e.target.getAttribute('href');
+
+        // Extract filename from URL
+        const urlParts = url.split('/');
+        const filename = urlParts[urlParts.length - 1].split('?')[0];
+
+        // Fetch the file and trigger download
+        fetch(url)
+          .then(response => response.blob())
+          .then(blob => {
+            const blobUrl = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = blobUrl;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(blobUrl);
+            document.body.removeChild(a);
+          })
+          .catch(error => {
+            console.error('Download failed:', error);
+            // Fallback: open in new tab if fetch fails
+            window.open(url, '_blank');
+          });
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Video & Founder",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Video Section"
+    },
+    {
+      "type": "text",
+      "id": "video_heading",
+      "label": "Video Heading",
+      "default": "VIDEO COMMERCIAL"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Video URL",
+      "info": "YouTube, Vimeo, or direct video file URL"
+    },
+    {
+      "type": "header",
+      "content": "Founder Section"
+    },
+    {
+      "type": "text",
+      "id": "founder_heading",
+      "label": "Founder Heading",
+      "default": "FOUNDER & CEO PHOTO"
+    },
+    {
+      "type": "textarea",
+      "id": "founder_description",
+      "label": "Founder Description",
+      "default": "Download official photo of Andries de Villiers, Founder and CEO of Titan Battlegear, for press and speaking features."
+    },
+    {
+      "type": "url",
+      "id": "founder_story_link",
+      "label": "Founder Story Link"
+    },
+    {
+      "type": "text",
+      "id": "founder_story_link_text",
+      "label": "Founder Story Link Text",
+      "default": "Read Andries' Story"
+    },
+    {
+      "type": "image_picker",
+      "id": "founder_photo",
+      "label": "Founder Photo"
+    },
+    {
+      "type": "url",
+      "id": "founder_photo_png_file",
+      "label": "Founder Photo PNG File URL",
+      "info": "URL to the high-resolution PNG file for download"
+    },
+    {
+      "type": "header",
+      "content": "Global Heading Settings"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-md",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "color",
+      "id": "video_section_bg_color",
+      "label": "Video Section Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "founder_section_bg_color",
+      "label": "Founder Section Background Color",
+      "default": "#f2f2f2"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video & Founder"
+    }
+  ]
+}
+{% endschema %}

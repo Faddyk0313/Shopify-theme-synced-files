@@ -1,0 +1,95 @@
+<!-- TBG Custom Code -->
+<section class="page-width tbg-video-stack">
+  <div class="tbg-video-stack__grid">
+    {% for i in (1..5) %}
+      {% assign video_key = 'video_' | append: i %}
+      {% assign video = section.settings[video_key] %}
+
+      {% if video != blank %}
+        <div class="tbg-video-stack__item">
+          {{ video | video_tag:
+            autoplay: false,
+            loop: false,
+            muted: false,
+            controls: true,
+            class: 'tbg-video-stack__video'
+          }}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<style>
+  /* TBG Custom Code */
+  .tbg-video-stack__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+
+  .tbg-video-stack__item {
+    aspect-ratio: 9 / 16;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .tbg-video-stack__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media screen and (max-width: 989px) {
+    .tbg-video-stack__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .tbg-video-stack__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  /* End TBG Custom Code */
+</style>
+<!-- End TBG Custom Code -->
+
+{% schema %}
+{
+  "name": "Five Horizontal Videos",
+  "settings": [
+    {
+      "type": "video",
+      "id": "video_1",
+      "label": "Video 1"
+    },
+    {
+      "type": "video",
+      "id": "video_2",
+      "label": "Video 2"
+    },
+    {
+      "type": "video",
+      "id": "video_3",
+      "label": "Video 3"
+    },
+    {
+      "type": "video",
+      "id": "video_4",
+      "label": "Video 4"
+    },
+    {
+      "type": "video",
+      "id": "video_5",
+      "label": "Video 5"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Five Horizontal Videos"
+    }
+  ]
+}
+{% endschema %}

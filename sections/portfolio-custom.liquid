@@ -1,0 +1,579 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {%- render 'section-variables', section: section -%}
+    --section-blocks-count: {{ section.blocks.size }};
+  }
+  {%- for block in section.blocks -%}
+    #shopify-block-{{ block.id }} {
+      {%- render 'section-variables', section: block -%}
+    }
+  {%- endfor -%}
+
+  #shopify-section-{{ section.id }} .profile.card {
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .profile.card .media {
+    border-radius: 16px;
+  }
+  {%- if section.settings.custom_image_height != blank -%}
+    #shopify-section-{{ section.id }} .profile.card .media {
+      height: {{ section.settings.custom_image_height }}px;
+    }
+
+    #shopify-section-{{ section.id }} .profile.card .media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  {%- endif -%}
+
+  #shopify-section-{{ section.id }} .profile__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    {% comment %} gap: 0.5rem; {% endcomment %}
+    padding: 1.5rem !important;
+    background: linear-gradient(to top, black, transparent);
+    background-color: transparent !important;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: none !important;
+  }
+  #shopify-section-{{ section.id }} .profile__button.portfolio-custom-plus {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  #shopify-section-{{ section.id }} .portfolio-custom-icon {
+    object-fit: contain;
+  }
+
+  #shopify-section-{{ section.id }} .portfolio-custom-heading > * {
+    margin: 0;
+    font-family: "PROHIBITIONReg", sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .portfolio-custom-description {
+    max-width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  #shopify-section-{{ section.id }} .portfolio-custom-description > * {
+    margin: 0;
+    font-family: "Rajdhani", sans-serif;
+  }
+
+  #shopify-section-{{ section.id }} .portfolio-custom-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .portfolio-custom-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 9999px;
+    border: 0;
+    background: #adadad;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .portfolio-custom-dot[aria-current="true"] {
+    {% if section.settings.color_background == "#000000" %} background: #e5fd00; {% else %} background: #000000; {% endif %}
+  }
+</style>
+
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+  <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
+    {%- if section.blocks.size > 0 -%}
+      <slider-element id="Slider-{{ section.id }}" class="{{ section.blocks.size }} grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card"{% if section.settings.carousel_on_desktop or section.settings.swipe_on_mobile %} tabindex="0"{% endif %}>
+        <motion-list class="portfolio card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid">
+          {%- render 'portfolio-custom', section: section -%}
+        </motion-list>
+      </slider-element>
+      {%- if section.blocks.size > 1 -%}
+        <div class="portfolio-custom-dots-wrap" data-portfolio-dots-wrap>
+          <div class="portfolio-custom-dots" role="tablist" aria-label="Portfolio slide indicators" data-portfolio-dots></div>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  (function() {
+    const sectionId = '{{ section.id }}';
+    const sectionEl = document.getElementById('shopify-section-' + sectionId);
+    if (!sectionEl || sectionEl.dataset.portfolioDotsReady === 'true') return;
+
+    const sliderEl = sectionEl.querySelector('#Slider-' + sectionId);
+    const trackEl = sliderEl ? sliderEl.querySelector('.card-grid') : null;
+    const slideEls = trackEl ? Array.from(trackEl.querySelectorAll('[data-portfolio-slide]')) : [];
+    const dotsContainer = sectionEl.querySelector('[data-portfolio-dots]');
+
+    if (!trackEl || !slideEls.length || !dotsContainer) return;
+    sectionEl.dataset.portfolioDotsReady = 'true';
+
+    let dotEls = [];
+    let maxStartIndex = Math.max(0, slideEls.length - 1);
+
+    const getFullyVisibleSlidesCount = function() {
+      if (slideEls.length <= 1) return 1;
+      const viewportWidth = sliderEl.getBoundingClientRect().width;
+      const firstRect = slideEls[0].getBoundingClientRect();
+      const secondRect = slideEls[1].getBoundingClientRect();
+      const step = Math.abs(secondRect.left - firstRect.left) || firstRect.width || 1;
+      const count = Math.floor((viewportWidth + 1) / step);
+      return Math.max(1, Math.min(slideEls.length, count));
+    };
+
+    const buildDots = function() {
+      const fullVisible = getFullyVisibleSlidesCount();
+      maxStartIndex = Math.max(0, slideEls.length - fullVisible);
+      const dotCount = maxStartIndex + 1;
+      dotsContainer.innerHTML = '';
+
+      for (let i = 0; i < dotCount; i += 1) {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'portfolio-custom-dot';
+        dot.setAttribute('data-portfolio-dot', '');
+        dot.setAttribute('data-index', String(i));
+        dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        dot.setAttribute('aria-current', i === 0 ? 'true' : 'false');
+        dotsContainer.appendChild(dot);
+      }
+
+      dotEls = Array.from(dotsContainer.querySelectorAll('[data-portfolio-dot]'));
+    };
+
+    const setActive = function(index) {
+      const safeIndex = Math.max(0, Math.min(index, maxStartIndex));
+      dotEls.forEach(function(dotEl, idx) {
+        if (idx === safeIndex) {
+          dotEl.setAttribute('aria-current', 'true');
+        } else {
+          dotEl.setAttribute('aria-current', 'false');
+        }
+      });
+    };
+
+    let activeIndex = 0;
+    const updateFromPosition = function() {
+      const viewportRect = sliderEl.getBoundingClientRect();
+      const viewportLeft = viewportRect.left;
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+
+      slideEls.forEach(function(slideEl, idx) {
+        const rect = slideEl.getBoundingClientRect();
+        const distance = Math.abs(rect.left - viewportLeft);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = idx;
+        }
+      });
+
+      const boundedIndex = Math.max(0, Math.min(closestIndex, maxStartIndex));
+      if (boundedIndex !== activeIndex) {
+        activeIndex = boundedIndex;
+        setActive(activeIndex);
+      }
+    };
+
+    const schedulePositionUpdate = function() {
+      requestAnimationFrame(updateFromPosition);
+    };
+
+    trackEl.addEventListener('scroll', schedulePositionUpdate, { passive: true });
+    sliderEl.addEventListener('scroll', schedulePositionUpdate, { passive: true });
+    trackEl.addEventListener('transitionend', schedulePositionUpdate);
+    sliderEl.addEventListener('transitionend', schedulePositionUpdate);
+    sliderEl.addEventListener('touchmove', schedulePositionUpdate, { passive: true });
+    sliderEl.addEventListener('pointermove', schedulePositionUpdate, { passive: true });
+
+    dotsContainer.addEventListener('click', function(event) {
+      const dotEl = event.target.closest('[data-portfolio-dot]');
+      if (!dotEl) return;
+      const index = Number(dotEl.getAttribute('data-index'));
+      const targetSlide = slideEls[index];
+      if (!targetSlide) return;
+      targetSlide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      activeIndex = Math.max(0, Math.min(index, maxStartIndex));
+      setActive(activeIndex);
+    });
+
+    let rafLoopId = null;
+    const tick = function() {
+      updateFromPosition();
+      rafLoopId = requestAnimationFrame(tick);
+    };
+    tick();
+    buildDots();
+    setActive(0);
+
+    document.addEventListener('shopify:section:load', function(event) {
+      if (!event.detail || event.detail.sectionId !== sectionId) return;
+      buildDots();
+      schedulePositionUpdate();
+    });
+    window.addEventListener('resize', function() {
+      buildDots();
+      schedulePositionUpdate();
+    });
+    document.addEventListener('shopify:section:unload', function(event) {
+      if (!event.detail || event.detail.sectionId !== sectionId) return;
+      if (rafLoopId) cancelAnimationFrame(rafLoopId);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Portfolio Custom",
+  "class": "portfolio-custom-section",
+  "max_blocks": 15,
+  "settings": [
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.global.settings.columns.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "carousel_on_desktop",
+      "label": "t:sections.global.settings.carousel_on_desktop.label",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:sections.portfolio.settings.layout.options__1.label"
+        },
+        {
+          "value": "grid",
+          "label": "t:sections.portfolio.settings.layout.options__2.label"
+        }
+      ],
+      "default": "default",
+      "label": "t:sections.portfolio.settings.layout.label"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.global.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.global.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.global.settings.image_ratio.options__3.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.global.settings.image_ratio.options__4.label"
+        },
+        {
+          "value": "wide",
+          "label": "t:sections.global.settings.image_ratio.options__5.label"
+        }
+      ],
+      "default": "portrait",
+      "label": "t:sections.global.settings.image_ratio.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__mobile.content"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio_mobile",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.global.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.global.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.global.settings.image_ratio.options__3.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.global.settings.image_ratio.options__4.label"
+        },
+        {
+          "value": "wide",
+          "label": "t:sections.global.settings.image_ratio.options__5.label"
+        }
+      ],
+      "default": "portrait",
+      "label": "t:sections.global.settings.image_ratio_mobile.label"
+    },
+    {
+      "type": "select",
+      "id": "custom_image_height",
+      "label": "Fixed image height (px)",
+      "default": "",
+      "options": [
+        {
+          "value": "",
+          "label": "Use image ratio"
+        },
+        {
+          "value": "450",
+          "label": "450"
+        },
+        {
+          "value": "480",
+          "label": "480"
+        },
+        {
+          "value": "500",
+          "label": "500"
+        },
+        {
+          "value": "550",
+          "label": "550"
+        },
+        {
+          "value": "600",
+          "label": "600"
+        },
+      ]
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:sections.global.settings.columns_mobile.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.global.settings.columns_mobile.options__2.label"
+        }
+      ],
+      "default": "1",
+      "label": "t:sections.global.settings.columns_mobile.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "swipe_on_mobile",
+      "label": "t:sections.global.settings.swipe_on_mobile.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "disable_modal_opening",
+      "label": "Disable modal opening and hide plus icon",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__colors.content",
+      "info": "t:sections.global.settings.header__colors.info"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "t:sections.global.settings.color_text.label"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "t:sections.global.settings.color_background.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_background",
+      "label": "t:sections.global.settings.gradient_background.label"
+    },
+    {
+      "type": "color",
+      "id": "color_highlight",
+      "label": "t:sections.global.settings.color_highlight.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_highlight",
+      "label": "t:sections.global.settings.gradient_highlight.label"
+    },
+    {
+      "type": "color",
+      "id": "color_button_text",
+      "label": "t:sections.global.settings.color_button_text.label"
+    },
+    {
+      "type": "color",
+      "id": "color_button_background",
+      "label": "t:sections.global.settings.color_button_background.label"
+    },
+    {
+      "type": "color_background",
+      "id": "color_button_gradient",
+      "label": "t:sections.global.settings.color_button_gradient.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 72
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "profile",
+      "name": "Profile",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.global.settings.image.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "t:sections.global.settings.image_mobile.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Small icon"
+        },
+        {
+          "type": "range",
+          "id": "icon_size",
+          "min": 16,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "label": "Icon size",
+          "default": 44
+        },
+        {
+          "type": "richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "<p>Heading</p>"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Card description",
+          "default": "<p>Add a short description for this card.</p>"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Modal content",
+          "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.global.settings.header__colors.content",
+          "info": "t:sections.global.settings.header__colors.info"
+        },
+        {
+          "type": "color",
+          "id": "color_text",
+          "label": "t:sections.global.settings.color_text.label",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "color_background",
+          "label": "t:sections.global.settings.color_background.label",
+          "default": "#171717"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Portfolio Custom",
+      "category": "t:categories.media",
+      "blocks": [
+        {
+          "type": "profile"
+        },
+        {
+          "type": "profile"
+        },
+        {
+          "type": "profile"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "footer",
+      "header",
+      "custom.overlay"
+    ]
+  }
+}
+{% endschema %}

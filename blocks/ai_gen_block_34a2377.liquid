@@ -1,0 +1,563 @@
+{% doc %}
+  @prompt
+    Create a clean, two-column promotional section on a light grey background.
+    
+    Left column:
+    
+    Short paragraph:
+    “Active duty military, veterans, first responders, government employees, and educators receive 15% off Titan BattlGear – plus free shipping. Always.”
+    
+    Below the text, add a solid black button with white uppercase text:
+    “VERIFY WITH GOVX”
+    
+    Right column:
+    
+    Vertical checklist with black check icons and short benefit statements:
+    
+    A9 ANSI cut resistance, the highest level available
+    
+    No Velcro
+    
+    Wrist protection
+    
+    USA Hockey compliant
+    
+    100% made in the USA
+    
+    Style:
+    
+    Minimal, premium, strong spacing
+    
+    Desktop: two columns side by side
+    
+    Mobile: stacked, centered
+    
+    Clean typography with clear hierarchy
+    
+    Subtle padding top and bottom for breathing room
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-govx-promo-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+    padding: {{ block.settings.padding_top }}px 0 {{ block.settings.padding_bottom }}px;
+  }
+
+  .ai-govx-promo-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-govx-promo-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: {{ block.settings.column_gap }}px;
+    align-items: center;
+  }
+
+  .ai-govx-promo-left-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.text_button_gap }}px;
+  }
+
+  .ai-govx-promo-text-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.text_size }}px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .ai-govx-promo-button-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    text-decoration: none;
+    font-size: {{ block.settings.button_text_size }}px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+  }
+
+  .ai-govx-promo-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+  }
+
+  .ai-govx-promo-checklist-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: {{ block.settings.checklist_gap }}px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .ai-govx-promo-checklist-item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: flex-start;
+    gap: {{ block.settings.icon_text_gap }}px;
+  }
+
+  .ai-govx-promo-check-icon-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    margin-top: 2px;
+  }
+
+  .ai-govx-promo-check-icon-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    fill: {{ block.settings.icon_color }};
+  }
+
+  .ai-govx-promo-checklist-text-{{ ai_gen_id }} {
+    color: {{ block.settings.checklist_text_color }};
+    font-size: {{ block.settings.checklist_text_size }}px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-govx-promo-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: {{ block.settings.mobile_gap }}px;
+      text-align: center;
+    }
+
+    .ai-govx-promo-left-{{ ai_gen_id }} {
+      align-items: center;
+    }
+
+    .ai-govx-promo-checklist-{{ ai_gen_id }} {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .ai-govx-promo-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.mobile_text_size }}px;
+    }
+
+    .ai-govx-promo-button-{{ ai_gen_id }} {
+      font-size: {{ block.settings.mobile_button_text_size }}px;
+    }
+
+    .ai-govx-promo-checklist-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.mobile_checklist_text_size }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-govx-promo-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-govx-promo-container-{{ ai_gen_id }}">
+    <div class="ai-govx-promo-grid-{{ ai_gen_id }}">
+      <div class="ai-govx-promo-left-{{ ai_gen_id }}">
+        {% if block.settings.promo_text != blank %}
+          <p class="ai-govx-promo-text-{{ ai_gen_id }}">
+            {{ block.settings.promo_text }}
+          </p>
+        {% endif %}
+
+        {% if block.settings.button_text != blank %}
+          <a
+            href="{{ block.settings.button_link }}"
+            class="ai-govx-promo-button-{{ ai_gen_id }}"
+          >
+            {{ block.settings.button_text }}
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="ai-govx-promo-right-{{ ai_gen_id }}">
+        <ul class="ai-govx-promo-checklist-{{ ai_gen_id }}">
+          {% if block.settings.benefit_1 != blank %}
+            <li class="ai-govx-promo-checklist-item-{{ ai_gen_id }}">
+              <span class="ai-govx-promo-check-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+              </span>
+              <p class="ai-govx-promo-checklist-text-{{ ai_gen_id }}">
+                {{ block.settings.benefit_1 }}
+              </p>
+            </li>
+          {% endif %}
+
+          {% if block.settings.benefit_2 != blank %}
+            <li class="ai-govx-promo-checklist-item-{{ ai_gen_id }}">
+              <span class="ai-govx-promo-check-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+              </span>
+              <p class="ai-govx-promo-checklist-text-{{ ai_gen_id }}">
+                {{ block.settings.benefit_2 }}
+              </p>
+            </li>
+          {% endif %}
+
+          {% if block.settings.benefit_3 != blank %}
+            <li class="ai-govx-promo-checklist-item-{{ ai_gen_id }}">
+              <span class="ai-govx-promo-check-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+              </span>
+              <p class="ai-govx-promo-checklist-text-{{ ai_gen_id }}">
+                {{ block.settings.benefit_3 }}
+              </p>
+            </li>
+          {% endif %}
+
+          {% if block.settings.benefit_4 != blank %}
+            <li class="ai-govx-promo-checklist-item-{{ ai_gen_id }}">
+              <span class="ai-govx-promo-check-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+              </span>
+              <p class="ai-govx-promo-checklist-text-{{ ai_gen_id }}">
+                {{ block.settings.benefit_4 }}
+              </p>
+            </li>
+          {% endif %}
+
+          {% if block.settings.benefit_5 != blank %}
+            <li class="ai-govx-promo-checklist-item-{{ ai_gen_id }}">
+              <span class="ai-govx-promo-check-icon-{{ ai_gen_id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+              </span>
+              <p class="ai-govx-promo-checklist-text-{{ ai_gen_id }}">
+                {{ block.settings.benefit_5 }}
+              </p>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "GovX promo section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Left column"
+    },
+    {
+      "type": "textarea",
+      "id": "promo_text",
+      "label": "Promotional text",
+      "default": "Active duty military, veterans, first responders, government employees, and educators receive 15% off Titan BattleGear – plus free shipping. Always."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "VERIFY WITH GOVX"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Right column benefits"
+    },
+    {
+      "type": "text",
+      "id": "benefit_1",
+      "label": "Benefit 1",
+      "default": "A9 ANSI cut resistance, the highest level available"
+    },
+    {
+      "type": "text",
+      "id": "benefit_2",
+      "label": "Benefit 2",
+      "default": "No Velcro"
+    },
+    {
+      "type": "text",
+      "id": "benefit_3",
+      "label": "Benefit 3",
+      "default": "Wrist protection"
+    },
+    {
+      "type": "text",
+      "id": "benefit_4",
+      "label": "Benefit 4",
+      "default": "USA Hockey compliant"
+    },
+    {
+      "type": "text",
+      "id": "benefit_5",
+      "label": "Benefit 5",
+      "default": "100% made in the USA"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 800,
+      "max": 1900,
+      "step": 100,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Column gap",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "text_button_gap",
+      "label": "Text to button gap",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "mobile_gap",
+      "label": "Mobile column gap",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#171717"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Check icon",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "checklist_text_color",
+      "label": "Checklist text",
+      "default": "#171717"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Promo text size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "mobile_text_size",
+      "label": "Mobile promo text size",
+      "min": 13,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "label": "Button text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "mobile_button_text_size",
+      "label": "Mobile button text size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "checklist_text_size",
+      "label": "Checklist text size",
+      "min": 13,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "mobile_checklist_text_size",
+      "label": "Mobile checklist text size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "label": "Vertical padding",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 16,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Checklist style"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "icon_text_gap",
+      "label": "Icon to text gap",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "checklist_gap",
+      "label": "Checklist item gap",
+      "min": 10,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "GovX promo section"
+    }
+  ]
+}
+{% endschema %}

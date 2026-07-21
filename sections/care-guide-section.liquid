@@ -1,0 +1,438 @@
+<style>
+  .cus_wrapper {
+    padding-block: {{ section.settings.section_gap }}px;
+    display: flex;
+    flex-direction: column;
+    gap: {{ section.settings.section_gap }}px;
+  }
+
+  .cus_care-section {
+    background: {{ section.settings.section_bg_color }};
+    color: {{ section.settings.section_text_color }};
+  }
+
+  .cus_care-section.blackBG {
+    background: {{ section.settings.dark_section_bg_color }};
+    color: {{ section.settings.dark_section_text_color }};
+  }
+
+  .cus_care-section .care-header {
+    background: {{ section.settings.header_bg_color }};
+    color: {{ section.settings.header_text_color }};
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 25px;
+  }
+
+  .cus_care-section .care-header h2 {
+    margin: 0;
+    color: {{ section.settings.header_text_color }};
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .cus_care-section .care-content {
+    padding: 35px 25px;
+  }
+
+  .cus_care-section .care-item {
+    margin-bottom: 20px;
+  }
+
+  .cus_care-section .care-item .icon-heading-grp {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+
+  .cus_care-section .care-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .cus_care-section .care-item h3 {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .cus_care-section.blackBG .care-item h3 {
+    color: {{ section.settings.dark_section_text_color }};
+  }
+
+  .cus_care-section .care-item p {
+    margin: 0 0 0 18px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: {{ section.settings.section_paragraph_color }};
+  }
+
+  .cus_care-section.blackBG .care-item p {
+    color: {{ section.settings.dark_section_text_color }};
+  }
+
+  @media (max-width: 749px) {
+    .cus_care-section .care-content {
+      padding: 25px 15px;
+    }
+    .cus_care-section .care-header {
+      padding: 12px 15px;
+    }
+    .cus_care-section .care-header h2 {
+      font-size: 24px;
+    }
+
+    .cus_care-section .care-item h3 {
+      font-size: 12px;
+    }
+
+    .cus_care-section .care-item p {
+      font-size: 12px;
+    }
+
+    .cus_care-section .care-header img {
+      transform: scale(0.9);
+      transform-origin: left center;
+    }
+
+    .cus_care-section .care-item .icon-heading-grp img {
+      transform: scale(0.8);
+      transform-origin: left center;
+    }
+  }
+</style>
+
+<div class="cus_wrapper page-width page-width--narrow ">
+  {% for block in section.blocks %}
+    <div
+      class="cus_care-section{% if block.settings.use_dark_theme %} blackBG{% endif %}"
+      {{ block.shopify_attributes }}
+    >
+      {% if block.settings.show_header %}
+        <div class="care-header">
+          {% if block.settings.header_icon_url != blank %}
+            <div>
+              <img
+                src="{{ block.settings.header_icon_url | escape }}"
+                width="{{ block.settings.header_icon_width }}"
+                height="auto"
+                loading="lazy"
+              >
+            </div>
+          {% endif %}
+          {% if block.settings.heading != blank %}
+            <h2>{{ block.settings.heading }}</h2>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <div class="care-content">
+        {% for i in (1..6) %}
+          {% assign title_key = 'item_' | append: i | append: '_title' %}
+          {% assign text_key = 'item_' | append: i | append: '_text' %}
+          {% assign item_title = block.settings[title_key] %}
+          {% assign item_text = block.settings[text_key] %}
+
+          {% if item_title != blank or item_text != blank %}
+            <div class="care-item">
+              {% if item_title != blank %}
+                <div class="icon-heading-grp">
+                  {% if block.settings.item_icon_url != blank %}
+                    <img
+                      src="{{ block.settings.item_icon_url | escape }}"
+                      width="{{ block.settings.item_icon_width }}"
+                      height="auto"
+                      loading="lazy"
+                    >
+                  {% endif %}
+                  <h3>{{ item_title }}</h3>
+                </div>
+              {% endif %}
+
+              {% if item_text != blank %}
+                <p style="margin-left: {{ block.settings.item_text_margin_left }}px;">{{ item_text }}</p>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Care Guide Section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "section_gap",
+      "label": "Section gap (px)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Default section background",
+      "default": "#e9e9e9"
+    },
+    {
+      "type": "color",
+      "id": "section_text_color",
+      "label": "Default section text color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "section_paragraph_color",
+      "label": "Default paragraph color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "header_bg_color",
+      "label": "Header background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "header_text_color",
+      "label": "Header text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "dark_section_bg_color",
+      "label": "Dark section background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "dark_section_text_color",
+      "label": "Dark section text color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "care_group",
+      "name": "Care section",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_header",
+          "label": "Show header",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "use_dark_theme",
+          "label": "Use dark section style",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Washing"
+        },
+        {
+          "type": "text",
+          "id": "header_icon_url",
+          "label": "Header icon URL"
+        },
+        {
+          "type": "range",
+          "id": "header_icon_width",
+          "label": "Header icon width (px)",
+          "min": 8,
+          "max": 80,
+          "step": 1,
+          "default": 40
+        },
+        {
+          "type": "text",
+          "id": "item_icon_url",
+          "label": "Item icon URL"
+        },
+        {
+          "type": "range",
+          "id": "item_icon_width",
+          "label": "Item icon width (px)",
+          "min": 8,
+          "max": 40,
+          "step": 1,
+          "default": 13
+        },
+        {
+          "type": "range",
+          "id": "item_text_margin_left",
+          "label": "Item text left margin (px)",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "default": 18
+        },
+        {
+          "type": "text",
+          "id": "item_1_title",
+          "label": "Item 1 title"
+        },
+        {
+          "type": "textarea",
+          "id": "item_1_text",
+          "label": "Item 1 text"
+        },
+        {
+          "type": "text",
+          "id": "item_2_title",
+          "label": "Item 2 title"
+        },
+        {
+          "type": "textarea",
+          "id": "item_2_text",
+          "label": "Item 2 text"
+        },
+        {
+          "type": "text",
+          "id": "item_3_title",
+          "label": "Item 3 title"
+        },
+        {
+          "type": "textarea",
+          "id": "item_3_text",
+          "label": "Item 3 text"
+        },
+        {
+          "type": "text",
+          "id": "item_4_title",
+          "label": "Item 4 title"
+        },
+        {
+          "type": "textarea",
+          "id": "item_4_text",
+          "label": "Item 4 text"
+        },
+        {
+          "type": "text",
+          "id": "item_5_title",
+          "label": "Item 5 title"
+        },
+        {
+          "type": "textarea",
+          "id": "item_5_text",
+          "label": "Item 5 text"
+        },
+        {
+          "type": "text",
+          "id": "item_6_title",
+          "label": "Item 6 title"
+        },
+        {
+          "type": "textarea",
+          "id": "item_6_text",
+          "label": "Item 6 text"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "Care Guide Section",
+      "blocks": [
+        {
+          "type": "care_group",
+          "settings": {
+            "heading": "Washing",
+            "header_icon_url": "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/wash.svg?v=1775563970",
+            "header_icon_width": 40,
+            "item_icon_url": "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/bullet.svg?v=1775563970",
+            "item_icon_width": 13,
+            "item_text_margin_left": 18,
+            "item_1_title": "Machine wash cold - gentle cycle, mild detergent",
+            "item_1_text": "Cold water, mild detergent. Think spa day, not power wash. Your BattleGear has been through enough already.",
+            "item_2_title": "Low tumble dry - no heat",
+            "item_2_text": "Your baselayer is built for the ice, not the sauna. Low and slow wins every time - heat degrades the A9 cut protection.",
+            "item_3_title": "Keep away from velcro and abrasive materials",
+            "item_3_text": "Your baselayer is built for the ice, not the sauna. Low and slow wins every time - heat degrades the A9 cut protection.",
+            "item_4_title": "Wash separately from heavy garments",
+            "item_4_text": "Jeans, jackets, and zippers like to pick fights with performance fabrics. Keep them out of the mix and let your BattleGear have the machine to itself."
+          }
+        },
+        {
+          "type": "care_group",
+          "settings": {
+            "heading": "WARRANTY KILLERS",
+            "header_icon_url": "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/no_warranty.svg?v=1775563970",
+            "header_icon_width": 45,
+            "item_icon_url": "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/x_5b3dbb6e-5c04-444b-bd18-f30462cc5844.svg?v=1775563970",
+            "item_icon_width": 13,
+            "item_text_margin_left": 18,
+            "item_1_title": "Bleach",
+            "item_1_text": "Absolutely not, ever, under any circumstances",
+            "item_2_title": "Dry cleaning",
+            "item_2_text": "Your gear is not a suit",
+            "item_3_title": "Heated drying or hot water",
+            "item_3_text": "Kills cut protection"
+          }
+        },
+        {
+          "type": "care_group",
+          "settings": {
+            "heading": "AFTER USE",
+            "header_icon_url": "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/hanger.svg?v=1775563970",
+            "header_icon_width": 45,
+            "item_icon_url": "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/bullet.svg?v=1775563970",
+            "item_icon_width": 13,
+            "item_text_margin_left": 18,
+            "item_1_title": "Hang to dry immediately",
+            "item_1_text": "Off the ice and onto a hanger. Don't let it sit in a pile - wet gear stewing in its own glory is a smell you'll never forget.",
+            "item_2_title": "Don't leave it in the hockey bag",
+            "item_2_text": "The hockey bag is where equipment goes to marinate. Your BattleGear has serious science protecting it - don't make it fight harder than it has to.",
+            "item_3_title": "Micro-Texpur(r) Antimicrobial Protection",
+            "item_3_text": "Built-in defense against bacteria, odor, mold, and mildew. It's doing heavy lifting - but it's not a reason to leave your gear in the bag.",
+            "item_4_title": "Wash separately from heavy garments",
+            "item_4_text": "Jeans, jackets, and zippers like to pick fights with performance fabrics. Keep them out of the mix and let your BattleGear have the machine to itself."
+          }
+        },
+        {
+          "type": "care_group",
+          "settings": {
+            "heading": "PRO TIPS",
+            "header_icon_url": "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/pro.svg?v=1775563970",
+            "header_icon_width": 45,
+            "item_icon_url": "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/star.svg?v=1775563970",
+            "item_icon_width": 15,
+            "item_text_margin_left": 20,
+            "item_1_title": "Wash in a delicates mesh laundry bag",
+            "item_1_text": "It keeps the TITANOTEX fabric protected and your baselayer from tangling with anything it shouldn't.",
+            "item_2_title": "Avoid crumpling into a ball and leaving in the road",
+            "item_2_text": "We probably don't need to say this - but we said it anyway.",
+            "item_3_title": "Skip the fabric softener.",
+            "item_3_text": "It coats the fibers and quietly reduces performance over time. Your gear doesn't need to smell like lavender to be elite."
+          }
+        },
+        {
+          "type": "care_group",
+          "settings": {
+            "use_dark_theme": true,
+            "heading": "PRODUCT NOTICE",
+            "header_icon_url": "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/product_notice.svg?v=1775563970",
+            "header_icon_width": 40,
+            "item_icon_url": "",
+            "item_text_margin_left": 0,
+            "item_1_title": "Our gear is made for performance and durability, but damage caused by velcro battles, zipper attacks, or rough washing is not considered a manufacturing defect. Treat it right, and your Titan will be ready for battle every time.",
+            "item_1_text": ""
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

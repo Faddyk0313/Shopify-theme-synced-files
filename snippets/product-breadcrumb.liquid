@@ -1,0 +1,134 @@
+{%- doc -%}
+  Renders hierarchical breadcrumb navigation for product pages with desktop-only display.
+
+  Creates a structured navigation path showing the product's location within the site hierarchy.
+
+  @param {object} product - Shopify product object for current page
+  @param {object} block - Section block containing settings and Shopify attributes
+  @param {object} [collection] - Specific collection context (auto-detected if omitted)
+
+  @example
+  {% render '',
+     product: product,
+     block: block
+  %}
+{%- enddoc -%}
+
+{% comment %} TBG custom Code {% endcomment %}
+<style>
+  .product__breadcrumb{
+    border: none;
+  }
+  @media (max-width: 400px) {
+    .product__breadcrumb li {
+      font-size: 11px !important; 
+    }
+  }
+  .product__breadcrumb li {
+    color: #747272;
+    white-space: nowrap;
+  }
+  .product__breadcrumb li:last-child {
+    white-space: normal;
+  }
+  .product-title-hyphen {
+    display: inline;
+  }
+  .product-title-mobile-break {
+    display: none;
+  }
+  .version2Breadcrumb {
+    display: flex;
+  }
+  .breadcrumb li+li:before {
+    background-color: #747272;
+  }
+  @media (max-width: 768px) {
+    .product-title-hyphen {
+      display: none;
+    }
+    .product-title-mobile-break {
+      display: block;
+    }
+    .breadcrumb li+li:before {
+      content: url("https://cdn.shopify.com/s/files/1/0635/2401/2210/files/svgviewer-output_2.svg?v=1770096365");
+      color: #747272;
+      padding-right: 8px;
+      padding-bottom: 8px;
+      transform: none;
+      background-color: transparent;
+    }
+    .firstTitlePart,
+    .product-title-hyphen {
+      display: none;
+    }
+  }
+</style>
+{% comment %} TBG custom Code {% endcomment %}
+<nav
+  class="product__breadcrumb breadcrumb flex"
+  role="navigation"
+  aria-label="breadcrumbs"
+  {{ block.shopify_attributes }}
+  style="padding: 0; margin: 0;"
+>
+ 
+  <ul class="original-design inline-flex gap-4 md:gap-6">
+    
+      {%- liquid
+        assign excluded_collections = 'not-on-sale-non-3-0-products,on-sale,collection-goalie,beer-league,collection-2xl-3xl,backorder-discount-smart-collection-copy,my-size-in-stock,halloween,new-drops,instock,all-products,gold-hockey-neck-guard,white-hockey-neck-guard,blue-hockey-neck-guard,yellow-hockey-neck-guard,gray-hockey-neck-guard,black-hockey-neck-guard,future-drops,novelty,team-colors,inline-core-colors,cut-resistant-battlegear,purple-hockey-neck-guards,orange-hockey-neck-guards,red-hockey-neck-guard,pink-hockey-neck-guard,maroon-hockey-neck-guards,green-hockey-neck-guard,preorder-smart-collection' | split: ','
+
+        if collection == blank
+          # Find first collection that's not in excluded list
+          assign collection = nil
+          for col in product.collections
+            unless excluded_collections contains col.handle
+              assign collection = col
+              break
+            endunless
+          endfor
+        endif
+        if collection != nil
+          # Pull raw titles, falling back via `default`
+          assign raw_collection_title = product.metafields.custom.collection_name_breadrcrumb | default: collection.title
+
+          # Downcase & split into words
+          assign down_collection     = raw_collection_title | downcase
+          assign words_collection    = down_collection | split: " "
+        endif
+      -%}
+      {% if collection != nil %}
+        {% capture collection_title %}
+          {% for word in words_collection %}
+            {{ word | capitalize }}{% unless forloop.last %} {% endunless %}
+          {% endfor %}
+        {% endcapture %}
+      {% endif %}
+
+      <li class="flex items-center gap-4 md:gap-6">
+        <a class="reversed-link" href="{{ collection.url | default: '/' }}">
+          {% if collection != nil %} 
+            {{ collection_title }} 
+          {% else %} 
+            HOME 
+          {% endif %}
+        </a>
+      </li>
+      <li class="version2Breadcrumb flex items-center gap-4 md:gap-6">
+        {% assign title_parts = product.title | split: ' - ' %}
+        {% if title_parts.size > 1 %}
+          {{ title_parts[1] | upcase }}
+        {% else %}
+          {{ product.title | upcase }}
+        {% endif %}
+      </li>
+      {% comment %} <li class="version1Breadcrumb flex items-center gap-4 md:gap-6">
+        {% assign title_parts = product.title | split: ' - ' %}
+        {% if title_parts.size > 1 %}
+          <span class="firstTitlePart">{{ title_parts[0] }}</span><span class="product-title-hyphen"> - </span><br class="product-title-mobile-break">{{ title_parts[1] }}
+        {% else %}
+          {{ product.title }}
+        {% endif %}
+      </li> {% endcomment %}
+  </ul>
+</nav>

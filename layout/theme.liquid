@@ -1,0 +1,943 @@
+{%- capture direction -%}{% render 'direction' %}{%- endcapture -%}
+<!doctype html>
+<html class="no-js{% if request.design_mode %} shopify-design-mode{% endif %}" lang="{{ request.locale.iso_code }}" dir="{{ direction }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_button_background }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+
+    <script>document.documentElement.classList.replace('no-js','js')</script>
+    <script>document.documentElement.classList.add(('ontouchstart' in window) || navigator.maxTouchPoints > 0 ? 'touch' : 'no-touch')</script>
+
+    {%- if settings.favicon != blank -%}
+      <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 32, height: 32 }}" type="image/png" />
+    {%- endif -%}
+
+    <title>
+      {{- page_title -}}
+      {%- if current_tags -%}
+        {%- assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+      {%- endif -%}
+      {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
+      {%- if request.page_type == 'password' -%}
+        {{- shop.name -}}
+      {%- else -%}
+        {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- endif -%}
+    </title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    {%- liquid
+      render 'social-meta-tags'
+      
+      render 'css-variables'
+      echo 'theme.css' | asset_url | stylesheet_tag: preload: true
+
+      if direction == 'rtl'
+        echo 'rtl.css' | asset_url | stylesheet_tag: preload: true
+      endif
+    -%}
+
+    <link rel="stylesheet" href="{{ 'apps.css' | asset_url }}" media="print" fetchpriority="low" onload="this.media='all'">
+
+    {{ content_for_header }}
+
+    <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+
+    {%- if settings.enable_tab_attention -%}
+      <script src="{{ 'tab-attention.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {%- if request.page_type contains 'customers/' -%}
+      <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {%- render 'js-variables' -%}
+
+    <!-- TBG Custom Code -->
+
+    {% render 'wsg-custom' %}
+
+    {% if template contains 'product' and product.tags contains 'private' %}
+      <meta name="robots" content="noindex, nofollow">
+    {% endif %}
+    {% if page.template_suffix == 'titan-vs-competitors' %}
+      <style>
+        @media (max-width: 768px) {
+          body *:not(#shopify-section-template--18618526236850__rich_text_GxV64H):not(#shopify-section-template--18618526236850__rich_text_GxV64H *) {
+            text-align: center !important;
+          }
+        }
+      </style>
+    {% endif %}
+    {% if template.name == 'product' and (template.suffix == 'non-index-pdp' or template.suffix == 'custom-team-pdp') %}
+      <meta name="robots" content="noindex, nofollow">
+    {% endif %}
+
+    <!-- usahockey unindex code -->
+    {% if template == 'collection' and collection.handle == 'usahockey' %}
+      <meta name="robots" content="noindex, nofollow">
+    {% endif %}
+    <!-- End usahockey unindex code -->
+
+    {% if request.page_type == 'product' and product.metafields.custom.noindex == true %}
+      <meta name="robots" content="noindex, nofollow">
+    {% elsif request.page_type == 'collection' and collection.metafields.custom.noindex == true %}
+      <meta name="robots" content="noindex, nofollow">
+    {% elsif request.page_type == 'page' and page.metafields.custom.noindex == true %}
+      <meta name="robots" content="noindex, nofollow">
+    {% endif %}
+    <!-- End TBG Custom Code -->
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Titan BattleGear",
+  "url": "https://www.titanbattlegear.com",
+  "logo": "https://www.titanbattlegear.com/cdn/shop/files/titan_battlegear_logo.png",
+  "description": "Titan BattleGear makes the safest cut-resistant hockey baselayer and neck guard shirts, featuring A9 ANSI-rated Titanotex fabric and ArcGuard Technology.",
+  "brand": {
+    "@type": "Brand",
+    "name": "Titan BattleGear",
+    "slogan": "We don't meet safety standards — we set them."
+  },
+  "sameAs": [
+    "https://www.instagram.com/titan_battlegear",
+    "https://www.linkedin.com/company/titan-battlegear"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer support",
+    "url": "https://titanbattlegear.zendesk.com/hc/en-us/requests/new"
+  }
+}
+</script>
+
+    {%- if request.page_type == 'policy' -%}
+      <style>
+        .shopify-policy__title {
+          font-size: var(--text-h2);
+          line-height: 1.3;
+          font-family: var(--font-heading-family);
+          font-style: var(--font-heading-style);
+          font-weight: var(--font-heading-weight);
+          letter-spacing: var(--font-heading-letter-spacing);
+          text-transform: var(--font-heading-text-transform);
+        }
+
+        .shopify-policy__body .rte {
+          font-size: var(--text-base);
+          line-height: 1.6;
+        }
+      </style>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          var policyBody = document.querySelector('.shopify-policy__body');
+          if (!policyBody) return;
+
+          policyBody.querySelectorAll('a:not([href])').forEach(function (anchor) {
+            var replacement = document.createElement('span');
+
+            Array.from(anchor.attributes).forEach(function (attr) {
+              replacement.setAttribute(attr.name, attr.value);
+            });
+
+            replacement.removeAttribute('role');
+            replacement.innerHTML = anchor.innerHTML;
+            anchor.replaceWith(replacement);
+          });
+        });
+      </script>
+    {%- endif -%}
+
+    {%- if request.page_type == 'page' and (page.handle == 'store-locator' or page.handle == 'titan-labs') -%}
+      <style>
+        .page.rte {
+          min-height: 70vh;
+        }
+
+        .shopify-policy__body iframe,
+        .page iframe {
+          min-height: 70vh;
+          width: 100%;
+          display: block;
+        }
+
+        .page [id*="locator"],
+        .page [class*="locator"] {
+          min-height: 70vh;
+        }
+      </style>
+    {%- endif -%}
+  </head>
+
+  <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if request.path == '/challenge' %} template-challange{% endif %}" data-rounded-button="{{ settings.rounded_button }}" data-rounded-input="{{ settings.rounded_input }}" data-rounded-block="{{ settings.rounded_block }}" data-rounded-card="{{ settings.rounded_card }}" data-button-hover="{{ settings.buttons_hover }}"{% if settings.enable_page_transition %} data-page-transition{% endif %}{% if settings.enable_lazy_image %} data-lazy-image{% endif %}{% unless settings.show_modal_close_button %} data-modal-swipe-only{% endunless %} data-title-animation data-page-rendering>
+     <!-- TBG Custom Code -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJ9B379C"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- END TBG Custom Code -->
+
+    {% render 'head-datalayer' %}
+    <a class="sr-only skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+    {%- liquid
+      if settings.enable_page_transition
+        render 'loading-bar'
+      endif
+      
+      render 'mouse-cursor'
+
+       comment
+        TBG Custom Code 
+       endcomment
+      if template != 'page.learn-advertorial' and template != 'page.alia-pop-up-full-screen' 
+        sections 'header-group'
+        sections 'overlay-group'
+      endif
+    -%}
+
+    <div class="page-container" id="PageContainer">
+      <main class="main-content relative" id="MainContent" role="main">
+        {{ content_for_layout }}
+      </main>
+      {% comment %} TBG Custom Code {% endcomment %}
+      {% if template != 'page.learn-advertorial' and template != 'page.alia-pop-up-full-screen'  %}
+        <footer class="footer-group block w-full" is="footer-group">
+          {%- sections 'footer-group' -%}
+        </footer>
+      {% endif %}
+
+    </div>
+
+    <ul hidden>
+      <li id="a11y-refresh-page-message">{{ 'general.accessibility.refresh_page' | t }}</li>
+      <li id="a11y-new-window-message">{{ 'general.accessibility.link_messages.new_window' | t }}</li>
+    </ul>
+
+
+    <!-- TBG Custom Code -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        if (window.location.pathname === '/collections/rinkwear') {
+          history.replaceState(null, null, '/collections/rinkwear'); // Stops unwanted redirects
+        }
+      });
+    </script>
+    {% comment %} {{ 'tbg-auto-discount.js' | asset_url | script_tag }} {% endcomment %}
+
+    {%- if template == 'index' -%}
+      <style>
+        #warningMsg .drawer__title {
+          font-size: 20px !important;
+        }
+
+        @media (min-width: 786px) {
+          #warningMsg .drawer__title {
+            font-size: 40px !important;
+          }
+        }
+
+        #warningMsg[active] .drawer__inner {
+          opacity: 1;
+          transform: scale(1);
+          transition: all .8s cubic-bezier(.7,0,.2,1);
+          pointer-events: all !important;
+        }
+
+        #warningMsg:not([active]) .drawer__inner {
+          opacity: 0;
+          transform: scale(0.95);
+          pointer-events: none;
+        }
+
+        #warningModalOverlay {
+          background-color: rgb(var(--color-overlay) / .7);
+          transition: all .8s cubic-bezier(.7,0,.2,1);
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        #warningMsg[active] #warningModalOverlay {
+          opacity: 1;
+          pointer-events: all;
+          cursor: default !important;
+        }
+
+        @media (max-width: 640px) {
+          #warningMsg {
+            transition: all .8s cubic-bezier(.7,0,.2,1);
+            opacity: 1;
+            transform: translateY(100%);
+          }
+
+          #warningMsg:not([active]) .drawer__inner {
+            opacity: 1;
+            pointer-events: none;
+          }
+
+          #warningMsg[active] {
+            pointer-events: all;
+            transform: translateY(0);
+          }
+
+          #warningMsg #warningModalOverlay {
+            transition: all 2s cubic-bezier(.7,0,.2,1);
+            transform: translate(0px);
+          }
+
+          #warningMsg[active] #warningModalOverlay {
+            opacity: 1;
+          }
+        }
+
+        .modal-visible * { pointer-events: none; }
+        .modal-visible #warningMsg,
+        .modal-visible #warningMsg * { pointer-events: auto; }
+
+        .klaviyo-loader {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          text-align: center;
+          z-index: 1;
+        }
+
+        .spinner {
+          border: 3px solid #f3f3f3;
+          border-top: 3px solid #333;
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          animation: spin 1s linear infinite;
+          margin: 0 auto 10px;
+        }
+
+        .klaviyo-loader.hidden {
+          display: none;
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      </style>
+
+      <!-- Registration Required Modal -->
+      <x-modal
+        id="warningMsg"
+        class="profile-modal x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+        role="dialog"
+        aria-modal="true"
+        hidden
+      >
+        <overlay-element
+          id="warningModalOverlay"
+          class="overlay fixed-modal fixed bottom-0 left-0 w-full h-screen transition-opacity duration-300"
+          aria-expanded="false"
+        ></overlay-element>
+
+        <div
+          style="background-color: white; min-height: 200px;"
+          class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden"
+        >
+          <!-- Loader (shows by default) -->
+          <div id="klaviyo-loader" class="klaviyo-loader">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+          </div>
+
+          <!-- Klaviyo form container (Klaviyo injects the form here) -->
+          <div class="email_iframe klaviyo-form-XGjnGj"></div>
+        </div>
+      </x-modal>
+
+      <!-- Protection Overlay -->
+      <div
+        id="protectionOverlay"
+        style="
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background-color: white;
+          z-index: 999999;
+          display: none;
+          justify-content: center;
+          align-items: center;
+          font-family: Arial, sans-serif;
+          font-size: 18px;
+          color: #333;
+        "
+      >
+        <div>
+          <div
+            style="
+              width: 40px;
+              height: 40px;
+              border: 4px solid #f3f3f3;
+              border-top: 4px solid #333;
+              border-radius: 50%;
+              animation: spin 1s linear infinite;
+              margin: 0 auto 20px auto;
+            "
+          ></div>
+          Reloading...
+        </div>
+      </div>
+
+      <script>
+        // Declare protection interval globally so it can be accessed everywhere
+        let protectionInterval;
+
+        document.addEventListener('DOMContentLoaded', function () {
+          const modal = document.getElementById('warningMsg');
+
+          // --- Check if URL has discount hash or parameter ---
+          const urlParams = new URLSearchParams(window.location.search);
+          const hasDiscountParam = urlParams.get('discountApplied') === 'true';
+          const hasDiscountHash =
+            window.location.hash === '#discountApplied=true' || window.location.hash === '#discount-applied';
+
+          // If no discount parameter or hash, don't show modal
+          if (!hasDiscountParam && !hasDiscountHash) {
+            return;
+          }
+
+          // --- Early exit if form already submitted this session ---
+          const formSubmitted = localStorage.getItem('klaviyo_home_form_submitted');
+          if (formSubmitted === 'true') {
+            return;
+          }
+
+          // --- Show modal since conditions are met ---
+          if (modal) {
+            modal.removeAttribute('hidden');
+            modal.setAttribute('active', '');
+          }
+
+          // DOM Protection: Reload if modal is removed illegitimately
+          protectionInterval = setInterval(() => {
+            const modalExists = document.getElementById('warningMsg');
+            const isFormSubmitted = localStorage.getItem('klaviyo_home_form_submitted') === 'true';
+
+            if (!modalExists && !isFormSubmitted) {
+              const protectionOverlay = document.getElementById('protectionOverlay');
+              if (protectionOverlay) {
+                protectionOverlay.style.display = 'flex';
+                protectionOverlay.offsetHeight; // Force repaint
+              }
+
+              clearInterval(protectionInterval);
+              location.reload();
+            }
+          }, 100);
+
+          // Fetch discount code from Shopify cart
+          let appliedDiscountCode = '';
+
+          async function getAppliedDiscountCode() {
+            try {
+              const response = await fetch('/cart.js');
+              const cart = await response.json();
+
+              // Check for applied discount code
+              if (cart.cart_level_discount_applications && cart.cart_level_discount_applications.length > 0) {
+                appliedDiscountCode = cart.cart_level_discount_applications[0].title;
+              } else if (cart.discount_codes && cart.discount_codes.length > 0) {
+                const discountData = cart.discount_codes[0];
+                // discount_codes can be an object with 'code' property or just a string
+                appliedDiscountCode = typeof discountData === 'object' ? discountData.code : discountData;
+              }
+
+              return appliedDiscountCode;
+            } catch (error) {
+              console.error('Error fetching cart:', error);
+              return '';
+            }
+          }
+
+          // Get discount code before monitoring form
+          getAppliedDiscountCode().then(() => {
+            monitorKlaviyoForm();
+          });
+
+          // Fill the team input in the 3rd form row
+          function fillTeamInput(scope) {
+            const root = scope || document;
+            const teamInput = root.querySelector('div[data-testid="form-row"]:nth-of-type(3) input');
+            if (teamInput && !teamInput.__tbg_filled) {
+              const val = appliedDiscountCode || 'No discount applied';
+              teamInput.value = val;
+              teamInput.setAttribute('value', val);
+              // Dispatch events so Klaviyo registers the value
+              teamInput.dispatchEvent(new Event('input', { bubbles: true }));
+              teamInput.dispatchEvent(new Event('change', { bubbles: true }));
+              teamInput.__tbg_filled = true;
+            }
+          }
+
+          function monitorKlaviyoForm() {
+            const formContainer = document.querySelector('.klaviyo-form-XGjnGj');
+            const loader = document.getElementById('klaviyo-loader');
+            if (!formContainer) return;
+
+            let formWasLoaded = false;
+            let previousContent = '';
+
+            function checkFormStatus() {
+              const currentContent = formContainer.innerHTML.trim();
+              const isEmpty = currentContent === '';
+              const hasContent = !isEmpty;
+
+              // Hide loader once content appears and fill team input
+              if (hasContent && !formWasLoaded) {
+                formWasLoaded = true;
+                if (loader) loader.classList.add('hidden');
+                fillTeamInput(formContainer);
+              }
+
+              if (formWasLoaded) {
+                const hasFormTag = formContainer.querySelector('form');
+                const hasInputs = formContainer.querySelector('input');
+                const noFormElements = !hasFormTag || !hasInputs;
+                const contentReduced = currentContent.length < 200 && previousContent.length > 1000;
+
+                const modalStillExists = document.getElementById('warningMsg');
+
+                if ((isEmpty || noFormElements || contentReduced) && modalStillExists) {
+                  localStorage.setItem('klaviyo_home_form_submitted', 'true');
+                  if (modal) {
+                    modal.removeAttribute('active');
+                    modal.style.display = 'none';
+                    modal.setAttribute('hidden', '');
+                  }
+                  clearInterval(protectionInterval);
+                  clearInterval(interval);
+                  observer.disconnect();
+                }
+              }
+
+              previousContent = currentContent;
+            }
+
+            // Poll every 500ms
+            const interval = setInterval(() => {
+              fillTeamInput(formContainer);
+              checkFormStatus();
+            }, 500);
+
+            // Observe dynamic injections
+            const observer = new MutationObserver(() => {
+              fillTeamInput(formContainer);
+              checkFormStatus();
+            });
+            observer.observe(formContainer, { childList: true, subtree: true, attributes: true });
+
+            fillTeamInput(formContainer);
+            checkFormStatus();
+          }
+        });
+      </script>
+    {% endif %}
+
+   
+    {% if page.handle == 'loyalty-program' %}
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          try {
+            var params = new URLSearchParams(window.location.search);
+            if (params.get('cus_scroll') !== 'true') return;
+            var selector = '#shopify-section-template--20096522387634__1736868115d3f15627';
+            var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var behavior = prefersReduced ? 'auto' : 'smooth';
+            var mobileFixedTop = window.matchMedia('(max-width: 767px)').matches ? 3800 : null;
+            var start = Date.now();
+            var maxWaitMs = 100;
+
+            function alignTarget(target) {
+              var endTime = Date.now() + 100;
+              var firstScroll = true;
+              function keepAligning() {
+                if (!document.body.contains(target) || Date.now() > endTime) return;
+                var currentBehavior = firstScroll ? behavior : 'auto';
+                firstScroll = false;
+                if (mobileFixedTop !== null) {
+                  if (Math.abs(window.scrollY - mobileFixedTop) <= 1) return;
+                  window.scrollTo({ top: mobileFixedTop, behavior: currentBehavior });
+                } else {
+                  var rectTop = target.getBoundingClientRect().top;
+                  if (Math.abs(rectTop) <= 1) return;
+                  var scrollTop = window.scrollY + rectTop;
+                  window.scrollTo({ top: scrollTop, behavior: currentBehavior });
+                }
+                window.setTimeout(keepAligning, 120);
+              }
+              keepAligning();
+            }
+
+            function waitForTarget() {
+              var target = document.querySelector(selector);
+              if (target) {
+                alignTarget(target);
+                return;
+              }
+              if (Date.now() - start < maxWaitMs) {
+                window.setTimeout(waitForTarget, 120);
+              }
+            }
+
+            waitForTarget();
+          } catch (e) {
+            return;
+          }
+        });
+      </script>
+    {% endif %}
+
+    <script>
+      (function () {
+        function runWhenIdle(callback) {
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(callback, { timeout: 3000 });
+            return;
+          }
+          setTimeout(callback, 1200);
+        }
+
+        function injectScript(src, attrs) {
+          var script = document.createElement('script');
+          script.src = src;
+          Object.keys(attrs || {}).forEach(function (key) {
+            script[key] = attrs[key];
+          });
+          document.head.appendChild(script);
+          return script;
+        }
+
+        function loadDeferredTrackers() {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+          injectScript('https://www.googletagmanager.com/gtm.js?id=GTM-PJ9B379C&l=dataLayer', { async: true });
+
+          (function (c, l, a, r, i, t, y) {
+            c[a] =
+              c[a] ||
+              function () {
+                (c[a].q = c[a].q || []).push(arguments);
+              };
+            t = l.createElement(r);
+            t.async = 1;
+            t.src = 'https://www.clarity.ms/tag/' + i;
+            y = l.getElementsByTagName(r)[0];
+            y.parentNode.insertBefore(t, y);
+          })(window, document, 'clarity', 'script', 'nv7qea8eec');
+
+          !(function (w, d) {
+            if (!w.rdt) {
+              var p = (w.rdt = function () {
+                p.sendEvent ? p.sendEvent.apply(p, arguments) : p.callQueue.push(arguments);
+              });
+              p.callQueue = [];
+              var t = d.createElement('script');
+              t.src = 'https://www.redditstatic.com/ads/pixel.js';
+              t.async = true;
+              var s = d.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(t, s);
+            }
+          })(window, document);
+          rdt('init', 'a2_goa189yz0f24');
+          rdt('track', 'PageVisit');
+
+          !(function (t, e) {
+            var o;
+            var n;
+            var p;
+            var r;
+            if (e.__SV || (window.posthog && window.posthog.__loaded)) return;
+            window.posthog = e;
+            e._i = [];
+            e.init = function (i, s, a) {
+              function g(target, name) {
+                var parts = name.split('.');
+                if (parts.length === 2) {
+                  target = target[parts[0]];
+                  name = parts[1];
+                }
+                target[name] = function () {
+                  target.push([name].concat(Array.prototype.slice.call(arguments, 0)));
+                };
+              }
+              p = t.createElement('script');
+              p.type = 'text/javascript';
+              p.crossOrigin = 'anonymous';
+              p.async = true;
+              var assetsHost = s.api_host && s.api_host.indexOf('.i.posthog.com') > -1
+                ? s.api_host.replace('.i.posthog.com', '-assets.i.posthog.com')
+                : 'https://us-assets.i.posthog.com';
+              p.src = assetsHost + '/static/array.js';
+              r = t.getElementsByTagName('script')[0];
+              r.parentNode.insertBefore(p, r);
+              var u = e;
+              if (a !== undefined) {
+                u = e[a] = [];
+              } else {
+                a = 'posthog';
+              }
+              u.people = u.people || [];
+              u.toString = function (debug) {
+                var name = 'posthog';
+                if (a !== 'posthog') name += '.' + a;
+                if (!debug) name += ' (stub)';
+                return name;
+              };
+              u.people.toString = function () {
+                return u.toString(1) + '.people (stub)';
+              };
+              o = 'capture identify alias set_config register register_once unregister opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags onSessionId get_session_id get_distinct_id group setPersonProperties captureException'.split(' ');
+              for (n = 0; n < o.length; n++) g(u, o[n]);
+              e._i.push([i, s, a]);
+            };
+            e.__SV = 1;
+          })(document, Array.isArray(window.posthog) ? window.posthog : []);
+
+          posthog.init('phc_5OKb3d3E7BPOs78n9YNJ65ETjPSUyEI9YFcpj7Cil3x', {
+            api_host: 'https://us.i.posthog.com',
+            ui_host: 'https://us.posthog.com',
+            capture_pageview: true,
+            capture_pageleave: false,
+            disable_session_recording: true,
+            autocapture: false,
+            enable_heatmaps: false,
+            cross_subdomain_cookie: false,
+            persistence: 'localStorage+cookie',
+            defaults: '2026-01-30',
+            person_profiles: 'identified_only'
+          });
+
+          if (!document.getElementById('hs-script-loader')) {
+            injectScript('//js.hs-scripts.com/46588550.js', { async: true, defer: true, id: 'hs-script-loader' });
+          }
+        }
+
+        window.addEventListener('load', function () {
+          runWhenIdle(loadDeferredTrackers);
+        });
+      })();
+    </script>
+
+    <script>
+      // TBG Custom Code
+      (function () {
+        function runWhenIdle(callback) {
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(callback, { timeout: 2500 });
+            return;
+          }
+          setTimeout(callback, 1200);
+        }
+
+        async function syncAmbassadorCode() {
+        try {
+          if (sessionStorage.getItem('tbg_amb_sync_done') === '1') return;
+          const res = await fetch('/cart.js');
+          const cart = await res.json();
+
+          const ambCodes = (cart.discount_codes || [])
+            .filter(dc => dc.code && dc.code.startsWith('AMB-'));
+
+          if (!ambCodes.length) {
+            sessionStorage.setItem('tbg_amb_sync_done', '1');
+            return;
+          }
+
+          const ambCode = ambCodes[ambCodes.length - 1].code;
+          const existingCode = cart.attributes && cart.attributes.tbg_ambassador_code;
+
+          if (existingCode === ambCode) {
+            sessionStorage.setItem('tbg_amb_sync_done', '1');
+            return;
+          }
+
+          await fetch('/cart/update.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              attributes: {
+                tbg_ambassador_code: ambCode
+              }
+            })
+          });
+          sessionStorage.setItem('tbg_amb_sync_done', '1');
+
+        } catch (e) {
+          // fail silently
+        }
+        }
+
+        window.addEventListener('load', function () {
+          runWhenIdle(syncAmbassadorCode);
+        });
+      })();
+      // End TBG Custom Code
+    </script>
+
+
+    <script>
+      // POSTHOG METRIC: Track product card link clicks
+      document.addEventListener('click', function(e) {  
+        if (e.target.closest('.template-collection .pdpPageLink') && window.posthog && typeof window.posthog.capture === 'function') {  
+          posthog.capture('Product Card Clicked on PLP', {  
+            page_type: 'collection'  
+          });  
+        }  
+      });  
+    </script>
+
+    <script>
+      // Posthog Metric : Track dynamic checkout wallet interactions on PDP.
+      (() => {
+        if (window.__dynamicCheckoutPosthogTrackerInitialized) return;
+        window.__dynamicCheckoutPosthogTrackerInitialized = true;
+
+        var lastTrackedInteraction = {
+          type: '',
+          timestamp: 0
+        };
+
+        function normalizeWalletType(rawValue) {
+          var value = (rawValue || '').toLowerCase();
+          if (!value) return 'unknown';
+          if (value.indexOf('shop') > -1) return 'shop_pay';
+          if (value.indexOf('apple') > -1) return 'apple_pay';
+          if (value.indexOf('google') > -1 || value.indexOf('g pay') > -1 || value.indexOf('gpay') > -1) return 'google_pay';
+          if (value.indexOf('paypal') > -1 || value.indexOf('pay pal') > -1) return 'paypal';
+          if (value.indexOf('buy it now') > -1) return 'buy_it_now';
+          if (value.indexOf('pay') > -1) return 'other';
+          return 'unknown';
+        }
+
+        function getEventPath(event) {
+          if (event && typeof event.composedPath === 'function') {
+            return event.composedPath();
+          }
+
+          var path = [];
+          var node = event && event.target;
+          while (node) {
+            path.push(node);
+            node = node.parentNode;
+          }
+          path.push(window);
+          return path;
+        }
+
+        function isElement(node) {
+          return node && node.nodeType === 1;
+        }
+
+        function getAttr(node, name) {
+          return isElement(node) && typeof node.getAttribute === 'function' ? node.getAttribute(name) : '';
+        }
+
+        function findDynamicCheckoutRoot(path) {
+          for (var i = 0; i < path.length; i += 1) {
+            var node = path[i];
+            if (!isElement(node)) continue;
+            if (node.matches && node.matches('.shopify-payment-button')) {
+              return node;
+            }
+          }
+
+          return null;
+        }
+
+        function detectWalletInfo(path, dynamicCheckoutRoot) {
+          for (var i = 0; i < path.length; i += 1) {
+            var node = path[i];
+            if (!isElement(node)) continue;
+
+            var tagName = (node.tagName || '').toLowerCase();
+            if (
+              tagName === 'shop-pay-wallet-button' ||
+              tagName === 'apple-pay-button' ||
+              tagName === 'google-pay-button' ||
+              tagName === 'paypal-button'
+            ) {
+              return { raw: tagName, type: normalizeWalletType(tagName) };
+            }
+
+            var attrCandidates = [
+              getAttr(node, 'aria-label'),
+              getAttr(node, 'data-testid'),
+              getAttr(node, 'name'),
+              getAttr(node, 'wallet-instrument-name'),
+              getAttr(node, 'call-to-action'),
+              getAttr(node, 'recommended'),
+              getAttr(node, 'fallback')
+            ];
+
+            for (var j = 0; j < attrCandidates.length; j += 1) {
+              var attrValue = attrCandidates[j];
+              var attrType = normalizeWalletType(attrValue);
+              if (attrType !== 'unknown') {
+                return { raw: attrValue, type: attrType };
+              }
+            }
+          }
+
+          var checkoutText = dynamicCheckoutRoot && dynamicCheckoutRoot.innerText ? dynamicCheckoutRoot.innerText.trim() : '';
+          if (checkoutText) {
+            var textType = normalizeWalletType(checkoutText);
+            if (textType !== 'unknown') return { raw: checkoutText, type: textType };
+          }
+
+          return { raw: 'unknown', type: 'unknown' };
+        }
+
+        function trackDynamicCheckoutInteraction(event) {
+          if (!window.posthog || typeof window.posthog.capture !== 'function') return;
+
+          var path = getEventPath(event);
+          var dynamicCheckoutRoot = findDynamicCheckoutRoot(path);
+          if (!dynamicCheckoutRoot) return;
+
+          var walletInfo = detectWalletInfo(path, dynamicCheckoutRoot);
+          var now = Date.now();
+
+          if (lastTrackedInteraction.type === walletInfo.type && now - lastTrackedInteraction.timestamp < 1000) {
+            return;
+          }
+
+          lastTrackedInteraction.type = walletInfo.type;
+          lastTrackedInteraction.timestamp = now;
+
+          window.posthog.capture('Dynamic Checkout Clicked on PDP', {
+            page_type: 'product',
+            wallet_type: walletInfo.type,
+            wallet_label_raw: walletInfo.raw,
+            interaction_event: event.type
+          });
+        }
+
+        document.addEventListener('pointerdown', trackDynamicCheckoutInteraction, true);
+        document.addEventListener('click', trackDynamicCheckoutInteraction, true);
+      })();
+    </script>
+    
+    {%- if request.design_mode == false and settings.preload_links -%}
+      <script src="{{ 'instant-page.js' | asset_url }}" type="module" fetchpriority="low" defer="defer"></script>
+    {%- endif -%}
+  </body>
+</html>

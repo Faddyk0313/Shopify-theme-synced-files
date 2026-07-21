@@ -1,0 +1,1202 @@
+{% doc %}
+  @prompt
+    build me a loyalty program tier table to support multiple tiers with bullet pints , hyper links , icons and images . it should be mobile responsive and showcase a hero image for each tier . there should be an option to edit fonts, text color, background color for each of the bullet points . you can use the multicolumn section of this page as a reference, make and option to be able to make it carousel toggle for mobile , keeping the options for columns on desktop , I want to have an option to choose between columns and carousel mode on desktop too
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-loyalty-tiers-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: 40px 20px;
+  }
+
+  {% if block.settings.desktop_layout == 'carousel' %}
+    .ai-loyalty-tiers__container-{{ ai_gen_id }} {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: {{ block.settings.column_gap }}px;
+      scroll-padding: 20px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .ai-loyalty-tiers__container-{{ ai_gen_id }}::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .ai-loyalty-tiers__container-{{ ai_gen_id }}::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .ai-loyalty-tiers__container-{{ ai_gen_id }}::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+
+    .ai-loyalty-tiers__container-{{ ai_gen_id }}::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    .ai-loyalty-tier-{{ ai_gen_id }} {
+      flex: 0 0 calc((100% - ({{ block.settings.columns_desktop | minus: 1 }} * {{ block.settings.column_gap }}px)) / {{ block.settings.columns_desktop }});
+      scroll-snap-align: start;
+    }
+  {% else %}
+    .ai-loyalty-tiers__container-{{ ai_gen_id }} {
+      display: grid;
+      grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+      gap: {{ block.settings.column_gap }}px;
+      max-width: 100%;
+    }
+
+    .ai-loyalty-tier-{{ ai_gen_id }} {
+      display: flex;
+      flex-direction: column;
+    }
+  {% endif %}
+
+  .ai-loyalty-tier-{{ ai_gen_id }} {
+    background-color: {{ block.settings.tier_background_color }};
+    border-radius: {{ block.settings.tier_border_radius }}px;
+    overflow: hidden;
+    border: {{ block.settings.tier_border_thickness }}px solid {{ block.settings.tier_border_color }};
+  }
+
+  .ai-loyalty-tier__hero-{{ ai_gen_id }} {
+    width: 100%;
+    height: {{ block.settings.hero_image_height }}px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-loyalty-tier__hero-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-loyalty-tier__hero-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-loyalty-tier__hero-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  .ai-loyalty-tier__content-{{ ai_gen_id }} {
+    padding: {{ block.settings.tier_padding }}px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ai-loyalty-tier__header-{{ ai_gen_id }} {
+    margin-bottom: 20px;
+  }
+
+  .ai-loyalty-tier__icon-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    margin-bottom: 12px;
+  }
+
+  .ai-loyalty-tier__icon-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .ai-loyalty-tier__icon-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #e5e5e5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-loyalty-tier__icon-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+  }
+
+  .ai-loyalty-tier__title-{{ ai_gen_id }} {
+    font-family: {{ block.settings.title_font.family }}, {{ block.settings.title_font.fallback_families }};
+    font-weight: {{ block.settings.title_font.weight }};
+    font-size: {{ block.settings.title_font_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+  }
+
+  .ai-loyalty-tier__subtitle-{{ ai_gen_id }} {
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-weight: {{ block.settings.body_font.weight }};
+    font-size: {{ block.settings.subtitle_font_size }}px;
+    color: {{ block.settings.subtitle_color }};
+    margin: 0 0 20px 0;
+    line-height: 1.4;
+  }
+
+  .ai-loyalty-tier__benefits-{{ ai_gen_id }} {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .ai-loyalty-tier__benefit-{{ ai_gen_id }} {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: {{ block.settings.bullet_padding }}px;
+    margin-bottom: 8px;
+    background-color: {{ block.settings.bullet_background_color }};
+    border-radius: {{ block.settings.bullet_border_radius }}px;
+  }
+
+  .ai-loyalty-tier__benefit-icon-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+  }
+
+  .ai-loyalty-tier__benefit-icon-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    stroke: {{ block.settings.bullet_icon_color }};
+  }
+
+  .ai-loyalty-tier__benefit-text-{{ ai_gen_id }} {
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-weight: {{ block.settings.body_font.weight }};
+    font-size: {{ block.settings.bullet_font_size }}px;
+    color: {{ block.settings.bullet_text_color }};
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+
+  .ai-loyalty-tier__benefit-text-{{ ai_gen_id }} a {
+    color: {{ block.settings.link_color }};
+    text-decoration: underline;
+  }
+
+  .ai-loyalty-tier__benefit-text-{{ ai_gen_id }} a:hover {
+    color: {{ block.settings.link_hover_color }};
+  }
+
+  .ai-loyalty-tier__cta-{{ ai_gen_id }} {
+    margin-top: 24px;
+  }
+
+  .ai-loyalty-tier__button-{{ ai_gen_id }} {
+    display: inline-block;
+    width: 100%;
+    padding: 14px 24px;
+    background-color: {{ block.settings.button_background_color }};
+    color: {{ block.settings.button_text_color }};
+    text-align: center;
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-weight: {{ block.settings.body_font.weight }};
+    font-size: {{ block.settings.button_font_size }}px;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-loyalty-tier__button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background_color }};
+  }
+
+  @media screen and (max-width: 989px) {
+    {% if block.settings.desktop_layout == 'carousel' %}
+      .ai-loyalty-tier-{{ ai_gen_id }} {
+        flex: 0 0 calc((100% - ({{ block.settings.columns_tablet | minus: 1 }} * {{ block.settings.column_gap }}px)) / {{ block.settings.columns_tablet }});
+      }
+    {% else %}
+      .ai-loyalty-tiers__container-{{ ai_gen_id }} {
+        grid-template-columns: repeat({{ block.settings.columns_tablet }}, 1fr);
+      }
+    {% endif %}
+  }
+
+  @media screen and (max-width: 749px) {
+    {% if block.settings.enable_mobile_carousel %}
+      .ai-loyalty-tiers__container-{{ ai_gen_id }} {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: {{ block.settings.column_gap }}px;
+        scroll-padding: 20px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .ai-loyalty-tiers__container-{{ ai_gen_id }}::-webkit-scrollbar {
+        display: none;
+      }
+
+      .ai-loyalty-tier-{{ ai_gen_id }} {
+        flex: 0 0 85%;
+        scroll-snap-align: start;
+      }
+    {% else %}
+      .ai-loyalty-tiers__container-{{ ai_gen_id }} {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .ai-loyalty-tier-{{ ai_gen_id }} {
+        display: flex;
+        flex-direction: column;
+      }
+    {% endif %}
+
+    .ai-loyalty-tier__hero-{{ ai_gen_id }} {
+      height: {{ block.settings.hero_image_height | times: 0.8 }}px;
+    }
+
+    .ai-loyalty-tier__content-{{ ai_gen_id }} {
+      padding: {{ block.settings.tier_padding | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<loyalty-tiers-{{ ai_gen_id }} class="ai-loyalty-tiers-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-loyalty-tiers__container-{{ ai_gen_id }}">
+    {% for i in (1..6) %}
+      {% liquid
+        assign tier_enabled_key = 'tier_' | append: i | append: '_enabled'
+        assign tier_hero_key = 'tier_' | append: i | append: '_hero_image'
+        assign tier_icon_key = 'tier_' | append: i | append: '_icon'
+        assign tier_title_key = 'tier_' | append: i | append: '_title'
+        assign tier_subtitle_key = 'tier_' | append: i | append: '_subtitle'
+        assign tier_button_text_key = 'tier_' | append: i | append: '_button_text'
+        assign tier_button_link_key = 'tier_' | append: i | append: '_button_link'
+
+        assign tier_enabled = block.settings[tier_enabled_key]
+        assign tier_hero = block.settings[tier_hero_key]
+        assign tier_icon = block.settings[tier_icon_key]
+        assign tier_title = block.settings[tier_title_key]
+        assign tier_subtitle = block.settings[tier_subtitle_key]
+        assign tier_button_text = block.settings[tier_button_text_key]
+        assign tier_button_link = block.settings[tier_button_link_key]
+      %}
+
+      {% if tier_enabled %}
+        <div class="ai-loyalty-tier-{{ ai_gen_id }}">
+          <div class="ai-loyalty-tier__hero-{{ ai_gen_id }}">
+            {% if tier_hero %}
+              <img
+                src="{{ tier_hero | image_url: width: 800 }}"
+                alt="{{ tier_hero.alt | escape }}"
+                loading="lazy"
+                width="{{ tier_hero.width }}"
+                height="{{ tier_hero.height }}"
+              >
+            {% else %}
+              <div class="ai-loyalty-tier__hero-placeholder-{{ ai_gen_id }}">
+                {{ 'hero-apparel-1' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="ai-loyalty-tier__content-{{ ai_gen_id }}">
+            <div class="ai-loyalty-tier__header-{{ ai_gen_id }}">
+              {% if tier_icon %}
+                <div class="ai-loyalty-tier__icon-{{ ai_gen_id }}">
+                  <img
+                    src="{{ tier_icon | image_url: width: 200 }}"
+                    alt="{{ tier_icon.alt | escape }}"
+                    loading="lazy"
+                    width="{{ tier_icon.width }}"
+                    height="{{ tier_icon.height }}"
+                  >
+                </div>
+              {% endif %}
+
+              {% if tier_title != blank %}
+                <h3 class="ai-loyalty-tier__title-{{ ai_gen_id }}">{{ tier_title }}</h3>
+              {% endif %}
+
+              {% if tier_subtitle != blank %}
+                <div class="ai-loyalty-tier__subtitle-{{ ai_gen_id }}">{{ tier_subtitle }}</div>
+              {% endif %}
+            </div>
+
+            <ul class="ai-loyalty-tier__benefits-{{ ai_gen_id }}">
+              {% for j in (1..8) %}
+                {% liquid
+                  assign benefit_key = 'tier_' | append: i | append: '_benefit_' | append: j
+                  assign benefit_text = block.settings[benefit_key]
+                %}
+
+                {% if benefit_text != blank %}
+                  <li class="ai-loyalty-tier__benefit-{{ ai_gen_id }}">
+                    <div class="ai-loyalty-tier__benefit-icon-{{ ai_gen_id }}">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    </div>
+                    <div class="ai-loyalty-tier__benefit-text-{{ ai_gen_id }}">{{ benefit_text }}</div>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+
+            {% if tier_button_text != blank %}
+              <div class="ai-loyalty-tier__cta-{{ ai_gen_id }}">
+                <a href="{{ tier_button_link }}" class="ai-loyalty-tier__button-{{ ai_gen_id }}">
+                  {{ tier_button_text }}
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</loyalty-tiers-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class LoyaltyTiers{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.style.display = 'block';
+      }
+    }
+
+    customElements.define('loyalty-tiers-{{ ai_gen_id }}', LoyaltyTiers{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Loyalty tier table",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "desktop_layout",
+      "label": "Desktop layout",
+      "options": [
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "carousel",
+          "label": "Carousel"
+        }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "label": "Columns on tablet",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_carousel",
+      "label": "Enable carousel on mobile",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Column gap",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Tier card style"
+    },
+    {
+      "type": "color",
+      "id": "tier_background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "tier_border_color",
+      "label": "Border color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "range",
+      "id": "tier_border_thickness",
+      "label": "Border thickness",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "tier_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "tier_padding",
+      "label": "Padding",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Hero image"
+    },
+    {
+      "type": "range",
+      "id": "hero_image_height",
+      "label": "Height",
+      "min": 100,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "default": 200
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Size",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "title_font",
+      "label": "Title font",
+      "default": "inter_n7"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Title size",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#171717"
+    },
+    {
+      "type": "font_picker",
+      "id": "body_font",
+      "label": "Body font",
+      "default": "inter_n4"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_font_size",
+      "label": "Subtitle size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#737373"
+    },
+    {
+      "type": "header",
+      "content": "Bullet points"
+    },
+    {
+      "type": "range",
+      "id": "bullet_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "bullet_text_color",
+      "label": "Text color",
+      "default": "#171717"
+    },
+    {
+      "type": "color",
+      "id": "bullet_background_color",
+      "label": "Background",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "bullet_icon_color",
+      "label": "Icon color",
+      "default": "#00adee"
+    },
+    {
+      "type": "range",
+      "id": "bullet_padding",
+      "label": "Padding",
+      "min": 5,
+      "max": 25,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "bullet_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Links"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link color",
+      "default": "#00adee"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Link hover color",
+      "default": "#0088bb"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Background",
+      "default": "#171717"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background_color",
+      "label": "Hover background",
+      "default": "#00adee"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Tier 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "tier_1_enabled",
+      "label": "Enable tier 1",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "tier_1_hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "image_picker",
+      "id": "tier_1_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tier_1_title",
+      "label": "Title",
+      "default": "Bronze Tier"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_1_subtitle",
+      "label": "Subtitle",
+      "default": "<p>Start your journey</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_1_benefit_1",
+      "label": "Benefit 1",
+      "default": "<p>5% off all purchases</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_1_benefit_2",
+      "label": "Benefit 2",
+      "default": "<p>Early access to sales</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_1_benefit_3",
+      "label": "Benefit 3",
+      "default": "<p>Birthday rewards</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_1_benefit_4",
+      "label": "Benefit 4"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_1_benefit_5",
+      "label": "Benefit 5"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_1_benefit_6",
+      "label": "Benefit 6"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_1_benefit_7",
+      "label": "Benefit 7"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_1_benefit_8",
+      "label": "Benefit 8"
+    },
+    {
+      "type": "text",
+      "id": "tier_1_button_text",
+      "label": "Button text",
+      "default": "Join now"
+    },
+    {
+      "type": "url",
+      "id": "tier_1_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Tier 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "tier_2_enabled",
+      "label": "Enable tier 2",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "tier_2_hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "image_picker",
+      "id": "tier_2_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tier_2_title",
+      "label": "Title",
+      "default": "Silver Tier"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_2_subtitle",
+      "label": "Subtitle",
+      "default": "<p>Level up your rewards</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_2_benefit_1",
+      "label": "Benefit 1",
+      "default": "<p>10% off all purchases</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_2_benefit_2",
+      "label": "Benefit 2",
+      "default": "<p>Free shipping on orders over $50</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_2_benefit_3",
+      "label": "Benefit 3",
+      "default": "<p>Exclusive member events</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_2_benefit_4",
+      "label": "Benefit 4"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_2_benefit_5",
+      "label": "Benefit 5"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_2_benefit_6",
+      "label": "Benefit 6"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_2_benefit_7",
+      "label": "Benefit 7"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_2_benefit_8",
+      "label": "Benefit 8"
+    },
+    {
+      "type": "text",
+      "id": "tier_2_button_text",
+      "label": "Button text",
+      "default": "Upgrade now"
+    },
+    {
+      "type": "url",
+      "id": "tier_2_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Tier 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "tier_3_enabled",
+      "label": "Enable tier 3",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "tier_3_hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "image_picker",
+      "id": "tier_3_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tier_3_title",
+      "label": "Title",
+      "default": "Gold Tier"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_3_subtitle",
+      "label": "Subtitle",
+      "default": "<p>Premium benefits</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_3_benefit_1",
+      "label": "Benefit 1",
+      "default": "<p>15% off all purchases</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_3_benefit_2",
+      "label": "Benefit 2",
+      "default": "<p>Free shipping on all orders</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_3_benefit_3",
+      "label": "Benefit 3",
+      "default": "<p>Priority customer support</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_3_benefit_4",
+      "label": "Benefit 4",
+      "default": "<p>VIP access to new products</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_3_benefit_5",
+      "label": "Benefit 5"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_3_benefit_6",
+      "label": "Benefit 6"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_3_benefit_7",
+      "label": "Benefit 7"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_3_benefit_8",
+      "label": "Benefit 8"
+    },
+    {
+      "type": "text",
+      "id": "tier_3_button_text",
+      "label": "Button text",
+      "default": "Unlock gold"
+    },
+    {
+      "type": "url",
+      "id": "tier_3_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Tier 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "tier_4_enabled",
+      "label": "Enable tier 4",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tier_4_hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "image_picker",
+      "id": "tier_4_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tier_4_title",
+      "label": "Title",
+      "default": "Platinum Tier"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_4_subtitle",
+      "label": "Subtitle",
+      "default": "<p>Elite status</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_4_benefit_1",
+      "label": "Benefit 1"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_4_benefit_2",
+      "label": "Benefit 2"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_4_benefit_3",
+      "label": "Benefit 3"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_4_benefit_4",
+      "label": "Benefit 4"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_4_benefit_5",
+      "label": "Benefit 5"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_4_benefit_6",
+      "label": "Benefit 6"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_4_benefit_7",
+      "label": "Benefit 7"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_4_benefit_8",
+      "label": "Benefit 8"
+    },
+    {
+      "type": "text",
+      "id": "tier_4_button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "tier_4_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Tier 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "tier_5_enabled",
+      "label": "Enable tier 5",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tier_5_hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "image_picker",
+      "id": "tier_5_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tier_5_title",
+      "label": "Title",
+      "default": "Diamond Tier"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_5_subtitle",
+      "label": "Subtitle",
+      "default": "<p>Ultimate rewards</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_5_benefit_1",
+      "label": "Benefit 1"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_5_benefit_2",
+      "label": "Benefit 2"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_5_benefit_3",
+      "label": "Benefit 3"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_5_benefit_4",
+      "label": "Benefit 4"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_5_benefit_5",
+      "label": "Benefit 5"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_5_benefit_6",
+      "label": "Benefit 6"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_5_benefit_7",
+      "label": "Benefit 7"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_5_benefit_8",
+      "label": "Benefit 8"
+    },
+    {
+      "type": "text",
+      "id": "tier_5_button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "tier_5_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Tier 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "tier_6_enabled",
+      "label": "Enable tier 6",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tier_6_hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "image_picker",
+      "id": "tier_6_icon",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "tier_6_title",
+      "label": "Title",
+      "default": "VIP Tier"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_6_subtitle",
+      "label": "Subtitle",
+      "default": "<p>Exclusive access</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_6_benefit_1",
+      "label": "Benefit 1"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_6_benefit_2",
+      "label": "Benefit 2"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_6_benefit_3",
+      "label": "Benefit 3"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_6_benefit_4",
+      "label": "Benefit 4"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_6_benefit_5",
+      "label": "Benefit 5"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_6_benefit_6",
+      "label": "Benefit 6"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_6_benefit_7",
+      "label": "Benefit 7"
+    },
+    {
+      "type": "richtext",
+      "id": "tier_6_benefit_8",
+      "label": "Benefit 8"
+    },
+    {
+      "type": "text",
+      "id": "tier_6_button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "tier_6_button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Loyalty tier table"
+    }
+  ]
+}
+{% endschema %}

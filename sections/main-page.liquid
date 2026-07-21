@@ -1,0 +1,1384 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+{% comment %} TBG CUSTOM CODE {% endcomment %}
+{%- if page.template_suffix != 'team-store-engine' -%}
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+  <div class="page-width{% if section.settings.narrow %} page-width--narrow{% endif %} relative">
+    <div class="title-wrapper leading-none {{ section.settings.heading_alignment }}">
+      <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}">
+        {%- render 'heading-content', content: page.title, style: 'none' -%}
+      </{{ section.settings.heading_tag }}>
+    </div>
+
+    <div class="page rte {{ section.settings.text_size }}">
+      {{- page.content -}}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% comment %} TBG CUSTOM CODE {% endcomment %}
+{%- assign has_team_query = false -%}
+{%- if request.query_string != blank and request.query_string contains 'team=' -%}
+  {%- assign has_team_query = true -%}
+{%- endif -%}
+
+{%- if page.template_suffix == 'team-store-engine' and has_team_query == false -%}
+  {%- assign missing_team_url = 'https://www.titanbattlegear.com/pages/team-sales-contact-form' -%}
+  <x-modal
+    id="warningMsg"
+    class="profile-modal x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full"
+    role="dialog"
+    aria-modal="true"
+    active
+  >
+    <overlay-element
+      id="warningModalOverlay"
+      class="overlay fixed-modal fixed bottom-0 left-0 w-full h-screen transition-opacity duration-300"
+      aria-expanded="false"
+    ></overlay-element>
+
+    <div
+      style="background-color: white; min-height: 200px;"
+      class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden"
+    >
+      <a class="titan-team-modal__exit-link" href="/">Exit to homepage</a>
+
+      <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative" tabindex="0">
+        <h2 class="drawer__title heading title-md uppercase" id="titan-modal-title">WELCOME TO TITAN</h2>
+      </gesture-element>
+
+      <div class="drawer__content opacity-0 invisible flex flex-col h-full grow shrink">
+        <div class="drawer__scrollable relative flex flex-col gap-5 md:gap-7 grow shrink">
+          <div class="titan-team-modal__body">
+            <p class="titan-team-modal__subheading" id="titan-modal-subtitle">Please Search For Your Team</p>
+
+            <div id="titan-step-1" class="titan-team-modal__step">
+              <div class="field">
+                <input
+                  id="titan-team-search"
+                  class="input is-floating"
+                  type="text"
+                  name="team_name"
+                  spellcheck="false"
+                  autocapitalize="words"
+                  autocomplete="off"
+                  placeholder="TEAM NAME"
+                  required
+                >
+                <label class="label is-floating" for="titan-team-search">TEAM NAME</label>
+              <div id="titan-team-results-panel" class="titan-team-results" style="display: none;">
+                <div id="Loader-{{ section.id }}-team-search" class="titan-team-results__loader" hidden>
+                  {%- render 'icon', icon: 'rotator', size: 'xs', class: 'animate-rotator' -%}
+                </div>
+                <ul id="titan-team-results-list" class="titan-team-results__list"></ul>
+                <div id="titan-team-no-results" class="titan-team-results__empty" hidden aria-live="polite">
+                  <p class="titan-team-results__empty-title">No Team Found - <a class="titan-team-results__empty-link" href="{{ missing_team_url }}">Request Your Team's Store</a></p>
+                </div>
+                <div class="titan-team-results__scrollbar" aria-hidden="true">
+                  <div class="titan-team-results__thumb">.</div>
+                </div>
+              </div>
+              </div>
+
+              <button
+                id="titan-next-btn"
+                class="button button--primary button--fixed"
+                type="button"
+                is="hover-button"
+                style="width: fit-content;"
+                disabled
+              >
+                <span class="btn-fill" data-fill></span>
+                <span class="btn-text">NEXT</span>
+              </button>
+            </div>
+
+            <form id="titan-step-2" class="titan-team-modal__step" style="display: none;">
+              <div class="field">
+                <input
+                  id="titan-email-input"
+                  class="input is-floating"
+                  type="email"
+                  name="email"
+                  spellcheck="false"
+                  autocapitalize="off"
+                  placeholder="EMAIL"
+                  required
+                >
+                <label class="label is-floating" for="titan-email-input">EMAIL</label>
+              </div>
+
+              <div class="field">
+                <input
+                  id="titan-phone-input"
+                  class="input is-floating"
+                  type="tel"
+                  name="phone"
+                  spellcheck="false"
+                  autocapitalize="off"
+                  placeholder="PHONE"
+                  required
+                >
+                <label class="label is-floating" for="titan-phone-input">PHONE</label>
+              </div>
+
+              <div class="titan-team-modal__checkbox-row">
+                <input id="titan-marketing-consent" type="checkbox" checked required>
+                <label for="titan-marketing-consent">I agree to receive communications for team store updates, order info, and communications. </label>
+              </div>
+
+              <button
+                class="button button--primary button--fixed"
+                type="submit"
+                is="hover-button"
+                style="width: fit-content;"
+              >
+                <span class="btn-fill" data-fill></span>
+                <span class="btn-text">ENTER STORE</span>
+              </button>
+            </form>
+
+            <div id="titan-step-3" class="titan-team-modal__step" style="display: none;">
+              <a href="https://www.titanbattlegear.com/collections/cut-resistant-battlegear">
+                <button
+                  class="button button--primary button--fixed"
+                  type="button"
+                  is="hover-button"
+                  style="width: fit-content;"
+                >
+                  <span class="btn-fill" data-fill></span>
+                  <span class="btn-text">SHOP TITAN</span>
+                </button>
+              </a>
+              <a href="https://www.titanbattlegear.com/pages/team-sales-program#3d-prod-configurator-section">
+                <button
+                  class="button button--secondary button--fixed"
+                  type="button"
+                  is="hover-button"
+                  style="width: fit-content;"
+                >
+                  <span class="btn-fill" data-fill></span>
+                  <span class="btn-text">DESIGN CUSTOM BATTLEGEAR</span>
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </x-modal>
+
+  <style>
+    .titan-team-modal__exit-link {
+      position: absolute;
+      bottom: 18px;
+      right: 20px;
+      z-index: 2;
+      color: rgba(0, 0, 0, 0.62);
+      font-size: 13px;
+      line-height: 1.2;
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 140ms ease;
+    }
+
+    .titan-team-modal__exit-link:hover {
+      color: #000;
+    }
+
+    .titan-team-modal__subheading {
+      margin: 0 0 18px;
+      {% comment %} font-weight: 500; {% endcomment %}
+      {% comment %} letter-spacing: 0.02em; {% endcomment %}
+      {% comment %} text-transform: uppercase; {% endcomment %}
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .titan-team-modal__step#titan-step-3 {
+      align-items: center;
+    }
+    .titan-team-modal__step {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .titan-team-results {
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 10px;
+      max-height: 130px;
+      background: #fff;
+      position: relative;
+      padding-right: 16px;
+    }
+
+    .titan-team-results__list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      overflow-y: auto;
+      overflow-x: hidden;
+      max-height: 130px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .titan-team-results__list::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      display: none;
+    }
+
+    .titan-team-results__scrollbar {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      bottom: 6px;
+      width: 8px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 120ms ease;
+    }
+
+    .titan-team-results.is-scrollable .titan-team-results__scrollbar {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .titan-team-results__thumb {
+      position: absolute;
+      top: 0;
+      left: 1px;
+      width: 6px;
+      border-radius: 999px;
+      background: #9b9b9b;
+      color: transparent;
+      font-size: 1px;
+      min-height: 22px;
+      transition: height 120ms ease;
+    }
+
+    .titan-team-results.is-scrollable .titan-team-results__thumb {
+      background: #9b9b9b;
+    }
+
+    .titan-team-results__item {
+      padding: 10px 26px;
+      cursor: pointer;
+      line-height: 1.3;
+    }
+
+    .titan-team-results__item:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .titan-team-results__loader[hidden] {
+      display: none;
+    }
+    .titan-team-results__loader {
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .titan-team-results.is-loading .titan-team-results__list {
+      display: none;
+    }
+
+    .titan-team-results__empty[hidden] {
+      display: none;
+    }
+
+    .titan-team-results__empty {
+      padding: 14px 18px 16px;
+    }
+
+    .titan-team-results__empty-title {
+      margin: 0 0 4px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .titan-team-results__empty-text {
+      margin: 0 0 10px;
+      color: rgba(0, 0, 0, 0.68);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .titan-team-results__empty-link {
+      display: inline-flex;
+      align-items: center;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .titan-team-modal__checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      {% comment %} margin: 8px 0 24px; {% endcomment %}
+      font-size: 16px;
+      {% comment %} text-transform: uppercase; {% endcomment %}
+    }
+
+    .titan-team-modal__checkbox-row input {
+      width: 18px !important;
+      height: 18px !important;
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: 768px) {
+      .titan-team-modal__exit-link {
+        bottom: 24px;
+        right: 16px;
+        font-size: 12px;
+      }
+
+      .titan-team-modal__subheading {
+        font-size: 16px;
+      }
+
+      .titan-team-results__item {
+        font-size: var(--text-sm);
+      }
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var SEARCH_BASE_URL = 'https://titan-shopify-team-store-configurat.vercel.app';
+      var TEAM_STORE_ENDPOINT = SEARCH_BASE_URL + '/api/team-store';
+      var CUSTOMER_CREATE_URL = SEARCH_BASE_URL + '/api/customers/create';
+      var TEAM_STORAGE_KEY = 'titan_team_store_team';
+      var TEAM_FAST_PATH_KEY = 'titan_team_store_fast_path_once';
+      var TEAM_PUBLISHED_KEY = 'titan_team_store_published_team';
+      var TEAM_ACCESS_CACHE_KEY = 'titan_team_store_access';
+      var TEAM_DISCOUNT_SESSION_KEY = 'titan_team_store_discount_applied';
+      var TEAM_TITAN_BYPASS_KEY = 'titan_team_store_titan_email_bypass';
+      var currentUrl = new URL(window.location.href);
+      var hashValue = currentUrl.hash ? currentUrl.hash.replace(/^#/, '') : '';
+      var hashParams = new URLSearchParams(hashValue);
+      var teamFromHash = hashParams.get('team');
+      var currentTeamParam = currentUrl.searchParams.get('team');
+      var isTeamStoresBasePath =
+        currentUrl.pathname === '/pages/team-stores' ||
+        currentUrl.pathname === '/pages/team-store';
+
+      if (teamFromHash) {
+        try {
+          localStorage.setItem(TEAM_STORAGE_KEY, teamFromHash);
+        } catch (error) {
+          // no-op
+        }
+      }
+
+      if (currentTeamParam) {
+        try {
+          localStorage.setItem(TEAM_STORAGE_KEY, currentTeamParam);
+        } catch (error) {
+          // no-op
+        }
+      }
+
+      var storedTeamFromStorage = '';
+      var fastPathTeamFromStorage = '';
+      var publishedTeamFromStorage = '';
+      if (isTeamStoresBasePath) {
+        try {
+          storedTeamFromStorage = localStorage.getItem(TEAM_STORAGE_KEY) || '';
+          fastPathTeamFromStorage = localStorage.getItem(TEAM_FAST_PATH_KEY) || '';
+          publishedTeamFromStorage = localStorage.getItem(TEAM_PUBLISHED_KEY) || '';
+        } catch (error) {
+          storedTeamFromStorage = '';
+          fastPathTeamFromStorage = '';
+          publishedTeamFromStorage = '';
+        }
+      }
+
+      var searchInput = document.getElementById('titan-team-search');
+      var resultsPanel = document.getElementById('titan-team-results-panel');
+      var resultsList = document.getElementById('titan-team-results-list');
+      var noResults = document.getElementById('titan-team-no-results');
+      var resultsScrollbar = resultsPanel ? resultsPanel.querySelector('.titan-team-results__scrollbar') : null;
+      var resultsThumb = resultsPanel ? resultsPanel.querySelector('.titan-team-results__thumb') : null;
+      var loader = document.getElementById('Loader-{{ section.id }}-team-search');
+      var nextButton = document.getElementById('titan-next-btn');
+      var stepOne = document.getElementById('titan-step-1');
+      var stepTwo = document.getElementById('titan-step-2');
+      var stepThree = document.getElementById('titan-step-3');
+      var emailInput = document.getElementById('titan-email-input');
+      var phoneInput = document.getElementById('titan-phone-input');
+      var marketingConsentInput = document.getElementById('titan-marketing-consent');
+      var title = document.getElementById('titan-modal-title');
+      var subtitle = document.getElementById('titan-modal-subtitle');
+      var teamModal = document.getElementById('warningMsg');
+      var selectedTeam = '';
+      var selectedHandle = '';
+      var hasSelectedTeam = false;
+      var fetchDebounceTimer = null;
+      var fetchController = null;
+      var teamHandleByName = {};
+
+      function isTeamModalVisible() {
+        return !!(
+          teamModal &&
+          teamModal.hasAttribute('active') &&
+          !teamModal.hasAttribute('hidden') &&
+          teamModal.style.display !== 'none'
+        );
+      }
+
+      function lockBodyScrollForTeamModal() {
+        if (document.body.dataset.titanTeamModalScrollLocked === 'true') {
+          return;
+        }
+
+        var scrollY = window.scrollY || window.pageYOffset || 0;
+        document.body.dataset.titanTeamModalScrollLocked = 'true';
+        document.body.dataset.titanTeamModalScrollY = String(scrollY);
+        document.body.dataset.titanTeamModalPreviousPosition = document.body.style.position || '';
+        document.body.dataset.titanTeamModalPreviousTop = document.body.style.top || '';
+        document.body.dataset.titanTeamModalPreviousWidth = document.body.style.width || '';
+        document.body.dataset.titanTeamModalPreviousOverflow = document.body.style.overflow || '';
+        document.documentElement.dataset.titanTeamModalPreviousOverflow = document.documentElement.style.overflow || '';
+
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.top = '-' + scrollY + 'px';
+        document.body.style.width = '100%';
+      }
+
+      function unlockBodyScrollForTeamModal() {
+        if (document.body.dataset.titanTeamModalScrollLocked !== 'true') {
+          return;
+        }
+
+        var scrollY = parseInt(document.body.dataset.titanTeamModalScrollY || '0', 10);
+        document.documentElement.style.overflow = document.documentElement.dataset.titanTeamModalPreviousOverflow || '';
+        document.body.style.overflow = document.body.dataset.titanTeamModalPreviousOverflow || '';
+        document.body.style.position = document.body.dataset.titanTeamModalPreviousPosition || '';
+        document.body.style.top = document.body.dataset.titanTeamModalPreviousTop || '';
+        document.body.style.width = document.body.dataset.titanTeamModalPreviousWidth || '';
+
+        delete document.documentElement.dataset.titanTeamModalPreviousOverflow;
+        delete document.body.dataset.titanTeamModalScrollLocked;
+        delete document.body.dataset.titanTeamModalScrollY;
+        delete document.body.dataset.titanTeamModalPreviousPosition;
+        delete document.body.dataset.titanTeamModalPreviousTop;
+        delete document.body.dataset.titanTeamModalPreviousWidth;
+        delete document.body.dataset.titanTeamModalPreviousOverflow;
+
+        window.scrollTo(0, Number.isNaN(scrollY) ? 0 : scrollY);
+      }
+
+      function syncTeamModalScrollLock() {
+        if (isTeamModalVisible()) {
+          lockBodyScrollForTeamModal();
+          return;
+        }
+
+        unlockBodyScrollForTeamModal();
+      }
+
+      syncTeamModalScrollLock();
+
+      if (teamModal && window.MutationObserver) {
+        var teamModalObserver = new MutationObserver(syncTeamModalScrollLock);
+        teamModalObserver.observe(teamModal, {
+          attributes: true,
+          attributeFilter: ['active', 'hidden', 'style', 'class']
+        });
+      }
+
+      window.addEventListener('pagehide', unlockBodyScrollForTeamModal);
+
+      if (!searchInput || !resultsPanel || !resultsList || !noResults || !loader || !nextButton || !stepOne || !stepTwo || !stepThree || !emailInput || !phoneInput || !marketingConsentInput || !title || !subtitle) {
+        return;
+      }
+
+      if (storedTeamFromStorage) {
+        title.textContent = formatTeamNameFromParam(storedTeamFromStorage) + ' TEAM STORE';
+        subtitle.textContent = 'Verifying Team store...';
+        stepOne.style.display = 'none';
+        stepTwo.style.display = 'none';
+        stepThree.style.display = 'none';
+      } else {
+        stepOne.style.display = 'flex';
+        stepTwo.style.display = 'none';
+        stepThree.style.display = 'none';
+      }
+      nextButton.disabled = true;
+
+      function updateNextState() {
+        nextButton.disabled = !hasSelectedTeam;
+      }
+
+      function slugify(value) {
+        return value
+          .toLowerCase()
+          .trim()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+      }
+
+      function formatTeamNameFromParam(value) {
+        return String(value || '')
+          .replace(/[-_]+/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim()
+          .toUpperCase();
+      }
+
+      function resetOptions() {
+        resultsList.innerHTML = '';
+        noResults.hidden = true;
+        resultsPanel.style.display = 'none';
+        resultsPanel.classList.remove('is-loading');
+        resultsPanel.classList.remove('is-scrollable');
+        loader.hidden = true;
+        teamHandleByName = {};
+      }
+
+      function updateResultsScrollbar() {
+        if (!resultsScrollbar || !resultsThumb) {
+          return;
+        }
+
+        var trackHeight = resultsScrollbar.clientHeight;
+        var scrollHeight = resultsList.scrollHeight;
+        var clientHeight = resultsList.clientHeight;
+        var canScroll = scrollHeight > clientHeight + 1;
+        var thumbHeight = trackHeight;
+        var thumbTop = 0;
+
+        resultsPanel.classList.toggle('is-scrollable', canScroll);
+
+        if (canScroll && trackHeight > 0) {
+          thumbHeight = Math.max((clientHeight / scrollHeight) * trackHeight, 22);
+          thumbHeight = Math.min(thumbHeight, trackHeight);
+          var maxThumbTop = Math.max(trackHeight - thumbHeight, 0);
+          var maxScrollTop = Math.max(scrollHeight - clientHeight, 1);
+          thumbTop = (resultsList.scrollTop / maxScrollTop) * maxThumbTop;
+        }
+
+        resultsThumb.style.height = thumbHeight + 'px';
+        resultsThumb.style.transform = 'translateY(' + thumbTop + 'px)';
+      }
+
+      function setLoading(isLoading) {
+        loader.hidden = !isLoading;
+        if (isLoading) {
+          noResults.hidden = true;
+          resultsPanel.style.display = 'block';
+          resultsPanel.classList.add('is-loading');
+          requestAnimationFrame(updateResultsScrollbar);
+          return;
+        }
+        resultsPanel.classList.remove('is-loading');
+        requestAnimationFrame(updateResultsScrollbar);
+      }
+
+      function showNoResults() {
+        resultsPanel.style.display = 'block';
+        noResults.hidden = false;
+        resultsPanel.classList.remove('is-scrollable');
+        requestAnimationFrame(updateResultsScrollbar);
+      }
+
+      function renderOptions(items) {
+        resetOptions();
+        items.forEach(function (item) {
+          if (!item || !item.teamName) {
+            return;
+          }
+          var listItem = document.createElement('li');
+          listItem.className = 'titan-team-results__item';
+          listItem.textContent = item.teamName;
+          listItem.dataset.teamName = item.teamName;
+          if (item.handle) {
+            listItem.dataset.teamHandle = item.handle;
+          }
+          listItem.addEventListener('click', function () {
+            searchInput.value = item.teamName;
+            selectedTeam = item.teamName;
+            selectedHandle = item.handle || '';
+            hasSelectedTeam = true;
+            updateNextState();
+            resultsPanel.style.display = 'none';
+          });
+          resultsList.appendChild(listItem);
+          if (item.handle) {
+            teamHandleByName[item.teamName.toLowerCase()] = item.handle;
+          }
+        });
+        if (resultsList.children.length > 0) {
+          resultsPanel.style.display = 'block';
+        } else {
+          showNoResults();
+        }
+        requestAnimationFrame(updateResultsScrollbar);
+      }
+
+      function fetchTeams(query) {
+        if (fetchController) {
+          fetchController.abort();
+        }
+
+        if (!query || query.length < 2) {
+          resetOptions();
+          selectedHandle = '';
+          setLoading(false);
+          return;
+        }
+
+        setLoading(true);
+        fetchController = new AbortController();
+        fetch(SEARCH_BASE_URL + '/api/team-stores/search?q=' + encodeURIComponent(query), {
+          method: 'GET',
+          signal: fetchController.signal
+        })
+          .then(function (response) {
+            if (!response.ok) {
+              throw new Error('Search failed');
+            }
+            return response.json();
+          })
+          .then(function (data) {
+            var items = data && Array.isArray(data.items) ? data.items : [];
+            renderOptions(items);
+            selectedHandle = teamHandleByName[searchInput.value.trim().toLowerCase()] || '';
+            setLoading(false);
+          })
+          .catch(function (error) {
+            if (error && error.name === 'AbortError') {
+              return;
+            }
+            resetOptions();
+          })
+          .finally(function () {
+            setLoading(false);
+          });
+      }
+
+      function findSelectedTeamRecord(items) {
+        if (!Array.isArray(items)) {
+          return null;
+        }
+        var normalizedSelectedTeam = (selectedTeam || '').toLowerCase().trim();
+        var normalizedSelectedHandle = (selectedHandle || '').toLowerCase().trim();
+
+        for (var i = 0; i < items.length; i += 1) {
+          var item = items[i];
+          if (!item) {
+            continue;
+          }
+          var itemName = (item.teamName || '').toLowerCase().trim();
+          var itemHandle = (item.handle || '').toLowerCase().trim();
+          if (
+            (normalizedSelectedHandle && itemHandle && itemHandle === normalizedSelectedHandle) ||
+            (normalizedSelectedTeam && itemName && itemName === normalizedSelectedTeam)
+          ) {
+            return item;
+          }
+        }
+        return null;
+      }
+
+      function getTeamStoreId(selectedRecord) {
+        if (!selectedRecord || typeof selectedRecord !== 'object') return '';
+        return (
+          selectedRecord.teamStoreId ||
+          selectedRecord.team_store_id ||
+          selectedRecord.teamStoreID ||
+          selectedRecord.id ||
+          ''
+        );
+      }
+
+      async function syncCustomerToBackend(teamStoreId) {
+        if (!teamStoreId) return;
+
+        var derivedStoreName = "TSC_" + (selectedHandle || '')
+          .replace(/-/g, ' ')
+          .trim() || (selectedTeam || '').trim();
+
+        var payload = {
+          teamStoreId: teamStoreId,
+          storeName: derivedStoreName,
+          teamName: selectedTeam,           // NEW
+          teamHandle: selectedHandle,       // NEW
+          email: (emailInput.value || '').trim(),
+          phone: (phoneInput.value || '').trim(),
+          marketingConsent: !!marketingConsentInput.checked
+        };
+
+        if (!payload.email) return;
+
+        try {
+          var customerRes = await fetch(CUSTOMER_CREATE_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          var customerData = await customerRes.json().catch(function () { return {}; });
+          if (!customerRes.ok || !customerData.ok) {
+            console.warn('[Team Store] Customer sync failed:', customerData && customerData.message ? customerData.message : 'Unknown error');
+          }
+        } catch (error) {
+          console.warn('[Team Store] Customer sync request failed:', error);
+        }
+      }
+
+      function showStepThree() {
+        if (teamModal) {
+          teamModal.setAttribute('active', '');
+          teamModal.style.display = '';
+        }
+        syncTeamModalScrollLock();
+        stepTwo.style.display = 'none';
+        stepOne.style.display = 'none';
+        stepThree.style.display = 'flex';
+        subtitle.innerHTML = 'Your Team Ordering Window Is Not Active - Please Contact Your Team Admin Or Manager To Request Order Window Dates';
+      }
+
+      function parseOrderWindowDate(value, isEndDate) {
+        if (!value) return null;
+
+        var rawValue = String(value).trim();
+        var dateOnlyMatch = rawValue.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+        if (dateOnlyMatch) {
+          var year = Number(dateOnlyMatch[1]);
+          var month = Number(dateOnlyMatch[2]) - 1;
+          var day = Number(dateOnlyMatch[3]);
+          return isEndDate
+            ? new Date(year, month, day, 23, 59, 59, 999)
+            : new Date(year, month, day, 0, 0, 0, 0);
+        }
+
+        var parsedDate = new Date(rawValue);
+        return Number.isNaN(parsedDate.getTime()) ? null : parsedDate;
+      }
+
+      function isTodayWithinOrderWindow(teamData) {
+        if (!teamData || typeof teamData !== 'object') return false;
+
+        var startDate = parseOrderWindowDate(teamData.orderWindowStart, false);
+        var endDate = parseOrderWindowDate(teamData.orderWindowEnd, true);
+        if (!startDate || !endDate) return false;
+
+        var now = new Date();
+        return now >= startDate && now <= endDate;
+      }
+
+      function isTitanEmail(email) {
+        if (!email) return false;
+        return String(email).trim().toLowerCase().endsWith('@titanbattlegear.com');
+      }
+
+      function hasStoredTitanBypass(teamParam) {
+        if (!teamParam) return false;
+        try {
+          return sessionStorage.getItem(TEAM_TITAN_BYPASS_KEY) === teamParam;
+        } catch (error) {
+          return false;
+        }
+      }
+
+      function storeTitanBypass(teamParam) {
+        if (!teamParam) return;
+        try {
+          sessionStorage.setItem(TEAM_TITAN_BYPASS_KEY, teamParam);
+        } catch (error) {
+          // no-op
+        }
+      }
+
+      function getCachedTeamAccess(teamParam) {
+        if (!teamParam) return null;
+
+        try {
+          var rawCache = localStorage.getItem(TEAM_ACCESS_CACHE_KEY);
+          if (!rawCache) return null;
+
+          var cachedAccess = JSON.parse(rawCache);
+          if (!cachedAccess || cachedAccess.team !== teamParam) return null;
+          if (!cachedAccess.titanBypass && !isTodayWithinOrderWindow(cachedAccess)) return null;
+
+          return cachedAccess;
+        } catch (error) {
+          return null;
+        }
+      }
+
+      function cacheTeamAccess(teamParam, teamData) {
+        if (!teamParam || !teamData) return;
+
+        try {
+          var titanBypass = hasStoredTitanBypass(teamParam);
+          localStorage.setItem(
+            TEAM_ACCESS_CACHE_KEY,
+            JSON.stringify({
+              team: teamParam,
+              orderWindowStart: teamData.orderWindowStart,
+              orderWindowEnd: teamData.orderWindowEnd,
+              discountCode: teamData.discountCode || '',
+              titanBypass: titanBypass,
+              verifiedAt: Date.now()
+            })
+          );
+        } catch (error) {
+          // no-op
+        }
+      }
+
+      function clearTeamAccessCacheIfMatches(teamParam) {
+        if (!teamParam) return;
+
+        try {
+          var rawCache = localStorage.getItem(TEAM_ACCESS_CACHE_KEY);
+          if (!rawCache) return;
+
+          var cachedAccess = JSON.parse(rawCache);
+          if (cachedAccess && cachedAccess.team === teamParam) {
+            localStorage.removeItem(TEAM_ACCESS_CACHE_KEY);
+          }
+        } catch (error) {
+          // no-op
+        }
+      }
+
+      function persistTeamLocally(teamParam) {
+        if (!teamParam) return;
+        try {
+          localStorage.setItem(TEAM_STORAGE_KEY, teamParam);
+        } catch (error) {
+          // no-op
+        }
+      }
+
+      function markTeamPublished(teamParam) {
+        if (!teamParam) return;
+        try {
+          localStorage.setItem(TEAM_PUBLISHED_KEY, teamParam);
+        } catch (error) {
+          // no-op
+        }
+      }
+
+      function clearPublishedFlagIfMatches(teamParam) {
+        if (!teamParam) return;
+        try {
+          var currentPublishedTeam = localStorage.getItem(TEAM_PUBLISHED_KEY) || '';
+          if (currentPublishedTeam === teamParam) {
+            localStorage.removeItem(TEAM_PUBLISHED_KEY);
+          }
+        } catch (error) {
+          // no-op
+        }
+      }
+
+      function clearTeamAccessIfMatches(teamParam) {
+        clearPublishedFlagIfMatches(teamParam);
+        clearTeamAccessCacheIfMatches(teamParam);
+      }
+
+      function getDiscountSessionValue(teamParam, discountCode) {
+        return teamParam + '|' + discountCode;
+      }
+
+      function wasDiscountAppliedThisSession(teamParam, discountCode) {
+        if (!teamParam || !discountCode) return false;
+
+        try {
+          return sessionStorage.getItem(TEAM_DISCOUNT_SESSION_KEY) === getDiscountSessionValue(teamParam, discountCode);
+        } catch (error) {
+          return false;
+        }
+      }
+
+      function routeThroughDiscount(teamParam, discountCode) {
+        if (!teamParam || !discountCode) return false;
+
+        try {
+          sessionStorage.setItem(TEAM_DISCOUNT_SESSION_KEY, getDiscountSessionValue(teamParam, discountCode));
+        } catch (error) {
+          // no-op
+        }
+
+        var redirectTarget = '/pages/team-store';
+        var discountUrl = '/discount/' + encodeURIComponent(discountCode) + '?redirect=' + encodeURIComponent(redirectTarget);
+        window.location.href = discountUrl;
+        return true;
+      }
+
+      function openVerifiedTeamStore(teamParam, teamData) {
+        if (!teamParam) return false;
+
+        var discountCode = (teamData && teamData.discountCode) || '';
+
+        persistTeamLocally(teamParam);
+        markTeamPublished(teamParam);
+
+        if (discountCode && !wasDiscountAppliedThisSession(teamParam, discountCode)) {
+          routeThroughDiscount(teamParam, discountCode);
+          return true;
+        }
+
+        if (isTeamStoresBasePath && !teamFromHash) {
+          currentUrl.hash = 'team=' + encodeURIComponent(teamParam);
+          window.history.replaceState({}, '', currentUrl.toString());
+        }
+
+        try {
+          localStorage.removeItem(TEAM_FAST_PATH_KEY);
+        } catch (error) {
+          // no-op
+        }
+
+        if (teamModal) {
+          teamModal.removeAttribute('active');
+          teamModal.style.display = 'none';
+        }
+        syncTeamModalScrollLock();
+        return false;
+      }
+
+      async function verifyTeamStoreAccess(teamParam, logContext, submittedEmail) {
+        if (!teamParam) return null;
+
+        try {
+          var verifyResponse = await fetch(
+            TEAM_STORE_ENDPOINT + '?team=' + encodeURIComponent(teamParam) + '&format=json',
+            { method: 'GET', headers: { Accept: 'application/json' } }
+          );
+
+          if (!verifyResponse.ok) {
+            console.log('[Team Store Modal] ' + logContext + ' verify failed (HTTP):', verifyResponse.status);
+            return null;
+          }
+
+          var verifyData = await verifyResponse.json();
+          if (!verifyData || !verifyData.team) {
+            console.log('[Team Store Modal] ' + logContext + ' verify failed (missing team object)');
+            return null;
+          }
+
+          var isInsideWindow = isTodayWithinOrderWindow(verifyData.team);
+          var hasTitanBypass = isTitanEmail(submittedEmail) || hasStoredTitanBypass(teamParam);
+          if (isTitanEmail(submittedEmail)) {
+            storeTitanBypass(teamParam);
+            hasTitanBypass = true;
+          }
+          if (!isInsideWindow && !hasTitanBypass) {
+            console.log('[Team Store Modal] ' + logContext + ' verify failed (outside order window):', {
+              orderWindowStart: verifyData.team.orderWindowStart,
+              orderWindowEnd: verifyData.team.orderWindowEnd
+            });
+            return null;
+          }
+
+          cacheTeamAccess(teamParam, verifyData.team);
+          return verifyData.team;
+        } catch (error) {
+          console.log('[Team Store Modal] ' + logContext + ' verify request error:', error);
+          return null;
+        }
+      }
+
+      async function resolveStoredTeamOnBasePage() {
+        if (!isTeamStoresBasePath || !storedTeamFromStorage) return;
+
+        var cachedAccess = getCachedTeamAccess(storedTeamFromStorage);
+        if (cachedAccess) {
+          console.log('[Team Store Modal] Cached team access found. Hiding modal immediately.');
+          if (openVerifiedTeamStore(storedTeamFromStorage, cachedAccess)) {
+            return;
+          }
+        }
+
+        if (teamFromHash && teamFromHash === storedTeamFromStorage) {
+          console.log('[Team Store Modal] Hash team check start.');
+          var hashTeamData = await verifyTeamStoreAccess(storedTeamFromStorage, 'Hash team');
+          if (!hashTeamData) {
+            clearTeamAccessIfMatches(storedTeamFromStorage);
+            showStepThree();
+            return;
+          }
+
+          console.log('[Team Store Modal] Hash team verified within order window.');
+          openVerifiedTeamStore(storedTeamFromStorage, hashTeamData);
+          return;
+        }
+
+        if (
+          (fastPathTeamFromStorage && fastPathTeamFromStorage === storedTeamFromStorage) ||
+          (publishedTeamFromStorage && publishedTeamFromStorage === storedTeamFromStorage)
+        ) {
+          console.log('[Team Store Modal] Fast-path check start for stored published team.');
+          var fastPathTeamData = await verifyTeamStoreAccess(storedTeamFromStorage, 'Fast-path team');
+          if (!fastPathTeamData) {
+            try {
+              localStorage.removeItem(TEAM_FAST_PATH_KEY);
+            } catch (error) {
+              // no-op
+            }
+            clearTeamAccessIfMatches(storedTeamFromStorage);
+            showStepThree();
+            return;
+          }
+
+          console.log('[Team Store Modal] Fast-path verified within order window.');
+          openVerifiedTeamStore(storedTeamFromStorage, fastPathTeamData);
+          return;
+        }
+
+        selectedHandle = storedTeamFromStorage;
+        selectedTeam = storedTeamFromStorage.replace(/-/g, ' ');
+        title.textContent = selectedTeam + ' TITAN STORE';
+        console.log('[Team Store Modal] Stored team check start:', {
+          storedTeamFromStorage: storedTeamFromStorage,
+          selectedTeam: selectedTeam
+        });
+
+        try {
+          var storedStatusResponse = await fetch(
+            SEARCH_BASE_URL + '/api/team-stores/search?q=' + encodeURIComponent(selectedTeam),
+            { method: 'GET' }
+          );
+          if (!storedStatusResponse.ok) {
+            console.log('[Team Store Modal] Stored team status request failed:', storedStatusResponse.status);
+            showStepThree();
+            return;
+          }
+
+          var storedStatusData = await storedStatusResponse.json();
+          var storedRecord = findSelectedTeamRecord(storedStatusData && storedStatusData.items);
+          var storedStatus = storedRecord && storedRecord.status ? String(storedRecord.status).toUpperCase() : '';
+          console.log('[Team Store Modal] Stored team status result:', {
+            status: storedStatus,
+            handle: storedRecord && storedRecord.handle ? storedRecord.handle : null
+          });
+
+          if (storedStatus === 'PUBLISHED') {
+            if (storedRecord && storedRecord.handle) {
+              selectedHandle = storedRecord.handle;
+            }
+            var teamParamToVerify = selectedHandle || storedTeamFromStorage;
+
+            var storedTeamData = await verifyTeamStoreAccess(teamParamToVerify, 'Stored team');
+            if (!storedTeamData) {
+              clearTeamAccessIfMatches(teamParamToVerify);
+              showStepThree();
+              return;
+            }
+
+            console.log('[Team Store Modal] Stored team verified published + available. Redirecting to hash team.');
+            openVerifiedTeamStore(teamParamToVerify, storedTeamData);
+            return;
+          }
+
+          console.log('[Team Store Modal] Stored team not published. Showing step 3.');
+          clearTeamAccessIfMatches(storedTeamFromStorage);
+          showStepThree();
+        } catch (error) {
+          clearTeamAccessIfMatches(storedTeamFromStorage);
+          console.log('[Team Store Modal] Stored team status request error:', error);
+          showStepThree();
+        }
+      }
+
+      searchInput.addEventListener('input', function () {
+        var query = searchInput.value.trim();
+        selectedTeam = '';
+        selectedHandle = '';
+        hasSelectedTeam = false;
+        updateNextState();
+        noResults.hidden = true;
+        if (resultsList.children.length === 0) {
+          resultsPanel.style.display = 'none';
+        }
+
+        if (fetchDebounceTimer) {
+          clearTimeout(fetchDebounceTimer);
+        }
+        fetchDebounceTimer = setTimeout(function () {
+          fetchTeams(query);
+        }, 250);
+      });
+
+      resultsList.addEventListener('scroll', updateResultsScrollbar);
+      window.addEventListener('resize', updateResultsScrollbar);
+
+      document.addEventListener('click', function (event) {
+        if (!resultsPanel.contains(event.target) && event.target !== searchInput) {
+          resultsPanel.style.display = 'none';
+        }
+      });
+
+      nextButton.addEventListener('click', function () {
+        if (!hasSelectedTeam || !selectedTeam) {
+          searchInput.focus();
+          return;
+        }
+
+        selectedHandle = teamHandleByName[selectedTeam.toLowerCase()] || selectedHandle;
+
+        stepOne.style.display = 'none';
+        stepTwo.style.display = 'flex';
+        stepThree.style.display = 'none';
+        title.textContent = selectedTeam + ' TITAN STORE';
+        subtitle.textContent = 'Please Enter Your Info to Continue';
+      });
+
+      resolveStoredTeamOnBasePage();
+
+      stepTwo.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        if (!selectedTeam) {
+          selectedTeam = searchInput.value.trim();
+        }
+        if (!selectedTeam) {
+          return;
+        }
+
+        try {
+          var statusResponse = await fetch(
+            SEARCH_BASE_URL + '/api/team-stores/search?q=' + encodeURIComponent(selectedTeam),
+            { method: 'GET' }
+          );
+          if (!statusResponse.ok) {
+            showStepThree();
+            return;
+          }
+
+          var statusData = await statusResponse.json();
+          var selectedRecord = findSelectedTeamRecord(statusData && statusData.items);
+          var selectedStatus = selectedRecord && selectedRecord.status ? String(selectedRecord.status).toUpperCase() : '';
+          var teamStoreId = getTeamStoreId(selectedRecord);
+          await syncCustomerToBackend(teamStoreId);
+
+          if (selectedStatus === 'PUBLISHED') {
+            if (selectedRecord && selectedRecord.handle) {
+              selectedHandle = selectedRecord.handle;
+            }
+            var teamParamToSave = selectedHandle || slugify(selectedTeam);
+            var selectedTeamData = await verifyTeamStoreAccess(
+              teamParamToSave,
+              'Selected team',
+              emailInput.value
+            );
+            if (!selectedTeamData) {
+              persistTeamLocally(teamParamToSave);
+              clearTeamAccessIfMatches(teamParamToSave);
+              showStepThree();
+              return;
+            }
+
+            persistTeamLocally(teamParamToSave);
+            markTeamPublished(teamParamToSave);
+            try {
+              localStorage.setItem(TEAM_FAST_PATH_KEY, teamParamToSave);
+            } catch (error) {
+              // no-op
+            }
+            openVerifiedTeamStore(teamParamToSave, selectedTeamData);
+            return;
+          }
+
+          persistTeamLocally(selectedHandle || slugify(selectedTeam));
+          clearTeamAccessIfMatches(selectedHandle || slugify(selectedTeam));
+          showStepThree();
+        } catch (error) {
+          persistTeamLocally(selectedHandle || slugify(selectedTeam));
+          clearTeamAccessIfMatches(selectedHandle || slugify(selectedTeam));
+          showStepThree();
+        }
+      });
+    });
+  </script>
+{% endif %}
+
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__heading.content"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-xl tracking-heading",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.global.settings.heading_alignment.label",
+      "options": [
+        {
+          "value": "text-left",
+          "label": "t:sections.global.settings.heading_alignment.options__1.label"
+        },
+        {
+          "value": "text-center",
+          "label": "t:sections.global.settings.heading_alignment.options__2.label"
+        },
+        {
+          "value": "text-right",
+          "label": "t:sections.global.settings.heading_alignment.options__3.label"
+        }
+      ],
+      "default": "text-left"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "options": [
+        {
+          "value": "text-sm",
+          "label": "t:sections.global.settings.text_size.options__1.label"
+        },
+        {
+          "value": "text-base",
+          "label": "t:sections.global.settings.text_size.options__2.label"
+        },
+        {
+          "value": "text-lg md:text-2xl",
+          "label": "t:sections.global.settings.text_size.options__3.label"
+        },
+        {
+          "value": "subtext-xl",
+          "label": "t:sections.global.settings.text_size.options__4.label"
+        }
+      ],
+      "default": "text-base",
+      "label": "t:sections.global.settings.text_size.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "narrow",
+      "label": "t:sections.global.settings.narrow.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ]
+}
+{% endschema %}

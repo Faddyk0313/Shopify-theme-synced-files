@@ -1,0 +1,504 @@
+{%- doc -%}
+  Renders a product recommendations carousel using Shopify's complementary products API.
+
+  Displays related products in a horizontal scrollable carousel with navigation controls. Automatically fetches recommendations based on the current product and displays them in a responsive grid that becomes swipeable on mobile devices.
+
+  @param {number} limit - Maximum products to display (1-10 recommended)
+  @param {string} heading - Section title text
+  @param {string} product_id - Source product ID for recommendations
+  @param {string} section_id - Unique section identifier
+  @param {string} [image_ratio] - Card image aspect ratio ('square', 'landscape', 'portrait')
+  @param {boolean} [image_fill] - Crop images to fill container
+  @param {boolean} [show_vendor] - Display product vendors
+  @param {boolean} [show_price] - Show product pricing
+  @param {object} [recommendations] - Pre-loaded recommendations object
+  @param {object} [recommendations_products] - Override product collection
+
+  @example
+  {% render 'product-complementary',
+     limit: 4,
+     heading: 'You may also like',
+     product_id: product.id,
+     section_id: section.id
+  %}
+{%- enddoc -%}
+
+
+{% comment %} TBG CUSTOM CODE {% endcomment %}
+
+{% if cartPage == true %}
+    <style>
+    
+    
+    button.cusaddToCart.button.button--primary {
+        background: white !important;
+        padding: 0 !important;
+        height: 30px;
+        width: 30px;
+    }
+    
+    @media(min-width: 1024px ) {
+      .govxPage button.cusaddToCart.button.button--primary {
+        height: 45px;
+        width: 45px;
+      }
+      .govxPage button.cusaddToCart.button.button--primary .btn-text .icon {
+        height: 1.5rem;
+        width: 1.5rem;
+      }
+
+    }
+    
+    button.cusaddToCart.button.button--primary .btn-text {
+        color: black;
+    }
+    
+    button.cusaddToCart.button.button--primary .btn-fill {
+        background: linear-gradient(54deg, #72ffb3 14%, #fffa63 85%) !important;
+    }
+    
+    button.cusaddToCart.button.button--primary:hover .btn-text {
+        background: transparent;
+        -webkit-text-fill-color: white;
+        -webkit-background-clip: border-box;
+    }
+    .cusaddToCart.button:after {
+        content: none;
+    }
+    .mobile.complementary-products .horizontal-product {
+        border: none;
+    }
+    .horizontal-product__quick-add form {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+    }
+    .horizontal-product .price {
+        align-items: flex-start !important;
+    }
+    .desktop .custom.recommend__title{
+        border-block-end: 0;
+        padding-block-end: 0;
+    }
+    {% if cartDrawer %} 
+      .cartDrawerEL .recommend__title {
+          color: white;
+      }
+      .complementary-products {
+        max-width: 300px;
+        min-width: 100%;
+      }
+      @media (min-width: 1024px) {
+        .cartDrawerEL .horizontal-products .horizontal-product {
+          padding-inline: 0 !important;
+        }
+      }
+      @media (max-width: 786px) {
+        .complementary-products .horizontal-product__media {
+          min-width: 100px !important;
+          max-width: 100px !important;
+        }
+      }
+    {% else %}
+      .complementary-products {
+        max-width: 400px;
+        min-width: 100%;
+      }
+      @media (max-width:1024px){
+        .cus-quickAddselect {
+            height: 30px !important;
+        }
+        .recommend__title {
+            color: white;
+        }
+      }
+    {% endif %}
+    .horizontal-product__title {
+        font-family: 'Armourxbd';
+    }
+    .recommend__title {
+        font-family: 'Armourxbd';
+        text-transform: uppercase;
+        font-size: 1.4rem;
+        margin: 0;
+    }
+    .mobile.complementary-products {
+        background-color: black;
+        padding-block: 1.5rem !important;
+    }
+    .govxPage.mobile.complementary-products {
+        padding-block: 0px !important;
+    }
+    .complementary-products__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+    }
+    .govxPage .complementary-products__header  {
+      position: absolute;
+      right: 0px;
+      top: -10px;
+    }
+    .complementary-products__controls {
+        display: flex;
+    }
+    .mobile .complementary-products__controls button svg {
+        fill: #fff !important;
+    }
+    .desktop .complementary-products__controls button svg {
+        fill: #000 !important;
+    }
+    #CartDrawer .complementary-products__controls button svg {
+      height: 25px;
+      width: 25px;
+    }
+    .complementary-products__controls button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        font-weight: 600;
+        padding: 0;
+        cursor: pointer;
+    }
+    .complementary-products__controls button:disabled {
+        opacity: 0.35;
+        cursor: default;
+    }
+    .complementary-products .horizontal-products {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 1.5rem;
+        justify-content: flex-start;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        touch-action: pan-x;
+    }
+    .complementary-products .horizontal-products::-webkit-scrollbar {
+        display: none;
+    }
+    .complementary-products .horizontal-product {
+        color: #fff;
+        border-radius: var(--rounded-button);
+        padding: 1rem !important;
+        min-width: 100%;
+        height: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        flex: 0 0 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+    }
+    .desktop.complementary-products .horizontal-product {
+        background: #000;
+    }
+    .mobile.complementary-products .horizontal-product {
+        background: transparent;
+    }
+    .complementary-products .horizontal-product__media {
+      border-radius: var(--rounded-button);
+      min-width: 150px;
+      max-width: 150px;
+      flex-grow: 1;
+    }
+    .govxPage.complementary-products .horizontal-product__media {
+      min-width: 140px !important;
+      max-width: 140px !important;
+    }
+    @media (min-width: 1024px) {
+      .govxPage.complementary-products .horizontal-product__media {
+        min-width: 250px !important;
+        max-width: 250px !important;
+      }
+    
+    }
+
+    .complementary-products .horizontal-product__media img,
+    .complementary-products .horizontal-product__media picture {
+        width: 100%;
+        height: auto;
+    }
+    .complementary-products .horizontal-product__header {
+        color: #fff;
+    }
+    .complementary-products .horizontal-product__details {
+        padding: 0 0 0 6px;
+    }
+    .complementary-products .horizontal-product__title {
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 0.05em;
+      color: #fff;
+    }
+    @media (min-width: 1325px) {
+      .govxPage.complementary-products .horizontal-product__title {
+        font-size: 25px;
+      }
+    }
+    
+    .complementary-products .horizontal-product__price-group {
+        margin-bottom: 6px
+    }
+
+    .complementary-products .horizontal-product__price-group .customPriceEl,
+    .complementary-products .horizontal-product__price-group .cusPrice,
+    .complementary-products .horizontal-product__price-group .price__regular {
+        color: #fff !important;
+        font-family: 'Armourxbd';
+        font-size: 18px;
+
+    }
+    .complementary-products .horizontal-product__quick-add-row {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 1rem;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    .complementary-products .horizontal-product__size-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+    }
+    .complementary-products .horizontal-product__size-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: white
+    }
+    @media (min-width: 1325px) {
+      .govxPage.complementary-products .horizontal-product__size-label {
+        font-size: 18px;
+      }
+    }
+    .complementary-products .horizontal-product__size-field {
+        position: relative;
+        min-width: fit-content;
+    }
+    .complementary-products .horizontal-product__size-field .select {
+        width: 100%;
+        height: 30px;
+        background: white;
+        color: #000;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 400;
+        {% comment %} font-family: 'Armourxbd'; {% endcomment %}
+        padding: 0.1rem 0.5rem;
+        padding-right: 1.5rem;
+        border: none;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+    @media (min-width: 1325px) {
+      .govxPage.complementary-products .horizontal-product__size-field .select {
+          height: 40px !important;
+          font-size: 18px;
+      }
+    }
+    .complementary-products .horizontal-product__size-field .select:focus {
+        outline: 2px solid #fff;
+        outline-offset: 2px;
+    }
+    .complementary-products .horizontal-product__dropdown-icon {
+        position: absolute;
+        top: 50%;
+        right: 0.4rem;
+        transform: translateY(-50%);
+        pointer-events: none;
+    }
+    .complementary-products .horizontal-product__dropdown-icon svg {
+        stroke: #000;
+        width: 16px;
+        height: 16px;
+    }
+    .complementary-products .horizontal-product__quick-add .cusaddToCart {
+        width: 48px;
+        height: 48px;
+    }
+    .complementary-products .horizontal-product__quick-add .btn-fill {
+        display: none;
+    }
+    .complementary-products .horizontal-product__quick-add .btn-text {
+        font-size: 1.25rem;
+        color: inherit;
+    }
+    .complementary-products .horizontal-product__quick-add .btn-text svg {
+        stroke: currentColor;
+    }
+    .complementary-carousel__slide {
+        flex: 0 0 100%;
+        width: 100%;
+        scroll-snap-align: start;
+    }
+    </style>
+    {% if onlyDesktop %} 
+        <style>
+          @media (min-width: 1024px) {
+            .recommend__title {
+              font-size: 1.9rem !important;
+            }
+            .complementary-products .horizontal-product__media {
+              border-radius: var(--rounded-button) !important;
+              min-width: 44% !important;
+              max-width: 120px !important;
+              flex-grow: 1 !important;
+            }
+            .complementary-products .horizontal-product {
+              flex: 0 0 calc((100% - 1.5rem) / 2) !important;
+              max-width: calc((100% - 1.5rem) / 2) !important;
+            }
+            .complementary-carousel__slide {
+              flex: 0 0 calc((100% - 1.5rem) / 2) !important;
+              width: calc((100% - 1.5rem) / 2) !important;
+            }
+          }
+        </style>
+    {% endif %}
+{% endif %}
+
+
+{%- liquid
+  if recommendations.performed
+    if recommendations_products != blank
+      assign products_count = recommendations_products.count
+    elsif recommendations.products_count > 0
+      assign recommendations_products = recommendations.products
+      assign products_count = recommendations.products_count
+    endif
+  endif
+-%}
+<product-recommendations
+  {% comment %} TBG CUSTOM CODE {% endcomment %}
+  class="{% if cartDrawer %} cartDrawerEL {% endif %} {% if govxPage %} govxPage {% endif %} {% if onlyDesktop %}desktop hidden lg:block {% else %}mobile page-width block {% endif %} complementary-products flex flex-col relative"
+  data-url="{{ routes.product_recommendations_url }}?section_id={{ section_id }}&product_id={{ product_id }}&limit={{ limit }}&intent=complementary"
+  data-complementary-carousel
+>
+  <div class="complementary-products__header  flex justify-between gap-4 items-start">
+    {% unless govxPage %} <p class="custom recommend__title heading cartheading grow">{{ heading | escape }}</p> {% endunless %}
+    {%- if products_count > 1 -%}
+      <div class="complementary-products__controls gap-2">
+        <button
+          type="button"
+          aria-label="{{ 'general.pagination.previous' | t | escape }}"
+          data-prev-button
+          disabled
+        >
+          <svg fill="#000000" height="30px" width="30px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+              viewBox="0 0 330 330" xml:space="preserve">
+            <path id="XMLID_92_" d="M111.213,165.004L250.607,25.607c5.858-5.858,5.858-15.355,0-21.213c-5.858-5.858-15.355-5.858-21.213,0.001
+              l-150,150.004C76.58,157.211,75,161.026,75,165.004c0,3.979,1.581,7.794,4.394,10.607l150,149.996
+              C232.322,328.536,236.161,330,240,330s7.678-1.464,10.607-4.394c5.858-5.858,5.858-15.355,0-21.213L111.213,165.004z"/>
+          </svg>
+        </button>
+        <button
+          type="button"
+          aria-label="{{ 'general.pagination.next' | t | escape }}"
+          data-next-button
+        >
+          <svg fill="#000000" height="30px" width="30px" style="transform: rotate(180deg);" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+              viewBox="0 0 330 330" xml:space="preserve">
+            <path id="XMLID_92_" d="M111.213,165.004L250.607,25.607c5.858-5.858,5.858-15.355,0-21.213c-5.858-5.858-15.355-5.858-21.213,0.001
+              l-150,150.004C76.58,157.211,75,161.026,75,165.004c0,3.979,1.581,7.794,4.394,10.607l150,149.996
+              C232.322,328.536,236.161,330,240,330s7.678-1.464,10.607-4.394c5.858-5.858,5.858-15.355,0-21.213L111.213,165.004z"/>
+          </svg>
+        </button>
+      </div>
+    {%- endif -%}
+  </div>
+  {%- if recommendations.performed -%}
+    <div class="complementary-carousel">
+      <div class="horizontal-products" data-complementary-track>
+        {% for recommendation in recommendations_products %}
+          {% assign accessibility = true %}
+          {% if products_count > 1 and forloop.index > 1 %}
+            {% assign accessibility = false %}
+          {% endif %}
+          <div class="complementary-carousel__slide">
+            {%- render 'cus-product-card-horizontal',
+              product: recommendation,
+              product_id: recommendation.id,
+              section_id: section_id,
+              image_ratio: image_ratio,
+              image_fill: image_fill,
+              show_vendor: show_vendor,
+              show_price: show_price,
+              show_quick_add: settings.show_quick_add,
+              show_quick_view: settings.product_quick_view,
+              accessibility: accessibility
+            -%}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {%- else -%}
+    <div class="horizontal-products relative"></div>
+  {%- endif -%}
+</product-recommendations>
+
+{%- liquid
+  if onlyDesktop
+    assign carousel_class = 'desktop'
+  else
+    assign carousel_class = 'mobile'
+  endif
+-%}
+
+<script>
+  (function () {
+    if (window.__complementaryCarouselBound) return;
+    window.__complementaryCarouselBound = true;
+
+    function getSlideWidth(track) {
+      const firstSlide = track.querySelector('.complementary-carousel__slide');
+      return firstSlide ? firstSlide.offsetWidth : track.clientWidth;
+    }
+
+    function updateButtonStates(track, prevButton, nextButton) {
+      const atStart = track.scrollLeft <= 5;
+      const atEnd = track.scrollLeft >= (track.scrollWidth - track.clientWidth - 5);
+      if (prevButton) prevButton.disabled = atStart;
+      if (nextButton) nextButton.disabled = atEnd;
+    }
+
+    document.addEventListener('click', function (e) {
+      const btn = e.target.closest('[data-prev-button],[data-next-button]');
+      if (!btn) return;
+
+      const carousel = btn.closest('[data-complementary-carousel]');
+      if (!carousel) return;
+
+      const track = carousel.querySelector('[data-complementary-track]');
+      if (!track) return;
+
+      const direction = btn.hasAttribute('data-prev-button') ? -1 : 1;
+      const offset = getSlideWidth(track) * direction;
+      track.scrollBy({ left: offset, behavior: 'smooth' });
+
+      const prevButton = carousel.querySelector('[data-prev-button]');
+      const nextButton = carousel.querySelector('[data-next-button]');
+      setTimeout(function () {
+        updateButtonStates(track, prevButton, nextButton);
+      }, 300);
+    });
+
+    document.addEventListener('scroll', function (e) {
+      const track = e.target.closest ? e.target.closest('[data-complementary-track]') : null;
+      if (!track) return;
+      const carousel = track.closest('[data-complementary-carousel]');
+      if (!carousel) return;
+      const prevButton = carousel.querySelector('[data-prev-button]');
+      const nextButton = carousel.querySelector('[data-next-button]');
+      updateButtonStates(track, prevButton, nextButton);
+    }, true);
+  })();
+</script>

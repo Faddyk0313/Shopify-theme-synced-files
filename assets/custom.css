@@ -1,0 +1,17 @@
+/* Apply the blur effect when the class is added to the body */
+.blur-background:before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.3); /* Optional dark overlay */
+  z-index: 9998; /* Ensure it's behind the popup */
+}
+
+div#shopify-section-template--18768373645490__1734533278498daf36
+  .rivo-vip-tier-container {
+  display: none;
+}

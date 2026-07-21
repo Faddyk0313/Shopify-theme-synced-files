@@ -1,0 +1,867 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  .team-store-shell__state {
+    padding: 24px 0;
+  }
+
+  .team-store-shell__price {
+    margin-top: 6px;
+  }
+</style>
+
+{{ 'collection.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'collection.js' | asset_url }}" defer></script>
+
+
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+  <div
+    class="collection page-width{% if section.settings.full_width %} page-width--full{% endif %} relative"
+    data-team-store-shell
+    data-endpoint="https://titan-shopify-team-store-configurat.vercel.app/api/team-store"
+  >
+    <div class="team-store-shell__state" data-team-store-state>
+      Loading team store...
+    </div>
+
+      <div class="rte collection__description" data-team-store-description-wrap hidden>
+        <div data-team-store-description></div>
+      </div>
+
+    <div class="collection__content flex">
+      <div class="flex flex-col gap-12 grow" id="ProductGridContainer">
+        <motion-list
+          class="card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid relative"
+          data-team-store-grid
+          hidden
+        ></motion-list>
+      </div>
+    </div>
+
+    <div hidden aria-hidden="true">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'promotion' or block.type == 'promotion_video' -%}
+          <template data-team-store-promotion data-position="{{ block.settings.position | default: 1 | plus: 0 }}">
+            {%- render 'promotion-card', block: block -%}
+          </template>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  (async function () {
+    const root = document.querySelector("[data-team-store-shell]");
+    if (!root) return;
+
+    const stateEl = root.querySelector("[data-team-store-state]");
+    const descriptionWrapEl = root.querySelector("[data-team-store-description-wrap]");
+    const descriptionEl = root.querySelector("[data-team-store-description]");
+    const gridEl = root.querySelector("[data-team-store-grid]");
+    const promotionTemplates = Array.from(root.querySelectorAll("[data-team-store-promotion]"));
+    const bannerMediaEl = document.querySelector(".banner__media");
+    const bannerPictureEl = bannerMediaEl?.querySelector("picture");
+    const bannerBoxEl = document.querySelector(".banner__box");
+    const heroBannerByPrimaryColor = {
+      Neon_Green: {
+        desktop: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Neon_Green.png?v=1776851386",
+        mobile: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Neon_Green_1.png?v=1776851342"
+      },
+      Red: {
+        desktop: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Red_38bd1f35-e339-4d83-b90c-1947d46a1f3e.png?v=1776841033",
+        mobile: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Red__1_960f19dd-dd73-4a43-ba15-0f0e6c056c84.png?v=1776841024"
+      },
+      Steel: {
+        desktop: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Steel.png?v=1776851386",
+        mobile: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Steel_1.png?v=1776851342"
+      },
+      Grey: {
+        desktop: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Grey.png?v=1776841032",
+        mobile: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Grey_1.png?v=1776841023"
+      },
+      Purple: {
+        desktop: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Purple.png?v=1776841032",
+        mobile: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Purple_1.png?v=1776841023"
+      },
+      Maroon: {
+        desktop: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Maroon.png?v=1776841032",
+        mobile: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Maroon_1.png?v=1776841023"
+      },
+      Navy: {
+        desktop: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Navy.png?v=1776841032",
+        mobile: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Navy_1.png?v=1776841023"
+      },
+      Kelly: {
+        desktop: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Kelly.png?v=1776841032",
+        mobile: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Kelly_1.png?v=1776841023"
+      },
+      Black: {
+        desktop: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Black.png?v=1776841032",
+        mobile: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Black_1.png?v=1776841023"
+      },
+      Team_Gold: {
+        desktop: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Team_Gold.png?v=1776851386",
+        mobile: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Team_Gold_1.png?v=1776851341"
+      },
+      Team_Vegas: {
+        desktop: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Team_Vegas.png?v=1776851386",
+        mobile: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Team_Vegas_1.png?v=1776851342"
+      },
+      Forest: {
+        desktop: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Forest.png?v=1776841032",
+        mobile: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Forest_1.png?v=1776841023"
+      },
+      Carolina: {
+        desktop: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Carolina.png?v=1776841032",
+        mobile: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Carolina_1.png?v=1776841024"
+      },
+      Royal: {
+        desktop: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Royal.png?v=1776841032",
+        mobile: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Royal_1.png?v=1776841023"
+      },
+      Hot_Pink: {
+        desktop: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Hot_Pink.png?v=1776851386",
+        mobile: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Hot_Pink_1.png?v=1776851341"
+      },
+      Orange: {
+        desktop: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Orange.png?v=1776841032",
+        mobile: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Orange_1.png?v=1776841023"
+      },
+      Flashpoint: {
+        desktop: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Flashpoint.png?v=1776851386",
+        mobile: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Flashpoint_1.png?v=1776851342"
+      },
+      Arctic: {
+        desktop: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Arctic.png?v=1776851385",
+        mobile: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Arctic_1.png?v=1776851341"
+      },
+      Teal: {
+        desktop: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Teal.png?v=1776841032",
+        mobile: "https://cdn.shopify.com/s/files/1/0635/2401/2210/files/Hero_banner_Teal_1.png?v=1776841023"
+      }
+    };
+
+    const TEAM_STORAGE_KEY = "titan_team_store_team";
+    const TEAM_FAST_PATH_KEY = "titan_team_store_fast_path_once";
+    const TEAM_PUBLISHED_KEY = "titan_team_store_published_team";
+    const TEAM_ACCESS_CACHE_KEY = "titan_team_store_access";
+    const TEAM_DISCOUNT_SESSION_KEY = "titan_team_store_discount_applied";
+    const TEAM_TITAN_BYPASS_KEY = "titan_team_store_titan_email_bypass";
+    const currentUrl = new URL(window.location.href);
+    const queryTeam = currentUrl.searchParams.get("team");
+    const hashParams = new URLSearchParams((currentUrl.hash || "").replace(/^#/, ""));
+    const hashTeam = hashParams.get("team");
+    const resolveTeamParam = () => {
+      let storedTeam = "";
+      let fastPathTeam = "";
+      let publishedTeam = "";
+      try {
+        storedTeam = localStorage.getItem(TEAM_STORAGE_KEY) || "";
+        fastPathTeam = localStorage.getItem(TEAM_FAST_PATH_KEY) || "";
+        publishedTeam = localStorage.getItem(TEAM_PUBLISHED_KEY) || "";
+      } catch (_error) {}
+
+      const liveUrl = new URL(window.location.href);
+      const liveQueryTeam = liveUrl.searchParams.get("team");
+      const liveHashTeam = new URLSearchParams((liveUrl.hash || "").replace(/^#/, "")).get("team");
+      return liveHashTeam || liveQueryTeam || hashTeam || queryTeam || storedTeam || fastPathTeam || publishedTeam;
+    };
+
+    const team = resolveTeamParam();
+
+    if (team) {
+      try {
+        localStorage.setItem(TEAM_STORAGE_KEY, team);
+      } catch (_error) {}
+    }
+
+    if (queryTeam && !hashTeam) {
+      currentUrl.searchParams.delete("team");
+      currentUrl.hash = "team=" + encodeURIComponent(queryTeam);
+      window.history.replaceState({}, "", currentUrl.toString());
+    }
+
+    const endpoint = root.getAttribute("data-endpoint");
+
+    if (!team) {
+      stateEl.textContent = "Missing team parameter.";
+      let attempts = 0;
+      const tryRecoverTeam = () => {
+        const recoveredTeam = resolveTeamParam();
+        if (recoveredTeam) {
+          try {
+            localStorage.setItem(TEAM_STORAGE_KEY, recoveredTeam);
+          } catch (_error) {}
+          window.location.reload();
+          return;
+        }
+        attempts += 1;
+        if (attempts < 20) {
+          window.setTimeout(tryRecoverTeam, 150);
+        }
+      };
+      tryRecoverTeam();
+      return;
+    }
+
+    if (!endpoint) {
+      stateEl.textContent = "Missing endpoint configuration.";
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        endpoint + "?team=" + encodeURIComponent(team) + "&format=json",
+        {
+          method: "GET",
+          headers: { Accept: "application/json" }
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to load team store");
+      }
+
+      const data = await response.json();
+
+      const teamData = data.team || {};
+      const hasTitanBypass = hasStoredTitanBypass(team);
+      if (!isTodayWithinOrderWindow(teamData) && !hasTitanBypass) {
+        clearTeamAccessFlags(team);
+        stateEl.textContent = "Your Team Ordering Window Is Not Active - Please Contact Your Team Admin Or Manager To Request Order Window Dates";
+        return;
+      }
+      cacheTeamAccess(team, teamData);
+
+      if (teamData.discountCode && !wasDiscountAppliedThisSession(team, teamData.discountCode)) {
+        routeThroughDiscount(team, teamData.discountCode);
+        return;
+      }
+
+      const includeStockColors = !!data.includeStockColors;
+      const pairProducts = includeStockColors
+        ? (data.products?.productPairs || []).flatMap((pair) =>
+            [pair.baseLayer, pair.neckGuard].filter(Boolean)
+          )
+        : [];
+      const products = [
+        ...(data.products?.customProducts || []),
+        ...pairProducts,
+        ...(data.products?.matchedCollectionProducts || [])
+      ];
+      const uniqueProducts = [];
+      const seenHandles = new Set();
+      products.forEach((product) => {
+        const handle = product?.handle || "";
+        if (!handle || seenHandles.has(handle)) return;
+        seenHandles.add(handle);
+        uniqueProducts.push(product);
+      });
+
+      if (bannerPictureEl) {
+        const firstColorLabelRaw = Array.isArray(teamData.colorLabels) ? teamData.colorLabels[0] : "";
+        const firstColorLabel =
+          typeof firstColorLabelRaw === "string"
+            ? firstColorLabelRaw
+            : (firstColorLabelRaw && (firstColorLabelRaw.label || firstColorLabelRaw.name || firstColorLabelRaw.value)) || "";
+        const heroConfig = heroBannerByPrimaryColor[firstColorLabel] || null;
+
+        if (heroConfig) {
+          let mobileSourceEl = bannerPictureEl.querySelector("source[data-team-store-hero-mobile]");
+          let desktopSourceEl = bannerPictureEl.querySelector("source[data-team-store-hero-desktop]");
+          let bannerImageEl = bannerPictureEl.querySelector("img[data-team-store-hero]");
+
+          if (!mobileSourceEl) {
+            mobileSourceEl = document.createElement("source");
+            mobileSourceEl.setAttribute("data-team-store-hero-mobile", "true");
+            mobileSourceEl.media = "(max-width: 767px)";
+            bannerPictureEl.insertBefore(mobileSourceEl, bannerPictureEl.firstChild || null);
+          }
+
+          if (!desktopSourceEl) {
+            desktopSourceEl = document.createElement("source");
+            desktopSourceEl.setAttribute("data-team-store-hero-desktop", "true");
+            desktopSourceEl.media = "(min-width: 768px)";
+            bannerPictureEl.insertBefore(desktopSourceEl, mobileSourceEl.nextSibling || null);
+          }
+
+          if (!bannerImageEl) {
+            bannerImageEl = document.createElement("img");
+            bannerImageEl.setAttribute("data-team-store-hero", "true");
+            bannerPictureEl.appendChild(bannerImageEl);
+          }
+
+          mobileSourceEl.srcset = heroConfig.mobile;
+          desktopSourceEl.srcset = heroConfig.desktop;
+          bannerImageEl.src = heroConfig.desktop;
+          bannerImageEl.alt = teamData.heroImageAlt || (teamData.teamName ? teamData.teamName + " Team Store" : "Team Store");
+        }
+      }
+
+      if (teamData.teamName && bannerBoxEl) {
+        let bannerTitleEl = bannerBoxEl.querySelector(".banner__title");
+
+        if (!bannerTitleEl) {
+          bannerTitleEl = document.createElement("h2");
+          bannerTitleEl.className = "banner__title heading leading-none title-lg";
+          bannerBoxEl.appendChild(bannerTitleEl);
+        }
+
+        bannerTitleEl.textContent = teamData.teamName.toUpperCase() + " TEAM STORE";
+      }
+
+      if (descriptionWrapEl && (teamData.description || (teamData.colorLabels || []).length)) {
+        descriptionWrapEl.hidden = false;
+      }
+
+      if (descriptionEl && teamData.description) {
+        descriptionEl.innerHTML = teamData.description;
+      }
+
+      if (!uniqueProducts.length) {
+        stateEl.textContent = "No products found for this team store.";
+        return;
+      }
+
+      gridEl.hidden = false;
+      const buildCardMarkup = (product, index) => `
+            <div class="card product-card product-card--{{ settings.card_style }}{% if settings.card_border_thickness > 0 %} product-card--thickness{% endif %} flex flex-col leading-none relative">
+              <div class="product-card__media relative h-auto">
+                <button
+                  type="button"
+                  class="quick-view__button button button--secondary z-2 absolute top-0 right-0 opacity-0"
+                  is="hover-button"
+                  aria-controls="Quickview-team-store-${index}"
+                  aria-expanded="false"
+                >
+                  <span class="btn-fill" data-fill></span>
+                  <span class="btn-text">
+                     <svg class="icon icon-eye icon-sm" viewBox="0 0 20 20" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" d="M18.3334 10C18.3334 12.0833 15.8334 16.6667 10 16.6667C4.16669 16.6667 1.66669 12.0833 1.66669 10C1.66669 7.91668 4.16669 3.33334 10 3.33334C15.8334 3.33334 18.3334 7.91668 18.3334 10Z"></path>
+                        <path stroke-linecap="round" d="M12.5 10C12.5 11.3807 11.3807 12.5 10 12.5C8.61931 12.5 7.50002 11.3807 7.50002 10C7.50002 8.6193 8.61931 7.50001 10 7.50001C11.3807 7.50001 12.5 8.6193 12.5 10Z"></path>
+                      </svg>
+                    <span class="sr-only">Quick view</span>
+                  </span>
+                </button>
+                <a class="pdpPageLink block relative media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} overflow-hidden" href="${escapeHtml(product.onlineStoreUrl || "#")}" aria-label="${escapeHtml(product.title || "")}" tabindex="-1">
+                  ${
+                    product.imageUrl
+                      ? `<img src="${escapeHtml(product.imageUrl)}" alt="${escapeHtml(product.imageAlt || product.title || "")}" loading="lazy">`
+                      : ""
+                  }
+                </a>
+              </div>
+              <div class="product-card__content grow flex flex-col justify-start text-{{ settings.card_text_alignment }} w-full">
+                <div class="product-card__details flex flex-col lg:flex-row items-baseline gap-2 w-full">
+                  <p class="grow{% if settings.product_title_truncation %} line-clamp-{{ settings.product_title_line_limit }}{% endif %}">
+                    <a class="product-card__title reversed-link text-base-xl font-medium leading-tight" href="${escapeHtml(product.onlineStoreUrl || "#")}">
+                      ${escapeHtml(product.title || "")}
+                    </a>
+                  </p>
+                </div>
+                <div class="team-store-shell__price">
+                  ${renderPriceRow(product)}
+                </div>
+              </div>
+              <quick-view
+                id="Quickview-team-store-${index}"
+                class="quick-view x-modal drawer z-40 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+                data-product-url="${escapeHtml(getProductPath(product))}"
+                role="dialog"
+                aria-label="${escapeHtml("Choose options for " + (product.title || "product"))}"
+                aria-modal="true"
+                hidden
+              >
+                <overlay-element
+                  class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none"
+                  aria-controls="Quickview-team-store-${index}"
+                  aria-expanded="false"
+                ></overlay-element>
+                <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+                  <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative" tabindex="0">
+                    <button
+                      class="button button--secondary button--close drawer__close z-1 absolute top-0 right-0 flex items-center justify-center opacity-0"
+                      type="button"
+                      is="hover-button"
+                      aria-controls="Quickview-team-store-${index}"
+                      aria-expanded="false"
+                      aria-label="Close"
+                    >
+                      <span class="btn-fill" data-fill></span>
+                      <span class="btn-text">×</span>
+                    </button>
+                  </gesture-element>
+                  <div class="quick-view__content drawer__content opacity-0 invisible flex flex-col h-full grow shrink"></div>
+                </div>
+              </quick-view>
+            </div>
+          `;
+      const promotions = promotionTemplates.map((template, templateIndex) => ({
+        position: Number(template.getAttribute("data-position")) || 1,
+        html: template.innerHTML,
+        templateIndex
+      }));
+
+      const applyPromotions = (productCards) => {
+        if (!promotions.length) return productCards;
+        const orderedPromotions = [...promotions].sort((a, b) => {
+          if (a.position === b.position) return a.templateIndex - b.templateIndex;
+          return a.position - b.position;
+        });
+        const output = [];
+
+        for (let i = 0; i < productCards.length; i++) {
+          const slot = i + 1;
+          for (const promo of orderedPromotions) {
+            if (promo.position === slot) {
+              output.push(promo.html);
+            }
+          }
+          output.push(productCards[i]);
+        }
+
+        for (const promo of orderedPromotions) {
+          if (promo.position > productCards.length) {
+            output.push(promo.html);
+          }
+        }
+
+        return output;
+      };
+
+      const renderGrid = () => {
+        const productCards = uniqueProducts.map((product, index) => buildCardMarkup(product, index));
+        gridEl.innerHTML = applyPromotions(productCards).join("");
+      };
+      renderGrid();
+
+      let lastActiveCurrency = getActiveCurrencyCode();
+      setInterval(() => {
+        const nextCurrency = getActiveCurrencyCode();
+        if (nextCurrency !== lastActiveCurrency) {
+          lastActiveCurrency = nextCurrency;
+          renderGrid();
+        }
+      }, 1000);
+
+      stateEl.remove();
+    } catch (error) {
+      console.error(error);
+      stateEl.textContent = "We could not load this team store right now.";
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function parseOrderWindowDate(value, isEndDate) {
+      if (!value) return null;
+
+      const rawValue = String(value).trim();
+      const dateOnlyMatch = rawValue.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (dateOnlyMatch) {
+        const year = Number(dateOnlyMatch[1]);
+        const month = Number(dateOnlyMatch[2]) - 1;
+        const day = Number(dateOnlyMatch[3]);
+        return isEndDate
+          ? new Date(year, month, day, 23, 59, 59, 999)
+          : new Date(year, month, day, 0, 0, 0, 0);
+      }
+
+      const parsedDate = new Date(rawValue);
+      return Number.isNaN(parsedDate.getTime()) ? null : parsedDate;
+    }
+
+    function isTodayWithinOrderWindow(teamData) {
+      if (!teamData || typeof teamData !== "object") return false;
+
+      const startDate = parseOrderWindowDate(teamData.orderWindowStart, false);
+      const endDate = parseOrderWindowDate(teamData.orderWindowEnd, true);
+      if (!startDate || !endDate) return false;
+
+      const now = new Date();
+      return now >= startDate && now <= endDate;
+    }
+
+    function clearTeamAccessFlags(teamParam) {
+      try {
+        if (localStorage.getItem(TEAM_FAST_PATH_KEY) === teamParam) {
+          localStorage.removeItem(TEAM_FAST_PATH_KEY);
+        }
+        if (localStorage.getItem(TEAM_PUBLISHED_KEY) === teamParam) {
+          localStorage.removeItem(TEAM_PUBLISHED_KEY);
+        }
+        const rawCache = localStorage.getItem(TEAM_ACCESS_CACHE_KEY);
+        if (rawCache) {
+          const cachedAccess = JSON.parse(rawCache);
+          if (cachedAccess && cachedAccess.team === teamParam) {
+            localStorage.removeItem(TEAM_ACCESS_CACHE_KEY);
+          }
+        }
+      } catch (_error) {}
+    }
+
+    function hasStoredTitanBypass(teamParam) {
+      if (!teamParam) return false;
+      try {
+        return sessionStorage.getItem(TEAM_TITAN_BYPASS_KEY) === teamParam;
+      } catch (_error) {
+        return false;
+      }
+    }
+
+    function cacheTeamAccess(teamParam, teamData) {
+      if (!teamParam || !teamData) return;
+
+      try {
+        const titanBypass = hasStoredTitanBypass(teamParam);
+        localStorage.setItem(
+          TEAM_ACCESS_CACHE_KEY,
+          JSON.stringify({
+            team: teamParam,
+            orderWindowStart: teamData.orderWindowStart,
+            orderWindowEnd: teamData.orderWindowEnd,
+            discountCode: teamData.discountCode || "",
+            titanBypass: titanBypass,
+            verifiedAt: Date.now()
+          })
+        );
+      } catch (_error) {}
+    }
+
+    function getDiscountSessionValue(teamParam, discountCode) {
+      return teamParam + "|" + discountCode;
+    }
+
+    function wasDiscountAppliedThisSession(teamParam, discountCode) {
+      if (!teamParam || !discountCode) return false;
+
+      try {
+        return sessionStorage.getItem(TEAM_DISCOUNT_SESSION_KEY) === getDiscountSessionValue(teamParam, discountCode);
+      } catch (_error) {
+        return false;
+      }
+    }
+
+    function routeThroughDiscount(teamParam, discountCode) {
+      if (!teamParam || !discountCode) return;
+
+      try {
+        sessionStorage.setItem(TEAM_DISCOUNT_SESSION_KEY, getDiscountSessionValue(teamParam, discountCode));
+      } catch (_error) {}
+
+      const redirectTarget = "/pages/team-store";
+      window.location.href = "/discount/" + encodeURIComponent(discountCode) + "?redirect=" + encodeURIComponent(redirectTarget);
+    }
+
+    function parseAmount(value) {
+      try {
+        if (value === null || value === undefined || value === "") return null;
+        const raw = String(value).trim();
+        const normalized = raw.replace(/,/g, "");
+        const parsed = Number(normalized);
+        return Number.isNaN(parsed) ? null : parsed;
+      } catch (_error) {
+        return null;
+      }
+    }
+
+    function parseMinorUnits(value) {
+      const parsed = parseAmount(value);
+      if (parsed === null) return null;
+      if (Number.isInteger(parsed)) return parsed;
+      return Math.round(parsed * 100);
+    }
+
+    function getShopCurrencyCode(productCurrencyCode) {
+      return (
+        (window.Shopify && window.Shopify.currency && (window.Shopify.currency.shopCurrency || window.Shopify.currency.shop_currency)) ||
+        productCurrencyCode ||
+        "USD"
+      );
+    }
+
+    function getActiveCurrencyCode() {
+      return (
+        (window.Shopify && window.Shopify.currency && window.Shopify.currency.active) ||
+        (window.Currency && window.Currency.currentCurrency) ||
+        "USD"
+      );
+    }
+
+    function convertMajorAmount(amountMajor, sourceCode, targetCode) {
+      if (amountMajor === null) return null;
+      if (!sourceCode || !targetCode || sourceCode === targetCode) return amountMajor;
+
+      const rates = window.Currency && window.Currency.rates ? window.Currency.rates : null;
+      if (rates && rates[sourceCode] && rates[targetCode]) {
+        const sourceRate = Number(rates[sourceCode]);
+        const targetRate = Number(rates[targetCode]);
+        if (!Number.isNaN(sourceRate) && !Number.isNaN(targetRate) && sourceRate > 0 && targetRate > 0) {
+          return amountMajor * (targetRate / sourceRate);
+        }
+      }
+
+      if (window.Currency && typeof window.Currency.convert === "function") {
+        try {
+          const converted = window.Currency.convert(amountMajor, sourceCode, targetCode);
+          if (typeof converted === "number" && !Number.isNaN(converted)) return converted;
+        } catch (_error) {}
+      }
+
+      if (window.Shopify && window.Shopify.currency && window.Shopify.currency.rate !== undefined) {
+        const rate = Number(window.Shopify.currency.rate);
+        const shopCode = getShopCurrencyCode(sourceCode);
+        if (!Number.isNaN(rate) && rate > 0) {
+          if (sourceCode === shopCode && targetCode !== shopCode) {
+            return amountMajor * rate;
+          }
+          if (sourceCode !== shopCode && targetCode === shopCode) {
+            return amountMajor / rate;
+          }
+        }
+      }
+
+      return amountMajor;
+    }
+
+    function formatMoneyMinor(minorUnits, sourceCurrencyCode) {
+      if (minorUnits === null) return "";
+      const sourceCode = getShopCurrencyCode(sourceCurrencyCode);
+      const targetCode = getActiveCurrencyCode();
+      const majorAmount = minorUnits / 100;
+      const convertedAmount = convertMajorAmount(majorAmount, sourceCode, targetCode);
+      if (convertedAmount === null) return "";
+
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: targetCode
+      }).format(convertedAmount);
+    }
+
+    function renderPriceRow(product) {
+      try {
+        const parsedPrice = parseMinorUnits(product && product.price);
+        const parsedCompareAt = parseMinorUnits(product && product.compareAtPrice);
+        const price = formatMoneyMinor(parsedPrice, product && product.currencyCode);
+        const compareAt = formatMoneyMinor(parsedCompareAt, product && product.currencyCode);
+        const onSale =
+          parsedCompareAt !== null &&
+          parsedPrice !== null &&
+          parsedCompareAt > parsedPrice;
+
+        if (!price && !compareAt) return "";
+
+        return `
+          <div class="price flex flex-wrap lg:flex-col lg:items-end gap-2 md:gap-1d5">
+            ${price ? `<span class="cusPrice  price__regular">From ${escapeHtml(price)}</span>` : ""}
+            ${onSale && compareAt ? `<s class="text-opacity">${escapeHtml(compareAt)}</s>` : ""}
+          </div>
+        `;
+      } catch (_error) {
+        return "";
+      }
+    }
+
+    function getProductPath(product) {
+      if (product?.onlineStoreUrl) {
+        try {
+          const parsed = new URL(product.onlineStoreUrl, window.location.origin);
+          if (parsed.pathname) return parsed.pathname;
+        } catch (_error) {}
+      }
+      if (product?.handle) return "/products/" + product.handle;
+      return "/products";
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Team store shell",
+  "class": "collection-section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 3,
+      "label": "t:sections.global.settings.columns.label"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "default": "2",
+      "label": "t:sections.global.settings.columns_mobile.label",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:sections.global.settings.columns_mobile.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.global.settings.columns_mobile.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 36
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "description",
+      "name": "t:sections.main-collection.blocks.description.name",
+      "limit": 1
+    },
+    {
+      "type": "promotion",
+      "name": "t:sections.main-collection.blocks.promotion.name",
+      "settings": [
+        { "type": "range", "id": "position", "min": 1, "max": 50, "step": 1, "default": 4, "label": "t:sections.main-collection.blocks.promotion.settings.position.label" },
+        { "type": "select", "id": "column_size", "options": [{ "value": "1", "label": "t:sections.main-collection.blocks.promotion.settings.column_size.options__1.label" }, { "value": "2", "label": "t:sections.main-collection.blocks.promotion.settings.column_size.options__2.label" }], "default": "1", "label": "t:sections.main-collection.blocks.promotion.settings.column_size.label" },
+        { "type": "select", "id": "row_size", "options": [{ "value": "1", "label": "t:sections.main-collection.blocks.promotion.settings.row_size.options__1.label" }, { "value": "2", "label": "t:sections.main-collection.blocks.promotion.settings.row_size.options__2.label" }], "default": "1", "label": "t:sections.main-collection.blocks.promotion.settings.row_size.label" },
+        { "type": "image_picker", "id": "image", "label": "t:sections.global.settings.image.label" },
+        { "type": "image_picker", "id": "image_mobile", "label": "t:sections.global.settings.image_mobile.label" },
+        { "type": "text", "id": "heading", "label": "t:sections.global.settings.heading.label", "default": "Example title" },
+        { "type": "richtext", "id": "content", "label": "t:sections.global.settings.description.label", "default": "<p>Share information about your brand with your customers.</p>" },
+        { "type": "text", "id": "button_label", "label": "t:sections.global.settings.button_label.label" },
+        { "type": "url", "id": "button_link", "label": "t:sections.global.settings.button_link.label" },
+        { "type": "select", "id": "content_position", "options": [{ "value": "md:items-start", "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__1.label" }, { "value": "md:items-center", "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__2.label" }, { "value": "md:items-end", "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__3.label" }], "default": "md:items-center", "label": "t:sections.global.settings.content_position.label" },
+        { "type": "select", "id": "content_position_mobile", "options": [{ "value": "items-start", "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__1.label" }, { "value": "items-center", "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__2.label" }, { "value": "items-end", "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__3.label" }], "default": "items-center", "label": "t:sections.global.settings.content_position_mobile.label" },
+        { "type": "text_alignment", "id": "text_alignment", "default": "center", "label": "t:sections.global.settings.text_alignment.label" },
+        { "type": "text_alignment", "id": "text_alignment_mobile", "default": "center", "label": "t:sections.global.settings.text_alignment_mobile.label" },
+        { "type": "color", "id": "color_text", "label": "t:sections.global.settings.color_text.label", "default": "#ffffff" },
+        { "type": "color", "id": "color_background", "label": "t:sections.global.settings.color_background.label", "default": "#171717" },
+        { "type": "color_background", "id": "gradient_background", "label": "t:sections.global.settings.gradient_background.label" },
+        { "type": "color", "id": "color_overlay", "label": "t:sections.global.settings.color_overlay.label", "default": "#171717" },
+        { "type": "range", "id": "overlay_opacity", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 40, "label": "t:sections.global.settings.overlay_opacity.label" }
+      ]
+    },
+    {
+      "type": "promotion_video",
+      "name": "t:sections.main-collection.blocks.promotion-video.name",
+      "settings": [
+        { "type": "range", "id": "position", "min": 1, "max": 50, "step": 1, "default": 4, "label": "t:sections.main-collection.blocks.promotion.settings.position.label" },
+        { "type": "select", "id": "column_size", "options": [{ "value": "1", "label": "t:sections.main-collection.blocks.promotion.settings.column_size.options__1.label" }, { "value": "2", "label": "t:sections.main-collection.blocks.promotion.settings.column_size.options__2.label" }], "default": "1", "label": "t:sections.main-collection.blocks.promotion.settings.column_size.label" },
+        { "type": "select", "id": "row_size", "options": [{ "value": "1", "label": "t:sections.main-collection.blocks.promotion.settings.row_size.options__1.label" }, { "value": "2", "label": "t:sections.main-collection.blocks.promotion.settings.row_size.options__2.label" }], "default": "1", "label": "t:sections.main-collection.blocks.promotion.settings.row_size.label" },
+        { "type": "video", "id": "video", "label": "t:sections.video.settings.video.label" },
+        { "type": "video_url", "id": "video_url", "accept": ["youtube", "vimeo"], "label": "t:sections.video.settings.video_url.label" },
+        { "type": "image_picker", "id": "cover_image", "label": "t:sections.video.settings.cover_image.label" },
+        { "type": "video", "id": "video_mobile", "label": "t:sections.video.settings.video_mobile.label" },
+        { "type": "video_url", "id": "video_url_mobile", "accept": ["youtube", "vimeo"], "label": "t:sections.video.settings.video_url_mobile.label" },
+        { "type": "image_picker", "id": "cover_image_mobile", "label": "t:sections.video.settings.cover_image_mobile.label" },
+        { "type": "text", "id": "heading", "label": "t:sections.global.settings.heading.label", "default": "Example title" },
+        { "type": "richtext", "id": "content", "label": "t:sections.global.settings.description.label", "default": "<p>Share information about your brand with your customers.</p>" },
+        { "type": "text", "id": "button_label", "label": "t:sections.global.settings.button_label.label" },
+        { "type": "url", "id": "button_link", "label": "t:sections.global.settings.button_link.label" },
+        {
+          "visible_if": "{{ block.settings.button_label != blank }}",
+          "type": "select",
+          "id": "button_style",
+          "options": [
+            { "value": "primary", "label": "t:sections.global.settings.button_style.options__1.label" },
+            { "value": "secondary", "label": "t:sections.global.settings.button_style.options__2.label" },
+            { "value": "link", "label": "t:sections.global.settings.button_style.options__3.label" }
+          ],
+          "default": "secondary",
+          "label": "t:sections.global.settings.button_style.label"
+        },
+        {
+          "visible_if": "{{ block.settings.button_label != blank and block.settings.button_style != 'link' }}",
+          "type": "select",
+          "id": "button_size",
+          "options": [
+            { "value": "sm", "label": "t:sections.global.settings.button_size.options__1.label" },
+            { "value": "md", "label": "t:sections.global.settings.button_size.options__2.label" },
+            { "value": "lg", "label": "t:sections.global.settings.button_size.options__3.label" }
+          ],
+          "default": "md",
+          "label": "t:sections.global.settings.button_size.label"
+        },
+        {
+          "visible_if": "{{ block.settings.button_label != blank }}",
+          "type": "checkbox",
+          "id": "button_external",
+          "label": "t:sections.global.settings.button_external.label",
+          "default": false
+        },
+        {
+          "visible_if": "{{ block.settings.button_label != blank }}",
+          "type": "checkbox",
+          "id": "button_icon",
+          "label": "t:sections.global.settings.button_icon.label",
+          "default": true
+        },
+        { "type": "select", "id": "content_position", "options": [{ "value": "md:items-start", "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__1.label" }, { "value": "md:items-center", "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__2.label" }, { "value": "md:items-end", "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__3.label" }], "default": "md:items-center", "label": "t:sections.global.settings.content_position.label" },
+        { "type": "select", "id": "content_position_mobile", "options": [{ "value": "items-start", "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__1.label" }, { "value": "items-center", "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__2.label" }, { "value": "items-end", "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__3.label" }], "default": "items-center", "label": "t:sections.global.settings.content_position_mobile.label" },
+        { "type": "text_alignment", "id": "text_alignment", "default": "center", "label": "t:sections.global.settings.text_alignment.label" },
+        { "type": "text_alignment", "id": "text_alignment_mobile", "default": "center", "label": "t:sections.global.settings.text_alignment_mobile.label" },
+        { "type": "color", "id": "color_text", "label": "t:sections.global.settings.color_text.label", "default": "#ffffff" },
+        { "type": "color", "id": "color_background", "label": "t:sections.global.settings.color_background.label", "default": "#171717" },
+        { "type": "color_background", "id": "gradient_background", "label": "t:sections.global.settings.gradient_background.label" },
+        { "type": "color", "id": "color_button_text", "label": "t:sections.global.settings.color_button_text.label", "default": "#171717" },
+        { "type": "color", "id": "color_button_background", "label": "t:sections.global.settings.color_button_background.label", "default": "#ffffff" },
+        { "type": "color_background", "id": "color_button_gradient", "label": "t:sections.global.settings.color_button_gradient.label" },
+        { "type": "color", "id": "color_overlay", "label": "t:sections.global.settings.color_overlay.label", "default": "#171717" },
+        { "type": "range", "id": "overlay_opacity", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 40, "label": "t:sections.global.settings.overlay_opacity.label" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Team store shell"
+    }
+  ]
+}
+{% endschema %}

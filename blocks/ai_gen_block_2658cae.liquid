@@ -1,0 +1,439 @@
+{% doc %}
+  @prompt
+    Generate a section that displays five videos in 16:9 strict ratio, stacked horizontally. The videos should chosen from schema., Sorry in 9:16 ratio. Also add setting to choose preview image(thumbnail of each video). Also use this play icon svg as a button(overlay on center of video) to play the video, this hides when video is playing, and when video is paused this appears again. https://cdn.shopify.com/s/files/1/0635/2401/2210/files/PLAY_BUTTON.svg?v=1781183919, Video setting in schema should be a video selector from library. not external link please
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-video-gallery-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .ai-video-gallery__container-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.gap }}px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    padding: 10px 0;
+  }
+
+  .ai-video-gallery__container-{{ ai_gen_id }}::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .ai-video-gallery__container-{{ ai_gen_id }}::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+
+  .ai-video-gallery__container-{{ ai_gen_id }}::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+
+  .ai-video-gallery__container-{{ ai_gen_id }}::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .ai-video-gallery__item-{{ ai_gen_id }} {
+    position: relative;
+    flex: 0 0 auto;
+    width: {{ block.settings.video_width }}px;
+    aspect-ratio: 9 / 16;
+    background-color: #000000;
+    border-radius: {{ block.settings.border_radius }}px;
+    overflow: hidden;
+  }
+
+  .ai-video-gallery__video-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-video-gallery__thumbnail-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-video-gallery__thumbnail-{{ ai_gen_id }}.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .ai-video-gallery__play-button-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: {{ block.settings.play_button_size }}px;
+    height: {{ block.settings.play_button_size }}px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+    padding: 0;
+  }
+
+  .ai-video-gallery__play-button-{{ ai_gen_id }}:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  .ai-video-gallery__play-button-{{ ai_gen_id }}.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .ai-video-gallery__play-button-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .ai-video-gallery__placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-video-gallery__placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-video-gallery__empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 16px;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-video-gallery__item-{{ ai_gen_id }} {
+      width: {{ block.settings.video_width | times: 0.7 }}px;
+    }
+
+    .ai-video-gallery__play-button-{{ ai_gen_id }} {
+      width: {{ block.settings.play_button_size | times: 0.8 }}px;
+      height: {{ block.settings.play_button_size | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<video-gallery-{{ ai_gen_id }} class="ai-video-gallery-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-video-gallery__container-{{ ai_gen_id }}">
+    {% for i in (1..5) %}
+      {% liquid
+        assign video_key = 'video_' | append: i
+        assign thumbnail_key = 'thumbnail_' | append: i
+        assign video = block.settings[video_key]
+        assign thumbnail = block.settings[thumbnail_key]
+      %}
+
+      <div class="ai-video-gallery__item-{{ ai_gen_id }}" data-video-index="{{ i }}">
+        {% if video != blank %}
+          {% if thumbnail != blank %}
+            <img
+              src="{{ thumbnail | image_url: width: 800 }}"
+              alt="Video {{ i }} thumbnail"
+              class="ai-video-gallery__thumbnail-{{ ai_gen_id }}"
+              loading="lazy"
+              width="{{ thumbnail.width }}"
+              height="{{ thumbnail.height }}"
+            >
+          {% endif %}
+
+          <button
+            class="ai-video-gallery__play-button-{{ ai_gen_id }}"
+            aria-label="Play video {{ i }}"
+            data-play-button
+          >
+            <img
+              src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/PLAY_BUTTON.svg?v=1781183919"
+              alt="Play"
+            >
+          </button>
+
+          <video
+            class="ai-video-gallery__video-{{ ai_gen_id }}"
+            {% if block.settings.loop_videos %}loop{% endif %}
+            {% if block.settings.mute_videos %}muted{% endif %}
+            playsinline
+            preload="metadata"
+            data-video
+          >
+            {% for source in video.sources %}
+              <source src="{{ source.url }}" type="{{ source.mime_type }}">
+            {% endfor %}
+          </video>
+        {% else %}
+          <div class="ai-video-gallery__placeholder-{{ ai_gen_id }}">
+            {{ 'image' | placeholder_svg_tag }}
+            <div class="ai-video-gallery__empty-state-{{ ai_gen_id }}">
+              Add video {{ i }}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</video-gallery-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class VideoGallery{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.videos = [];
+      }
+
+      connectedCallback() {
+        this.initializeVideos();
+      }
+
+      initializeVideos() {
+        const videoItems = this.querySelectorAll('.ai-video-gallery__item-{{ ai_gen_id }}');
+
+        videoItems.forEach((item) => {
+          const video = item.querySelector('[data-video]');
+          const playButton = item.querySelector('[data-play-button]');
+          const thumbnail = item.querySelector('.ai-video-gallery__thumbnail-{{ ai_gen_id }}');
+
+          if (!video || !playButton) return;
+
+          playButton.addEventListener('click', () => {
+            this.pauseAllVideos();
+            this.playVideo(video, playButton, thumbnail);
+          });
+
+          video.addEventListener('play', () => {
+            this.hidePlayButton(playButton);
+            if (thumbnail) {
+              thumbnail.classList.add('hidden');
+            }
+          });
+
+          video.addEventListener('pause', () => {
+            this.showPlayButton(playButton);
+          });
+
+          video.addEventListener('ended', () => {
+            this.showPlayButton(playButton);
+            if (thumbnail) {
+              thumbnail.classList.remove('hidden');
+            }
+          });
+
+          video.addEventListener('click', () => {
+            if (video.paused) {
+              this.pauseAllVideos();
+              this.playVideo(video, playButton, thumbnail);
+            } else {
+              video.pause();
+            }
+          });
+
+          this.videos.push({ video, playButton, thumbnail });
+        });
+      }
+
+      playVideo(video, playButton, thumbnail) {
+        video.play();
+        this.hidePlayButton(playButton);
+        if (thumbnail) {
+          thumbnail.classList.add('hidden');
+        }
+      }
+
+      pauseAllVideos() {
+        this.videos.forEach(({ video, playButton, thumbnail }) => {
+          if (!video.paused) {
+            video.pause();
+            this.showPlayButton(playButton);
+          }
+        });
+      }
+
+      hidePlayButton(button) {
+        button.classList.add('hidden');
+      }
+
+      showPlayButton(button) {
+        button.classList.remove('hidden');
+      }
+    }
+
+    customElements.define('video-gallery-{{ ai_gen_id }}', VideoGallery{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Video gallery",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Video 1"
+    },
+    {
+      "type": "video",
+      "id": "video_1",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "thumbnail_1",
+      "label": "Thumbnail"
+    },
+    {
+      "type": "header",
+      "content": "Video 2"
+    },
+    {
+      "type": "video",
+      "id": "video_2",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "thumbnail_2",
+      "label": "Thumbnail"
+    },
+    {
+      "type": "header",
+      "content": "Video 3"
+    },
+    {
+      "type": "video",
+      "id": "video_3",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "thumbnail_3",
+      "label": "Thumbnail"
+    },
+    {
+      "type": "header",
+      "content": "Video 4"
+    },
+    {
+      "type": "video",
+      "id": "video_4",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "thumbnail_4",
+      "label": "Thumbnail"
+    },
+    {
+      "type": "header",
+      "content": "Video 5"
+    },
+    {
+      "type": "video",
+      "id": "video_5",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "thumbnail_5",
+      "label": "Thumbnail"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "video_width",
+      "label": "Video width",
+      "min": 200,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between videos",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Play button"
+    },
+    {
+      "type": "range",
+      "id": "play_button_size",
+      "label": "Play button size",
+      "min": 40,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Video settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "loop_videos",
+      "label": "Loop videos",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "mute_videos",
+      "label": "Mute videos",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video gallery"
+    }
+  ]
+}
+{% endschema %}

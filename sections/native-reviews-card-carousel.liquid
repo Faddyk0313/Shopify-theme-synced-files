@@ -1,0 +1,682 @@
+{% comment %} TBG Custom Code {% endcomment %}
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {%- render 'section-variables', section: section -%}
+  }
+
+  @media screen and (max-width: 639px) {
+    #shopify-section-{{ section.id }} .slider--tablet .mobile\:card-grid--1 {
+        --slider-item-width: 85vw;
+        gap: 1rem !important;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel {
+    box-sizing: border-box;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel .card-grid {
+    gap: 13px;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel .review-card {
+    background: #fff;
+    border-radius: 16px;
+    display: flex;
+    overflow: clip;
+    box-shadow: 0 13px 32px -8px rgba(0, 0, 0, 0.15);
+    position: relative;
+    margin-bottom: 30px;
+    max-height: 290px;
+    border: 1px solid #cacaca;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel .review-card.opened {
+    max-height: none;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel .review-card.collapsed {
+    max-height: 290px;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel .review-image {
+    flex: 0 0 40%;
+    position: relative;
+    background: #e6e6e6;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel .review-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel .review-content {
+    padding: 14px;
+    flex: 0 0 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel .rating-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel .stars {
+    display: inline-flex;
+    gap: 1px;
+    line-height: 1;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel .star {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel .star svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel .verified-badge {
+    background: #e5fd00;
+    padding: 5px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel .title {
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel .body-wrapper {
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel .body {
+    font-size: 12px;
+    margin: 0;
+    color: #111;
+    flex: 1;
+    line-height: 1.3;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel .read-more-btn {
+    background: none;
+    border: none;
+    padding: 8px 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    font-style: italic;
+    text-decoration: underline;
+    font-size: 12px;
+    display: block;
+    text-align: left;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel .review-card.collapsed .read-more-btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to bottom, transparent, #fff 30%, #fff);
+    width: 100%;
+    padding-left: 14px;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    margin-top: auto;
+    font-weight: 600;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-carousel .empty-state {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    padding: 24px;
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .reviews-carousel .rating-row {
+      gap: 6px;
+    }
+
+    #shopify-section-{{ section.id }} .reviews-carousel .stars {
+      gap: 2px;
+    }
+
+    #shopify-section-{{ section.id }} .reviews-carousel .star {
+      width: 16px;
+      height: 16px;
+    }
+
+    #shopify-section-{{ section.id }} .reviews-carousel .verified-badge {
+      font-size: 14px;
+    }
+
+    #shopify-section-{{ section.id }} .reviews-carousel .title {
+      font-weight: 900;
+      font-size: 16px;
+      gap: 8px;
+    }
+
+    #shopify-section-{{ section.id }} .reviews-carousel .body {
+      font-size: 14px;
+    }
+
+    #shopify-section-{{ section.id }} .reviews-carousel .read-more-btn {
+      font-size: 14px;
+    }
+  }
+</style>
+
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+  <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative reviews-carousel">
+    {%- capture indicators -%}
+      {%- if section.settings.carousel_on_desktop -%}
+        <div class="indicators hidden lg:flex gap-2d5">
+          <button class="button button--secondary" type="button" is="previous-button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">
+              {%- render 'icon', icon: 'chevron-left', class: 'transform' -%}
+            </span>
+          </button>
+          <button class="button button--secondary" type="button" is="next-button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.next' | t | escape }}">
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">
+              {%- render 'icon', icon: 'chevron-right', class: 'transform' -%}
+            </span>
+          </button>
+        </div>
+      {%- endif -%}
+    {%- endcapture -%}
+
+    {%- render 'section-heading', section: section, section_button: indicators -%}
+
+    <slider-element
+      id="Slider-{{ section.id }}"
+      class="grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}"
+      selector=".card-grid>.card"
+      {% if section.settings.carousel_on_desktop or section.settings.swipe_on_mobile %}
+        tabindex="0"
+      {% endif %}
+    >
+      <motion-list
+        id="ReviewsList-{{ section.id }}"
+        class="product-grid card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid"
+      >
+        <div class="card product-card product-card--standard empty-state">Loading reviews...</div>
+      </motion-list>
+    </slider-element>
+  </div>
+</div>
+
+<script>
+  // TBG Custom Code
+  (function () {
+    const sectionRoot = document.getElementById('shopify-section-{{ section.id }}');
+    if (!sectionRoot || sectionRoot.dataset.reviewsInit === 'true') return;
+    sectionRoot.dataset.reviewsInit = 'true';
+
+    const slidesEl = sectionRoot.querySelector('#ReviewsList-{{ section.id }}');
+    if (!slidesEl) return;
+
+    let cardObserver = null;
+
+    function formatDate(iso) {
+      if (!iso) return '';
+      const d = new Date(iso);
+      const opts = { month: 'numeric', day: 'numeric', year: 'numeric' };
+      return d.toLocaleDateString('en-US', opts);
+    }
+
+    function createStarSVG(filled) {
+      const fillColor = filled ? '#000' : 'rgba(0,0,0,0.2)';
+      return `
+        <div class="star" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-label="${filled ? 'filled star' : 'empty star'}">
+            <path fill="${fillColor}" d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.782 1.402 8.184L12 18.896l-6.336 3.88 1.402-8.184L1.132 9.21l8.2-1.192z"/>
+          </svg>
+        </div>`;
+    }
+
+    function formatName(name) {
+      const raw = (name || '').trim();
+      if (!raw) return 'Anonymous';
+      const parts = raw.split(' ');
+      if (parts.length > 1 && parts[parts.length - 1]) {
+        return `${parts[0]} ${parts[parts.length - 1][0]}.`;
+      }
+      return parts[0];
+    }
+
+    function setupCardObserver() {
+      if (cardObserver) cardObserver.disconnect();
+
+      cardObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const card = entry.target;
+            const readMoreBtn = card.querySelector('.read-more-btn');
+
+            if (!entry.isIntersecting && card.classList.contains('opened') && readMoreBtn) {
+              card.classList.add('collapsed');
+              card.classList.remove('opened');
+              readMoreBtn.textContent = 'Read more';
+              readMoreBtn.setAttribute('aria-label', 'Read full review');
+            }
+          });
+        },
+        {
+          root: null,
+          rootMargin: '-50px',
+          threshold: 0,
+        }
+      );
+    }
+
+    function applyReadMoreLogic(card) {
+      const existingBtn = card.querySelector('.read-more-btn');
+      if (existingBtn) existingBtn.remove();
+
+      card.classList.remove('collapsed');
+      card.classList.remove('opened');
+
+      const cardHeight = card.scrollHeight;
+      const cardVisibleHeight = card.offsetHeight;
+
+      if (cardHeight > 290) {
+        card.classList.add('collapsed');
+        card.classList.remove('opened');
+
+        setTimeout(() => {
+          const collapsedHeight = card.offsetHeight;
+          const fullHeight = card.scrollHeight;
+
+          if (fullHeight > collapsedHeight) {
+            const readMoreBtn = document.createElement('button');
+            readMoreBtn.className = 'read-more-btn';
+            readMoreBtn.textContent = 'Read more';
+            readMoreBtn.type = 'button';
+            readMoreBtn.setAttribute('aria-label', 'Read full review');
+
+            readMoreBtn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              if (card.classList.contains('collapsed')) {
+                card.classList.remove('collapsed');
+                card.classList.add('opened');
+                readMoreBtn.textContent = 'Read less';
+                readMoreBtn.setAttribute('aria-label', 'Collapse review');
+              } else {
+                card.classList.add('collapsed');
+                card.classList.remove('opened');
+                readMoreBtn.textContent = 'Read more';
+                readMoreBtn.setAttribute('aria-label', 'Read full review');
+              }
+            });
+
+            const reviewContent = card.querySelector('.review-content');
+            if (reviewContent) reviewContent.appendChild(readMoreBtn);
+            if (cardObserver) cardObserver.observe(card);
+          } else {
+            card.classList.remove('collapsed');
+          }
+        }, 0);
+      }
+    }
+
+    function refreshReadMoreCards() {
+      const cards = slidesEl.querySelectorAll('.review-card');
+      if (!cards.length) return;
+
+      setupCardObserver();
+      cards.forEach((card) => applyReadMoreLogic(card));
+    }
+
+    function buildReviewCard(r) {
+      const card = document.createElement('div');
+      card.className = 'card product-card product-card--standard review-card';
+      card.setAttribute('role', 'group');
+
+      const reviewerName =
+        (r.reviewer && (r.reviewer.name || `${r.reviewer.first_name || ''} ${r.reviewer.last_name || ''}`.trim())) ||
+        'Anonymous';
+
+      card.setAttribute('aria-label', `Review by ${reviewerName}`);
+
+      const imgUrl = (r.pictures && r.pictures[0] && r.pictures[0].urls && r.pictures[0].urls.original) || '';
+      const reviewerImageHTML = `
+        <div class="review-image">
+          ${
+            imgUrl
+              ? `<img alt="Reviewer image" src="${imgUrl}">`
+              : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666;">No Image</div>'
+          }
+        </div>
+      `;
+
+      let starsHTML = '';
+      for (let i = 1; i <= 5; i++) {
+        starsHTML += createStarSVG(i <= (typeof r.rating === 'number' ? r.rating : 0));
+      }
+
+      const verifiedHTML =
+        r.verified && String(r.verified).toLowerCase().includes('verified')
+          ? '<div class="verified-badge" aria-label="Verified purchase">Verified</div>'
+          : '';
+
+      card.innerHTML = `
+        ${reviewerImageHTML}
+        <div class="review-content">
+          <div class="rating-row">
+            <div class="stars" aria-label="Rating: ${r.rating || 0} out of 5">${starsHTML}</div>
+            ${verifiedHTML}
+          </div>
+          <div class="title">${r.title || ''}</div>
+          <div class="body-wrapper"><p class="body">${r.body || ''}</p></div>
+          <div class="footer">
+            <div>${formatName(reviewerName)}</div>
+            <div>${formatDate(r.created_at)}</div>
+          </div>
+        </div>
+      `;
+
+      setTimeout(() => {
+        applyReadMoreLogic(card);
+      }, 0);
+
+      return card;
+    }
+
+    async function fetchReviews() {
+      setupCardObserver();
+
+      try {
+        const res = await fetch('https://hocky-name-generator-seven.vercel.app/api/mostRecentReviews');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        const data = await res.json();
+        const reviews = Array.isArray(data.groupedReviews && data.groupedReviews['With Pictures'])
+          ? data.groupedReviews['With Pictures'].filter((r) => r.rating >= 4)
+          : [];
+
+        slidesEl.innerHTML = '';
+
+        if (!reviews.length) {
+          slidesEl.innerHTML = '<div class="card product-card product-card--standard empty-state">No reviews available right now.</div>';
+          return;
+        }
+
+        reviews.forEach((review) => {
+          slidesEl.appendChild(buildReviewCard(review));
+        });
+
+        // Let slider-element recalculate after dynamic DOM insert.
+        requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
+      } catch (err) {
+        console.error('Failed to load reviews:', err);
+        slidesEl.innerHTML = '<div class="card product-card product-card--standard empty-state">Unable to load reviews.</div>';
+      }
+    }
+
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        refreshReadMoreCards();
+      }, 180);
+    });
+
+    fetchReviews();
+  })();
+  // End TBG Custom Code
+</script>
+
+{% schema %}
+{
+  "name": "Reviews Card Native",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "carousel_on_desktop",
+      "label": "t:sections.global.settings.carousel_on_desktop.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__mobile.content"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:sections.global.settings.columns_mobile.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.global.settings.columns_mobile.options__2.label"
+        }
+      ],
+      "default": "1",
+      "label": "t:sections.global.settings.columns_mobile.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "swipe_on_mobile",
+      "label": "t:sections.global.settings.swipe_on_mobile.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 2,
+      "label": "t:sections.global.settings.columns.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__heading.content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:sections.global.settings.heading.label",
+      "default": "Customer reviews"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-md",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.global.settings.heading_alignment.label",
+      "options": [
+        {
+          "value": "text-left md:items-end md:flex-row",
+          "label": "t:sections.global.settings.heading_alignment.options__1.label"
+        },
+        {
+          "value": "text-center md:items-center",
+          "label": "t:sections.global.settings.heading_alignment.options__2.label"
+        },
+        {
+          "value": "text-right md:items-end md:flex-row-reverse",
+          "label": "t:sections.global.settings.heading_alignment.options__3.label"
+        }
+      ],
+      "default": "text-left md:items-end md:flex-row"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:sections.global.settings.subheading.label"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:sections.global.settings.description.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__colors.content",
+      "info": "t:sections.global.settings.header__colors.info"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "t:sections.global.settings.color_text.label"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "t:sections.global.settings.color_background.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_background",
+      "label": "t:sections.global.settings.gradient_background.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 72
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews Card Native"
+    }
+  ]
+}
+{% endschema %}

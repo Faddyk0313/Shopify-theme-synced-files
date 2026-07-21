@@ -1,0 +1,13 @@
+{% comment %}
+Custom robots.txt override for Titan BattleGear to allow policy pages
+{% endcomment %}
+
+User-agent: *
+Allow: /policies/
+Allow: /policies/privacy-policy
+Allow: /policies/terms-of-service
+Allow: /policies/contact-information
+Allow: /policies/shipping-policy
+Allow: /policies/refund-policy
+
+{{ shop.robots_txt }}

@@ -1,0 +1,256 @@
+{%- doc -%}
+  Renders product pricing with sale detection, unit prices, and dynamic price ranges.
+
+  Displays comprehensive pricing information including regular prices, sale prices, price ranges for products with variants, and unit pricing. Automatically detects sales, formats currencies, and handles various pricing scenarios with proper accessibility support.
+
+  @param {object} [product] - Shopify product object for pricing
+  @param {object} [variant] - Specific variant for single price display
+  @param {boolean} [use_variant] - Show variant price vs product range
+  @param {boolean} [placeholder] - Display placeholder $19.99 price
+  @param {boolean} [hide_unit_price] - Hide unit price information
+  @param {boolean} [hide_sale_price] - Hide compare at (sale) price
+  @param {boolean} [skip_to_price] - Skip quantity break considerations
+  @param {string} [class] - Additional CSS classes
+
+  @example
+  {% render 'product-price',
+     product: product,
+     variant: product.selected_variant,
+     use_variant: true
+  %}
+{%- enddoc -%}
+
+
+{%- comment -%}TBG Custom Code{%- endcomment -%}
+<style>
+  .product-sticky-form .prod-id-{{ product.id }} {
+    flex-direction: row !important;
+  }
+  .wholesale-price {
+    position: relative;
+  }
+  .diagonal-strike {
+    color: gray;
+  }
+  .diagonal-strike::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: red;
+    transform: rotate(15deg); /* changed from -15deg to 15deg */
+    transform-origin: center;
+  }
+  .normalSaleFont {
+    font-size: 90% !important;
+  }
+</style>
+
+{%- assign size_option_index = 0 -%}
+{%- if product != blank -%}
+  {%- for option in product.options_with_values -%}
+    {%- assign downcased_option = option.name | downcase -%}
+    {%- if downcased_option contains 'size' -%}
+      {%- assign size_option_index = option.position -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if size_option_index == 0 -%}
+    {%- assign size_option_index = 1 -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- if size_option_index == 0 -%}
+  {%- assign size_option_index = 1 -%}
+{%- endif -%}
+
+{%- assign original_price = product.price -%}
+{%- assign wholesale_discount = 0 -%}
+
+{% comment %} {%- assign og_product_ids = "8388625531058,8256299040946,8256293404850,8256229179570,8251770142898" | split: "," -%} {% endcomment %}
+{% comment %} {%- assign product_id_str = product.id | append: "" -%} {% endcomment %}
+
+{%- if customer -%}
+  {% assign tags = customer.tags | downcase %}
+  {% if tags contains 'wholesale-gold' %}
+    {% assign wholesale_discount = 0.44 %}
+  {% elsif tags contains 'wholesale-silver' %}
+    {% assign wholesale_discount = 0.37 %}
+  {% elsif tags contains 'wholesale-bronze' %}
+    {% assign wholesale_discount = 0.30 %}
+  {% elsif tags contains 'gold-dealer' %}
+    {% assign wholesale_discount = 0.30 %}
+  {% elsif tags contains 'silver-dealer' %}
+    {% assign wholesale_discount = 0.25 %}
+  {% elsif tags contains 'bronze-dealer' %}
+    {% assign wholesale_discount = 0.20 %}
+    {% comment %} {%- elsif og_product_ids contains product_id_str -%} {% endcomment %}
+    {% comment %} {%- assign wholesale_discount = 0.30 -%} {% endcomment %}
+  {%- else -%}
+    {%- assign wholesale_discount = 0 -%}
+  {%- endif -%}
+{%- else -%}
+  {% comment %}
+    {%- if og_product_ids contains product_id_str -%}
+      {%- assign wholesale_discount = 0.30 -%}
+    {%- else -%}
+  {% endcomment %}
+  {%- assign wholesale_discount = 0 -%}
+  {% comment %} {%- endif -%} {% endcomment %}
+{%- endif -%}
+
+{%- if wholesale_discount > 0 -%}
+  {%- assign discount_amount = original_price | times: wholesale_discount -%}
+  {%- assign discounted_price = original_price | minus: discount_amount -%}
+
+  <p
+    class="wholesale-price whitespace-nowrap flex items-center gap-2 {{ style }} {%- if is_center == false -%} justify-start {%- else -%} justify-center {%- endif -%}"
+    style="margin-block: 0 !important; {% if boldPrice == true %} margin-left: auto; {% endif %}"
+  >
+    <span class="diagonal-strike {% if boldPrice == true %} customStyle heading leading-none product-title-sm mobile:product-title-sm {% else %} price__regular text-gray-500 {% endif %} whitespace-nowrap relative inline-block ">
+      {{ product.price | money }}
+    </span>
+    <span class="price__regular new {% if boldPrice == true %} customStyle heading leading-none product-title-sm mobile:product-title-sm {% else %} price__regular text-gray-500 {% endif %} whitespace-nowrap text-red-600 font-semibold">
+      {{ discounted_price | money }}
+    </span>
+  </p>
+
+{%- else -%}
+  {%- comment -%}TBG Custom Code{%- endcomment -%}
+{%- liquid
+  if use_variant
+    assign target = variant | default: product.selected_or_first_available_variant
+  elsif placeholder
+    assign target = null
+  else
+    assign target = product
+  endif
+
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: 1999
+
+  assign on_sale = false
+  unless hide_sale_price
+    if compare_at_price > price
+      assign on_sale = true
+    endif
+  endunless
+-%}
+{% comment %} TBG CUSTOM CODE {% endcomment %}
+  {%- assign variant_price_entries = '' -%}
+  {%- if product.variants != blank -%}
+    {%- for variant in product.variants -%}
+      {%- assign variant_size_value = '' -%}
+      {%- case size_option_index -%}
+        {%- when 1 -%}
+          {%- assign variant_size_value = variant.option1 -%}
+        {%- when 2 -%}
+          {%- assign variant_size_value = variant.option2 -%}
+        {%- when 3 -%}
+          {%- assign variant_size_value = variant.option3 -%}
+        {%- else -%}
+          {%- assign variant_size_value = variant.option1 -%}
+      {%- endcase -%}
+      {%- assign trimmed_variant_size = variant_size_value | strip -%}
+      {%- if trimmed_variant_size != blank -%}
+        {%- capture entry -%}
+          {%- if variant_price_entries != '' -%},{%- endif -%}
+          {"size": {{ trimmed_variant_size | json }}, "price": {{ variant.price | money | json }}}
+        {%- endcapture -%}
+        {%- assign variant_price_entries = variant_price_entries | append: entry -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+  {%- capture variant_prices_json -%}
+    {%- if variant_price_entries != '' -%}[{{ variant_price_entries }}]{%- else -%}[]{%- endif -%}
+  {%- endcapture -%}
+
+  {% comment %} TBG CUSTOM CODE {% endcomment %}
+  <div
+    {% comment %} B - Test START {% endcomment %}
+        style="display: flex;
+        {% if source == 'sub-header' %} justify-content: start; {% endif %}
+        {% comment %} {% if source == 'sub-header' %} flex-direction: column-reverse; {% else %} flex-direction: column; {% endif %} {% endcomment %}
+        {% if boldPrice == true %} margin-left: auto; {% endif %}
+         "
+      {% comment %} B - Test END {% endcomment %}
+    data-product-id="{{ product.id }}"
+    data-variant-prices="{{ variant_prices_json | escape }}"
+    data-size-option-index="{{ size_option_index }}"
+    class="
+      prod-id-{{ product.id }} price
+      {%- if on_sale %} price--on-sale{% endif -%}
+      {%- if class != blank %} {{ class }}{% endif -%}
+    "
+  >
+  {%- if on_sale -%}
+    <span class="sr-only">{{ 'products.price.sale_price' | t }}</span>
+  {%- endif -%}
+
+  {%- comment -%}TBG Custom Code{%- endcomment -%}
+  <span class=" cusPrice {% if boldPrice == true %} customStyle heading leading-none product-title-sm mobile:product-title-sm {% else %} price__regular {% endif %} whitespace-nowrap ">
+    {%- liquid
+      if product.quantity_price_breaks_configured? != true or skip_to_price
+        if target == product and product.price_varies
+          if settings.currency_code_enabled
+            assign price_min = product.price_min | money_with_currency
+          else
+            assign price_min = product.price_min | money
+          endif
+          echo 'products.price.from_price_html' | t: price: price_min
+        else
+          if settings.currency_code_enabled
+            echo price | money_with_currency
+          else
+            echo price | money
+          endif
+        endif
+      else
+        if settings.currency_code_enabled
+          assign price_min = product.price_min | money_with_currency
+        else
+          assign price_min = product.price_min | money
+        endif
+        echo 'products.price.from_price_html' | t: price: price_min
+      endif
+    -%}
+  </span>
+  {%- if on_sale and source == 'sub-header' -%}
+    <style>
+      .subheader .customStyle {
+        color: #d60d10;
+      }
+    </style>
+  {% endif %}
+
+  {%- if on_sale -%}
+    <span class="sr-only">{{ 'products.price.regular_price' | t }}</span>
+    {% comment %} TBG CUSTOM CODE {% endcomment %}
+    <span class="price__sale inline-flex items-center h-auto relative {% if saleFontSize == 'normal' %} normalSaleFont {% endif %}">
+      {%- liquid
+        if settings.currency_code_enabled
+          echo compare_at_price | money_with_currency
+        else
+          echo compare_at_price | money
+        endif
+      -%}
+    </span>
+  {%- endif -%}
+
+  {%- unless hide_unit_price -%}
+    {%- if target.unit_price_measurement -%}
+      {%- liquid
+        if settings.currency_code_enabled
+          assign unit_price = target.unit_price | money_with_currency
+        else
+          assign unit_price = target.unit_price | money
+        endif
+      -%}
+      {%- render 'unit-price', price: unit_price, measurement: target.unit_price_measurement -%}
+    {%- endif -%}
+  {%- endunless -%}
+</div>
+{%- comment -%}TBG Custom Code{%- endcomment -%}
+{%- endif -%}

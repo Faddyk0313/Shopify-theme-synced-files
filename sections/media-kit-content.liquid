@@ -1,0 +1,1187 @@
+<style>
+  /* CSS Variables */
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --mobile-carousel-items: {{ section.settings.mobile_carousel_items }};
+  }
+
+  #shopify-section-{{ section.id }} .section::before {
+    content: none;
+  }
+
+  /* Hero Section */
+  #shopify-section-{{ section.id }} .cus_hero-section {
+    display: grid;
+    grid-template-columns: 60% 40%;
+  }
+
+  #shopify-section-{{ section.id }} .hero-left h2 {
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .hero-left p {
+    line-height: 1.6;
+  }
+
+  #shopify-section-{{ section.id }} .hero-right {
+    background-color: #f5f5f5;
+  }
+
+  /* Quick Facts */
+  #shopify-section-{{ section.id }} .quick-facts h2 {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .fact-item {
+    margin-bottom: 1rem;
+  }
+
+  #shopify-section-{{ section.id }} .fact-item strong {
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .certification-badges {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    max-width: 450px;
+  }
+
+  #shopify-section-{{ section.id }} .badge-item {
+    text-align: center;
+  }
+
+  /* Logos Section */
+  #shopify-section-{{ section.id }} .logos-section {
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  #shopify-section-{{ section.id }} .logos-section h2 {
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .logos-section .description {
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    max-width: 60%;
+  }
+
+  #shopify-section-{{ section.id }} .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2rem;
+  }
+
+  #shopify-section-{{ section.id }} .logo-item {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .logo-box {
+    background-color: #ffffff;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    width: 100%;
+    max-width: 200px;
+  }
+
+  #shopify-section-{{ section.id }} .logo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .logo-item p {
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .logo-downloads {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: auto;
+  }
+
+  #shopify-section-{{ section.id }} .logo-downloads a {
+    color: #e2fb31;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .logo-downloads a:hover {
+    text-decoration: underline;
+  }
+
+  /* Product Photos Section */
+  #shopify-section-{{ section.id }} .product-photos-section h2 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .product-photos-section .description {
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    max-width: 60%;
+  }
+
+  #shopify-section-{{ section.id }} .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .photo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .photo-box {
+    aspect-ratio: 1;
+    background-color: #000000;
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  #shopify-section-{{ section.id }} .photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .photo-downloads {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: auto;
+  }
+
+  #shopify-section-{{ section.id }} .photo-downloads a {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .photo-downloads a:hover {
+    text-decoration: underline;
+  }
+
+  #shopify-section-{{ section.id }} .carousel-navigation {
+    display: none;
+  }
+
+  /* Video & Founder Section */
+  #shopify-section-{{ section.id }} .video-founder-section {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    gap: 0;
+  }
+
+  #shopify-section-{{ section.id }} .video-section {
+    background-color: #000000;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #shopify-section-{{ section.id }} .video-section h2 {
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .video-wrapper {
+    aspect-ratio: 16/9;
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .video-wrapper iframe,
+  #shopify-section-{{ section.id }} .video-wrapper video {
+    width: 100%;
+    height: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .founder-section {
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .founder-section h2 {
+    font-size: var(--title-md);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .founder-section .description {
+    font-size: 16px;
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  #shopify-section-{{ section.id }} .founder-section a {
+    color: #0066cc;
+    text-decoration: underline;
+  }
+
+  #shopify-section-{{ section.id }} .founder-photo {
+    margin-top: 0.5rem;
+    aspect-ratio: 5/6;
+    background-color: transparent;
+    overflow: hidden;
+    width: 30vw;
+    max-width: 300px;
+  }
+
+  #shopify-section-{{ section.id }} .founder-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Press Section */
+  #shopify-section-{{ section.id }} .press-section h2 {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .press-contact {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  #shopify-section-{{ section.id }} .press-contact svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  #shopify-section-{{ section.id }} .press-contact a {
+    color: #000000;
+    text-decoration: none;
+  }
+
+  #shopify-section-{{ section.id }} .press-contact a:hover {
+    text-decoration: underline;
+  }
+
+  #shopify-section-{{ section.id }} .social-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .social-links svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .cus_hero-section {
+      grid-template-columns: 1fr;
+    }
+
+    #shopify-section-{{ section.id }} .logos-section .description,
+    #shopify-section-{{ section.id }} .product-photos-section .description {
+      max-width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .logo-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    #shopify-section-{{ section.id }} .photo-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    #shopify-section-{{ section.id }} .photo-grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .photo-item {
+      flex: 0 0 calc(100% / var(--mobile-carousel-items) - 0.8rem);
+      scroll-snap-align: start;
+    }
+
+    #shopify-section-{{ section.id }} .carousel-navigation {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    #shopify-section-{{ section.id }} .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #cccccc;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #shopify-section-{{ section.id }} .carousel-dot.active {
+      background-color: #000000;
+    }
+
+    #shopify-section-{{ section.id }} .video-founder-section {
+      grid-template-columns: 1fr;
+    }
+
+    #shopify-section-{{ section.id }} .founder-photo {
+      width: 100%;
+    }
+
+    h2.title-lg.tracking-heading {
+      font-size: var(--title-md) !important;
+    }
+  }
+
+  @media (min-width: 1450px) {
+    #shopify-section-{{ section.id }} .founder-photo {
+      width: 400px;
+      max-width: 400px;
+    }
+  }
+
+  @media (min-width: 2200px) {
+    .hero-left.page-width,
+    .video-section.page-width {
+      padding-inline-end: 170px !important;
+    }
+
+    .hero-right.page-width,
+    .founder-section.page-width {
+      padding-inline-start: 170px !important;
+    }
+  }
+</style>
+
+<div class="section media-brand-assets-section">
+  <!-- Hero Section -->
+  <div class="cus_hero-section">
+    <div class="hero-left section--padding page-width">
+      <{{ section.settings.heading_tag }} class="{{ section.settings.heading_size }}">
+        {{- section.settings.hero_heading -}}
+      </{{ section.settings.heading_tag }}>
+      <p>{{ section.settings.hero_description }}</p>
+    </div>
+    <div class="hero-right section--padding page-width" style="margin: 0;">
+      <div class="quick-facts">
+        <{{ section.settings.heading_tag }} class="{{ section.settings.heading_size }}">
+          {{- section.settings.quick_facts_heading -}}
+        </{{ section.settings.heading_tag }}>
+        <div class="fact-item">
+          <strong>{{ section.settings.fact_1_label }}</strong> {{ section.settings.fact_1_value }}
+        </div>
+        <div class="fact-item">
+          <strong>{{ section.settings.fact_2_label }}</strong> {{ section.settings.fact_2_value }}
+        </div>
+        <div class="fact-item">
+          <strong>{{ section.settings.fact_3_label }}</strong> {{ section.settings.fact_3_value }}
+        </div>
+        <div class="certification-badges">
+          {% if section.settings.badge_1_image != blank %}
+            <div class="badge-item">
+              <img
+                src="{{ section.settings.badge_1_image | img_url: '160x160' }}"
+                alt="Fact Badge"
+              >
+            </div>
+          {% endif %}
+          {% if section.settings.badge_2_image != blank %}
+            <div class="badge-item">
+              <img
+                src="{{ section.settings.badge_2_image | img_url: '160x160' }}"
+                alt="Fact Badge"
+              >
+            </div>
+          {% endif %}
+          {% if section.settings.badge_3_image != blank %}
+            <div class="badge-item">
+              <img
+                src="{{ section.settings.badge_3_image | img_url: '160x160' }}"
+                alt="Fact Badge"
+              >
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logos Section -->
+  <div class="page-width logos-section section--padding">
+    <{{ section.settings.heading_tag }} class="{{ section.settings.heading_size }}">
+      {{- section.settings.logos_heading -}}
+    </{{ section.settings.heading_tag }}>
+    <p class="description">{{ section.settings.logos_description }}</p>
+    <div class="logo-grid">
+      {% for i in (1..6) %}
+        {% assign logo_image = 'logo_' | append: i | append: '_image' %}
+        {% assign logo_title = 'logo_' | append: i | append: '_title' %}
+        {% assign logo_png = 'logo_' | append: i | append: '_png_file' %}
+        {% assign logo_svg = 'logo_' | append: i | append: '_svg_file' %}
+        <div class="logo-item">
+          <div class="logo-box">
+            {% if section.settings[logo_image] != blank %}
+              <img
+                src="{{ section.settings[logo_image] | img_url: '300x300' }}"
+                alt="{{ section.settings[logo_title] }}"
+              >
+            {% endif %}
+          </div>
+          <p>{{ section.settings[logo_title] }}</p>
+          <div class="logo-downloads">
+            {% if section.settings[logo_png] != blank %}
+              <a href="{{ section.settings[logo_png] }}" class="download-link" data-filename="{{ section.settings[logo_title] | handleize }}.png">PNG</a>
+            {% endif %}
+            {% if section.settings[logo_svg] != blank %}
+              <a href="{{ section.settings[logo_svg] }}" class="download-link" data-filename="{{ section.settings[logo_title] | handleize }}.svg">SVG</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Product Photos Section -->
+  <div class="page-width product-photos-section section--padding">
+    <{{ section.settings.heading_tag }} class="{{ section.settings.heading_size }}">
+      {{- section.settings.photos_heading -}}
+    </{{ section.settings.heading_tag }}>
+    <p class="description">{{ section.settings.photos_description }}</p>
+    <div class="photo-grid" id="photo-carousel-{{ section.id }}">
+      {% for i in (1..5) %}
+        {% assign photo_image = 'photo_' | append: i | append: '_image' %}
+        {% assign photo_png = 'photo_' | append: i | append: '_png_file' %}
+        <div class="photo-item" data-index="{{ forloop.index0 }}">
+          <div class="photo-box">
+            {% if section.settings[photo_image] != blank %}
+              <img src="{{ section.settings[photo_image] | img_url: '600x600' }}" alt="Product photo {{ i }}">
+            {% endif %}
+          </div>
+          <div class="photo-downloads">
+            {% if section.settings[photo_png] != blank %}
+              <a href="{{ section.settings[photo_png] }}" class="download-link" data-filename="product-photo-{{ i }}.png">PNG</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="carousel-navigation" id="carousel-nav-{{ section.id }}">
+      {% assign total_images = 5 %}
+      {% assign visible_items = section.settings.mobile_carousel_items %}
+      {% assign dot_count = total_images | minus: visible_items | plus: 1 | ceil %}
+      {% for i in (1..dot_count) %}
+        <button class="carousel-dot {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Go to page {{ i }}"></button>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Video & Founder Section -->
+  <div class="video-founder-section ">
+    <div class="video-section section--padding page-width" style="margin: 0;">
+      <{{ section.settings.heading_tag }} class="{{ section.settings.heading_size }}">
+        {{- section.settings.video_heading -}}
+      </{{ section.settings.heading_tag }}>
+      <div class="video-wrapper">
+        {% if section.settings.video_url != blank %}
+          {% if section.settings.video_url contains 'youtube.com' or section.settings.video_url contains 'youtu.be' %}
+            {% assign video_id = section.settings.video_url
+              | split: 'v='
+              | last
+              | split: '/'
+              | last
+              | split: '&'
+              | first
+            %}
+            <iframe
+              src="https://www.youtube.com/embed/{{ video_id }}"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            >
+            </iframe>
+          {% elsif section.settings.video_url contains 'vimeo.com' %}
+            {% assign video_id = section.settings.video_url | split: '/' | last %}
+            <iframe
+              src="https://player.vimeo.com/video/{{ video_id }}"
+              frameborder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowfullscreen
+            >
+            </iframe>
+          {% else %}
+            <video controls>
+              <source src="{{ section.settings.video_url }}" type="video/mp4">
+            </video>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="founder-section section--padding page-width">
+      <div>
+        <h2 class="title-md tracking-heading">
+          {{- section.settings.founder_heading -}}
+        </h2>
+        <p class="description">
+          {{ section.settings.founder_description }}
+          {% if section.settings.founder_story_link != blank %}
+            <a href="{{ section.settings.founder_story_link }}">{{ section.settings.founder_story_link_text }}</a>
+          {% endif %}
+        </p>
+      </div>
+      <div class="founder-photo">
+        {% if section.settings.founder_photo != blank %}
+          <img
+            src="{{ section.settings.founder_photo | img_url: '800x1000' }}"
+            alt="{{ section.settings.founder_heading }}"
+          >
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Press Section -->
+  <div class="page-width press-section section--padding">
+    <{{ section.settings.heading_tag }} class="{{ section.settings.heading_size }}">
+      {{- section.settings.press_heading -}}
+    </{{ section.settings.heading_tag }}>
+    <div class="press-contact">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+      <a href="mailto:{{ section.settings.press_email }}">{{ section.settings.press_email }}</a>
+    </div>
+    <div class="social-links">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+      </svg>
+      <span>{{ section.settings.social_handle }}</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // Handle download links
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('download-link')) {
+        e.preventDefault();
+        const url = e.target.getAttribute('href');
+        const filename = e.target.getAttribute('data-filename');
+
+        // Fetch the file and trigger download
+        fetch(url)
+          .then(response => response.blob())
+          .then(blob => {
+            const blobUrl = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = blobUrl;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(blobUrl);
+            document.body.removeChild(a);
+          })
+          .catch(error => {
+            console.error('Download failed:', error);
+            // Fallback: open in new tab if fetch fails
+            window.open(url, '_blank');
+          });
+      }
+    });
+
+    const sectionId = '{{ section.id }}';
+    const carousel = document.getElementById('photo-carousel-' + sectionId);
+    const dots = document.querySelectorAll('#carousel-nav-' + sectionId + ' .carousel-dot');
+
+    if (!carousel || dots.length === 0) return;
+
+    // Update active dot based on scroll position
+    function updateActiveDot() {
+      if (window.innerWidth > 768) return; // Only on mobile
+
+      const scrollLeft = carousel.scrollLeft;
+      const scrollWidth = carousel.scrollWidth - carousel.clientWidth;
+
+      if (scrollWidth === 0) {
+        dots[0]?.classList.add('active');
+        return;
+      }
+
+      // Calculate which dot should be active based on scroll percentage
+      const scrollPercentage = scrollLeft / scrollWidth;
+      const currentDotIndex = Math.round(scrollPercentage * (dots.length - 1));
+
+      dots.forEach((dot, index) => {
+        if (index === currentDotIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    // Handle dot clicks
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', function() {
+        if (window.innerWidth > 768) return; // Only on mobile
+
+        const scrollWidth = carousel.scrollWidth - carousel.clientWidth;
+        const scrollPosition = (scrollWidth / (dots.length - 1)) * index;
+
+        carousel.scrollTo({
+          left: scrollPosition,
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Update active dot on scroll
+    carousel.addEventListener('scroll', updateActiveDot);
+
+    // Update on resize
+    window.addEventListener('resize', updateActiveDot);
+
+    // Initialize
+    updateActiveDot();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Media & Brand Assets",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "hero_heading",
+      "label": "Hero Heading",
+      "default": "TITAN BATTLEGEAR IS REDEFINING SAFETY AND PERFORMANCE IN HOCKEY."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_description",
+      "label": "Hero Description",
+      "default": "We design the most advanced cut-resistant baselayer and neck guards in the game, built with proprietary technology and trusted by players at all levels of the game."
+    },
+    {
+      "type": "header",
+      "content": "Quick Facts"
+    },
+    {
+      "type": "text",
+      "id": "quick_facts_heading",
+      "label": "Quick Facts Heading",
+      "default": "QUICK FACTS"
+    },
+    {
+      "type": "text",
+      "id": "fact_1_label",
+      "label": "Fact 1 Label",
+      "default": "Founded:"
+    },
+    {
+      "type": "text",
+      "id": "fact_1_value",
+      "label": "Fact 1 Value",
+      "default": "2023"
+    },
+    {
+      "type": "text",
+      "id": "fact_2_label",
+      "label": "Fact 2 Label",
+      "default": "Headquarters:"
+    },
+    {
+      "type": "text",
+      "id": "fact_2_value",
+      "label": "Fact 2 Value",
+      "default": "Parkland, FL"
+    },
+    {
+      "type": "text",
+      "id": "fact_3_label",
+      "label": "Fact 3 Label",
+      "default": "Manufacturing:"
+    },
+    {
+      "type": "text",
+      "id": "fact_3_value",
+      "label": "Fact 3 Value",
+      "default": "Minneapolis, MN"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_1_image",
+      "label": "Badge 1 Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_2_image",
+      "label": "Badge 2 Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_3_image",
+      "label": "Badge 3 Image"
+    },
+    {
+      "type": "header",
+      "content": "Logos Section"
+    },
+    {
+      "type": "text",
+      "id": "logos_heading",
+      "label": "Logos Heading",
+      "default": "LOGOS"
+    },
+    {
+      "type": "textarea",
+      "id": "logos_description",
+      "label": "Logos Description",
+      "default": "We design the most advanced cut-resistant baselayer and neck guards in the game, built with proprietary technology and trusted by players at all levels of the game."
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_1_image",
+      "label": "Logo 1 Preview Image"
+    },
+    {
+      "type": "text",
+      "id": "logo_1_title",
+      "label": "Logo 1 Title",
+      "default": "MAIN, BLACK"
+    },
+    {
+      "type": "url",
+      "id": "logo_1_png_file",
+      "label": "Logo 1 PNG File URL"
+    },
+    {
+      "type": "url",
+      "id": "logo_1_svg_file",
+      "label": "Logo 1 SVG File URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_2_image",
+      "label": "Logo 2 Preview Image"
+    },
+    {
+      "type": "text",
+      "id": "logo_2_title",
+      "label": "Logo 2 Title",
+      "default": "MAIN, WHITE"
+    },
+    {
+      "type": "url",
+      "id": "logo_2_png_file",
+      "label": "Logo 2 PNG File URL"
+    },
+    {
+      "type": "url",
+      "id": "logo_2_svg_file",
+      "label": "Logo 2 SVG File URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_3_image",
+      "label": "Logo 3 Preview Image"
+    },
+    {
+      "type": "text",
+      "id": "logo_3_title",
+      "label": "Logo 3 Title",
+      "default": "SECONDARY, BLACK"
+    },
+    {
+      "type": "url",
+      "id": "logo_3_png_file",
+      "label": "Logo 3 PNG File URL"
+    },
+    {
+      "type": "url",
+      "id": "logo_3_svg_file",
+      "label": "Logo 3 SVG File URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_4_image",
+      "label": "Logo 4 Preview Image"
+    },
+    {
+      "type": "text",
+      "id": "logo_4_title",
+      "label": "Logo 4 Title",
+      "default": "SECONDARY, WHITE"
+    },
+    {
+      "type": "url",
+      "id": "logo_4_png_file",
+      "label": "Logo 4 PNG File URL"
+    },
+    {
+      "type": "url",
+      "id": "logo_4_svg_file",
+      "label": "Logo 4 SVG File URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_5_image",
+      "label": "Logo 5 Preview Image"
+    },
+    {
+      "type": "text",
+      "id": "logo_5_title",
+      "label": "Logo 5 Title",
+      "default": "PUCK MARK, BLACK"
+    },
+    {
+      "type": "url",
+      "id": "logo_5_png_file",
+      "label": "Logo 5 PNG File URL"
+    },
+    {
+      "type": "url",
+      "id": "logo_5_svg_file",
+      "label": "Logo 5 SVG File URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_6_image",
+      "label": "Logo 6 Preview Image"
+    },
+    {
+      "type": "text",
+      "id": "logo_6_title",
+      "label": "Logo 6 Title",
+      "default": "PUCK MARK, WHITE"
+    },
+    {
+      "type": "url",
+      "id": "logo_6_png_file",
+      "label": "Logo 6 PNG File URL"
+    },
+    {
+      "type": "url",
+      "id": "logo_6_svg_file",
+      "label": "Logo 6 SVG File URL"
+    },
+    {
+      "type": "header",
+      "content": "Product Photos Section"
+    },
+    {
+      "type": "text",
+      "id": "photos_heading",
+      "label": "Photos Heading",
+      "default": "PRODUCT PHOTOS"
+    },
+    {
+      "type": "textarea",
+      "id": "photos_description",
+      "label": "Photos Description",
+      "default": "We design the most advanced cut-resistant baselayer and neck guards in the game, built with proprietary technology and trusted by players at all levels of the game."
+    },
+    {
+      "type": "image_picker",
+      "id": "photo_1_image",
+      "label": "Product Photo 1"
+    },
+    {
+      "type": "url",
+      "id": "photo_1_png_file",
+      "label": "Product Photo 1 PNG File URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo_2_image",
+      "label": "Product Photo 2"
+    },
+    {
+      "type": "url",
+      "id": "photo_2_png_file",
+      "label": "Product Photo 2 PNG File URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo_3_image",
+      "label": "Product Photo 3"
+    },
+    {
+      "type": "url",
+      "id": "photo_3_png_file",
+      "label": "Product Photo 3 PNG File URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo_4_image",
+      "label": "Product Photo 4"
+    },
+    {
+      "type": "url",
+      "id": "photo_4_png_file",
+      "label": "Product Photo 4 PNG File URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "photo_5_image",
+      "label": "Product Photo 5"
+    },
+    {
+      "type": "url",
+      "id": "photo_5_png_file",
+      "label": "Product Photo 5 PNG File URL"
+    },
+    {
+      "type": "range",
+      "id": "mobile_carousel_items",
+      "min": 1,
+      "max": 5,
+      "step": 0.5,
+      "label": "Mobile Carousel Items Visible",
+      "info": "Number of product photos visible at once on mobile (e.g., 2.5 shows 2.5 images)",
+      "default": 2.5
+    },
+    {
+      "type": "header",
+      "content": "Video Section"
+    },
+    {
+      "type": "text",
+      "id": "video_heading",
+      "label": "Video Heading",
+      "default": "VIDEO COMMERCIAL"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Video URL",
+      "info": "YouTube, Vimeo, or direct video file URL"
+    },
+    {
+      "type": "header",
+      "content": "Founder Section"
+    },
+    {
+      "type": "text",
+      "id": "founder_heading",
+      "label": "Founder Heading",
+      "default": "FOUNDER & CEO PHOTO"
+    },
+    {
+      "type": "textarea",
+      "id": "founder_description",
+      "label": "Founder Description",
+      "default": "Download official photo of Andries de Villiers, Founder and CEO of Titan Battlegear, for press and speaking features."
+    },
+    {
+      "type": "url",
+      "id": "founder_story_link",
+      "label": "Founder Story Link"
+    },
+    {
+      "type": "text",
+      "id": "founder_story_link_text",
+      "label": "Founder Story Link Text",
+      "default": "Read Andries' Story"
+    },
+    {
+      "type": "image_picker",
+      "id": "founder_photo",
+      "label": "Founder Photo"
+    },
+    {
+      "type": "header",
+      "content": "Press & Partnership Section"
+    },
+    {
+      "type": "text",
+      "id": "press_heading",
+      "label": "Press Heading",
+      "default": "PRESS & PARTNERSHIP INQUIRIES"
+    },
+    {
+      "type": "text",
+      "id": "press_email",
+      "label": "Press Email",
+      "default": "media@titanbattlegear.com"
+    },
+    {
+      "type": "text",
+      "id": "social_handle",
+      "label": "Social Media Handle",
+      "default": "@titan_battlegear"
+    },
+    {
+      "type": "header",
+      "content": "Global Heading Settings"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-md",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.global.settings.heading_alignment.label",
+      "options": [
+        {
+          "value": "text-left md:items-end md:flex-row",
+          "label": "t:sections.global.settings.heading_alignment.options__1.label"
+        },
+        {
+          "value": "text-center md:items-center",
+          "label": "t:sections.global.settings.heading_alignment.options__2.label"
+        },
+        {
+          "value": "text-right md:items-end md:flex-row-reverse",
+          "label": "t:sections.global.settings.heading_alignment.options__3.label"
+        }
+      ],
+      "default": "text-left md:items-end md:flex-row"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "Media & Brand Assets"
+    }
+  ]
+}
+{% endschema %}

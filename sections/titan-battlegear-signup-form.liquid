@@ -1,0 +1,809 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #shopify-section-{{ section.id }} {
+    --tbg-bg: #f5f5f3;
+    --tbg-surface: #ffffff;
+    --tbg-border: rgba(0, 0, 0, 0.12);
+    --tbg-text: #1a1a1a;
+    --tbg-muted: #666;
+    --tbg-accent: #111;
+    --tbg-danger: #c0392b;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup {
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--tbg-surface);
+    border: 1px solid var(--tbg-border);
+    border-radius: 16px;
+    padding: 28px;
+    color: var(--tbg-text);
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__header {
+    margin-bottom: 24px;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--tbg-muted);
+    margin-bottom: 8px;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__title {
+    font-size: clamp(24px, 3vw, 34px);
+    line-height: 1.15;
+    margin: 0 0 8px;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__subtitle {
+    margin: 0;
+    color: var(--tbg-muted);
+    line-height: 1.6;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__required {
+    color: var(--tbg-danger);
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__field--full {
+    grid-column: 1 / -1;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__label {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__input,
+  #shopify-section-{{ section.id }} .tbg-signup__select,
+  #shopify-section-{{ section.id }} .tbg-signup__textarea {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--tbg-text);
+    font: inherit;
+    font-size: 14px;
+    padding: 10px 12px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__input,
+  #shopify-section-{{ section.id }} .tbg-signup__select {
+    height: 42px;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 44px;
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none"%3E%3Cpath d="M4.5 6.75L9 11.25L13.5 6.75" stroke="%231a1a1a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 18px 18px;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__select::-ms-expand {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__textarea {
+    min-height: 96px;
+    resize: vertical;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__input:focus,
+  #shopify-section-{{ section.id }} .tbg-signup__select:focus,
+  #shopify-section-{{ section.id }} .tbg-signup__textarea:focus {
+    outline: none;
+    border-color: rgba(0, 0, 0, 0.55);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.04);
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__panel {
+    background: var(--tbg-bg);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__panel-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    /* margin-top: 10px; */
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__checkbox input {
+    margin-top: 3px;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  #shopify-section-{{ section.id }} .tbg-signup__checkbox input[type=checkbox]:not(.switch):after {
+    inset-inline-start: 5px;
+    inset-block-start: 2px;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__checkbox span {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__sig-preview {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    border: 1px solid var(--tbg-border);
+    border-radius: 10px;
+    background: var(--tbg-bg);
+    min-height: 58px;
+    padding: 12px 14px;
+    margin-top: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__sig-name {
+    font-family: Georgia, serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #999;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__sig-name.is-signed {
+    color: var(--tbg-text);
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__meta {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__meta span {
+    display: block;
+    font-size: 11px;
+    color: #888;
+    line-height: 1.4;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__error {
+    display: none;
+    margin-top: 10px;
+    color: var(--tbg-danger);
+    font-size: 13px;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__error.is-visible {
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__submit {
+    width: 100%;
+    border: 0;
+    border-radius: 10px;
+    padding: 12px 16px;
+    background: var(--tbg-accent);
+    color: #fff;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    margin-top: 6px;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__submit:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__submit:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  #shopify-section-{{ section.id }} .tbg-signup__status {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--tbg-muted);
+    min-height: 1.2em;
+  }
+
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .tbg-signup {
+      padding: 20px;
+      border-radius: 14px;
+    }
+
+    #shopify-section-{{ section.id }} .tbg-signup__grid {
+      grid-template-columns: 1fr;
+    }
+
+    #shopify-section-{{ section.id }} .tbg-signup__sig-preview {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    #shopify-section-{{ section.id }} .tbg-signup__meta {
+      text-align: left;
+    }
+  }
+</style>
+
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+  <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
+    <div class="tbg-signup">
+      <div class="tbg-signup__header">
+        {% if section.settings.eyebrow != blank %}
+          <div class="tbg-signup__eyebrow">{{ section.settings.eyebrow }}</div>
+        {% endif %}
+        <h2 class="tbg-signup__title">{{ section.settings.title }}</h2>
+        {% if section.settings.subtitle != blank %}
+          <p class="tbg-signup__subtitle">{{ section.settings.subtitle }}</p>
+        {% endif %}
+      </div>
+
+      <form id="TBGSignupForm-{{ section.id }}" novalidate>
+        <div class="tbg-signup__field">
+          <label class="tbg-signup__label" for="tbg-guardian-name-{{ section.id }}"
+            >Parent / guardian name <span class="tbg-signup__required">*</span></label
+          >
+          <input
+            class="tbg-signup__input"
+            type="text"
+            id="tbg-guardian-name-{{ section.id }}"
+            placeholder="Full name"
+            autocomplete="name"
+            required
+          >
+        </div>
+
+        <div class="tbg-signup__field">
+          <label class="tbg-signup__label" for="tbg-relationship-{{ section.id }}"
+            >Relationship to child <span class="tbg-signup__required">*</span></label
+          >
+          <select class="tbg-signup__select" id="tbg-relationship-{{ section.id }}" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Parent">Parent</option>
+            <option value="Legal guardian">Legal guardian</option>
+          </select>
+        </div>
+
+        <div class="tbg-signup__field">
+          <label class="tbg-signup__label" for="tbg-guardian-email-{{ section.id }}"
+            >Parent / guardian email <span class="tbg-signup__required">*</span></label
+          >
+          <input
+            class="tbg-signup__input"
+            type="email"
+            id="tbg-guardian-email-{{ section.id }}"
+            placeholder="email@example.com"
+            autocomplete="email"
+            required
+          >
+        </div>
+
+        <div class="tbg-signup__field">
+          <label class="tbg-signup__label" for="tbg-guardian-phone-{{ section.id }}"
+            >Parent / guardian phone <span class="tbg-signup__required">*</span></label
+          >
+          <input
+            class="tbg-signup__input"
+            type="tel"
+            id="tbg-guardian-phone-{{ section.id }}"
+            placeholder="(555) 000-0000"
+            autocomplete="tel"
+            required
+          >
+        </div>
+
+        <div class="tbg-signup__field">
+          <label class="tbg-signup__label" for="tbg-child-name-{{ section.id }}"
+            >Child's name <span class="tbg-signup__required">*</span></label
+          >
+          <input
+            class="tbg-signup__input"
+            type="text"
+            id="tbg-child-name-{{ section.id }}"
+            placeholder="Full name"
+            autocomplete="off"
+            required
+          >
+        </div>
+
+        <div class="tbg-signup__field">
+          <label class="tbg-signup__label" for="tbg-child-dob-{{ section.id }}"
+            >Child's date of birth <span class="tbg-signup__required">*</span></label
+          >
+          <input class="tbg-signup__input" type="date" id="tbg-child-dob-{{ section.id }}" required>
+        </div>
+
+        <div class="tbg-signup__field">
+          <label class="tbg-signup__label" for="tbg-size-{{ section.id }}"
+            >Child's baselayer size <span class="tbg-signup__required">*</span></label
+          >
+          <select class="tbg-signup__select" id="tbg-size-{{ section.id }}" required>
+            <option value="" selected disabled>Select a size</option>
+            <option value="Youth XS">Youth XS</option>
+            <option value="Youth S">Youth S</option>
+            <option value="Youth M">Youth M</option>
+            <option value="Youth L">Youth L</option>
+            <option value="Youth XL">Youth XL</option>
+            <option value="Adult XS">Adult XS</option>
+            <option value="Adult S">Adult S</option>
+            <option value="Adult M">Adult M</option>
+            <option value="Adult L">Adult L</option>
+            <option value="Adult XL">Adult XL</option>
+            <option value="Adult XXL">Adult XXL</option>
+          </select>
+        </div>
+
+        <div class="tbg-signup__panel">
+          <div class="tbg-signup__panel-title">
+            Mailing address <span class="tbg-signup__required">(optional)</span>
+          </div>
+          <div class="tbg-signup__field">
+            <input
+              class="tbg-signup__input"
+              type="text"
+              id="tbg-address-street-{{ section.id }}"
+              placeholder="Street address"
+            >
+          </div>
+          <div class="tbg-signup__grid">
+            <div class="tbg-signup__field">
+              <input class="tbg-signup__input" type="text" id="tbg-address-city-{{ section.id }}" placeholder="City">
+            </div>
+            <div class="tbg-signup__field">
+              <input class="tbg-signup__input" type="text" id="tbg-address-state-{{ section.id }}" placeholder="State">
+            </div>
+          </div>
+          <div class="tbg-signup__field">
+            <input class="tbg-signup__input" type="text" id="tbg-address-zip-{{ section.id }}" placeholder="ZIP code">
+          </div>
+        </div>
+
+        <div class="tbg-signup__field">
+          <label class="tbg-signup__label" for="tbg-social-handles-{{ section.id }}"
+            >Social media handles <span class="tbg-signup__required">(optional)</span></label
+          >
+          <textarea
+            class="tbg-signup__textarea"
+            id="tbg-social-handles-{{ section.id }}"
+            placeholder="@yourkid_ig, @yourkid on TikTok..."
+          ></textarea>
+        </div>
+
+        <div class="tbg-signup__panel">
+          <div class="tbg-signup__panel-title">Permissions &amp; interests</div>
+
+          <div
+            class="tbg-signup__section-divider"
+            style="display: flex; flex-direction: column; gap: 12px; padding-bottom: 16px;"
+          >
+            <div class="tbg-signup__field" style="margin-bottom: 0;">
+              <label class="tbg-signup__label" for="tbg-baselayer-brand-{{ section.id }}">
+                Do you wear a baselayer today? If so, which brand? <span class="tbg-signup__required">*</span>
+              </label>
+              <input
+                class="tbg-signup__input"
+                type="text"
+                id="tbg-baselayer-brand-{{ section.id }}"
+                placeholder=""
+                required
+              >
+            </div>
+
+            <div class="tbg-signup__field" style="margin-bottom: 0;">
+              <label class="tbg-signup__label" for="tbg-product-feedback-{{ section.id }}">
+                Would you be willing to give us feedback on the product? <span class="tbg-signup__required">*</span>
+              </label>
+              <select class="tbg-signup__select" id="tbg-product-feedback-{{ section.id }}" required>
+                <option value="" selected disabled>Select one</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div class="tbg-signup__field" style="margin-bottom: 0;">
+              <label class="tbg-signup__label" for="tbg-heard-of-titan-{{ section.id }}">
+                Have you heard of Titan Battlegear? If so, where? <span class="tbg-signup__required">*</span>
+              </label>
+              <input
+                class="tbg-signup__input"
+                type="text"
+                id="tbg-heard-of-titan-{{ section.id }}"
+                placeholder=""
+                required
+              >
+            </div>
+          </div>
+
+          <div
+            class="tbg-signup__section-divider"
+            style="border-top: 0.5px solid rgba(0,0,0,0.1); padding-block: 16px; display: flex; flex-direction: column; gap: 12px;"
+          >
+            <label class="tbg-signup__checkbox" style>
+              <input type="checkbox" id="cb-ambassador-{{ section.id }}">
+              <span
+              >I'm interested in learning more about my child becoming a Titan BattleGear brand ambassador.
+              <span class="tbg-signup__required">(optional)</span></span
+              >
+            </label>
+          </div>
+
+          <div
+            class="tbg-signup__section-divider"
+            style="border-top: 0.5px solid rgba(0,0,0,0.1); padding-block: 16px; display: flex; flex-direction: column; gap: 12px;"
+          >
+            <p class="tbg-signup__section-label" style="font-size: 14px; font-weight: 500; color: var(--tbg-text);">
+              Photo &amp; media release <span class="tbg-signup__required">*</span>
+            </p>
+            <div
+              class="tbg-signup__release-box"
+              style="background: #fff; border: 0.5px solid rgba(0,0,0,0.12); border-radius: 8px; padding: 12px 14px;"
+            >
+              <p
+                class="tbg-signup__release-summary"
+                style="font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 8px;"
+              >
+                <strong>Summary:</strong> By checking the box below, you give Titan BattleGear permission to use photos
+                or videos of your child, from our events or publicly available sources, on our social media and
+                marketing channels, at no cost and with no expiration.
+              </p>
+              <details>
+                <summary style="font-size: 13px; color: #555; cursor: pointer; list-style: none; display: flex; align-items: center; gap: 4px;">
+                  &#8964; Read full legal language
+                </summary>
+                <p
+                  class="tbg-signup__legal-text"
+                  style="font-size: 12px; color: #555; line-height: 1.7; margin-top: 10px; padding-top: 10px; border-top: 0.5px solid rgba(0,0,0,0.1);"
+                >
+                  I, the undersigned parent or legal guardian, hereby grant Titan BattleGear the irrevocable right and
+                  permission to photograph, record, and reproduce my child's image, likeness, and voice, whether
+                  captured at any Titan BattleGear-affiliated event or sourced from publicly available photographs or
+                  media. I authorize the use of such media in any format, including but not limited to social media,
+                  digital advertising, print, and promotional materials, without compensation, geographic restriction,
+                  or time limitation. I release Titan BattleGear from any claims arising from the use of said media,
+                  including but not limited to claims of defamation, invasion of privacy, or misappropriation of
+                  likeness.
+                </p>
+              </details>
+            </div>
+            <label class="tbg-signup__checkbox" style="margin-top: 0;">
+              <input type="checkbox" id="cb-photo-{{ section.id }}">
+              <span
+                >I have read and agree to the photo &amp; media release above.
+                <span class="tbg-signup__required">*</span></span
+              >
+            </label>
+          </div>
+
+          <div
+            class="tbg-signup__section-divider"
+            style="border-top: 0.5px solid rgba(0,0,0,0.1); padding-top: 16px; display: flex; flex-direction: column; gap: 12px;"
+          >
+            <p class="tbg-signup__section-label" style="font-size: 14px; font-weight: 500; color: var(--tbg-text);">
+              Communication preferences <span class="tbg-signup__required">*</span>
+            </p>
+            <label class="tbg-signup__checkbox" style="margin-top: 0;">
+              <input type="checkbox" id="cb-email-{{ section.id }}">
+              <span
+                >I agree to receive email communications from Titan BattleGear, including program updates, event
+                information, and promotional content. I understand I may unsubscribe at any time.
+                <span class="tbg-signup__required">*</span></span
+              >
+            </label>
+            <label class="tbg-signup__checkbox" style="margin-top: 0;">
+              <input type="checkbox" id="cb-sms-{{ section.id }}">
+              <span
+                >I agree to receive SMS text messages from Titan BattleGear. Message and data rates may apply. Reply
+                STOP at any time to opt out. <span class="tbg-signup__required">*</span></span
+              >
+            </label>
+          </div>
+        </div>
+
+        <div class="tbg-signup__field">
+          <label class="tbg-signup__label" for="tbg-signature-{{ section.id }}"
+            >Digital signature <span class="tbg-signup__required">*</span></label
+          >
+          <p style="font-size: 13px; color: #888; margin-bottom: 8px;">
+            Type your full legal name as it appears above to sign this form.
+          </p>
+          <input
+            class="tbg-signup__input"
+            type="text"
+            id="tbg-signature-{{ section.id }}"
+            placeholder="Full legal name"
+            required
+          >
+          <div class="tbg-signup__sig-preview">
+            <span class="tbg-signup__sig-name" id="tbg-signature-display-{{ section.id }}"
+              >Your signature will appear here</span
+            >
+            <div class="tbg-signup__meta">
+              <span id="tbg-signature-date-{{ section.id }}"></span>
+              <span id="tbg-signature-ip-{{ section.id }}"></span>
+            </div>
+          </div>
+          <div class="tbg-signup__error" id="tbg-signature-error-{{ section.id }}">
+            Please enter your full legal name to sign.
+          </div>
+        </div>
+
+        <button class="tbg-signup__submit" type="submit" id="TBGSignupSubmit-{{ section.id }}">
+          {{ section.settings.button_label }}
+        </button>
+
+        <div class="tbg-signup__error" id="TBGSignupFormError-{{ section.id }}">
+          Please complete all required fields and check all required boxes before submitting.
+        </div>
+        <div class="tbg-signup__status" id="TBGSignupStatus-{{ section.id }}" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const sectionId = {{ section.id | json }};
+    const form = document.getElementById(`TBGSignupForm-${sectionId}`);
+    if (!form) return;
+
+    const statusEl = document.getElementById(`TBGSignupStatus-${sectionId}`);
+    const formErrorEl = document.getElementById(`TBGSignupFormError-${sectionId}`);
+    const signatureErrorEl = document.getElementById(`tbg-signature-error-${sectionId}`);
+    const submitButton = document.getElementById(`TBGSignupSubmit-${sectionId}`);
+    const signatureInput = document.getElementById(`tbg-signature-${sectionId}`);
+    const signatureDisplay = document.getElementById(`tbg-signature-display-${sectionId}`);
+    const signatureDate = document.getElementById(`tbg-signature-date-${sectionId}`);
+    const signatureIp = document.getElementById(`tbg-signature-ip-${sectionId}`);
+
+    let userIP = 'unavailable';
+    fetch('https://api.ipify.org?format=json')
+      .then((response) => response.json())
+      .then((data) => {
+        userIP = data.ip || 'unavailable';
+        if (signatureInput.value.trim()) {
+          signatureIp.textContent = `IP: ${userIP}`;
+        }
+      })
+      .catch(() => {});
+
+    function getValue(id) {
+      const el = document.getElementById(id);
+      return el ? el.value.trim() : '';
+    }
+
+    function getChecked(id) {
+      const el = document.getElementById(id);
+      return !!(el && el.checked);
+    }
+
+    function updateSignaturePreview(value) {
+      const trimmed = value.trim();
+      if (trimmed) {
+        signatureDisplay.textContent = trimmed;
+        signatureDisplay.classList.add('is-signed');
+        const now = new Date();
+        signatureDate.textContent = `${now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} ${now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
+        signatureIp.textContent = `IP: ${userIP}`;
+      } else {
+        signatureDisplay.textContent = 'Your signature will appear here';
+        signatureDisplay.classList.remove('is-signed');
+        signatureDate.textContent = '';
+        signatureIp.textContent = '';
+      }
+    }
+
+    signatureInput.addEventListener('input', (event) => {
+      updateSignaturePreview(event.target.value);
+      signatureErrorEl.classList.remove('is-visible');
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const requiredFieldIds = [
+        `tbg-guardian-name-${sectionId}`,
+        `tbg-relationship-${sectionId}`,
+        `tbg-guardian-email-${sectionId}`,
+        `tbg-guardian-phone-${sectionId}`,
+        `tbg-child-name-${sectionId}`,
+        `tbg-child-dob-${sectionId}`,
+        `tbg-size-${sectionId}`,
+        `tbg-baselayer-brand-${sectionId}`,
+        `tbg-product-feedback-${sectionId}`,
+        `tbg-heard-of-titan-${sectionId}`
+      ];
+
+      const requiredCheckboxIds = [
+        {% comment %} `cb-ambassador-${sectionId}`, {% endcomment %}
+        `cb-photo-${sectionId}`,
+        `cb-email-${sectionId}`,
+        `cb-sms-${sectionId}`
+      ];
+
+      const allFilled = requiredFieldIds.every((id) => getValue(id) !== '');
+      const allChecked = requiredCheckboxIds.every((id) => getChecked(id));
+      const signature = getValue(`tbg-signature-${sectionId}`);
+
+      if (!signature) {
+        signatureErrorEl.classList.add('is-visible');
+      } else {
+        signatureErrorEl.classList.remove('is-visible');
+      }
+
+      if (!allFilled || !allChecked || !signature) {
+        formErrorEl.classList.add('is-visible');
+        statusEl.textContent = '';
+        return;
+      }
+
+      formErrorEl.classList.remove('is-visible');
+      statusEl.textContent = 'Submitting...';
+      submitButton.disabled = true;
+
+      const payload = {
+        guardianName: getValue(`tbg-guardian-name-${sectionId}`),
+        relationship: getValue(`tbg-relationship-${sectionId}`),
+        email: getValue(`tbg-guardian-email-${sectionId}`),
+        phone: getValue(`tbg-guardian-phone-${sectionId}`),
+        childName: getValue(`tbg-child-name-${sectionId}`),
+        childDOB: getValue(`tbg-child-dob-${sectionId}`),
+        size: getValue(`tbg-size-${sectionId}`),
+        addressStreet: getValue(`tbg-address-street-${sectionId}`),
+        addressCity: getValue(`tbg-address-city-${sectionId}`),
+        addressState: getValue(`tbg-address-state-${sectionId}`),
+        addressZip: getValue(`tbg-address-zip-${sectionId}`),
+        socialHandles: getValue(`tbg-social-handles-${sectionId}`),
+        baselayerBrandToday: getValue(`tbg-baselayer-brand-${sectionId}`),
+        willingToGiveFeedback: getValue(`tbg-product-feedback-${sectionId}`),
+        heardOfTitanWhere: getValue(`tbg-heard-of-titan-${sectionId}`),
+        ambassadorInterest: getChecked(`cb-ambassador-${sectionId}`) ? 'yes' : 'no',
+        photoRelease: getChecked(`cb-photo-${sectionId}`) ? 'yes' : 'no',
+        emailConsent: getChecked(`cb-email-${sectionId}`) ? 'yes' : 'no',
+        smsConsent: getChecked(`cb-sms-${sectionId}`) ? 'yes' : 'no',
+        signature,
+        signedAt: new Date().toISOString(),
+        ip: userIP,
+        pageUrl: window.location.href,
+        pagePath: window.location.pathname,
+        sectionId
+      };
+
+      try {
+        const response = await fetch("https://brandambassadorcommission.vercel.app/api/form-submit", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+
+        statusEl.textContent = 'Submitted successfully.';
+        form.reset();
+        updateSignaturePreview('');
+      } catch (error) {
+        console.error('Titan BattleGear signup submission failed:', error);
+        statusEl.textContent = 'Submission failed. Please try again.';
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Claim 3.0 Baselayer Form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Titan BattleGear"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Claim your exclusive Titan BattleGear 3.0 baselayer"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "A parent or guardian must complete this form on behalf of their child."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Submit"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 72
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Claim 3.0 Baselayer Form"
+    }
+  ]
+}
+{% endschema %}

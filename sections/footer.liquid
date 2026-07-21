@@ -1,0 +1,822 @@
+<style>
+    #shopify-section-{{ section.id }} {
+      --section-padding-top: {{ section.settings.padding_top }}px;
+      --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+      {%- render 'section-variables', section: section -%}
+    }
+  {% comment %} TBG custom Code {% endcomment %}
+    @media screen and (min-width: 1280px) {
+      .footer {
+        grid-template-columns: 1fr 0.3fr !important;
+      }
+    }
+
+    .footer__socials {
+      align-self: start !important;
+    }
+
+    @media screen and (min-width: 1280px) {
+      .footer__socials {
+        align-self: center !important;
+      }
+    }
+
+      @media (min-width: 1280px ) {
+        .footer__left {
+          padding-right: 50px;
+        }
+        .footer__right {
+          padding-inline-start: 20px !important;
+          padding-left: 20px !important;
+          padding-right: 0px !important;
+        }
+        .custom_footer-contact {
+               padding-left: 15px;
+           }
+      }
+      {% comment %} @media (min-width: 1680px ) {
+        .footer__left {
+          padding-right: 50px;
+        }
+        .footer__right {
+          padding-inline: 50px !important;
+        }
+      } {% endcomment %}
+       .custom_footer-contact {
+              padding-left: 15px;
+              min-width: 300px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+          }
+
+          .custom_footer-contact h4 {
+              /* font-size: 1.3rem; */
+              margin-bottom: 0.5rem;
+          }
+
+          .custom_footer-contact p {
+              /* font-size: 0.95rem; */
+              margin: 0.3rem 0;
+              text-align: center;
+          }
+
+          .contact-icons {
+              display: flex;
+              gap: 2rem;
+              flex-wrap: wrap;
+              margin: 1rem 0;
+              justify-content: center;
+          }
+
+          .contact-icons div {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              font-size: 0.9rem;
+          }
+      @media (max-width: 1280px) {
+        .custom_footer-contact {
+              align-items: start;
+          }
+
+          .custom_footer-contact p {
+              text-align: start;
+          }
+
+          .contact-icons {
+              justify-content: start;
+          }
+
+          .contact-icons div {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              font-size: 0.9rem;
+          }
+      }
+      @media screen and (min-width: 768px) {
+        .footer__accordions > * {
+          width: fit-content !important;
+        }
+        .footer__accordions summary span {
+          word-break: keep-all;
+          white-space: nowrap;
+        }
+      }
+
+      .reversed-link {
+        background-position: var(--transform-origin-end) calc(99%) !important;
+      }
+      .reversed-link:hover {
+        background-position: var(--transform-origin-start) calc(99%) !important;
+      }
+
+      @media screen and (min-width: 1680px) {
+        .footer {
+          grid-template-columns: 1fr 0.4fr !important;
+        }
+        .footer__accordions {
+          gap: var(--sp-14);
+        }
+        .footer__right {
+          padding-inline: clamp(var(--sp-10), 8.421vw, var(--sp-40) 10rem) !important;
+        }
+      }
+      @media screen and (min-width: 1800px) {
+        .footer {
+          grid-template-columns: 1fr 0.5fr !important;
+        }
+        .footer__accordions {
+          gap: var(--sp-16);
+        }
+        .footer__right {
+          padding-inline: clamp(var(--sp-10), 8.421vw, var(--sp-40) 10rem) !important;
+        }
+      }
+      {% comment %} TBG custom Code {% endcomment %}
+</style>
+
+{%- liquid
+  assign enable_footer_info = false
+  if section.settings.enable_newsletter or section.settings.show_social or shop.features.follow_on_shop? and section.settings.enable_follow_on_shop
+    assign enable_footer_info = true
+  endif
+-%}
+
+<div
+  class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded{% endif %}"
+  {% if section.settings.enable_parallax %}
+    is="footer-parallax"
+  {% endif %}
+>
+  <div
+    class="footer{% if enable_footer_info %}{% if section.settings.invert_newsletter_others %} footer--inverted{% endif %}{% else %} footer--no-info{% endif %} page-width{% if section.settings.full_width %} page-width--full{% endif %} relative grid"
+    role="region"
+    aria-label="Footer"
+  >
+    {%- if section.blocks.size > 0 -%}
+      <div class="footer__left flex flex-col md:flex-row gap-10">
+        {%- liquid
+          assign block = section.blocks | where: 'type', 'logo_social' | first
+          if block
+            render 'footer-logo', block: block
+          endif
+        -%}
+
+        <div class="footer__accordions flex flex-wrap flex-col md:flex-row md:grow md:gap-12">
+          {%- liquid
+            for block in section.blocks
+              case block.type
+                when 'link_list'
+                  render 'footer-menu', block: block
+
+                when 'text'
+                  render 'footer-text', block: block
+
+                when 'brand_information'
+                  render 'footer-contact', block: block
+              endcase
+            endfor
+          -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.enable_newsletter
+      or section.settings.show_social
+      or shop.features.follow_on_shop?
+      and section.settings.enable_follow_on_shop
+    -%}
+      <div class="footer__right grid gap-10">
+        {% comment %} TBG custom Code {% endcomment %}
+
+        <div class="custom_footer-contact">
+          <h4 class="heading text-base-2xl font-medium lg:font-heading">Need A Hand?</h4>
+          <p class="text-sm-lg leading-tight">We're available by phone and chat daily from 8a-6p ET</p>
+          <div class="contact-icons">
+            {% comment %}
+              <div class="text-sm-lg leading-tight">
+                <a
+                  id="faq-coming-soon"
+                  style="display: flex; flex-direction: column; align-items: center; gap: 5px;"
+                  href="#"
+                >
+                  <img loading="lazy" decoding="async"
+                    src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/reception-svgrepo-com_1.svg?v=1743940604"
+                    width="30"
+                    height="30"
+                  >
+                  <p class="reversed-link">FAQ</p>
+                </a>
+              </div>
+              <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                  const faqBtn = document.getElementById('faq-coming-soon');
+
+                  if (faqBtn) {
+                    faqBtn.addEventListener('click', function (e) {
+                      e.preventDefault();
+                      alert('FAQs are coming soon!\nWe’re working on something great.');
+                    });
+                  }
+                });
+              </script>
+            {% endcomment %}
+
+            <div class="text-sm-lg leading-tight">
+              <a style="display: flex; flex-direction: column; align-items: center; gap: 5px;" href="sms:9547376777">
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/chat-line-svgrepo-com_1.svg?v=1743940604"
+                  width="30"
+                  height="30"
+                >
+                <p class="reversed-link">Text</p>
+              </a>
+            </div>
+            <div class="text-sm-lg leading-tight">
+              <a
+                id="custom-chat-button"
+                style="display: flex; flex-direction: column; align-items: center; gap: 5px;"
+                href="#"
+              >
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/chat-dots-svgrepo-com_1.svg?v=1743940604"
+                  width="30"
+                  height="30"
+                >
+                <p class="reversed-link">Chat</p>
+              </a>
+            </div>
+
+            <script>
+              // TBG Custom Code
+              document.addEventListener('DOMContentLoaded', function () {
+                const chatBtn = document.getElementById('custom-chat-button');
+
+                if (!chatBtn) return;
+
+                chatBtn.addEventListener('click', function (e) {
+                  e.preventDefault();
+
+                  const gorgiasReady = window.GorgiasChat
+                    ? window.GorgiasChat.init()
+                    : new Promise(function (resolve) {
+                        window.addEventListener(
+                          'gorgias-widget-loaded',
+                          function () {
+                            resolve();
+                          },
+                          { once: true }
+                        );
+                      });
+
+                  gorgiasReady
+                    .then(function () {
+                      if (window.GorgiasChat && typeof window.GorgiasChat.open === 'function') {
+                        window.GorgiasChat.open();
+                        return;
+                      }
+
+                      window.location.href = 'https://contact.gorgias.help/forms/59qu80a2';
+                    })
+                    .catch(function () {
+                      window.location.href = 'https://contact.gorgias.help/forms/59qu80a2';
+                    });
+                });
+              });
+              // End TBG Custom Code
+            </script>
+
+            <div class="text-sm-lg leading-tight">
+              <a
+                style="display: flex; flex-direction: column; align-items: center; gap: 5px;"
+                href="mailto:info@titanbattlegear.com"
+              >
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/email-8-svgrepo-com_1.svg?v=1743940604"
+                  width="30"
+                  height="30"
+                >
+                <p class="reversed-link">Email</p>
+              </a>
+            </div>
+            <div class="text-sm-lg leading-tight">
+              <a
+                style="display: flex; flex-direction: column; align-items: center; gap: 5px;"
+                href="tel:9547376777"
+              >
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/phone-svgrepo-com.svg?v=1743940605"
+                  width="30"
+                  height="30"
+                >
+                <p class="reversed-link">Call</p>
+              </a>
+            </div>
+            <div class="text-sm-lg leading-tight">
+              <a
+                style="display: flex; flex-direction: column; align-items: center; gap: 5px;"
+                href="https://www.titanbattlegear.com/apps/redo/returns-portal/login"
+              >
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/return-svgrepo-com.svg?v=1765884391"
+                  width="30"
+                  height="30"
+                >
+                <p class="reversed-link">Return</p>
+              </a>
+            </div>
+          </div>
+
+          <img
+            loading="lazy"
+            decoding="async"
+            width="auto"
+            height="70px"
+            style="height: 70px; margin-bottom: 10px;"
+            src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/official_partner_of_USAH_and_PWHL.svg?v=1765786337"
+          >
+          {%- if section.settings.show_social -%}
+            <div class="footer__socials flex justify-start  xl:justify-center" style=" margin-block: 10px;">
+              {%- render 'social-icons', size: 'lg', gap: '5' -%}
+            </div>
+          {%- endif -%}
+          {% comment %} <div style="padding-top:14px;"><a href="https://www.titanbattlegear.com/apps/redo/returns-portal/login"><p class="reversed-link">Returns</p></a></div> {% endcomment %}
+        </div>
+        {% comment %} TBG custom Code {% endcomment %}
+        {%- if section.settings.enable_newsletter -%}
+          <div class="footer__newsletter grid gap-6">
+            {%- if section.settings.newsletter_logo -%}
+              <p class="footer__logo leading-none">
+                <a href="{{ routes.root_url }}">
+                  <span class="sr-only">{{ shop.name }}</span>
+                  {%- assign logo_width = section.settings.newsletter_logo_height
+                    | times: section.settings.newsletter_logo.aspect_ratio
+                    | round
+                  -%}
+                  {%- assign max_width = section.settings.newsletter_logo.width -%}
+                  {%- capture sizes -%}{{ logo_width }}px{%- endcapture -%}
+                  {%- capture widths -%}{{ logo_width | times: 1.5 | at_most: max_width | round }}, {{ logo_width | times: 2 | at_most: max_width }}, {{ logo_width | times: 3 | at_most: max_width }}{%- endcapture -%}
+                  {%- capture style -%}--image-width: {{ logo_width }}px; --image-height: {{ section.settings.newsletter_logo_height }}px;{%- endcapture -%}
+                  {{-
+                    section.settings.newsletter_logo
+                    | image_url: width: max_width
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: widths,
+                      sizes: sizes,
+                      style: style,
+                      fetchpriority: 'low',
+                      is: 'lazy-image'
+                  -}}
+                </a>
+              </p>
+            {%- endif -%}
+
+            <p class="h3 text-xl {{ section.settings.newsletter_heading_size }} leading-none tracking-none font-medium lg:font-heading">
+              {{ section.settings.newsletter_heading | escape }}
+            </p>
+            {%- render 'newsletter-form', section_id: section.id, context: 'footer' -%}
+
+            {%- if section.settings.newsletter_text != blank -%}
+              <div class="rte text-sm leading-tight">{{ section.settings.newsletter_text }}</div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {% comment %} TBG custom Code {% endcomment %}
+        {% comment %} {%- if section.settings.show_social -%}
+          <div class="footer__socials flex align-self-end justify-start md:justify-end xl:justify-start">
+            {%- render 'social-icons', size: 'lg', gap: '7' -%}
+          </div>
+        {%- endif -%} {% endcomment %}
+        {% comment %} TBG custom Code {% endcomment %}
+
+        {% comment %} TBG CUSTOM CODE {%- if section.settings.show_social -%}
+          <div class="footer__socials flex align-self-end justify-start md:justify-end xl:justify-start">
+            {%- render 'social-icons', size: 'lg', gap: '7' -%}
+          </div>
+        {%- endif -%} {% endcomment %}
+
+        {%- if shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}
+          <div class="follow-on-shop">
+            {{- shop | login_button: action: 'follow' -}}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.enable_parallax -%}
+    <parallax-overlay
+      class="footer-overlay hidden md:block z-20 absolute left-0 top-0 w-full pointer-events-none"
+      data-target="height"
+      data-start="100%"
+      data-stop="0%"
+    ></parallax-overlay>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.footer.name",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "invert_newsletter_others",
+      "default": false,
+      "label": "t:sections.footer.settings.invert_newsletter_others.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__newsletter.content",
+      "info": "t:sections.footer.settings.header__newsletter.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_newsletter",
+      "default": true,
+      "label": "t:sections.footer.settings.enable_newsletter.label"
+    },
+    {
+      "visible_if": "{{ section.settings.enable_newsletter == true }}",
+      "type": "text",
+      "id": "newsletter_heading",
+      "default": "Subscribe to our emails",
+      "label": "t:sections.global.settings.heading.label"
+    },
+    {
+      "visible_if": "{{ section.settings.enable_newsletter == true }}",
+      "type": "select",
+      "id": "newsletter_heading_size",
+      "options": [
+        {
+          "value": "md:title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "md:title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "md:title-lg",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "md:title-xl",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "md:title-lg",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "visible_if": "{{ section.settings.enable_newsletter == true }}",
+      "type": "richtext",
+      "id": "newsletter_text",
+      "label": "t:sections.global.settings.text.label",
+      "info": "t:sections.global.settings.optional.label"
+    },
+    {
+      "visible_if": "{{ section.settings.enable_newsletter == true }}",
+      "type": "image_picker",
+      "id": "newsletter_logo",
+      "label": "t:sections.footer.settings.newsletter_logo.label"
+    },
+    {
+      "visible_if": "{{ section.settings.enable_newsletter == true and section.settings.newsletter_logo != blank }}",
+      "type": "range",
+      "id": "newsletter_logo_height",
+      "label": "t:sections.footer.settings.newsletter_logo_height.label",
+      "default": 50,
+      "min": 20,
+      "max": 120,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__social.content",
+      "info": "t:sections.footer.settings.header__social.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "default": true,
+      "label": "t:sections.footer.settings.show_social.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__follow.content",
+      "info": "t:sections.footer.settings.header__follow.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_follow_on_shop",
+      "default": true,
+      "label": "t:sections.footer.settings.enable_follow_on_shop.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__colors.content",
+      "info": "t:sections.global.settings.header__colors.info"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "t:sections.global.settings.color_text.label",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "t:sections.global.settings.color_background.label",
+      "default": "#1f1f1f"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_background",
+      "label": "t:sections.global.settings.gradient_background.label"
+    },
+    {
+      "type": "color",
+      "id": "color_button_text",
+      "label": "t:sections.global.settings.color_button_text.label",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "color_button_background",
+      "label": "t:sections.global.settings.color_button_background.label",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color_background",
+      "id": "color_button_gradient",
+      "label": "t:sections.global.settings.color_button_gradient.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 72
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_parallax",
+      "label": "t:sections.global.settings.enable_parallax.label",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo_social",
+      "name": "t:sections.footer.blocks.logo_social.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "t:sections.footer.blocks.logo_social.settings.logo.label"
+        },
+        {
+          "type": "range",
+          "id": "logo_height",
+          "label": "t:sections.footer.blocks.logo_social.settings.logo_height.label",
+          "default": 50,
+          "min": 20,
+          "max": 120,
+          "step": 1,
+          "unit": "px"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social",
+          "default": false,
+          "label": "t:sections.footer.settings.show_social.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_follow_on_shop",
+          "default": false,
+          "label": "t:sections.footer.settings.enable_follow_on_shop.label"
+        }
+      ]
+    },
+    {
+      "type": "link_list",
+      "name": "t:sections.footer.blocks.link_list.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.global.settings.heading.label",
+          "info": "t:sections.global.settings.optional.label",
+          "default": "Heading"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "default": "footer",
+          "label": "t:sections.footer.blocks.link_list.settings.menu.label",
+          "info": "t:sections.footer.blocks.link_list.settings.menu.info"
+        },
+        {
+          "type": "range",
+          "id": "container_width",
+          "label": "t:sections.footer.blocks.global.settings.container_width.label",
+          "default": 50,
+          "min": 15,
+          "max": 95,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.global.settings.header__mobile.content"
+        },
+        {
+          "type": "checkbox",
+          "id": "opened",
+          "default": false,
+          "label": "t:sections.footer.blocks.global.settings.opened.label"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "t:sections.footer.blocks.text.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.global.settings.heading.label",
+          "info": "t:sections.global.settings.optional.label",
+          "default": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:sections.global.settings.text.label",
+          "default": "<p>Share contact information, store details, and brand content with your customers.</p>"
+        },
+        {
+          "type": "range",
+          "id": "container_width",
+          "label": "t:sections.footer.blocks.global.settings.container_width.label",
+          "default": 50,
+          "min": 15,
+          "max": 95,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.global.settings.header__mobile.content"
+        },
+        {
+          "type": "checkbox",
+          "id": "opened",
+          "default": false,
+          "label": "t:sections.footer.blocks.global.settings.opened.label"
+        }
+      ]
+    },
+    {
+      "type": "brand_information",
+      "name": "t:sections.footer.blocks.brand_information.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.global.settings.heading.label",
+          "info": "t:sections.global.settings.optional.label",
+          "default": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "button_label_1",
+          "label": "t:sections.footer.blocks.brand_information.settings.button_label_1.label"
+        },
+        {
+          "type": "url",
+          "id": "button_link_1",
+          "label": "t:sections.footer.blocks.brand_information.settings.button_link_1.label"
+        },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "label": "t:sections.footer.blocks.brand_information.settings.button_label_2.label"
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "t:sections.footer.blocks.brand_information.settings.button_link_2.label"
+        },
+        {
+          "type": "text",
+          "id": "button_label_3",
+          "label": "t:sections.footer.blocks.brand_information.settings.button_label_3.label"
+        },
+        {
+          "type": "url",
+          "id": "button_link_3",
+          "label": "t:sections.footer.blocks.brand_information.settings.button_link_3.label"
+        },
+        {
+          "type": "text",
+          "id": "button_label_4",
+          "label": "t:sections.footer.blocks.brand_information.settings.button_label_4.label"
+        },
+        {
+          "type": "url",
+          "id": "button_link_4",
+          "label": "t:sections.footer.blocks.brand_information.settings.button_link_4.label"
+        },
+        {
+          "type": "range",
+          "id": "container_width",
+          "label": "t:sections.footer.blocks.global.settings.container_width.label",
+          "default": 50,
+          "min": 15,
+          "max": 95,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.global.settings.header__mobile.content"
+        },
+        {
+          "type": "checkbox",
+          "id": "opened",
+          "default": false,
+          "label": "t:sections.footer.blocks.global.settings.opened.label"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "logo_social"
+      },
+      {
+        "type": "link_list"
+      }
+    ]
+  },
+  "enabled_on": {
+    "groups": ["footer"]
+  }
+}
+{% endschema %}

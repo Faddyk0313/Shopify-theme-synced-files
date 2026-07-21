@@ -1,0 +1,1259 @@
+{% assign tags = customer.tags | downcase %}
+{% if customer and tags contains 'wholesale-bronze' or tags contains 'wholesale-silver' or tags contains 'wholesale-gold' or tags contains 'bronze-dealer' or tags contains 'silver-dealer' or tags contains 'gold-dealer' %}
+
+  {% assign wholesale_discount = 0 %}
+  {% if customer %}
+    {% assign tags = customer.tags | downcase %}
+    {% if tags contains 'wholesale-gold' %}
+      {% assign wholesale_discount = 0.44 %}
+    {% elsif tags contains 'wholesale-silver' %}
+      {% assign wholesale_discount = 0.37 %}
+    {% elsif tags contains 'wholesale-bronze' %}
+      {% assign wholesale_discount = 0.30 %}
+    {% elsif tags contains 'gold-dealer' %}
+      {% assign wholesale_discount = 0.30 %}
+    {% elsif tags contains 'silver-dealer' %}
+      {% assign wholesale_discount = 0.25 %}
+    {% elsif tags contains 'bronze-dealer' %}
+      {% assign wholesale_discount = 0.20 %}
+    {% endif %}
+  {% endif %}
+  
+  {% comment %}
+    Handles → IDs mapping (for reference):
+     – battlegear-og         (331456970930)
+     – inline-core-colors    (329689530546)
+     – novelty               (329689628850)
+     – team-colors           (329689596082)
+  {% endcomment %}
+  <style>
+      /* --- Collections Bar --- */
+      .name-grid {
+          padding-top: 20px;
+          display: flex;
+          gap: 10px;
+      }
+
+      /* Name Buttons */
+      .name-box {
+          background: white;
+          border: 2px solid rgb(210, 209, 209);
+          padding: 0.5rem 1rem;
+          border-radius: 8px;
+          cursor: pointer;
+          font-size: 14px;
+          transition: all 0.3s ease-in-out;
+          cursor: pointer;
+      }
+
+      .name-box:active {
+          transform: scale(0.9);
+      }
+
+      .name-box:hover,
+      .selected_name {
+          border-color: black;
+          font-weight: bold;
+      }
+
+
+      #qof-current-collection {
+        padding-block: 20px;
+      }
+
+      .quick-order-page {
+        /* width: 100%; */
+        padding-block: 2rem;
+      }
+
+      .quick-order-title {
+        font-size: var(--title-md);
+        margin-bottom: 20px;
+      }
+
+      .qof-search-container {
+        border-radius: 15px;
+        overflow: clip;
+      }
+
+      .qof-search-container input {
+        border-radius: 15px;
+        padding-block: 0.7rem;
+        padding-inline: 1rem;
+        transition: all 0.3s ease-in-out;
+        border: 2px solid rgb(210, 209, 209);
+        cursor: text;
+        outline: none;
+        max-width: 20rem;
+        width: 20rem;
+      }
+      .qof-search-container input:focus {
+        border-color: black;
+        outline: none;
+      }
+
+      *:focus {
+        outline: none;
+      }
+
+      *:focus:not(:focus-visible) {
+        outline: none;
+      }
+
+      /* --- Quick Order Table (scoped) --- */
+
+      /* wrap the form so it can scroll horizontally */
+      #quick-order-form {
+        width: 100%;
+        overflow-x: auto;               /* allow horizontal scroll */
+        -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+      }
+
+      /* ensure the table inside is as wide as needed */
+      #quick-order-form table {
+        width: max-content; /* let the table size to its content */
+        min-width: 100%;    /* but never smaller than the viewport/form width */
+        border-collapse: collapse;
+        box-shadow: none;
+      }
+
+      /* optional: hide vertical scrollbar and only show horizontal */
+      #quick-order-form {
+        overflow-y: hidden;
+      }
+
+      /* Header row: single bottom border */
+      #quick-order-form thead th {
+        padding-block: 1rem;
+        padding-right: 3.5rem;
+        padding-left: 0rem;
+        font-size: 0.8rem;
+        font-weight: 400;
+        text-transform: uppercase;
+        border-bottom: 1px solid #e5e5e5;
+        text-align: center;
+        background-color: transparent;
+
+      }
+
+      /* Body rows: only horizontal dividers */
+      #quick-order-form tbody tr {
+        border: none;
+      }
+
+      #quick-order-form tbody * {
+        font-size: 0.9rem;
+      }
+
+      /* Cells: comfy padding */
+      #quick-order-form td:not(.variant-indent) {
+        padding-top: 1.4rem;
+        padding-bottom: 0rem;
+        padding-right: 3.5rem;
+        padding-left: 0rem;
+        vertical-align: middle;
+        text-align: center;
+        box-sizing: content-box;
+      }
+
+      /* Merge Image + Product into one cell */
+      #quick-order-form .product-info {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      #quick-order-form .product-info img {
+        width: 60px;
+        height: auto;
+        border-radius: 4px;
+        flex-shrink: 0;
+      }
+      #quick-order-form .product-info__meta {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      #quick-order-form .product-info__title {
+        font-weight: 500;
+      }
+
+      /* Toggle‐variants button stays inline with product title */
+      #quick-order-form .toggle-variants {
+        margin-left: 0.5rem;
+      }
+
+      /* Variant rows: merge image+title, splice into first column */
+      #quick-order-form .variant-row .variant-info {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      /* .quantity_selector {
+        max-width: 14rem;
+        min-width: 14rem;
+        width: 14rem;
+      } */
+      .total {
+        max-width: 6rem;
+        min-width: 6rem;
+        width: 6em;
+      }
+
+      .price {
+        max-width: 7rem;
+        min-width: 7rem;
+        width: 7rem;
+
+      }
+      /* .msg {
+        max-width: 18rem;
+        min-width: 18rem;
+        width: 18rem;
+      } */
+
+      #quick-order-form .variant-info img {
+        width: 60px;
+        height: auto;
+        border-radius: 4px;
+        flex-shrink: 0;
+      }
+
+      #quick-order-form .variant-info__title {
+        font-weight: 500;
+      }
+      #quick-order-form .variant-info__sku {
+        font-weight: 400;
+        font-size: 0.7rem;
+      }
+
+      .title_sku_container {
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* You can remove the old gray bg on .variant-row if you like */
+      #quick-order-form .variant-row {
+        background: transparent;
+      }
+
+      .toggle-variants {
+        padding: 5px;
+        font-size: 12px !important;
+        cursor: pointer;
+        border: 1px solid #333;
+        border-radius: 10px;
+        background: #fff;
+      }
+
+      .variant-indent {
+        padding-block: 0.5rem;
+        padding-right: 2rem;
+        padding-left:1.5rem;
+        vertical-align: middle;
+      }
+
+      @media (min-width: 678px) {
+        .variant-indent {
+          padding-left:2.5rem;
+        }
+      }
+
+      .btn {
+        display:inline-block; padding:10px 20px; background:#000;
+        color:#fff; text-transform:uppercase; cursor:pointer;
+        border:none;
+      }
+
+      /* --- Sticky footer --- */
+     .qof-footer.desktop {
+      display: grid;
+      grid-template-columns:
+        auto       /* Add to Cart  */
+        auto       /* Remove all   */
+        1fr        /* Total Items  */
+        auto       /* Subtotal     */
+      ;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-top: 1px solid #ddd;
+      position: sticky;
+      bottom: 0;
+      z-index: 10;
+      width: max-content;
+      min-width: 100%;
+       margin-top: 1.4rem;
+          background-color: #f2f2f2;
+
+    }
+
+
+      /* “View cart” button style */
+      .btn-outline {
+        padding: 10px 20px;
+        border: 1px solid #000;
+        background: transparent;
+        cursor: pointer;
+        text-transform: uppercase;
+      }
+
+      /* “Remove all” link style */
+      .btn-clear {
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+
+      #add-to-cart-btn, #qof-clear {
+        width: 12rem;
+        font-size: 14px;
+      }
+
+      #qof-clear > .btn-fill {
+        --motion-translateY: -76%;
+      }
+      #qof-clear:hover > .btn-fill {
+        --motion-translateY: 0;
+      }
+
+      /* Tax message style */
+      #qof-count {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 5px;
+      }
+      .qof-taxmsg {
+        font-size: 0.8rem;
+        color: #666;
+        text-align: right;
+      }
+      #qof-subtotal {
+        font-size: 1rem;
+        color: #000;
+      }
+
+      .align-left {
+        text-align: left !important;
+        padding-left: 2rem;
+      }
+      .align-right {
+        text-align: right !important;
+        padding-right: 0rem !important;
+
+      }
+
+      .taxMsg {
+        position: relative;
+      }
+
+      .taxMsg .underline {
+        position: absolute;
+        bottom: -2px;
+        left: 0px;
+        width: 0px;
+        max-width: 0px;
+        height: 1px;
+        transition: all 0.8s ease-in-out;
+        background-color: black;
+      }
+
+      .taxMsg:hover .underline {
+        width: 100%;
+        max-width: 100%
+      }
+
+      .qof-footer.mobile {
+        display: none;
+      }
+      /* by default, mobile cards hidden, desktop table shown */
+    .qof-mobile  { display: none; }
+    .qof-desktop { display: block; }
+
+    /* at small viewports, swap them */
+    @media (max-width: 1150px) {
+      .qof-desktop { display: none; }
+      .qof-mobile  { display: block; }
+
+      .qof-mobile {
+        padding: 1rem;
+      }
+
+      .qof-mobile-product {
+        border-bottom: 1px solid #eee;
+        padding: 1rem 0;
+      }
+
+      .qof-mobile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+      }
+
+      .qof-mobile-header > div.image-title {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+      }
+
+      #quick-order-form img {
+        border-radius: 0.7rem; flex-shrink: 0;
+      }
+
+      .variant-info img {
+        width: 50px; height: 50px; border-radius: 0.3rem; flex-shrink: 0;
+      }
+      .qof-mobile-meta h3 {
+        margin: 0;
+        font-size: 1rem;
+      }
+      .qof-mobile-meta .mobile-price {
+        font-size: 0.9rem;
+        color: #333;
+      }
+
+      .toggle-variants {
+        margin-top: 0.5rem;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.85rem;
+      }
+
+      .qof-mobile-variants {
+        margin-top: 0.75rem;
+      }
+
+      .mobile-product-details {
+        display: flex;
+        gap:5px;
+        justify-content: space-between;
+        align: start;
+        col-span: 2;
+      }
+
+
+      .variant-row {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.7rem 0;
+        border-top: 1px solid #eee;
+      }
+      .variant-info { display: flex; align-items: start; gap: 0.7rem; }
+      .variant-stock { font-size: 0.85rem; color: #666; margin-left: auto; }
+      .variant-quantity { }
+      .variant-price    { font-size: 0.9rem; }
+      .variant-total    { font-weight: bold; }
+
+      .mobile-quantity-total {
+        display: flex;
+        gap:5px;
+        justify-content: space-between;
+        align-items: center
+      }
+      .qof-footer.desktop {
+        display: none;
+      }
+      .qof-footer.mobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      #qof-subtotal {
+        text-align: center;
+        padding-bottom: 1rem;
+      }
+      .button-grp-mobile {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      #qof-count {
+        flex-direction: row;
+        align-items: baseline;
+      }
+    }
+
+      .disabled {
+        color: gray;
+        cursor: not-allowed;
+      }
+      /* hide the native arrows so only your code quantity buttons ever changes the value */
+      .quantity__input::-webkit-inner-spin-button,
+      .quantity__input::-webkit-outer-spin-button {
+        -webkit-appearance: none !important;
+        margin: 0 !important;
+      }
+      .quantity__input {
+        -moz-appearance: textfield !important; /* Firefox */
+      }
+  </style>
+
+  {% assign quick_collection_handles = 'battlegear-og,inline-core-colors,novelty,team-colors' | split: ',' %}
+  {% assign active_collection = quick_collection_handles[0] %}
+
+  
+  
+  <section class="page-width quick-order-page">
+    <!-- Collections Bar -->
+    <div class="qof-collections-bar name-grid">
+      {% for handle in quick_collection_handles %}
+        {% assign col = collections[handle] %}
+        <button
+          type="button"
+          class="name-box qof-collection-btn{% if handle == active_collection %} selected_name{% endif %}"
+          data-collection-handle="{{ handle }}"
+          data-collection-title="{{ col.title }}"
+        >
+          {{ col.title }}
+        </button>
+      {% endfor %}
+    </div>
+
+    <h2 id="qof-current-collection">
+      {{ collections[active_collection].title }}
+    </h2>
+    <!-- Global Search -->
+    <div class="qof-search-container">
+      <input
+        type="search"
+        id="qof-search-input"
+        placeholder="Search products…"
+      >
+    </div>
+
+    <!-- DESKTOP TABLE (hidden on mobile) -->
+    <div class="qof-desktop">
+      <form id="quick-order-form">
+        <table id="tableView">
+          <thead>
+            <tr>
+              <th class="align-left">Product</th>
+              <th class="quantity_selector">Quantity</th>
+              <th class="msg">Stock / Message</th>
+              <th class="price">Price</th>
+              <th class="align-right total last">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for handle in quick_collection_handles %}
+              {% for product in collections[handle].products %}
+                <!-- Product Row -->
+                <tr
+                  class="product-row"
+                  data-collection-handle="{{ handle }}"
+                  data-product-id="{{ product.id }}"
+                  {% unless handle == active_collection %}
+                    style="display:none"
+                  {% endunless %}
+                >
+                  <!-- Image + product Name ans show variants button -->
+                  <td class="product-info">
+                    <img
+                      src="{{ product.featured_image | image_url: width:80, height:80 }}"
+                      alt="{{ product.title }}"
+                    >
+                    <div class="product-info__meta">
+                      <span class="product-info__title">{{ product.title }}</span>
+                      <button
+                        type="button"
+                        class="toggle-variants"
+                        data-product-id="{{ product.id }}"
+                        aria-expanded="false"
+                      >
+                        Show Variants
+                      </button>
+                    </div>
+                  </td>
+                  <!-- Quantity (parent row) -->
+                  <td class="quantity_selector">–</td>
+                  <!-- Stock/Message -->
+                  <td class="msg">–</td>
+                  <!-- Price (first variant) -->
+                  {% if wholesale_discount > 0 %}
+                    {%- assign discount_amount = product.price_min | times: wholesale_discount -%}
+                    {%- assign discounted_price = product.price_min | minus: discount_amount -%}
+                    <td class="price">{{ discounted_price | money }}/ea</td>
+                  {% endif %}
+                  <!-- Total -->
+                  <td class="product-total total align-right last">$0.00</td>
+                </tr>
+
+                <!-- Variant Rows -->
+                {% for variant in product.variants %}
+                  <tr
+                    class="variant-row"
+                    data-parent-id="{{ product.id }}"
+                    data-collection-handle="{{ handle }}"
+                    style="display:none"
+                  >
+                    <!-- ↳ Variant (image + title) -->
+                    <td class="variant-info variant-indent">
+                      <img
+                        src="
+                          {{ variant.image | default: product.featured_image
+                          | image_url: width:60, height:60 }}
+                        "
+                        alt="{{ variant.title }}"
+                      >
+
+                      <div class="title_sku_container">
+                        <span class="variant-info__title">{{ variant.title }}</span>
+                        <span class="variant-info__sku">Variant SKU: {{ variant.sku }}</span>
+                      </div>
+                    </td>
+
+                    <!-- Quantity -->
+                    <td class="quantity_selector">
+                    {% if variant.inventory_management and variant.inventory_quantity > 0 %}
+                        <quantity-input class="quantity inline-flex relative" data-variant-id="{{ variant.id }}">
+                          <button type="button" name="minus" class="active quantity__button">
+                            {%- render 'icon', icon: 'chevron-left', size: 'sm', class: 'stroke-2 transform' -%}
+                          </button>
+                          <input
+                            class="desktop variant-quantity quantity__input text-sm sm:text-base font-medium text-center"
+                            type="number"
+                            data-id="{{ variant.id }}"
+                            inputmode="numeric"
+                            autocomplete="off"
+                            min="0"
+                            max="{{ variant.inventory_quantity }}"
+                            value="0"
+                          >
+                          <button
+                            type="button"
+                            name="plus"
+                            class="active quantity__button"
+                            aria-label="{{ 'products.quantity.increase' | t: product: product.title | escape }}"
+                          >
+                            {%- render 'icon', icon: 'chevron-right', size: 'sm', class: 'stroke-2 transform' -%}
+                          </button>
+                        </quantity-input>
+                    {% elsif variant.inventory_management and variant.inventory_quantity <= 0 and variant.inventory_policy == 'continue' %}
+                        <quantity-input class="quantity inline-flex relative" data-variant-id="{{ variant.id }}">
+                          <button type="button" name="minus" class="active quantity__button">
+                            {%- render 'icon', icon: 'chevron-left', size: 'sm', class: 'stroke-2 transform' -%}
+                          </button>
+                          <input
+                            class="desktop variant-quantity quantity__input text-sm sm:text-base font-medium text-center"
+                            type="number"
+                            data-id="{{ variant.id }}"
+                            inputmode="numeric"
+                            autocomplete="off"
+                            min="0"
+                            value="0"
+                          >
+                          <button
+                            type="button"
+                            name="plus"
+                            class="active quantity__button"
+                            aria-label="{{ 'products.quantity.increase' | t: product: product.title | escape }}"
+                          >
+                            {%- render 'icon', icon: 'chevron-right', size: 'sm', class: 'stroke-2 transform' -%}
+                          </button>
+                        </quantity-input>
+                      {% else %}
+                        <quantity-input
+                          class="quantity disabled  inline-flex relative"
+                          data-variant-id="{{ variant.id }}"
+                        >
+                          <button type="button" name="minus" class="quantity__button">
+                            {%- render 'icon', icon: 'chevron-left', size: 'sm', class: 'stroke-2 transform' -%}
+                          </button>
+                          <input
+                            class="desktop variant-quantity quantity__input text-sm sm:text-base font-medium text-center"
+                            type="number"
+                            data-id="{{ variant.id }}"
+                            inputmode="numeric"
+                            autocomplete="off"
+                            min="0"
+                            max="{{ variant.inventory_quantity }}"
+                            value="0"
+                            disabled
+                      
+                          >
+                          <button
+                            type="button"
+                            name="plus"
+                            class="quantity__button"
+                            aria-label="{{ 'products.quantity.increase' | t: product: product.title | escape }}"
+                          >
+                            {%- render 'icon', icon: 'chevron-right', size: 'sm', class: 'stroke-2 transform' -%}
+                          </button>
+                        </quantity-input>
+                      {% endif %}
+                    </td>
+
+                    <!-- Stock / Message -->
+                    <td class="msg">
+                      {% assign msg = variant.metafields.custom.preproduction_note %}
+                      {% if msg %}
+                        <!-- <span class="variant-message">{{ msg }}</span> -->
+                        <span class="variant-message">Preproduction</span>
+                      {% elsif variant.inventory_management and variant.inventory_quantity > 0 %}
+                        <span class="in-stock">{{ variant.inventory_quantity }} in stock</span>
+                      {% elsif variant.metafields.custom.notify_me_button_label == '<strong>Coming Soon - Notify Me</strong>'  %}
+                        <span class="variant-message">Future Drops</span>
+                      {% else %}
+                        <span class="out-of-stock">Sold Out</span>
+                      {% endif %}
+                    </td>
+
+                    {% if wholesale_discount > 0 %}
+                      {%- assign discount_amount = variant.price | times: wholesale_discount -%}
+                      {%- assign discounted_price = variant.price | minus: discount_amount -%}
+                  
+                      <td class="wholesale-price price whitespace-nowrap ">
+                        <span class="diagonal-strike price__regular whitespace-nowrap relative inline-block text-gray-500" style="color: gray; font-size: 13px;">
+                          {{ variant.price | money }}
+                        </span>
+                        <span class="variant-price  price__regular new whitespace-nowrap text-red-600 font-semibold">
+                          {{ discounted_price | money }}
+                        </span>
+                      </td>
+                  
+                    {%- else -%}
+                        <!-- Price -->
+                        <td class="variant-price price">{{ variant.price | money }}/ea </td>
+                    {% endif %}
+
+                    <!-- Variant Total -->
+                    <td class="variant-total total align-right">$0.00</td>
+                  </tr>
+                {% endfor %}
+              {% endfor %}
+            {% endfor %}
+            <!-- No Results Message -->
+            <tr class="no-results" style="display:none">
+              <td colspan="5" style="text-align:center; padding:2rem;">No products found for your search.</td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+
+    <!-- MOBILE CARDS (hidden on desktop) -->
+    <div class="qof-mobile">
+      {% for handle in quick_collection_handles %}
+        {% for product in collections[handle].products %}
+          <div
+            class="qof-mobile-product product-row"
+            data-collection-handle="{{handle}}"
+            {% unless handle == active_collection %}
+              style="display:none"
+            {% endunless %}
+          >
+            <div class="qof-mobile-header">
+              <div class="image-title">
+                <img
+                  src="{{ product.featured_image | image_url: width:60, height:60 }}"
+                  alt="{{product.title}}"
+                >
+                <div class="qof-mobile-meta">
+                  <h3>{{ product.title }}</h3>
+                </div>
+              </div>
+              {% if wholesale_discount > 0 %}
+                  {%- assign discount_amount = product.price_min | times: wholesale_discount -%}
+                  {%- assign discounted_price = product.price_min | minus: discount_amount -%}
+                  <span class="mobile-price">{{ discounted_price | money }}/ea</span>
+              {% else %}
+                <span class="mobile-price">{{ product.price_min | money }}/ea</span>
+              {% endif %}
+            </div>
+            <button
+              type="button"
+              class="toggle-variants"
+              data-product-id="{{product.id}}"
+              aria-expanded="false"
+            >
+              Show Variants
+            </button>
+            <div
+              id="mobile-variants-{{product.id}}"
+              class="qof-mobile-variants"
+            >
+              {% for variant in product.variants %}
+                <div class="variant-row" data-parent-id="{{product.id}}" style="display:none">
+                  <div class="mobile-product-details">
+                    <div class="variant-info">
+                      <img
+                        src="{{ product.featured_image | image_url: width:60, height:60 }}"
+                        alt="{{product.title}}"
+                      >
+                      <div>
+                        <strong>{{ variant.title }}</strong><br>
+                        <small>SKU: {{ variant.sku }}</small>
+                      </div>
+                    </div>
+                    {% if wholesale_discount > 0 %}
+                      {%- assign discount_amount = variant.price | times: wholesale_discount -%}
+                      {%- assign discounted_price = variant.price | minus: discount_amount -%}
+                  
+                      <p class="wholesale-price whitespace-nowrap flex items-center gap-2 hi {%- if is_center == false -%}hi justify-start {%- else -%}hi justify-center {%- endif -%}">
+                        <span class="diagonal-strike price__regular whitespace-nowrap relative inline-block text-gray-500" style="color: gray; font-size: 13px;">
+                          {{ variant.price | money }}
+                        </span>
+                        <span class="variant-price  price__regular new whitespace-nowrap text-red-600 font-semibold">
+                          {{ discounted_price | money }}
+                        </span>
+                      </p>
+                  
+                    {%- else -%}
+                        <!-- Price -->
+                        <div class="variant-price price">{{ variant.price | money }}/ea </div>
+                    {% endif %}
+                  </div>
+
+                  <div class="variant-stock">
+                    {% assign msg = variant.metafields.custom.preproduction_note %}
+                    {% if msg %}
+                      <span class="variant-message">Preproduction</span>
+                    {% elsif variant.inventory_management and variant.inventory_quantity > 0 %}
+                      <span class="in-stock">{{ variant.inventory_quantity }} in stock</span>
+                    {% elsif variant.metafields.custom.notify_me_button_label == '<strong>Coming Soon - Notify Me</strong>'  %}
+                        <span class="variant-message">Future Drops</span>
+                      {% else %}
+                      <span class="out-of-stock">Sold Out</span>
+                    {% endif %}
+                  </div>
+
+                  
+
+                  <div class="mobile-quantity-total">
+                    {% if variant.inventory_management and variant.inventory_quantity > 0 %}
+                      <quantity-input class="quantity inline-flex relative" data-variant-id="{{ variant.id }}">
+                        <button type="button" name="minus" class="active quantity__button">
+                          {%- render 'icon', icon: 'chevron-left', size: 'sm', class: 'stroke-2 transform' -%}
+                        </button>
+                        <input
+                          class="mobile variant-quantity quantity__input text-sm sm:text-base font-medium text-center"
+                          type="number"
+                          data-id="{{ variant.id }}"
+                          inputmode="numeric"
+                          autocomplete="off"
+                          min="0"
+                          max="{{ variant.inventory_quantity }}"
+                          value="0"
+                        >
+                        <button
+                          type="button"
+                          name="plus"
+                          class="active quantity__button"
+                          aria-label="{{ 'products.quantity.increase' | t: product: product.title | escape }}"
+                        >
+                          {%- render 'icon', icon: 'chevron-right', size: 'sm', class: 'stroke-2 transform' -%}
+                        </button>
+                      </quantity-input>
+                    {% elsif variant.inventory_management and variant.inventory_quantity <= 0 and variant.inventory_policy == 'continue' %}
+                     <quantity-input class="quantity inline-flex relative" data-variant-id="{{ variant.id }}">
+                        <button type="button" name="minus" class="active quantity__button">
+                          {%- render 'icon', icon: 'chevron-left', size: 'sm', class: 'stroke-2 transform' -%}
+                        </button>
+                        <input
+                          class="mobile variant-quantity quantity__input text-sm sm:text-base font-medium text-center"
+                          type="number"
+                          data-id="{{ variant.id }}"
+                          inputmode="numeric"
+                          autocomplete="off"
+                          min="0"
+                          max="{{ variant.inventory_quantity }}"
+                          value="0"
+                        >
+                        <button
+                          type="button"
+                          name="plus"
+                          class="active quantity__button"
+                          aria-label="{{ 'products.quantity.increase' | t: product: product.title | escape }}"
+                        >
+                          {%- render 'icon', icon: 'chevron-right', size: 'sm', class: 'stroke-2 transform' -%}
+                        </button>
+                      </quantity-input>
+                    {% else %}
+                      <quantity-input
+                        class="quantity disabled  inline-flex relative"
+                        data-variant-id="{{ variant.id }}"
+                      >
+                        <button type="button" name="minus" class="quantity__button">
+                          {%- render 'icon', icon: 'chevron-left', size: 'sm', class: 'stroke-2 transform' -%}
+                        </button>
+                        <input
+                          class="mobile variant-quantity  quantity__input text-sm sm:text-base font-medium text-center"
+                          type="number"
+                          data-id="{{ variant.id }}"
+                          inputmode="numeric"
+                          autocomplete="off"
+                          min="0"
+                          max="{{ variant.inventory_quantity }}"
+                          value="0"
+                          disabled
+                        >
+                        <button
+                          type="button"
+                          name="plus"
+                          class="quantity__button"
+                          aria-label="{{ 'products.quantity.increase' | t: product: product.title | escape }}"
+                        >
+                          {%- render 'icon', icon: 'chevron-right', size: 'sm', class: 'stroke-2 transform' -%}
+                        </button>
+                      </quantity-input>
+                    {% endif %}
+                    <div class="variant-total">$0.00</div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+
+    <div class="qof-footer desktop ">
+      <!-- <button id="add-to-cart-btn" class="btn">Add Selected to Cart</button> -->
+      <button
+        id="add-to-cart-btn"
+        class="button button--primary"
+        is="hover-button"
+      >
+        <span class="btn-fill" data-fill></span>
+
+        <span class="btn-text">
+          {%- liquid
+            echo 'products.product.add_to_cart' | t
+          -%}
+        </span>
+      </button>
+      <!-- <button id="qof-clear" class="btn-clear">Remove all</button> -->
+      <a
+        href="#"
+        id="qof-clear"
+        class="button button--secondary"
+        is="hover-link"
+        data-no-instant
+      >
+        <span class="btn-fill" data-fill style="transform: translateY(var(--motion-translateY));"></span>
+        <span class="btn-text">Reset Form</span>
+      </a>
+      <div id="qof-count">
+        <div id="qof-count-value">0</div>
+        <div>Total Items</div>
+      </div>
+      <!-- now 2nd -->
+
+      <div class="qof-taxmsg">
+        <div id="qof-subtotal">
+          <span id="qof-subtotal-value">$0.00</span><br>
+          <small>Product subtotal</small>
+        </div>
+        Taxes, Discounts and <a href="/policies/shipping-policy">Shipping</a> calculated at checkout
+      </div>
+    </div>
+
+    <div class="qof-footer mobile">
+      <div id="qof-count">
+        <small>Total Items: </small>
+        <div id="qof-count-value">0</div>
+      </div>
+      <!-- now 2nd -->
+      <div class="qof-taxmsg">
+        <div id="qof-subtotal"><small>Product subtotal</small>: <span id="qof-subtotal-value">$0.00</span></div>
+        <div>Taxes, Discounts and <a href="/policies/shipping-policy">Shipping</a> calculated at checkout</div>
+      </div>
+      <div class="button-grp-mobile">
+        <!-- <button id="add-to-cart-btn" class="btn">Add Selected to Cart</button> -->
+        <button
+          id="add-to-cart-btn"
+          class="button button--primary"
+          is="hover-button"
+        >
+          <span class="btn-fill" data-fill></span>
+
+          <span class="btn-text">
+            {%- liquid
+              echo 'products.product.add_to_cart' | t
+            -%}
+          </span>
+        </button>
+        <!-- <button id="qof-clear" class="btn-clear">Remove all</button> -->
+        <a
+          href="#"
+          id="qof-clear"
+          class="button button--secondary"
+          is="hover-link"
+          data-no-instant
+        >
+          <span class="btn-fill" data-fill style="transform: translateY(var(--motion-translateY));"></span>
+          <span class="btn-text">Reset Form</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // — Variant toggling —
+    document.querySelectorAll(".toggle-variants").forEach(button => {
+      button.addEventListener("click", () => {
+        const pid  = button.dataset.productId;
+        const rows = document.querySelectorAll(`.variant-row[data-parent-id="${pid}"]`);
+        if (!rows.length) return;
+    
+        const willShow = rows[0].style.display === "none";
+        // decide “display” mode based on viewport width
+        const isMobile     = window.matchMedia("(max-width: 1150px)").matches;
+        const showStyle    = isMobile ? "flex" : "table-row";
+    
+        rows.forEach(r => {
+          r.style.display = willShow ? showStyle : "none";
+        });
+    
+        button.textContent       = willShow ? "Hide Variants" : "Show Variants";
+        button.setAttribute("aria-expanded", willShow);
+      });
+    });
+
+function updateTotalFor(input) {
+  // 1. clamp the raw input value to [min, max]:
+  const min = parseInt(input.min,  10) || 0;
+  const max = parseInt(input.max, 10) || Infinity;
+  let qty  = parseInt(input.value, 10) || 0;
+
+  if (qty < min) {
+    qty = min;
+    input.value = qty;
+  } else if (qty > max) {
+    qty = max;
+    input.value = qty;
+  }
+
+  // 2. now use the clamped `qty` for your total logic:
+  const row       = input.closest("tr.variant-row");
+  const priceCell = row.querySelector(".variant-price");
+  const totalCell = row.querySelector(".variant-total");
+  const price     = parseFloat(priceCell.textContent.replace(/[^0-9.-]+/g,"")) || 0;
+
+  if (qty > 0) {
+    totalCell.textContent = "$" + (price * qty).toFixed(2);
+  } else {
+    totalCell.textContent = "$0.00";
+  }
+
+  // …and the rest of your subtotal/items recalculation…
+  let items = 0, subtotal = 0;
+  document.querySelectorAll(".variant-quantity").forEach(el => {
+    const q = parseInt(el.value, 10) || 0;
+    if (q > 0) {
+      items += q;
+      const r = el.closest("tr.variant-row");
+      const p = parseFloat(
+        r.querySelector(".variant-price")
+         .textContent.replace(/[^0-9.-]+/g,"")
+      ) || 0;
+      subtotal += p * q;
+    }
+  });
+
+  document.getElementById("qof-count").innerHTML =
+    `<div id='qof-count-value'>${items}</div> <div>Total Items</div>`;
+  document.getElementById("qof-subtotal").innerHTML =
+    `<span id='qof-subtotal-value'>$${subtotal.toFixed(2)}</span><br><small>Product subtotal</small>`;
+}
+
+function updateTotalForMobile(input) {
+  // clamp to [min, max] just like above
+  const min = parseInt(input.min,  10) || 0;
+  const max = parseInt(input.max, 10) || Infinity;
+  let qty  = parseInt(input.value, 10) || 0;
+
+  if (qty < min) {
+    qty = min;
+    input.value = qty;
+  } else if (qty > max) {
+    qty = max;
+    input.value = qty;
+  }
+
+  // now your existing mobile total logic…
+  const row       = input.closest("div.variant-row");
+  const priceCell = row.querySelector(".variant-price");
+  const totalCell = row.querySelector(".variant-total");
+  const cleanText = priceCell.textContent.replace(/[^0-9.,]/g, "").replace(/,/g, "");
+  const price = parseFloat(cleanText) || 0;
+
+  if (qty > 0) {
+    totalCell.textContent = "$" + (price * qty).toFixed(2);
+  } else {
+    totalCell.textContent = "$0.00";
+  }
+
+  let items = 0, subtotal = 0;
+  document.querySelectorAll("div.qof-mobile input.mobile.variant-quantity")
+    .forEach(el => {
+      const q = parseInt(el.value, 10) || 0;
+      if (q > 0) {
+        items += q;
+        const r = el.closest("div.variant-row");
+        const p = parseFloat(
+          r.querySelector(".variant-price")
+           .textContent.replace(/[^0-9.-]+/g,"")
+        ) || 0;
+        subtotal += p * q;
+      }
+    });
+
+  document.getElementById("qof-count-value").innerText    = items;
+  document.getElementById("qof-subtotal-value").innerText = "$" + subtotal.toFixed(2);
+}
+
+// re-attach your listeners:
+document.querySelectorAll("quantity-input input.desktop.variant-quantity")
+  .forEach(input => {
+    const handler = () => updateTotalFor(input);
+    input.addEventListener("input",  handler);
+    input.addEventListener("change", handler);
+  });
+document.querySelectorAll("quantity-input input.mobile.variant-quantity")
+  .forEach(input => {
+    const handler = () => updateTotalForMobile(input);
+    input.addEventListener("input",  handler);
+    input.addEventListener("change", handler);
+  });
+
+    // — Add Selected to Cart —
+    document.getElementById("add-to-cart-btn").addEventListener("click", () => {
+      const items = [];
+      document.querySelectorAll(".variant-quantity").forEach(input => {
+        const qty = parseInt(input.value, 10) || 0;
+        if (qty > 0) {
+          items.push({ id: input.dataset.id, quantity: qty });
+        }
+      });
+      if (!items.length) {
+        return alert("Please select at least one item.");
+      }
+      fetch("/cart/add.js", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items })
+      })
+      .then(res => res.json())
+      .then(() => { window.location.href = "/cart"; })
+      .catch(err => {
+        console.error("Cart error:", err);
+        alert("Failed to add items. Please try again.");
+      });
+    });
+
+    // — Collection switching —
+    const collBtns = document.querySelectorAll(".qof-collection-btn");
+    const prodRows = document.querySelectorAll(".product-row");
+    const varRows  = document.querySelectorAll(".variant-row");
+    let currentCollection = collBtns[0].dataset.collectionHandle;
+    
+    function showCollection(handle) {
+      currentCollection = handle;
+      // highlight
+      collBtns.forEach(b => b.classList.toggle("selected_name", b.dataset.collectionHandle === handle));
+      // show/hide products
+      prodRows.forEach(r => {
+        r.style.display = (r.dataset.collectionHandle === handle ? "" : "none");
+      });
+      // hide & reset all variants
+      varRows.forEach(r => r.style.display = "none");
+      document.querySelectorAll(".toggle-variants").forEach(btn => {
+        btn.textContent       = "Show Variants";
+        btn.setAttribute("aria-expanded", "false");
+      });
+      // 3) Update the <h2> text:
+      const title = document
+        .querySelector(`.qof-collection-btn[data-collection-handle="${handle}"]`)
+        .dataset.collectionTitle;
+      document.getElementById("qof-current-collection").textContent = title;
+
+    }
+    
+    collBtns.forEach(btn => {
+      btn.addEventListener("click", () => showCollection(btn.dataset.collectionHandle));
+    });
+    // init load
+    if (collBtns.length) {
+      showCollection(collBtns[0].dataset.collectionHandle);
+    }
+
+    // Global search Logic
+    const searchInput = document.getElementById("qof-search-input");
+    const noRow       = document.querySelector(".no-results");
+
+    searchInput.addEventListener("input", () => {
+      const term = searchInput.value.trim().toLowerCase();
+
+      // if search is empty, revert to collection filter
+      if (!term) {
+        noRow.style.display = "none";
+        return showCollection(currentCollection);
+      }
+
+      // non-empty search → un-highlight all collections
+      collBtns.forEach(btn => btn.classList.remove("selected_name"));
+
+      // otherwise, bypass collection filter & do a substring match on product title
+      let matches = 0;
+      // hide all variants & reset toggles
+      varRows.forEach(r => r.style.display = "none");
+      document.querySelectorAll(".toggle-variants").forEach(btn => {
+        btn.textContent = "Show Variants";
+        btn.setAttribute("aria-expanded", "false");
+      });
+
+      prodRows.forEach(row => {
+        const titleEl = row.querySelector(".product-info__title");
+        const title   = titleEl ? titleEl.textContent.trim().toLowerCase() : "";
+
+        if (title.includes(term)) {
+          row.style.display = "";
+          matches++;
+        } else {
+          row.style.display = "none";
+        }
+      });
+
+      // show or hide the “no results” message
+      noRow.style.display = matches ? "none" : "table-row";
+    });
+
+    // --- FOOTER LOGIC ---
+    const clearBtn = document.getElementById("qof-clear");
+    
+    clearBtn.addEventListener("click", (e) => {
+      e.preventDefault();    // stop the “#” from jumping
+      // 1) Reset every variant row:
+      document.querySelectorAll("tr.variant-row").forEach(row => {
+        const input   = row.querySelector("input.variant-quantity");
+        const totalTd = row.querySelector(".variant-total");
+        if (input)   input.value = 0;
+        if (totalTd) totalTd.textContent = "$0.00";
+      });
+      document.querySelectorAll("div.variant-row").forEach(row => {
+        const input   = row.querySelector("input.variant-quantity");
+        const totalTd = row.querySelector(".variant-total");
+        if (input)   input.value = 0;
+        if (totalTd) totalTd.textContent = "$0.00";
+      });
+    
+      // 2) Reset the sticky footer values:
+      document.getElementById("qof-count-value").innerText    = "0";
+      document.getElementById("qof-subtotal-value").innerText = "$0.00";
+    });
+
+  });
+  </script>
+{% else %}
+  <div style="text-align: center; padding: 50px;">
+    <h2>This page is only available for wholesale customers.</h2>
+  </div>
+{% endif %}

@@ -1,0 +1,551 @@
+{% doc %}
+  @prompt
+    Create a dynamic accelerated checkout button display that detects the user's device and shows only the relevant payment button. For iOS devices, show only Apple Pay. For Android devices, show only Google Pay. For other devices, show PayPal or a default option. The code should detect the device type using user agent detection and conditionally render the appropriate Shopify accelerated checkout button while hiding the others.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-smart-checkout-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .ai-smart-checkout-container-{{ ai_gen_id }} {
+    width: {{ block.settings.desktop_width_percent }}%;
+    margin: 0 auto;
+    padding: {{ block.settings.padding }}px;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-smart-checkout-heading-{{ ai_gen_id }} {
+    text-align: {{ block.settings.text_alignment }};
+    margin: 0 0 {{ block.settings.heading_spacing }}px;
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-smart-checkout-subtext-{{ ai_gen_id }} {
+    text-align: {{ block.settings.text_alignment }};
+    margin: 0 0 {{ block.settings.subtext_spacing }}px;
+    font-size: {{ block.settings.subtext_size }}px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-smart-checkout-buttons-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ai-smart-checkout-button-wrapper-{{ ai_gen_id }} {
+    display: none;
+  }
+
+  .ai-smart-checkout-button-wrapper-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  .ai-smart-checkout-fallback-{{ ai_gen_id }} {
+    display: none;
+  }
+
+  .ai-smart-checkout-fallback-{{ ai_gen_id }}.active {
+    display: block;
+  }
+
+  .ai-smart-checkout-button-{{ ai_gen_id }} {
+    width: 100%;
+    padding: {{ block.settings.button_padding }}px;
+    background-color: {{ block.settings.button_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_font_size }}px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .ai-smart-checkout-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_color }};
+  }
+
+  .ai-smart-checkout-device-info-{{ ai_gen_id }} {
+    margin-top: 16px;
+    padding: 12px;
+    background-color: {{ block.settings.info_background_color }};
+    border-radius: 6px;
+    font-size: 12px;
+    color: {{ block.settings.info_text_color }};
+    text-align: center;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-smart-checkout-container-{{ ai_gen_id }} {
+      width: 100%;
+    }
+  }
+{% endstyle %}
+
+<smart-checkout-{{ ai_gen_id }}
+  class="ai-smart-checkout-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-smart-checkout-container-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h3 class="ai-smart-checkout-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h3>
+    {% endif %}
+
+    {% if block.settings.subtext != blank %}
+      <div class="ai-smart-checkout-subtext-{{ ai_gen_id }}">{{ block.settings.subtext }}</div>
+    {% endif %}
+
+    <div class="ai-smart-checkout-buttons-{{ ai_gen_id }}">
+      <div
+        class="ai-smart-checkout-button-wrapper-{{ ai_gen_id }} ai-smart-checkout-apple-pay-{{ ai_gen_id }}"
+        data-payment-type="apple-pay"
+      >
+        {% if block.settings.apple_pay_link != blank %}
+          <a
+            href="{{ block.settings.apple_pay_link }}"
+            class="ai-smart-checkout-button-{{ ai_gen_id }}"
+          >
+            {{ block.settings.apple_pay_text }}
+          </a>
+        {% endif %}
+      </div>
+
+      <div
+        class="ai-smart-checkout-button-wrapper-{{ ai_gen_id }} ai-smart-checkout-google-pay-{{ ai_gen_id }}"
+        data-payment-type="google-pay"
+      >
+        {% if block.settings.google_pay_link != blank %}
+          <a
+            href="{{ block.settings.google_pay_link }}"
+            class="ai-smart-checkout-button-{{ ai_gen_id }}"
+          >
+            {{ block.settings.google_pay_text }}
+          </a>
+        {% endif %}
+      </div>
+
+      <div
+        class="ai-smart-checkout-button-wrapper-{{ ai_gen_id }} ai-smart-checkout-paypal-{{ ai_gen_id }}"
+        data-payment-type="paypal"
+      >
+        {% if block.settings.paypal_link != blank %}
+          <a
+            href="{{ block.settings.paypal_link }}"
+            class="ai-smart-checkout-button-{{ ai_gen_id }}"
+          >
+            {{ block.settings.paypal_text }}
+          </a>
+        {% endif %}
+      </div>
+
+      {% if block.settings.show_fallback_button %}
+        <div class="ai-smart-checkout-fallback-{{ ai_gen_id }}">
+          <a
+            href="{{ block.settings.fallback_button_link }}"
+            class="ai-smart-checkout-button-{{ ai_gen_id }}"
+          >
+            {{ block.settings.fallback_button_text }}
+          </a>
+        </div>
+      {% endif %}
+    </div>
+
+    {% if block.settings.show_device_info %}
+      <div class="ai-smart-checkout-device-info-{{ ai_gen_id }}">
+        <span class="ai-smart-checkout-device-label-{{ ai_gen_id }}"></span>
+      </div>
+    {% endif %}
+  </div>
+</smart-checkout-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class SmartCheckout{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.deviceType = null;
+      }
+
+      connectedCallback() {
+        this.detectDevice();
+        this.showRelevantButton();
+        this.updateDeviceInfo();
+      }
+
+      detectDevice() {
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+          this.deviceType = 'ios';
+        } else if (/android/i.test(userAgent)) {
+          this.deviceType = 'android';
+        } else {
+          this.deviceType = 'other';
+        }
+      }
+
+      showRelevantButton() {
+        const applePayWrapper = this.querySelector('.ai-smart-checkout-apple-pay-{{ ai_gen_id }}');
+        const googlePayWrapper = this.querySelector('.ai-smart-checkout-google-pay-{{ ai_gen_id }}');
+        const paypalWrapper = this.querySelector('.ai-smart-checkout-paypal-{{ ai_gen_id }}');
+        const fallbackWrapper = this.querySelector('.ai-smart-checkout-fallback-{{ ai_gen_id }}');
+
+        let buttonShown = false;
+
+        if (this.deviceType === 'ios' && applePayWrapper) {
+          const applePayButton = applePayWrapper.querySelector('.ai-smart-checkout-button-{{ ai_gen_id }}');
+          if (applePayButton) {
+            applePayWrapper.classList.add('active');
+            this.hideOtherButtons(applePayWrapper);
+            buttonShown = true;
+          }
+        } else if (this.deviceType === 'android' && googlePayWrapper) {
+          const googlePayButton = googlePayWrapper.querySelector('.ai-smart-checkout-button-{{ ai_gen_id }}');
+          if (googlePayButton) {
+            googlePayWrapper.classList.add('active');
+            this.hideOtherButtons(googlePayWrapper);
+            buttonShown = true;
+          }
+        }
+
+        if (!buttonShown && paypalWrapper) {
+          const paypalButton = paypalWrapper.querySelector('.ai-smart-checkout-button-{{ ai_gen_id }}');
+          if (paypalButton) {
+            paypalWrapper.classList.add('active');
+            this.hideOtherButtons(paypalWrapper);
+            buttonShown = true;
+          }
+        }
+
+        if (!buttonShown && fallbackWrapper) {
+          fallbackWrapper.classList.add('active');
+        }
+      }
+
+      hideOtherButtons(activeWrapper) {
+        const allWrappers = this.querySelectorAll('.ai-smart-checkout-button-wrapper-{{ ai_gen_id }}');
+        allWrappers.forEach(wrapper => {
+          if (wrapper !== activeWrapper) {
+            wrapper.style.display = 'none';
+          }
+        });
+      }
+
+      updateDeviceInfo() {
+        const deviceLabel = this.querySelector('.ai-smart-checkout-device-label-{{ ai_gen_id }}');
+        if (deviceLabel) {
+          let deviceText = '';
+          if (this.deviceType === 'ios') {
+            deviceText = 'iOS device detected - Showing Apple Pay';
+          } else if (this.deviceType === 'android') {
+            deviceText = 'Android device detected - Showing Google Pay';
+          } else {
+            deviceText = 'Desktop/Other device detected - Showing PayPal';
+          }
+          deviceLabel.textContent = deviceText;
+        }
+      }
+    }
+
+    customElements.define('smart-checkout-{{ ai_gen_id }}', SmartCheckout{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Smart checkout button",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Express checkout</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "<p>Complete your purchase with one tap</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Apple Pay"
+    },
+    {
+      "type": "text",
+      "id": "apple_pay_text",
+      "label": "Button text",
+      "default": "Pay with Apple Pay"
+    },
+    {
+      "type": "url",
+      "id": "apple_pay_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Google Pay"
+    },
+    {
+      "type": "text",
+      "id": "google_pay_text",
+      "label": "Button text",
+      "default": "Pay with Google Pay"
+    },
+    {
+      "type": "url",
+      "id": "google_pay_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "PayPal"
+    },
+    {
+      "type": "text",
+      "id": "paypal_text",
+      "label": "Button text",
+      "default": "Pay with PayPal"
+    },
+    {
+      "type": "url",
+      "id": "paypal_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Fallback button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_fallback_button",
+      "label": "Show fallback button",
+      "info": "Displays when no payment button is configured",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "fallback_button_text",
+      "label": "Fallback button text",
+      "default": "Proceed to checkout"
+    },
+    {
+      "type": "url",
+      "id": "fallback_button_link",
+      "label": "Fallback button link"
+    },
+    {
+      "type": "header",
+      "content": "Device detection"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_device_info",
+      "label": "Show device info",
+      "info": "Display detected device type for testing",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Padding",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#171717"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 14,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Heading spacing",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Subtext"
+    },
+    {
+      "type": "range",
+      "id": "subtext_size",
+      "label": "Subtext size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "subtext_spacing",
+      "label": "Subtext spacing",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "range",
+      "id": "button_padding",
+      "label": "Button padding",
+      "min": 8,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button color",
+      "default": "#171717"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Button hover color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Device info"
+    },
+    {
+      "type": "color",
+      "id": "info_background_color",
+      "label": "Info background color",
+      "default": "#f7fee7"
+    },
+    {
+      "type": "color",
+      "id": "info_text_color",
+      "label": "Info text color",
+      "default": "#4d7c0f"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Smart checkout button"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,162 @@
+{%- doc -%}
+  Renders product variant selectors as buttons with color swatches or dropdown menus.
+
+  Supports size charts, variant images, and dynamic option display based on availability.
+
+  @param {object} product - Product object with variants and options
+  @param {object} block - Section block with picker settings
+  @param {string} product_form_id - Form ID for variant inputs
+  @param {string} product_id - Product ID for targeting
+  @param {string} section_id - Section ID for uniqueness
+  @param {string} [image_ratio] - Swatch image aspect ratio
+  @param {string} [image_ratio_mobile] - Mobile swatch aspect ratio
+  @param {boolean} [image_fill] - Fill vs contain swatch images
+
+  @example
+  {% render 'product-variant-picker',
+    product: product,
+    block: block,
+    product_form_id: product_form_id,
+    product_id: product.id,
+    section_id: section.id
+  %}
+{%- enddoc -%}
+
+
+
+{% comment %} B - Test START {% endcomment %}
+<style>
+    .product-form__input--dropdown .field > select[is="custom-select"] {
+      background-color: #f2f2f2;
+      background: #f2f2f2;
+    }
+    .product-form__input--dropdown .field  {
+      width: max-content;
+    }
+    .product-form__input--dropdown .field select {
+      padding-right: 2.2rem; /* adjust to your icon’s width + margin */
+
+    }
+
+
+    .select-icon {
+    pointer-events: none;
+    /* adjust position if needed: */
+    right: 12px;
+    top: 50% !important;
+    transform: translateY(-50%) scaleY(-1) !important;
+  }
+</style>
+
+<style>
+  .select-icon {
+    inset-inline-end: 6px !important;
+  }
+  .cus_variant_picker * {
+    font-size: 12px !important;
+  }
+  .cus_variant_picker {
+    padding-inline: 10px;
+    padding-right: 25px;
+    {% if product.template_suffix != 'custom-team-pdp' and product.template_suffix != 'neck-guards' and product.template_suffix != 'non-index-pdp' %} min-height: 60px; {% endif %}
+  }
+  .product-form__input--dropdown .field select {
+    padding-right: 1.4rem !important;
+  }
+  @media (min-width: 640px) {
+    .product-form__input--dropdown .field select {
+      padding-right: 2.2rem !important; /* adjust to your icon’s width + margin */
+
+    }
+    .cus_variant_picker * {
+      font-size: 15px !important;
+    }
+    .cus_variant_picker {
+      padding-inline: 20px;
+      padding-right: 30px !important;
+      min-height: 60px;
+    }
+    .select-icon {
+      inset-inline-end: 8px !important;
+    }
+  }
+  /* TBG Custom Code */
+  .tbg-custom-select{
+    position:relative;
+    width:100%;
+    background-color: #f2f2f2;
+    border-radius: 0.75rem;
+    font-size: 12px;
+  }
+  @media (min-width: 640px) {
+    .tbg-custom-select{
+      font-size: 15px;
+    }
+  }
+
+  .tbg-custom-select__button{border: 1px solid rgb(var(--color-border)); border-radius: var(--buttons-radius); display:flex; align-items:center; justify-content:space-between; width:100%; cursor:pointer; line-height:1.2;min-height: 52px;padding-inline: 10px;padding-right: 30px !important;}
+    @media (min-width: 640px) {
+      .tbg-custom-select__button{
+        min-height: 60px;
+      }
+    }
+  .tbg-custom-select__list{position:absolute; z-index:30; top:calc(100% + 4px); left:0; right:0; background:#fff; border:1px solid var(--color-border, #e5e7eb); border-radius:6px; box-shadow:0 0px 20px rgba(0, 0, 0, 0.34); display:none;}
+  .tbg-custom-select__item{padding:8px 12px; cursor:pointer; white-space:nowrap;}
+  .tbg-custom-select__item[aria-selected="true"]{font-weight:600;}
+  .tbg-custom-select__item:hover{background:#f6f7f8;}
+  .tbg-custom-select__item[data-out="true"]{text-decoration:line-through; opacity:.6;}
+  .tbg-custom-select[aria-expanded="true"] .tbg-custom-select__list{display:block;}
+  /* End TBG Custom Code */
+</style>
+{% comment %}
+  {% else %}
+    <style>
+      .select-icon {
+        inset-inline-end: 12px !important;
+      }
+    </style>
+  {% endif %}
+{% endcomment %}
+{% comment %} B - Test END {% endcomment %}
+
+
+{%- unless product.has_only_default_variant -%}
+  {%- liquid
+    case block.settings.picker_type
+      when 'button'
+        if block.settings.enable_color_swatches
+          if block.settings.color_swatch_type == 'variant'
+            render 'product-variant-picker-variant', product: product, product_id: product_id, section_id: section_id, enable_dynamic_variants: block.settings.enable_dynamic_variants, show_variant_labels: block.settings.show_variant_labels, size_chart: block.settings.size_chart, shopify_attributes: block.shopify_attributes, context: 'product', image_ratio: image_ratio, image_ratio_mobile: image_ratio_mobile, image_fill: image_fill
+          else
+            render 'product-variant-picker-swatch', product: product, product_id: product_id, section_id: section_id, enable_dynamic_variants: block.settings.enable_dynamic_variants, show_variant_labels: block.settings.show_variant_labels, size_chart: block.settings.size_chart, shopify_attributes: block.shopify_attributes, context: 'product'
+          endif
+        else
+          render 'product-variant-picker-button', product: product, product_id: product_id, section_id: section_id, enable_dynamic_variants: block.settings.enable_dynamic_variants, show_variant_labels: block.settings.show_variant_labels, size_chart: block.settings.size_chart, shopify_attributes: block.shopify_attributes, context: 'product'
+        endif
+      when 'dropdown'
+        render 'product-variant-picker-dropdown', product: product, product_id: product_id, section_id: section_id, enable_dynamic_variants: block.settings.enable_dynamic_variants, show_variant_labels: block.settings.show_variant_labels, size_chart: block.settings.size_chart, shopify_attributes: block.shopify_attributes, context: 'product'
+    endcase
+  -%}
+{%- endunless -%}
+
+<noscript>
+  <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
+    <label class="form__label flex gap-2" for="Variants-{{ section_id }}-{{ product_id }}">{{ 'products.product.product_variants' | t }}</label>
+    <div class="field">
+      <select name="id" id="Variants-{{ section_id }}-{{ product_id }}" class="select" form="{{ product_form_id }}">
+        {%- for variant in product.variants -%}
+          <option
+            {% if variant == product.selected_or_first_available_variant %}selected{% endif %}
+            {% if variant.available == false %}disabled{% endif %}
+            value="{{ variant.id }}"
+          >
+            {{ variant.title }}
+            {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+            - {{ variant.price | money | strip_html }}
+          </option>
+        {%- endfor -%}
+      </select>
+      {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none' -%}
+    </div>
+  </div>
+</noscript>

@@ -1,0 +1,762 @@
+{% comment %} TBG Custom Code {% endcomment %}
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --reviews-video-width-mobile: {{ section.settings.video_width_mobile }}vw;
+    --video-title-font-size-mobile: {{ section.settings.title_font_size_mobile }}px;
+    --video-title-font-size-desktop: {{ section.settings.title_font_size_desktop }}px;
+    --video-name-font-size-mobile: {{ section.settings.name_font_size_mobile }}px;
+    --video-name-font-size-desktop: {{ section.settings.name_font_size_desktop }}px;
+    {%- render 'section-variables', section: section -%}
+  }
+
+  #shopify-section-{{ section.id }} .reviews-video-carousel .card-grid {
+    gap: 13px;
+  }
+
+  @media screen and (min-width: 768px) {
+    #shopify-section-{{ section.id }} .reviews-video-carousel .card-grid--1 {
+      --slider-item-width: calc((100% - 52px) / 5);
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }} .reviews-video-carousel .slider--tablet .mobile\:card-grid--1 {
+      --slider-item-width: var(--reviews-video-width-mobile);
+      gap: 1rem !important;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .video-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 13px 32px -8px rgba(0, 0, 0, 0.15);
+    border: 1px solid #cacaca;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    height: auto;
+    margin-bottom: 30px;
+  }
+
+  #shopify-section-{{ section.id }} .video-frame-wrap {
+    width: 100%;
+    background: #e6e6e6;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .video-preview-image,
+  #shopify-section-{{ section.id }} .video-frame {
+    width: 100%;
+    aspect-ratio: 9/16;
+    height: auto;
+    border: 0;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .video-preview-image {
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    z-index: 0;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+  }
+
+  #shopify-section-{{ section.id }} .video-frame {
+    position: relative;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  #shopify-section-{{ section.id }} .video-frame-wrap.is-playing .video-frame {
+    opacity: 1;
+  }
+
+  #shopify-section-{{ section.id }} .video-frame-wrap.is-playing .video-preview-image {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .video-gradient-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 62%);
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+    display: block !important;
+  }
+
+  #shopify-section-{{ section.id }} .video-play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+  }
+
+  #shopify-section-{{ section.id }} .video-play-button {
+    appearance: none;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .video-play-badge {
+    width: 72px;
+    height: 72px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .video-play-badge img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  #shopify-section-{{ section.id }} .video-frame-wrap.is-playing .video-play-overlay,
+  #shopify-section-{{ section.id }} .video-frame-wrap.is-playing .video-gradient-overlay {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .video-content {
+    position: relative;
+    padding: 18px 18px;
+    background: #000000;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #shopify-section-{{ section.id }} .video-stars {
+    display: flex;
+    gap: 0px;
+    align-items: center;
+    line-height: 0;
+    margin-bottom: 5px;
+  }
+
+  #shopify-section-{{ section.id }} .video-stars svg {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .video-title {
+    font-weight: 400;
+    font-size: var(--video-title-font-size-mobile);
+    line-height: 1.15;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .video-title-box.is-expanded .video-title {
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
+
+  #shopify-section-{{ section.id }} .video-read-more {
+    display: inline-block;
+    font-size: 11px;
+    line-height: 1;
+    font-weight: 400;
+    text-decoration: underline;
+    color: rgba(255, 255, 255, 0.75);
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    text-align: start;
+    margin-top: 4px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+
+  #shopify-section-{{ section.id }} .video-read-more[hidden] {
+    display: none !important;
+  }
+
+  #shopify-section-{{ section.id }} .cus_outer {
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .reviews-video-carousel .card-grid > .card {
+    align-self: flex-start;
+    height: auto;
+  }
+
+  #shopify-section-{{ section.id }} .video-name {
+    font-weight: 700;
+    font-size: var(--video-name-font-size-mobile);
+    line-height: 1.1;
+    margin: 0;
+    text-align: right;
+    margin-top: 30px;
+  }
+
+  #shopify-section-{{ section.id }} .empty-state {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    padding: 24px;
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .video-title {
+      font-size: var(--video-title-font-size-desktop);
+    }
+
+    #shopify-section-{{ section.id }} .video-name {
+      font-size: var(--video-name-font-size-desktop);
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    #shopify-section-{{ section.id }} .reviews-video-carousel--desktop-wrap .card-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 13px;
+      align-items: flex-start;
+    }
+
+    #shopify-section-{{ section.id }} .reviews-video-carousel--desktop-wrap .card-grid > .card {
+      flex: 0 0 calc((100% - 52px) / 5);
+      width: calc((100% - 52px) / 5);
+    }
+  }
+</style>
+
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+  <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative reviews-video-carousel{% unless section.settings.carousel_on_desktop %} reviews-video-carousel--desktop-wrap{% endunless %}">
+    {%- capture indicators -%}
+      {%- if section.settings.carousel_on_desktop -%}
+        <div class="indicators hidden lg:flex gap-2d5">
+          <button class="button button--secondary" type="button" is="previous-button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">
+              {%- render 'icon', icon: 'chevron-left', class: 'transform' -%}
+            </span>
+          </button>
+          <button class="button button--secondary" type="button" is="next-button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.next' | t | escape }}">
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">
+              {%- render 'icon', icon: 'chevron-right', class: 'transform' -%}
+            </span>
+          </button>
+        </div>
+      {%- endif -%}
+    {%- endcapture -%}
+
+    {%- render 'section-heading', section: section, section_button: indicators -%}
+
+    <slider-element
+      id="Slider-{{ section.id }}"
+      class="grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}"
+      selector=".card-grid>.card"
+      {% if section.settings.carousel_on_desktop or section.settings.swipe_on_mobile %}
+        tabindex="0"
+      {% endif %}
+    >
+      <motion-list
+        id="ReviewsVideoList-{{ section.id }}"
+        class="product-grid card-grid card-grid--1 mobile:card-grid--1 grid"
+      >
+        {% if section.blocks.size == 0 %}
+          <div class="card product-card product-card--standard empty-state">
+            Add video blocks to show customer videos.
+          </div>
+        {% else %}
+          {% for block in section.blocks %}
+            {% assign shopify_video = block.settings.video %}
+            {% if shopify_video != blank %}
+              {% assign preview_image_url = '' %}
+              {% if block.settings.preview_image %}
+                {% assign preview_image_url = block.settings.preview_image | image_url: width: 900 | prepend: 'https:' %}
+              {% elsif shopify_video.preview_image %}
+                {% assign preview_image_url = shopify_video.preview_image | image_url: width: 900 | prepend: 'https:' %}
+              {% endif %}
+              <div class="card product-card product-card--standard video-card" {{ block.shopify_attributes }}>
+                <div class="video-frame-wrap has-shopify-video">
+                  {% if preview_image_url != blank %}
+                    <img
+                      class="video-preview-image"
+                      src="{{ preview_image_url }}"
+                      alt=""
+                      loading="lazy"
+                      aria-hidden="true"
+                    >
+                  {% endif %}
+                  <div class="video-gradient-overlay" aria-hidden="true"></div>
+                  <div class="video-play-overlay" aria-hidden="false">
+                    <button class="video-play-button" type="button" aria-label="Play video">
+                      <span class="video-play-badge">
+                        <img
+                          src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/PLAY_BUTTON.svg?v=1781183919"
+                          alt=""
+                          aria-hidden="true"
+                        >
+                      </span>
+                    </button>
+                  </div>
+                  {% comment %} TBG custom code: use only Shopify video_tag for faster native video delivery and playback startup {% endcomment %}
+                  {{
+                    shopify_video
+                    | video_tag:
+                      class: 'video-frame',
+                      image_size: '900x',
+                      autoplay: false,
+                      loop: false,
+                      controls: false,
+                      muted: false,
+                      playsinline: true,
+                      preload: 'metadata'
+                  }}
+                </div>
+
+                {% if block.settings.title != blank or block.settings.name != blank %}
+                  <div class="video-content">
+                    <div class="video-stars" aria-hidden="true">
+                      {% for i in (1..5) %}
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                          <path d="M12 2.25l2.877 5.83 6.433.936-4.655 4.538 1.098 6.409L12 16.989l-5.753 2.974 1.098-6.409L2.69 9.016l6.433-.936L12 2.25z"></path>
+                        </svg>
+                      {% endfor %}
+                    </div>
+                    {% if block.settings.title != blank %}
+                      <div class="cus_outer">
+                        <div class="video-title-box">
+                          <p class="video-title">{{ block.settings.title }}</p>
+                        </div>
+                        <button class="video-read-more" type="button" hidden>read more</button>
+                      </div>
+                    {% endif %}
+                    {% if block.settings.name != blank %}
+                      <p class="video-name">- {{ block.settings.name }}</p>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </motion-list>
+    </slider-element>
+  </div>
+</div>
+
+{% comment %} TBG custom code: native Shopify video playback handling for review carousel {% endcomment %}
+{% comment %} POSTHOG METRIC - Customer Review Video Clicked - Track video clicked or not {% endcomment %}
+{% comment %} POSTHOG METRIC - Customer Review Video Click Count - Tracks how mnay video clicked {% endcomment %}
+<script>
+  (function () {
+    const sectionRoot = document.getElementById('shopify-section-{{ section.id }}');
+    if (!sectionRoot) return;
+    const uniqueVideosClicked = new Set();
+    let hasClickedAnyVideo = false;
+
+    sectionRoot.querySelectorAll('.video-frame-wrap').forEach((wrap, index) => {
+      const button = wrap.querySelector('.video-play-button');
+      const video = wrap.querySelector('video');
+      if (!button || !video) return;
+
+      const videoKey = video.currentSrc || video.getAttribute('src') || video.getAttribute('poster') || 'video-' + index;
+
+      const setPlayingState = (isPlaying) => {
+        wrap.classList.toggle('is-playing', isPlaying);
+        if (isPlaying) {
+          video.setAttribute('controls', '');
+        } else {
+          video.removeAttribute('controls');
+        }
+      };
+
+      button.addEventListener('click', () => {
+        if (typeof posthog !== 'undefined' && typeof posthog.capture === 'function') {
+          if (!hasClickedAnyVideo) {
+            hasClickedAnyVideo = true;
+
+            posthog.capture('Customer Review Video Clicked', {
+              section_name: 'customer_reviews_video_carousel',
+              video_clicked: true
+            });
+          }
+
+          if (!uniqueVideosClicked.has(videoKey)) {
+            uniqueVideosClicked.add(videoKey);
+
+            posthog.capture('Customer Review Video Click Count', {
+              section_name: 'customer_reviews_video_carousel',
+              unique_video_click_count: uniqueVideosClicked.size
+            });
+          }
+        }
+
+        const playPromise = video.play();
+        setPlayingState(true);
+
+        if (playPromise && typeof playPromise.catch === 'function') {
+          playPromise.catch(() => {
+            setPlayingState(false);
+          });
+        }
+      });
+
+      video.addEventListener('pause', () => {
+        setPlayingState(false);
+      });
+
+      video.addEventListener('ended', () => {
+        setPlayingState(false);
+      });
+
+      video.addEventListener('play', () => {
+        setPlayingState(true);
+      });
+    });
+
+    sectionRoot.querySelectorAll('.video-content').forEach((content) => {
+      const titleBox = content.querySelector('.video-title-box');
+      const readMore = content.querySelector('.video-read-more');
+      if (!titleBox || !readMore) return;
+
+      let expanded = false;
+      const titleEl = titleBox.querySelector('.video-title');
+      if (!titleEl) return;
+
+      const isClipped = () => titleEl.scrollHeight > titleEl.clientHeight + 1;
+
+      const refreshReadMore = () => {
+        titleBox.classList.remove('is-expanded');
+        const needsToggle = isClipped();
+
+        if (!needsToggle) {
+          expanded = false;
+          readMore.hidden = true;
+          readMore.textContent = 'read more';
+          return;
+        }
+
+        titleBox.classList.toggle('is-expanded', expanded);
+        readMore.hidden = false;
+        readMore.textContent = expanded ? 'show less' : 'read more';
+      };
+
+      readMore.addEventListener('click', () => {
+        expanded = !expanded;
+        refreshReadMore();
+      });
+
+      requestAnimationFrame(refreshReadMore);
+      window.addEventListener('resize', refreshReadMore);
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(refreshReadMore).catch(() => {});
+      }
+    });
+  })();
+</script>
+
+{% comment %} TBG custom code: default preset blocks for review videos {% endcomment %}
+{% schema %}
+{
+  "name": "Reviews Video Carousel",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "carousel_on_desktop",
+      "label": "t:sections.global.settings.carousel_on_desktop.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "swipe_on_mobile",
+      "label": "t:sections.global.settings.swipe_on_mobile.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Video size"
+    },
+    {
+      "type": "range",
+      "id": "video_width_mobile",
+      "min": 40,
+      "max": 90,
+      "step": 1,
+      "unit": "vw",
+      "label": "Video width (mobile)",
+      "default": 70
+    },
+    {
+      "type": "header",
+      "content": "Card typography"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "min": 8,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Title font size (mobile)",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_desktop",
+      "min": 8,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Title font size (desktop)",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "name_font_size_mobile",
+      "min": 8,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Name font size (mobile)",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "name_font_size_desktop",
+      "min": 8,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Name font size (desktop)",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__heading.content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:sections.global.settings.heading.label",
+      "default": "SEE WHAT HOCKEY FAMILIES ARE SAYING"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-md",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.global.settings.heading_alignment.label",
+      "options": [
+        {
+          "value": "text-left md:items-end md:flex-row",
+          "label": "t:sections.global.settings.heading_alignment.options__1.label"
+        },
+        {
+          "value": "text-center md:items-center",
+          "label": "t:sections.global.settings.heading_alignment.options__2.label"
+        },
+        {
+          "value": "text-right md:items-end md:flex-row-reverse",
+          "label": "t:sections.global.settings.heading_alignment.options__3.label"
+        }
+      ],
+      "default": "text-left md:items-end md:flex-row"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:sections.global.settings.subheading.label"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:sections.global.settings.description.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__colors.content",
+      "info": "t:sections.global.settings.header__colors.info"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "t:sections.global.settings.color_text.label"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "t:sections.global.settings.color_background.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_background",
+      "label": "t:sections.global.settings.gradient_background.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Shopify video"
+        },
+        {
+          "type": "image_picker",
+          "id": "preview_image",
+          "label": "Preview image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews Video Carousel"
+    }
+  ]
+}
+{% endschema %}

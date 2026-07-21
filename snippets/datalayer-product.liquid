@@ -1,0 +1,32 @@
+{%- liquid
+        assign current_variant = product.selected_or_first_available_variant
+      -%}
+      
+      <script>
+        var itemObject = {
+            item_id: {{ current_variant.id | json }},
+            id: {{ current_variant.id | json }},
+            item_name: {{ product.title | json }},
+            currency: {{ shop.currency | json }},
+            item_brand: {{ product.vendor | json }},
+            item_category: {{ product.type | json }},
+            item_variant: {{ current_variant.title | json }},
+            price: {{ current_variant.price }} / 100,
+            google_business_vertical: 'retail',
+            quantity: 1
+        }
+      
+        document.addEventListener('DOMContentLoaded', () => {
+            const addToCartBtn = document.querySelector('[name="add"]')
+            addToCartBtn?.addEventListener('click', () => {
+                dataLayer.push({ ecommerce: null });
+                dataLayer.push({
+                    event: "custom_add_to_cart",
+                    ecommerce: {
+                    currency: {{ shop.currency | json }},
+                        items: [itemObject]
+                    }
+                });
+            })
+        })
+      </script>

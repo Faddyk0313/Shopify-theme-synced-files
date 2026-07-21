@@ -1,0 +1,378 @@
+<style>
+  /* CSS Variables */
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #shopify-section-{{ section.id }} .section::before {
+    content: none;
+  }
+
+  #shopify-section-{{ section.id }} .section {
+    background-color: {{ section.settings.background_color }};
+  }
+
+  /* Hero Section */
+  #shopify-section-{{ section.id }} .cus_hero-section {
+    display: grid;
+    grid-template-columns: 60% 40%;
+  }
+
+  #shopify-section-{{ section.id }} .hero-left {
+    background-color: {{ section.settings.hero_left_bg_color }};
+  }
+
+  #shopify-section-{{ section.id }} .hero-left h2 {
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .hero-left p {
+    line-height: 1.6;
+  }
+
+  #shopify-section-{{ section.id }} .hero-right {
+    background-color: {{ section.settings.hero_right_bg_color }};
+  }
+
+  /* Quick Facts */
+  #shopify-section-{{ section.id }} .quick-facts h2 {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .fact-item {
+    margin-bottom: 1rem;
+  }
+
+  #shopify-section-{{ section.id }} .fact-item strong {
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .certification-badges {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    max-width: 450px;
+  }
+
+  #shopify-section-{{ section.id }} .badge-item {
+    text-align: center;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .cus_hero-section {
+      grid-template-columns: 1fr;
+    }
+    #shopify-section-{{ section.id }} .hero-left {
+        padding-block-end: {{ section.settings.hero_padding_bottom }}px;
+    }
+    #shopify-section-{{ section.id }} .hero-right {
+        padding-block-start: {{ section.settings.quick_facts_padding_top }}px;
+    }
+
+  }
+
+  @media (min-width: 2200px) {
+    .hero-left.page-width {
+      padding-inline-end: 170px !important;
+    }
+
+    .hero-right.page-width {
+      padding-inline-start: 170px !important;
+    }
+  }
+</style>
+
+<div class="section hero-quick-facts-section">
+  <!-- Hero Section -->
+  <div class="cus_hero-section">
+    <div class="hero-left section--padding page-width">
+      <{{ section.settings.heading_tag }} class="{{ section.settings.heading_size }}">
+        {{- section.settings.hero_heading -}}
+      </{{ section.settings.heading_tag }}>
+      <p>{{ section.settings.hero_description }}</p>
+    </div>
+    <div class="hero-right section--padding page-width" style="margin: 0;">
+      <div class="quick-facts">
+        <{{ section.settings.heading_tag }} class="{{ section.settings.heading_size }}">
+          {{- section.settings.quick_facts_heading -}}
+        </{{ section.settings.heading_tag }}>
+        <div class="fact-item">
+          <strong>{{ section.settings.fact_1_label }}</strong> {{ section.settings.fact_1_value }}
+        </div>
+        <div class="fact-item">
+          <strong>{{ section.settings.fact_2_label }}</strong> {{ section.settings.fact_2_value }}
+        </div>
+        <div class="fact-item">
+          <strong>{{ section.settings.fact_3_label }}</strong> {{ section.settings.fact_3_value }}
+        </div>
+        <div class="certification-badges">
+          {% if section.settings.badge_1_image != blank %}
+            <div class="badge-item">
+              <img
+                src="{{ section.settings.badge_1_image | img_url: '160x160' }}"
+                alt="Fact Badge"
+                width="160"
+                height="160"
+              >
+            </div>
+          {% endif %}
+          {% if section.settings.badge_2_image != blank %}
+            <div class="badge-item">
+              <img
+                src="{{ section.settings.badge_2_image | img_url: '160x160' }}"
+                alt="Fact Badge"
+                width="160"
+                height="160"
+              >
+            </div>
+          {% endif %}
+          {% if section.settings.badge_3_image != blank %}
+            <div class="badge-item">
+              <img
+                src="{{ section.settings.badge_3_image | img_url: '160x160' }}"
+                alt="Fact Badge"
+                width="160"
+                height="160"
+              >
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero & Quick Facts",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "hero_heading",
+      "label": "Hero Heading",
+      "default": "TITAN BATTLEGEAR IS REDEFINING SAFETY AND PERFORMANCE IN HOCKEY."
+    },
+    {
+      "type": "textarea",
+      "id": "hero_description",
+      "label": "Hero Description",
+      "default": "We design the most advanced cut-resistant baselayer and neck guards in the game, built with proprietary technology and trusted by players at all levels of the game."
+    },
+    {
+      "type": "header",
+      "content": "Quick Facts"
+    },
+    {
+      "type": "text",
+      "id": "quick_facts_heading",
+      "label": "Quick Facts Heading",
+      "default": "QUICK FACTS"
+    },
+    {
+      "type": "text",
+      "id": "fact_1_label",
+      "label": "Fact 1 Label",
+      "default": "Founded:"
+    },
+    {
+      "type": "text",
+      "id": "fact_1_value",
+      "label": "Fact 1 Value",
+      "default": "2023"
+    },
+    {
+      "type": "text",
+      "id": "fact_2_label",
+      "label": "Fact 2 Label",
+      "default": "Headquarters:"
+    },
+    {
+      "type": "text",
+      "id": "fact_2_value",
+      "label": "Fact 2 Value",
+      "default": "Parkland, FL"
+    },
+    {
+      "type": "text",
+      "id": "fact_3_label",
+      "label": "Fact 3 Label",
+      "default": "Manufacturing:"
+    },
+    {
+      "type": "text",
+      "id": "fact_3_value",
+      "label": "Fact 3 Value",
+      "default": "Minneapolis, MN"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_1_image",
+      "label": "Badge 1 Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_2_image",
+      "label": "Badge 2 Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_3_image",
+      "label": "Badge 3 Image"
+    },
+    {
+      "type": "header",
+      "content": "Global Heading Settings"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-md",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "color",
+      "id": "hero_left_bg_color",
+      "label": "Hero Left Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "hero_right_bg_color",
+      "label": "Hero Right Background Color",
+      "default": "#f2f2f2"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 72
+    },
+    {
+      "type": "header",
+      "content": "Mobile Middle Spacing"
+    },
+    {
+      "type": "range",
+      "id": "hero_padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "quick_facts_padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero & Quick Facts"
+    }
+  ]
+}
+{% endschema %}

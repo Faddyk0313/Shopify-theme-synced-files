@@ -1,0 +1,701 @@
+{% comment %} TBG Custom Code {% endcomment %}
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  .review-list {
+    color: #111;
+    overflow: hidden;
+    border-top: 2px solid #a9a9a9;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  .review-list.fade-out {
+    opacity: 0;
+  }
+
+  .review-list .review-item {
+    padding: 18px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+  }
+  .review-list .review-item {
+    border-bottom: 2px solid #a9a9a9;
+  }
+  @media (max-width: 1024px) {
+    .review-list { 
+      border: none;
+    }
+    .review-list .review-item:first-of-type {
+      border-top: 2px solid #a9a9a9;
+    }
+  }
+  .review-list .row-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .review-list .stars {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .review-list .star svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+    fill: #000;
+  }
+  .review-list .verified-badge {
+    background: #e5fd00;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 8px;
+    white-space: nowrap;
+  }
+  .review-list .title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .review-list .title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.1;
+    font-family: Armourxbold;
+  }
+  .review-list .date {
+    font-size: 0.9rem;
+    color: #444;
+    flex-shrink: 0;
+  }
+  .review-list .bodyWrapper {
+    position: relative;
+    overflow: hidden;
+  }
+  .review-list .bodyWrapper.collapsed {
+    max-height: 120px;
+  }
+
+  .review-list .body {
+    font-size: 0.95rem;
+    margin: 0;
+    color: #111;
+    flex: 1;
+    line-height: 1.3;
+  }
+
+  .review-list .read-more-btn {
+    background: transparent;
+    border: none;
+    padding: 8px 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    font-style: italic;
+    text-decoration: underline;
+    font-size: 0.95rem;
+    display: block;
+    text-align: left;
+    margin-top: 4px;
+  }
+
+  .review-list .read-more-btn:hover {
+    opacity: 0.7;
+  }
+
+  .review-list .bodyWrapper.collapsed + .read-more-btn {
+    position: relative;
+    margin-top: -20px;
+    padding-top: 20px;
+  }
+
+  .review-list .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .review-list .footer > div {
+    font-weight: 700;
+  }
+  .review-list .footer > div.date {
+    font-weight: 500;
+  }
+  @media (min-width: 1024px) {
+    .review-list .footer {
+      margin-top: auto !important;
+    }
+  }
+
+  /* pagination */
+  #cus_pagination.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 18px 0;
+    font-size: 1rem;
+    user-select: none;
+  }
+  #cus_pagination.pagination button {
+    background: none;
+    border: none;
+    /* padding: 6px 10px; */
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 4px;
+  }
+  #cus_pagination.pagination button.current {
+    text-decoration: underline;
+    pointer-events: none;
+  }
+  #cus_pagination.pagination .next,
+  #cus_pagination.pagination .prev {
+    font-size: 1.1rem;
+  }
+
+  @media (min-width: 1024px) {
+    .review-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 32px;
+    }
+  }
+</style>
+
+{% assign review_collection_handle = '' %}
+{% assign product_in_allowed_review_collection = false %}
+{% assign allowed_review_collection_handles = 'cut-resistant-baselayer,battlegear-2-0-neck-guard,graphic-yth-tee,graphic-yth-hoodie,shorts,hats' | split: ',' %}
+
+{% for allowed_handle in allowed_review_collection_handles %}
+  {% assign allowed_handle = allowed_handle | strip %}
+
+  {% for collection in product.collections %}
+    {% if collection.handle == allowed_handle %}
+      {% assign review_collection_handle = allowed_handle %}
+      {% assign product_in_allowed_review_collection = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  {% if review_collection_handle != '' %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% if review_collection_handle == '' %}
+  {% assign review_collection_handle = 'cut-resistant-baselayer' %}
+{% endif %}
+
+<div
+  id="cus_reviewsSection"
+  class="section section--padding"
+  {% if product_in_allowed_review_collection %}
+    hidden
+  {% endif %}
+>
+  <div class="page-width relative">
+    {%- render 'section-heading', section: section -%}
+
+    <div
+      id="cus_reviewContainer"
+      class="review-list"
+      aria-label="Customer reviews list"
+    >
+      <!-- rendered reviews go here -->
+    </div>
+
+    <div id="cus_pagination" class="pagination" aria-label="Pagination"></div>
+  </div>
+</div>
+
+<script>
+  const defaultPerPage = 4;
+  const collectionHandle = {{ review_collection_handle | json }};
+  const hideEmptyAllowedReviewCollection = {{ product_in_allowed_review_collection | json }};
+
+  function getPerPage() {
+    return window.matchMedia('(min-width:1024px)').matches ? 8 : defaultPerPage;
+  }
+
+  let page = 1;
+  let reviews = [];
+  let isInitial = true;
+  let lastViewportWidth = window.innerWidth;
+  let resizeRafId = null;
+
+  function updateReviewSectionVisibility() {
+    const section = document.getElementById('cus_reviewsSection');
+    if (!section || !hideEmptyAllowedReviewCollection) return;
+
+    section.hidden = reviews.length === 0;
+  }
+
+  function formatDate(iso) {
+    const d = new Date(iso);
+    const opts = { month: 'numeric', day: 'numeric', year: 'numeric' };
+    return d.toLocaleDateString('en-US', opts);
+  }
+
+  function createStarElems(rating) {
+    let html = '';
+    for (let i = 1; i <= 5; i++) {
+      html += `
+    <div class="star" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path fill="${
+          i <= rating ? '#000' : 'rgba(0,0,0,0.2)'
+        }" d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.782 1.402 8.184L12 18.896l-6.336 3.88 1.402-8.184L1.132 9.21l8.2-1.192z"/>
+      </svg>
+    </div>`;
+    }
+    return html;
+  }
+
+  async function loadReviews() {
+    if (!collectionHandle) {
+      reviews = [];
+      refresh();
+      return;
+    }
+
+    try {
+      const res = await fetch(`https://hocky-name-generator-seven.vercel.app/api/reviewsByCollection?collectionHandle=${encodeURIComponent(collectionHandle)}`);
+      if (!res.ok) throw new Error(`Status ${res.status}`);
+      const data = await res.json();
+      const reviewsArr = data.groupedReviews['Without Pictures'].filter((r) => r.rating >= 4);
+
+      // assume data is array of Judge.me-style review objects
+      reviews = Array.isArray(reviewsArr) ? reviewsArr : [];
+    } catch (e) {
+      console.error('Failed to fetch reviews:', e);
+      reviews = []; // fallback empty
+    }
+    updateReviewSectionVisibility();
+    page = 1; // reset to first page on load
+    refresh();
+  }
+
+  function renderList() {
+    const container = document.getElementById('cus_reviewContainer');
+    const formatName = (name) => {
+      const parts = name.trim().split(' ');
+      if (parts.length > 1) {
+        return `${parts[0]} ${parts[parts.length - 1][0]}.`;
+      } else {
+        return parts[0]; // only first name, no dot
+      }
+    };
+    const perPage = getPerPage();
+    container.innerHTML = '';
+    const start = (page - 1) * perPage;
+    const slice = reviews.slice(start, start + perPage);
+    slice.forEach((r) => {
+      const title = r.title || '';
+      const body = r.body || '';
+      const rating = typeof r.rating === 'number' ? r.rating : 0;
+      const reviewerName =
+        (r.reviewer && (r.reviewer.name || `${r.reviewer.first_name || ''} ${r.reviewer.last_name || ''}`.trim())) ||
+        'Anonymous';
+      const verified = r.verified || '';
+      const createdAt = r.created_at || r.createdAt || '';
+
+      const div = document.createElement('div');
+      div.className = 'review-item';
+      div.innerHTML = `
+        <div class="row-top">
+          <div class="stars" aria-label="Rating: ${rating} out of 5">${createStarElems(rating)}</div>
+          ${verified.toLowerCase().includes('verified') ? `<div class="verified-badge">Verified</div>` : ''}
+        </div>
+        <div class="title-row">
+          <div class="title">${title}</div>
+        </div>
+        <div class="bodyWrapper"><p class="body" data-full="${body}">${body}</p></div>
+        <div class="footer">
+          <div>${formatName(reviewerName)}</div>
+          <div class="date">${createdAt ? formatDate(createdAt) : ''}</div>
+
+        </div>
+      `;
+      container.appendChild(div);
+
+      // Check if content overflows and add "Read more" button
+      setTimeout(() => {
+        const bodyWrapper = div.querySelector('.bodyWrapper');
+        const bodyText = div.querySelector('.body');
+
+        // Check if content exceeds 120px
+        if (bodyText.scrollHeight > 120) {
+          bodyWrapper.classList.add('collapsed');
+
+          const readMoreBtn = document.createElement('button');
+          readMoreBtn.className = 'read-more-btn';
+          readMoreBtn.textContent = 'Read more';
+          readMoreBtn.setAttribute('aria-label', 'Read full review');
+
+          readMoreBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (bodyWrapper.classList.contains('collapsed')) {
+              bodyWrapper.classList.remove('collapsed');
+              readMoreBtn.textContent = 'Read less';
+              readMoreBtn.setAttribute('aria-label', 'Collapse review');
+            } else {
+              bodyWrapper.classList.add('collapsed');
+              readMoreBtn.textContent = 'Read more';
+              readMoreBtn.setAttribute('aria-label', 'Read full review');
+            }
+          });
+
+          bodyWrapper.parentNode.insertBefore(readMoreBtn, bodyWrapper.nextSibling);
+        }
+      }, 0);
+    });
+  }
+  // helper to generate a compact page list
+  function getPageList(total, current, delta = 1) {
+    const pages = [];
+    const left = Math.max(2, current - delta);
+    const right = Math.min(total - 1, current + delta);
+
+    pages.push(1);
+    if (left > 2) pages.push('…');
+
+    for (let i = left; i <= right; i++) {
+      pages.push(i);
+    }
+
+    if (right < total - 1) pages.push('…');
+    if (total > 1) pages.push(total);
+
+    return pages;
+  }
+
+  function renderPagination() {
+    const pag = document.getElementById('cus_pagination');
+    const perPage = getPerPage();
+    pag.innerHTML = '';
+    const total = Math.ceil(reviews.length / perPage) || 1;
+
+    if (total <= 1) return;
+
+    const maxButtons = 5;
+    const half = Math.floor(maxButtons / 2);
+
+    // calculate start/end of window
+    let start = page - half;
+    let end = page + half;
+    if (start < 1) {
+      start = 1;
+      end = Math.min(total, maxButtons);
+    }
+    if (end > total) {
+      end = total;
+      start = Math.max(1, total - maxButtons + 1);
+    }
+
+    // prev
+    const prev = document.createElement('button');
+    prev.textContent = '‹';
+    prev.style.display = page === 1 ? 'none' : 'inline-block';
+    prev.addEventListener('click', () => {
+      page = Math.max(1, page - 1);
+      refresh();
+    });
+    pag.appendChild(prev);
+
+    // numbered buttons
+    for (let i = start; i <= end; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = i;
+      if (i === page) btn.classList.add('current');
+      btn.addEventListener('click', () => {
+        page = i;
+        refresh();
+      });
+      pag.appendChild(btn);
+    }
+
+    // next
+    const next = document.createElement('button');
+    next.textContent = '›';
+    next.style.display = page === total ? 'none' : 'inline-block';
+
+    next.addEventListener('click', () => {
+      page = Math.min(total, page + 1);
+      refresh();
+    });
+    pag.appendChild(next);
+  }
+
+  function refresh() {
+    const container = document.getElementById('cus_reviewContainer');
+    container.classList.add('fade-out');
+
+    setTimeout(() => {
+      renderList();
+      container.classList.remove('fade-out');
+
+      if (!isInitial) {
+        // only scroll on page-switch, not on initial load
+        const offsetPx = 150; // adjust as needed
+        const topY = container.getBoundingClientRect().top + window.pageYOffset - offsetPx;
+        window.scrollTo({ top: topY, behavior: 'smooth' });
+      }
+      isInitial = false;
+    }, 300);
+
+    renderPagination();
+  }
+
+  // initial load
+  loadReviews();
+  window.addEventListener('resize', () => {
+    if (resizeRafId) cancelAnimationFrame(resizeRafId);
+
+    resizeRafId = requestAnimationFrame(() => {
+      resizeRafId = null;
+      const currentWidth = window.innerWidth;
+
+      // Mobile browsers fire resize while scrolling when the URL bar shows/hides.
+      // Ignore height-only changes to prevent rerender jitter.
+      if (currentWidth === lastViewportWidth) return;
+
+      lastViewportWidth = currentWidth;
+      page = 1;
+      // directly update list & pagination—no scroll or fade
+      renderList();
+      renderPagination();
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "All Reviews Paginated",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__heading.content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:sections.global.settings.heading.label",
+      "default": "MOST RECENT"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-md",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.global.settings.heading_alignment.label",
+      "options": [
+        {
+          "value": "text-left md:items-end md:flex-row",
+          "label": "t:sections.global.settings.heading_alignment.options__1.label"
+        },
+        {
+          "value": "text-center md:items-center",
+          "label": "t:sections.global.settings.heading_alignment.options__2.label"
+        },
+        {
+          "value": "text-right md:items-end md:flex-row-reverse",
+          "label": "t:sections.global.settings.heading_alignment.options__3.label"
+        }
+      ],
+      "default": "text-left md:items-end md:flex-row"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__highlight.content",
+      "info": "t:sections.global.settings.header__highlight.info"
+    },
+    {
+      "type": "select",
+      "id": "highlighted_text",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.global.settings.highlighted_text.options__1.label"
+        },
+        {
+          "value": "text",
+          "label": "t:sections.global.settings.highlighted_text.options__2.label"
+        },
+        {
+          "value": "full_text",
+          "label": "t:sections.global.settings.highlighted_text.options__3.label"
+        },
+        {
+          "value": "half_text",
+          "label": "t:sections.global.settings.highlighted_text.options__4.label"
+        },
+        {
+          "value": "underline",
+          "label": "t:sections.global.settings.highlighted_text.options__5.label"
+        },
+        {
+          "value": "marker",
+          "label": "t:sections.global.settings.highlighted_text.options__6.label"
+        },
+        {
+          "value": "stencil",
+          "label": "t:sections.global.settings.highlighted_text.options__7.label"
+        },
+        {
+          "value": "scribble",
+          "label": "t:sections.global.settings.highlighted_text.options__8.label"
+        }
+      ],
+      "default": "none",
+      "label": "t:sections.global.settings.highlighted_text.label"
+    },
+    {
+      "visible_if": "{{ section.settings.highlighted_text == 'scribble' }}",
+      "type": "select",
+      "id": "highlighted_scribble",
+      "options": [
+        {
+          "value": "circle",
+          "label": "t:sections.global.settings.highlighted_scribble.options__1.label"
+        },
+        {
+          "value": "basic-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__2.label"
+        },
+        {
+          "value": "sketch-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__3.label"
+        },
+        {
+          "value": "squiggle-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__4.label"
+        },
+        {
+          "value": "squiggle-underline-2",
+          "label": "t:sections.global.settings.highlighted_scribble.options__5.label"
+        }
+      ],
+      "default": "circle",
+      "label": "t:sections.global.settings.highlighted_scribble.label",
+      "info": "t:sections.global.settings.highlighted_scribble.info"
+    },
+    {
+      "visible_if": "{{ section.settings.highlighted_text != 'none' }}",
+      "type": "checkbox",
+      "id": "highlighted_reveal",
+      "label": "t:sections.global.settings.highlighted_reveal.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "All Reviews Paginated"
+    }
+  ]
+}
+{% endschema %}

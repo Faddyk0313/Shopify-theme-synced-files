@@ -1,0 +1,51 @@
+{%- comment -%}
+  Related‑posts block
+  • pulls up to 4 articles from the **same blog** that share ≥1 tag
+  • excludes the current article
+  • falls back to the newest 4 posts if no tag match is found
+{%- endcomment -%}
+
+{%- assign related_posts = '' | split: ',' -%}
+
+{%- for tag in article.tags -%}
+  {%- for a in blog.articles limit: 50 -%}  {#– cap for perf –#}
+    {%- if a.id != article.id and a.tags contains tag -%}
+      {%- unless related_posts contains a -%}
+        {%- assign related_posts = related_posts | push: a -%}
+      {%- endunless -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endfor -%}
+
+{%- if related_posts == empty -%}
+  {%- assign related_posts = blog.articles | where: "id", article.id, false | slice: 0, 4 -%}
+{%- endif -%}
+
+{%- assign related_posts = related_posts | uniq | slice: 0, 4 -%}
+
+{%- if related_posts.size > 0 -%}
+<section class="related-posts page-width my-16">
+  <h2 class="text-2xl font-bold mb-6">You may also like</h2>
+
+  <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+    {%- for post in related_posts -%}
+      <article class="group">
+        <a href="{{ post.url }}" class="block overflow-hidden rounded-lg">
+          {%- if post.image -%}
+            {{ post.image | image_url: width: 600
+                         | image_tag: loading: 'lazy',
+                                      class: 'w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300' }}
+          {%- endif -%}
+        </a>
+
+        <h3 class="mt-4 text-lg font-semibold leading-tight">
+          <a href="{{ post.url }}">{{ post.title }}</a>
+        </h3>
+        <p class="text-sm text-gray-500">
+          {{ post.excerpt | strip_html | truncate: 80 }}
+        </p>
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+{%- endif -%}

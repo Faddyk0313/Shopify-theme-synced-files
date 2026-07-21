@@ -1,0 +1,1114 @@
+<!-- TBG Custom Code -->
+<style>
+  /* Live */
+  #shopify-section-template--18768374890674__custom_liquid_UVzjEY .page-width {
+    padding: 0 !important;
+  }
+
+  /* Custom */
+  #shopify-section-template--18530212282546__custom_liquid_dFWBrM .page-width {
+    padding: 0 !important;
+  }
+
+  #sliders-container {
+    overflow-x: clip;
+  }
+
+  #sliders-container .slider-wrapper {
+    overflow: hidden;
+    margin-inline: 0px;
+    margin-bottom: 40px;
+  }
+
+  #sliders-container .slider-wrapper .swiper-pagination-bullet {
+    background: #000000;
+    height: 12px;
+    width: 12px;
+  }
+
+  #sliders-container .slider-wrapper .swiper-slide-button {
+    margin-top: -50px;
+    bottom: 0;
+    top: 102%;
+  }
+
+  #sliders-container .slider-wrapper .swiper-button-prev {
+    left: 30px;
+  }
+
+  #sliders-container .slider-wrapper .swiper-button-next {
+    right: 30px;
+  }
+
+  @media (min-width: 768px) {
+    #sliders-container .slider-wrapper .swiper-button-prev {
+      left: 40px;
+    }
+
+    #sliders-container .slider-wrapper .swiper-button-next {
+      right: 40px;
+    }
+  }
+
+  #sliders-container .swiper-slide-button::after {
+    display: none;
+  }
+
+  /* alternate background for each category carousel */
+  #sliders-container > section:nth-of-type(odd) {
+    background: #ffffff;
+  }
+
+  /* 1st, 3rd, 5th… */
+  #sliders-container > section:nth-of-type(even) {
+    background: #f2f2f2;
+  }
+
+  /* tighten vertical padding in each category band */
+  #sliders-container > section {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  #sliders-container .video-swiper {
+    max-width: 850px;
+  }
+
+  #sliders-container .swiper-wrapper {
+    max-width: fit-content;
+    margin-inline: auto;
+  }
+
+  /*── Utility spacing ─────────────────────────────────────────────────────────*/
+  #sliders-container .py-20 {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  #sliders-container .pb-5 {
+    padding-bottom: 1.25rem;
+  }
+
+  #sliders-container .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #sliders-container .text-center {
+    text-align: center;
+  }
+
+  #sliders-container .px-\[20px\] {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  @media (min-width: 768px) {
+    #sliders-container .md\:px-\[30px\] {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+
+  #sliders-container .my-5 {
+    margin: 1.25rem 0;
+  }
+
+  #sliders-container .mb-5 {
+    margin-bottom: 1.25rem;
+  }
+
+  #sliders-container .mb-4 {
+    margin-bottom: 1rem;
+  }
+
+  #sliders-container .mb-3 {
+    margin-bottom: 0.75rem;
+  }
+
+  #sliders-container .mb-2 {
+    margin-bottom: 0.5rem;
+  }
+
+  #sliders-container .gap-2 {
+    gap: 0.5rem;
+  }
+
+  #sliders-container .gap-1 {
+    gap: 0.25rem;
+  }
+
+  #sliders-container .p-6 {
+    padding: 1.5rem;
+  }
+
+  #sliders-container .px-2 {
+    padding-inline: 0.5rem;
+  }
+
+  #sliders-container .p-\[6px\] {
+    padding: 6px;
+  }
+
+  /*── Sizing ─────────────────────────────────────────────────────────────────*/
+  #sliders-container .w-full {
+    width: 100%;
+  }
+
+  #sliders-container .w-10 {
+    width: 2.5rem;
+  }
+
+  #sliders-container .h-10 {
+    height: 2.5rem;
+  }
+
+  #sliders-container .w-4 {
+    width: 1rem;
+  }
+
+  #sliders-container .h-4 {
+    height: 1rem;
+  }
+
+  #sliders-container .min-h-\[454px\] {
+    min-height: 454px;
+  }
+
+  #sliders-container .h-\[300px\] {
+    height: 300px;
+  }
+
+  #sliders-container .max-h-\[300px\] {
+    max-height: 300px;
+  }
+
+  /*── Typography ──────────────────────────────────────────────────────────────*/
+  #sliders-container .text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  @media (min-width: 640px) {
+    #sliders-container .sm\:text-4xl {
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+    }
+  }
+
+  #sliders-container .font-semibold {
+    font-weight: 600;
+  }
+
+  #sliders-container .font-bold {
+    font-weight: 700;
+  }
+
+  #sliders-container .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  #sliders-container .text-\[12px\] {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  @media (min-width: 768px) {
+    #sliders-container .md\:text-\[16px\] {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  }
+
+  #sliders-container .text-\[11px\] {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  /*── Flex & Layout ──────────────────────────────────────────────────────────*/
+  #sliders-container .flex {
+    display: flex;
+  }
+
+  #sliders-container .justify-center {
+    justify-content: center;
+  }
+
+  #sliders-container .justify-between {
+    justify-content: space-between;
+  }
+
+  #sliders-container .items-center {
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    #sliders-container .md\:grid-cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  /*── Text & Decoration ─────────────────────────────────────────────────────*/
+  #sliders-container .underline {
+    text-decoration-line: underline;
+  }
+
+  #sliders-container .underline-offset-2 {
+    text-underline-offset: 0.25rem;
+  }
+
+  #sliders-container .text-left {
+    text-align: left;
+  }
+
+  /*── Colors & Backgrounds ───────────────────────────────────────────────────*/
+  #sliders-container .bg-white {
+    background-color: #fff;
+  }
+
+  #sliders-container .bg-black {
+    background-color: #000;
+  }
+
+  #sliders-container .text-white {
+    color: #fff;
+  }
+
+  #sliders-container .text-gray-500 {
+    color: #6b7280;
+  }
+
+  #sliders-container .text-\[\#1A1A1A\] {
+    color: #1a1a1a;
+  }
+
+  #sliders-container .text-black {
+    color: black;
+  }
+
+  #sliders-container .bg-\[\#efefef\] {
+    background-color: #efefef;
+  }
+
+  #sliders-container .border-gray-200 {
+    border-color: #e1e1e1 !important;
+  }
+
+  /*── Borders & Rounding ────────────────────────────────────────────────────*/
+  #sliders-container .border {
+    border: 1px solid #e1e1e1 !important;
+  }
+
+  #sliders-container .rounded-lg {
+    border-radius: 0.5rem;
+  }
+
+  #sliders-container .rounded-xl {
+    border-radius: 0.75rem;
+  }
+
+  #sliders-container .rounded-2xl {
+    border-radius: 1rem;
+  }
+
+  #sliders-container .rounded-\[5px\] {
+    border-radius: 5px;
+  }
+
+  /*── Positioning ───────────────────────────────────────────────────────────*/
+  #sliders-container .relative {
+    position: relative;
+  }
+
+  #sliders-container .absolute {
+    position: absolute;
+  }
+
+  #sliders-container .inset-auto {
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+  }
+
+  #sliders-container .bottom-0 {
+    bottom: 0;
+  }
+
+  #sliders-container .left-\[40px\] {
+    left: 40px;
+  }
+
+  #sliders-container .right-0 {
+    right: 0;
+  }
+
+  #sliders-container .ml-2 {
+    margin-left: 0.5rem;
+  }
+
+  /*── Overflow & Scrolling ───────────────────────────────────────────────────*/
+  #sliders-container .overflow-y-scroll {
+    overflow-y: auto;
+  }
+
+  /*── Shadows ───────────────────────────────────────────────────────────────*/
+  #sliders-container .shadow-sm {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  /*── Aspect Ratio ──────────────────────────────────────────────────────────*/
+  #sliders-container .aspect-video {
+    aspect-ratio: 16/9;
+  }
+</style>
+
+{% capture video_groups_raw_string %}{{ section.settings.safety_video_links | default: "https://youtube.com/embed/OJ6Q2yBqvZg|https://youtube.com/embed/ZOWaLBbtkr0|https://youtube.com/embed/_PZO1Ve-V9w|https://youtube.com/embed/tie4wG4W9kU" | newline_to_br | replace: "<br />", "|" | replace: "<br>", "|" }}~~{{ section.settings.quality_video_links | default: "https://youtube.com/embed/fWI24iSBg7I?feature=shared|https://youtube.com/embed/3pcaPE19zFc?feature=share|https://youtube.com/embed/6KVh51I0e3M" | newline_to_br | replace: "<br />", "|" | replace: "<br>", "|" }}~~{{ section.settings.comfort_video_links | default: "https://youtube.com/embed/9TDi4Ylxzzs|https://youtube.com/embed/fuYP4wJsfgk?feature=shared|https://youtube.com/embed/QceW1c_NAwA?feature=shared|https://youtube.com/embed/88PEJh6wWLk?feature=share|https://www.youtube.com/embed/h8x_v8PgqN8?si=busduuEU4dD-vvYZ" | newline_to_br | replace: "<br />", "|" | replace: "<br>", "|" }}~~{{ section.settings.style_video_links | default: "https://youtube.com/embed/eOWHBducRmk?feature=share|https://youtube.com/embed/-hukY2U-Vic?feature=share|https://youtube.com/embed/HjKNSR0iCs4" | newline_to_br | replace: "<br />", "|" | replace: "<br>", "|" }}~~{{ section.settings.no_velcro_video_links | default: "https://youtube.com/embed/c3NkJ3ijg3Q?feature=shared|https://youtube.com/embed/M5_NzkX7pXA?feature=shared" | newline_to_br | replace: "<br />", "|" | replace: "<br>", "|" }}~~{{ section.settings.love_it_video_links | default: "https://www.youtube.com/embed/h8x_v8PgqN8?si=busduuEU4dD-vvYZ|https://www.youtube.com/embed/5KJoBB2XAaY" | newline_to_br | replace: "<br />", "|" | replace: "<br>", "|" }}{% endcapture %}
+{% assign video_groups_raw = video_groups_raw_string | split: "~~" %} {% assign product_titles = "BG 2.0 LS NECK GUARD SHIRT – NEON
+GRAFFITI,BG 2.0 LS VELCRO NECK GUARD SHIRT - BLACK/ARCTIC,BG 2.0 LS NECK GUARD
+SHIRT - BLACKOUT CAMO,BG 2.0 LS NECK GUARD SHIRT – NEON GRAFFITI,MV PUCK LOGO SR
+TEE,BG 2.0 SS NECK GUARD SHIRT - BLACK,BG OG SS SR NECK GUARD SHIRT,BG 2.0 LS
+NECK GUARD SHIRT - TEAM NAVY,BG 2.0 LS NECK GUARD SHIRT – NEON GRAFFITI,BG OG SS
+SR NECK GUARD SHIRT,BG 2.0 LS NECK GUARD SHIRT – NEON GRAFFITI,MV PUCK LOGO SR
+TEE,BG 2.0 LS NECK GUARD SHIRT – NEON GRAFFITI,BG 2.0 LS NECK GUARD SHIRT -
+BLACKOUT CAMO,BG OG LS SR NECK GUARD SHIRT,BG OG SS SR NECK GUARD SHIRT,BG 2.0
+LS NECK GUARD SHIRT - BLACKOUT CAMO,BG 2.0 LS NECK GUARD SHIRT - TEAM ROYAL" |
+split: "," %} {% assign ratings = "5,5,4,5,5,4,5,5,5,5,5,5,5,5,5,5,5,5" | split:
+"," %} {% assign names = "Tyler Ronsman,Helen Vande Hei,Jonathan Duffty, Tyler
+Ronsman,Jenna Weinerman,David Mechler,Mayhem,NATALIYA MILLIGAN,Tyler
+Ronsman,Mayhem,Tyler Ronsman,Jenna Weinerman,Tyler Ronsman,Maddie
+Hamilton,Christin Haegele,Mayhem,Maddie Hamilton,Robert Brown" | split: "," %}
+{% assign dates =
+"06/24/2025,06/13/2025,06/11/2025,06/24/2025,06/12/2025,05/22/2025,06/25/2025,06/24/2025,06/24/2025,06/25/2025,06/24/2025,06/12/2025,06/24/2025,06/07/2025,05/30/2025,06/25/2025,06/07/2025,05/08/2025,"
+| split: "," %} {% assign verified =
+"true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true"
+| split: "," %} {% assign titles = "Fit + Feel + Style + Protection = Titan;Best
+neck guard around;Great protection where it matters;Fit + Feel + Style +
+Protection = Titan;Soft and wonderful t-shirt!;Decent but pricey;Love, love,
+love the hot pink. Plus, kids think I look like an Avenger;Great shirt;Fit +
+Feel + Style + Protection = Titan;Love, love, love the hot pink. Plus, kids
+think I look like an Avenger;Fit + Feel + Style + Protection = Titan;Soft and
+wonderful t-shirt!;Fit + Feel + Style + Protection = Titan;My son's and my
+favorite;Great Product;Love, love, love the hot pink. Plus, kids think I look
+like an Avenger;My son's and my favorite;Great Protection" | split: ";" %} {%
+assign bodies = "While researching and building a spreadsheet on better
+protective gear for my daughter, I stumbled upon Titan. I asked around and
+nobody had heard of them, some even balked a bit at the price. A higher cost for
+quality product and better protection is a no brainer to my wife and I for a
+sport our daughter loves. The color she wanted wasn't in stock so I decided to
+buy one for myself (casual player) and my younger son who is just starting out.
+We got them and tried them on right away. No Velcro, easy to put on and comfy,
+let's just say my daughter was jealous and has been waiting for the Miami Vice
+color to be back in stock. The fit and feel are great, we are excited to upgrade
+from her major retail brand cutshirt to Titan. We were a bit curious if the No
+Velcro neck is the right way to go, but after reading some reviews, we feel it
+will be the better option as her hair gets caught and tangled in the Velcro on
+her current shirt. High quality neck and wrist protection plus some style all
+equals an easy purchase for us to have extra peace of mind while our kid is out
+there battling for the puck.^My son absolutely loves the fit of these shirts. We
+have bought three so far and they are all in great shape even after a year of
+washing them every week. I like the protection of the risk guards and the neck
+guard combined. We always used to buy Bauer shirts which are good as well, but
+not as good as these. If you purchase, you will not be disappointed.^The shirt
+provides exactly what it says, the neck and wrist guards are a huge improvement
+on what my son had before and he likes putting it on over the old guards he
+used. The only reason I go for 4 stars is the body and sleeves of the shirt come
+across as subpar for the price.^While researching and building a spreadsheet on
+better protective gear for my daughter, I stumbled upon Titan. I asked around
+and nobody had heard of them, some even balked a bit at the price. A higher cost
+for quality product and better protection is a no brainer to my wife and I for a
+sport our daughter loves. The color she wanted wasn't in stock so I decided to
+buy one for myself (casual player) and my younger son who is just starting out.
+We got them and tried them on right away. No Velcro, easy to put on and comfy,
+let's just say my daughter was jealous and has been waiting for the Miami Vice
+color to be back in stock. The fit and feel are great, we are excited to upgrade
+from her major retail brand cutshirt to Titan. We were a bit curious if the No
+Velcro neck is the right way to go, but after reading some reviews, we feel it
+will be the better option as her hair gets caught and tangled in the Velcro on
+her current shirt. High quality neck and wrist protection plus some style all
+equals an easy purchase for us to have extra peace of mind while our kid is out
+there battling for the puck.^I bought a Titan BattleGear tee to rep the brand
+off-the-ice and it’s soft, high-quality, and looks cool. The colors look sharp
+and people have even stopped to ask me what Titan is! Proud to be repping Titan
+around.^Shirts are expensive and material pulls. At this price point that should
+not happen so easily.^Great fit, great color - very happy with this
+purchase.^Great shirt! First hockey shirt that my son loves! Very comfortable!
+Thank you^While researching and building a spreadsheet on better protective gear
+for my daughter, I stumbled upon Titan. I asked around and nobody had heard of
+them, some even balked a bit at the price. A higher cost for quality product and
+better protection is a no brainer to my wife and I for a sport our daughter
+loves. The color she wanted wasn't in stock so I decided to buy one for myself
+(casual player) and my younger son who is just starting out. We got them and
+tried them on right away. No Velcro, easy to put on and comfy, let's just say my
+daughter was jealous and has been waiting for the Miami Vice color to be back in
+stock. The fit and feel are great, we are excited to upgrade from her major
+retail brand cutshirt to Titan. We were a bit curious if the No Velcro neck is
+the right way to go, but after reading some reviews, we feel it will be the
+better option as her hair gets caught and tangled in the Velcro on her current
+shirt. High quality neck and wrist protection plus some style all equals an easy
+purchase for us to have extra peace of mind while our kid is out there battling
+for the puck.^Great fit, great color - very happy with this purchase.^While
+researching and building a spreadsheet on better protective gear for my
+daughter, I stumbled upon Titan. I asked around and nobody had heard of them,
+some even balked a bit at the price. A higher cost for quality product and
+better protection is a no brainer to my wife and I for a sport our daughter
+loves. The color she wanted wasn't in stock so I decided to buy one for myself
+(casual player) and my younger son who is just starting out. We got them and
+tried them on right away. No Velcro, easy to put on and comfy, let's just say my
+daughter was jealous and has been waiting for the Miami Vice color to be back in
+stock. The fit and feel are great, we are excited to upgrade from her major
+retail brand cutshirt to Titan. We were a bit curious if the No Velcro neck is
+the right way to go, but after reading some reviews, we feel it will be the
+better option as her hair gets caught and tangled in the Velcro on her current
+shirt. High quality neck and wrist protection plus some style all equals an easy
+purchase for us to have extra peace of mind while our kid is out there battling
+for the puck.^I bought a Titan BattleGear tee to rep the brand off-the-ice and
+it’s soft, high-quality, and looks cool. The colors look sharp and people have
+even stopped to ask me what Titan is! Proud to be repping Titan around.^While
+researching and building a spreadsheet on better protective gear for my
+daughter, I stumbled upon Titan. I asked around and nobody had heard of them,
+some even balked a bit at the price. A higher cost for quality product and
+better protection is a no brainer to my wife and I for a sport our daughter
+loves. The color she wanted wasn't in stock so I decided to buy one for myself
+(casual player) and my younger son who is just starting out. We got them and
+tried them on right away. No Velcro, easy to put on and comfy, let's just say my
+daughter was jealous and has been waiting for the Miami Vice color to be back in
+stock. The fit and feel are great, we are excited to upgrade from her major
+retail brand cutshirt to Titan. We were a bit curious if the No Velcro neck is
+the right way to go, but after reading some reviews, we feel it will be the
+better option as her hair gets caught and tangled in the Velcro on her current
+shirt. High quality neck and wrist protection plus some style all equals an easy
+purchase for us to have extra peace of mind while our kid is out there battling
+for the puck.^My son was sick of his other bully in neck guard base layers
+velcro popping open all the time. We tried the Titan BG 2.0 and my son loved it.
+No more fixing his neck guard, super light and comfy base layer. And I love the
+way it fits and protects him.^The fit was perfect and provides much more
+coverage than the other brand we were using. We transitioned to the adapt
+(slip-on) which completely eliminates the velcro and was always the first thing
+that wore out on our other neck guard shirts. The extra cost is offset by the
+added life these have. I would highly recommend this product to anyone looking
+to protect their hockey player.^Great fit, great color - very happy with this
+purchase.^My son was sick of his other bully in neck guard base layers velcro
+popping open all the time. We tried the Titan BG 2.0 and my son loved it. No
+more fixing his neck guard, super light and comfy base layer. And I love the way
+it fits and protects him.^These shirts are great. The protection they provide is
+also great. My grandsons love everything about these shirts, but the best thing
+is NO MORE VELCRO around their necks. They were so happy do be able to ditch the
+velcro neck guards." | split: "^" %} {% assign headings = "Safety
+Reviews;Performance, Durability & Quality Reviews;Comfort & Fit Reviews;Style &
+Color Reviews;No Velcro Reviews;'I Just Love It' Reviews" | split: ";" %} {%
+assign descriptions = "See how Titan’s built-in, A9 cut-resistant protection
+gives players peace of mind every time they hit the ice.;Players talk about how
+Titan gear holds up under pressure - game after game, season after season.;From
+practice to playoffs, hear how Titan stays comfortable, secure, and
+distraction-free.;Bold colors. Team vibes. Real feedback on how Titan looks and
+feels out there.;No scratchy straps, no shifting collars - just the freedom to
+focus on the game.;Sometimes it’s not one thing - it’s everything. These reviews
+say it all." | split: ";" %}
+
+<div id="sliders-container" class="">
+  {% assign last_outer = headings.size | minus: 1 %} {% assign total_cards =
+  product_titles.size | minus: 1 %} {% for i in (0..last_outer) %}
+  <section class="py-20">
+    <!-- Stars, Heading, description -->
+    <div class="max-w-6xl mx-auto text-center px-[20px]">
+      <div class="flex justify-center mb-4 space-x-2">
+        {% for i in (1..5) %}
+        <img
+          src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/pointed-star.png?v=1745741039"
+          alt="Pointed Star"
+          class="w-10 h-10"
+        />
+        {% endfor %}
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-semibold mb-2">{{ headings[i] }}</h2>
+      <p class="text-sm text-gray-700 mb-6">{{ descriptions[i] }}</p>
+    </div>
+
+    <!-- Videos Carousel -->
+    {% assign section_video_links = video_groups_raw[i] | split: "|" %} {% if
+    section_video_links.size > 0 %}
+    <div class="swiper video-swiper px-[20px] md:px-[30px]">
+      <div class="slider-wrapper videos videos-wrapper my-5">
+        <div class="mb-5 swiper-wrapper">
+          {% for link in section_video_links %}
+          {% assign video_url = link | strip %}
+          {% assign clean_video_url = video_url | split: "?" | first %}
+          {% assign video_id = "" %}
+          {% if video_url contains "/embed/" %}
+          {% assign video_id = clean_video_url | split: "/embed/" | last | split: "/" | first %}
+          {% elsif video_url contains "/shorts/" %}
+          {% assign video_id = clean_video_url | split: "/shorts/" | last | split: "/" | first %}
+          {% elsif video_url contains "/live/" %}
+          {% assign video_id = clean_video_url | split: "/live/" | last | split: "/" | first %}
+          {% elsif video_url contains "youtu.be/" %}
+          {% assign video_id = clean_video_url | split: "youtu.be/" | last | split: "/" | first %}
+          {% elsif video_url contains "v=" %}
+          {% assign video_id = video_url | split: "v=" | last | split: "&" | first %}
+          {% endif %}
+          {% if video_id != blank %}
+          {% assign embed_url = "https://www.youtube.com/embed/" | append: video_id %}
+          {% else %}
+          {% assign embed_url = video_url %}
+          {% endif %}
+          {% if embed_url != blank %}
+          <iframe
+            class="min-h-[454px] swiper-slide w-full aspect-video rounded-2xl"
+            src="{{ embed_url }}"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
+          {% endif %}
+          {% endfor %}
+        </div>
+        <div class="swiper-pagination"></div>
+        <div
+          class="swiper-slide-button swiper-button-prev text-black !absolute !inset-auto !bottom-0 !left-[40px]"
+        >
+          {%- render 'icon', icon: 'arrow-left-long', class: 'transform' -%}
+        </div>
+        <div
+          class="swiper-slide-button swiper-button-next text-black !absolute !inset-auto !bottom-0 !right-[40px]"
+        >
+          {%- render 'icon', icon: 'arrow-right-long', class: 'transform' -%}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Cards Carousel -->
+    <div class="swiper px-[20px] md:px-[30px]">
+      <div class="slider-wrapper cards my-5">
+        <div class="mb-5 swiper-wrapper">
+          <!-- ${reviews
+              .map(
+                (r) => ` -->
+          {% assign starting_card_index = i | times: 3 %} {% assign
+          ending_card_index_raw = i | plus: 1 | times: 3 | minus: 1 %} {% assign
+          ending_card_index = ending_card_index_raw %} {% if
+          ending_card_index_raw > total_cards %} {% assign ending_card_index =
+          total_cards %} {% endif %} {% for k in
+          (starting_card_index..ending_card_index) %}
+          <div
+            class="max-h-[300px ] h-[300px] overflow-y-scroll bg-white border border-gray-200 rounded-2xl p-6 text-left shadow-sm swiper-slide"
+          >
+            <p class="mb-3 text-sm">
+              about
+              <span class="underline underline-offset-2"
+                >{{ product_titles[k] }}</span
+              >
+            </p>
+            <div class="flex justify-between items-center mb-2">
+              <div class="flex items-center gap-1">
+                {% for i in (1..ratings[k]) %}
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/pointed-star.png?v=1745741039"
+                  alt="Pointed Star"
+                  class="w-4 h-4"
+                />
+                {% endfor %}
+              </div>
+              <p class="text-[12px] text-gray-500">{{ dates[k] }}</p>
+            </div>
+
+            <div class="flex items-center mb-4 gap-2">
+              <div class="relative">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/user.png?v=1745741939"
+                  alt="Profile Icon"
+                  class="w-10 h-10 p-[6px] bg-[#efefef] rounded-xl"
+                />
+                {% if verified[k] %}
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/check-circle.png?v=1745741991"
+                  alt="Verified"
+                  class="absolute right-0 bottom-0 w-4 h-4"
+                />
+                {% endif %}
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <p class="text-sm">
+                    {% assign parts = names[k] | split: " " %} {% if parts.size
+                    > 1 %} {{ parts[0] }} {{ parts.last | slice: 0,1 }}. {% else
+                    %} {{ parts[0] }} {% endif %}
+                  </p>
+                  {% if verified[k] %}
+                  <span
+                    class="bg-black text-white text-[11px] px-2 rounded-[5px]"
+                    >Verified</span
+                  >
+                  {% endif %}
+                </div>
+                <div>
+                  <img
+                    src="https://judgeme-public-images.imgix.net/judgeme/flags/US.svg"
+                    alt="American Flag"
+                    class="w-4 h-4 ml-2"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <p class="font-bold mb-2">{{ titles[k] }}</p>
+            <p style="color: #333333; line-height: 1.5" class="mb-4">
+              {{ bodies[k] }}
+            </p>
+          </div>
+          {% endfor %}
+
+          <!-- `
+              )
+              .join("")} -->
+        </div>
+        <div class="swiper-pagination"></div>
+        <div
+          class="swiper-slide-button swiper-button-prev text-black !absolute !inset-auto !bottom-0 !left-[40px]"
+        >
+          {%- render 'icon', icon: 'arrow-left-long', class: 'transform' -%}
+        </div>
+        <div
+          class="swiper-slide-button swiper-button-next text-black !absolute !inset-auto !bottom-0 !right-[40px]"
+        >
+          {%- render 'icon', icon: 'arrow-right-long', class: 'transform' -%}
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endfor %}
+</div>
+
+<script defer>
+  // TBG Custom Code
+  document.addEventListener("DOMContentLoaded", () => {
+    const sectionRoot = document.getElementById("shopify-section-{{ section.id }}");
+    const container = document.getElementById("sliders-container");
+
+    if (!sectionRoot || !container || sectionRoot.dataset.tbgSwiperLazyInit === "true") return;
+    sectionRoot.dataset.tbgSwiperLazyInit = "true";
+
+    function loadSwiperAssets() {
+      if (window.__tbgSwiperAssetsPromise) return window.__tbgSwiperAssetsPromise;
+
+      window.__tbgSwiperAssetsPromise = new Promise((resolve, reject) => {
+        const cssHref = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css";
+        const jsSrc = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js";
+
+        const finalize = () => {
+          if (window.Swiper) {
+            resolve(window.Swiper);
+          } else {
+            reject(new Error("Swiper failed to initialize"));
+          }
+        };
+
+        if (!document.querySelector(`link[data-tbg-swiper-css="${cssHref}"]`)) {
+          const css = document.createElement("link");
+          css.rel = "stylesheet";
+          css.href = cssHref;
+          css.setAttribute("data-tbg-swiper-css", cssHref);
+          document.head.appendChild(css);
+        }
+
+        if (window.Swiper) {
+          finalize();
+          return;
+        }
+
+        const existingScript = document.querySelector(`script[data-tbg-swiper-js="${jsSrc}"]`);
+        if (existingScript) {
+          existingScript.addEventListener("load", finalize, { once: true });
+          existingScript.addEventListener("error", reject, { once: true });
+          return;
+        }
+
+        const script = document.createElement("script");
+        script.src = jsSrc;
+        script.defer = true;
+        script.setAttribute("data-tbg-swiper-js", jsSrc);
+        script.addEventListener("load", finalize, { once: true });
+        script.addEventListener("error", reject, { once: true });
+        document.head.appendChild(script);
+      });
+
+      return window.__tbgSwiperAssetsPromise;
+    }
+
+    async function initStaticCustomerReviews() {
+      await loadSwiperAssets();
+
+      if (container.dataset.tbgSwiperRendered === "true") return;
+      container.dataset.tbgSwiperRendered = "true";
+
+    const getYouTubeEmbedUrl = (url) => {
+      const value = url.trim();
+      const id =
+        value.match(/\/embed\/([^?&/]+)/)?.[1] ||
+        value.match(/\/shorts\/([^?&/]+)/)?.[1] ||
+        value.match(/\/live\/([^?&/]+)/)?.[1] ||
+        value.match(/youtu\.be\/([^?&/]+)/)?.[1] ||
+        value.match(/[?&]v=([^?&/]+)/)?.[1];
+
+      return id ? `https://www.youtube.com/embed/${id}` : value;
+    };
+
+    const parseVideoLinks = (links) =>
+      links
+        .split(/\r?\n|\|/)
+        .map(getYouTubeEmbedUrl)
+        .filter(Boolean);
+
+    // 0) Dynamic video links per category
+    const videosLinks = {
+      Safety: {
+        links: parseVideoLinks({{ section.settings.safety_video_links | default: "https://youtube.com/embed/OJ6Q2yBqvZg|https://youtube.com/embed/ZOWaLBbtkr0|https://youtube.com/embed/_PZO1Ve-V9w|https://youtube.com/embed/tie4wG4W9kU" | json }}),
+      },
+      "Quality & Durability": {
+        links: parseVideoLinks({{ section.settings.quality_video_links | default: "https://youtube.com/embed/fWI24iSBg7I?feature=shared|https://youtube.com/embed/3pcaPE19zFc?feature=share|https://youtube.com/embed/6KVh51I0e3M" | json }}),
+      },
+      "Comfort & Fit": {
+        links: parseVideoLinks({{ section.settings.comfort_video_links | default: "https://youtube.com/embed/9TDi4Ylxzzs|https://youtube.com/embed/fuYP4wJsfgk?feature=shared|https://youtube.com/embed/QceW1c_NAwA?feature=shared|https://youtube.com/embed/88PEJh6wWLk?feature=share|https://www.youtube.com/embed/h8x_v8PgqN8?si=busduuEU4dD-vvYZ" | json }}),
+      },
+      "Style & Color": {
+        links: parseVideoLinks({{ section.settings.style_video_links | default: "https://youtube.com/embed/eOWHBducRmk?feature=share|https://youtube.com/embed/-hukY2U-Vic?feature=share|https://youtube.com/embed/HjKNSR0iCs4" | json }}),
+      },
+      "No Velcro": {
+        links: parseVideoLinks({{ section.settings.no_velcro_video_links | default: "https://youtube.com/embed/c3NkJ3ijg3Q?feature=shared|https://youtube.com/embed/M5_NzkX7pXA?feature=shared" | json }}),
+      },
+      "I Simply Love It": {
+        links: parseVideoLinks({{ section.settings.love_it_video_links | default: "https://www.youtube.com/embed/h8x_v8PgqN8?si=busduuEU4dD-vvYZ|https://www.youtube.com/embed/5KJoBB2XAaY" | json }}),
+      },
+    };
+
+    const sectionInfo = {
+      Safety: {
+        heading: "Safety Reviews",
+        subheading:
+          "See how Titan’s built-in, A9 cut-resistant protection gives players peace of mind every time they hit the ice.",
+      },
+      "Quality & Durability": {
+        heading: "Performance, Durability & Quality Reviews",
+        subheading:
+          "Players talk about how Titan gear holds up under pressure - game after game, season after season.",
+      },
+      "Comfort & Fit": {
+        heading: "Comfort & Fit Reviews",
+        subheading:
+          "From practice to playoffs, hear how Titan stays comfortable, secure, and distraction-free.",
+      },
+      "Style & Color": {
+        heading: "Style & Color Reviews",
+        subheading:
+          "Bold colors. Team vibes. Real feedback on how Titan looks and feels out there.",
+      },
+      "No Velcro": {
+        heading: "No Velcro Reviews",
+        subheading:
+          "No scratchy straps, no shifting collars - just the freedom to focus on the game.",
+      },
+      "I Simply Love It": {
+        heading: "“I Just Love It” Reviews",
+        subheading:
+          "Sometimes it’s not one thing - it’s everything. These reviews say it all.",
+      },
+    };
+
+    // 1) Define your exact order:
+    const categories = [
+      "Safety",
+      "Quality & Durability",
+      "Comfort & Fit",
+      "Style & Color",
+      "No Velcro",
+      "I Simply Love It",
+    ];
+
+    try {
+      const res = await fetch(
+        "https://hocky-name-generator-seven.vercel.app/api/reviews"
+      );
+      const { groupedReviews } = await res.json();
+
+      const restEntries = Object.entries(groupedReviews).slice(1);
+      // (optionally) sort restEntries here…
+      const restObj = Object.fromEntries(restEntries);
+
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      container.innerHTML = "";
+
+      categories.forEach((category) => {
+        const reviews = restObj[category] || [];
+        // 1) Category section
+        const section = document.createElement("section");
+        section.className = "py-20";
+
+        // 1) Stars + heading
+        section.innerHTML = `
+                <div class="max-w-6xl mx-auto text-center px-[20px]">
+                    <div class="flex justify-center mb-4 space-x-2">
+                        ${Array.from({ length: 5 })
+                          .map(
+                            () => `
+                            <img src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/pointed-star.png?v=1745741039"
+                                 alt="Pointed Star" class="w-10 h-10">
+                        `
+                          )
+                          .join("")}
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-semibold mb-2">
+                        ${sectionInfo[category].heading}
+                    </h2>
+                    <p class="text-sm text-gray-700 mb-6">
+                    ${sectionInfo[category].subheading}
+                    </p>
+                </div>
+            `.trim();
+
+        // 2) --- Video carousel ---
+        if (videosLinks[category].links.length > 0) {
+          const videoSwiper = document.createElement("div");
+          videoSwiper.className = "swiper video-swiper px-[20px] md:px-[30px]";
+          videoSwiper.innerHTML = `
+                      <div class="slider-wrapper videos videos-wrapper  my-5 ">
+                          <div class="mb-5 swiper-wrapper">
+                              ${videosLinks[category].links
+                                .map(
+                                  (link) => ` 
+                                  <iframe class="min-h-[454px]  swiper-slide w-full aspect-video rounded-2xl"
+                                          src="${link}" frameborder="0" allowfullscreen></iframe>
+                              `
+                                )
+                                .join("")}
+                          </div>
+                          <div class="swiper-pagination"></div>
+                          <div class="swiper-slide-button swiper-button-prev text-black !absolute !inset-auto  !bottom-0 !left-[40px]   ">{%- render 'icon', icon: 'arrow-left-long', class: 'transform' -%}</div>
+                          <div class="swiper-slide-button swiper-button-next text-black !absolute !inset-auto  !bottom-0 !right-[40px]  ">{%- render 'icon', icon: 'arrow-right-long', class: 'transform' -%}</div>    
+                      </div>
+                    `;
+          section.appendChild(videoSwiper);
+        }
+        // 3) --- Reviews carousel ---
+        const sliderWrapper = document.createElement("div");
+        sliderWrapper.className = "swiper px-[20px] md:px-[30px]";
+        sliderWrapper.innerHTML = `
+                <div class="slider-wrapper cards my-5 ">
+                    <div class="mb-5 swiper-wrapper">
+                        ${reviews
+                          .filter((r) => r.rating > 3)
+                          .map(
+                            (r) => `
+                            <div class="max-h-[300px ] h-[300px] overflow-y-scroll bg-white border border-gray-200 rounded-2xl p-6 text-left shadow-sm swiper-slide">
+                                <p class="mb-3 text-sm">about <span class="underline underline-offset-2">${
+                                  r.product_title
+                                }</span></p>
+                                <div class="flex justify-between items-center mb-2">
+                                    <div class="flex items-center gap-1">
+                                        ${Array.from({ length: r.rating })
+                                          .map(
+                                            () => `
+                                            <img src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/pointed-star.png?v=1745741039"
+                                                 alt="Pointed Star" class="w-4 h-4">
+                                        `
+                                          )
+                                          .join("")}
+                                    </div>
+                                    <p class="text-[12px] text-gray-500">
+                                        ${new Date(
+                                          r.created_at
+                                        ).toLocaleDateString("en-US", {
+                                          year: "numeric",
+                                          month: "2-digit",
+                                          day: "2-digit",
+                                        })}
+                                    </p>
+                                </div>
+                                <div class="flex items-center mb-4 gap-2">
+                                    <div class='relative'>
+                                        <img src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/user.png?v=1745741939"
+                                             alt="Profile Icon" class="w-10 h-10 p-[6px] bg-[#efefef] rounded-xl">
+                                        <img src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/check-circle.png?v=1745741991"
+                                             alt="Profile Icon" class="absolute right-0 bottom-0 w-4 h-4">
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-2">
+                                           <p class="text-sm">${(() => {
+                                             const parts = r.reviewer.name
+                                               .trim()
+                                               .split(" ");
+                                             if (parts.length > 1) {
+                                               return `${parts[0]} ${
+                                                 parts[parts.length - 1][0]
+                                               }.`;
+                                             } else {
+                                               return parts[0]; // just first name, no dot
+                                             }
+                                           })()}</p>
+                                            ${
+                                              r.verified == "verified-purchase"
+                                                ? '<span class="bg-black text-white text-[11px] px-2 rounded-[5px]">Verified</span>'
+                                                : ""
+                                            }
+                                        </div>
+                                        <div>
+                                            <img src="https://judgeme-public-images.imgix.net/judgeme/flags/US.svg"
+                                                 alt="American Flag" class="w-4 h-4 ml-2">
+                                        </div>
+                                    </div>
+                                </div>
+                                ${
+                                  r.pictures[0]
+                                    ? `${r.pictures.map(
+                                        (picture) =>
+                                          `<img src="${picture.urls["original"]}" alt="picture" class="mb-2">`
+                                      )}`
+                                    : ""
+                                }
+                                <p class="font-bold mb-2">${
+                                  r.title
+                                    ? `<p class="font-bold mb-2">${r.title}</p>`
+                                    : ""
+                                }</p>
+                                <p style="color: #333333; line-height: 1.5;" class=" mb-4">${
+                                  r.body
+                                }</p>
+                                
+                            </div>
+                        `
+                          )
+                          .join("")}
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-slide-button swiper-button-prev text-black !absolute !inset-auto  !bottom-0 !left-[40px]   ">{%- render 'icon', icon: 'arrow-left-long', class: 'transform' -%}</div>
+                    <div class="swiper-slide-button swiper-button-next text-black !absolute !inset-auto  !bottom-0 !right-[40px]  ">{%- render 'icon', icon: 'arrow-right-long', class: 'transform' -%}</div>    
+                </div>
+            `;
+        section.appendChild(sliderWrapper);
+
+        // 4) add section to the DOM
+        container.appendChild(section);
+      });
+
+      // 5) Initialize all Swipers
+      container.querySelectorAll(".slider-wrapper.cards").forEach((wrapper) => {
+        new Swiper(wrapper, {
+          loop: true,
+          spaceBetween: 10,
+          pagination: {
+            el: wrapper.querySelector(".swiper-pagination"),
+            clickable: true,
+            dynamicBullets: true,
+          },
+          navigation: {
+            nextEl: wrapper.querySelector(".swiper-button-next"),
+            prevEl: wrapper.querySelector(".swiper-button-prev"),
+          },
+          breakpoints: {
+            0: { slidesPerView: 1 },
+            530: { slidesPerView: 2 },
+            800: { slidesPerView: 3 },
+          },
+        });
+      });
+      // 5) Initialize all Swipers
+      container.querySelectorAll(".slider-wrapper.videos").forEach((wrapper) => {
+        new Swiper(wrapper, {
+          loop: true,
+          spaceBetween: 10,
+          pagination: {
+            el: wrapper.querySelector(".swiper-pagination"),
+            clickable: true,
+            dynamicBullets: true,
+          },
+          navigation: {
+            nextEl: wrapper.querySelector(".swiper-button-next"),
+            prevEl: wrapper.querySelector(".swiper-button-prev"),
+          },
+          breakpoints: {
+            0: { slidesPerView: 1.3 },
+            530: { slidesPerView: 2 },
+            800: { slidesPerView: 3 },
+          },
+        });
+      });
+    } catch (err) {
+      console.error("Failed to load reviews:", err);
+    }
+
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      initStaticCustomerReviews();
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        initStaticCustomerReviews();
+      },
+      {
+        rootMargin: "1200px 0px",
+      }
+    );
+
+    observer.observe(sectionRoot);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Customer Reviews Grouped",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Guideline",
+      "info": "Paste one YouTube video link per line. Normal watch links, Shorts links, youtu.be links and embed links are supported."
+    },
+    {
+      "type": "textarea",
+      "id": "safety_video_links",
+      "label": "Safety video links",
+      "default": "https://youtube.com/embed/OJ6Q2yBqvZg\nhttps://youtube.com/embed/ZOWaLBbtkr0\nhttps://youtube.com/embed/_PZO1Ve-V9w\nhttps://youtube.com/embed/tie4wG4W9kU"
+    },
+    {
+      "type": "textarea",
+      "id": "quality_video_links",
+      "label": "Quality and durability video links",
+      "default": "https://youtube.com/embed/fWI24iSBg7I?feature=shared\nhttps://youtube.com/embed/3pcaPE19zFc?feature=share\nhttps://youtube.com/embed/6KVh51I0e3M"
+    },
+    {
+      "type": "textarea",
+      "id": "comfort_video_links",
+      "label": "Comfort and fit video links",
+      "default": "https://youtube.com/embed/9TDi4Ylxzzs\nhttps://youtube.com/embed/fuYP4wJsfgk?feature=shared\nhttps://youtube.com/embed/QceW1c_NAwA?feature=shared\nhttps://youtube.com/embed/88PEJh6wWLk?feature=share\nhttps://www.youtube.com/embed/h8x_v8PgqN8?si=busduuEU4dD-vvYZ"
+    },
+    {
+      "type": "textarea",
+      "id": "style_video_links",
+      "label": "Style and color video links",
+      "default": "https://youtube.com/embed/eOWHBducRmk?feature=share\nhttps://youtube.com/embed/-hukY2U-Vic?feature=share\nhttps://youtube.com/embed/HjKNSR0iCs4"
+    },
+    {
+      "type": "textarea",
+      "id": "no_velcro_video_links",
+      "label": "No Velcro video links",
+      "default": "https://youtube.com/embed/c3NkJ3ijg3Q?feature=shared\nhttps://youtube.com/embed/M5_NzkX7pXA?feature=shared"
+    },
+    {
+      "type": "textarea",
+      "id": "love_it_video_links",
+      "label": "I Just Love It video links",
+      "default": "https://www.youtube.com/embed/h8x_v8PgqN8?si=busduuEU4dD-vvYZ\nhttps://www.youtube.com/embed/5KJoBB2XAaY"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Reviews Grouped",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

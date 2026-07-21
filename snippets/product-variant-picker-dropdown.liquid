@@ -1,0 +1,438 @@
+{%- doc -%}
+  Renders an isolated variant picker form for bundle products with customizable selection interfaces.
+
+  Creates a self-contained form for selecting and adding product variants to bundles with inventory awareness.
+
+  @param {object} product - Shopify product object with variants and option data
+  @param {string} product_id - Unique product identifier for element targeting
+  @param {string} section_id - Section identifier for form namespacing
+  @param {boolean} [enable_dynamic_variants] - Enable dynamic product options
+  @param {boolean} [show_variant_labels] - Show variant label
+  @param {object} [size_chart] - Shopify page object for size chart
+  @param {string} [context] - Context identifier for ID generation
+  @param {string} [shopify_attributes] - Shopify-specific attributes
+
+  @example
+  {% render 'product-variant-picker-dropdown',
+    product: product,
+    product_id: product.id,
+    section_id: section.id
+  %}
+{%- enddoc -%}
+
+<style>
+  /* TBG Custom Code */
+  .tbg-custom-select{
+    position:relative;
+    width:100%;
+    background-color: #f2f2f2;
+    border-radius: 0.75rem;
+    font-size: 12px;
+  }
+  @media (min-width: 640px) {
+    .tbg-custom-select{
+      font-size: 15px;
+    }
+  }
+
+  .tbg-custom-select__button{border: 1px solid rgb(var(--color-border)); border-radius: var(--buttons-radius); display:flex; align-items:center; justify-content:space-between; width:100%; cursor:pointer; line-height:1.2;min-height: 52px;padding-inline: 10px;padding-right: 30px !important; background-color: white;}
+    @media (min-width: 640px) {
+      .tbg-custom-select__button{
+        min-height: 60px;
+      }
+    }
+  .tbg-custom-select__list{position:absolute; z-index:30; top:calc(100% + 4px); left:0; right:0; background:#fff; border:1px solid var(--color-border, #e5e7eb); border-radius:6px; box-shadow:0 0px 20px rgba(0, 0, 0, 0.34); display:none;}
+  .tbg-custom-select__item{padding:8px 12px; cursor:pointer; white-space:nowrap;}
+  .tbg-custom-select__item[aria-selected="true"]{font-weight:600;}
+  .tbg-custom-select__item:hover{background:#f6f7f8;}
+  .tbg-custom-select__item[data-out="true"]{text-decoration:line-through; opacity:.6;}
+  .tbg-custom-select[aria-expanded="true"] .tbg-custom-select__list{display:block;}
+</style>
+
+<variant-picker
+  id="VariantPicker-{{ section_id }}-{{ product_id }}{% if context == 'bundle' %}-dropdown{% endif %}"
+  {% comment %} TBG CUTOM CODE {% endcomment %}
+  class="variant-picker flex gap-2 {% if context == 'bundle' %} overflow-hidden{% endif %} no-js-hidden"
+  {% if enable_dynamic_variants %}
+    data-dynamic-variants
+  {% endif %}
+  {{ shopify_attributes }}
+>
+  {%- for option in product.options_with_values -%}
+    {% comment %} TBG CUSTOM CODE {%- liquid
+      assign is_size = false
+      if size_chart != blank
+        assign size_trigger = 'products.general.size_trigger' | t | downcase | strip
+        assign downcased_option = option.name | downcase | strip
+        if downcased_option == size_trigger
+          assign is_size = true
+        endif
+      endif
+    -%}
+    {% endcomment %}
+    <div
+      class="product-form__input product-form__input--dropdown variant-input-wrapper"
+      data-option-index="option{{ forloop.index }}"
+      data-option-slug="{{ option.name | handleize }}"
+    >
+      <div class="form__label flex items-center justify-between gap-2 w-full">
+        {%- if show_variant_labels -%}
+          <label class="flex gap-2" for="Option-{{ section_id }}-{{ product_id }}-{{ forloop.index0 }}">
+            {{- option.name -}}
+            :
+            <span class="font-medium" id="{{ section_id }}-{{ product_id }}-option{{ option.position }}">
+              {{- option.selected_value -}}
+            </span>
+          </label>
+        {%- endif -%}
+      </div>
+      {% comment %} TBG CUSTOM CODE {%- if is_size -%}
+        <div class="flex items-center gap-2">
+          {%- render 'icon', icon: 'ruler', size: 'xs', class: 'stroke-1' -%}
+          <button
+            type="button"
+            class="link text-sm leading-tight cursor-pointer"
+            aria-controls="SizeChart-{{ section_id }}-{{ product_id }}"
+            aria-expanded="false"
+          >
+            {{- 'products.general.size_chart' | t -}}
+          </button>
+          <x-modal
+            id="SizeChart-{{ section_id }}-{{ product_id }}"
+            class="x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+            role="dialog"
+            aria-modal="true"
+            aria-label="{{ size_chart.title | escape }}"
+            hidden
+          >
+            <overlay-element
+              class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none"
+              aria-controls="SizeChart-{{ section_id }}-{{ product_id }}"
+              aria-expanded="false"
+            ></overlay-element>
+            <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+              <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative" tabindex="0">
+                <span class="drawer__title heading title-md">{{ size_chart.title | escape }}</span>
+                <button
+                  class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center"
+                  type="button"
+                  is="hover-button"
+                  aria-controls="SizeChart-{{ section_id }}-{{ product_id }}"
+                  aria-expanded="false"
+                  aria-label="{{ 'general.accessibility.close' | t | escape }}"
+                >
+                  <span class="btn-fill" data-fill></span>
+                  <span class="btn-text">
+                    {%- render 'icon', icon: 'close', size: 'sm' -%}
+                  </span>
+                </button>
+              </gesture-element>
+              <div class="drawer__content opacity-0 invisible flex flex-col h-full grow shrink">
+                <div class="drawer__scrollable relative flex flex-col gap-5 md:gap-7 grow shrink">
+                  <div class="rte text-base md:text-lg">{{ size_chart.content }}</div>
+                </div>
+              </div>
+            </div>
+          </x-modal>
+        </div>
+      {%- endif -%} {% endcomment %}
+      {% comment %} TBG CUSTOM CODE {% endcomment %}
+      <div class="field variant-wrapper">
+        {%- comment -%}
+            We keep the native <select> for form submission and theme JS, but visually replace it
+            with a custom dropdown that lets us style out-of-stock options with strikethrough.
+          {%- endcomment -%}
+        <select
+          id="Option-{{ section_id }}-{{ product_id }}-{{ forloop.index0 }}"
+          class="select cus_variant_picker"
+          name="options[{{ option.name | escape }}]"
+          is="custom-select"
+          data-tbg-enhance="custom-select"
+          style="position:absolute; inset:0; width:100%; height:100%; opacity:0; pointer-events:none; background: #f2f2f2;"
+        >
+          {%- for value in option.values -%}
+            <!-- TBG Custom Code -->
+            {%- assign tbg_out = 'false' -%}
+
+            {%- assign tbg_total_qty = 0 -%}
+            {%- assign tbg_has_stock = false -%}
+            {%- assign tbg_has_continue = false -%}
+
+            {%- case forloop.parentloop.index0 -%}
+              {%- when 0 -%}
+                {%- for v in product.variants -%}
+                  {%- if v.option1 == value -%}
+                    {%- assign tbg_total_qty = tbg_total_qty | plus: v.inventory_quantity -%}
+                    {%- if v.inventory_quantity > 0 -%}{%- assign tbg_has_stock = true -%}{%- endif -%}
+                    {%- if v.inventory_policy == 'continue' -%}
+                      {%- assign tbg_has_continue = true -%}
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- when 1 -%}
+                {%- for v in product.variants -%}
+                  {%- if v.option2 == value -%}
+                    {%- assign tbg_total_qty = tbg_total_qty | plus: v.inventory_quantity -%}
+                    {%- if v.inventory_quantity > 0 -%}{%- assign tbg_has_stock = true -%}{%- endif -%}
+                    {%- if v.inventory_policy == 'continue' -%}
+                      {%- assign tbg_has_continue = true -%}
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- when 2 -%}
+                {%- for v in product.variants -%}
+                  {%- if v.option3 == value -%}
+                    {%- assign tbg_total_qty = tbg_total_qty | plus: v.inventory_quantity -%}
+                    {%- if v.inventory_quantity > 0 -%}{%- assign tbg_has_stock = true -%}{%- endif -%}
+                    {%- if v.inventory_policy == 'continue' -%}
+                      {%- assign tbg_has_continue = true -%}
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
+            {%- endcase -%}
+
+            {%- if tbg_total_qty <= 0 and tbg_has_stock == false and tbg_has_continue == false -%}
+              {%- assign tbg_out = 'true' -%}
+            {%- endif -%}
+            <!-- End TBG Custom Code -->
+            <option
+              value="{{ value | escape }}"
+              data-option-value-id="{{ value.id }}"
+              {% if option.selected_value == value %}
+                selected
+              {% endif -%}
+              {%- comment -%}TBG Custom Code{%- endcomment -%}
+              data-tbg-out="{{ tbg_out }}"
+              {%- comment -%}TBG Custom Code{%- endcomment -%}
+              {% if value.product_url != blank and value.product_url != product.url %}
+                data-product-url="{{ value.variant.url | default: value.product_url }}"
+              {% endif %}
+              data-option-index="{{ option.position }}"
+            >
+              {{ value }}
+            </option>
+          {%- endfor -%}
+        </select>
+
+        <!-- TBG Custom Code -->
+          <div
+            class="tbg-custom-select "
+            data-for="Option-{{ section_id }}-{{ product_id }}-{{ forloop.index0 }}"
+          ></div>
+          <!-- TBG Custom Code -->
+
+          <!-- TBG Custom Code -->
+        {%- render 'icon', icon: 'chevron-up', size: 'lg', class: 'absolute select-icon' -%}
+      </div>
+    </div>
+  {%- endfor -%}
+
+  <script type="application/json" data-selected-variant>
+    {{ product.selected_or_first_available_variant | json }}
+  </script>
+  {%- if product.variants_count <= 250 -%}
+    <script type="application/json" data-variants>
+      {{ product.variants | json }}
+    </script>
+  {%- endif -%}
+</variant-picker>
+
+
+{%- comment -%}TBG Custom Code{%- endcomment -%}
+<script>
+  // TBG Custom Code
+  (() => {
+    const SELECTOR = 'select[data-tbg-enhance="custom-select"]';
+    const VARIANT_CACHE = new WeakMap();
+
+    // TBG Custom Code: normalize option values before string operations.
+    function toSafeString(value) {
+      if (typeof value === 'string') return value;
+      if (value == null) return '';
+      return String(value);
+    }
+
+    function getVariantsForSelect(nativeSelect) {
+      const root = nativeSelect.closest('variant-picker') || document;
+      if (VARIANT_CACHE.has(root)) return VARIANT_CACHE.get(root);
+      const script = root.querySelector('script[data-variants]');
+      let variants = [];
+      if (script && script.textContent) {
+        try {
+          variants = JSON.parse(script.textContent.trim());
+        } catch (err) {
+          variants = [];
+        }
+      }
+      VARIANT_CACHE.set(root, variants);
+      return variants;
+    }
+
+    function isVariantInStock(variant) {
+      if (!variant) return false;
+      if (variant.available === true) return true;
+      if (typeof variant.inventory_quantity === 'number' && variant.inventory_quantity > 0) return true;
+      return variant.inventory_policy === 'continue';
+    }
+
+    function updateOutStates(nativeSelect) {
+      const variants = getVariantsForSelect(nativeSelect);
+      if (!variants || variants.length === 0) return;
+
+      const root = nativeSelect.closest('variant-picker') || document;
+      const allSelects = [...root.querySelectorAll(SELECTOR)];
+      const currentValues = allSelects.map((sel) => sel.value);
+      const currentIndex = allSelects.indexOf(nativeSelect);
+      if (currentIndex < 0) return;
+
+      [...nativeSelect.options].forEach((opt) => {
+        const matches = variants.filter((v) => {
+          if (!v || !v.options) return false;
+          if (v.options[currentIndex] !== opt.value) return false;
+          for (let i = 0; i < currentValues.length; i += 1) {
+            if (i === currentIndex) continue;
+            if (v.options[i] !== currentValues[i]) return false;
+          }
+          return true;
+        });
+
+        const hasStock = matches.some(isVariantInStock);
+        opt.dataset.tbgOut = hasStock ? 'false' : 'true';
+      });
+
+      const custom = nativeSelect.parentElement?.querySelector('.tbg-custom-select');
+      if (custom) {
+        const items = custom.querySelectorAll('.tbg-custom-select__item');
+        items.forEach((item) => {
+          const opt = [...nativeSelect.options].find((o) => o.value === item.dataset.value);
+          if (opt) item.setAttribute('data-out', opt.dataset.tbgOut === 'true' ? 'true' : 'false');
+        });
+      }
+    }
+
+    function buildCustomFrom(nativeSelect) {
+      // If already enhanced, bail.
+      if (!nativeSelect || nativeSelect.dataset.tbgEnhanced === 'true') return;
+
+      const id = nativeSelect.id;
+      const mount = nativeSelect.parentElement?.querySelector(`.tbg-custom-select[data-for="${id}"]`);
+      {% comment %} if (!mount) return; {% endcomment %}
+
+      // Build custom UI
+      const nameAttr = nativeSelect.getAttribute("name")
+      const wrapper = document.createElement('div');
+      wrapper.className = 'tbg-custom-select';
+      wrapper.setAttribute('aria-expanded', 'false');
+      wrapper.setAttribute('data-name', nameAttr);
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'tbg-custom-select__button';
+      btn.setAttribute('aria-haspopup', 'listbox');
+
+      const list = document.createElement('div');
+      list.className = 'tbg-custom-select__list';
+      list.setAttribute('role', 'listbox');
+
+      // Options
+      {% comment %} [...nativeSelect.options].forEach((opt) => {
+        opt.selected ? localStorage.setItem('userSize', opt.value) : continue;
+      }) {% endcomment %}
+      [...nativeSelect.options].forEach((opt) => {
+        const item = document.createElement('div');
+        item.className = 'tbg-custom-select__item';
+        item.setAttribute('role', 'option');
+        item.setAttribute('data-value', opt.value);
+        item.setAttribute('data-out', opt.dataset.tbgOut === 'true' ? 'true' : 'false');
+        item.setAttribute('aria-selected', opt.selected ? 'true' : 'false');
+        item.textContent = opt.text;
+
+        item.addEventListener('click', () => {
+          const optionValue = toSafeString(opt.value);
+          nativeSelect.value = optionValue;
+          const sizeToStore = optionValue.includes('/') ? optionValue.split('/')[0] : optionValue;
+          localStorage.setItem('userSize', sizeToStore);
+          console.log("Selected Size:" + optionValue );
+          console.log("local storage Size:" + localStorage.getItem('userSize'));
+          // Let the theme handle variant switching
+          nativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+          btn.textContent = opt.text;
+          [...list.children].forEach((el) => el.setAttribute('aria-selected', 'false'));
+          item.setAttribute('aria-selected', 'true');
+          wrapper.setAttribute('aria-expanded', 'false');
+        });
+
+        list.appendChild(item);
+      });
+
+      btn.textContent = nativeSelect.options[nativeSelect.selectedIndex]?.text || 'Select';
+      btn.addEventListener('click', () => {
+        const open = wrapper.getAttribute('aria-expanded') === 'true';
+        wrapper.setAttribute('aria-expanded', open ? 'false' : 'true');
+      });
+
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        if (!wrapper.contains(e.target)) wrapper.setAttribute('aria-expanded', 'false');
+      });
+
+      wrapper.appendChild(btn);
+      wrapper.appendChild(list);
+      mount.replaceWith(wrapper);
+
+      // Mark enhanced so we don't double-build
+      nativeSelect.dataset.tbgEnhanced = 'true';
+      updateOutStates(nativeSelect);
+    }
+
+    function enhanceAll() {
+      document.querySelectorAll(SELECTOR).forEach((sel) => {
+        buildCustomFrom(sel);
+        updateOutStates(sel);
+      });
+    }
+
+    // Initial run
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', enhanceAll);
+    } else {
+      enhanceAll();
+    }
+
+    // Re-run on common Shopify theme events (covers variant changes & section reloads)
+    [
+      'shopify:section:load',
+      'shopify:section:select',
+      'shopify:block:select',
+      'variant:change',
+      'product:variant-change',
+      'theme:variant:change',
+      'product:updated',
+    ].forEach((evt) => document.addEventListener(evt, enhanceAll));
+
+    // MutationObserver: catch any dynamic HTML swaps and re-enhance
+    const mo = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        // If a new select we care about was added, or inside an added node
+        const added = [...m.addedNodes].some(
+          (n) => n.nodeType === 1 && (n.matches?.(SELECTOR) || n.querySelector?.(SELECTOR))
+        );
+        if (added) {
+          enhanceAll();
+          break;
+        }
+      }
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+
+    // Safety: if some script resets the native select, re-enhance lazily
+    document.addEventListener('change', (e) => {
+      const sel = e.target?.closest?.(SELECTOR);
+      if (!sel) return;
+      if (sel.dataset.tbgEnhanced !== 'true') buildCustomFrom(sel);
+      document.querySelectorAll(SELECTOR).forEach(updateOutStates);
+    });
+  })();
+  // End TBG Custom Code
+</script>
+{%- comment -%}TBG Custom Code{%- endcomment -%}

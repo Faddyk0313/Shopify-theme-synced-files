@@ -1,0 +1,269 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {%- render 'section-variables', section: section -%}
+  }
+  /* TBG Custom Code */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  #3d-prod-configurator-section {
+    position: relative;
+    min-height: 400px;
+  }
+
+  .tbg-iframe-loader {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    z-index: 2;
+  }
+
+  .tbg-spinner {
+    display: block !important;
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e5e5e5;
+    border-top: 4px solid #000;
+    border-radius: 50%;
+    animation: tbg-spin 0.8s linear infinite;
+  }
+
+  @keyframes tbg-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  #productConfigurator {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  /* End TBG Custom Code */
+</style>
+
+<!-- TBG Custom Code -->
+{% assign rating_product = all_products['battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-black-long'] %}
+
+{% assign rating_value = rating_product.metafields.reviews.rating.value | default: 0 %}
+{% assign rating_count = rating_product.metafields.reviews.rating_count.value | default: 0 %}
+<!-- End TBG Custom Code -->
+
+<div class="section section--padding">
+  <div class="page-width relative">
+    <div id="3d-prod-configurator-section">
+      <!-- TBG Custom Code -->
+      <div class="tbg-iframe-loader" id="tbgLoader">
+        <div class="tbg-spinner"></div>
+      </div>
+      <!-- End TBG Custom Code -->
+
+      <iframe
+        id="productConfigurator"
+        {% if rating_value != 0 and rating_count != 0 %}
+          data-base-src="https://titan-3d-product-configurator.vercel.app/?sourcePage=team-sales-program&ratingValue={{ rating_value | url_encode }}&ratingCount={{ rating_count | url_encode }}"
+        {% else %}
+          data-base-src="https://titan-3d-product-configurator.vercel.app/?sourcePage=team-sales-program"
+        {% endif %}
+        width="100%"
+        scrolling="no"
+        style="border: none; overflow: clip;"
+      ></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  // TBG Custom Code
+  const iframe = document.getElementById('productConfigurator');
+  const loader = document.getElementById('tbgLoader');
+
+  function normalizeLegacyHashQueryUrl() {
+    const hashValue = window.location.hash || '';
+    const hashQueryIndex = hashValue.indexOf('?');
+    if (hashQueryIndex < 0) return;
+
+    const anchorId = hashValue.slice(1, hashQueryIndex);
+    const hashQuery = hashValue.slice(hashQueryIndex + 1);
+    if (!hashQuery) return;
+
+    const pageUrl = new URL(window.location.href);
+    const mergedSearchParams = new URLSearchParams(pageUrl.search);
+    const hashSearchParams = new URLSearchParams(hashQuery);
+
+    hashSearchParams.forEach(function (value, key) {
+      mergedSearchParams.set(key, value);
+    });
+
+    pageUrl.search = mergedSearchParams.toString();
+    pageUrl.hash = anchorId ? '#' + anchorId : '';
+    window.history.replaceState(null, '', pageUrl.toString());
+  }
+
+  function scrollToHashAnchor() {
+    const hashValue = window.location.hash || '';
+    if (!hashValue) return;
+
+    const anchorId = hashValue.slice(1).split('?')[0];
+    if (!anchorId) return;
+
+    const anchorElement = document.getElementById(anchorId);
+    if (!anchorElement) return;
+
+    anchorElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function buildConfiguratorUrl() {
+    if (!iframe) return '';
+
+    const baseSrc = iframe.getAttribute('data-base-src');
+    if (!baseSrc) return '';
+
+    const iframeUrl = new URL(baseSrc, window.location.origin);
+    const topPageParams = new URLSearchParams(window.location.search);
+    const hashValue = window.location.hash || '';
+    const hashQueryIndex = hashValue.indexOf('?');
+    const hashParams = hashQueryIndex >= 0
+      ? new URLSearchParams(hashValue.slice(hashQueryIndex + 1))
+      : null;
+
+    topPageParams.forEach(function (value, key) {
+      iframeUrl.searchParams.set(key, value);
+    });
+
+    if (hashParams) {
+      hashParams.forEach(function (value, key) {
+        iframeUrl.searchParams.set(key, value);
+      });
+    }
+
+    return iframeUrl.toString();
+  }
+
+  function renderConfiguratorIframe() {
+    if (!iframe || iframe.getAttribute('src')) return;
+    const finalUrl = buildConfiguratorUrl();
+    if (finalUrl) iframe.setAttribute('src', finalUrl);
+  }
+
+  let didScheduleConfiguratorLoad = false;
+
+  function scheduleConfiguratorLoad() {
+    if (didScheduleConfiguratorLoad) return;
+    didScheduleConfiguratorLoad = true;
+
+    const sectionEl = document.getElementById('3d-prod-configurator-section');
+    const hashTarget = (window.location.hash || '').split('?')[0];
+
+    if (
+      hashTarget === '#3d-prod-configurator-section'
+      || hashTarget === '#shopify-section-{{ section.id }}'
+    ) {
+      renderConfiguratorIframe();
+      return;
+    }
+
+    if (!sectionEl || !('IntersectionObserver' in window)) {
+      renderConfiguratorIframe();
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.some((entry) => entry.isIntersecting);
+        if (!visible) return;
+        observer.disconnect();
+        renderConfiguratorIframe();
+      },
+      { rootMargin: '300px 0px' }
+    );
+
+    observer.observe(sectionEl);
+  }
+
+  function waitForTopParamsAndScheduleLoad() {
+    const maxWaitMs = 1500;
+    const pollIntervalMs = 50;
+    const startTime = Date.now();
+    const hasSearchParams = function () {
+      return window.location.search.length > 1;
+    };
+    const hasHashParams = function () {
+      const hashValue = window.location.hash || '';
+      return hashValue.includes('?') && hashValue.split('?')[1].length > 0;
+    };
+
+    if (hasSearchParams() || hasHashParams()) {
+      scheduleConfiguratorLoad();
+      return;
+    }
+
+    const intervalId = window.setInterval(function () {
+      const hasTopParams = hasSearchParams() || hasHashParams();
+      const timeoutReached = Date.now() - startTime >= maxWaitMs;
+
+      if (hasTopParams || timeoutReached) {
+        window.clearInterval(intervalId);
+        scheduleConfiguratorLoad();
+      }
+    }, pollIntervalMs);
+  }
+
+  normalizeLegacyHashQueryUrl();
+  waitForTopParamsAndScheduleLoad();
+  scrollToHashAnchor();
+
+  if (iframe && loader) {
+    iframe.addEventListener('load', function () {
+      loader.style.display = 'none';
+      iframe.style.opacity = '1';
+    });
+  }
+
+  window.addEventListener('message', function (event) {
+    if (event.data && event.data.frameHeight && iframe) {
+      iframe.style.height = event.data.frameHeight + 'px';
+    }
+  });
+  // End TBG Custom Code
+</script>
+
+{% schema %}
+{
+  "name": "3d Shirt Configurator",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 100
+    },
+  ],
+  "presets": [
+    {
+      "name": "3d Shirt Configurator"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,224 @@
+<style>
+  #shopify-section-{{ section.id }} .govx-features {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.background_color }};
+  }
+
+  #shopify-section-{{ section.id }} .govx-features__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+  }
+
+  #shopify-section-{{ section.id }} .govx-features__col--content-left {
+    align-items: center;
+  }
+  #shopify-section-{{ section.id }} .govx-features__col {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+
+  #shopify-section-{{ section.id }} .govx-features__points {
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 14px;
+  }
+
+  #shopify-section-{{ section.id }} .govx-features__point-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.35;
+  }
+
+  #shopify-section-{{ section.id }} .govx-features__point-icon {
+    font-size: 22px;
+    line-height: 1;
+    margin-top: 2px;
+    color: #000;
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .govx-features__button-wrap {
+    margin-top: 24px;
+  }
+
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .govx-features__grid {
+      flex-direction: row;
+      gap: 60px;
+    }
+
+    #shopify-section-{{ section.id }} .govx-features__col--content-left .button {
+      width: 50%;
+      align-self: start;
+      width: fit-content;
+    }
+  }
+</style>
+
+<section class="govx-features">
+  <div class="page-width">
+    <div class="govx-features__grid">
+      <div class="govx-features__col govx-features__col--content-left rich-text text-{{ section.settings.text_alignment_mobile }} md:text-{{ section.settings.text_alignment_desktop }}">
+        {%- if section.settings.left_richtext != blank -%}
+          <div class="rte">{{ section.settings.left_richtext }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+            {%- render 'button',
+            label: section.settings.button_label,
+            link: section.settings.button_link,
+            show_icon: false,
+            -%}
+        {%- endif -%}
+      </div>
+
+      <div class="govx-features__col govx-features__col--points-right rich-text text-{{ section.settings.text_alignment_mobile }} md:text-{{ section.settings.text_alignment_desktop }}">
+        {%- if section.settings.right_richtext != blank -%}
+          <div class="rte">{{ section.settings.right_richtext }}</div>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <ul class="govx-features__points" role="list">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'point' and block.settings.text != blank -%}
+                <li class="govx-features__point-item" {{ block.shopify_attributes }}>
+                  <span class="govx-features__point-icon" aria-hidden="true">&#10003;</span>
+                  <span>{{ block.settings.text }}</span>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Govx Features",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "left_richtext",
+      "label": "Left rich text",
+      "default": "<p>Active duty military, veterans, first responders, government employees, and educators receive 15% off Titan BattlGear plus free shipping. Always.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "right_richtext",
+      "label": "Right rich text"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Verify with GOVX"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text_alignment",
+      "id": "text_alignment_desktop",
+      "label": "Desktop text alignment",
+      "default": "left"
+    },
+    {
+      "type": "text_alignment",
+      "id": "text_alignment_mobile",
+      "label": "Mobile text alignment",
+      "default": "left"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ececec"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Point text",
+          "default": "A9 ANSI cut resistance, the highest level available"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Govx Features",
+      "blocks": [
+        {
+          "type": "point",
+          "settings": {
+            "text": "A9 ANSI cut resistance, the highest level available"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "text": "No Velcro"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "text": "Wrist protection"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "text": "USA Hockey compliant"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "text": "100% made in the USA"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

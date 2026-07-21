@@ -1,0 +1,767 @@
+{% if page.handle == 'join-the-titan-movement' %}
+  <style>
+    /* Hide the original Klaviyo form */
+    #shopify-section-{{ section.id }} .klaviyo-form-SaDUB8 {
+      display: none;
+      position: absolute ;
+      height: 1px;
+      opacity: 0 ;
+      pointer-events: none ;
+    }
+
+    /* Custom form styles */
+    #shopify-section-{{ section.id }} .custom-klaviyo-form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    #shopify-section-{{ section.id }} .custom-form-field {
+      margin-bottom: 1.5rem;
+    }
+
+    #shopify-section-{{ section.id }} .custom-form-field label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    #shopify-section-{{ section.id }} .custom-form-field input[type="text"],
+    #shopify-section-{{ section.id }} .custom-form-field input[type="email"] {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: border-color 0.2s;
+    }
+
+    #shopify-section-{{ section.id }} .custom-form-field input[type="text"]:focus,
+    #shopify-section-{{ section.id }} .custom-form-field input[type="email"]:focus {
+      outline: none;
+      border-color: #000;
+    }
+
+    #shopify-section-{{ section.id }} .custom-form-field input.error {
+      border-color: #ef4444;
+    }
+
+    #shopify-section-{{ section.id }} .custom-form-field input::placeholder {
+      color: #9ca3af;
+      font-size: 18px;
+    }
+
+    #shopify-section-{{ section.id }} .error-message {
+      color: #ef4444;
+      font-size: 12px;
+      margin-top: 0.25rem;
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .error-message.show {
+      display: block;
+    }
+
+    #shopify-section-{{ section.id }} .custom-radio-group {
+      margin-bottom: 1.5rem;
+    }
+
+    #shopify-section-{{ section.id }} .custom-radio-group label.group-label {
+      display: block;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    #shopify-section-{{ section.id }} .custom-radio-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    #shopify-section-{{ section.id }} .custom-radio-option {
+      position: relative;
+      flex: 1;
+      min-width: 150px;
+    }
+
+    #shopify-section-{{ section.id }} .custom-radio-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    #shopify-section-{{ section.id }} .custom-radio-option label {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 50px;
+      background-color: #000;
+      border: 2px solid #000;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+      transition: all 0.3s ease;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    #shopify-section-{{ section.id }} .custom-radio-option label:hover {
+      color: #000 !important;
+      background-color: #f3f4f6  !important;
+      transform: translateY(-2px)  !important;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)  !important;
+    }
+
+    #shopify-section-{{ section.id }} .custom-radio-option input[type="radio"]:checked + label {
+      background-color: #000 !important;
+      color: #fff !important;
+      border-color: #000 !important;
+      outline: 2px solid #000;
+      outline-offset: 2px;
+    }
+
+
+    #shopify-section-{{ section.id }} .radio-error {
+      color: #ef4444;
+      font-size: 12px;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .radio-error.show {
+      display: block;
+    }
+
+
+      #shopify-section-{{ section.id }} .custom-radio-option label {
+        font-size: 12px;
+        padding: 0 0.5rem;
+      }
+    }
+
+    #shopify-section-{{ section.id }} .custom-form-disclaimer {
+      margin-bottom: 1.5rem;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #6b7280;
+    }
+
+    #shopify-section-{{ section.id }} .custom-form-disclaimer a {
+      color: #2563eb;
+      text-decoration: underline;
+    }
+
+    /* Style Klaviyo's phone field when moved to custom form */
+    #shopify-section-{{ section.id }} #klaviyo-phone-field-container {
+      margin-bottom: 1.5rem;
+    }
+
+    #shopify-section-{{ section.id }} #klaviyo-phone-field-container [data-testid="form-row"] {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: stretch !important;
+      position: relative !important;
+    }
+
+    #shopify-section-{{ section.id }} #klaviyo-phone-field-container [data-testid="form-component"] {
+      display: flex !important;
+      padding: 0 !important;
+      width: 100% !important;
+    }
+
+    #shopify-section-{{ section.id }} .custom-submit-btn {
+      width: 100%;
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    #shopify-section-{{ section.id }} .custom-submit-btn:hover {
+      background-color: #333;
+    }
+
+    #shopify-section-{{ section.id }} .custom-submit-btn:disabled {
+      background-color: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    /* Loading spinner */
+    #shopify-section-{{ section.id }} .custom-form-loading {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    #shopify-section-{{ section.id }} .custom-form-loading.active {
+      display: block;
+    }
+
+    #shopify-section-{{ section.id }} .spinner {
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #000;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin2 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin2 {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Success message */
+    #shopify-section-{{ section.id }} .custom-form-success {
+      display: none;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    #shopify-section-{{ section.id }} .custom-form-success.active {
+      display: block;
+    }
+
+    #shopify-section-{{ section.id }} .custom-form-success h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #000;
+    }
+
+    #shopify-section-{{ section.id }} .custom-form-success p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #4b5563;
+      margin-bottom: 0.5rem;
+    }
+
+    #shopify-section-{{ section.id }} .custom-form-success a {
+      color: #2563eb;
+      text-decoration: underline;
+    }
+
+    #shopify-section-{{ section.id }} .needsclick.go3132032548.kl-private-reset-css-Xuajs1 {
+      border: 1px solid #d1d5db !important;
+      border-radius: 4px !important;
+    }
+    #shopify-section-{{ section.id }} .needsclick.go3132032548.kl-private-reset-css-Xuajs1 input:focus {
+      outline: none !important;
+      border-color: #000 !important;
+    }
+    #shopify-section-{{ section.id }} .needsclick.go3132032548.kl-private-reset-css-Xuajs1:hover {
+      border: 1px solid #d1d5db !important;
+      border-radius: 4px !important;
+    }
+  </style>
+
+  <style>
+    #shopify-section-{{ section.id }} {
+      --section-padding-top: {{ section.settings.padding_top }}px;
+      --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  </style>
+
+  <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+    <div class="page-width{% if section.settings.narrow %} page-width--narrow{% endif %} relative">
+      <!-- Hidden Klaviyo Form -->
+      <div class="klaviyo-form-SaDUB8"></div>
+
+      <!-- Custom Form -->
+      <div class="custom-klaviyo-form">
+        <form id="custom-klaviyo-form" class="active">
+          <div class="custom-form-field">
+            <input
+              type="text"
+              id="custom-first-name"
+              name="first_name"
+              placeholder="First Name"
+              required
+            >
+            <div class="error-message" id="first-name-error">Please enter your first name</div>
+          </div>
+
+          <div class="custom-form-field">
+            <input
+              type="text"
+              id="custom-last-name"
+              name="last_name"
+              placeholder="Last Name"
+              required
+            >
+            <div class="error-message" id="last-name-error">Please enter your last name</div>
+          </div>
+
+          <div class="custom-form-field">
+            <input
+              type="email"
+              id="custom-email"
+              name="email"
+              placeholder="Email"
+              required
+            >
+            <div class="error-message" id="email-error">Please enter a valid email address</div>
+          </div>
+
+          <!-- Klaviyo's phone field will be moved here -->
+          <div id="klaviyo-phone-field-container"></div>
+
+          <div class="custom-radio-group">
+            <label class="group-label">Which of these best describes you?</label>
+
+            <div class="custom-radio-options">
+              <div class="custom-radio-option">
+                <input
+                  type="radio"
+                  id="custom-hockey-parent"
+                  name="user_type"
+                  value="Hockey Parent"
+                  required
+                >
+                <label for="custom-hockey-parent">Hockey Parent</label>
+              </div>
+
+              <div class="custom-radio-option">
+                <input
+                  type="radio"
+                  id="custom-youth-player"
+                  name="user_type"
+                  value="Youth Player"
+                >
+                <label for="custom-youth-player">Youth Player</label>
+              </div>
+
+              <div class="custom-radio-option">
+                <input
+                  type="radio"
+                  id="custom-adult-player"
+                  name="user_type"
+                  value="Adult Player"
+                >
+                <label for="custom-adult-player">Adult Player</label>
+              </div>
+
+              <div class="custom-radio-option">
+                <input
+                  type="radio"
+                  id="custom-coach-retailer"
+                  name="user_type"
+                  value="Coach, Retailer, or Team Buyer"
+                >
+                <label for="custom-coach-retailer">Coach, Retailer, or Team Buyer</label>
+              </div>
+            </div>
+            <div class="radio-error" id="radio-error">Please select an option</div>
+          </div>
+
+          <div class="custom-form-disclaimer">
+            <p>
+              By submitting this form, you agree to receive email marketing from Titan BattleGear. You may unsubscribe
+              at any time via the link in the email.
+              <a href="https://www.titanbattlegear.com/policies/privacy-policy" target="_blank">Privacy Policy</a> &amp;
+              <a href="https://www.titanbattlegear.com/policies/terms-of-service" target="_blank">Terms</a>.
+            </p>
+          </div>
+          <button type="submit" class="custom-submit-btn">Claim My 20% Off</button>
+        </form>
+
+        <!-- Loading State -->
+        <div class="custom-form-loading" id="custom-form-loading">
+          <div class="spinner"></div>
+          <p>Submitting your information...</p>
+        </div>
+
+        <!-- Success Message -->
+        <div class="custom-form-success" id="custom-form-success">
+          <h2>Thanks for connecting with us!</h2>
+          <p>Your exclusive 15% code is on its way to your inbox.</p>
+          <p>Until then, explore how Titan is redefining hockey safety</p>
+          <a href="/collections/all">Shop Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      let klaviyoFormLoaded = false;
+      let formSyncInterval;
+
+      // Move Klaviyo's entire phone field row to custom form
+      function moveKlaviyoPhoneField() {
+        const klaviyoForm = document.querySelector('.klaviyo-form-SaDUB8 form');
+        if (!klaviyoForm) return;
+
+        // Find all form rows in Klaviyo form
+        const formRows = klaviyoForm.querySelectorAll('[data-testid="form-row"]');
+
+        // The 4th form-row should be the phone field (index 3, zero-based)
+        // But let's find it by looking for the phone input to be safe
+        let phoneFieldRow = null;
+
+        formRows.forEach(function (row) {
+          const phoneInput = row.querySelector('[data-testid="phoneNumberInput"]');
+          if (phoneInput) {
+            phoneFieldRow = row;
+          }
+        });
+
+        if (phoneFieldRow) {
+          const container = document.getElementById('klaviyo-phone-field-container');
+          if (container && !container.hasChildNodes()) {
+            // Move the entire phone field row to the custom form
+            container.appendChild(phoneFieldRow);
+            console.log('Phone field moved successfully');
+          }
+        } else {
+          console.log('Phone field not found in Klaviyo form');
+        }
+      }
+
+      // Wait for Klaviyo form to load
+      function waitForKlaviyoForm() {
+        return new Promise(function (resolve) {
+          const checkInterval = setInterval(function () {
+            const klaviyoForm = document.querySelector('.klaviyo-form-SaDUB8 form');
+            if (klaviyoForm) {
+              // Check if phone field exists before proceeding
+              const phoneInput = klaviyoForm.querySelector('[data-testid="phoneNumberInput"]');
+              if (phoneInput) {
+                clearInterval(checkInterval);
+                klaviyoFormLoaded = true;
+
+                // Move Klaviyo's phone field after form loads
+                setTimeout(function () {
+                  moveKlaviyoPhoneField();
+                }, 500);
+
+                resolve(klaviyoForm);
+              }
+            }
+          }, 100);
+
+          // Timeout after 10 seconds
+          setTimeout(function () {
+            clearInterval(checkInterval);
+            if (!klaviyoFormLoaded) {
+              console.error('Klaviyo form did not load in time');
+              resolve(null);
+            }
+          }, 10000);
+        });
+      }
+
+      // Sync custom form values to Klaviyo form
+      function syncToKlaviyoForm() {
+        const klaviyoForm = document.querySelector('.klaviyo-form-SaDUB8 form');
+        if (!klaviyoForm) return;
+
+        // Get custom form values
+        const firstName = document.getElementById('custom-first-name').value;
+        const lastName = document.getElementById('custom-last-name').value;
+        const email = document.getElementById('custom-email').value;
+        const userType = document.querySelector('input[name="user_type"]:checked');
+
+        // Find and populate Klaviyo form fields
+        // First Name - look for input with placeholder "First Name"
+        const klaviyoFirstName = klaviyoForm.querySelector('input[placeholder="First Name"]');
+        if (klaviyoFirstName) {
+          klaviyoFirstName.value = firstName;
+          klaviyoFirstName.dispatchEvent(new Event('input', { bubbles: true }));
+          klaviyoFirstName.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+
+        // Last Name - look for input with placeholder "Last Name"
+        const klaviyoLastName = klaviyoForm.querySelector('input[placeholder="Last Name"]');
+        if (klaviyoLastName) {
+          klaviyoLastName.value = lastName;
+          klaviyoLastName.dispatchEvent(new Event('input', { bubbles: true }));
+          klaviyoLastName.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+
+        // Email - look for input with type="email" or placeholder "Email"
+        const klaviyoEmail = klaviyoForm.querySelector('input[type="email"], input[placeholder="Email"]');
+        if (klaviyoEmail) {
+          klaviyoEmail.value = email;
+          klaviyoEmail.dispatchEvent(new Event('input', { bubbles: true }));
+          klaviyoEmail.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+
+        // User Type (radio buttons) - match by aria-label attribute
+        if (userType) {
+          const userTypeValue = userType.value;
+          const klaviyoRadios = klaviyoForm.querySelectorAll('input[type="radio"]');
+
+          klaviyoRadios.forEach(function (radio) {
+            const ariaLabel = radio.getAttribute('aria-label');
+            const labelElement = klaviyoForm.querySelector('label[for="' + radio.id + '"]');
+            const labelText = labelElement ? labelElement.textContent.trim() : '';
+
+            // Check if this radio matches the selected user type
+            if (
+              ariaLabel === userTypeValue ||
+              labelText === userTypeValue ||
+              ariaLabel === userTypeValue.replace(', ', ' ') ||
+              labelText.includes(userTypeValue)
+            ) {
+              radio.checked = true;
+              radio.dispatchEvent(new Event('change', { bubbles: true }));
+              radio.dispatchEvent(new Event('click', { bubbles: true }));
+            }
+          });
+        }
+
+        // Phone Number - no need to sync, it's the actual Klaviyo field now
+
+        // SMS Opt-in Checkbox
+        const klaviyoSmsCheckbox = klaviyoForm.querySelector(
+          'input[type="checkbox"][name*="sms"], input[type="checkbox"][name*="promotional"]'
+        );
+        if (klaviyoSmsCheckbox) {
+          klaviyoSmsCheckbox.dispatchEvent(new Event('change', { bubbles: true }));
+          klaviyoSmsCheckbox.dispatchEvent(new Event('click', { bubbles: true }));
+        }
+      }
+
+      // Check if Klaviyo form was submitted successfully
+      function checkKlaviyoSuccess() {
+        return new Promise(function (resolve) {
+          let attempts = 0;
+          const maxAttempts = 50; // Check for 5 seconds (50 * 100ms)
+
+          const checkInterval = setInterval(function () {
+            attempts++;
+
+            // Look for the success message in Klaviyo form
+            const klaviyoContainer = document.querySelector('.klaviyo-form-SaDUB8');
+            if (klaviyoContainer) {
+              const successParagraph = klaviyoContainer.querySelector('p');
+              if (successParagraph && successParagraph.textContent.includes('Thanks for connecting with us!')) {
+                clearInterval(checkInterval);
+                resolve(true);
+                return;
+              }
+            }
+
+            // Timeout after max attempts
+            if (attempts >= maxAttempts) {
+              clearInterval(checkInterval);
+              resolve(false);
+            }
+          }, 100);
+        });
+      }
+
+      // Validation function
+      function validateForm() {
+        let isValid = true;
+
+        // Validate first name
+        const firstName = document.getElementById('custom-first-name');
+        const firstNameError = document.getElementById('first-name-error');
+        if (!firstName.value.trim()) {
+          firstName.classList.add('error');
+          firstNameError.classList.add('show');
+          isValid = false;
+        } else {
+          firstName.classList.remove('error');
+          firstNameError.classList.remove('show');
+        }
+
+        // Validate last name
+        const lastName = document.getElementById('custom-last-name');
+        const lastNameError = document.getElementById('last-name-error');
+        if (!lastName.value.trim()) {
+          lastName.classList.add('error');
+          lastNameError.classList.add('show');
+          isValid = false;
+        } else {
+          lastName.classList.remove('error');
+          lastNameError.classList.remove('show');
+        }
+
+        // Validate email
+        const email = document.getElementById('custom-email');
+        const emailError = document.getElementById('email-error');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email.value.trim() || !emailRegex.test(email.value.trim())) {
+          email.classList.add('error');
+          emailError.classList.add('show');
+          isValid = false;
+        } else {
+          email.classList.remove('error');
+          emailError.classList.remove('show');
+        }
+
+        // Phone number validation - handled by Klaviyo's field now
+
+        // Validate radio selection
+        const radioSelected = document.querySelector('input[name="user_type"]:checked');
+        const radioError = document.getElementById('radio-error');
+        if (!radioSelected) {
+          radioError.classList.add('show');
+          isValid = false;
+        } else {
+          radioError.classList.remove('show');
+        }
+
+        return isValid;
+      }
+
+      // Clear error on input change
+      document.getElementById('custom-first-name').addEventListener('input', function () {
+        this.classList.remove('error');
+        document.getElementById('first-name-error').classList.remove('show');
+      });
+
+      document.getElementById('custom-last-name').addEventListener('input', function () {
+        this.classList.remove('error');
+        document.getElementById('last-name-error').classList.remove('show');
+      });
+
+      document.getElementById('custom-email').addEventListener('input', function () {
+        this.classList.remove('error');
+        document.getElementById('email-error').classList.remove('show');
+      });
+
+      // Phone field event listener removed - using Klaviyo's field directly
+
+      document.querySelectorAll('input[name="user_type"]').forEach(function (radio) {
+        radio.addEventListener('change', function () {
+          document.getElementById('radio-error').classList.remove('show');
+        });
+      });
+
+      // Handle custom form submission
+      document.getElementById('custom-klaviyo-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        // Validate form first
+        if (!validateForm()) {
+          return;
+        }
+
+        const customForm = document.getElementById('custom-klaviyo-form');
+        const loadingState = document.getElementById('custom-form-loading');
+        const successState = document.getElementById('custom-form-success');
+
+        // Hide form, show loading
+        customForm.style.display = 'none';
+        loadingState.classList.add('active');
+
+        try {
+          // Wait for Klaviyo form if not loaded yet
+          if (!klaviyoFormLoaded) {
+            await waitForKlaviyoForm();
+          }
+
+          // Sync values to Klaviyo form
+          syncToKlaviyoForm();
+
+          // Small delay to ensure values are set
+          await new Promise((resolve) => setTimeout(resolve, 300));
+
+          // Submit the Klaviyo form
+          const klaviyoForm = document.querySelector('.klaviyo-form-SaDUB8 form');
+          if (klaviyoForm) {
+            const klaviyoSubmitBtn = klaviyoForm.querySelector(
+              'button[type="button"], button[type="submit"], input[type="submit"]'
+            );
+
+            if (klaviyoSubmitBtn) {
+              // Trigger click event
+              klaviyoSubmitBtn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+              klaviyoSubmitBtn.click();
+
+              // Wait and check for success
+              const isSuccess = await checkKlaviyoSuccess();
+
+              // Hide loading
+              loadingState.classList.remove('active');
+
+              // Hide the entire custom form container
+              document.querySelector('.custom-klaviyo-form').style.display = 'none';
+
+              // Show the original Klaviyo form
+              const klaviyoFormContainer = document.querySelector('.klaviyo-form-SaDUB8');
+              if (klaviyoFormContainer) {
+                klaviyoFormContainer.style.position = 'relative';
+                klaviyoFormContainer.style.display = 'block';
+                klaviyoFormContainer.style.left = '0';
+                klaviyoFormContainer.style.width = 'auto';
+                klaviyoFormContainer.style.height = 'auto';
+                klaviyoFormContainer.style.opacity = '1';
+                klaviyoFormContainer.style.pointerEvents = 'auto';
+              }
+            }
+          } else {
+            throw new Error('Klaviyo form not found');
+          }
+        } catch (error) {
+          console.error('Error submitting form:', error);
+
+          // Hide loading, show form again with error
+          loadingState.classList.remove('active');
+          customForm.style.display = 'block';
+          alert('There was an error submitting the form. Please try again.');
+        }
+      });
+
+      // Real-time sync as user types (optional)
+      const customInputs = document.querySelectorAll('#custom-klaviyo-form input');
+      customInputs.forEach(function (input) {
+        input.addEventListener('input', function () {
+          if (klaviyoFormLoaded) {
+            syncToKlaviyoForm();
+          }
+        });
+      });
+
+      // Initialize - wait for Klaviyo form to load
+      waitForKlaviyoForm();
+    })();
+  </script>
+{% endif %}
+{% schema %}
+{
+  "name": "Titan Movement",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 100
+    }
+  ],
+  "presets": [{ "name": "Titan Movement" }]
+}
+{% endschema %}

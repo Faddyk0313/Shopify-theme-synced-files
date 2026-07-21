@@ -1,0 +1,7 @@
+<script>
+        window.dataLayer = window.dataLayer || [];
+    </script>
+ 
+    {%- if template contains 'product' -%}
+        {%- render 'datalayer-product', product: product -%}
+    {%- endif -%}

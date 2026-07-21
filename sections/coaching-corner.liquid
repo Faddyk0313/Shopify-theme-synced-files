@@ -1,0 +1,369 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #shopify-section-{{ section.id }} .team-neck-protection-section .subSection {
+    padding-bottom: 2.5rem;
+    background-color: {{ section.settings.section_background_color }} !important;
+  }
+
+  #shopify-section-{{ section.id }} .subSection.last {
+    padding-block: 2.5rem;
+    background-color: black;
+  }
+  
+  #shopify-section-{{ section.id }} .subSection.last .button.button--primary {
+    background: white !important;
+    color: black !important;
+  }
+  #shopify-section-{{ section.id }} .subSection.last .button.button--primary:hover {
+    color: white !important;
+  }
+  #shopify-section-{{ section.id }} .subSection.last .button.button--primary .btn-fill {
+    background: black !important;
+  }
+
+  #shopify-section-{{ section.id }} .cus_header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .section-number {
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 44px;
+    padding: 0px 20px;
+    padding-left: 80px;
+    padding-bottom: 3px;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .cus_section-heading {
+    font-size: 44px;
+  }
+
+  #shopify-section-{{ section.id }} .product-showcase {
+    margin: 0 auto;
+    padding-block: 1.5rem;
+    padding-inline: var(--page-padding);
+  }
+
+  #shopify-section-{{ section.id }} .product-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .cta-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .section-number {
+      font-size: 24px;
+      padding: 0px 10px;
+      padding-left: 30px;
+      padding-bottom: 3px;
+    }
+
+    #shopify-section-{{ section.id }} .cus_section-heading {
+      font-size: 16px;
+    }
+  }
+
+  .extra-side-padding {
+    max-width: 800px;
+    margin-inline: auto;
+  }
+</style>
+
+<div class="section section--padding team-neck-protection-section">
+  <div class="subSection relative">
+    <div class="cus_header">
+      <h2 class="section-number">1</h2>
+      <h2 class="cus_section-heading">{{ section.settings.heading_1 }}</h2>
+    </div>
+    <div class="product-showcase">
+      <picture>
+        <source
+          media="(max-width: 768px)"
+          srcset="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/color_fan_12_colors_mobile.png?v=1760789017"
+        >
+        <img
+          src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/color_fan_12_colors.png?v=1760789016"
+          alt="TITAN neck protection available in 12 colors"
+          class="product-image"
+          width="500px"
+          height="200px"
+        >
+      </picture>
+    </div>
+
+    <div class="cta-wrapper">
+      {%- render 'button',
+        label: section.settings.button_label_1,
+        link: section.settings.button_link_1,
+        size: section.settings.button_size,
+        style: section.settings.button_style,
+        textSize: section.settings.button_font_size,
+      -%}
+    </div>
+  </div>
+  <div class="subSection relative">
+    <div class="cus_header">
+      <h2 class="section-number">2</h2>
+      <h2 class="cus_section-heading">{{ section.settings.heading_2 }}</h2>
+    </div>
+    <div class="product-showcase extra-side-padding">
+      
+        <video
+          src="https://cdn.shopify.com/videos/c/o/v/fce15e698316458a941bc663c31e583e.mp4"
+          alt="TITAN neck protection available in 12 colors"
+          class="product-image"
+          controls
+          autoplay
+          loop
+          muted
+          playsinline
+          width="500px"
+          height="200px"
+        />
+    </div>
+
+    <div class="cta-wrapper">
+      {%- render 'button',
+        label: section.settings.button_label_2,
+        link: section.settings.button_link_2,
+        size: section.settings.button_size,
+        style: section.settings.button_style,
+        textSize: section.settings.button_font_size,
+      -%}
+    </div>
+  </div>
+  <div class="subSection relative">
+    <div class="cus_header">
+      <h2 class="section-number">3</h2>
+      <h2 class="cus_section-heading">{{ section.settings.heading_3 }}</h2>
+    </div>
+    {% comment %} <div class="klaviyo-form-WxY69r page-width extra-side-padding"></div> {% endcomment %}
+    <div class="klaviyo-form-X5EvGr page-width extra-side-padding"></div>
+    {% comment %} <div class="product-showcase">
+      <picture>
+        <source
+          media="(max-width: 768px)"
+          srcset="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/color_fan_12_colors_mobile.png?v=1760789017"
+        >
+        <img
+          src="https://cdn.shopify.com/s/files/1/0635/2401/2210/files/color_fan_12_colors.png?v=1760789016"
+          alt="TITAN neck protection available in 12 colors"
+          class="product-image"
+          width="500px"
+          height="200px"
+        >
+      </picture>
+    </div> {% endcomment %}
+
+    {% comment %} <div class="cta-wrapper">
+      {%- render 'button',
+        label: section.settings.button_label_3,
+        link: section.settings.button_link_3,
+        size: section.settings.button_size,
+        style: section.settings.button_style,
+        textSize: section.settings.button_font_size,
+      -%}
+    </div> {% endcomment %}
+  </div>
+  
+</div>
+
+{% schema %}
+{
+  "name": "Team Neck Protection",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Sub Section 1"
+    },
+    {
+      "type": "richtext",
+      "id": "heading_1",
+      "label": "t:sections.global.settings.heading.label"
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "default": "Button label",
+      "label": "t:sections.global.settings.button_label.label",
+      "info": "t:sections.global.settings.button_label.info"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "t:sections.global.settings.button_link.label"
+    },
+    {
+      "type": "header",
+      "content": "Sub Section 2"
+    },
+    {
+      "type": "richtext",
+      "id": "heading_2",
+      "label": "t:sections.global.settings.heading.label"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "default": "Button label",
+      "label": "t:sections.global.settings.button_label.label",
+      "info": "t:sections.global.settings.button_label.info"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "t:sections.global.settings.button_link.label"
+    },
+    {
+      "type": "header",
+      "content": "Sub Section 3"
+    },
+    {
+      "type": "richtext",
+      "id": "heading_3",
+      "label": "t:sections.global.settings.heading.label"
+    },
+    {
+      "type": "text",
+      "id": "button_label_3",
+      "default": "Button label",
+      "label": "t:sections.global.settings.button_label.label",
+      "info": "t:sections.global.settings.button_label.info"
+    },
+    {
+      "type": "url",
+      "id": "button_link_3",
+      "label": "t:sections.global.settings.button_link.label"
+    },
+    {
+      "type": "header",
+      "content": "Sub Section 4"
+    },
+    {
+      "type": "text",
+      "id": "button_label_4",
+      "default": "Button label",
+      "label": "t:sections.global.settings.button_label.label",
+      "info": "t:sections.global.settings.button_label.info"
+    },
+    {
+      "type": "url",
+      "id": "button_link_4",
+      "label": "t:sections.global.settings.button_link.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "color",
+      "id": "section_background_color",
+      "label": "Section Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:sections.global.settings.button_style.options__1.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:sections.global.settings.button_style.options__2.label"
+        },
+        {
+          "value": "link",
+          "label": "t:sections.global.settings.button_style.options__3.label"
+        }
+      ],
+      "default": "primary",
+      "label": "t:sections.global.settings.button_style.label"
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "options": [
+        {
+          "value": "sm",
+          "label": "t:sections.global.settings.button_size.options__1.label"
+        },
+        {
+          "value": "md",
+          "label": "t:sections.global.settings.button_size.options__2.label"
+        },
+        {
+          "value": "lg",
+          "label": "t:sections.global.settings.button_size.options__3.label"
+        }
+      ],
+      "default": "md",
+      "label": "t:sections.global.settings.button_size.label"
+    },
+    {
+      "type": "select",
+      "id": "button_font_size",
+      "options": [
+        {
+          "value": "16",
+          "label": "16 px"
+        },
+        {
+          "value": "18",
+          "label": "18 px"
+        },
+        {
+          "value": "20",
+          "label": "20 px"
+        },
+        {
+          "value": "22",
+          "label": "22 px"
+        }
+      ],
+      "default": "18",
+      "label": "Button Font Size"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "Team Neck Protection"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,648 @@
+{% doc %}
+  @prompt
+    EVENT CALENDAR BOX STYLE , WITH THE NAME AND DATE OF THE EVENT INSIDE THE BOX OF EACH DATE AND A BUTTON TO LEARN MORE
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-event-calendar-{{ ai_gen_id }} {
+    padding: 40px 20px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-event-calendar__container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+  }
+
+  .ai-event-calendar__heading-{{ ai_gen_id }} {
+    text-align: center;
+    margin: 0 0 40px;
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+  }
+
+  .ai-event-calendar__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: {{ block.settings.grid_gap }}px;
+  }
+
+  .ai-event-calendar__event-{{ ai_gen_id }} {
+    background-color: {{ block.settings.card_background }};
+    border: {{ block.settings.card_border_width }}px solid {{ block.settings.card_border_color }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .ai-event-calendar__event-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-event-calendar__date-box-{{ ai_gen_id }} {
+    background-color: {{ block.settings.date_box_background }};
+    color: {{ block.settings.date_box_text_color }};
+    border-radius: {{ block.settings.date_box_border_radius }}px;
+    padding: 16px;
+    text-align: center;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ai-event-calendar__day-{{ ai_gen_id }} {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    margin: 0;
+  }
+
+  .ai-event-calendar__month-{{ ai_gen_id }} {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 4px 0 0;
+  }
+
+  .ai-event-calendar__event-name-{{ ai_gen_id }} {
+    font-size: {{ block.settings.event_name_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.event_name_color }};
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .ai-event-calendar__event-time-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.event_time_color }};
+    margin: 0;
+  }
+
+  .ai-event-calendar__event-description-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.event_description_color }};
+    line-height: 1.5;
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .ai-event-calendar__button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-event-calendar__button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+  }
+
+  .ai-event-calendar__empty-state-{{ ai_gen_id }} {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+    font-size: 16px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-event-calendar__grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+    }
+
+    .ai-event-calendar__heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-event-calendar-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-event-calendar__container-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-event-calendar__heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+    {% endif %}
+
+    {% assign has_events = false %}
+    {% for i in (1..6) %}
+      {% assign event_enabled_key = 'event_' | append: i | append: '_enabled' %}
+      {% if block.settings[event_enabled_key] %}
+        {% assign has_events = true %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    {% if has_events %}
+      <div class="ai-event-calendar__grid-{{ ai_gen_id }}">
+        {% for i in (1..6) %}
+          {% liquid
+            assign event_enabled_key = 'event_' | append: i | append: '_enabled'
+            assign event_name_key = 'event_' | append: i | append: '_name'
+            assign event_date_key = 'event_' | append: i | append: '_date'
+            assign event_time_key = 'event_' | append: i | append: '_time'
+            assign event_description_key = 'event_' | append: i | append: '_description'
+            assign event_link_key = 'event_' | append: i | append: '_link'
+
+            assign event_enabled = block.settings[event_enabled_key]
+            assign event_name = block.settings[event_name_key]
+            assign event_date = block.settings[event_date_key]
+            assign event_time = block.settings[event_time_key]
+            assign event_description = block.settings[event_description_key]
+            assign event_link = block.settings[event_link_key]
+          %}
+
+          {% if event_enabled %}
+            <div class="ai-event-calendar__event-{{ ai_gen_id }}">
+              <div class="ai-event-calendar__date-box-{{ ai_gen_id }}">
+                {% if event_date != blank %}
+                  {% assign date_parts = event_date | split: '-' %}
+                  {% assign year = date_parts[0] %}
+                  {% assign month = date_parts[1] %}
+                  {% assign day = date_parts[2] %}
+                  
+                  <div class="ai-event-calendar__day-{{ ai_gen_id }}">{{ day | plus: 0 }}</div>
+                  
+                  {% case month %}
+                    {% when '01' %}
+                      <div class="ai-event-calendar__month-{{ ai_gen_id }}">Jan</div>
+                    {% when '02' %}
+                      <div class="ai-event-calendar__month-{{ ai_gen_id }}">Feb</div>
+                    {% when '03' %}
+                      <div class="ai-event-calendar__month-{{ ai_gen_id }}">Mar</div>
+                    {% when '04' %}
+                      <div class="ai-event-calendar__month-{{ ai_gen_id }}">Apr</div>
+                    {% when '05' %}
+                      <div class="ai-event-calendar__month-{{ ai_gen_id }}">May</div>
+                    {% when '06' %}
+                      <div class="ai-event-calendar__month-{{ ai_gen_id }}">Jun</div>
+                    {% when '07' %}
+                      <div class="ai-event-calendar__month-{{ ai_gen_id }}">Jul</div>
+                    {% when '08' %}
+                      <div class="ai-event-calendar__month-{{ ai_gen_id }}">Aug</div>
+                    {% when '09' %}
+                      <div class="ai-event-calendar__month-{{ ai_gen_id }}">Sep</div>
+                    {% when '10' %}
+                      <div class="ai-event-calendar__month-{{ ai_gen_id }}">Oct</div>
+                    {% when '11' %}
+                      <div class="ai-event-calendar__month-{{ ai_gen_id }}">Nov</div>
+                    {% when '12' %}
+                      <div class="ai-event-calendar__month-{{ ai_gen_id }}">Dec</div>
+                  {% endcase %}
+                {% else %}
+                  <div class="ai-event-calendar__day-{{ ai_gen_id }}">--</div>
+                  <div class="ai-event-calendar__month-{{ ai_gen_id }}">---</div>
+                {% endif %}
+              </div>
+
+              {% if event_name != blank %}
+                <h3 class="ai-event-calendar__event-name-{{ ai_gen_id }}">{{ event_name }}</h3>
+              {% endif %}
+
+              {% if event_time != blank %}
+                <p class="ai-event-calendar__event-time-{{ ai_gen_id }}">{{ event_time }}</p>
+              {% endif %}
+
+              {% if event_description != blank %}
+                <p class="ai-event-calendar__event-description-{{ ai_gen_id }}">{{ event_description }}</p>
+              {% endif %}
+
+              {% if event_link != blank %}
+                <a href="{{ event_link }}" class="ai-event-calendar__button-{{ ai_gen_id }}">
+                  {{ block.settings.button_text }}
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="ai-event-calendar__empty-state-{{ ai_gen_id }}">
+        Next, enable and configure your events
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Event calendar",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Upcoming Events"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Space between cards",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#171717"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "date_box_background",
+      "label": "Date box background",
+      "default": "#00adee"
+    },
+    {
+      "type": "color",
+      "id": "date_box_text_color",
+      "label": "Date box text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "event_name_color",
+      "label": "Event name",
+      "default": "#171717"
+    },
+    {
+      "type": "color",
+      "id": "event_time_color",
+      "label": "Event time",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "event_description_color",
+      "label": "Event description",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "date_box_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Date box border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "event_name_size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Event name size",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Learn More"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#171717"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button hover background",
+      "default": "#00adee"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Button border radius",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Event 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "event_1_enabled",
+      "label": "Enable event 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "event_1_name",
+      "label": "Event name",
+      "default": "Product Launch"
+    },
+    {
+      "type": "text",
+      "id": "event_1_date",
+      "label": "Date",
+      "default": "2025-11-15"
+    },
+    {
+      "type": "text",
+      "id": "event_1_time",
+      "label": "Time",
+      "default": "7:00 PM - 9:00 PM"
+    },
+    {
+      "type": "textarea",
+      "id": "event_1_description",
+      "label": "Description",
+      "default": "Join us for the exclusive launch of our latest collection."
+    },
+    {
+      "type": "url",
+      "id": "event_1_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Event 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "event_2_enabled",
+      "label": "Enable event 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "event_2_name",
+      "label": "Event name",
+      "default": "Training Workshop"
+    },
+    {
+      "type": "text",
+      "id": "event_2_date",
+      "label": "Date",
+      "default": "2025-11-22"
+    },
+    {
+      "type": "text",
+      "id": "event_2_time",
+      "label": "Time",
+      "default": "10:00 AM - 12:00 PM"
+    },
+    {
+      "type": "textarea",
+      "id": "event_2_description",
+      "label": "Description",
+      "default": "Learn advanced techniques from our expert trainers."
+    },
+    {
+      "type": "url",
+      "id": "event_2_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Event 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "event_3_enabled",
+      "label": "Enable event 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "event_3_name",
+      "label": "Event name",
+      "default": "Community Meetup"
+    },
+    {
+      "type": "text",
+      "id": "event_3_date",
+      "label": "Date",
+      "default": "2025-12-05"
+    },
+    {
+      "type": "text",
+      "id": "event_3_time",
+      "label": "Time",
+      "default": "6:00 PM - 8:00 PM"
+    },
+    {
+      "type": "textarea",
+      "id": "event_3_description",
+      "label": "Description",
+      "default": "Connect with fellow enthusiasts and share your experiences."
+    },
+    {
+      "type": "url",
+      "id": "event_3_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Event 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "event_4_enabled",
+      "label": "Enable event 4",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "event_4_name",
+      "label": "Event name"
+    },
+    {
+      "type": "text",
+      "id": "event_4_date",
+      "label": "Date"
+    },
+    {
+      "type": "text",
+      "id": "event_4_time",
+      "label": "Time"
+    },
+    {
+      "type": "textarea",
+      "id": "event_4_description",
+      "label": "Description"
+    },
+    {
+      "type": "url",
+      "id": "event_4_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Event 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "event_5_enabled",
+      "label": "Enable event 5",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "event_5_name",
+      "label": "Event name"
+    },
+    {
+      "type": "text",
+      "id": "event_5_date",
+      "label": "Date"
+    },
+    {
+      "type": "text",
+      "id": "event_5_time",
+      "label": "Time"
+    },
+    {
+      "type": "textarea",
+      "id": "event_5_description",
+      "label": "Description"
+    },
+    {
+      "type": "url",
+      "id": "event_5_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Event 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "event_6_enabled",
+      "label": "Enable event 6",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "event_6_name",
+      "label": "Event name"
+    },
+    {
+      "type": "text",
+      "id": "event_6_date",
+      "label": "Date"
+    },
+    {
+      "type": "text",
+      "id": "event_6_time",
+      "label": "Time"
+    },
+    {
+      "type": "textarea",
+      "id": "event_6_description",
+      "label": "Description"
+    },
+    {
+      "type": "url",
+      "id": "event_6_link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Event calendar"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,666 @@
+<style>
+      .first_outer {
+        margin: 30px auto;
+        width: 1000px;
+    }
+
+    @media (max-width: 850px) {
+       .first_outer {
+          margin: 30px auto;
+          width: 100%;
+       }
+    }
+    .outer {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background-color: #f2f2f2f2;
+    padding: 30px;
+    border-radius: 20px;
+  }
+
+  .group,
+  .show_names_btn,
+  .show_names_btn_white {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      width: 100%;
+  }
+
+  .my_dropdown,
+  .input_field {
+      padding: 15px;
+      border-radius: 15px;
+      border: 2px solid rgb(210, 209, 209);
+      background-color: white;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+      outline: none;
+  }
+  .input_field {
+      cursor: text;
+  }
+
+  .my_dropdown:focus,
+  .input_field:focus {
+      border-color: black;
+  }
+
+  .custom-dropdown {
+      position: relative;
+      width: 100%;
+      display: inline-block;
+      /* Adjust width as needed */
+  }
+
+  .my_dropdown {
+      appearance: none;
+      width: 100%;
+      /* Removes default arrow */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+  }
+
+  .show_names_btn {
+      font-size: 18px;
+      position: relative;
+      overflow: clip;
+      height: 60px;
+      background-color: black;
+      padding: 15px;
+      border-radius: 15px;
+      border: 2px solid black;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+      outline: none;
+      color: white;
+  }
+
+  .show_names_btn .hovered_element {
+      position: absolute;
+      bottom: 100%;
+      left: -5%;
+      width: 110%;
+      border-radius: 100%;
+      height: 300%;
+      transition: all 0.3s ease-in-out;
+      background-color: white;
+  }
+
+  .show_names_btn:hover .hovered_element {
+      bottom: -100%;
+  }
+
+  .show_names_btn .button_text {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+  }
+
+  .show_names_btn:hover .button_text {
+      color: black;
+  }
+
+  .pointer_events_none {
+      pointer-events: none;
+  }
+
+  .show_names_btn_white {
+      font-size: 18px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      position: relative;
+      overflow: clip;
+      height: 60px;
+      background-color: white;
+      padding: 15px;
+      border-radius: 15px;
+      border: 2px solid black;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+      outline: none;
+  }
+
+  .show_names_btn_white .hovered_element {
+      position: absolute;
+      bottom: 100%;
+      left: -5%;
+      width: 110%;
+      border-radius: 100%;
+      height: 300%;
+      transition: all 0.3s ease-in-out;
+      background-color: black;
+  }
+
+  .show_names_btn_white:hover .hovered_element {
+      bottom: -100%;
+  }
+
+  .show_names_btn_white .button_text {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      color: black;
+  }
+
+  .show_names_btn_white:hover .button_text {
+      color: white;
+  }
+
+  /* Custom dropdown arrow */
+  .custom-arrow {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 12px;
+      pointer-events: none;
+      /* Prevents interaction with the arrow */
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve"><defs></defs><g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >	<path d="M 90 24.25 c 0 -0.896 -0.342 -1.792 -1.025 -2.475 c -1.366 -1.367 -3.583 -1.367 -4.949 0 L 45 60.8 L 5.975 21.775 c -1.367 -1.367 -3.583 -1.367 -4.95 0 c -1.366 1.367 -1.366 3.583 0 4.95 l 41.5 41.5 c 1.366 1.367 3.583 1.367 4.949 0 l 41.5 -41.5 C 89.658 26.042 90 25.146 90 24.25 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" /></g></svg>')
+          no-repeat center;
+      background-size: contain;
+  }
+
+  .modal-overlay {
+      display: none;
+    background-color: #f2f2f2f2;
+    padding: 30px;
+    border-radius: 20px;
+  }
+
+  /* Modal Content */
+  .modal-content {
+      width: 100%;
+      height: 100%;
+      background: #f2f2f2f2;
+      position: relative;
+  }
+
+  /* Close Button (Back Arrow) */
+  .close-btn {
+      font-size: 24px;
+      cursor: pointer;
+  }
+
+  /* Name Grid */
+  .name-grid {
+      padding-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+  }
+
+  /* Name Buttons */
+  .name-box {
+      background: white;
+      border: 2px solid rgb(210, 209, 209);
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+  }
+
+  .name-box.remove_blur {
+      filter: blur(0px);
+  }
+
+  .name-box:active {
+      transform: scale(0.9);
+      background-color: rgb(201, 201, 201);
+      /* box-shadow: 0px 5px 10px rgb(252, 66, 123, 0.5); */
+  }
+
+  .name-box:hover,
+  .selected_name {
+      border-color: black;
+      background-color: #ccff00;
+  }
+
+  /* Description Text */
+  .description {
+      font-size: 14px;
+      text-align: center;
+  }
+
+  /* Social Share */
+  .social-share {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      width: fit-content;
+      margin: 0 auto;
+  }
+
+  .social-share p {
+      margin: 5px 0;
+      font-size: 20px;
+      font-weight: 600;
+  }
+
+  .icons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 5px;
+  }
+
+  .social-icon {
+      font-size: 24px;
+      cursor: pointer;
+  }
+
+  /* Email Modal Specific Styles */
+  .email-modal {
+      width: 100%;
+  }
+
+  .fields {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+  }
+
+  #selected-names-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+      justify-content: center;
+  }
+
+  .headingCustom {
+      display: inline-block;
+      white-space: nowrap;
+      font-size: 10vw; /* Start with a large font size */
+      font-weight: bold;
+      transition: font-size 0.2s ease;
+      padding: 10px;
+  }
+
+  .container {
+      text-align: center;
+      border: 2px solid gray;
+      border-radius: 20px;
+  }
+
+  /* Form Fields */
+  .input-field {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 15px;
+      border: 1px solid black;
+      border-radius: 5px;
+  }
+
+  .error_msg {
+      color: red;
+      font-size: 12px;
+      opacity: 0%;
+      transition: all 0.5s ease-in-out;
+  }
+
+  .show {
+      opacity: 100%;
+  }
+
+  .blurring-modal {
+      margin: 0px auto;
+      background-color: #fff;
+  }
+
+  .error_close_div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  .cursor_disabled {
+      cursor: not-allowed;
+  }
+  .group .label {
+   font-family: TITANFONT;
+  }
+  .name-box {
+   font-family: TITANFONT;
+  }
+  .error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-left: 10px;
+    display: inline-block;
+  }
+  .group {
+    position: relative;
+  }
+  .labelContanier {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+</style>
+
+<div class="page-width first_outer">
+  <div class="outer" id="outer">
+    <div class="group">
+      <p class="label">Theme Style</p>
+      <div class="custom-dropdown">
+        <select class="my_dropdown" id="theme_style">
+          <option value="classic">Classic</option>
+          <option value="funny">Funny</option>
+          <option value="aggressive">Aggressive</option>
+          <option value="military">Military</option>
+          <option value="weather">Weather</option>
+          <option value="animal">Animal</option>
+          <option value="mythical">Mythical</option>
+          <option value="heroic">Heroic</option>
+          <option value="bullies">Bullies</option>
+          <option value="nerdy">Nerdy</option>
+          <option value="futuristic">Futuristic</option>
+        </select>
+        <span class="custom-arrow"></span>
+      </div>
+    </div>
+    <div class="group">
+      <p class="label">Mascot Theme</p>
+      <div class="custom-dropdown">
+        <select class="my_dropdown" id="mascot_theme">
+          <option value="military">Military</option>
+          <option value="animals">Animals</option>
+          <option value="ocean">Ocean</option>
+          <option value="storm">Storm</option>
+          <option value="gladiator">Gladiator</option>
+          <option value="viking">Viking</option>
+        </select>
+        <span class="custom-arrow"></span>
+      </div>
+    </div>
+    <div class="group">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <p class="label">Location name</p>
+        <p class="error_msg" id="location_error_msg">Please Enter your location</p>
+      </div>
+      <input class="input_field location_input" type="text" placeholder="Enter city for a localized feel">
+    </div>
+    <div class="group">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <p class="label">Color</p>
+        <p class="error_msg" id="color_error_msg">Please Enter Color</p>
+      </div>
+      <input class="input_field color_input" type="text" placeholder="Enter colors to influence the tone">
+    </div>
+    <!-- Button to Open Modal -->
+    <button class="show_names_btn" id="openModal" onclick="openModalHandler()">
+      <span class="hovered_element"></span>
+      <span class="button_text">Show me names</span>
+    </button>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-content">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span class="close-btn" id="closeModal" onclick="closeModalHandler()">←</span>
+        <span class="error_msg" id="errorMsg">Please select atleast one name</span>
+      </div>
+      <div class="name-grid"></div>
+
+      <button id="blurring_btn" class="show_names_btn" onclick="showMoreNamesHandler()">
+        <span class="hovered_element"></span>
+        <span class="button_text">Show me more names</span>
+      </button>
+      <button class="show_names_btn_white" id="openEmailModal" onclick="openEmailModalHandler()">
+        <span class="hovered_element"></span>
+        <span class="button_text">Share</span>
+      </button>
+      <p class="description">Click your favorite names above to email and share</p>
+    </div>
+  </div>
+
+  <!-- Email Modal -->
+  <div class="modal-overlay" id="emailModal">
+    <div class="modal-content email-modal">
+      <span class="close-btn" id="closeEmailModal" onclick="closeEmailModalHandler()">←</span>
+      <div id="selected-names-container"></div>
+      <div class="fields">
+        <div class="group">
+          <div class="labelContanier">
+            <p class="label">First Name</p>
+            <span class="error-message" id="firstNameError"></span>
+          </div>
+          <input class="input_field" type="text" id="firstName">
+        </div>
+        <div class="group">
+          <div class="labelContanier">
+            <p class="label">Last Name</p>
+            <span class="error-message" id="lastNameError"></span>
+          </div>
+          <input class="input_field" type="text" id="lastName">
+        </div>
+        <div class="group">
+          <div class="labelContanier">
+            <p class="label">Email Address</p>
+            <span class="error-message" id="emailError"></span>
+          </div>
+          <input class="input_field" type="email" id="email">
+        </div>
+        <button class="show_names_btn" id="submitEmail" onclick="submitEmailHandler()">
+          <span class="hovered_element"></span>
+          <span class="button_text">Send</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script defer src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script defer>
+  // Initialize EmailJS
+  emailjs.init("NaaCuwfFErhUInsy1");
+
+  // async function submitEmailHandler() {
+  //     const submitBtn = document.getElementById("submitEmail");
+  //     const firstName = document.getElementById("firstName").value.trim();
+  //     const lastName = document.getElementById("lastName").value.trim();
+  //     const email = document.getElementById("email").value.trim();
+  //     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  //     let hasError = false;
+
+  //     // Reset error messages
+  //     document.getElementById("firstNameError").innerText = "";
+  //     document.getElementById("lastNameError").innerText = "";
+  //     document.getElementById("emailError").innerText = "";
+
+  //     if (!firstName) {
+  //       document.getElementById("firstNameError").innerText = "Please fill this field.";
+  //       hasError = true;
+  //     }
+  //     if (!lastName) {
+  //       document.getElementById("lastNameError").innerText = "Please fill this field.";
+  //       hasError = true;
+  //     }
+  //     if (!email) {
+  //       document.getElementById("emailError").innerText = "Please fill this field.";
+  //       hasError = true;
+  //     } else if (!emailRegex.test(email)) {
+  //       document.getElementById("emailError").innerText = "Email is not correct.";
+  //       hasError = true;
+  //     }
+
+  //     if (hasError) {
+  //       return;
+  //     }
+
+  //     // Capture dynamically selected names
+  //     const selectedNames = Array.from(document.querySelectorAll(".selected_name"))
+  //       .map(name => name.innerText);
+
+  //     if (selectedNames.length === 0) {
+  //       console.log("Please select at least one name.");
+  //       return;
+  //     }
+
+  //     // Start loading animation
+  //     startLoading(submitBtn);
+
+  //     try {
+  //       await sendEmail(email, firstName, selectedNames);
+  //       console.log("Email sent successfully!");
+  //       closeEmailModalHandler();
+  //     } catch (error) {
+  //       console.error("Error sending email:", error);
+  //       console.log("Failed to send email.");
+  //     } finally {
+  //       // Stop loading animation
+  //       stopLoading(submitBtn);
+  //     }
+  //   }
+
+
+  async function submitEmailHandler() {
+  const submitBtn = document.getElementById("submitEmail");
+  const firstName = document.getElementById("firstName").value.trim();
+  const lastName = document.getElementById("lastName").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  let hasError = false;
+
+  // Reset error messages
+  document.getElementById("firstNameError").innerText = "";
+  document.getElementById("lastNameError").innerText = "";
+  document.getElementById("emailError").innerText = "";
+
+  if (!firstName) {
+    document.getElementById("firstNameError").innerText = "Please fill this field.";
+    hasError = true;
+  }
+  if (!lastName) {
+    document.getElementById("lastNameError").innerText = "Please fill this field.";
+    hasError = true;
+  }
+  if (!email) {
+    document.getElementById("emailError").innerText = "Please fill this field.";
+    hasError = true;
+  } else if (!emailRegex.test(email)) {
+    document.getElementById("emailError").innerText = "Email is not correct.";
+    hasError = true;
+  }
+
+  if (hasError) return;
+
+  // Get selected names
+  const selectedNames = Array.from(document.querySelectorAll(".selected_name"))
+    .map(name => name.innerText);
+  if (selectedNames.length === 0) {
+    console.log("Please select at least one name.");
+    return;
+  }
+
+  // Start loading animation
+  startLoading(submitBtn);
+
+  try {
+    const formattedTeamNames = selectedNames.join(", ");
+    const prompt = `Generated Team Names: ${formattedTeamNames}`;
+
+    // ✅ 1. Send email via EmailJS
+    await emailjs.send("service_v3tntz1", "template_vh89gfi", {
+      firstName,
+      to_email: email,
+      team_names_list: formattedTeamNames,
+    }, "NaaCuwfFErhUInsy1");
+
+    // ✅ 2. Send to backend API (HubSpot + OpenAI)
+    await fetch("/api/hockyNameGenerator", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        prompt,
+      }),
+    });
+    try {
+    const res = await fetch("https://hocky-name-generator-seven.vercel.app/api/sendToHubspot", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+      }),
+    });
+
+    const result = await res.json();
+    if (!result.success) {
+      console.error("Failed to send lead to HubSpot", result.error);
+    } else {
+      console.log("✅ Lead synced to HubSpot");
+    }
+  } catch (err) {
+    console.error("Error sending to HubSpot:", err);
+  }
+    console.log("All good: email sent + lead synced");
+    closeEmailModalHandler();
+  } catch (error) {
+    console.error("Submission failed:", error);
+  } finally {
+    stopLoading(submitBtn);
+  }
+}
+
+
+  
+  function sendEmail(email, firstName, teamNames) {
+    // Convert array into a bullet list with line breaks
+    const formattedTeamNames = teamNames.join(", ");
+    console.log("formattedTeamNames", formattedTeamNames);
+
+    return emailjs.send("service_v3tntz1", "template_vh89gfi", {
+      firstName: firstName,
+      to_email: email,
+      team_names_list: formattedTeamNames, // Send formatted list
+    }, "NaaCuwfFErhUInsy1");
+  }
+
+  function startLoading(button) {
+    let dots = 0;
+    button.disabled = true;
+    button.innerText = "Sending";
+    button.dataset.interval = setInterval(() => {
+      dots = (dots + 1) % 4;
+      button.innerText = "Sending" + ".".repeat(dots);
+    }, 500);
+  }
+
+  function stopLoading(button) {
+    clearInterval(button.dataset.interval);
+    button.innerText = "Send";
+    button.disabled = false;
+  }
+</script>
+
+<script src="{{ 'hockey-team_name-generator-JS.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Section name",
+  "settings": []
+}
+{% endschema %}

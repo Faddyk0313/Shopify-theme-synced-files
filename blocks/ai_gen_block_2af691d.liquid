@@ -1,0 +1,485 @@
+{% doc %}
+  @prompt
+    Create a minimal horizontal product carousel that displays one full product card with a 15% peek of the next card to indicate scrollability. Each card features a large square product image with shadow on top, followed by a small uppercase category label, a bold uppercase product title on the left, and a bold price aligned to the right. Include schema settings for manual product selection via product picker, carousel speed control, and navigation arrow toggles. Keep white background with generous padding and maintain the 1-card + peek layout across all devices., please use product_list schema setting for products selection rather than giving 6 sepeerate settings for product selecteion.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-product-carousel-{{ ai_gen_id }} {
+    display: block;
+    background-color: white;
+    width: 100%;
+    padding: 60px 40px;
+  }
+
+  .ai-product-carousel-container-{{ ai_gen_id }} {
+    position: relative;
+    max-width: 1900px;
+    margin: 0 auto;
+  }
+
+  .ai-product-carousel-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    overflow: hidden;
+    {% comment %} padding-right: 15%; {% endcomment %}
+  }
+
+  .ai-product-carousel-track-{{ ai_gen_id }} {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease;
+  }
+
+  .ai-product-carousel-card-{{ ai_gen_id }} {
+    flex: 0 0 auto;
+    width: calc((100% - 15%) / 5);
+    min-width: 0;
+    background-color: #f2f2f2;
+    padding: 1rem;
+    border-radius: var(--border-radius-small);
+    box-sizing: border-box;
+  }
+
+  .ai-product-carousel-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .ai-product-carousel-image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-product-carousel-image-placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-product-carousel-image-placeholder-{{ ai_gen_id }} svg {
+    width: 50%;
+    height: 50%;
+    opacity: 0.3;
+  }
+
+  .ai-product-carousel-info-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .ai-product-carousel-details-{{ ai_gen_id }} {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .ai-product-carousel-category-{{ ai_gen_id }} {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color:rgb(32, 31, 31);
+    font-weight: 500;
+  }
+
+  .ai-product-carousel-title-{{ ai_gen_id }} {
+    font-size: 19px;
+    font-weight: 700;
+    font-family: 'Armourxbd';
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #171717;
+    margin: 0;
+    line-height: 1.3;
+
+  }
+
+  .ai-product-carousel-title-link-{{ ai_gen_id }} {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .ai-product-carousel-title-link-{{ ai_gen_id }}:hover {
+    opacity: 0.7;
+  }
+
+  .ai-product-carousel-price-{{ ai_gen_id }} {
+    font-size: 19px;
+    font-weight: 700;
+    font-family: 'Armourxbd';
+    color: #171717;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .ai-product-carousel-nav-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 2px solid #171717;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+  }
+
+  .ai-product-carousel-nav-{{ ai_gen_id }}:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .ai-product-carousel-nav-prev-{{ ai_gen_id }} {
+    left: -24px;
+  }
+
+  .ai-product-carousel-nav-next-{{ ai_gen_id }} {
+    right: -24px;
+  }
+
+  .ai-product-carousel-nav-{{ ai_gen_id }} svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2px;
+  }
+
+  .ai-product-carousel-empty-{{ ai_gen_id }} {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666666;
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 1023px) {
+    .ai-product-carousel-card-{{ ai_gen_id }} {
+      flex: 0 0 auto;
+      width: calc((100% - 15%) / 3);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-product-carousel-{{ ai_gen_id }} {
+      padding: 40px 20px;
+    }
+
+    .ai-product-carousel-card-{{ ai_gen_id }} {
+      flex: 0 0 auto;
+      width: calc((100% - 15%) / 1);
+    }
+
+    .ai-product-carousel-nav-prev-{{ ai_gen_id }} {
+      left: -12px;
+    }
+
+    .ai-product-carousel-nav-next-{{ ai_gen_id }} {
+      right: -12px;
+    }
+
+    .ai-product-carousel-nav-{{ ai_gen_id }} {
+      width: 40px;
+      height: 40px;
+    }
+
+    .ai-product-carousel-nav-{{ ai_gen_id }} svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+{% endstyle %}
+
+<product-carousel-{{ ai_gen_id }}
+  class="ai-product-carousel-{{ ai_gen_id }}"
+  data-autoplay="{{ block.settings.autoplay }}"
+  data-autoplay-speed="{{ block.settings.autoplay_speed }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-product-carousel-container-{{ ai_gen_id }}">
+    {% if block.settings.products.count > 0 %}
+      <div class="ai-product-carousel-wrapper-{{ ai_gen_id }}">
+        <div class="ai-product-carousel-track-{{ ai_gen_id }}">
+          {% for product in block.settings.products %}
+            <div class="ai-product-carousel-card-{{ ai_gen_id }}">
+              <div class="ai-product-carousel-image-wrapper-{{ ai_gen_id }}">
+                {% if product.featured_image %}
+                  <img
+                    src="{{ product.featured_image | image_url: width: 800 }}"
+                    alt="{{ product.featured_image.alt | escape }}"
+                    class="ai-product-carousel-image-{{ ai_gen_id }}"
+                    loading="lazy"
+                    width="800"
+                    height="800"
+                  >
+                {% else %}
+                  <div class="ai-product-carousel-image-placeholder-{{ ai_gen_id }}">
+                    {{ 'product-1' | placeholder_svg_tag }}
+                  </div>
+                {% endif %}
+              </div>
+              
+              {% assign excluded_collection_handles = "backorder-discount-smart-collection-copy,my-size-in-stock,halloween,new-drops,instock,all-products,gold-hockey-neck-guard,white-hockey-neck-guard,blue-hockey-neck-guard,yellow-hockey-neck-guard,gray-hockey-neck-guard,black-hockey-neck-guard,future-drops,novelty,team-colors,inline-core-colors,cut-resistant-battlegear,purple-hockey-neck-guards,orange-hockey-neck-guards,red-hockey-neck-guard,pink-hockey-neck-guard,maroon-hockey-neck-guards,green-hockey-neck-guard,preorder-smart-collection" | split: "," %}
+              {% assign product_collection_label = blank %}
+              {% for collection in product.collections %}
+                {% unless excluded_collection_handles contains collection.handle %}
+                  {% assign product_collection_label = collection.title %}
+                  {% break %}
+                {% endunless %}
+              {% endfor %}
+              {% if product_collection_label != blank %}
+                <div class="ai-product-carousel-category-{{ ai_gen_id }}">
+                  {{ product_collection_label }}
+                </div>
+              {% endif %}
+              <div class="ai-product-carousel-info-{{ ai_gen_id }}">
+                <div class="ai-product-carousel-details-{{ ai_gen_id }}">
+                  {% assign title_parts = product.title | split: " - " %}
+                  {% if title_parts.size > 1 %}
+                    {% assign display_title = title_parts.last | strip %}
+                  {% else %}
+                    {% assign display_title = product.title %}
+                  {% endif %}
+                  <h3 class="ai-product-carousel-title-{{ ai_gen_id }}">
+                    <a
+                      href="{{ product.url }}"
+                      class="ai-product-carousel-title-link-{{ ai_gen_id }}"
+                    >
+                      {{ display_title }}
+                    </a>
+                  </h3>
+                </div>
+                
+                <div class="ai-product-carousel-price-{{ ai_gen_id }}">
+                  {{ product.price | money }}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      {% if block.settings.show_navigation %}
+        <button
+          class="ai-product-carousel-nav-{{ ai_gen_id }} ai-product-carousel-nav-prev-{{ ai_gen_id }}"
+          aria-label="Previous product"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+          >
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        
+        <button
+          class="ai-product-carousel-nav-{{ ai_gen_id }} ai-product-carousel-nav-next-{{ ai_gen_id }}"
+          aria-label="Next product"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+          >
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      {% endif %}
+    {% else %}
+      <div class="ai-product-carousel-empty-{{ ai_gen_id }}">
+        Select products to display in the carousel
+      </div>
+    {% endif %}
+  </div>
+</product-carousel-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ProductCarousel{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.currentIndex = 0;
+        this.autoplayInterval = null;
+      }
+
+      connectedCallback() {
+        this.track = this.querySelector('.ai-product-carousel-track-{{ ai_gen_id }}');
+        this.cards = this.querySelectorAll('.ai-product-carousel-card-{{ ai_gen_id }}');
+        this.prevButton = this.querySelector('.ai-product-carousel-nav-prev-{{ ai_gen_id }}');
+        this.nextButton = this.querySelector('.ai-product-carousel-nav-next-{{ ai_gen_id }}');
+        
+        this.totalCards = this.cards.length;
+        
+        if (this.totalCards === 0) return;
+
+        this.setupEventListeners();
+        this.updateCarousel();
+        
+        if (this.dataset.autoplay === 'true') {
+          this.startAutoplay();
+        }
+      }
+
+      setupEventListeners() {
+        if (this.prevButton) {
+          this.prevButton.addEventListener('click', () => this.prev());
+        }
+        
+        if (this.nextButton) {
+          this.nextButton.addEventListener('click', () => this.next());
+        }
+
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+
+        this.track.addEventListener('touchstart', (e) => {
+          startX = e.touches[0].clientX;
+          isDragging = true;
+          this.stopAutoplay();
+        });
+
+        this.track.addEventListener('touchmove', (e) => {
+          if (!isDragging) return;
+          currentX = e.touches[0].clientX;
+        });
+
+        this.track.addEventListener('touchend', () => {
+          if (!isDragging) return;
+          isDragging = false;
+          
+          const diff = startX - currentX;
+          
+          if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+              this.next();
+            } else {
+              this.prev();
+            }
+          }
+          
+          if (this.dataset.autoplay === 'true') {
+            this.startAutoplay();
+          }
+        });
+      }
+
+      prev() {
+        if (this.currentIndex > 0) {
+          this.currentIndex--;
+          this.updateCarousel();
+        }
+      }
+
+      next() {
+        if (this.currentIndex < this.totalCards - 1) {
+          this.currentIndex++;
+          this.updateCarousel();
+        }
+      }
+
+      updateCarousel() {
+        const cardWidth = this.cards[0].offsetWidth;
+        const gap = 20;
+        const offset = this.currentIndex * (cardWidth + gap);
+        
+        this.track.style.transform = 'translateX(-' + offset + 'px)';
+
+        if (this.prevButton) {
+          this.prevButton.disabled = this.currentIndex === 0;
+        }
+        
+        if (this.nextButton) {
+          this.nextButton.disabled = this.currentIndex === this.totalCards - 1;
+        }
+      }
+
+      startAutoplay() {
+        const speed = parseInt(this.dataset.autoplaySpeed) * 1000;
+        
+        this.autoplayInterval = setInterval(() => {
+          if (this.currentIndex < this.totalCards - 1) {
+            this.next();
+          } else {
+            this.currentIndex = 0;
+            this.updateCarousel();
+          }
+        }, speed);
+      }
+
+      stopAutoplay() {
+        if (this.autoplayInterval) {
+          clearInterval(this.autoplayInterval);
+          this.autoplayInterval = null;
+        }
+      }
+
+      disconnectedCallback() {
+        this.stopAutoplay();
+      }
+    }
+
+    customElements.define('product-carousel-{{ ai_gen_id }}', ProductCarousel{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product carousel",
+  "settings": [
+    {
+      "type": "product_list",
+      "id": "products",
+      "label": "Products"
+    },
+    {
+      "type": "header",
+      "content": "Carousel settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay speed",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "show_navigation",
+      "label": "Show navigation arrows",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product carousel"
+    }
+  ]
+}
+{% endschema %}

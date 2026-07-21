@@ -1,0 +1,317 @@
+<style>
+  #shopify-section-{{ section.id }} .govx-eligibility__content,
+  #shopify-section-{{ section.id }} .govx-eligibility__products {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.background_color }};
+  }
+
+  #shopify-section-{{ section.id }} .govx-eligibility__grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #shopify-section-{{ section.id }} .govx-eligibility__col {
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .govx-eligibility__heading {
+    margin: 0;
+    text-transform: uppercase;
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+
+  #shopify-section-{{ section.id }} .govx-eligibility__points {
+    list-style: none;
+    margin-block: 26px ;
+    padding: 0;
+    display: grid;
+    gap: 20px;
+  }
+
+  #shopify-section-{{ section.id }} .govx-eligibility__point-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    line-height: 1.3;
+  }
+
+  #shopify-section-{{ section.id }} .govx-eligibility__point-icon {
+    flex: 0 0 auto;
+    line-height: 1;
+    margin-top: 3px;
+    font-size: 16px;
+    color: #000;
+  }
+
+  #shopify-section-{{ section.id }} .govx-eligibility__button-wrap {
+    margin-top: 34px;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .govx-eligibility__button {
+    display: inline-block;
+    min-width: 290px;
+    padding: 14px 28px;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-align: center;
+  }
+
+  @media (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .govx-eligibility__content {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .govx-eligibility__content .button {
+        align-self: center !important;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .govx-eligibility__grid {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    #shopify-section-{{ section.id }} .govx-eligibility__col {
+      width: 50%;
+    }
+
+    #shopify-section-{{ section.id }} .govx-eligibility__button-wrap {
+      text-align: left;
+    }
+    #shopify-section-{{ section.id }} .govx-eligibility__content {
+        padding-right: 1rem !important;
+    }
+    #shopify-section-{{ section.id }} .govx-eligibility__products {
+        padding-left: 1rem !important;
+    }
+    .govx-eligibility__grid {
+        height: 500px;
+    }
+    .govx-eligibility__content,
+    .govx-eligibility__products {
+        height: 100%;
+    }
+     .govx-eligibility__products {
+        display: flex;
+        align-items: center;
+    }
+  }
+
+</style>
+
+{%- liquid
+  assign first_product_id = blank
+
+  if product != blank
+    assign first_product_id = product.id
+  elsif cart != blank and cart.item_count > 0
+    assign first_product_id = cart.items.first.product_id
+  elsif section.settings.cart_recommendations_products != blank
+    assign first_manual_product = section.settings.cart_recommendations_products.first
+    if first_manual_product != blank
+      assign first_product_id = first_manual_product.id
+    endif
+  endif
+-%}
+
+<section class="govx-eligibility">
+  <div class="govx-eligibility__grid">
+    <div class="govx-eligibility__col govx-eligibility__content page-width">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="govx-eligibility__heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <ul class="govx-eligibility__points" role="list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'point' and block.settings.text != blank -%}
+              <li class="govx-eligibility__point-item" {{ block.shopify_attributes }}>
+                <span class="govx-eligibility__point-icon" aria-hidden="true">&#9658;</span>
+                <span>{{ block.settings.text }}</span>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank -%}
+        {%- render 'button',
+          label: section.settings.button_label,
+          link: section.settings.button_link,
+          show_icon: false
+        -%}
+      {%- endif -%}
+    </div>
+
+    <div class="govx-eligibility__col govx-eligibility__products page-width" style="background-color: black;">
+      {%- if first_product_id != blank -%}
+        {%- render 'cus-product-complementary',
+          section_id: section.id,
+          product_id: first_product_id,
+          heading: section.settings.cart_recommendations_heading,
+          recommendations_products: section.settings.cart_recommendations_products,
+          image_ratio: settings.product_image_ratio,
+          image_fill: settings.product_image_fill,
+          limit: section.settings.cart_recommendations_limit,
+          show_vendor: section.settings.show_cart_recommendations_vendor,
+          show_price: section.settings.show_cart_recommendations_price,
+          onlyDesktop: false,
+          cartPage: true,
+          govxPage: true,
+          paddingBlock: section.settings.padding_top
+        -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Govx Eligibility",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "WHO'S ELIGIBLE?"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "default": "title-xl",
+      "options": [
+        {
+          "value": "title-lg",
+          "label": "Large"
+        },
+        {
+          "value": "title-xl",
+          "label": "Extra large"
+        },
+        {
+          "value": "title-2xl",
+          "label": "2XL"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "VERIFY WITH GOVX"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "cart_recommendations_heading",
+      "label": "Recommendations heading",
+      "default": "You may also like"
+    },
+    {
+      "type": "range",
+      "id": "cart_recommendations_limit",
+      "label": "Recommendations limit",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "product_list",
+      "id": "cart_recommendations_products",
+      "label": "t:sections.cart-drawer.settings.cart_recommendations_products.label",
+      "info": "t:sections.cart-drawer.settings.cart_recommendations_products.info"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ececec"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Bullet point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Point text",
+          "default": "Current & former US military"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Govx Eligibility",
+      "blocks": [
+        {
+          "type": "point",
+          "settings": {
+            "text": "Current & former US military"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "text": "Military spouses & dependents"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "text": "First responders (law enforcement, fire, EMS)"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "text": "Federal, state, and local government employees"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "text": "K-12 and university educators & staff"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

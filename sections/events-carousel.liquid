@@ -1,0 +1,471 @@
+<!-- TBG Custom Code -->
+{% comment %}
+  TBG Events Grid Section
+  Displays all events
+{% endcomment %}
+
+<div class="section section--padding">
+  {%- comment -%} Get all event metaobjects {%- endcomment -%}
+  {%- assign entries = shop.metaobjects.event.values | default: shop.metaobjects.events.values -%}
+
+  <div class="page-width relative">
+    {%- render 'section-heading', section: section -%}
+  </div>
+  <div class="page-width relative">
+    <slider-element id="Slider-{{ section.id }}" class="shop-the-feed grid slider slider--desktop slider--tablet" selector=".card-grid>.card">
+      <motion-list class="card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid">
+        {%- for e in entries -%}
+          <article class="card tbg-event-card" data-event-date="{{ e.start_date.value | default: e.start_date }}">
+          <div class="tbg-event-card__date">
+            {%- assign d = e.start_date | date: "%B %e, %Y" -%}
+            {{ d }}
+          </div>
+
+          <h3 class="tbg-event-card__title">
+            {{ e.name | escape }}
+          </h3>
+
+           {%- assign loc = e.location_display | default: e.city -%}
+{%- if e.state != blank -%}
+  {%- assign loc = loc | append: ', ' | append: e.state -%}
+{%- endif -%}
+          {%- if e.country and e.country != blank -%}
+            {%- if loc != blank -%}
+              {%- assign loc = loc | append: ', ' | append: e.country -%}
+            {%- else -%}
+              {%- assign loc = e.country -%}
+            {%- endif -%}
+          {%- endif -%}
+          <div class="tbg-event-card__location">{{ loc }}</div>
+
+          {%- if e.image and e.image != blank -%}
+            <div class="tbg-event-card__image">
+              <img
+                loading="lazy"
+                alt="{{ e.name | escape }}"
+                src="{{ e.image | image_url: width: 800 }}"
+                width="400" height="240">
+            </div>
+          {%- endif -%}
+
+          {% comment %} <div class="tbg-event-card__cta">
+            <a class="tbg-btn" href="{{ e.cta_url | default: '#' }}">
+              {{ e.cta_label | default: 'Learn More' }}
+            </a>
+          </div> {% endcomment %}
+          {% comment %} <div class="tbg-event-card__cta">
+            {%- render 'button',
+              label: e.cta_label,
+              link: e.cta_url,
+              size: "sm",
+              width: '150px',
+              style: "primary",
+            -%}
+          </div> {% endcomment %}
+
+          {% comment %} {%- if e.partner_tags.value and e.partner_tags.value.size > 0 -%}
+            <ul class="tbg-event-card__tags">
+              {%- for tag in e.partner_tags.value -%}
+                <li>{{ tag }}</li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%} {% endcomment %}
+        </article>
+        {%- endfor -%}
+      </motion-list>
+
+      <div class="indicators hidden lg:flex gap-2d5 items-center absolute top-0 left-0 w-full h-full pointer-events-none opacity-0 page-width">
+        <button class="button button--primary pointer-events-auto" type="button" is="previous-button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled tabindex="-1">
+          <span class="btn-fill" data-fill></span>
+          <span class="btn-text">
+            <svg class="icon icon-chevron-left stroke-2 transform" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </span>
+        </button>
+        <button class="button button--primary pointer-events-auto" type="button" is="next-button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.next' | t | escape }}" tabindex="-1">
+          <span class="btn-fill" data-fill></span>
+          <span class="btn-text">
+            <svg class="icon icon-chevron-right stroke-2 transform" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </slider-element>
+  </div>
+</div>
+
+<script>
+(function() {
+  // Wait for DOM to be ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', sortAndFilterEvents);
+  } else {
+    sortAndFilterEvents();
+  }
+
+  function sortAndFilterEvents() {
+    const container = document.querySelector('#Slider-{{ section.id }} .card-grid');
+    if (!container) return;
+
+    // Get current date (start of today)
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    // Get all event cards
+    const cards = Array.from(container.querySelectorAll('.tbg-event-card'));
+
+    // Filter and sort events
+    const upcomingCards = [];
+
+    cards.forEach(function(card) {
+      const eventDate = new Date(card.getAttribute('data-event-date'));
+      eventDate.setHours(0, 0, 0, 0);
+
+      // Hide past events
+      if (eventDate < today) {
+        card.style.display = 'none';
+      } else {
+        upcomingCards.push(card);
+      }
+    });
+
+    // Sort upcoming events by date (closest/soonest first)
+    upcomingCards.sort(function(a, b) {
+      const dateA = new Date(a.getAttribute('data-event-date'));
+      const dateB = new Date(b.getAttribute('data-event-date'));
+      return dateA - dateB; // Ascending order (soonest first)
+    });
+
+    // Re-append upcoming cards in sorted order
+    upcomingCards.forEach(function(card) {
+      container.appendChild(card);
+    });
+
+    // Reset carousel scroll position to the start
+    resetCarouselPosition();
+  }
+
+  function resetCarouselPosition() {
+    // Wait a bit longer for carousel to fully initialize
+    setTimeout(function() {
+      const slider = document.querySelector('#Slider-{{ section.id }}');
+      if (!slider) return;
+
+      const container = slider.querySelector('.card-grid');
+      if (!container) return;
+
+      // Method 1: Reset scroll position
+      container.scrollLeft = 0;
+
+      // Method 2: Reset transform
+      container.style.transform = 'translateX(0px)';
+
+      // Method 3: Find and reset the slider element's internal state
+      if (slider.scrollTo) {
+        slider.scrollTo(0, 0);
+      }
+
+      // Method 4: Force enable the previous button and click it multiple times
+      const prevButton = slider.querySelector('[is="previous-button"]');
+      if (prevButton) {
+        // Temporarily enable it
+        prevButton.disabled = false;
+
+        // Click it multiple times to ensure we're at the start
+        setTimeout(function() {
+          for (let i = 0; i < 15; i++) {
+            prevButton.click();
+          }
+        }, 100);
+      }
+
+      // Method 5: Manually set slider index to 0 if the slider has a custom element
+      if (slider.index !== undefined) {
+        slider.index = 0;
+      }
+
+      // Force a re-layout
+      container.offsetHeight;
+    }, 200);
+  }
+})();
+</script>
+
+<style>
+    #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {%- render 'section-variables', section: section -%}
+  }
+/* TBG Custom Code - Event Card Styling Only */
+.tbg-events__header { margin-bottom: 32px; }
+.tbg-events__header h2 { margin: 0 0 8px; }
+.tbg-events__sub { color: #666; margin: 0; }
+
+/* Event Card Content */
+.tbg-event-card {
+  background: #f2f2f2;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tbg-event-card__date {
+  font-size: 13px;
+  color: #222;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.tbg-event-card__title {
+  font-size: 18px;
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+
+.tbg-event-card__location {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.tbg-event-card__image {
+  margin-top: auto;
+  margin-bottom: 12px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.tbg-event-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.tbg-event-card__cta {
+  text-align: center;
+}
+
+.tbg-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.tbg-btn:hover {
+  background: #333;
+}
+
+.tbg-btn--secondary {
+  background: #444;
+}
+
+.tbg-event-card__tags {
+  list-style: none;
+  display: flex;
+  gap: 6px;
+  padding: 12px 0 0;
+  margin: 0;
+  flex-wrap: wrap;
+}
+
+.tbg-event-card__tags li {
+  background: #d5e9ff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+}
+/* End TBG Custom Code */
+</style>
+
+{% schema %}
+{
+  "name": "Upcoming Events Carousel",
+  "class": "tbg-events-section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "t:sections.global.settings.heading.label",
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-md",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.global.settings.heading_alignment.label",
+      "options": [
+        {
+          "value": "text-left md:items-end md:flex-row",
+          "label": "t:sections.global.settings.heading_alignment.options__1.label"
+        },
+        {
+          "value": "text-center md:items-center",
+          "label": "t:sections.global.settings.heading_alignment.options__2.label"
+        },
+        {
+          "value": "text-right md:items-end md:flex-row-reverse",
+          "label": "t:sections.global.settings.heading_alignment.options__3.label"
+        }
+      ],
+      "default": "text-left md:items-end md:flex-row"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:sections.global.settings.subheading.label"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:sections.global.settings.description.label"
+    },
+    {
+      "type": "header",
+      "content": "Carousel Settings"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "Number of columns on desktop"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1 column"
+        },
+        {
+          "value": "2",
+          "label": "2 columns"
+        }
+      ],
+      "default": "1",
+      "label": "Number of columns on mobile"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+  ],
+  "presets": [
+    {
+      "name": "Upcoming Events Carousel"
+    }
+  ]
+}
+{% endschema %}
+<!-- End TBG Custom Code -->

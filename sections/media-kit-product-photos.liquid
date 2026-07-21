@@ -1,0 +1,412 @@
+<style>
+  /* CSS Variables */
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --mobile-carousel-items: {{ section.settings.mobile_carousel_items }};
+  }
+
+  #shopify-section-{{ section.id }} .section::before {
+    content: none;
+  }
+
+  #shopify-section-{{ section.id }} .section {
+    background-color: {{ section.settings.background_color }};
+  }
+
+  /* Product Photos Section */
+  #shopify-section-{{ section.id }} .product-photos-section h2 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .product-photos-section .description {
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    max-width: 60%;
+  }
+
+  #shopify-section-{{ section.id }} .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+  }
+
+  #shopify-section-{{ section.id }} .photo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .photo-box {
+    aspect-ratio: 1;
+    background-color: #000000;
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  #shopify-section-{{ section.id }} .photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .photo-downloads {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: auto;
+  }
+
+  #shopify-section-{{ section.id }} .photo-downloads a {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  #shopify-section-{{ section.id }} .photo-downloads a:hover {
+    text-decoration: underline;
+  }
+
+  #shopify-section-{{ section.id }} .carousel-navigation {
+    display: none;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .product-photos-section .description {
+      max-width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .photo-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    #shopify-section-{{ section.id }} .photo-grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .photo-item {
+      flex: 0 0 calc(100% / var(--mobile-carousel-items) - 0.8rem);
+      scroll-snap-align: start;
+    }
+
+    #shopify-section-{{ section.id }} .carousel-navigation {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    #shopify-section-{{ section.id }} .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #cccccc;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #shopify-section-{{ section.id }} .carousel-dot.active {
+      background-color: #000000;
+    }
+  }
+</style>
+
+<div class="section product-photos-section-wrapper">
+  <!-- Product Photos Section -->
+  <div class="page-width product-photos-section section--padding">
+    <{{ section.settings.heading_tag }} class="{{ section.settings.heading_size }}">
+      {{- section.settings.photos_heading -}}
+    </{{ section.settings.heading_tag }}>
+    <p class="description">{{ section.settings.photos_description }}</p>
+    <div class="photo-grid" id="photo-carousel-{{ section.id }}">
+      {% for block in section.blocks %}
+        <div class="photo-item" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          <div class="photo-box">
+            {% if block.settings.photo_image != blank %}
+              <img src="{{ block.settings.photo_image | img_url: '600x600' }}" alt="Product Photo" width="600" height="600">
+            {% endif %}
+          </div>
+          <div class="photo-downloads">
+            {% if block.settings.photo_png_file != blank %}
+              <a href="{{ block.settings.photo_png_file }}" class="download-link">PNG</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="carousel-navigation" id="carousel-nav-{{ section.id }}">
+      {% assign total_images = section.blocks.size %}
+      {% assign visible_items = section.settings.mobile_carousel_items %}
+      {% assign dot_count = total_images | minus: visible_items | plus: 1 | ceil %}
+      {% for i in (1..dot_count) %}
+        <button class="carousel-dot {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Go to page {{ i }}"></button>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // Handle download links
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('download-link')) {
+        e.preventDefault();
+        const url = e.target.getAttribute('href');
+
+        // Extract filename from URL
+        const urlParts = url.split('/');
+        const filename = urlParts[urlParts.length - 1].split('?')[0];
+
+        // Fetch the file and trigger download
+        fetch(url)
+          .then(response => response.blob())
+          .then(blob => {
+            const blobUrl = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = blobUrl;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(blobUrl);
+            document.body.removeChild(a);
+          })
+          .catch(error => {
+            console.error('Download failed:', error);
+            // Fallback: open in new tab if fetch fails
+            window.open(url, '_blank');
+          });
+      }
+    });
+
+    const sectionId = '{{ section.id }}';
+    const carousel = document.getElementById('photo-carousel-' + sectionId);
+    const dots = document.querySelectorAll('#carousel-nav-' + sectionId + ' .carousel-dot');
+
+    if (!carousel || dots.length === 0) return;
+
+    // Update active dot based on scroll position
+    function updateActiveDot() {
+      if (window.innerWidth > 768) return; // Only on mobile
+
+      const scrollLeft = carousel.scrollLeft;
+      const scrollWidth = carousel.scrollWidth - carousel.clientWidth;
+
+      if (scrollWidth === 0) {
+        dots[0]?.classList.add('active');
+        return;
+      }
+
+      // Calculate which dot should be active based on scroll percentage
+      const scrollPercentage = scrollLeft / scrollWidth;
+      const currentDotIndex = Math.round(scrollPercentage * (dots.length - 1));
+
+      dots.forEach((dot, index) => {
+        if (index === currentDotIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    // Handle dot clicks
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', function() {
+        if (window.innerWidth > 768) return; // Only on mobile
+
+        const scrollWidth = carousel.scrollWidth - carousel.clientWidth;
+        const scrollPosition = (scrollWidth / (dots.length - 1)) * index;
+
+        carousel.scrollTo({
+          left: scrollPosition,
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Update active dot on scroll
+    carousel.addEventListener('scroll', updateActiveDot);
+
+    // Update on resize
+    window.addEventListener('resize', updateActiveDot);
+
+    // Initialize
+    updateActiveDot();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product Photos",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product Photos Section"
+    },
+    {
+      "type": "text",
+      "id": "photos_heading",
+      "label": "Photos Heading",
+      "default": "PRODUCT PHOTOS"
+    },
+    {
+      "type": "textarea",
+      "id": "photos_description",
+      "label": "Photos Description",
+      "default": "We design the most advanced cut-resistant baselayer and neck guards in the game, built with proprietary technology and trusted by players at all levels of the game."
+    },
+    {
+      "type": "range",
+      "id": "mobile_carousel_items",
+      "min": 1,
+      "max": 10,
+      "step": 0.5,
+      "label": "Mobile Carousel Items Visible",
+      "info": "Number of product photos visible at once on mobile (e.g., 2.5 shows 2.5 images)",
+      "default": 2.5
+    },
+    {
+      "type": "header",
+      "content": "Global Heading Settings"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-md",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Product Photo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "photo_image",
+          "label": "Product Photo"
+        },
+        {
+          "type": "url",
+          "id": "photo_png_file",
+          "label": "PNG File URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Photos",
+      "blocks": [
+      ]
+    }
+  ]
+}
+{% endschema %}
