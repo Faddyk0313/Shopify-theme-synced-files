@@ -1,1 +1,1853 @@
-{"sections":{"image_with_text_overlay_iHzycc":{"type":"image-with-text-overlay","blocks":{"heading_NmTngj":{"type":"heading","settings":{"heading":"PROTECT YOUR TEAM","heading_size":"title-lg tracking-heading","heading_tag":"h2","highlighted_text":"full_text","highlighted_scribble":"circle","highlighted_reveal":false}},"subheading_7pt8My":{"type":"subheading","disabled":true,"settings":{"subheading":"CUSTOM COLORS & DESIGNS","subheading_size":"subtitle-lg","secondary_color":true}}},"block_order":["heading_NmTngj","subheading_7pt8My"],"settings":{"transparent_header":false,"image":"shopify:\/\/shop_images\/stars_team_store_banner_desktop_281e2f8a-d756-4012-8211-919d6c2dc11e.png","image_height":"adapt","content_width":"medium","content_position":"md:items-end md:justify-start","text_alignment":"left","image_mobile":"shopify:\/\/shop_images\/stars_titan_battlegear_team_sales_program_2.png","image_height_mobile":"adapt","content_position_mobile":"items-end justify-center","text_alignment_mobile":"center","color_text":"#ffffff","color_background":"","gradient_background":"","color_highlight":"#e2fb31","gradient_highlight":"","color_button_text":"#171717","color_button_background":"#ffffff","color_button_gradient":"","color_overlay":"#171717","overlay_opacity":6,"padding_top":0,"padding_bottom":0,"divider":false,"full_width":true,"rounded":false,"enable_parallax":false,"parallax_direction":"vertical"}},"rich_text_yKELwF":{"type":"rich-text","blocks":{"button_W6g3Dr":{"type":"button","settings":{"button_label":"DESIGN YOUR BATTLEGEAR","button_link":"https:\/\/www.titanbattlegear.com\/pages\/team-sales-program#3d-prod-configurator-section","button_style":"primary","button_size":"sm","button_external":false,"button_icon":true}},"button_wiwgfp":{"type":"button","settings":{"button_label":"CONTACT TEAM SALES","button_link":"https:\/\/www.titanbattlegear.com\/pages\/team-sales-program#shopify-section-template--21655845798066__rich_text_qtEApy","button_style":"primary","button_size":"sm","button_external":false,"button_icon":true}}},"block_order":["button_W6g3Dr","button_wiwgfp"],"name":"Rich text","settings":{"text_alignment":"center","text_alignment_mobile":"center","heading":"","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_width":"small","heading_tag":"h2","subheading":"","description":"","button_label":"","button_link":"","button_external":false,"button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false,"color_text":"","color_background":"#000000","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"#171717","color_button_background":"#f2f2f2","color_button_gradient":"","padding_top":16,"padding_bottom":28,"divider":false,"narrow":true,"rounded":false}},"scrolling_text_xpjTin":{"type":"scrolling-text","blocks":{"image_GwyxJH":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/truck_icon_d829828e-64c0-4758-8810-ac2b445544d2.png","height":0,"link":"","accessibility_info":"","external":false}},"text_BtKpLB":{"type":"text","settings":{"text":"CUSTOM TEAM ORDER RESERVATIONS ARE FILLING UP FAST - <strong>REGISTER TODAY<\/strong>","text_size":16,"text_font":"body","highlighted_text":"full_text","highlighted_scribble":"sketch-underline"}}},"block_order":["image_GwyxJH","text_BtKpLB"],"disabled":true,"settings":{"direction":"left","speed":18,"grid_horizontal":60,"enable_twin":false,"enable_parallax":false,"color_text":"#000000","color_background":"#e2fb31","gradient_background":"","color_highlight":"","gradient_highlight":"","padding_top":12,"padding_bottom":12,"divider":false,"rounded":false}},"image_with_text_KVaz8F":{"type":"image-with-text","blocks":{"heading_V8wzPp":{"type":"heading","settings":{"heading":"25% PLAYER DISCOUNT","heading_size":"title-md","heading_tag":"h2","highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false}},"image_x4XWDc":{"type":"image","settings":{"image_width":"custom","image_max_width":50,"image_max_width_mobile":50}},"subheading_KkbptF":{"type":"subheading","settings":{"subheading":"Exclusive site-wide savings","subheading_size":"subtitle-lg","secondary_color":false}},"text_BazCdp":{"type":"text","settings":{"text":"<p><strong>1. REQUEST DISCOUNT CODE<\/strong> - Provide admin contact to distribute code to all parents and players<\/p><p><strong>2. CHOOSE DISCOUNT START & END DATE<\/strong> - Code active for a maximum of 7 days. Only available once per year per organization.<\/p><p><strong>3. APPROVAL<\/strong> - Code is provided for org-wide distribution<\/p>","text_font":"body","text_size":"subtext-md","text_max_size":32,"text_line_height":1.6,"text_letter_spacing":0,"text_capitalize":false,"secondary_color":false,"highlighted_text":"none","highlighted_scribble":"circle"}},"button_LXCF7Y":{"type":"button","settings":{"button_label":"REQUEST DISCOUNT CODE","button_link":"shopify:\/\/pages\/team-discount-program","button_style":"primary","button_size":"sm","button_external":false,"button_icon":true}}},"block_order":["heading_V8wzPp","image_x4XWDc","subheading_KkbptF","text_BazCdp","button_LXCF7Y"],"name":"TEAM DISCOUNT","settings":{"image":"shopify:\/\/shop_images\/discount_team_web_3c331140-a2fd-4c2a-9e8a-d49dc52f64ac.png","image_height":"adapt","image_width":"small","layout":"text_first","text_alignment":"left","content_position":"align-self-center","image_height_mobile":"auto","text_alignment_mobile":"center","color_text":"#171717","color_background":"#f2f2f2","gradient_background":"","color_background_2":"","gradient_background_2":"","color_highlight":"","gradient_highlight":"","color_button_text":"#ffffff","color_button_background":"#000000","color_button_gradient":"","padding_top":40,"padding_bottom":40,"divider":false,"full_width":false,"rounded":false,"enable_parallax":false,"parallax_direction":"vertical"}},"image_with_text_Mardxg":{"type":"image-with-text","blocks":{"heading_BiGBDY":{"type":"heading","settings":{"heading":"TEAM BATTLEGEAR","heading_size":"title-md","heading_tag":"h2","highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false}},"subheading_xjnzw7":{"type":"subheading","settings":{"subheading":"CUSTOM CUT-RESISTANT BASELAYER","subheading_size":"subtitle-lg","secondary_color":false}},"text_rRkJbD":{"type":"text","settings":{"text":"<p>1. DESIGN - Create your custom BattleGear with our <a href=\"https:\/\/www.titanbattlegear.com\/pages\/team-sales-program#3d-prod-configurator-section\" title=\"https:\/\/www.titanbattlegear.com\/pages\/team-sales-program#3d-prod-configurator-section\">3D Configurator <\/a> or leverage our design team.<\/p><p>2. ONE WEEK ORDER WINDOW - Titan hosted team store or team\/dealer administrated order.<\/p><p>3. PRODUCTION - Orders received by June 1 will deliver before season start. Minimum 50 units ordered to start production.<\/p>","text_font":"body","text_size":"subtext-md","text_max_size":32,"text_line_height":1.6,"text_letter_spacing":0,"text_capitalize":false,"secondary_color":false,"highlighted_text":"none","highlighted_scribble":"circle"}},"button_wzGWEx":{"type":"button","settings":{"button_label":"CONTACT TEAM SALES","button_link":"https:\/\/www.titanbattlegear.com\/pages\/team-sales-program#shopify-section-template--20575200215218__rich_text_qtEApy","button_style":"primary","button_size":"sm","button_external":false,"button_icon":true}}},"block_order":["heading_BiGBDY","subheading_xjnzw7","text_rRkJbD","button_wzGWEx"],"settings":{"image":"shopify:\/\/shop_images\/mid_faifield_for_team_sales_web.png","image_height":"adapt","image_width":"small","layout":"image_first","text_alignment":"left","content_position":"align-self-center","image_mobile":"shopify:\/\/shop_images\/mid_faifield_for_team_sales_web.png","image_height_mobile":"auto","text_alignment_mobile":"center","color_text":"#ffffff","color_background":"#000000","gradient_background":"","color_background_2":"","gradient_background_2":"","color_highlight":"","gradient_highlight":"","color_button_text":"#000000","color_button_background":"#ffffff","color_button_gradient":"","padding_top":36,"padding_bottom":36,"divider":false,"full_width":false,"rounded":false,"enable_parallax":false,"parallax_direction":"vertical"}},"rich_text_3RHMtg":{"type":"rich-text","blocks":{"heading_nWhtRx":{"type":"heading","settings":{"heading":"TEAM ORDER LIFECYCLE","heading_size":"title-md","heading_tag":"h2","highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false}},"text_nxJryB":{"type":"text","settings":{"text":"<p>BE ORDER-READY BY TRYOUTS <\/p>","text_font":"body","text_size":"subtext-sm","text_max_size":32,"text_line_height":1.6,"text_letter_spacing":0,"text_capitalize":false,"secondary_color":false,"highlighted_text":"none","highlighted_scribble":"circle"}},"spacing_6Yxk4C":{"type":"spacing","settings":{"height":40,"height_mobile":0}},"image_arxcAk":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/timeline2.svg","image_width":"custom","image_max_width":920,"image_max_width_mobile":600}}},"block_order":["heading_nWhtRx","text_nxJryB","spacing_6Yxk4C","image_arxcAk"],"name":"t:sections.rich-text.name","settings":{"text_alignment":"center","text_alignment_mobile":"center","heading":"","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_width":"small","heading_tag":"h2","subheading":"","description":"","button_label":"","button_link":"","button_external":false,"button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false,"color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":20,"padding_bottom":20,"divider":false,"narrow":false,"rounded":false}},"ss_slider_2_iDYmfV":{"type":"ss-slider-2","blocks":{"slide_B4jGqU":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/flamingos.png","title":"","button":"","url":""}},"slide_3wV3mm":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/hawks_red.png","title":"","button":"","url":""}},"slide_BtDwMA":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/stars_green.png","title":"","button":"","url":""}},"slide_cGGbgk":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/eep.png","title":"","button":"","url":""}},"slide_gMF3c4":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/Golden_Bears.png","title":"","button":"","url":""}},"slide_DBLXEB":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/hawks_black.png","title":"","button":"","url":""}},"slide_QE8EpK":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/aces.png","title":"","button":"","url":""}},"slide_nVEVwf":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/lumberjacks_fcf32567-49be-4069-b45a-2a6ad86effa8.png","title":"","button":"","url":""}},"slide_4WiEmr":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/conquer_91117218-0574-4eb2-aed8-bdb48448d552.png","title":"","button":"","url":""}},"slide_6QgQkn":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/stars_black.png","title":"","button":"","url":""}},"slide_wwGyRG":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/blazers.png","title":"","button":"","url":""}},"slide_dE9P8F":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/montgomery_e157fa85-eaba-42ea-bcab-16b0030d08e9.png","title":"","button":"","url":""}},"slide_6eNjYf":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/chevy_chase_0f58410b-a55b-41ff-bbf9-780c625e121f.png","title":"","button":"","url":""}},"slide_pWVbN8":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/rtk_27db4a70-4b47-4d18-ba99-142c67ba6eae.png","title":"","button":"","url":""}},"slide_wBEFk7":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/mid_fairdfield_blue_yellow.png","title":"","button":"","url":""}},"slide_UqdNip":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/jr_knights.png","title":"","button":"","url":""}},"slide_QMQ7GQ":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/blazers_navy.png","title":"","button":"","url":""}},"slide_3Nwqp4":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/tri_city.png","title":"","button":"","url":""}},"slide_b4RRjr":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/ccyha.png","title":"","button":"","url":""}},"slide_WxzBAr":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/mid_fairdfield_black.png","title":"","button":"","url":""}},"slide_gQdHYB":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/easton.png","title":"","button":"","url":""}},"slide_QcxwWX":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/huskies.png","title":"","button":"","url":""}},"slide_N4U3VX":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/wellesley.png","title":"","button":"","url":""}},"slide_4tMViX":{"type":"slide","settings":{"image":"shopify:\/\/shop_images\/mid_fairdfield_blue_red.png","title":"","button":"","url":""}}},"block_order":["slide_B4jGqU","slide_3wV3mm","slide_BtDwMA","slide_cGGbgk","slide_gMF3c4","slide_DBLXEB","slide_QE8EpK","slide_nVEVwf","slide_4WiEmr","slide_6QgQkn","slide_wwGyRG","slide_dE9P8F","slide_6eNjYf","slide_pWVbN8","slide_wBEFk7","slide_UqdNip","slide_QMQ7GQ","slide_3Nwqp4","slide_b4RRjr","slide_WxzBAr","slide_gQdHYB","slide_QcxwWX","slide_N4U3VX","slide_4tMViX"],"name":"SS - Slider #2","settings":{"slider_view":5,"slider_view_mobile":3,"slider_rotate":0,"card_padding_vertical":24,"card_padding_vertical_mobile":24,"card_padding_horizontal":40,"card_padding_horizontal_mobile":30,"card_radius":14,"card_border_thickness":0,"card_shadow":true,"card_ratio":"portrait","card_ratio_mobile":"portrait","card_overlay":0,"content_horizontal_position":"center","content_horizontal_position_mobile":"center","content_vertical_position":"end","content_vertical_position_mobile":"end","title_custom":false,"title_font":"josefin_sans_n4","title_size":28,"title_size_mobile":28,"title_height":130,"button_custom":false,"button_font":"josefin_sans_n4","button_size":14,"button_size_mobile":14,"button_height":100,"button_mt":16,"button_padding_vertical":12,"button_padding_horizontal":20,"button_radius":0,"button_border_thickness":1,"arrow_size":42,"arrow_size_mobile":32,"arrow_icon_size":20,"arrow_icon_size_mobile":12,"arrow_border_thickness":0,"arrow_show_desktop":true,"arrow_show_mobile":false,"title_color":"rgba(0,0,0,0)","card_border_color":"#121212","card_shadow_color":"#121212","card_overlay_color":"#121212","button_color":"rgba(0,0,0,0)","button_hover_color":"#121212","button_bg_color":"","button_bg_hover_color":"rgba(0,0,0,0)","button_border_color":"rgba(0,0,0,0)","button_border_hover_color":"rgba(0,0,0,0)","arrow_color":"#ffffff","arrow_hover_color":"#171717","arrow_bg_color":"#171717","arrow_bg_hover_color":"#ffffff","arrow_border_color":"#121212","arrow_border_hover_color":"#454545","background_color":"#f2f2f2","background_gradient":"","border_color":"#121212","margin_top":0,"margin_bottom":0,"padding_top":36,"padding_bottom":36,"padding_horizontal":0,"padding_horizontal_mobile":0,"full_width":true,"content_width":1200,"border_thickness":0,"lazy":false}},"image_with_text_overlay_wwk4kQ":{"type":"image-with-text-overlay","disabled":true,"name":"Tech Specs","settings":{"transparent_header":false,"image":"shopify:\/\/shop_images\/dark_tech_spec_desktop_dec_copy.png","image_height":"adapt","content_width":"small","content_position":"md:items-end md:justify-start","text_alignment":"left","image_mobile":"shopify:\/\/shop_images\/dark_tech_spec_mobile_team_sales.png","image_height_mobile":"adapt","content_position_mobile":"items-end justify-start","text_alignment_mobile":"left","color_text":"#ffffff","color_background":"#000000","gradient_background":"","color_highlight":"#e0a580","gradient_highlight":"","color_button_text":"#171717","color_button_background":"#ffffff","color_button_gradient":"","color_overlay":"#171717","overlay_opacity":70,"padding_top":0,"padding_bottom":0,"divider":false,"full_width":true,"rounded":false,"enable_parallax":false,"parallax_direction":"vertical"}},"custom_rich_text_Fh3qGh":{"type":"custom-rich-text","blocks":{"heading_part_EYyzW4":{"type":"heading_part","settings":{"text":"NOT ALL","font_style":"armour","heading_size_mobile_px":32,"heading_size_desktop_px":60,"new_line":true}},"heading_part_7AbbUJ":{"type":"heading_part","settings":{"text":"NECK GUARDS","font_style":"armour","heading_size_mobile_px":32,"heading_size_desktop_px":60,"new_line":true}},"heading_part_HbXcpi":{"type":"heading_part","settings":{"text":"ARE CREATED EQUAL","font_style":"armour","heading_size_mobile_px":32,"heading_size_desktop_px":60,"new_line":true}},"text_y6HhdW":{"type":"text","settings":{"text":"<p>Titan BattleGear delivers the highest level of cut resistance in hockey where it counts – neck and wrists. Play with confidence knowing you’re fully covered.<\/p>","text_max_width_mobile":560,"text_max_width_desktop":580,"text_font":"body","text_size":"subtext-md","text_max_size":32,"text_line_height":1.6,"text_letter_spacing":0,"text_capitalize":false,"secondary_color":false,"highlighted_text":"none","highlighted_scribble":"circle"}}},"block_order":["heading_part_EYyzW4","heading_part_7AbbUJ","heading_part_HbXcpi","text_y6HhdW"],"name":"Custom Rich Text","settings":{"text_alignment":"left","text_alignment_mobile":"center","heading":"","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_width":"small","heading_tag":"h2","combined_heading_tag":"h2","subheading":"","description":"","button_label":"","button_link":"","button_external":false,"button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false,"color_text":"","color_background":"#ffffff","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":28,"padding_bottom":28,"divider":false,"narrow":false,"rounded":false}},"portfolio_custom_6bkU7e":{"type":"portfolio-custom","blocks":{"profile_DQBPyU":{"type":"profile","settings":{"image":"shopify:\/\/shop_images\/tech_1_b54f6942-8c26-4fcd-bf2a-2de6e24a618b.png","icon":"shopify:\/\/shop_images\/spc.svg","icon_size":58,"heading":"<p>Ditch<\/p><p>Velcro<\/p>","description":"<p><strong>Patented Stretch ProCurve™ Collar<\/strong><\/p><p>Adaptive protection that moves with the athlete. No straps. No irritation. No velcro.<\/p>","text":"<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>","color_text":"#ffffff","color_background":"#171717"}},"profile_Q74K3k":{"type":"profile","settings":{"image":"shopify:\/\/shop_images\/tech_2_206b17d5-6051-4d44-a7d6-dea393579846.png","icon":"shopify:\/\/shop_images\/titanotex_aero_181f01f0-d378-4e30-8026-b5fdd25543cf.svg","icon_size":52,"heading":"<p>MAXIMUM<\/p><p>CUT RESISTANCE<\/p>","description":"<p><strong>TITANOTEX™ cut-resistant Fabric<\/strong><\/p><p>Rated up to ANSI A9 (scale of A1-A9), while other brands average A3.<\/p>","text":"<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>","color_text":"#ffffff","color_background":"#171717"}},"profile_CPXzDm":{"type":"profile","settings":{"image":"shopify:\/\/shop_images\/tech_4_7d9ac665-5dd7-4c19-9d14-5419ea71ee01.png","icon":"shopify:\/\/shop_images\/arcguar_logo.svg","icon_size":52,"heading":"<p>FULL<br\/>COVERAGE<\/p>","description":"<p><strong>Patented Arc~Guard™ Collar<\/strong><\/p><p>Anatomically contoured to protect the carotid and jugular without bunching.<\/p>","text":"<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>","color_text":"#ffffff","color_background":"#171717"}},"profile_qJjNPE":{"type":"profile","settings":{"image":"shopify:\/\/shop_images\/13.png","icon":"shopify:\/\/shop_images\/comfort.svg","icon_size":54,"heading":"<p>LIGHTWEIGHT<\/p><p>& BREATHABLE<\/p>","description":"<p>Thermo-regulated 4-way stretch fabric, engineered to wick moisture and provide maximum mobility.<\/p>","text":"<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>","color_text":"#ffffff","color_background":"#171717"}},"profile_EizdXp":{"type":"profile","settings":{"image":"shopify:\/\/shop_images\/tech_5_8c112124-d850-4eb2-8a7a-f570e984cdfa.png","icon":"shopify:\/\/shop_images\/style_logo.svg","icon_size":52,"heading":"<p>UNMATCHED<br\/>STYLE<\/p>","description":"<p>Express your identity with bold designs, limited edition drops, and team colors. <\/p>","text":"<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>","color_text":"#ffffff","color_background":"#171717"}},"profile_3RW9GQ":{"type":"profile","settings":{"image":"shopify:\/\/shop_images\/tech_6_490391e4-5fdf-4b86-8c7f-303f089b6315.png","icon":"shopify:\/\/shop_images\/usa_logo.svg","icon_size":52,"heading":"<p>MADE IN<br\/>THE USA<\/p>","description":"<p>Built locally <strong>(MN, NJ, FL)<\/strong>, with the best materials. Protection that doesn't need a passport.<\/p>","text":"<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>","color_text":"#ffffff","color_background":"#171717"}},"profile_xbm9Pp":{"type":"profile","settings":{"image":"shopify:\/\/shop_images\/7_b38fd5c8-4233-4272-890f-0e026399ae6d.jpg","icon":"shopify:\/\/shop_images\/teamworks_logo.svg","icon_size":44,"heading":"<p>YOUR TEAM<br\/>YOUR COLORS<\/p>","description":"<p><strong>Custom Team Baselayer<\/strong><\/p><p>Designed with your team's logo, colors, and unique identity.<\/p>","text":"<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>","color_text":"#ffffff","color_background":"#171717"}}},"block_order":["profile_DQBPyU","profile_Q74K3k","profile_CPXzDm","profile_qJjNPE","profile_EizdXp","profile_3RW9GQ","profile_xbm9Pp"],"name":"Tech Specs","settings":{"columns":5,"carousel_on_desktop":true,"layout":"default","image_ratio":"portrait","image_ratio_mobile":"adapt","custom_image_height":"","columns_mobile":"1","swipe_on_mobile":true,"disable_modal_opening":true,"color_text":"","color_background":"#ffffff","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":24,"padding_bottom":36,"divider":false,"full_width":false,"rounded":false}},"image_with_text_overlay_Pn8Hcg":{"type":"image-with-text-overlay","blocks":{"heading_Wp4kmk":{"type":"heading","settings":{"heading":"MAXIMUM CUT-RESISTANCE","heading_size":"title-md","heading_tag":"h2","highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false}},"text_xW6CFh":{"type":"text","settings":{"text":"<p>11 of 14 other neck guards failed to stop a skate blade in lab testing<\/p><p><a href=\"https:\/\/www.titanbattlegear.com\/blogs\/hockey-safety\/mayo-clinic-hockey-neck-guard-safety-test\" target=\"_blank\" title=\"https:\/\/www.titanbattlegear.com\/blogs\/hockey-safety\/mayo-clinic-hockey-neck-guard-safety-test\"><em>Mayo Clinic \/ Clinical Journal of Sports Medicine.<\/em><\/a><\/p>","text_font":"body","text_size":"subtext-md","text_max_size":32,"text_line_height":1.6,"text_letter_spacing":0,"text_capitalize":false,"secondary_color":false,"highlighted_text":"none","highlighted_scribble":"circle"}},"image_Ex3fER":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/safety_scale_jun_2026_black.svg","image_width":"custom","image_max_width":600,"image_max_width_mobile":380}}},"block_order":["heading_Wp4kmk","text_xW6CFh","image_Ex3fER"],"name":"new safety scale section","settings":{"transparent_header":false,"image":"shopify:\/\/shop_images\/tech_safety_scale_header.png","image_height":"adapt","content_width":"small","content_position":"md:items-center md:justify-start","text_alignment":"left","image_mobile":"shopify:\/\/shop_images\/tech_safety_scale_header_mobile.png","image_height_mobile":"600px","content_position_mobile":"items-start justify-start","text_alignment_mobile":"center","color_text":"#ffffff","color_background":"#171717","gradient_background":"","color_highlight":"#e2fb31","gradient_highlight":"","color_button_text":"#171717","color_button_background":"#ffffff","color_button_gradient":"","color_overlay":"#171717","overlay_opacity":0,"padding_top":0,"padding_bottom":0,"divider":false,"full_width":true,"rounded":false,"enable_parallax":false,"parallax_direction":"vertical"}},"custom_rich_text_iFgdmi":{"type":"custom-rich-text","blocks":{"heading_part_Et49w7":{"type":"heading_part","settings":{"text":"UPGRADE TO TITAN","font_style":"armour","heading_size_mobile_px":32,"heading_size_desktop_px":60,"new_line":false}}},"block_order":["heading_part_Et49w7"],"name":"Custom Rich Text","settings":{"text_alignment":"left","text_alignment_mobile":"center","heading":"","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_width":"small","heading_tag":"h2","combined_heading_tag":"h2","subheading":"","description":"","button_label":"","button_link":"","button_external":false,"button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false,"color_text":"","color_background":"#ffffff","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":40,"padding_bottom":40,"divider":false,"narrow":false,"rounded":false}},"titanpdp_comparison_table_TAUfCW":{"type":"titanpdpComparisonTable","name":"Titan PDP Compare Table","settings":{"margin_top":10,"margin_bottom":75,"color_background":"#ffffff","swap_row_color_order":true,"gray_row_color":"#ffffff","white_row_color":"#f2f2f2"}},"3d_prod_config_HdGjaa":{"type":"3d-prod-config","name":"3d Shirt Configurator","settings":{"padding_top":72,"padding_bottom":100}},"rich_text_qtEApy":{"type":"rich-text","blocks":{"heading_wHxYiJ":{"type":"heading","settings":{"heading":"CONTACT TEAM SALES","heading_size":"title-md","heading_tag":"h2","highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false}}},"block_order":["heading_wHxYiJ"],"name":"t:sections.rich-text.name","settings":{"text_alignment":"left","text_alignment_mobile":"left","heading":"","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_width":"large","heading_tag":"h2","subheading":"","description":"","button_label":"","button_link":"","button_external":false,"button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false,"color_text":"#ffffff","color_background":"#000000","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":20,"padding_bottom":0,"divider":false,"narrow":false,"rounded":false}},"custom_liquid_ijgnyq":{"type":"custom-liquid","name":"t:sections.custom-liquid.name","settings":{"liquid":"<script src=\"https:\/\/js.hsforms.net\/forms\/embed\/46588550.js\" defer><\/script>\n<div class=\"hs-form-frame\" data-region=\"na1\" data-form-id=\"d7bcd3f3-9615-4cde-a94c-0ca255d083ff\" data-portal-id=\"46588550\"><\/div>","color_text":"#ffffff","color_background":"#000000","gradient_background":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":28,"padding_bottom":72,"divider":false,"narrow":false,"rounded":false}},"image_with_text_W9AHFF":{"type":"image-with-text","blocks":{"heading_7ND6A4":{"type":"heading","settings":{"heading":"Semi-Custom","heading_size":"title-md","heading_tag":"h2","highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false}},"text_cARCAL":{"type":"text","settings":{"text":"<ul><li>Choose from 8 designs, 21 sublimation colors, and 17 thread colors<\/li><li>Select your design and assign your colors to portions of the shirt<\/li><li>Upload your logo<\/li><li>Offered in Adult and Youth Long Sleeve Stretch ProCurve<\/li><li>Requires a minimum order of 12 units (black or white thread) to begin production<\/li><li>Two ordering options: Individual ordering (our team sets up a custom store for your club on <a href=\"http:\/\/titanbattlegear.com\/\" target=\"_blank\"><strong>titanbattlegear.com<\/strong><\/a>) or Bulk Ordering (team admin places order and bulk discounts available)<\/li><li>Click “GET STARTED” below to begin the process”<\/li><\/ul>","text_font":"body","text_size":"subtext-md","text_max_size":32,"text_line_height":1.6,"text_letter_spacing":0,"text_capitalize":false,"secondary_color":false,"highlighted_text":"none","highlighted_scribble":"circle"}},"button_hDyCXm":{"type":"button","settings":{"button_label":"Get Started","button_link":"shopify:\/\/products\/semi-custom-team-battlegear","button_style":"primary","button_size":"md","button_external":false,"button_icon":true}}},"block_order":["heading_7ND6A4","text_cARCAL","button_hDyCXm"],"disabled":true,"settings":{"image":"shopify:\/\/shop_images\/mega_menu_semi_custom.jpg","image_height":"adapt","image_width":"small","layout":"image_first","text_alignment":"left","content_position":"align-self-center","image_height_mobile":"auto","text_alignment_mobile":"left","color_text":"","color_background":"#ffffff","gradient_background":"","color_background_2":"","gradient_background_2":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":36,"padding_bottom":52,"divider":false,"full_width":false,"rounded":false,"enable_parallax":true,"parallax_direction":"vertical"}},"rich_text_y7QWm6":{"type":"rich-text","blocks":{"heading_Rq3KhG":{"type":"heading","settings":{"heading":"<strong>Team Customization Contact Form<\/strong>","heading_size":"title-sm","heading_tag":"h2","highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false}}},"block_order":["heading_Rq3KhG"],"disabled":true,"settings":{"text_alignment":"center","text_alignment_mobile":"center","heading":"","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_width":"small","heading_tag":"h2","subheading":"","description":"","button_label":"","button_link":"","button_external":false,"button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false,"color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":0,"padding_bottom":0,"divider":false,"narrow":true,"rounded":false}},"custom_liquid_e3bQGr":{"type":"custom-liquid","disabled":true,"settings":{"liquid":"<script charset=\"utf-8\" type=\"text\/javascript\" src=\"\/\/js.hsforms.net\/forms\/embed\/v2.js\"><\/script>\n<script>\n  hbspt.forms.create({\n    portalId: \"46588550\",\n    formId: \"bb171335-be02-4c35-8323-e84ca1cb8efd\",\n    onFormSubmit: function($form) {\n      \/\/ Scroll the user back to the form after submission\n      setTimeout(function() {\n        $form[0].scrollIntoView({ behavior: 'smooth', block: 'start' });\n      }, 500);\n    }\n  });\n<\/script>","color_text":"","color_background":"","gradient_background":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":72,"padding_bottom":16,"divider":false,"narrow":true,"rounded":false}},"rich_text_mWjfgB":{"type":"rich-text","blocks":{"heading_C6n9XM":{"type":"heading","settings":{"heading":"Schedule Zoom with a Titan","heading_size":"title-md","heading_tag":"h2","highlighted_text":"full_text","highlighted_scribble":"circle","highlighted_reveal":false}},"text_fqEgVg":{"type":"text","settings":{"text":"<p>Thank you for your interest in Titan BattleGear! You can now schedule a Zoom meeting with one of our team members to discuss your needs and customization options.<\/p>","text_font":"body","text_size":"subtext-md","text_max_size":32,"text_line_height":1.6,"text_letter_spacing":0,"text_capitalize":false,"secondary_color":false,"highlighted_text":"none","highlighted_scribble":"circle"}},"liquid_gg7MdX":{"type":"liquid","settings":{"liquid":"<!-- Start of Meetings Embed Script -->\n    <div class=\"meetings-iframe-container\" data-src=\"https:\/\/meetings.hubspot.com\/andries-de-villiers\/teamworks?embed=true\"><\/div>\n    <script type=\"text\/javascript\" src=\"https:\/\/static.hsappstatic.net\/MeetingsEmbed\/ex\/MeetingsEmbedCode.js\"><\/script>\n  <!-- End of Meetings Embed Script -->"}}},"block_order":["heading_C6n9XM","text_fqEgVg","liquid_gg7MdX"],"disabled":true,"settings":{"text_alignment":"left","text_alignment_mobile":"left","heading":"","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_width":"small","heading_tag":"h2","subheading":"","description":"","button_label":"","button_link":"","button_external":false,"button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false,"color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":72,"padding_bottom":0,"divider":false,"narrow":true,"rounded":false}},"contact_form_L9m4dd":{"type":"contact-form","blocks":{"custom_field_a79hyk":{"type":"custom_field","settings":{"type":"text","title":"Team\/Org Name","required":false,"full_width":false,"checked_value":"Yes","unchecked_value":"No","radio_options":"","select_options":""}},"custom_field_zgHWwW":{"type":"custom_field","settings":{"type":"text","title":"Team Size","required":false,"full_width":false,"checked_value":"Yes","unchecked_value":"No","radio_options":"","select_options":""}},"custom_field_bN3Fwh":{"type":"custom_field","settings":{"type":"text","title":"Phone Number","required":false,"full_width":false,"checked_value":"Yes","unchecked_value":"No","radio_options":"","select_options":""}}},"block_order":["custom_field_a79hyk","custom_field_zgHWwW","custom_field_bN3Fwh"],"disabled":true,"settings":{"heading":"Team Customization Contact Form","heading_size":"title-sm","heading_alignment":"text-center md:items-center","heading_tag":"h2","subheading":"","description":"","button_label":"","button_link":"","button_external":false,"button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false,"color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":72,"padding_bottom":72,"divider":false,"narrow":true,"rounded":true}},"featured_collection_eaBtkG":{"type":"featured-collection","custom_css":[".product-card__bottom.flex.items-center.gap-2 {display: none !important;}"],"settings":{"collection":"team-colors","products":["battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-navy-long","hockey-cut-resistant-neck-guard-team-navy","battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-red-long","hockey-cut-resistant-neck-guard-team-red","battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-royal-long","hockey-cut-resistant-neck-guard-team-royal","battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-forest-green-long","hockey-cut-resistant-neck-guard-team-forest-green","battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-maroon-long","hockey-cut-resistant-neck-guard-team-maroon","battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-purple-long","hockey-cut-resistant-neck-guard-team-purple","battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-kelly-green-long","hockey-cut-resistant-neck-guard-team-kelly-green","battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-orange-long","hockey-cut-resistant-neck-guard-team-orange","battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-gold-long","hockey-cut-resistant-neck-guard-team-gold","battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-carolina-blue-long","hockey-cut-resistant-neck-guard-team-carolina-blue"],"product_limit":12,"columns":5,"new_version2":false,"carousel_on_desktop":true,"show_view_all":true,"columns_mobile":"2","swipe_on_mobile":true,"heading":"SHOP TEAM COLORS COLLECTION","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_tag":"h2","subheading":"DON'T NEED A CUSTOM DESIGN?","description":"","highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false,"color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":24,"padding_bottom":52,"divider":false,"full_width":false,"rounded":false}},"image_with_text_overlay_RNm3WX":{"type":"image-with-text-overlay","name":"Image with text overlay","settings":{"transparent_header":false,"image":"shopify:\/\/shop_images\/RTK_banner.png","image_height":"adapt","content_width":"small","content_position":"md:items-end md:justify-start","text_alignment":"left","image_mobile":"shopify:\/\/shop_images\/RTK_banner_MOBILE.png","image_height_mobile":"adapt","content_position_mobile":"items-end justify-start","text_alignment_mobile":"left","color_text":"#ffffff","color_background":"","gradient_background":"","color_highlight":"#e0a580","gradient_highlight":"","color_button_text":"#171717","color_button_background":"#ffffff","color_button_gradient":"","color_overlay":"#171717","overlay_opacity":0,"padding_top":0,"padding_bottom":0,"divider":false,"full_width":true,"rounded":false,"enable_parallax":false,"parallax_direction":"vertical"}},"logo_list_XJGFE9":{"type":"logo-list","blocks":{"logo_4wWNJk":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/mid_fairfield.png","height":156,"link":""}},"logo_PdNmxf":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/JR_Panthers_Logo.svg","height":132,"link":""}},"logo_RTRr43":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/Brunswick_Logo.png","height":132,"link":""}},"logo_WeFkDk":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/Bridgeport_Islanders_logo_svg_49e93486-a879-483b-b205-e2f7cdb8ddf6.png","height":132,"link":""}},"logo_nMRAhx":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/Stallions_a712e90b-60af-4502-b0c0-ed6b404de1df.png","height":132,"link":""}},"logo_dKHDfg":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/USA_hockey_logo.gif","height":112,"link":""}},"logo_VF6MLN":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/Vice_Hockey_2.png","height":132,"link":""}},"logo_3GDHzY":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/hawks_8eaed656-98f0-4d44-b7a1-cee96c4bbd54.png","height":132,"link":""}},"logo_ygVCFm":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/wolfpack_fcba1eb1-dc02-4b07-9f6f-23a0e0eaccba.png","height":132,"link":""}},"logo_46tPcY":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/Ice-Devils-Logobug_small_3056083f-5fa4-4c5d-8596-07f3af3ec523.png","height":132,"link":""}},"logo_dkGqcm":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/Ironwood_Lumberjacks_logo.png","height":132,"link":""}},"logo_YWijTX":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/Stars_FNL_OFFICIAL.jpg","height":132,"link":""}},"logo_RUzDDN":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/nc_golden_bears_logo.png","height":132,"link":""}},"logo_tMJpUK":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/ccyha_logo.png","height":132,"link":""}},"logo_hh7AC8":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/MCN_Sentaors_logo_1.png","height":152,"link":""}},"logo_czJQVN":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/RTK.png","height":132,"link":""}},"logo_PCampn":{"type":"logo","settings":{"image":"shopify:\/\/shop_images\/RTK_Official_Logo_REV.png","height":132,"link":""}}},"block_order":["logo_4wWNJk","logo_PdNmxf","logo_RTRr43","logo_WeFkDk","logo_nMRAhx","logo_dKHDfg","logo_VF6MLN","logo_3GDHzY","logo_ygVCFm","logo_46tPcY","logo_dkGqcm","logo_YWijTX","logo_RUzDDN","logo_tMJpUK","logo_hh7AC8","logo_czJQVN","logo_PCampn"],"settings":{"layout":"marquee","grid_horizontal":60,"direction":"left","speed":8,"heading":"TOGETHER WE CONQUER","heading_size":"title-md","heading_alignment":"text-center md:items-center","heading_tag":"h5","subheading":"","description":"","button_label":"","button_link":"","button_external":false,"button_icon":true,"highlighted_text":"full_text","highlighted_scribble":"circle","highlighted_reveal":false,"color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":72,"padding_bottom":72,"divider":false,"full_width":true,"rounded":false}},"main-page":{"type":"main-page","disabled":true,"settings":{"heading_size":"title-xl tracking-heading","heading_alignment":"text-left","heading_tag":"h1","text_size":"text-base","padding_top":72,"padding_bottom":120,"divider":false,"narrow":true,"rounded":false}}},"order":["image_with_text_overlay_iHzycc","rich_text_yKELwF","scrolling_text_xpjTin","image_with_text_KVaz8F","image_with_text_Mardxg","rich_text_3RHMtg","ss_slider_2_iDYmfV","image_with_text_overlay_wwk4kQ","custom_rich_text_Fh3qGh","portfolio_custom_6bkU7e","image_with_text_overlay_Pn8Hcg","custom_rich_text_iFgdmi","titanpdp_comparison_table_TAUfCW","3d_prod_config_HdGjaa","rich_text_qtEApy","custom_liquid_ijgnyq","image_with_text_W9AHFF","rich_text_y7QWm6","custom_liquid_e3bQGr","rich_text_mWjfgB","contact_form_L9m4dd","featured_collection_eaBtkG","image_with_text_overlay_RNm3WX","logo_list_XJGFE9","main-page"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_with_text_overlay_iHzycc": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_NmTngj": {
+          "type": "heading",
+          "settings": {
+            "heading": "PROTECT YOUR TEAM",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "full_text",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "subheading_7pt8My": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "CUSTOM COLORS & DESIGNS",
+            "subheading_size": "subtitle-lg",
+            "secondary_color": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_NmTngj",
+        "subheading_7pt8My"
+      ],
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/stars_team_store_banner_desktop_281e2f8a-d756-4012-8211-919d6c2dc11e.png",
+        "image_height": "adapt",
+        "content_width": "medium",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/stars_titan_battlegear_team_sales_program_2.png",
+        "image_height_mobile": "adapt",
+        "content_position_mobile": "items-end justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "#e2fb31",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 6,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "rich_text_yKELwF": {
+      "type": "rich-text",
+      "blocks": {
+        "button_W6g3Dr": {
+          "type": "button",
+          "settings": {
+            "button_label": "DESIGN YOUR BATTLEGEAR",
+            "button_link": "https://www.titanbattlegear.com/pages/team-sales-program#3d-prod-configurator-section",
+            "button_style": "primary",
+            "button_size": "sm",
+            "button_external": false,
+            "button_icon": true
+          }
+        },
+        "button_wiwgfp": {
+          "type": "button",
+          "settings": {
+            "button_label": "CONTACT TEAM SALES",
+            "button_link": "https://www.titanbattlegear.com/pages/team-sales-program#shopify-section-template--21717622882482__rich_text_qtEApy",
+            "button_style": "primary",
+            "button_size": "sm",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "button_W6g3Dr",
+        "button_wiwgfp"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#f2f2f2",
+        "color_button_gradient": "",
+        "padding_top": 16,
+        "padding_bottom": 28,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "scrolling_text_xpjTin": {
+      "type": "scrolling-text",
+      "blocks": {
+        "image_GwyxJH": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/truck_icon_d829828e-64c0-4758-8810-ac2b445544d2.png",
+            "height": 0,
+            "link": "",
+            "accessibility_info": "",
+            "external": false
+          }
+        },
+        "text_BtKpLB": {
+          "type": "text",
+          "settings": {
+            "text": "CUSTOM TEAM ORDER RESERVATIONS ARE FILLING UP FAST - <strong>REGISTER TODAY</strong>",
+            "text_size": 16,
+            "text_font": "body",
+            "highlighted_text": "full_text",
+            "highlighted_scribble": "sketch-underline"
+          }
+        }
+      },
+      "block_order": [
+        "image_GwyxJH",
+        "text_BtKpLB"
+      ],
+      "disabled": true,
+      "settings": {
+        "direction": "left",
+        "speed": 18,
+        "grid_horizontal": 60,
+        "enable_twin": false,
+        "enable_parallax": false,
+        "color_text": "#000000",
+        "color_background": "#e2fb31",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "padding_top": 12,
+        "padding_bottom": 12,
+        "divider": false,
+        "rounded": false
+      }
+    },
+    "image_with_text_KVaz8F": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_V8wzPp": {
+          "type": "heading",
+          "settings": {
+            "heading": "25% PLAYER DISCOUNT",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "image_x4XWDc": {
+          "type": "image",
+          "settings": {
+            "image_width": "custom",
+            "image_max_width": 50,
+            "image_max_width_mobile": 50
+          }
+        },
+        "subheading_KkbptF": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Exclusive site-wide savings",
+            "subheading_size": "subtitle-lg",
+            "secondary_color": false
+          }
+        },
+        "text_BazCdp": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>1. REQUEST DISCOUNT CODE</strong> - Provide admin contact to distribute code to all parents and players</p><p><strong>2. CHOOSE DISCOUNT START & END DATE</strong> - Code active for a maximum of 7 days. Only available once per year per organization.</p><p><strong>3. APPROVAL</strong> - Code is provided for org-wide distribution</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button_LXCF7Y": {
+          "type": "button",
+          "settings": {
+            "button_label": "REQUEST DISCOUNT CODE",
+            "button_link": "shopify://pages/team-discount-program",
+            "button_style": "primary",
+            "button_size": "sm",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_V8wzPp",
+        "image_x4XWDc",
+        "subheading_KkbptF",
+        "text_BazCdp",
+        "button_LXCF7Y"
+      ],
+      "name": "TEAM DISCOUNT",
+      "settings": {
+        "image": "shopify://shop_images/discount_team_web_3c331140-a2fd-4c2a-9e8a-d49dc52f64ac.png",
+        "image_height": "adapt",
+        "image_width": "small",
+        "layout": "text_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "image_height_mobile": "auto",
+        "text_alignment_mobile": "center",
+        "color_text": "#171717",
+        "color_background": "#f2f2f2",
+        "gradient_background": "",
+        "color_background_2": "",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "#ffffff",
+        "color_button_background": "#000000",
+        "color_button_gradient": "",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "image_with_text_Mardxg": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_BiGBDY": {
+          "type": "heading",
+          "settings": {
+            "heading": "TEAM BATTLEGEAR",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "subheading_xjnzw7": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "CUSTOM CUT-RESISTANT BASELAYER",
+            "subheading_size": "subtitle-lg",
+            "secondary_color": false
+          }
+        },
+        "text_rRkJbD": {
+          "type": "text",
+          "settings": {
+            "text": "<p>1. DESIGN - Create your custom BattleGear with our <a href=\"https://www.titanbattlegear.com/pages/team-sales-program#3d-prod-configurator-section\" title=\"https://www.titanbattlegear.com/pages/team-sales-program#3d-prod-configurator-section\">3D Configurator </a> or leverage our design team.</p><p>2. ONE WEEK ORDER WINDOW - Titan hosted team store or team/dealer administrated order.</p><p>3. PRODUCTION - Orders received by June 1 will deliver before season start. Minimum 50 units ordered to start production.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button_wzGWEx": {
+          "type": "button",
+          "settings": {
+            "button_label": "CONTACT TEAM SALES",
+            "button_link": "https://www.titanbattlegear.com/pages/team-sales-program#shopify-section-template--20575200215218__rich_text_qtEApy",
+            "button_style": "primary",
+            "button_size": "sm",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_BiGBDY",
+        "subheading_xjnzw7",
+        "text_rRkJbD",
+        "button_wzGWEx"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/mid_faifield_for_team_sales_web.png",
+        "image_height": "adapt",
+        "image_width": "small",
+        "layout": "image_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "image_mobile": "shopify://shop_images/mid_faifield_for_team_sales_web.png",
+        "image_height_mobile": "auto",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_background_2": "",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "#000000",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "rich_text_3RHMtg": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_nWhtRx": {
+          "type": "heading",
+          "settings": {
+            "heading": "TEAM ORDER LIFECYCLE",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_nxJryB": {
+          "type": "text",
+          "settings": {
+            "text": "<p>BE ORDER-READY BY TRYOUTS </p>",
+            "text_font": "body",
+            "text_size": "subtext-sm",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "spacing_6Yxk4C": {
+          "type": "spacing",
+          "settings": {
+            "height": 40,
+            "height_mobile": 0
+          }
+        },
+        "image_arxcAk": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/timeline2.svg",
+            "image_width": "custom",
+            "image_max_width": 920,
+            "image_max_width_mobile": 600
+          }
+        }
+      },
+      "block_order": [
+        "heading_nWhtRx",
+        "text_nxJryB",
+        "spacing_6Yxk4C",
+        "image_arxcAk"
+      ],
+      "name": "t:sections.rich-text.name",
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "ss_slider_2_iDYmfV": {
+      "type": "ss-slider-2",
+      "blocks": {
+        "slide_B4jGqU": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/flamingos.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_3wV3mm": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/hawks_red.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_BtDwMA": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/stars_green.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_cGGbgk": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/eep.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_gMF3c4": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Golden_Bears.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_DBLXEB": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/hawks_black.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_QE8EpK": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/aces.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_nVEVwf": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/lumberjacks_fcf32567-49be-4069-b45a-2a6ad86effa8.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_4WiEmr": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/conquer_91117218-0574-4eb2-aed8-bdb48448d552.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_6QgQkn": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/stars_black.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_wwGyRG": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/blazers.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_dE9P8F": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/montgomery_e157fa85-eaba-42ea-bcab-16b0030d08e9.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_6eNjYf": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/chevy_chase_0f58410b-a55b-41ff-bbf9-780c625e121f.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_pWVbN8": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/rtk_27db4a70-4b47-4d18-ba99-142c67ba6eae.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_wBEFk7": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/mid_fairdfield_blue_yellow.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_UqdNip": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/jr_knights.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_QMQ7GQ": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/blazers_navy.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_3Nwqp4": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/tri_city.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_b4RRjr": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/ccyha.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_WxzBAr": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/mid_fairdfield_black.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_gQdHYB": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/easton.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_QcxwWX": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/huskies.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_N4U3VX": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/wellesley.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        },
+        "slide_4tMViX": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/mid_fairdfield_blue_red.png",
+            "title": "",
+            "button": "",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_B4jGqU",
+        "slide_3wV3mm",
+        "slide_BtDwMA",
+        "slide_cGGbgk",
+        "slide_gMF3c4",
+        "slide_DBLXEB",
+        "slide_QE8EpK",
+        "slide_nVEVwf",
+        "slide_4WiEmr",
+        "slide_6QgQkn",
+        "slide_wwGyRG",
+        "slide_dE9P8F",
+        "slide_6eNjYf",
+        "slide_pWVbN8",
+        "slide_wBEFk7",
+        "slide_UqdNip",
+        "slide_QMQ7GQ",
+        "slide_3Nwqp4",
+        "slide_b4RRjr",
+        "slide_WxzBAr",
+        "slide_gQdHYB",
+        "slide_QcxwWX",
+        "slide_N4U3VX",
+        "slide_4tMViX"
+      ],
+      "name": "SS - Slider #2",
+      "settings": {
+        "slider_view": 5,
+        "slider_view_mobile": 3,
+        "slider_rotate": 0,
+        "card_padding_vertical": 24,
+        "card_padding_vertical_mobile": 24,
+        "card_padding_horizontal": 40,
+        "card_padding_horizontal_mobile": 30,
+        "card_radius": 14,
+        "card_border_thickness": 0,
+        "card_shadow": true,
+        "card_ratio": "portrait",
+        "card_ratio_mobile": "portrait",
+        "card_overlay": 0,
+        "content_horizontal_position": "center",
+        "content_horizontal_position_mobile": "center",
+        "content_vertical_position": "end",
+        "content_vertical_position_mobile": "end",
+        "title_custom": false,
+        "title_font": "josefin_sans_n4",
+        "title_size": 28,
+        "title_size_mobile": 28,
+        "title_height": 130,
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 14,
+        "button_size_mobile": 14,
+        "button_height": 100,
+        "button_mt": 16,
+        "button_padding_vertical": 12,
+        "button_padding_horizontal": 20,
+        "button_radius": 0,
+        "button_border_thickness": 1,
+        "arrow_size": 42,
+        "arrow_size_mobile": 32,
+        "arrow_icon_size": 20,
+        "arrow_icon_size_mobile": 12,
+        "arrow_border_thickness": 0,
+        "arrow_show_desktop": true,
+        "arrow_show_mobile": false,
+        "title_color": "rgba(0,0,0,0)",
+        "card_border_color": "#121212",
+        "card_shadow_color": "#121212",
+        "card_overlay_color": "#121212",
+        "button_color": "rgba(0,0,0,0)",
+        "button_hover_color": "#121212",
+        "button_bg_color": "",
+        "button_bg_hover_color": "rgba(0,0,0,0)",
+        "button_border_color": "rgba(0,0,0,0)",
+        "button_border_hover_color": "rgba(0,0,0,0)",
+        "arrow_color": "#ffffff",
+        "arrow_hover_color": "#171717",
+        "arrow_bg_color": "#171717",
+        "arrow_bg_hover_color": "#ffffff",
+        "arrow_border_color": "#121212",
+        "arrow_border_hover_color": "#454545",
+        "background_color": "#f2f2f2",
+        "background_gradient": "",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 0,
+        "padding_horizontal_mobile": 0,
+        "full_width": true,
+        "content_width": 1200,
+        "border_thickness": 0,
+        "lazy": false
+      }
+    },
+    "image_with_text_overlay_wwk4kQ": {
+      "type": "image-with-text-overlay",
+      "disabled": true,
+      "name": "Tech Specs",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/dark_tech_spec_desktop_dec_copy.png",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/dark_tech_spec_mobile_team_sales.png",
+        "image_height_mobile": "adapt",
+        "content_position_mobile": "items-end justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 70,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "custom_rich_text_Fh3qGh": {
+      "type": "custom-rich-text",
+      "blocks": {
+        "heading_part_EYyzW4": {
+          "type": "heading_part",
+          "settings": {
+            "text": "NOT ALL",
+            "font_style": "armour",
+            "heading_size_mobile_px": 32,
+            "heading_size_desktop_px": 60,
+            "new_line": true
+          }
+        },
+        "heading_part_7AbbUJ": {
+          "type": "heading_part",
+          "settings": {
+            "text": "NECK GUARDS",
+            "font_style": "armour",
+            "heading_size_mobile_px": 32,
+            "heading_size_desktop_px": 60,
+            "new_line": true
+          }
+        },
+        "heading_part_HbXcpi": {
+          "type": "heading_part",
+          "settings": {
+            "text": "ARE CREATED EQUAL",
+            "font_style": "armour",
+            "heading_size_mobile_px": 32,
+            "heading_size_desktop_px": 60,
+            "new_line": true
+          }
+        },
+        "text_y6HhdW": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Titan BattleGear delivers the highest level of cut resistance in hockey where it counts – neck and wrists. Play with confidence knowing you’re fully covered.</p>",
+            "text_max_width_mobile": 560,
+            "text_max_width_desktop": 580,
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_part_EYyzW4",
+        "heading_part_7AbbUJ",
+        "heading_part_HbXcpi",
+        "text_y6HhdW"
+      ],
+      "name": "Custom Rich Text",
+      "settings": {
+        "text_alignment": "left",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "combined_heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "#ffffff",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "portfolio_custom_6bkU7e": {
+      "type": "portfolio-custom",
+      "blocks": {
+        "profile_DQBPyU": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/tech_1_b54f6942-8c26-4fcd-bf2a-2de6e24a618b.png",
+            "icon": "shopify://shop_images/spc.svg",
+            "icon_size": 58,
+            "heading": "<p>Ditch</p><p>Velcro</p>",
+            "description": "<p><strong>Patented Stretch ProCurve™ Collar</strong></p><p>Adaptive protection that moves with the athlete. No straps. No irritation. No velcro.</p>",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        },
+        "profile_Q74K3k": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/tech_2_206b17d5-6051-4d44-a7d6-dea393579846.png",
+            "icon": "shopify://shop_images/titanotex_aero_181f01f0-d378-4e30-8026-b5fdd25543cf.svg",
+            "icon_size": 52,
+            "heading": "<p>MAXIMUM</p><p>CUT RESISTANCE</p>",
+            "description": "<p><strong>TITANOTEX™ cut-resistant Fabric</strong></p><p>Rated up to ANSI A9 (scale of A1-A9), while other brands average A3.</p>",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        },
+        "profile_CPXzDm": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/tech_4_7d9ac665-5dd7-4c19-9d14-5419ea71ee01.png",
+            "icon": "shopify://shop_images/arcguar_logo.svg",
+            "icon_size": 52,
+            "heading": "<p>FULL<br/>COVERAGE</p>",
+            "description": "<p><strong>Patented Arc~Guard™ Collar</strong></p><p>Anatomically contoured to protect the carotid and jugular without bunching.</p>",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        },
+        "profile_qJjNPE": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/13.png",
+            "icon": "shopify://shop_images/comfort.svg",
+            "icon_size": 54,
+            "heading": "<p>LIGHTWEIGHT</p><p>& BREATHABLE</p>",
+            "description": "<p>Thermo-regulated 4-way stretch fabric, engineered to wick moisture and provide maximum mobility.</p>",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        },
+        "profile_EizdXp": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/tech_5_8c112124-d850-4eb2-8a7a-f570e984cdfa.png",
+            "icon": "shopify://shop_images/style_logo.svg",
+            "icon_size": 52,
+            "heading": "<p>UNMATCHED<br/>STYLE</p>",
+            "description": "<p>Express your identity with bold designs, limited edition drops, and team colors. </p>",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        },
+        "profile_3RW9GQ": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/tech_6_490391e4-5fdf-4b86-8c7f-303f089b6315.png",
+            "icon": "shopify://shop_images/usa_logo.svg",
+            "icon_size": 52,
+            "heading": "<p>MADE IN<br/>THE USA</p>",
+            "description": "<p>Built locally <strong>(MN, NJ, FL)</strong>, with the best materials. Protection that doesn't need a passport.</p>",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        },
+        "profile_xbm9Pp": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/7_b38fd5c8-4233-4272-890f-0e026399ae6d.jpg",
+            "icon": "shopify://shop_images/teamworks_logo.svg",
+            "icon_size": 44,
+            "heading": "<p>YOUR TEAM<br/>YOUR COLORS</p>",
+            "description": "<p><strong>Custom Team Baselayer</strong></p><p>Designed with your team's logo, colors, and unique identity.</p>",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        }
+      },
+      "block_order": [
+        "profile_DQBPyU",
+        "profile_Q74K3k",
+        "profile_CPXzDm",
+        "profile_qJjNPE",
+        "profile_EizdXp",
+        "profile_3RW9GQ",
+        "profile_xbm9Pp"
+      ],
+      "name": "Tech Specs",
+      "settings": {
+        "columns": 5,
+        "carousel_on_desktop": true,
+        "layout": "default",
+        "image_ratio": "portrait",
+        "image_ratio_mobile": "adapt",
+        "custom_image_height": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "disable_modal_opening": true,
+        "color_text": "",
+        "color_background": "#ffffff",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 24,
+        "padding_bottom": 36,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "image_with_text_overlay_Pn8Hcg": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_Wp4kmk": {
+          "type": "heading",
+          "settings": {
+            "heading": "MAXIMUM CUT-RESISTANCE",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_xW6CFh": {
+          "type": "text",
+          "settings": {
+            "text": "<p>11 of 14 other neck guards failed to stop a skate blade in lab testing</p><p><a href=\"https://www.titanbattlegear.com/blogs/hockey-safety/mayo-clinic-hockey-neck-guard-safety-test\" target=\"_blank\" title=\"https://www.titanbattlegear.com/blogs/hockey-safety/mayo-clinic-hockey-neck-guard-safety-test\"><em>Mayo Clinic / Clinical Journal of Sports Medicine.</em></a></p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "image_Ex3fER": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/safety_scale_jun_2026_black.svg",
+            "image_width": "custom",
+            "image_max_width": 600,
+            "image_max_width_mobile": 380
+          }
+        }
+      },
+      "block_order": [
+        "heading_Wp4kmk",
+        "text_xW6CFh",
+        "image_Ex3fER"
+      ],
+      "name": "new safety scale section",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/tech_safety_scale_header.png",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-center md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/tech_safety_scale_header_mobile.png",
+        "image_height_mobile": "600px",
+        "content_position_mobile": "items-start justify-start",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "#171717",
+        "gradient_background": "",
+        "color_highlight": "#e2fb31",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "custom_rich_text_iFgdmi": {
+      "type": "custom-rich-text",
+      "blocks": {
+        "heading_part_Et49w7": {
+          "type": "heading_part",
+          "settings": {
+            "text": "UPGRADE TO TITAN",
+            "font_style": "armour",
+            "heading_size_mobile_px": 32,
+            "heading_size_desktop_px": 60,
+            "new_line": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_part_Et49w7"
+      ],
+      "name": "Custom Rich Text",
+      "settings": {
+        "text_alignment": "left",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "combined_heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "#ffffff",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "titanpdp_comparison_table_TAUfCW": {
+      "type": "titanpdpComparisonTable",
+      "name": "Titan PDP Compare Table",
+      "settings": {
+        "margin_top": 10,
+        "margin_bottom": 75,
+        "color_background": "#ffffff",
+        "swap_row_color_order": true,
+        "gray_row_color": "#ffffff",
+        "white_row_color": "#f2f2f2"
+      }
+    },
+    "3d_prod_config_HdGjaa": {
+      "type": "3d-prod-config",
+      "name": "3d Shirt Configurator",
+      "settings": {
+        "padding_top": 72,
+        "padding_bottom": 100
+      }
+    },
+    "rich_text_qtEApy": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_wHxYiJ": {
+          "type": "heading",
+          "settings": {
+            "heading": "CONTACT TEAM SALES",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_wHxYiJ"
+      ],
+      "name": "t:sections.rich-text.name",
+      "settings": {
+        "text_alignment": "left",
+        "text_alignment_mobile": "left",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "large",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "#ffffff",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 20,
+        "padding_bottom": 0,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "custom_liquid_ijgnyq": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.name",
+      "settings": {
+        "liquid": "<script src=\"https://js.hsforms.net/forms/embed/46588550.js\" defer></script>\n<div class=\"hs-form-frame\" data-region=\"na1\" data-form-id=\"d7bcd3f3-9615-4cde-a94c-0ca255d083ff\" data-portal-id=\"46588550\"></div>",
+        "color_text": "#ffffff",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 28,
+        "padding_bottom": 72,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "image_with_text_W9AHFF": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_7ND6A4": {
+          "type": "heading",
+          "settings": {
+            "heading": "Semi-Custom",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_cARCAL": {
+          "type": "text",
+          "settings": {
+            "text": "<ul><li>Choose from 8 designs, 21 sublimation colors, and 17 thread colors</li><li>Select your design and assign your colors to portions of the shirt</li><li>Upload your logo</li><li>Offered in Adult and Youth Long Sleeve Stretch ProCurve</li><li>Requires a minimum order of 12 units (black or white thread) to begin production</li><li>Two ordering options: Individual ordering (our team sets up a custom store for your club on <a href=\"http://titanbattlegear.com/\" target=\"_blank\"><strong>titanbattlegear.com</strong></a>) or Bulk Ordering (team admin places order and bulk discounts available)</li><li>Click “GET STARTED” below to begin the process”</li></ul>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button_hDyCXm": {
+          "type": "button",
+          "settings": {
+            "button_label": "Get Started",
+            "button_link": "shopify://products/semi-custom-team-battlegear",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_7ND6A4",
+        "text_cARCAL",
+        "button_hDyCXm"
+      ],
+      "disabled": true,
+      "settings": {
+        "image": "shopify://shop_images/mega_menu_semi_custom.jpg",
+        "image_height": "adapt",
+        "image_width": "small",
+        "layout": "image_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "image_height_mobile": "auto",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "#ffffff",
+        "gradient_background": "",
+        "color_background_2": "",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 36,
+        "padding_bottom": 52,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
+      }
+    },
+    "rich_text_y7QWm6": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_Rq3KhG": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Team Customization Contact Form</strong>",
+            "heading_size": "title-sm",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_Rq3KhG"
+      ],
+      "disabled": true,
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "custom_liquid_e3bQGr": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "settings": {
+        "liquid": "<script charset=\"utf-8\" type=\"text/javascript\" src=\"//js.hsforms.net/forms/embed/v2.js\"></script>\n<script>\n  hbspt.forms.create({\n    portalId: \"46588550\",\n    formId: \"bb171335-be02-4c35-8323-e84ca1cb8efd\",\n    onFormSubmit: function($form) {\n      // Scroll the user back to the form after submission\n      setTimeout(function() {\n        $form[0].scrollIntoView({ behavior: 'smooth', block: 'start' });\n      }, 500);\n    }\n  });\n</script>",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 16,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "rich_text_mWjfgB": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_C6n9XM": {
+          "type": "heading",
+          "settings": {
+            "heading": "Schedule Zoom with a Titan",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "full_text",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_fqEgVg": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Thank you for your interest in Titan BattleGear! You can now schedule a Zoom meeting with one of our team members to discuss your needs and customization options.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "liquid_gg7MdX": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<!-- Start of Meetings Embed Script -->\n    <div class=\"meetings-iframe-container\" data-src=\"https://meetings.hubspot.com/andries-de-villiers/teamworks?embed=true\"></div>\n    <script type=\"text/javascript\" src=\"https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js\"></script>\n  <!-- End of Meetings Embed Script -->"
+          }
+        }
+      },
+      "block_order": [
+        "heading_C6n9XM",
+        "text_fqEgVg",
+        "liquid_gg7MdX"
+      ],
+      "disabled": true,
+      "settings": {
+        "text_alignment": "left",
+        "text_alignment_mobile": "left",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 0,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "contact_form_L9m4dd": {
+      "type": "contact-form",
+      "blocks": {
+        "custom_field_a79hyk": {
+          "type": "custom_field",
+          "settings": {
+            "type": "text",
+            "title": "Team/Org Name",
+            "required": false,
+            "full_width": false,
+            "checked_value": "Yes",
+            "unchecked_value": "No",
+            "radio_options": "",
+            "select_options": ""
+          }
+        },
+        "custom_field_zgHWwW": {
+          "type": "custom_field",
+          "settings": {
+            "type": "text",
+            "title": "Team Size",
+            "required": false,
+            "full_width": false,
+            "checked_value": "Yes",
+            "unchecked_value": "No",
+            "radio_options": "",
+            "select_options": ""
+          }
+        },
+        "custom_field_bN3Fwh": {
+          "type": "custom_field",
+          "settings": {
+            "type": "text",
+            "title": "Phone Number",
+            "required": false,
+            "full_width": false,
+            "checked_value": "Yes",
+            "unchecked_value": "No",
+            "radio_options": "",
+            "select_options": ""
+          }
+        }
+      },
+      "block_order": [
+        "custom_field_a79hyk",
+        "custom_field_zgHWwW",
+        "custom_field_bN3Fwh"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "Team Customization Contact Form",
+        "heading_size": "title-sm",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "narrow": true,
+        "rounded": true
+      }
+    },
+    "featured_collection_eaBtkG": {
+      "type": "featured-collection",
+      "custom_css": [
+        ".product-card__bottom.flex.items-center.gap-2 {display: none !important;}"
+      ],
+      "settings": {
+        "collection": "team-colors",
+        "products": [
+          "battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-navy-long",
+          "hockey-cut-resistant-neck-guard-team-navy",
+          "battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-red-long",
+          "hockey-cut-resistant-neck-guard-team-red",
+          "battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-royal-long",
+          "hockey-cut-resistant-neck-guard-team-royal",
+          "battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-forest-green-long",
+          "hockey-cut-resistant-neck-guard-team-forest-green",
+          "battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-maroon-long",
+          "hockey-cut-resistant-neck-guard-team-maroon",
+          "battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-purple-long",
+          "hockey-cut-resistant-neck-guard-team-purple",
+          "battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-kelly-green-long",
+          "hockey-cut-resistant-neck-guard-team-kelly-green",
+          "battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-orange-long",
+          "hockey-cut-resistant-neck-guard-team-orange",
+          "battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-gold-long",
+          "hockey-cut-resistant-neck-guard-team-gold",
+          "battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-team-carolina-blue-long",
+          "hockey-cut-resistant-neck-guard-team-carolina-blue"
+        ],
+        "product_limit": 12,
+        "columns": 5,
+        "new_version2": false,
+        "carousel_on_desktop": true,
+        "show_view_all": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "heading": "SHOP TEAM COLORS COLLECTION",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "DON'T NEED A CUSTOM DESIGN?",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 24,
+        "padding_bottom": 52,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "image_with_text_overlay_RNm3WX": {
+      "type": "image-with-text-overlay",
+      "name": "Image with text overlay",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/RTK_banner.png",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/RTK_banner_MOBILE.png",
+        "image_height_mobile": "adapt",
+        "content_position_mobile": "items-end justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "logo_list_XJGFE9": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_4wWNJk": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/mid_fairfield.png",
+            "height": 156,
+            "link": ""
+          }
+        },
+        "logo_PdNmxf": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/JR_Panthers_Logo.svg",
+            "height": 132,
+            "link": ""
+          }
+        },
+        "logo_RTRr43": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Brunswick_Logo.png",
+            "height": 132,
+            "link": ""
+          }
+        },
+        "logo_WeFkDk": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Bridgeport_Islanders_logo_svg_49e93486-a879-483b-b205-e2f7cdb8ddf6.png",
+            "height": 132,
+            "link": ""
+          }
+        },
+        "logo_nMRAhx": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Stallions_a712e90b-60af-4502-b0c0-ed6b404de1df.png",
+            "height": 132,
+            "link": ""
+          }
+        },
+        "logo_dKHDfg": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/USA_hockey_logo.gif",
+            "height": 112,
+            "link": ""
+          }
+        },
+        "logo_VF6MLN": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Vice_Hockey_2.png",
+            "height": 132,
+            "link": ""
+          }
+        },
+        "logo_3GDHzY": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/hawks_8eaed656-98f0-4d44-b7a1-cee96c4bbd54.png",
+            "height": 132,
+            "link": ""
+          }
+        },
+        "logo_ygVCFm": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/wolfpack_fcba1eb1-dc02-4b07-9f6f-23a0e0eaccba.png",
+            "height": 132,
+            "link": ""
+          }
+        },
+        "logo_46tPcY": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Ice-Devils-Logobug_small_3056083f-5fa4-4c5d-8596-07f3af3ec523.png",
+            "height": 132,
+            "link": ""
+          }
+        },
+        "logo_dkGqcm": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Ironwood_Lumberjacks_logo.png",
+            "height": 132,
+            "link": ""
+          }
+        },
+        "logo_YWijTX": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Stars_FNL_OFFICIAL.jpg",
+            "height": 132,
+            "link": ""
+          }
+        },
+        "logo_RUzDDN": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/nc_golden_bears_logo.png",
+            "height": 132,
+            "link": ""
+          }
+        },
+        "logo_tMJpUK": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/ccyha_logo.png",
+            "height": 132,
+            "link": ""
+          }
+        },
+        "logo_hh7AC8": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/MCN_Sentaors_logo_1.png",
+            "height": 152,
+            "link": ""
+          }
+        },
+        "logo_czJQVN": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/RTK.png",
+            "height": 132,
+            "link": ""
+          }
+        },
+        "logo_PCampn": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/RTK_Official_Logo_REV.png",
+            "height": 132,
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_4wWNJk",
+        "logo_PdNmxf",
+        "logo_RTRr43",
+        "logo_WeFkDk",
+        "logo_nMRAhx",
+        "logo_dKHDfg",
+        "logo_VF6MLN",
+        "logo_3GDHzY",
+        "logo_ygVCFm",
+        "logo_46tPcY",
+        "logo_dkGqcm",
+        "logo_YWijTX",
+        "logo_RUzDDN",
+        "logo_tMJpUK",
+        "logo_hh7AC8",
+        "logo_czJQVN",
+        "logo_PCampn"
+      ],
+      "settings": {
+        "layout": "marquee",
+        "grid_horizontal": 60,
+        "direction": "left",
+        "speed": 8,
+        "heading": "TOGETHER WE CONQUER",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h5",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "full_text",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": true,
+        "rounded": false
+      }
+    },
+    "main-page": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_size": "title-xl tracking-heading",
+        "heading_alignment": "text-left",
+        "heading_tag": "h1",
+        "text_size": "text-base",
+        "padding_top": 72,
+        "padding_bottom": 120,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    }
+  },
+  "order": [
+    "image_with_text_overlay_iHzycc",
+    "rich_text_yKELwF",
+    "scrolling_text_xpjTin",
+    "image_with_text_KVaz8F",
+    "image_with_text_Mardxg",
+    "rich_text_3RHMtg",
+    "ss_slider_2_iDYmfV",
+    "image_with_text_overlay_wwk4kQ",
+    "custom_rich_text_Fh3qGh",
+    "portfolio_custom_6bkU7e",
+    "image_with_text_overlay_Pn8Hcg",
+    "custom_rich_text_iFgdmi",
+    "titanpdp_comparison_table_TAUfCW",
+    "3d_prod_config_HdGjaa",
+    "rich_text_qtEApy",
+    "custom_liquid_ijgnyq",
+    "image_with_text_W9AHFF",
+    "rich_text_y7QWm6",
+    "custom_liquid_e3bQGr",
+    "rich_text_mWjfgB",
+    "contact_form_L9m4dd",
+    "featured_collection_eaBtkG",
+    "image_with_text_overlay_RNm3WX",
+    "logo_list_XJGFE9",
+    "main-page"
+  ]
+}
