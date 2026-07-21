@@ -264,7 +264,7 @@
       },
       "15491642209532502609": {
         "type": "shopify://apps/brand-ambassador-commission/blocks/ambassador-safelink-tracker/019d9a59-52d5-7b52-aab8-10340ad507b9",
-        "disabled": true,
+        "disabled": false,
         "settings": {
           "app_url": "https://brandambassadorcommission.vercel.app"
         }
