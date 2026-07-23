@@ -1,1 +1,820 @@
-{"sections":{"image_with_text_overlay_ARrb3R":{"type":"image-with-text-overlay","blocks":{"spacing_pdNrAw":{"type":"spacing","settings":{"height":0,"height_mobile":24}},"image_73Rt4T":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/3.0_BATTLEGEAR_SVG.svg","image_width":"custom","image_max_width":540,"image_max_width_mobile":330}},"button_LA9bnw":{"type":"button","settings":{"button_label":"3.0 Release Schedule","button_link":"shopify:\/\/pages\/production-tracker","button_style":"link","button_size":"sm","button_external":false,"button_icon":true}},"subheading_iDrEVg":{"type":"subheading","disabled":true,"settings":{"subheading":"save on 2.0 while supplies last","subheading_size":"subtitle-lg","secondary_color":true}}},"block_order":["spacing_pdNrAw","image_73Rt4T","button_LA9bnw","subheading_iDrEVg"],"name":"3.0 COMING SOON ","settings":{"transparent_header":true,"image":"shopify:\/\/shop_images\/3.0_banner_desktop.png","image_height":"adapt","content_width":"small","content_position":"md:items-center md:justify-start","text_alignment":"left","image_mobile":"shopify:\/\/shop_images\/3.0_banner_mobile_581c74c8-5c77-4e2b-a3a6-3d48067f5d5c.png","image_height_mobile":"adapt","content_position_mobile":"items-start justify-center","text_alignment_mobile":"left","color_text":"#ffffff","color_background":"#000000","gradient_background":"","color_highlight":"#e2fb31","gradient_highlight":"","color_button_text":"#171717","color_button_background":"#ffffff","color_button_gradient":"","color_overlay":"#171717","overlay_opacity":0,"padding_top":0,"padding_bottom":0,"divider":false,"full_width":true,"rounded":false,"enable_parallax":false,"parallax_direction":"vertical"}},"featured_product_mKayji":{"type":"featured-product","blocks":{"rating_iy3PKG":{"type":"rating","settings":{}},"liquid_9b3RHq":{"type":"liquid","settings":{"liquid":"<style>\n  .product__rating {\n    font-weight: 600;\n    color: #4e4e4e;\n  }\n  .rating.text-lg.leading-none {\n    font-size: 1.2rem;\n  }\n  .rating-star:before {\n    content: \"\\2605\\2605\\2605\\2605\\2605\";\n    background: black;\n    -webkit-text-fill-color: transparent;\n    -webkit-background-clip: text;\n    background-clip: text;\n  }\n  .cus_sub_header {\n    font-weight: 700;\n    padding-bottom: 0.5rem;\n    margin: 0 !important;\n    padding: 0 !important;\n    color: #5b5b5b;\n    font-size: var(--text-sm);\n    text-transform: uppercase;\n  }\n  .h1.heading {\n     font-size: 1.5rem;\n  }\n  @media (min-width: 1024px) {\n    .cus_sub_header {\n      padding-top: 1rem;\n      padding-bottom: 0.3rem;\n    }\n  }\n  @media (max-width: 500px) {\n    .h1.heading,\n    .customStyle {\n      font-size: 1.3rem !important;\n    }\n  }\n  .customStyle {\n    font-family: Armourxbd !important;\n    font-size: 1.5rem;\n  }\n  .customStyle.diagonal-strike {\n    font-size: 1rem;\n  }\n\n  .h1.heading {\n    font-size: 1.5rem;\n  }\n\n  \/* TBG Custom Code *\/\n  .tbg-payment-terms-source {\n    position: relative;\n    min-height: 0;\n  }\n\n  .tbg-payment-terms-source shopify-payment-terms,\n  .tbg-payment-terms-source .shopify-payment-terms,\n  .tbg-payment-terms-source iframe {\n    position: absolute !important;\n    width: 1px !important;\n    height: 1px !important;\n    margin: -1px !important;\n    padding: 0 !important;\n    overflow: hidden !important;\n    clip: rect(0 0 0 0) !important;\n    clip-path: inset(50%) !important;\n    white-space: nowrap !important;\n    border: 0 !important;\n    opacity: 0 !important;\n    pointer-events: none !important;\n  }\n\n  .tbg-installment-row {\n    display: flex;\n    justify-content: flex-end;\n  }\n\n  .tbg-installment-row .installment {\n    text-align: left;\n  }\n\n  .tbg-installment-row .installment strong {\n    font-weight: 700;\n  }\n\n  .tbg-installment-trigger {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    width: 16px;\n    height: 16px;\n    margin-left: 6px;\n    padding: 0;\n    border: 0;\n    background: transparent;\n    color: currentColor;\n    cursor: pointer;\n    vertical-align: middle;\n  }\n\n  .tbg-installment-trigger svg {\n    width: 14px;\n    height: 14px;\n    display: block;\n  }\n\n  .tbg-installment-trigger:focus-visible {\n    outline: 2px solid currentColor;\n    outline-offset: 2px;\n    border-radius: 999px;\n  }\n\n  .tbg-installment-row {\n    margin-top: 6px;\n  }\n<\/style>\n\n{%- assign product = all_products[section.settings.product] -%}\n\n{%- if product -%}\n  {%- assign product_form_installment_id = 'ProductFormInstallment-' | append: section.id | append: '-' | append: product.id -%}\n  {%- assign tbg_custom_installment_id = 'TBG-CustomInstallment-' | append: section.id | append: '-' | append: product.id -%}\n  {%- assign tbg_variant_data_id = 'TBG-InstallmentVariantData-' | append: section.id | append: '-' | append: product.id -%}\n\n  <p class=\"cus_sub_header\">\n    {{ product.metafields.custom.collection_name | default: \"HECC Certified\" }}\n  <\/p>\n\n  <div class=\"product__title flex gap-3\">\n    <h1 class=\"h1 heading leading-none product-title-sm mobile:product-title-sm\" style=\"margin: 0 !important; font-family: Armourxbd !important;\">\n      <split-words class=\"split-words block\" data-animate=\"fade-up\">\n        {{ product.title }}\n      <\/split-words>\n    <\/h1>\n\n    <div style=\"margin-left: auto;\" class=\"product__price grid gap-3\">\n      <div class=\"no-js-hidden\" id=\"Price-{{ section.id }}-{{ product.id }}\">\n        {%- render 'product-price', product: product, use_variant: true, class: 'flex flex-wrap items-baseline gap-2 lg:gap-1d5', style: \"ml-2 flex-col-reverse\", boldPrice: true -%}\n      <\/div>\n\n      {%- form 'product',\n        product,\n        id: product_form_installment_id,\n        class: 'installment text-sm leading-tight tbg-payment-terms-source'\n      -%}\n        <input type=\"hidden\" name=\"id\" value=\"{{ product.selected_or_first_available_variant.id }}\">\n        {{ form | payment_terms }}\n      {%- endform -%}\n\n      <script type=\"application\/json\" id=\"{{ tbg_variant_data_id }}\">\n        [\n          {%- for variant in product.variants -%}\n            { \"id\": {{ variant.id | json }}, \"price\": {{ variant.price | json }} }{%- unless forloop.last -%},{%- endunless -%}\n          {%- endfor -%}\n        ]\n      <\/script>\n\n      <script>\n        (function () {\n          var sourceFormId = {{ product_form_installment_id | json }};\n          var customInstallmentId = {{ tbg_custom_installment_id | json }};\n          var variantDataId = {{ tbg_variant_data_id | json }};\n          var minPriceCents = 3500;\n          var monthlyThresholdCents = 5000;\n          var currencyCode = {{ cart.currency.iso_code | default: shop.currency | json }};\n\n          window.TBGCustomInstallments = window.TBGCustomInstallments || {};\n          if (window.TBGCustomInstallments[customInstallmentId]) return;\n          window.TBGCustomInstallments[customInstallmentId] = true;\n\n          var retryTimer = null;\n          var nativeObserver = null;\n          var shadowObserver = null;\n          var variantPriceMap = {};\n\n          try {\n            var variantDataEl = document.getElementById(variantDataId);\n            var variantData = variantDataEl ? JSON.parse(variantDataEl.textContent) : [];\n            variantData.forEach(function (variant) {\n              variantPriceMap[String(variant.id)] = Number(variant.price || 0);\n            });\n          } catch (e) {}\n\n          function getSourceForm() {\n            return document.getElementById(sourceFormId);\n          }\n\n          function getCustomLine() {\n            return document.getElementById(customInstallmentId);\n          }\n\n          function getScopeRoot() {\n            var sourceForm = getSourceForm();\n            if (!sourceForm) return document;\n            return (\n              sourceForm.closest('[data-section-id]') ||\n              sourceForm.closest('product-info') ||\n              sourceForm.closest('section') ||\n              document\n            );\n          }\n\n          function formatMoney(cents) {\n            var amount = Number(cents || 0) \/ 100;\n\n            try {\n              return new Intl.NumberFormat(undefined, {\n                style: 'currency',\n                currency: currencyCode,\n                minimumFractionDigits: 2,\n                maximumFractionDigits: 2\n              }).format(amount);\n            } catch (e) {\n              return '$' + amount.toFixed(2);\n            }\n          }\n\n          function getSelectedVariantId() {\n            var sourceForm = getSourceForm();\n            if (!sourceForm) return '';\n\n            var scopeRoot = getScopeRoot();\n            var primaryInputs = scopeRoot.querySelectorAll(\n              'form[action*=\"\/cart\/add\"] input[name=\"id\"], product-form input[name=\"id\"], .product-form input[name=\"id\"]'\n            );\n\n            for (var i = 0; i < primaryInputs.length; i++) {\n              var input = primaryInputs[i];\n              var parentForm = input.closest('form');\n\n              if (parentForm && parentForm.id !== sourceFormId && input.value) {\n                return String(input.value);\n              }\n            }\n\n            var sourceInput = sourceForm.querySelector('input[name=\"id\"]');\n            if (sourceInput && sourceInput.value) {\n              return String(sourceInput.value);\n            }\n\n            var urlVariant = new URLSearchParams(window.location.search).get('variant');\n            return urlVariant ? String(urlVariant) : '';\n          }\n\n          function syncSourceFormVariant(variantId) {\n            var sourceForm = getSourceForm();\n            if (!sourceForm || !variantId) return;\n\n            var input = sourceForm.querySelector('input[name=\"id\"]');\n            if (!input || input.value === variantId) return;\n\n            input.value = variantId;\n            input.dispatchEvent(new Event('change', { bubbles: true }));\n          }\n\n          function getVariantPriceCents(variantId) {\n            if (!variantId) return null;\n            var price = variantPriceMap[String(variantId)];\n            return typeof price === 'number' && !isNaN(price) ? price : null;\n          }\n\n          function getNativePaymentTermsElement() {\n            var sourceForm = getSourceForm();\n            return sourceForm ? sourceForm.querySelector('shopify-payment-terms') : null;\n          }\n\n          function getNativePaymentText() {\n            var paymentTermsEl = getNativePaymentTermsElement();\n            if (!paymentTermsEl) return '';\n\n            var textParts = [];\n\n            if (paymentTermsEl.textContent) {\n              textParts.push(paymentTermsEl.textContent);\n            }\n\n            if (paymentTermsEl.innerText) {\n              textParts.push(paymentTermsEl.innerText);\n            }\n\n            if (paymentTermsEl.shadowRoot) {\n              if (paymentTermsEl.shadowRoot.textContent) {\n                textParts.push(paymentTermsEl.shadowRoot.textContent);\n              }\n              if (paymentTermsEl.shadowRoot.innerText) {\n                textParts.push(paymentTermsEl.shadowRoot.innerText);\n              }\n            }\n\n            return textParts.join(' ').replace(\/\\s+\/g, ' ').trim();\n          }\n\n          function extractInstallmentValue(text) {\n            if (!text) return null;\n\n            var normalizedText = text.replace(\/\\s+\/g, ' ').trim();\n\n            var monthlyMatch = normalizedText.match(\/([€£$]\\s?\\d[\\d,]*(?:\\.\\d{2})?)\\\/mo\\b\/i);\n            if (monthlyMatch) {\n              return {\n                amount: monthlyMatch[1].replace(\/\\s+\/g, ' ').trim(),\n                suffix: '\/mo'\n              };\n            }\n\n            var installmentMatch = normalizedText.match(\/(?:pay in|or pay in)?\\s*(\\d+)\\s+interest-free installments? of\\s+([€£$]\\s?\\d[\\d,]*(?:\\.\\d{2})?)\/i);\n            if (installmentMatch) {\n              return {\n                amount: installmentMatch[2].replace(\/\\s+\/g, ' ').trim(),\n                suffix: ''\n              };\n            }\n\n            return null;\n          }\n\n          function getNativePopupTrigger() {\n            var paymentTermsEl = getNativePaymentTermsElement();\n            if (!paymentTermsEl) return null;\n\n            var candidates = [];\n\n            function collectClickableElements(root) {\n              if (!root || !root.querySelectorAll) return [];\n              return Array.prototype.slice.call(\n                root.querySelectorAll('a, button, [role=\"button\"], [tabindex]')\n              );\n            }\n\n            candidates = candidates.concat(collectClickableElements(paymentTermsEl));\n\n            if (paymentTermsEl.shadowRoot) {\n              candidates = candidates.concat(collectClickableElements(paymentTermsEl.shadowRoot));\n            }\n\n            var preferredTexts = [\n              'check your purchasing power',\n              'learn more'\n            ];\n\n            for (var i = 0; i < preferredTexts.length; i++) {\n              var preferredText = preferredTexts[i];\n\n              for (var j = 0; j < candidates.length; j++) {\n                var el = candidates[j];\n                var text = (el.textContent || el.innerText || '').replace(\/\\s+\/g, ' ').trim().toLowerCase();\n\n                if (text.indexOf(preferredText) !== -1) {\n                  return el;\n                }\n              }\n            }\n\n            return candidates.length ? candidates[0] : null;\n          }\n\n          function openNativeInstallmentPopup() {\n            var trigger = getNativePopupTrigger();\n            if (!trigger) return;\n            trigger.click();\n          }\n\n          function renderCustomInstallment() {\n            var customLine = getCustomLine();\n            if (!customLine) return;\n\n            var variantId = getSelectedVariantId();\n            syncSourceFormVariant(variantId);\n\n            var variantPriceCents = getVariantPriceCents(variantId);\n\n            if (variantPriceCents !== null && variantPriceCents < minPriceCents) {\n              customLine.innerHTML = '';\n              customLine.hidden = true;\n              return;\n            }\n\n            var installmentData = extractInstallmentValue(getNativePaymentText());\n\n            if (!installmentData && variantPriceCents !== null) {\n              var divisor = variantPriceCents >= monthlyThresholdCents ? 4 : 2;\n              installmentData = {\n                amount: formatMoney(Math.round(variantPriceCents \/ divisor)),\n                suffix: divisor === 4 ? '\/mo' : ''\n              };\n            }\n\n            if (!installmentData || !installmentData.amount) {\n              customLine.innerHTML = '';\n              customLine.hidden = true;\n              return;\n            }\n\n            customLine.innerHTML =\n              'or from <strong>' +\n              installmentData.amount +\n              '<\/strong>' +\n              installmentData.suffix +\n              '<button type=\"button\" class=\"tbg-installment-trigger\" aria-label=\"Learn more about payment options\">' +\n                '<svg viewBox=\"0 0 20 20\" fill=\"none\" aria-hidden=\"true\">' +\n                  '<circle cx=\"10\" cy=\"10\" r=\"8.25\" stroke=\"currentColor\" stroke-width=\"1.5\"><\/circle>' +\n                  '<path d=\"M10 8.2V13\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\"><\/path>' +\n                  '<circle cx=\"10\" cy=\"5.8\" r=\"0.9\" fill=\"currentColor\"><\/circle>' +\n                '<\/svg>' +\n              '<\/button>';\n\n            customLine.hidden = false;\n          }\n\n          function attachNativeObserver() {\n            var paymentTermsEl = getNativePaymentTermsElement();\n            if (!paymentTermsEl) return;\n\n            if (!nativeObserver) {\n              nativeObserver = new MutationObserver(function () {\n                renderCustomInstallment();\n              });\n            }\n\n            nativeObserver.disconnect();\n            nativeObserver.observe(paymentTermsEl, {\n              attributes: true,\n              childList: true,\n              subtree: true,\n              characterData: true\n            });\n\n            if (paymentTermsEl.shadowRoot) {\n              if (!shadowObserver) {\n                shadowObserver = new MutationObserver(function () {\n                  renderCustomInstallment();\n                });\n              }\n\n              shadowObserver.disconnect();\n              shadowObserver.observe(paymentTermsEl.shadowRoot, {\n                childList: true,\n                subtree: true,\n                characterData: true\n              });\n            }\n          }\n\n          function startRefreshWindow() {\n            renderCustomInstallment();\n            attachNativeObserver();\n\n            if (retryTimer) {\n              clearInterval(retryTimer);\n            }\n\n            var attempts = 0;\n            retryTimer = setInterval(function () {\n              attempts += 1;\n              attachNativeObserver();\n              renderCustomInstallment();\n\n              if (attempts >= 10) {\n                clearInterval(retryTimer);\n              }\n            }, 300);\n          }\n\n          function bindVariantListeners() {\n            var scopeRoot = getScopeRoot();\n\n            function handleVariantInteraction(event) {\n              var target = event.target;\n              if (!target || !scopeRoot.contains(target)) return;\n\n              if (\n                target.name === 'id' ||\n                target.matches('select[name^=\"options[\"]') ||\n                target.matches('input[name^=\"options[\"]') ||\n                target.closest('variant-selects') ||\n                target.closest('variant-radios')\n              ) {\n                requestAnimationFrame(startRefreshWindow);\n              }\n            }\n\n            scopeRoot.addEventListener('change', handleVariantInteraction);\n            scopeRoot.addEventListener('input', handleVariantInteraction);\n\n            scopeRoot.addEventListener('click', function (event) {\n              var trigger = event.target.closest('.tbg-installment-trigger');\n              if (!trigger) return;\n\n              event.preventDefault();\n              openNativeInstallmentPopup();\n            });\n\n            document.addEventListener('variant:change', startRefreshWindow);\n            document.addEventListener('product:variant-change', startRefreshWindow);\n            document.addEventListener('product-info:variant-change', startRefreshWindow);\n          }\n\n          function init() {\n            startRefreshWindow();\n            bindVariantListeners();\n          }\n\n          if (document.readyState === 'loading') {\n            document.addEventListener('DOMContentLoaded', init, { once: true });\n          } else {\n            init();\n          }\n        })();\n      <\/script>\n    <\/div>\n  <\/div>\n\n  <div class=\"tbg-installment-row\">\n    <div id=\"{{ tbg_custom_installment_id }}\" class=\"installment text-sm leading-tight\" aria-live=\"polite\" hidden><\/div>\n  <\/div>\n{%- endif -%}"}},"title_fYXeYp":{"type":"title","disabled":true,"settings":{"title_size":"product-title-md","title_size_mobile":"product-title-md","title_tag":"h2","show_price":true,"show_rating":true}},"text_Yt6nYn":{"type":"text","settings":{"icon":"time","iwidth":"custom","icon_width":22,"text":"<strong>NEW IN STOCK - LIMITED UNITS AVAILABLE<\/strong>","text_size":"text-base"}},"read_more_XfamLV":{"type":"read_more","settings":{}},"spinning_text_Fz7zCb":{"type":"spinning_text","settings":{"text":"NEW IN STOCK"}},"description_Fh9cKi":{"type":"description","disabled":true,"settings":{"text_size":"text-base"}},"variant_picker_GLRbLX":{"type":"variant_picker","disabled":true,"settings":{"enable_dynamic_variants":true,"show_variant_labels":false,"picker_type":"dropdown","enable_color_swatches":true,"color_swatch_type":"color","size_chart":"copy-of-battlegear-2-0-size-chart"}},"buy_buttons_hiFt6n":{"type":"buy_buttons","disabled":true,"settings":{"show_quantity_selector":true,"show_price":false,"show_dynamic_checkout":true,"show_gift_card_recipient":true,"enable_back_in_stock":false,"show_back_in_stock_name":false,"show_back_in_stock_phone":false}}},"block_order":["rating_iy3PKG","liquid_9b3RHq","title_fYXeYp","text_Yt6nYn","read_more_XfamLV","spinning_text_Fz7zCb","description_Fh9cKi","variant_picker_GLRbLX","buy_buttons_hiFt6n"],"disabled":true,"name":"t:sections.featured-product.name","settings":{"product":"cut-resistant-baselayer-3-0-black","enable_sticky_info":true,"media_size":50,"gallery_layout":"thumbnail","thumbnail_position":"beside","image_ratio":"adapt_first","image_zoom":"lightbox","hide_variants":false,"enable_video_autoplay":false,"enable_video_looping":false,"mobile_layout":"full_width","image_ratio_mobile":"adapt_first","mobile_thumbnail":false,"padding_top":96,"padding_bottom":40,"divider":false,"full_width":false,"rounded":false}},"portfolio_custom_nTJygx":{"type":"portfolio-custom","blocks":{"profile_AQUPMG":{"type":"profile","settings":{"image":"shopify:\/\/shop_images\/tech_1_b54f6942-8c26-4fcd-bf2a-2de6e24a618b.png","icon":"shopify:\/\/shop_images\/spc.svg","icon_size":58,"heading":"<p>Ditch<\/p><p>Velcro<\/p>","description":"<p><strong>Patented Stretch ProCurve™ Collar<\/strong><\/p><p>Adaptive protection that moves with the athlete. No straps. No irritation. No velcro.<\/p>","text":"<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>","color_text":"#ffffff","color_background":"#171717"}},"profile_RE4jDe":{"type":"profile","settings":{"image":"shopify:\/\/shop_images\/13.png","icon":"shopify:\/\/shop_images\/comfort.svg","icon_size":54,"heading":"<p>75%<br\/>LIGHTER<\/p>","description":"<p><strong>TITANOTEX™ AERO STRETCH<\/strong><\/p><p>Our lightest, most advanced cut-resistant technology maximizes air flow, and removes bulk from your baselayer.<\/p>","text":"<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>","color_text":"#ffffff","color_background":"#171717"}},"profile_K8W8cb":{"type":"profile","settings":{"image":"shopify:\/\/shop_images\/aj_on_and_off.png","icon":"shopify:\/\/shop_images\/up_and_down_arrow.svg","icon_size":54,"heading":"<p>EASIER<br\/>ON\/OFF<\/p>","description":"<p><strong>TITANOTEX™ AERO STRETCH<\/strong><\/p><p>25% more stretch enables the collar to effortlessly expand and recover over your head.<\/p>","text":"<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>","color_text":"#ffffff","color_background":"#171717"}},"profile_xPbijN":{"type":"profile","settings":{"image":"shopify:\/\/shop_images\/tech_2_206b17d5-6051-4d44-a7d6-dea393579846.png","icon":"shopify:\/\/shop_images\/titanotex_aero_181f01f0-d378-4e30-8026-b5fdd25543cf.svg","icon_size":52,"heading":"<p>MAXIMUM<\/p><p>CUT RESISTANCE<\/p>","description":"<p><strong>TITANOTEX™ CUT-RESISTANT TECH<\/strong><\/p><p>Rated up to ANSI A9 (scale of A1-A9), while other brands average A3.<\/p>","text":"<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>","color_text":"#ffffff","color_background":"#171717"}},"profile_nfwxhg":{"type":"profile","settings":{"image":"shopify:\/\/shop_images\/tech_4_7d9ac665-5dd7-4c19-9d14-5419ea71ee01.png","icon":"shopify:\/\/shop_images\/arcguar_logo.svg","icon_size":52,"heading":"<p>FULL<br\/>COVERAGE<\/p>","description":"<p><strong>Patented Arc~Guard™ Collar<\/strong><\/p><p>Anatomically contoured to protect the carotid and jugular without bunching.<\/p>","text":"<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>","color_text":"#ffffff","color_background":"#171717"}},"profile_EAUFAQ":{"type":"profile","settings":{"image":"shopify:\/\/shop_images\/tech_6_490391e4-5fdf-4b86-8c7f-303f089b6315.png","icon":"shopify:\/\/shop_images\/usa_logo.svg","icon_size":52,"heading":"<p>MADE IN<br\/>THE USA<\/p>","description":"<p>Built locally <strong>(MN, NJ, FL)<\/strong>, with the best materials. Protection that doesn't need a passport.<\/p>","text":"<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>","color_text":"#ffffff","color_background":"#171717"}}},"block_order":["profile_AQUPMG","profile_RE4jDe","profile_K8W8cb","profile_xPbijN","profile_nfwxhg","profile_EAUFAQ"],"name":"Tech Specs","settings":{"columns":5,"carousel_on_desktop":true,"layout":"default","image_ratio":"portrait","image_ratio_mobile":"adapt","custom_image_height":"","columns_mobile":"1","swipe_on_mobile":true,"disable_modal_opening":true,"color_text":"","color_background":"#000000","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":28,"padding_bottom":28,"divider":false,"full_width":true,"rounded":false}},"rich_text_i6Ry8e":{"type":"rich-text","blocks":{"button_YAieVp":{"type":"button","settings":{"button_label":"Learn More","button_link":"","button_style":"secondary","button_size":"sm","button_external":false,"button_icon":true}}},"block_order":["button_YAieVp"],"disabled":true,"name":"BLOGPOST BUTTON ","settings":{"text_alignment":"center","text_alignment_mobile":"center","heading":"","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_width":"small","heading_tag":"h2","subheading":"","description":"","button_label":"","button_link":"","button_external":false,"button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false,"color_text":"","color_background":"#000000","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"#171717","color_button_background":"#e2fb31","color_button_gradient":"","padding_top":0,"padding_bottom":20,"divider":false,"narrow":true,"rounded":false}},"featured_collection_CMKrtc":{"type":"featured-collection","name":"t:sections.featured-collection.name","settings":{"collection":"","products":["cut-resistant-baselayer-3-0-black","cut-resistant-baselayer-3-0-royal","cut-resistant-neck-guard-3-0-black","cut-resistant-neck-guard-3-0-white"],"columns":5,"carousel_on_desktop":false,"show_view_all":false,"columns_mobile":"2","swipe_on_mobile":true,"heading":"ORDER NOW","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_tag":"h2","subheading":"","description":"","highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false,"color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":72,"padding_bottom":72,"divider":false,"full_width":false,"rounded":false}},"image_with_text_overlay_ijJQBF":{"type":"image-with-text-overlay","blocks":{"image_AeEqKN":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/Titanotex_aero_explained_copy.svg","image_width":"custom","image_max_width":420,"image_max_width_mobile":300}}},"block_order":["image_AeEqKN"],"name":"t:sections.image-with-text-overlay.name","settings":{"transparent_header":false,"image":"shopify:\/\/shop_images\/3.0_banner_desktop_aero.png","image_height":"adapt","content_width":"large","content_position":"md:items-end md:justify-start","text_alignment":"left","image_mobile":"shopify:\/\/shop_images\/3.0_banner_mobile_aero.png","image_height_mobile":"300px","content_position_mobile":"items-end justify-start","text_alignment_mobile":"left","color_text":"#ffffff","color_background":"","gradient_background":"","color_highlight":"#e0a580","gradient_highlight":"","color_button_text":"#171717","color_button_background":"#ffffff","color_button_gradient":"","color_overlay":"#171717","overlay_opacity":0,"padding_top":0,"padding_bottom":0,"divider":false,"full_width":true,"rounded":false,"enable_parallax":false,"parallax_direction":"vertical"}},"featured_collection_6kH43T":{"type":"featured-collection","name":"t:sections.featured-collection.name","settings":{"collection":"","products":["cut-resistant-baselayer-3-0-f-r-limited-edition-drops-7-15","cut-resistant-baselayer-3-0-navy","cut-resistant-baselayer-3-0-white","cut-resistant-baselayer-3-0-blackout-camo","cut-resistant-baselayer-3-0-early-riser","cut-resistant-baselayer-3-0-whiteout-camo","cut-resistant-baselayer-3-0-miami-vice","cut-resistant-baselayer-3-0-red","cut-resistant-baselayer-3-0-hot-lap","cut-resistant-baselayer-3-0-galaxy-splatter","cut-resistant-baselayer-3-0-s-p-limited-edition-drops-9-15"],"columns":5,"carousel_on_desktop":false,"show_view_all":false,"columns_mobile":"2","swipe_on_mobile":true,"heading":"COMING SOON","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_tag":"h2","subheading":"","description":"","highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false,"color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":72,"padding_bottom":72,"divider":false,"full_width":false,"rounded":false}},"image_with_text_overlay_yxA8bY":{"type":"image-with-text-overlay","blocks":{"image_VGyGWe":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/extended_wrist_coverage_explained_36f8632f-dd43-4355-a227-99070d0b7a79.svg","image_width":"custom","image_max_width":470,"image_max_width_mobile":300}}},"block_order":["image_VGyGWe"],"name":"t:sections.image-with-text-overlay.name","settings":{"transparent_header":false,"image":"shopify:\/\/shop_images\/3.0_banner_desktop_wrist.png","image_height":"adapt","content_width":"small","content_position":"md:items-end md:justify-start","text_alignment":"left","image_mobile":"shopify:\/\/shop_images\/3.0_banner_mobile_wrist.png","image_height_mobile":"300px","content_position_mobile":"items-end justify-start","text_alignment_mobile":"left","color_text":"#ffffff","color_background":"","gradient_background":"","color_highlight":"#e0a580","gradient_highlight":"","color_button_text":"#171717","color_button_background":"#ffffff","color_button_gradient":"","color_overlay":"#171717","overlay_opacity":0,"padding_top":0,"padding_bottom":0,"divider":false,"full_width":true,"rounded":false,"enable_parallax":false,"parallax_direction":"vertical"}},"featured_collection_GyKyie":{"type":"featured-collection","name":"t:sections.featured-collection.name","settings":{"collection":"","products":["cut-resistant-baselayer-3-0-kelly","cut-resistant-baselayer-3-0-orange","cut-resistant-baselayer-3-0-pink-frost","cut-resistant-baselayer-3-0-maroon","cut-resistant-baselayer-3-0-purple","cut-resistant-baselayer-3-0-forest","cut-resistant-baselayer-3-0-carolina","cut-resistant-baselayer-3-0-team-gold","cut-resistant-baselayer-3-0-p-h-limited-edition-drops-11-15"],"columns":5,"carousel_on_desktop":false,"show_view_all":false,"columns_mobile":"2","swipe_on_mobile":true,"heading":"COMING LATER","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_tag":"h2","subheading":"","description":"","highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false,"color_text":"","color_background":"rgba(0,0,0,0)","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":72,"padding_bottom":72,"divider":false,"full_width":false,"rounded":false}},"image_with_text_overlay_VaKKLG":{"type":"image-with-text-overlay","blocks":{"heading_yVG43r":{"type":"heading","settings":{"heading":"<strong> CUT-RESISTANT NECK GUARDS<\/strong>","heading_size":"title-lg tracking-heading","heading_tag":"h1","highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false}},"image_T9khqV":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/icon_website_USA_novelcro.svg","image_width":"custom","image_max_width":200,"image_max_width_mobile":150}}},"block_order":["heading_yVG43r","image_T9khqV"],"disabled":true,"custom_css":["h1 {font-family: TITANFONT;}"],"settings":{"transparent_header":false,"image":"{{ collection.image }}","image_height":"adapt","content_width":"large","content_position":"md:items-end md:justify-start","text_alignment":"left","image_mobile":"shopify:\/\/shop_images\/stand_alone_collar.png","image_height_mobile":"adapt","content_position_mobile":"items-end justify-center","text_alignment_mobile":"center","color_text":"#ffffff","color_background":"","gradient_background":"","color_highlight":"#e2fb31","gradient_highlight":"","color_button_text":"#171717","color_button_background":"#ffffff","color_button_gradient":"","color_overlay":"#171717","overlay_opacity":0,"padding_top":0,"padding_bottom":0,"divider":false,"full_width":true,"rounded":false,"enable_parallax":false,"parallax_direction":"vertical"}},"main-collection-banner":{"type":"main-collection-banner","blocks":{"spacing":{"type":"spacing","disabled":true,"settings":{"height":48,"height_mobile":0}},"title":{"type":"title","disabled":true,"settings":{"title_size":"title-lg tracking-heading"}},"description_KiwP3a":{"type":"description","disabled":true,"settings":{"text_font":"body","text_size":"subtext-sm","text_max_size":128,"text_line_height":1.6,"text_letter_spacing":0,"text_capitalize":false,"secondary_color":true}},"breadcrumb":{"type":"breadcrumb","disabled":true,"settings":{"show_collections_link":true,"show_collection_title":true}}},"block_order":["spacing","title","description_KiwP3a","breadcrumb"],"disabled":true,"settings":{"transparent_header":false,"show_image":false,"image_height":"400px","content_position":"md:items-end md:justify-start","text_alignment":"left","image_height_mobile":"auto","content_position_mobile":"items-end justify-start","text_alignment_mobile":"left","color_text":"#ffffff","color_background":"","gradient_background":"","color_overlay":"#171717","overlay_opacity":20,"padding_top":0,"padding_bottom":0,"divider":false,"full_width":false,"rounded":false,"enable_parallax":true,"parallax_direction":"vertical"}},"main-collection":{"type":"main-collection","blocks":{"subcollections_TWbxhq":{"type":"subcollections","disabled":true,"settings":{"menu":"subcollections","show_count":false}}},"block_order":["subcollections_TWbxhq"],"disabled":true,"settings":{"products_per_page":50,"columns":5,"columns_mobile":"2","pagination":"infinite","enable_filtering":true,"filter_type":"sidebar","filter_collapsed":false,"filter_color_swatches":true,"enable_sorting":true,"show_on_model":false,"buttons_style":"secondary","padding_top":36,"padding_bottom":72,"divider":false,"full_width":false,"rounded":false}},"recently-viewed":{"type":"recently-viewed","custom_css":[".product-card__bottom.flex.items-center.gap-2 {display: none !important;}"],"settings":{"product_limit":4,"columns":5,"carousel_on_desktop":true,"columns_mobile":"1","swipe_on_mobile":true,"heading":"RECENTLY VIEWED","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_tag":"h2","subheading":"","description":"","highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false,"color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":72,"padding_bottom":72,"divider":false,"full_width":false,"rounded":true}}},"order":["image_with_text_overlay_ARrb3R","featured_product_mKayji","portfolio_custom_nTJygx","rich_text_i6Ry8e","featured_collection_CMKrtc","image_with_text_overlay_ijJQBF","featured_collection_6kH43T","image_with_text_overlay_yxA8bY","featured_collection_GyKyie","image_with_text_overlay_VaKKLG","main-collection-banner","main-collection","recently-viewed"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_with_text_overlay_ARrb3R": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "spacing_pdNrAw": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 24
+          }
+        },
+        "image_73Rt4T": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/3.0_BATTLEGEAR_SVG.svg",
+            "image_width": "custom",
+            "image_max_width": 540,
+            "image_max_width_mobile": 330
+          }
+        },
+        "button_LA9bnw": {
+          "type": "button",
+          "settings": {
+            "button_label": "3.0 Release Schedule",
+            "button_link": "shopify://pages/production-tracker",
+            "button_style": "link",
+            "button_size": "sm",
+            "button_external": false,
+            "button_icon": true
+          }
+        },
+        "subheading_iDrEVg": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "save on 2.0 while supplies last",
+            "subheading_size": "subtitle-lg",
+            "secondary_color": true
+          }
+        }
+      },
+      "block_order": [
+        "spacing_pdNrAw",
+        "image_73Rt4T",
+        "button_LA9bnw",
+        "subheading_iDrEVg"
+      ],
+      "name": "3.0 COMING SOON ",
+      "settings": {
+        "transparent_header": true,
+        "image": "shopify://shop_images/3.0_banner_desktop.png",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-center md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/3.0_banner_mobile_581c74c8-5c77-4e2b-a3a6-3d48067f5d5c.png",
+        "image_height_mobile": "adapt",
+        "content_position_mobile": "items-start justify-center",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_highlight": "#e2fb31",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "featured_product_mKayji": {
+      "type": "featured-product",
+      "blocks": {
+        "rating_iy3PKG": {
+          "type": "rating",
+          "settings": {}
+        },
+        "liquid_9b3RHq": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<style>\n  .product__rating {\n    font-weight: 600;\n    color: #4e4e4e;\n  }\n  .rating.text-lg.leading-none {\n    font-size: 1.2rem;\n  }\n  .rating-star:before {\n    content: \"\\2605\\2605\\2605\\2605\\2605\";\n    background: black;\n    -webkit-text-fill-color: transparent;\n    -webkit-background-clip: text;\n    background-clip: text;\n  }\n  .cus_sub_header {\n    font-weight: 700;\n    padding-bottom: 0.5rem;\n    margin: 0 !important;\n    padding: 0 !important;\n    color: #5b5b5b;\n    font-size: var(--text-sm);\n    text-transform: uppercase;\n  }\n  .h1.heading {\n     font-size: 1.5rem;\n  }\n  @media (min-width: 1024px) {\n    .cus_sub_header {\n      padding-top: 1rem;\n      padding-bottom: 0.3rem;\n    }\n  }\n  @media (max-width: 500px) {\n    .h1.heading,\n    .customStyle {\n      font-size: 1.3rem !important;\n    }\n  }\n  .customStyle {\n    font-family: Armourxbd !important;\n    font-size: 1.5rem;\n  }\n  .customStyle.diagonal-strike {\n    font-size: 1rem;\n  }\n\n  .h1.heading {\n    font-size: 1.5rem;\n  }\n\n  /* TBG Custom Code */\n  .tbg-payment-terms-source {\n    position: relative;\n    min-height: 0;\n  }\n\n  .tbg-payment-terms-source shopify-payment-terms,\n  .tbg-payment-terms-source .shopify-payment-terms,\n  .tbg-payment-terms-source iframe {\n    position: absolute !important;\n    width: 1px !important;\n    height: 1px !important;\n    margin: -1px !important;\n    padding: 0 !important;\n    overflow: hidden !important;\n    clip: rect(0 0 0 0) !important;\n    clip-path: inset(50%) !important;\n    white-space: nowrap !important;\n    border: 0 !important;\n    opacity: 0 !important;\n    pointer-events: none !important;\n  }\n\n  .tbg-installment-row {\n    display: flex;\n    justify-content: flex-end;\n  }\n\n  .tbg-installment-row .installment {\n    text-align: left;\n  }\n\n  .tbg-installment-row .installment strong {\n    font-weight: 700;\n  }\n\n  .tbg-installment-trigger {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    width: 16px;\n    height: 16px;\n    margin-left: 6px;\n    padding: 0;\n    border: 0;\n    background: transparent;\n    color: currentColor;\n    cursor: pointer;\n    vertical-align: middle;\n  }\n\n  .tbg-installment-trigger svg {\n    width: 14px;\n    height: 14px;\n    display: block;\n  }\n\n  .tbg-installment-trigger:focus-visible {\n    outline: 2px solid currentColor;\n    outline-offset: 2px;\n    border-radius: 999px;\n  }\n\n  .tbg-installment-row {\n    margin-top: 6px;\n  }\n</style>\n\n{%- assign product = all_products[section.settings.product] -%}\n\n{%- if product -%}\n  {%- assign product_form_installment_id = 'ProductFormInstallment-' | append: section.id | append: '-' | append: product.id -%}\n  {%- assign tbg_custom_installment_id = 'TBG-CustomInstallment-' | append: section.id | append: '-' | append: product.id -%}\n  {%- assign tbg_variant_data_id = 'TBG-InstallmentVariantData-' | append: section.id | append: '-' | append: product.id -%}\n\n  <p class=\"cus_sub_header\">\n    {{ product.metafields.custom.collection_name | default: \"HECC Certified\" }}\n  </p>\n\n  <div class=\"product__title flex gap-3\">\n    <h1 class=\"h1 heading leading-none product-title-sm mobile:product-title-sm\" style=\"margin: 0 !important; font-family: Armourxbd !important;\">\n      <split-words class=\"split-words block\" data-animate=\"fade-up\">\n        {{ product.title }}\n      </split-words>\n    </h1>\n\n    <div style=\"margin-left: auto;\" class=\"product__price grid gap-3\">\n      <div class=\"no-js-hidden\" id=\"Price-{{ section.id }}-{{ product.id }}\">\n        {%- render 'product-price', product: product, use_variant: true, class: 'flex flex-wrap items-baseline gap-2 lg:gap-1d5', style: \"ml-2 flex-col-reverse\", boldPrice: true -%}\n      </div>\n\n      {%- form 'product',\n        product,\n        id: product_form_installment_id,\n        class: 'installment text-sm leading-tight tbg-payment-terms-source'\n      -%}\n        <input type=\"hidden\" name=\"id\" value=\"{{ product.selected_or_first_available_variant.id }}\">\n        {{ form | payment_terms }}\n      {%- endform -%}\n\n      <script type=\"application/json\" id=\"{{ tbg_variant_data_id }}\">\n        [\n          {%- for variant in product.variants -%}\n            { \"id\": {{ variant.id | json }}, \"price\": {{ variant.price | json }} }{%- unless forloop.last -%},{%- endunless -%}\n          {%- endfor -%}\n        ]\n      </script>\n\n      <script>\n        (function () {\n          var sourceFormId = {{ product_form_installment_id | json }};\n          var customInstallmentId = {{ tbg_custom_installment_id | json }};\n          var variantDataId = {{ tbg_variant_data_id | json }};\n          var minPriceCents = 3500;\n          var monthlyThresholdCents = 5000;\n          var currencyCode = {{ cart.currency.iso_code | default: shop.currency | json }};\n\n          window.TBGCustomInstallments = window.TBGCustomInstallments || {};\n          if (window.TBGCustomInstallments[customInstallmentId]) return;\n          window.TBGCustomInstallments[customInstallmentId] = true;\n\n          var retryTimer = null;\n          var nativeObserver = null;\n          var shadowObserver = null;\n          var variantPriceMap = {};\n\n          try {\n            var variantDataEl = document.getElementById(variantDataId);\n            var variantData = variantDataEl ? JSON.parse(variantDataEl.textContent) : [];\n            variantData.forEach(function (variant) {\n              variantPriceMap[String(variant.id)] = Number(variant.price || 0);\n            });\n          } catch (e) {}\n\n          function getSourceForm() {\n            return document.getElementById(sourceFormId);\n          }\n\n          function getCustomLine() {\n            return document.getElementById(customInstallmentId);\n          }\n\n          function getScopeRoot() {\n            var sourceForm = getSourceForm();\n            if (!sourceForm) return document;\n            return (\n              sourceForm.closest('[data-section-id]') ||\n              sourceForm.closest('product-info') ||\n              sourceForm.closest('section') ||\n              document\n            );\n          }\n\n          function formatMoney(cents) {\n            var amount = Number(cents || 0) / 100;\n\n            try {\n              return new Intl.NumberFormat(undefined, {\n                style: 'currency',\n                currency: currencyCode,\n                minimumFractionDigits: 2,\n                maximumFractionDigits: 2\n              }).format(amount);\n            } catch (e) {\n              return '$' + amount.toFixed(2);\n            }\n          }\n\n          function getSelectedVariantId() {\n            var sourceForm = getSourceForm();\n            if (!sourceForm) return '';\n\n            var scopeRoot = getScopeRoot();\n            var primaryInputs = scopeRoot.querySelectorAll(\n              'form[action*=\"/cart/add\"] input[name=\"id\"], product-form input[name=\"id\"], .product-form input[name=\"id\"]'\n            );\n\n            for (var i = 0; i < primaryInputs.length; i++) {\n              var input = primaryInputs[i];\n              var parentForm = input.closest('form');\n\n              if (parentForm && parentForm.id !== sourceFormId && input.value) {\n                return String(input.value);\n              }\n            }\n\n            var sourceInput = sourceForm.querySelector('input[name=\"id\"]');\n            if (sourceInput && sourceInput.value) {\n              return String(sourceInput.value);\n            }\n\n            var urlVariant = new URLSearchParams(window.location.search).get('variant');\n            return urlVariant ? String(urlVariant) : '';\n          }\n\n          function syncSourceFormVariant(variantId) {\n            var sourceForm = getSourceForm();\n            if (!sourceForm || !variantId) return;\n\n            var input = sourceForm.querySelector('input[name=\"id\"]');\n            if (!input || input.value === variantId) return;\n\n            input.value = variantId;\n            input.dispatchEvent(new Event('change', { bubbles: true }));\n          }\n\n          function getVariantPriceCents(variantId) {\n            if (!variantId) return null;\n            var price = variantPriceMap[String(variantId)];\n            return typeof price === 'number' && !isNaN(price) ? price : null;\n          }\n\n          function getNativePaymentTermsElement() {\n            var sourceForm = getSourceForm();\n            return sourceForm ? sourceForm.querySelector('shopify-payment-terms') : null;\n          }\n\n          function getNativePaymentText() {\n            var paymentTermsEl = getNativePaymentTermsElement();\n            if (!paymentTermsEl) return '';\n\n            var textParts = [];\n\n            if (paymentTermsEl.textContent) {\n              textParts.push(paymentTermsEl.textContent);\n            }\n\n            if (paymentTermsEl.innerText) {\n              textParts.push(paymentTermsEl.innerText);\n            }\n\n            if (paymentTermsEl.shadowRoot) {\n              if (paymentTermsEl.shadowRoot.textContent) {\n                textParts.push(paymentTermsEl.shadowRoot.textContent);\n              }\n              if (paymentTermsEl.shadowRoot.innerText) {\n                textParts.push(paymentTermsEl.shadowRoot.innerText);\n              }\n            }\n\n            return textParts.join(' ').replace(/\\s+/g, ' ').trim();\n          }\n\n          function extractInstallmentValue(text) {\n            if (!text) return null;\n\n            var normalizedText = text.replace(/\\s+/g, ' ').trim();\n\n            var monthlyMatch = normalizedText.match(/([€£$]\\s?\\d[\\d,]*(?:\\.\\d{2})?)\\/mo\\b/i);\n            if (monthlyMatch) {\n              return {\n                amount: monthlyMatch[1].replace(/\\s+/g, ' ').trim(),\n                suffix: '/mo'\n              };\n            }\n\n            var installmentMatch = normalizedText.match(/(?:pay in|or pay in)?\\s*(\\d+)\\s+interest-free installments? of\\s+([€£$]\\s?\\d[\\d,]*(?:\\.\\d{2})?)/i);\n            if (installmentMatch) {\n              return {\n                amount: installmentMatch[2].replace(/\\s+/g, ' ').trim(),\n                suffix: ''\n              };\n            }\n\n            return null;\n          }\n\n          function getNativePopupTrigger() {\n            var paymentTermsEl = getNativePaymentTermsElement();\n            if (!paymentTermsEl) return null;\n\n            var candidates = [];\n\n            function collectClickableElements(root) {\n              if (!root || !root.querySelectorAll) return [];\n              return Array.prototype.slice.call(\n                root.querySelectorAll('a, button, [role=\"button\"], [tabindex]')\n              );\n            }\n\n            candidates = candidates.concat(collectClickableElements(paymentTermsEl));\n\n            if (paymentTermsEl.shadowRoot) {\n              candidates = candidates.concat(collectClickableElements(paymentTermsEl.shadowRoot));\n            }\n\n            var preferredTexts = [\n              'check your purchasing power',\n              'learn more'\n            ];\n\n            for (var i = 0; i < preferredTexts.length; i++) {\n              var preferredText = preferredTexts[i];\n\n              for (var j = 0; j < candidates.length; j++) {\n                var el = candidates[j];\n                var text = (el.textContent || el.innerText || '').replace(/\\s+/g, ' ').trim().toLowerCase();\n\n                if (text.indexOf(preferredText) !== -1) {\n                  return el;\n                }\n              }\n            }\n\n            return candidates.length ? candidates[0] : null;\n          }\n\n          function openNativeInstallmentPopup() {\n            var trigger = getNativePopupTrigger();\n            if (!trigger) return;\n            trigger.click();\n          }\n\n          function renderCustomInstallment() {\n            var customLine = getCustomLine();\n            if (!customLine) return;\n\n            var variantId = getSelectedVariantId();\n            syncSourceFormVariant(variantId);\n\n            var variantPriceCents = getVariantPriceCents(variantId);\n\n            if (variantPriceCents !== null && variantPriceCents < minPriceCents) {\n              customLine.innerHTML = '';\n              customLine.hidden = true;\n              return;\n            }\n\n            var installmentData = extractInstallmentValue(getNativePaymentText());\n\n            if (!installmentData && variantPriceCents !== null) {\n              var divisor = variantPriceCents >= monthlyThresholdCents ? 4 : 2;\n              installmentData = {\n                amount: formatMoney(Math.round(variantPriceCents / divisor)),\n                suffix: divisor === 4 ? '/mo' : ''\n              };\n            }\n\n            if (!installmentData || !installmentData.amount) {\n              customLine.innerHTML = '';\n              customLine.hidden = true;\n              return;\n            }\n\n            customLine.innerHTML =\n              'or from <strong>' +\n              installmentData.amount +\n              '</strong>' +\n              installmentData.suffix +\n              '<button type=\"button\" class=\"tbg-installment-trigger\" aria-label=\"Learn more about payment options\">' +\n                '<svg viewBox=\"0 0 20 20\" fill=\"none\" aria-hidden=\"true\">' +\n                  '<circle cx=\"10\" cy=\"10\" r=\"8.25\" stroke=\"currentColor\" stroke-width=\"1.5\"></circle>' +\n                  '<path d=\"M10 8.2V13\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\"></path>' +\n                  '<circle cx=\"10\" cy=\"5.8\" r=\"0.9\" fill=\"currentColor\"></circle>' +\n                '</svg>' +\n              '</button>';\n\n            customLine.hidden = false;\n          }\n\n          function attachNativeObserver() {\n            var paymentTermsEl = getNativePaymentTermsElement();\n            if (!paymentTermsEl) return;\n\n            if (!nativeObserver) {\n              nativeObserver = new MutationObserver(function () {\n                renderCustomInstallment();\n              });\n            }\n\n            nativeObserver.disconnect();\n            nativeObserver.observe(paymentTermsEl, {\n              attributes: true,\n              childList: true,\n              subtree: true,\n              characterData: true\n            });\n\n            if (paymentTermsEl.shadowRoot) {\n              if (!shadowObserver) {\n                shadowObserver = new MutationObserver(function () {\n                  renderCustomInstallment();\n                });\n              }\n\n              shadowObserver.disconnect();\n              shadowObserver.observe(paymentTermsEl.shadowRoot, {\n                childList: true,\n                subtree: true,\n                characterData: true\n              });\n            }\n          }\n\n          function startRefreshWindow() {\n            renderCustomInstallment();\n            attachNativeObserver();\n\n            if (retryTimer) {\n              clearInterval(retryTimer);\n            }\n\n            var attempts = 0;\n            retryTimer = setInterval(function () {\n              attempts += 1;\n              attachNativeObserver();\n              renderCustomInstallment();\n\n              if (attempts >= 10) {\n                clearInterval(retryTimer);\n              }\n            }, 300);\n          }\n\n          function bindVariantListeners() {\n            var scopeRoot = getScopeRoot();\n\n            function handleVariantInteraction(event) {\n              var target = event.target;\n              if (!target || !scopeRoot.contains(target)) return;\n\n              if (\n                target.name === 'id' ||\n                target.matches('select[name^=\"options[\"]') ||\n                target.matches('input[name^=\"options[\"]') ||\n                target.closest('variant-selects') ||\n                target.closest('variant-radios')\n              ) {\n                requestAnimationFrame(startRefreshWindow);\n              }\n            }\n\n            scopeRoot.addEventListener('change', handleVariantInteraction);\n            scopeRoot.addEventListener('input', handleVariantInteraction);\n\n            scopeRoot.addEventListener('click', function (event) {\n              var trigger = event.target.closest('.tbg-installment-trigger');\n              if (!trigger) return;\n\n              event.preventDefault();\n              openNativeInstallmentPopup();\n            });\n\n            document.addEventListener('variant:change', startRefreshWindow);\n            document.addEventListener('product:variant-change', startRefreshWindow);\n            document.addEventListener('product-info:variant-change', startRefreshWindow);\n          }\n\n          function init() {\n            startRefreshWindow();\n            bindVariantListeners();\n          }\n\n          if (document.readyState === 'loading') {\n            document.addEventListener('DOMContentLoaded', init, { once: true });\n          } else {\n            init();\n          }\n        })();\n      </script>\n    </div>\n  </div>\n\n  <div class=\"tbg-installment-row\">\n    <div id=\"{{ tbg_custom_installment_id }}\" class=\"installment text-sm leading-tight\" aria-live=\"polite\" hidden></div>\n  </div>\n{%- endif -%}"
+          }
+        },
+        "title_fYXeYp": {
+          "type": "title",
+          "disabled": true,
+          "settings": {
+            "title_size": "product-title-md",
+            "title_size_mobile": "product-title-md",
+            "title_tag": "h2",
+            "show_price": true,
+            "show_rating": true
+          }
+        },
+        "text_Yt6nYn": {
+          "type": "text",
+          "settings": {
+            "icon": "time",
+            "iwidth": "custom",
+            "icon_width": 22,
+            "text": "<strong>NEW IN STOCK - LIMITED UNITS AVAILABLE</strong>",
+            "text_size": "text-base"
+          }
+        },
+        "read_more_XfamLV": {
+          "type": "read_more",
+          "settings": {}
+        },
+        "spinning_text_Fz7zCb": {
+          "type": "spinning_text",
+          "settings": {
+            "text": "NEW IN STOCK"
+          }
+        },
+        "description_Fh9cKi": {
+          "type": "description",
+          "disabled": true,
+          "settings": {
+            "text_size": "text-base"
+          }
+        },
+        "variant_picker_GLRbLX": {
+          "type": "variant_picker",
+          "disabled": true,
+          "settings": {
+            "enable_dynamic_variants": true,
+            "show_variant_labels": false,
+            "picker_type": "dropdown",
+            "enable_color_swatches": true,
+            "color_swatch_type": "color",
+            "size_chart": "copy-of-battlegear-2-0-size-chart"
+          }
+        },
+        "buy_buttons_hiFt6n": {
+          "type": "buy_buttons",
+          "disabled": true,
+          "settings": {
+            "show_quantity_selector": true,
+            "show_price": false,
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true,
+            "enable_back_in_stock": false,
+            "show_back_in_stock_name": false,
+            "show_back_in_stock_phone": false
+          }
+        }
+      },
+      "block_order": [
+        "rating_iy3PKG",
+        "liquid_9b3RHq",
+        "title_fYXeYp",
+        "text_Yt6nYn",
+        "read_more_XfamLV",
+        "spinning_text_Fz7zCb",
+        "description_Fh9cKi",
+        "variant_picker_GLRbLX",
+        "buy_buttons_hiFt6n"
+      ],
+      "disabled": true,
+      "name": "t:sections.featured-product.name",
+      "settings": {
+        "product": "cut-resistant-baselayer-3-0-black",
+        "enable_sticky_info": true,
+        "media_size": 50,
+        "gallery_layout": "thumbnail",
+        "thumbnail_position": "beside",
+        "image_ratio": "adapt_first",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_autoplay": false,
+        "enable_video_looping": false,
+        "mobile_layout": "full_width",
+        "image_ratio_mobile": "adapt_first",
+        "mobile_thumbnail": false,
+        "padding_top": 96,
+        "padding_bottom": 40,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "portfolio_custom_nTJygx": {
+      "type": "portfolio-custom",
+      "blocks": {
+        "profile_AQUPMG": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/tech_1_b54f6942-8c26-4fcd-bf2a-2de6e24a618b.png",
+            "icon": "shopify://shop_images/spc.svg",
+            "icon_size": 58,
+            "heading": "<p>Ditch</p><p>Velcro</p>",
+            "description": "<p><strong>Patented Stretch ProCurve™ Collar</strong></p><p>Adaptive protection that moves with the athlete. No straps. No irritation. No velcro.</p>",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        },
+        "profile_RE4jDe": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/13.png",
+            "icon": "shopify://shop_images/comfort.svg",
+            "icon_size": 54,
+            "heading": "<p>75%<br/>LIGHTER</p>",
+            "description": "<p><strong>TITANOTEX™ AERO STRETCH</strong></p><p>Our lightest, most advanced cut-resistant technology maximizes air flow, and removes bulk from your baselayer.</p>",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        },
+        "profile_K8W8cb": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/aj_on_and_off.png",
+            "icon": "shopify://shop_images/up_and_down_arrow.svg",
+            "icon_size": 54,
+            "heading": "<p>EASIER<br/>ON/OFF</p>",
+            "description": "<p><strong>TITANOTEX™ AERO STRETCH</strong></p><p>25% more stretch enables the collar to effortlessly expand and recover over your head.</p>",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        },
+        "profile_xPbijN": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/tech_2_206b17d5-6051-4d44-a7d6-dea393579846.png",
+            "icon": "shopify://shop_images/titanotex_aero_181f01f0-d378-4e30-8026-b5fdd25543cf.svg",
+            "icon_size": 52,
+            "heading": "<p>MAXIMUM</p><p>CUT RESISTANCE</p>",
+            "description": "<p><strong>TITANOTEX™ CUT-RESISTANT TECH</strong></p><p>Rated up to ANSI A9 (scale of A1-A9), while other brands average A3.</p>",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        },
+        "profile_nfwxhg": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/tech_4_7d9ac665-5dd7-4c19-9d14-5419ea71ee01.png",
+            "icon": "shopify://shop_images/arcguar_logo.svg",
+            "icon_size": 52,
+            "heading": "<p>FULL<br/>COVERAGE</p>",
+            "description": "<p><strong>Patented Arc~Guard™ Collar</strong></p><p>Anatomically contoured to protect the carotid and jugular without bunching.</p>",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        },
+        "profile_EAUFAQ": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/tech_6_490391e4-5fdf-4b86-8c7f-303f089b6315.png",
+            "icon": "shopify://shop_images/usa_logo.svg",
+            "icon_size": 52,
+            "heading": "<p>MADE IN<br/>THE USA</p>",
+            "description": "<p>Built locally <strong>(MN, NJ, FL)</strong>, with the best materials. Protection that doesn't need a passport.</p>",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        }
+      },
+      "block_order": [
+        "profile_AQUPMG",
+        "profile_RE4jDe",
+        "profile_K8W8cb",
+        "profile_xPbijN",
+        "profile_nfwxhg",
+        "profile_EAUFAQ"
+      ],
+      "name": "Tech Specs",
+      "settings": {
+        "columns": 5,
+        "carousel_on_desktop": true,
+        "layout": "default",
+        "image_ratio": "portrait",
+        "image_ratio_mobile": "adapt",
+        "custom_image_height": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "disable_modal_opening": true,
+        "color_text": "",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "divider": false,
+        "full_width": true,
+        "rounded": false
+      }
+    },
+    "rich_text_i6Ry8e": {
+      "type": "rich-text",
+      "blocks": {
+        "button_YAieVp": {
+          "type": "button",
+          "settings": {
+            "button_label": "Learn More",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_size": "sm",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "button_YAieVp"
+      ],
+      "disabled": true,
+      "name": "BLOGPOST BUTTON ",
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#e2fb31",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 20,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "featured_collection_CMKrtc": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.name",
+      "settings": {
+        "collection": "",
+        "products": [
+          "cut-resistant-baselayer-3-0-navy",
+          "cut-resistant-baselayer-3-0-white",
+          "cut-resistant-baselayer-3-0-royal",
+          "cut-resistant-baselayer-3-0-black",
+          "cut-resistant-neck-guard-3-0-black",
+          "cut-resistant-neck-guard-3-0-white"
+        ],
+        "product_limit": 6,
+        "columns": 5,
+        "new_version2": false,
+        "carousel_on_desktop": false,
+        "show_view_all": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "heading": "ORDER NOW",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "image_with_text_overlay_ijJQBF": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "image_AeEqKN": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Titanotex_aero_explained_copy.svg",
+            "image_width": "custom",
+            "image_max_width": 420,
+            "image_max_width_mobile": 300
+          }
+        }
+      },
+      "block_order": [
+        "image_AeEqKN"
+      ],
+      "name": "t:sections.image-with-text-overlay.name",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/3.0_banner_desktop_aero.png",
+        "image_height": "adapt",
+        "content_width": "large",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/3.0_banner_mobile_aero.png",
+        "image_height_mobile": "300px",
+        "content_position_mobile": "items-end justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "featured_collection_6kH43T": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.name",
+      "settings": {
+        "collection": "",
+        "products": [
+          "cut-resistant-baselayer-3-0-f-r-limited-edition-drops-7-15",
+          "cut-resistant-baselayer-3-0-navy",
+          "cut-resistant-baselayer-3-0-white",
+          "cut-resistant-baselayer-3-0-blackout-camo",
+          "cut-resistant-baselayer-3-0-early-riser",
+          "cut-resistant-baselayer-3-0-whiteout-camo",
+          "cut-resistant-baselayer-3-0-miami-vice",
+          "cut-resistant-baselayer-3-0-red",
+          "cut-resistant-baselayer-3-0-hot-lap",
+          "cut-resistant-baselayer-3-0-galaxy-splatter",
+          "cut-resistant-baselayer-3-0-s-p-limited-edition-drops-9-15"
+        ],
+        "product_limit": 6,
+        "columns": 5,
+        "new_version2": false,
+        "carousel_on_desktop": false,
+        "show_view_all": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "heading": "COMING SOON",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "image_with_text_overlay_yxA8bY": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "image_VGyGWe": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/extended_wrist_coverage_explained_36f8632f-dd43-4355-a227-99070d0b7a79.svg",
+            "image_width": "custom",
+            "image_max_width": 470,
+            "image_max_width_mobile": 300
+          }
+        }
+      },
+      "block_order": [
+        "image_VGyGWe"
+      ],
+      "name": "t:sections.image-with-text-overlay.name",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/3.0_banner_desktop_wrist.png",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/3.0_banner_mobile_wrist.png",
+        "image_height_mobile": "300px",
+        "content_position_mobile": "items-end justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "featured_collection_GyKyie": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.name",
+      "settings": {
+        "collection": "",
+        "products": [
+          "cut-resistant-baselayer-3-0-kelly",
+          "cut-resistant-baselayer-3-0-orange",
+          "cut-resistant-baselayer-3-0-pink-frost",
+          "cut-resistant-baselayer-3-0-maroon",
+          "cut-resistant-baselayer-3-0-purple",
+          "cut-resistant-baselayer-3-0-forest",
+          "cut-resistant-baselayer-3-0-carolina",
+          "cut-resistant-baselayer-3-0-team-gold",
+          "cut-resistant-baselayer-3-0-p-h-limited-edition-drops-11-15"
+        ],
+        "product_limit": 6,
+        "columns": 5,
+        "new_version2": false,
+        "carousel_on_desktop": false,
+        "show_view_all": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "heading": "COMING LATER",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "rgba(0,0,0,0)",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "image_with_text_overlay_VaKKLG": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_yVG43r": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong> CUT-RESISTANT NECK GUARDS</strong>",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h1",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "image_T9khqV": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/icon_website_USA_novelcro.svg",
+            "image_width": "custom",
+            "image_max_width": 200,
+            "image_max_width_mobile": 150
+          }
+        }
+      },
+      "block_order": [
+        "heading_yVG43r",
+        "image_T9khqV"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "h1 {font-family: TITANFONT;}"
+      ],
+      "settings": {
+        "transparent_header": false,
+        "image": "{{ collection.image }}",
+        "image_height": "adapt",
+        "content_width": "large",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/stand_alone_collar.png",
+        "image_height_mobile": "adapt",
+        "content_position_mobile": "items-end justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "#e2fb31",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "main-collection-banner": {
+      "type": "main-collection-banner",
+      "blocks": {
+        "spacing": {
+          "type": "spacing",
+          "disabled": true,
+          "settings": {
+            "height": 48,
+            "height_mobile": 0
+          }
+        },
+        "title": {
+          "type": "title",
+          "disabled": true,
+          "settings": {
+            "title_size": "title-lg tracking-heading"
+          }
+        },
+        "description_KiwP3a": {
+          "type": "description",
+          "disabled": true,
+          "settings": {
+            "text_font": "body",
+            "text_size": "subtext-sm",
+            "text_max_size": 128,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": true
+          }
+        },
+        "breadcrumb": {
+          "type": "breadcrumb",
+          "disabled": true,
+          "settings": {
+            "show_collections_link": true,
+            "show_collection_title": true
+          }
+        }
+      },
+      "block_order": [
+        "spacing",
+        "title",
+        "description_KiwP3a",
+        "breadcrumb"
+      ],
+      "disabled": true,
+      "settings": {
+        "transparent_header": false,
+        "show_image": false,
+        "image_height": "400px",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "left",
+        "image_height_mobile": "auto",
+        "content_position_mobile": "items-end justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_background": "",
+        "gradient_background": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 20,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
+      }
+    },
+    "main-collection": {
+      "type": "main-collection",
+      "blocks": {
+        "subcollections_TWbxhq": {
+          "type": "subcollections",
+          "disabled": true,
+          "settings": {
+            "menu": "subcollections",
+            "show_count": false
+          }
+        }
+      },
+      "block_order": [
+        "subcollections_TWbxhq"
+      ],
+      "disabled": true,
+      "settings": {
+        "products_per_page": 50,
+        "columns": 5,
+        "columns_mobile": "2",
+        "pagination": "infinite",
+        "enable_filtering": true,
+        "filter_type": "sidebar",
+        "filter_collapsed": false,
+        "filter_color_swatches": true,
+        "enable_sorting": true,
+        "show_on_model": false,
+        "buttons_style": "secondary",
+        "padding_top": 36,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "recently-viewed": {
+      "type": "recently-viewed",
+      "custom_css": [
+        ".product-card__bottom.flex.items-center.gap-2 {display: none !important;}"
+      ],
+      "settings": {
+        "product_limit": 4,
+        "columns": 5,
+        "carousel_on_desktop": true,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "RECENTLY VIEWED",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": true
+      }
+    }
+  },
+  "order": [
+    "image_with_text_overlay_ARrb3R",
+    "featured_product_mKayji",
+    "portfolio_custom_nTJygx",
+    "rich_text_i6Ry8e",
+    "featured_collection_CMKrtc",
+    "image_with_text_overlay_ijJQBF",
+    "featured_collection_6kH43T",
+    "image_with_text_overlay_yxA8bY",
+    "featured_collection_GyKyie",
+    "image_with_text_overlay_VaKKLG",
+    "main-collection-banner",
+    "main-collection",
+    "recently-viewed"
+  ]
+}
