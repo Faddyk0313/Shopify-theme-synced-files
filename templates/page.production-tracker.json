@@ -181,7 +181,7 @@
             "image": "shopify://shop_images/miamiVICE--3-2_1.jpg",
             "hide_image": false,
             "heading": "<h3>Miami Vice - 3.0</h3>",
-            "text": "<p>Coming Soon</p>"
+            "text": "<p>In QC</p>"
           }
         },
         "item_mAK9P8": {
@@ -190,6 +190,33 @@
             "image": "shopify://shop_images/Camorightcolor.jpg",
             "hide_image": false,
             "heading": "<h3>Blackout Camo - 3.0</h3>",
+            "text": "<p>In Sewing</p>"
+          }
+        },
+        "item_Jm3YLh": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/1000066_EarlyRiser_front.png",
+            "hide_image": false,
+            "heading": "<h3>Early Riser - 3.0</h3>",
+            "text": "<p>Preparing For Sewing</p>"
+          }
+        },
+        "item_cbDarg": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/WHITEOUT_CAMO_3251a6a2-7bd0-49dd-94e9-8f82c46dd571.png",
+            "hide_image": false,
+            "heading": "<h3>Whiteout Camo - 3.0</h3>",
+            "text": "<p>Preparing For Sewing</p>"
+          }
+        },
+        "item_TM8m6X": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/1000164_galaxysplatter_main.png",
+            "hide_image": false,
+            "heading": "<h3>Galaxy Splatter - 3.0</h3>",
             "text": "<p>Coming Soon</p>"
           }
         },
@@ -199,33 +226,6 @@
             "image": "shopify://shop_images/red_302ee0c7-5a36-4b90-a81a-8ac95f158d1c.jpg",
             "hide_image": false,
             "heading": "<h3>Red - 3.0</h3>",
-            "text": "<p>Coming Soon</p>"
-          }
-        },
-        "item_cbDarg": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/WHITEOUT_CAMO_3251a6a2-7bd0-49dd-94e9-8f82c46dd571.png",
-            "hide_image": false,
-            "heading": "<h3>Whiteout Camo - 3.0</h3>",
-            "text": "<p>Coming Soon</p>"
-          }
-        },
-        "item_Jm3YLh": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/1000066_EarlyRiser_front.png",
-            "hide_image": false,
-            "heading": "<h3>Early Riser - 3.0</h3>",
-            "text": "<p>Coming Soon</p>"
-          }
-        },
-        "item_TM8m6X": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/1000164_galaxysplatter_main.png",
-            "hide_image": false,
-            "heading": "<h3>Galaxy Splatter - 3.0</h3>",
             "text": "<p>Coming Soon</p>"
           }
         },
@@ -320,10 +320,10 @@
         "item_8tbRaU",
         "item_N9BVh3",
         "item_mAK9P8",
-        "item_GyzRU6",
-        "item_cbDarg",
         "item_Jm3YLh",
+        "item_cbDarg",
         "item_TM8m6X",
+        "item_GyzRU6",
         "item_mbTidh",
         "item_pgNQhE",
         "item_ji4wf8",
