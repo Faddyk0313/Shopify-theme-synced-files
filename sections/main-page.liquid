@@ -1,7 +1,8 @@
 <style>
   {% if section.settings.background_color %}
-    #shopify-section-{{ section.id }}::before {
+    #shopify-section-{{ section.id }} .section::before {
       background-color: {{ section.settings.background_color }} !important;
+      background: {{ section.settings.background_color }} !important;
     }
   {% endif %}
   #shopify-section-{{ section.id }} {
