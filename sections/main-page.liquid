@@ -1,7 +1,9 @@
 <style>
-  #shopify-section-{{ section.id }}::before {
-    background-color: "white";
-  }
+  {% if section.settings.background_color %}
+    #shopify-section-{{ section.id }}::before {
+      background-color: {{ section.settings.background_color }} !important;
+    }
+  {% endif %}
   #shopify-section-{{ section.id }} {
     --section-padding-top: {{ section.settings.padding_top }}px;
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -1389,7 +1391,7 @@
     },
     {
       "type": "color",
-      "id": "color_background",
+      "id": "background_color",
       "label": "t:sections.global.settings.color_background.label"
     },
   ]
