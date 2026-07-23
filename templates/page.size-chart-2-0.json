@@ -12,7 +12,7 @@
     "main-page": {
       "type": "main-page",
       "settings": {
-        "heading_size": "title-md",
+        "heading_size": "title-lg tracking-heading",
         "heading_alignment": "text-center",
         "heading_tag": "h2",
         "text_size": "text-sm",
@@ -21,7 +21,7 @@
         "divider": false,
         "narrow": true,
         "rounded": true,
-        "background_color": "#FFFFFF"
+        "background_color": "#ffffff"
       }
     },
     "custom_liquid_3hfG7p": {
