@@ -1,1 +1,580 @@
-{"sections":{"image_with_text_overlay_Mbyg4a":{"type":"image-with-text-overlay","blocks":{"heading_hAMbxq":{"type":"heading","settings":{"heading":"PRODUCTION TRACKER","heading_size":"title-lg tracking-heading","heading_tag":"h2","highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false}}},"block_order":["heading_hAMbxq"],"name":"Image with text overlay","settings":{"transparent_header":false,"image":"shopify:\/\/shop_images\/Screenshot_2025-12-18_at_12.55.03_PM.png","image_height":"400px","content_width":"small","content_position":"md:items-end md:justify-start","text_alignment":"center","image_height_mobile":"200px","content_position_mobile":"items-end justify-start","text_alignment_mobile":"left","color_text":"#ffffff","color_background":"","gradient_background":"","color_highlight":"#e0a580","gradient_highlight":"","color_button_text":"#171717","color_button_background":"#ffffff","color_button_gradient":"","color_overlay":"#171717","overlay_opacity":35,"padding_top":0,"padding_bottom":0,"divider":false,"full_width":true,"rounded":false,"enable_parallax":true,"parallax_direction":"vertical"}},"rich_text_gJCTBQ":{"type":"rich-text","blocks":{"text_GUw4kw":{"type":"text","settings":{"text":"<p>View the current order of production for colorways over the next 4-6 weeks (sorted descending by completion date).<\/p><p>If you have any questions about specific sizes or further detail, please contact us at info@titanbattlegear.com.<\/p>","text_font":"body","text_size":"subtext-md","text_max_size":32,"text_line_height":1.6,"text_letter_spacing":0,"text_capitalize":false,"secondary_color":false,"highlighted_text":"none","highlighted_scribble":"circle"}}},"block_order":["text_GUw4kw"],"name":"t:sections.rich-text.name","settings":{"text_alignment":"left","text_alignment_mobile":"left","heading":"","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_width":"small","heading_tag":"h2","subheading":"","description":"","button_label":"","button_link":"","button_external":false,"button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false,"color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":32,"padding_bottom":0,"divider":false,"narrow":false,"rounded":false}},"ss_timeline_3_PJmYYe":{"type":"ss-timeline-3","blocks":{"item_Nb4YGG":{"type":"item","disabled":true,"settings":{"image":"shopify:\/\/shop_images\/Dark.png","hide_image":false,"heading":"<h3>Black - 3.0<\/h3>","text":"<p>Done - In Stock Now<\/p>"}},"item_CjRVHK":{"type":"item","disabled":true,"settings":{"image":"shopify:\/\/shop_images\/ROYAL.png","hide_image":false,"heading":"<h3>Royal - 3.0<\/h3>","text":"<p>Done - In Stock Now<\/p>"}},"item_Qjkd87":{"type":"item","disabled":true,"settings":{"image":"shopify:\/\/shop_images\/mistery_pdp_image.png","hide_image":false,"heading":"<h3>Limited Edition USA Hockey Drop - 3.0<\/h3>","text":"<p>In Sewing<\/p>"}},"item_JJ8pnU":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/mistery_pdp_image.png","hide_image":false,"heading":"<h3>Limited Edition Drop - 3.0<\/h3>","text":"<p>Done - At Warehouse<\/p>"}},"item_8nq4Bx":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/Navy_7b822ef1-e7ba-4163-9baa-ea6a69bb9798.png","hide_image":false,"heading":"<h3>Navy - 3.0<\/h3>","text":"<p>In Sewing<\/p>"}},"item_8tbRaU":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/1000064_white_main.png","hide_image":false,"heading":"<h3>White - 3.0<\/h3>","text":"<p>In Sewing<\/p>"}},"item_GyzRU6":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/red_302ee0c7-5a36-4b90-a81a-8ac95f158d1c.jpg","hide_image":false,"heading":"<h3>Red - 3.0<\/h3>","text":"<p>Coming Soon<\/p>"}},"item_cbDarg":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/WHITEOUT_CAMO_3251a6a2-7bd0-49dd-94e9-8f82c46dd571.png","hide_image":false,"heading":"<h3>Whiteout Camo - 3.0<\/h3>","text":"<p>Coming Soon<\/p>"}},"item_mAK9P8":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/Camorightcolor.jpg","hide_image":false,"heading":"<h3>Blackout Camo - 3.0<\/h3>","text":"<p>Coming Soon<\/p>"}},"item_Jm3YLh":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/1000066_EarlyRiser_front.png","hide_image":false,"heading":"<h3>Early Riser - 3.0<\/h3>","text":"<p>Coming Soon<\/p>"}},"item_N9BVh3":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/miamiVICE--3-2_1.jpg","hide_image":false,"heading":"<h3>Miami Vice - 3.0<\/h3>","text":"<p>Coming Soon<\/p>"}},"item_TM8m6X":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/1000164_galaxysplatter_main.png","hide_image":false,"heading":"<h3>Galaxy Splatter - 3.0<\/h3>","text":"<p>Coming Soon<\/p>"}},"item_mbTidh":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/mistery_pdp_image.png","hide_image":false,"heading":"<h3>Limited Edition Drop - 3.0<\/h3>","text":"<p>Season Start<\/p>"}},"item_pgNQhE":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/KELLY_636ac4da-0989-40e1-bff3-b707d9e6846e.png","hide_image":false,"heading":"<h3>Kelly - 3.0<\/h3>","text":"<p>Coming This Fall<\/p>"}},"item_ji4wf8":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/FOREST_34e7bef4-9cb0-4945-b1d4-6ad1df83f9cf.png","hide_image":false,"heading":"<h3>Forest - 3.0<\/h3>","text":"<p>Coming This Fall<\/p>"}},"item_hgtp3f":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/MAROON_ed249f21-0410-49a5-81eb-52539e80c99e.png","hide_image":false,"heading":"<h3>Maroon - 3.0<\/h3>","text":"<p>Coming This Fall<\/p>"}},"item_QmCh4r":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/GOLD_6229d2cb-f419-42c1-a4f1-e3f659847366.png","hide_image":false,"heading":"<h3>Team Gold - 3.0<\/h3>","text":"<p>Coming This Fall<\/p>"}},"item_C7FRJH":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/ORANGE_3c220b1d-784e-4878-801c-813e4c5bce31.png","hide_image":false,"heading":"<h3>Orange - 3.0<\/h3>","text":"<p>Coming This Fall<\/p>"}},"item_Uiqtc9":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/CAROLINA.png","hide_image":false,"heading":"<h3>Carolina - 3.0<\/h3>","text":"<p>Coming This Fall<\/p>"}},"item_RCAg8x":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/PINK_FROST.png","hide_image":false,"heading":"<h3>Pink Frost - 3.0<\/h3>","text":"<p>Coming This Fall<\/p>"}},"item_gVQWbN":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/mistery_pdp_image.png","hide_image":false,"heading":"<h3>Limited Edition Drop - 3.0<\/h3>","text":"<p>Fall<\/p>"}}},"block_order":["item_Nb4YGG","item_CjRVHK","item_Qjkd87","item_JJ8pnU","item_8nq4Bx","item_8tbRaU","item_GyzRU6","item_cbDarg","item_mAK9P8","item_Jm3YLh","item_N9BVh3","item_TM8m6X","item_mbTidh","item_pgNQhE","item_ji4wf8","item_hgtp3f","item_QmCh4r","item_C7FRJH","item_Uiqtc9","item_RCAg8x","item_gVQWbN"],"name":"SS - Timeline #3","settings":{"heading":"<h2>CUT-RESISTANT BASELAYER<\/h2>","heading_custom":false,"heading_font":"josefin_sans_n4","heading_size":50,"heading_size_mobile":28,"heading_height":130,"heading_align":"center","heading_align_mobile":"center","items_mt":0,"items_mt_mobile":0,"items_space":0,"items_space_mobile":0,"content_padding_horizontal":48,"content_padding_horizontal_mobile":48,"circle_size":32,"circle_size_mobile":20,"circle_border_thickness":1,"image_width":50,"image_width_mobile":70,"image_radius":0,"image_border_thickness":0,"image_ratio":"original","image_ratio_mobile":"original","image_align":"center","image_align_mobile":"center","item_heading_custom":false,"item_heading_font":"josefin_sans_n4","item_heading_size":32,"item_heading_size_mobile":20,"item_heading_height":130,"item_heading_mt":0,"item_heading_mt_mobile":16,"item_heading_align":"left","item_heading_align_mobile":"left","item_text_custom":false,"item_text_font":"josefin_sans_n4","item_text_size":21,"item_text_size_mobile":16,"item_text_height":140,"item_text_mt":16,"item_text_mt_mobile":0,"item_text_align":"left","item_text_align_mobile":"left","line_color":"#000000","circle_bg_color":"#e2fb31","circle_border_color":"#000000","item_heading_color":"#000000","item_text_color":"#000000","heading_color":"#000000","background_color":"#f2f2f2","background_gradient":"","border_color":"#000000","margin_top":0,"margin_bottom":0,"margin_horizontal":0,"margin_horizontal_mobile":0,"padding_top":80,"padding_bottom":80,"padding_horizontal":5,"padding_horizontal_mobile":1.5,"full_width":false,"content_width":120,"border_thickness":0,"section_radius":0,"lazy":true}},"ss_timeline_3_cq4icM":{"type":"ss-timeline-3","blocks":{"item_k3tXMR":{"type":"item","disabled":true,"settings":{"image":"shopify:\/\/shop_images\/Front_kelly.png","hide_image":false,"heading":"<h3>Kelly<\/h3>","text":"<p>QC\/Packing<\/p>"}},"item_HmymQV":{"type":"item","disabled":true,"settings":{"image":"shopify:\/\/shop_images\/Front_Orange.png","hide_image":false,"heading":"<h3>Orange<\/h3>","text":"<p>Sewing<\/p>"}},"item_UHQVtP":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/Front_Black.png","hide_image":false,"heading":"<h3>Black - 3.0<\/h3>","text":"<p>In QC<\/p>"}},"item_hDpLJ8":{"type":"item","disabled":true,"settings":{"image":"shopify:\/\/shop_images\/Front_Navy.png","hide_image":false,"heading":"<h3>Navy<\/h3>","text":"<p>Preparing for sewing<\/p>"}},"item_7K9npK":{"type":"item","disabled":true,"settings":{"image":"shopify:\/\/shop_images\/Front_Red.png","hide_image":false,"heading":"<h3>RED<\/h3>","text":"<p>Preparing for sewing<\/p>"}},"item_CTR6Uh":{"type":"item","settings":{"image":"shopify:\/\/shop_images\/Front_White.png","hide_image":false,"heading":"<h3>White - 3.0<\/h3>","text":"<p>In Sewing<\/p>"}},"item_ieBeJC":{"type":"item","disabled":true,"settings":{"image":"shopify:\/\/shop_images\/Front_Royal.png","hide_image":false,"heading":"<h3>Royal<\/h3>","text":"<p>Sewing<\/p>"}}},"block_order":["item_k3tXMR","item_HmymQV","item_UHQVtP","item_hDpLJ8","item_7K9npK","item_CTR6Uh","item_ieBeJC"],"disabled":true,"name":"SS - Timeline #3","settings":{"heading":"<h2>CUT-RESISTANT NECK GUARD<\/h2>","heading_custom":false,"heading_font":"josefin_sans_n4","heading_size":50,"heading_size_mobile":28,"heading_height":130,"heading_align":"center","heading_align_mobile":"center","items_mt":0,"items_mt_mobile":0,"items_space":0,"items_space_mobile":0,"content_padding_horizontal":48,"content_padding_horizontal_mobile":48,"circle_size":32,"circle_size_mobile":20,"circle_border_thickness":1,"image_width":50,"image_width_mobile":70,"image_radius":0,"image_border_thickness":0,"image_ratio":"landscape","image_ratio_mobile":"landscape","image_align":"center","image_align_mobile":"center","item_heading_custom":false,"item_heading_font":"josefin_sans_n4","item_heading_size":32,"item_heading_size_mobile":20,"item_heading_height":130,"item_heading_mt":0,"item_heading_mt_mobile":16,"item_heading_align":"left","item_heading_align_mobile":"left","item_text_custom":false,"item_text_font":"josefin_sans_n4","item_text_size":21,"item_text_size_mobile":16,"item_text_height":140,"item_text_mt":16,"item_text_mt_mobile":0,"item_text_align":"left","item_text_align_mobile":"left","line_color":"#000000","circle_bg_color":"#e2fb31","circle_border_color":"#000000","item_heading_color":"#000000","item_text_color":"#000000","heading_color":"#000000","background_color":"#f2f2f2","background_gradient":"","border_color":"#000000","margin_top":0,"margin_bottom":0,"margin_horizontal":0,"margin_horizontal_mobile":0,"padding_top":80,"padding_bottom":84,"padding_horizontal":5,"padding_horizontal_mobile":1.5,"full_width":false,"content_width":120,"border_thickness":0,"section_radius":0,"lazy":true}},"main-page":{"type":"main-page","disabled":true,"settings":{"heading_size":"title-lg tracking-heading","heading_alignment":"text-center","heading_tag":"h2","text_size":"text-base","padding_top":32,"padding_bottom":32,"divider":false,"narrow":true,"rounded":false}}},"order":["image_with_text_overlay_Mbyg4a","rich_text_gJCTBQ","ss_timeline_3_PJmYYe","ss_timeline_3_cq4icM","main-page"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_with_text_overlay_Mbyg4a": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_hAMbxq": {
+          "type": "heading",
+          "settings": {
+            "heading": "PRODUCTION TRACKER",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_hAMbxq"
+      ],
+      "name": "Image with text overlay",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/Screenshot_2025-12-18_at_12.55.03_PM.png",
+        "image_height": "400px",
+        "content_width": "small",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "center",
+        "image_height_mobile": "200px",
+        "content_position_mobile": "items-end justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 35,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
+      }
+    },
+    "rich_text_gJCTBQ": {
+      "type": "rich-text",
+      "blocks": {
+        "text_GUw4kw": {
+          "type": "text",
+          "settings": {
+            "text": "<p>View the current order of production for colorways over the next 4-6 weeks (sorted descending by completion date).</p><p>If you have any questions about specific sizes or further detail, please contact us at info@titanbattlegear.com.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "text_GUw4kw"
+      ],
+      "name": "t:sections.rich-text.name",
+      "settings": {
+        "text_alignment": "left",
+        "text_alignment_mobile": "left",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 32,
+        "padding_bottom": 0,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "ss_timeline_3_PJmYYe": {
+      "type": "ss-timeline-3",
+      "blocks": {
+        "item_Nb4YGG": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/Dark.png",
+            "hide_image": false,
+            "heading": "<h3>Black - 3.0</h3>",
+            "text": "<p>Done - In Stock Now</p>"
+          }
+        },
+        "item_CjRVHK": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/ROYAL.png",
+            "hide_image": false,
+            "heading": "<h3>Royal - 3.0</h3>",
+            "text": "<p>Done - In Stock Now</p>"
+          }
+        },
+        "item_Qjkd87": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/mistery_pdp_image.png",
+            "hide_image": false,
+            "heading": "<h3>Limited Edition USA Hockey Drop - 3.0</h3>",
+            "text": "<p>In Sewing</p>"
+          }
+        },
+        "item_JJ8pnU": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/mistery_pdp_image.png",
+            "hide_image": false,
+            "heading": "<h3>Limited Edition Drop - 3.0</h3>",
+            "text": "<p>Done - At Warehouse</p>"
+          }
+        },
+        "item_8nq4Bx": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/Navy_7b822ef1-e7ba-4163-9baa-ea6a69bb9798.png",
+            "hide_image": false,
+            "heading": "<h3>Navy - 3.0</h3>",
+            "text": "<p>In Sewing</p>"
+          }
+        },
+        "item_8tbRaU": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/1000064_white_main.png",
+            "hide_image": false,
+            "heading": "<h3>White - 3.0</h3>",
+            "text": "<p>In Sewing</p>"
+          }
+        },
+        "item_N9BVh3": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/miamiVICE--3-2_1.jpg",
+            "hide_image": false,
+            "heading": "<h3>Miami Vice - 3.0</h3>",
+            "text": "<p>Coming Soon</p>"
+          }
+        },
+        "item_mAK9P8": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Camorightcolor.jpg",
+            "hide_image": false,
+            "heading": "<h3>Blackout Camo - 3.0</h3>",
+            "text": "<p>Coming Soon</p>"
+          }
+        },
+        "item_GyzRU6": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/red_302ee0c7-5a36-4b90-a81a-8ac95f158d1c.jpg",
+            "hide_image": false,
+            "heading": "<h3>Red - 3.0</h3>",
+            "text": "<p>Coming Soon</p>"
+          }
+        },
+        "item_cbDarg": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/WHITEOUT_CAMO_3251a6a2-7bd0-49dd-94e9-8f82c46dd571.png",
+            "hide_image": false,
+            "heading": "<h3>Whiteout Camo - 3.0</h3>",
+            "text": "<p>Coming Soon</p>"
+          }
+        },
+        "item_Jm3YLh": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/1000066_EarlyRiser_front.png",
+            "hide_image": false,
+            "heading": "<h3>Early Riser - 3.0</h3>",
+            "text": "<p>Coming Soon</p>"
+          }
+        },
+        "item_TM8m6X": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/1000164_galaxysplatter_main.png",
+            "hide_image": false,
+            "heading": "<h3>Galaxy Splatter - 3.0</h3>",
+            "text": "<p>Coming Soon</p>"
+          }
+        },
+        "item_mbTidh": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/mistery_pdp_image.png",
+            "hide_image": false,
+            "heading": "<h3>Limited Edition Drop - 3.0</h3>",
+            "text": "<p>Season Start</p>"
+          }
+        },
+        "item_pgNQhE": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/KELLY_636ac4da-0989-40e1-bff3-b707d9e6846e.png",
+            "hide_image": false,
+            "heading": "<h3>Kelly - 3.0</h3>",
+            "text": "<p>Coming This Fall</p>"
+          }
+        },
+        "item_ji4wf8": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/FOREST_34e7bef4-9cb0-4945-b1d4-6ad1df83f9cf.png",
+            "hide_image": false,
+            "heading": "<h3>Forest - 3.0</h3>",
+            "text": "<p>Coming This Fall</p>"
+          }
+        },
+        "item_hgtp3f": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/MAROON_ed249f21-0410-49a5-81eb-52539e80c99e.png",
+            "hide_image": false,
+            "heading": "<h3>Maroon - 3.0</h3>",
+            "text": "<p>Coming This Fall</p>"
+          }
+        },
+        "item_QmCh4r": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/GOLD_6229d2cb-f419-42c1-a4f1-e3f659847366.png",
+            "hide_image": false,
+            "heading": "<h3>Team Gold - 3.0</h3>",
+            "text": "<p>Coming This Fall</p>"
+          }
+        },
+        "item_C7FRJH": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/ORANGE_3c220b1d-784e-4878-801c-813e4c5bce31.png",
+            "hide_image": false,
+            "heading": "<h3>Orange - 3.0</h3>",
+            "text": "<p>Coming This Fall</p>"
+          }
+        },
+        "item_Uiqtc9": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/CAROLINA.png",
+            "hide_image": false,
+            "heading": "<h3>Carolina - 3.0</h3>",
+            "text": "<p>Coming This Fall</p>"
+          }
+        },
+        "item_RCAg8x": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/PINK_FROST.png",
+            "hide_image": false,
+            "heading": "<h3>Pink Frost - 3.0</h3>",
+            "text": "<p>Coming This Fall</p>"
+          }
+        },
+        "item_gVQWbN": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/mistery_pdp_image.png",
+            "hide_image": false,
+            "heading": "<h3>Limited Edition Drop - 3.0</h3>",
+            "text": "<p>Fall</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_Nb4YGG",
+        "item_CjRVHK",
+        "item_Qjkd87",
+        "item_JJ8pnU",
+        "item_8nq4Bx",
+        "item_8tbRaU",
+        "item_N9BVh3",
+        "item_mAK9P8",
+        "item_GyzRU6",
+        "item_cbDarg",
+        "item_Jm3YLh",
+        "item_TM8m6X",
+        "item_mbTidh",
+        "item_pgNQhE",
+        "item_ji4wf8",
+        "item_hgtp3f",
+        "item_QmCh4r",
+        "item_C7FRJH",
+        "item_Uiqtc9",
+        "item_RCAg8x",
+        "item_gVQWbN"
+      ],
+      "name": "SS - Timeline #3",
+      "settings": {
+        "heading": "<h2>CUT-RESISTANT BASELAYER</h2>",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 50,
+        "heading_size_mobile": 28,
+        "heading_height": 130,
+        "heading_align": "center",
+        "heading_align_mobile": "center",
+        "items_mt": 0,
+        "items_mt_mobile": 0,
+        "items_space": 0,
+        "items_space_mobile": 0,
+        "content_padding_horizontal": 48,
+        "content_padding_horizontal_mobile": 48,
+        "circle_size": 32,
+        "circle_size_mobile": 20,
+        "circle_border_thickness": 1,
+        "image_width": 50,
+        "image_width_mobile": 70,
+        "image_radius": 0,
+        "image_border_thickness": 0,
+        "image_ratio": "original",
+        "image_ratio_mobile": "original",
+        "image_align": "center",
+        "image_align_mobile": "center",
+        "item_heading_custom": false,
+        "item_heading_font": "josefin_sans_n4",
+        "item_heading_size": 32,
+        "item_heading_size_mobile": 20,
+        "item_heading_height": 130,
+        "item_heading_mt": 0,
+        "item_heading_mt_mobile": 16,
+        "item_heading_align": "left",
+        "item_heading_align_mobile": "left",
+        "item_text_custom": false,
+        "item_text_font": "josefin_sans_n4",
+        "item_text_size": 21,
+        "item_text_size_mobile": 16,
+        "item_text_height": 140,
+        "item_text_mt": 16,
+        "item_text_mt_mobile": 0,
+        "item_text_align": "left",
+        "item_text_align_mobile": "left",
+        "line_color": "#000000",
+        "circle_bg_color": "#e2fb31",
+        "circle_border_color": "#000000",
+        "item_heading_color": "#000000",
+        "item_text_color": "#000000",
+        "heading_color": "#000000",
+        "background_color": "#f2f2f2",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 120,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "ss_timeline_3_cq4icM": {
+      "type": "ss-timeline-3",
+      "blocks": {
+        "item_k3tXMR": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/Front_kelly.png",
+            "hide_image": false,
+            "heading": "<h3>Kelly</h3>",
+            "text": "<p>QC/Packing</p>"
+          }
+        },
+        "item_HmymQV": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/Front_Orange.png",
+            "hide_image": false,
+            "heading": "<h3>Orange</h3>",
+            "text": "<p>Sewing</p>"
+          }
+        },
+        "item_UHQVtP": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Front_Black.png",
+            "hide_image": false,
+            "heading": "<h3>Black - 3.0</h3>",
+            "text": "<p>In QC</p>"
+          }
+        },
+        "item_hDpLJ8": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/Front_Navy.png",
+            "hide_image": false,
+            "heading": "<h3>Navy</h3>",
+            "text": "<p>Preparing for sewing</p>"
+          }
+        },
+        "item_7K9npK": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/Front_Red.png",
+            "hide_image": false,
+            "heading": "<h3>RED</h3>",
+            "text": "<p>Preparing for sewing</p>"
+          }
+        },
+        "item_CTR6Uh": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Front_White.png",
+            "hide_image": false,
+            "heading": "<h3>White - 3.0</h3>",
+            "text": "<p>In Sewing</p>"
+          }
+        },
+        "item_ieBeJC": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/Front_Royal.png",
+            "hide_image": false,
+            "heading": "<h3>Royal</h3>",
+            "text": "<p>Sewing</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_k3tXMR",
+        "item_HmymQV",
+        "item_UHQVtP",
+        "item_hDpLJ8",
+        "item_7K9npK",
+        "item_CTR6Uh",
+        "item_ieBeJC"
+      ],
+      "disabled": true,
+      "name": "SS - Timeline #3",
+      "settings": {
+        "heading": "<h2>CUT-RESISTANT NECK GUARD</h2>",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 50,
+        "heading_size_mobile": 28,
+        "heading_height": 130,
+        "heading_align": "center",
+        "heading_align_mobile": "center",
+        "items_mt": 0,
+        "items_mt_mobile": 0,
+        "items_space": 0,
+        "items_space_mobile": 0,
+        "content_padding_horizontal": 48,
+        "content_padding_horizontal_mobile": 48,
+        "circle_size": 32,
+        "circle_size_mobile": 20,
+        "circle_border_thickness": 1,
+        "image_width": 50,
+        "image_width_mobile": 70,
+        "image_radius": 0,
+        "image_border_thickness": 0,
+        "image_ratio": "landscape",
+        "image_ratio_mobile": "landscape",
+        "image_align": "center",
+        "image_align_mobile": "center",
+        "item_heading_custom": false,
+        "item_heading_font": "josefin_sans_n4",
+        "item_heading_size": 32,
+        "item_heading_size_mobile": 20,
+        "item_heading_height": 130,
+        "item_heading_mt": 0,
+        "item_heading_mt_mobile": 16,
+        "item_heading_align": "left",
+        "item_heading_align_mobile": "left",
+        "item_text_custom": false,
+        "item_text_font": "josefin_sans_n4",
+        "item_text_size": 21,
+        "item_text_size_mobile": 16,
+        "item_text_height": 140,
+        "item_text_mt": 16,
+        "item_text_mt_mobile": 0,
+        "item_text_align": "left",
+        "item_text_align_mobile": "left",
+        "line_color": "#000000",
+        "circle_bg_color": "#e2fb31",
+        "circle_border_color": "#000000",
+        "item_heading_color": "#000000",
+        "item_text_color": "#000000",
+        "heading_color": "#000000",
+        "background_color": "#f2f2f2",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 80,
+        "padding_bottom": 84,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 120,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "main-page": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_size": "title-lg tracking-heading",
+        "heading_alignment": "text-center",
+        "heading_tag": "h2",
+        "text_size": "text-base",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    }
+  },
+  "order": [
+    "image_with_text_overlay_Mbyg4a",
+    "rich_text_gJCTBQ",
+    "ss_timeline_3_PJmYYe",
+    "ss_timeline_3_cq4icM",
+    "main-page"
+  ]
+}
