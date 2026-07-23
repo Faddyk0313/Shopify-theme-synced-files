@@ -1,1 +1,199 @@
-{"sections":{"main-page":{"type":"main-page","settings":{"heading_size":"title-lg tracking-heading","heading_alignment":"text-center","heading_tag":"h2","text_size":"text-sm","padding_top":36,"padding_bottom":16,"divider":false,"narrow":true,"rounded":true}},"rich_text_J43Y7e":{"type":"rich-text","blocks":{"heading_jPHMtQ":{"type":"heading","settings":{"heading":"Rich text","heading_size":"title-lg tracking-heading","heading_tag":"h2","highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false}},"button_ThYVC3":{"type":"button","settings":{"button_label":"Button label","button_link":"","button_style":"primary","button_size":"md","button_external":false,"button_icon":true}}},"block_order":["heading_jPHMtQ","button_ThYVC3"],"disabled":true,"settings":{"text_alignment":"left","text_alignment_mobile":"left","heading":"","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_width":"small","heading_tag":"h2","subheading":"","description":"","button_label":"","button_link":"","button_external":false,"button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false,"color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":72,"padding_bottom":100,"divider":false,"narrow":true,"rounded":false}},"rich_text_prJFbT":{"type":"rich-text","blocks":{"heading_QjDTCd":{"type":"heading","settings":{"heading":"NECK GUARD SIZE CHART","heading_size":"title-md","heading_tag":"h2","highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false}},"spacing_VB6wMq":{"type":"spacing","settings":{"height":40,"height_mobile":0}},"image_6XPwNc":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/NECK_GUARD_GRAPHIC.svg","image_width":"custom","image_max_width":520,"image_max_width_mobile":320}},"heading_7tUxYp":{"type":"heading","settings":{"heading":"YOUTH & SENIOR SIZE","heading_size":"title-sm","heading_tag":"h2","highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false}},"image_qD6yFT":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/NECK_GUARD_SIZE_CHART.svg","image_width":"custom","image_max_width":710,"image_max_width_mobile":600}},"button_de6DC6":{"type":"button","settings":{"button_label":"Shop Neck Guards","button_link":"shopify:\/\/collections\/battlegear-2-0-neck-guard","button_style":"primary","button_size":"sm","button_external":false,"button_icon":false}}},"block_order":["heading_QjDTCd","spacing_VB6wMq","image_6XPwNc","heading_7tUxYp","image_qD6yFT","button_de6DC6"],"disabled":true,"settings":{"text_alignment":"center","text_alignment_mobile":"center","heading":"","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_width":"small","heading_tag":"h2","subheading":"","description":"","button_label":"","button_link":"","button_external":false,"button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle","highlighted_reveal":false,"color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":12,"padding_bottom":68,"divider":false,"narrow":true,"rounded":true}}},"order":["main-page","rich_text_J43Y7e","rich_text_prJFbT"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "settings": {
+        "heading_size": "title-lg tracking-heading",
+        "heading_alignment": "text-center",
+        "heading_tag": "h2",
+        "text_size": "text-sm",
+        "padding_top": 36,
+        "padding_bottom": 68,
+        "divider": false,
+        "narrow": true,
+        "rounded": true,
+        "background_color": ""
+      }
+    },
+    "rich_text_J43Y7e": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_jPHMtQ": {
+          "type": "heading",
+          "settings": {
+            "heading": "Rich text",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "button_ThYVC3": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_jPHMtQ",
+        "button_ThYVC3"
+      ],
+      "disabled": true,
+      "settings": {
+        "text_alignment": "left",
+        "text_alignment_mobile": "left",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 100,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "rich_text_prJFbT": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_QjDTCd": {
+          "type": "heading",
+          "settings": {
+            "heading": "NECK GUARD SIZE CHART",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "spacing_VB6wMq": {
+          "type": "spacing",
+          "settings": {
+            "height": 40,
+            "height_mobile": 0
+          }
+        },
+        "image_6XPwNc": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/NECK_GUARD_GRAPHIC.svg",
+            "image_width": "custom",
+            "image_max_width": 520,
+            "image_max_width_mobile": 320
+          }
+        },
+        "heading_7tUxYp": {
+          "type": "heading",
+          "settings": {
+            "heading": "YOUTH & SENIOR SIZE",
+            "heading_size": "title-sm",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "image_qD6yFT": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/NECK_GUARD_SIZE_CHART.svg",
+            "image_width": "custom",
+            "image_max_width": 710,
+            "image_max_width_mobile": 600
+          }
+        },
+        "button_de6DC6": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Neck Guards",
+            "button_link": "shopify://collections/battlegear-2-0-neck-guard",
+            "button_style": "primary",
+            "button_size": "sm",
+            "button_external": false,
+            "button_icon": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_QjDTCd",
+        "spacing_VB6wMq",
+        "image_6XPwNc",
+        "heading_7tUxYp",
+        "image_qD6yFT",
+        "button_de6DC6"
+      ],
+      "disabled": true,
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 12,
+        "padding_bottom": 68,
+        "divider": false,
+        "narrow": true,
+        "rounded": true
+      }
+    }
+  },
+  "order": [
+    "main-page",
+    "rich_text_J43Y7e",
+    "rich_text_prJFbT"
+  ]
+}
