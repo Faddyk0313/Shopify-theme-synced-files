@@ -376,9 +376,10 @@
           "cut-resistant-baselayer-3-0-royal",
           "cut-resistant-baselayer-3-0-black",
           "cut-resistant-neck-guard-3-0-black",
-          "cut-resistant-neck-guard-3-0-white"
+          "cut-resistant-neck-guard-3-0-white",
+          "cut-resistant-baselayer-3-0-blackout-camo"
         ],
-        "product_limit": 6,
+        "product_limit": 25,
         "columns": 5,
         "new_version2": false,
         "carousel_on_desktop": false,
@@ -462,16 +463,14 @@
       "settings": {
         "collection": "",
         "products": [
-          "cut-resistant-baselayer-3-0-blackout-camo",
           "cut-resistant-baselayer-3-0-miami-vice",
           "cut-resistant-baselayer-3-0-early-riser",
           "cut-resistant-baselayer-3-0-whiteout-camo",
           "cut-resistant-baselayer-3-0-red",
-          "cut-resistant-baselayer-3-0-hot-lap",
           "cut-resistant-baselayer-3-0-galaxy-splatter",
           "cut-resistant-baselayer-3-0-s-p-limited-edition-drops-9-15"
         ],
-        "product_limit": 6,
+        "product_limit": 25,
         "columns": 5,
         "new_version2": false,
         "carousel_on_desktop": false,
@@ -565,7 +564,7 @@
           "cut-resistant-baselayer-3-0-team-gold",
           "cut-resistant-baselayer-3-0-p-h-limited-edition-drops-11-15"
         ],
-        "product_limit": 6,
+        "product_limit": 25,
         "columns": 5,
         "new_version2": false,
         "carousel_on_desktop": false,
