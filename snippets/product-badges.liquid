@@ -58,12 +58,11 @@
 {% comment %} TBG custom code {% endcomment %}
 
 {%- liquid
-  assign hide_sale_badge = false
   assign show_save_label_badge = false
   assign show_save_value_badge = false
   for product_collection in product.collections
     if product_collection.handle == 'last-chance' or product_collection.id == 358732595378
-      assign hide_sale_badge = true
+      assign isLastChanceProd = true
       break
     endif
   endfor
@@ -109,9 +108,25 @@
     color: {{ product.metafields.custom.product_label_text_color.value }};
   {%- endif -%}
 {%- endcapture -%}
+
 {%- assign badge_styles = badge_styles | strip -%}
-<div class="show_sold_out: {{ show_sold_out }}, product.available: {{ product.available }} badges{% if class != blank %} {{ class }}{% endif %}">
-  {% unless show_sold_out and product.available == false %}
+<div class="badges{% if class != blank %} {{ class }}{% endif %}">
+  {% if isLastChanceProd %}
+    {% unless show_sold_out and product.available == false %}
+      {%- if product.metafields.theme.label.value != blank -%}
+        {%- for label in product.metafields.theme.label.value -%}
+          <span
+            class="badge{% if vertical_badges %} badge--vertical{% endif %} flex items-center gap-1d5 leading-none rounded-full font-bold"
+            {% if badge_styles != blank %}
+              style="{{ badge_styles }}"
+            {% endif %}
+          >
+            {{- label | escape -}}
+          </span>
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endunless -%}
+  {% else %}
     {%- if product.metafields.theme.label.value != blank -%}
       {%- for label in product.metafields.theme.label.value -%}
         <span
@@ -124,10 +139,10 @@
         </span>
       {%- endfor -%}
     {%- endif -%}
-  {%- endunless -%}
+  {% endif %}
 
 
-  {%- if saved_amount != blank and hide_sale_badge == false -%}
+  {%- if saved_amount != blank and isLastChanceProd == false -%}
     {% if product.available %}
       {% comment %} TBG custom code {% endcomment %}
       {%- if show_save_label_badge -%}
