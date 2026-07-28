@@ -803,6 +803,65 @@
         "parallax_direction": "vertical"
       }
     },
+    "featured_collection_L6Qg3w": {
+      "type": "featured-collection",
+      "disabled": true,
+      "custom_css": [
+        "@media (max-width: 768px) {.title-md {font-size: var(--title-sm); /* Adjust to your desired small size variable */ }}",
+        ".product-card__bottom.flex.items-center.gap-2 {display: none !important;}"
+      ],
+      "name": "USA HOCKEY PRODUCTS",
+      "settings": {
+        "collection": "",
+        "products": [
+          "yth-dryland-short-rl-vert",
+          "yth-rl-circle-tee-black",
+          "yth-rl-splatter-hoodie-dark-gray-heather",
+          "yth-dryland-short-short-2",
+          "yth-dryland-short-rl-stripe",
+          "sr-rl-stack-2-0-tee-black",
+          "sr-rl-splatter-hoodie-black",
+          "sr-rl-circle-tee-dusty-pink",
+          "sr-rl-circle-tee-black",
+          "sr-rl-circle-hoodie-2-0-black",
+          "sr-rl-circle-hoodie-lunar-rock",
+          "sr-rl-stack-hoodie-black",
+          "sr-dryland-short-rl-vert",
+          "sr-rink-life-rink-tee-bone",
+          "yth-rink-life-rink-tee-black-white",
+          "yth-brand-loop-hoodie-white"
+        ],
+        "product_limit": 25,
+        "columns": 5,
+        "new_version2": false,
+        "carousel_on_desktop": true,
+        "show_view_all": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 28,
+        "padding_bottom": 48,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
     "image_with_text_overlay_jTmbcF": {
       "type": "image-with-text-overlay",
       "blocks": {
@@ -1572,6 +1631,7 @@
     "custom_rich_text_z9ewr3",
     "titanpdp_comparison_table_RBJzWh",
     "image_with_text_overlay_ccefpm",
+    "featured_collection_L6Qg3w",
     "image_with_text_overlay_jTmbcF",
     "featured_collection_GBFe6r",
     "image_with_text_overlay_R7zCJm",
