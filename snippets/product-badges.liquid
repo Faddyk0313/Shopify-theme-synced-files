@@ -110,7 +110,7 @@
   {%- endif -%}
 {%- endcapture -%}
 {%- assign badge_styles = badge_styles | strip -%}
-<div class=" badges{% if class != blank %} {{ class }}{% endif %}">
+<div class="show_sold_out: {{ show_sold_out }}, product.available: {{ product.available }} badges{% if class != blank %} {{ class }}{% endif %}">
   {% unless show_sold_out and product.available == false %}
     {%- if product.metafields.theme.label.value != blank -%}
       {%- for label in product.metafields.theme.label.value -%}
