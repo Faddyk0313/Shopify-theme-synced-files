@@ -58,7 +58,6 @@
         "image_DQqcD8",
         "text_DbjMiA"
       ],
-      "disabled": true,
       "name": "RINKLIFE BANNER",
       "settings": {
         "transparent_header": false,
@@ -92,7 +91,6 @@
     },
     "featured_collection_gYEKdL": {
       "type": "featured-collection",
-      "disabled": true,
       "custom_css": [
         "@media (max-width: 768px) {.title-md {font-size: var(--title-sm); /* Adjust to your desired small size variable */ }}",
         ".product-card__bottom.flex.items-center.gap-2 {display: none !important;}"
