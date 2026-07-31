@@ -105,6 +105,7 @@
       "blocks": {
         "spacing_tt6UHK": {
           "type": "spacing",
+          "disabled": true,
           "settings": {
             "height": 0,
             "height_mobile": 12
@@ -116,21 +117,14 @@
             "image": "shopify://shop_images/3.0_miami_vice.svg",
             "image_width": "custom",
             "image_max_width": 350,
-            "image_max_width_mobile": 160
-          }
-        },
-        "spacing_aPAddj": {
-          "type": "spacing",
-          "settings": {
-            "height": 0,
-            "height_mobile": 80
+            "image_max_width_mobile": 240
           }
         },
         "spacing_kdt7HV": {
           "type": "spacing",
           "settings": {
             "height": 0,
-            "height_mobile": 120
+            "height_mobile": 80
           }
         },
         "spacing_gqWAtP": {
@@ -155,7 +149,6 @@
       "block_order": [
         "spacing_tt6UHK",
         "image_8e49hm",
-        "spacing_aPAddj",
         "spacing_kdt7HV",
         "spacing_gqWAtP",
         "button_LQkjMt"
@@ -170,7 +163,7 @@
         "content_position": "md:items-center md:justify-start",
         "text_alignment": "left",
         "image_mobile": "shopify://shop_images/MIAMI_VICE_MOBILE_BANNER.webp",
-        "image_height_mobile": "adapt",
+        "image_height_mobile": "400px",
         "content_position_mobile": "items-start justify-center",
         "text_alignment_mobile": "center",
         "color_text": "#000000",
