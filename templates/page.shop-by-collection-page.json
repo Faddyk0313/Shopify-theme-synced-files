@@ -25,6 +25,70 @@
         "background_color": ""
       }
     },
+    "image_with_text_overlay_kPUDTw": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "image_X6jYw4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/frozen_rocket_svg_website.svg",
+            "image_width": "custom",
+            "image_max_width": 230,
+            "image_max_width_mobile": 140
+          }
+        },
+        "text_KcJdcL": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>At <strong>Titan Labs </strong>we don’t just create gear; we create confidence. Our commitment to innovation, protection, and performance ensures you’re always ready for the fight ahead.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "image_X6jYw4",
+        "text_KcJdcL"
+      ],
+      "name": "FROZEN ROCKET BANNER",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/frozen_banner_1_desk.webp",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-center md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/frozen_banner_1_mobile.webp",
+        "image_height_mobile": "adapt",
+        "content_position_mobile": "items-start justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "#00adee",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
     "image_with_text_overlay_KzzDdD": {
       "type": "image-with-text-overlay",
       "blocks": {
@@ -151,70 +215,6 @@
         "divider": false,
         "full_width": false,
         "rounded": false
-      }
-    },
-    "image_with_text_overlay_kPUDTw": {
-      "type": "image-with-text-overlay",
-      "blocks": {
-        "image_X6jYw4": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/frozen_rocket_svg_website.svg",
-            "image_width": "custom",
-            "image_max_width": 230,
-            "image_max_width_mobile": 140
-          }
-        },
-        "text_KcJdcL": {
-          "type": "text",
-          "disabled": true,
-          "settings": {
-            "text": "<p>At <strong>Titan Labs </strong>we don’t just create gear; we create confidence. Our commitment to innovation, protection, and performance ensures you’re always ready for the fight ahead.</p>",
-            "text_font": "body",
-            "text_size": "subtext-md",
-            "text_max_size": 32,
-            "text_line_height": 1.6,
-            "text_letter_spacing": 0,
-            "text_capitalize": false,
-            "secondary_color": false,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        }
-      },
-      "block_order": [
-        "image_X6jYw4",
-        "text_KcJdcL"
-      ],
-      "name": "FROZEN ROCKET BANNER",
-      "settings": {
-        "transparent_header": false,
-        "image": "shopify://shop_images/frozen_banner_1_desk.webp",
-        "image_height": "adapt",
-        "content_width": "small",
-        "content_position": "md:items-center md:justify-start",
-        "text_alignment": "left",
-        "image_mobile": "shopify://shop_images/frozen_banner_1_mobile.webp",
-        "image_height_mobile": "adapt",
-        "content_position_mobile": "items-start justify-center",
-        "text_alignment_mobile": "center",
-        "color_text": "#ffffff",
-        "color_background": "",
-        "gradient_background": "",
-        "color_highlight": "#00adee",
-        "gradient_highlight": "",
-        "color_button_text": "#171717",
-        "color_button_background": "#ffffff",
-        "color_button_gradient": "",
-        "color_overlay": "#171717",
-        "overlay_opacity": 0,
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "divider": false,
-        "full_width": true,
-        "rounded": false,
-        "enable_parallax": false,
-        "parallax_direction": "vertical"
       }
     },
     "featured_collection_WXjHCR": {
@@ -751,10 +751,10 @@
   },
   "order": [
     "main-page",
-    "image_with_text_overlay_KzzDdD",
-    "featured_collection_gYEKdL",
     "image_with_text_overlay_kPUDTw",
     "featured_collection_WXjHCR",
+    "image_with_text_overlay_KzzDdD",
+    "featured_collection_gYEKdL",
     "image_with_text_overlay_JAQfPj",
     "featured_collection_JwXzf9",
     "image_with_text_overlay_WrWWyF",
