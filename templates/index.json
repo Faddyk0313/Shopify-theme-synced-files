@@ -144,8 +144,8 @@
           "type": "button",
           "settings": {
             "button_label": "SHOP NOW",
-            "button_link": "shopify://pages/shop-by-collection",
-            "button_style": "primary",
+            "button_link": "shopify://products/cut-resistant-baselayer-3-0-miami-vice",
+            "button_style": "secondary",
             "button_size": "sm",
             "button_external": false,
             "button_icon": true
