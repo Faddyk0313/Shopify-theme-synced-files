@@ -371,6 +371,8 @@
       "settings": {
         "collection": "",
         "products": [
+          "cut-resistant-baselayer-3-0-blackout-camo",
+          "cut-resistant-baselayer-3-0-miami-vice",
           "cut-resistant-baselayer-3-0-navy",
           "cut-resistant-baselayer-3-0-white",
           "cut-resistant-baselayer-3-0-royal",
@@ -378,8 +380,7 @@
           "cut-resistant-neck-guard-3-0-black",
           "cut-resistant-neck-guard-3-0-white",
           "cut-resistant-baselayer-3-0-frozen-rocket",
-          "cut-resistant-baselayer-3-0-usa-hockey-white",
-          "cut-resistant-baselayer-3-0-blackout-camo"
+          "cut-resistant-baselayer-3-0-usa-hockey-white"
         ],
         "product_limit": 25,
         "columns": 5,
