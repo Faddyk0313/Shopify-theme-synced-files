@@ -100,6 +100,98 @@
         "parallax_direction": "vertical"
       }
     },
+    "image_with_text_overlay_7W36g4": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "spacing_tt6UHK": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 12
+          }
+        },
+        "image_8e49hm": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/3.0_miami_vice.svg",
+            "image_width": "custom",
+            "image_max_width": 350,
+            "image_max_width_mobile": 160
+          }
+        },
+        "spacing_aPAddj": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 80
+          }
+        },
+        "spacing_kdt7HV": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 120
+          }
+        },
+        "spacing_gqWAtP": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 120
+          }
+        },
+        "button_LQkjMt": {
+          "type": "button",
+          "settings": {
+            "button_label": "SHOP NOW",
+            "button_link": "shopify://pages/shop-by-collection",
+            "button_style": "primary",
+            "button_size": "sm",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "spacing_tt6UHK",
+        "image_8e49hm",
+        "spacing_aPAddj",
+        "spacing_kdt7HV",
+        "spacing_gqWAtP",
+        "button_LQkjMt"
+      ],
+      "disabled": true,
+      "name": "MIAMI VICE BANNER",
+      "settings": {
+        "transparent_header": true,
+        "image": "shopify://shop_images/3.0_MIAMI_homepage_desktop.webp",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-center md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/MIAMI_VICE_MOBILE_BANNER.webp",
+        "image_height_mobile": "adapt",
+        "content_position_mobile": "items-start justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#000000",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_highlight": "#e2fb31",
+        "gradient_highlight": "",
+        "color_button_text": "#00B0F4",
+        "color_button_background": "#FFFFFF",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
     "image_with_text_overlay_9ze9nz": {
       "type": "image-with-text-overlay",
       "blocks": {
@@ -1619,6 +1711,7 @@
   },
   "order": [
     "image_with_text_overlay_XyHULG",
+    "image_with_text_overlay_7W36g4",
     "image_with_text_overlay_9ze9nz",
     "logo_list_nBVhDN",
     "size_based_products_6ab66e",
