@@ -69,6 +69,7 @@
         "spacing_dextkm",
         "button_fHNQ7J"
       ],
+      "disabled": true,
       "name": "FROZEN ROCKET",
       "settings": {
         "transparent_header": true,
@@ -160,7 +161,6 @@
         "spacing_gqWAtP",
         "button_LQkjMt"
       ],
-      "disabled": true,
       "name": "MIAMI VICE BANNER",
       "settings": {
         "transparent_header": true,
@@ -178,8 +178,8 @@
         "gradient_background": "",
         "color_highlight": "#e2fb31",
         "gradient_highlight": "",
-        "color_button_text": "#00B0F4",
-        "color_button_background": "#FFFFFF",
+        "color_button_text": "#00b0f4",
+        "color_button_background": "#ffffff",
         "color_button_gradient": "",
         "color_overlay": "#171717",
         "overlay_opacity": 0,
@@ -431,7 +431,7 @@
           "cut-resistant-neck-guard-3-0-black",
           "cut-resistant-baselayer-3-0-white",
           "cut-resistant-neck-guard-3-0-white",
-          "battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-miami-long",
+          "cut-resistant-baselayer-3-0-miami-vice",
           "yth-dryland-short-rl-vert",
           "yth-rink-rat-hoodie-neon-blue",
           "yth-flying-pucks-tee-white",
