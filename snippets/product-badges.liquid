@@ -129,15 +129,16 @@
   {% else %}
     {%- if product.metafields.theme.label.value != blank -%}
       {%- for label in product.metafields.theme.label.value -%}
-        {% comment %} {% if label == 'LAST CHANCE' and show_sold_out !=  true %} {% endcomment %}
-        <span
-          class="nolastchance {{ show_sold_out }} badge{% if vertical_badges %} badge--vertical{% endif %} flex items-center gap-1d5 leading-none rounded-full font-bold"
-          {% if badge_styles != blank %}
-            style="{{ badge_styles }}"
-          {% endif %}
-        >
-          {{- label | escape -}}
-        </span>
+        {% unless show_sold_out %}
+          <span
+            class="nolastchance {{ show_sold_out }} badge{% if vertical_badges %} badge--vertical{% endif %} flex items-center gap-1d5 leading-none rounded-full font-bold"
+            {% if badge_styles != blank %}
+              style="{{ badge_styles }}"
+            {% endif %}
+          >
+            {{- label | escape -}}
+          </span>
+        {% endunless %}
       {%- endfor -%}
     {%- endif -%}
   {% endif %}
