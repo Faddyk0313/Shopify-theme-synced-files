@@ -111,7 +111,7 @@
 
 {%- assign badge_styles = badge_styles | strip -%}
 <div class="badges{% if class != blank %} {{ class }}{% endif %}">
-  {% if isLastChanceProd %}
+  {% if isLastChanceProd and show_sold_out != true %}
     {% unless show_sold_out and product.available == false %}
       {%- if product.metafields.theme.label.value != blank -%}
         {%- for label in product.metafields.theme.label.value -%}
