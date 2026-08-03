@@ -129,7 +129,18 @@
   {% else %}
     {%- if product.metafields.theme.label.value != blank -%}
       {%- for label in product.metafields.theme.label.value -%}
-        {% unless show_sold_out %}
+        {% if label == "Last chance" %}
+          {% unless show_sold_out %}
+            <span
+              class="nolastchance {{ show_sold_out }} badge{% if vertical_badges %} badge--vertical{% endif %} flex items-center gap-1d5 leading-none rounded-full font-bold"
+              {% if badge_styles != blank %}
+                style="{{ badge_styles }}"
+              {% endif %}
+            >
+              {{- label | escape -}}
+            </span>
+          {% endunless %}
+        {% else %}
           <span
             class="nolastchance {{ show_sold_out }} badge{% if vertical_badges %} badge--vertical{% endif %} flex items-center gap-1d5 leading-none rounded-full font-bold"
             {% if badge_styles != blank %}
@@ -138,7 +149,7 @@
           >
             {{- label | escape -}}
           </span>
-        {% endunless %}
+        {% endif %}
       {%- endfor -%}
     {%- endif -%}
   {% endif %}
