@@ -116,7 +116,7 @@
       {%- if product.metafields.theme.label.value != blank -%}
         {%- for label in product.metafields.theme.label.value -%}
           <span
-            class="hiii badge{% if vertical_badges %} badge--vertical{% endif %} flex items-center gap-1d5 leading-none rounded-full font-bold"
+            class=" badge{% if vertical_badges %} badge--vertical{% endif %} flex items-center gap-1d5 leading-none rounded-full font-bold"
             {% if badge_styles != blank %}
               style="{{ badge_styles }}"
             {% endif %}
@@ -127,10 +127,10 @@
       {%- endif -%}
     {%- endunless -%}
   {% else %}
-    {%- if product.metafields.theme.label.value != blank -%}
+    {%- if product.metafields.theme.label.value != blank and show_sold_out != true -%}
       {%- for label in product.metafields.theme.label.value -%}
         <span
-          class="helloo badge{% if vertical_badges %} badge--vertical{% endif %} flex items-center gap-1d5 leading-none rounded-full font-bold"
+          class="{{ show_sold_out }} badge{% if vertical_badges %} badge--vertical{% endif %} flex items-center gap-1d5 leading-none rounded-full font-bold"
           {% if badge_styles != blank %}
             style="{{ badge_styles }}"
           {% endif %}
