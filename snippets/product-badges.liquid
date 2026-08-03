@@ -116,7 +116,7 @@
       {%- if product.metafields.theme.label.value != blank -%}
         {%- for label in product.metafields.theme.label.value -%}
           <span
-            class="badge{% if vertical_badges %} badge--vertical{% endif %} flex items-center gap-1d5 leading-none rounded-full font-bold"
+            class="lastchance badge{% if vertical_badges %} badge--vertical{% endif %} flex items-center gap-1d5 leading-none rounded-full font-bold"
             {% if badge_styles != blank %}
               style="{{ badge_styles }}"
             {% endif %}
@@ -130,7 +130,7 @@
     {%- if product.metafields.theme.label.value != blank -%}
       {%- for label in product.metafields.theme.label.value -%}
         <span
-          class="badge{% if vertical_badges %} badge--vertical{% endif %} flex items-center gap-1d5 leading-none rounded-full font-bold"
+          class="nolastchance badge{% if vertical_badges %} badge--vertical{% endif %} flex items-center gap-1d5 leading-none rounded-full font-bold"
           {% if badge_styles != blank %}
             style="{{ badge_styles }}"
           {% endif %}
