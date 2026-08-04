@@ -63,6 +63,8 @@
     const descriptionEl = root.querySelector("[data-team-store-description]");
     const gridEl = root.querySelector("[data-team-store-grid]");
     const promotionTemplates = Array.from(root.querySelectorAll("[data-team-store-promotion]"));
+    // TBG custom code: Hide the extra image/text section when a team store has custom products.
+    const customProductsSectionToHide = document.querySelector("#shopify-section-template--21717618950322__image_with_text_btMG9T");
     const bannerMediaEl = document.querySelector(".banner__media");
     const bannerPictureEl = bannerMediaEl?.querySelector("picture");
     const bannerBoxEl = document.querySelector(".banner__box");
@@ -242,6 +244,12 @@
         return;
       }
 
+      const customProducts = data.products?.customProducts || [];
+      if (customProductsSectionToHide && customProducts.length > 0) {
+        customProductsSectionToHide.hidden = true;
+        customProductsSectionToHide.setAttribute("aria-hidden", "true");
+      }
+
       const includeStockColors = !!data.includeStockColors;
       const pairProducts = includeStockColors
         ? (data.products?.productPairs || []).flatMap((pair) =>
@@ -249,7 +257,7 @@
           )
         : [];
       const products = [
-        ...(data.products?.customProducts || []),
+        ...customProducts,
         ...pairProducts,
         ...(data.products?.matchedCollectionProducts || [])
       ];
