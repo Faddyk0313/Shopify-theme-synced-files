@@ -259,6 +259,8 @@
       });
       if (hasCustomProducts) {
         hideCustomProductsSection();
+      } else {
+        showCustomProductsSection();
       }
 
       const includeStockColors = !!data.includeStockColors;
@@ -616,6 +618,31 @@
           hideCustomProductsSection(nextAttempt + 1);
         }, 150);
       }
+    }
+
+    // TBG custom code: Explicitly restore the section when a team store has no custom products.
+    function showCustomProductsSection() {
+      const section = document.querySelector(CUSTOM_PRODUCTS_SECTION_SELECTOR);
+
+      if (!section) {
+        setTeamStoreDebug({
+          sectionSelector: CUSTOM_PRODUCTS_SECTION_SELECTOR,
+          sectionFound: false,
+          sectionHidden: false,
+          sectionShown: false
+        });
+        return;
+      }
+
+      section.hidden = false;
+      section.removeAttribute("aria-hidden");
+      section.style.removeProperty("display");
+      setTeamStoreDebug({
+        sectionSelector: CUSTOM_PRODUCTS_SECTION_SELECTOR,
+        sectionFound: true,
+        sectionHidden: false,
+        sectionShown: true
+      });
     }
 
     function parseOrderWindowDate(value, isEndDate) {
