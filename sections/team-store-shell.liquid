@@ -64,7 +64,9 @@
     const gridEl = root.querySelector("[data-team-store-grid]");
     const promotionTemplates = Array.from(root.querySelectorAll("[data-team-store-promotion]"));
     // TBG custom code: Hide the extra image/text section when a team store has custom products.
-    const customProductsSectionToHide = document.querySelector("#shopify-section-template--21717618950322__image_with_text_btMG9T");
+    const CUSTOM_PRODUCTS_SECTION_SELECTOR = "#shopify-section-template--21717618950322__image_with_text_btMG9T";
+    const debugPanel = createTeamStoreDebugPanel();
+    let teamStoreDebugDetails = {};
     const bannerMediaEl = document.querySelector(".banner__media");
     const bannerPictureEl = bannerMediaEl?.querySelector("picture");
     const bannerBoxEl = document.querySelector(".banner__box");
@@ -245,9 +247,18 @@
       }
 
       const customProducts = data.products?.customProducts || [];
-      if (customProductsSectionToHide && customProducts.length > 0) {
-        customProductsSectionToHide.hidden = true;
-        customProductsSectionToHide.setAttribute("aria-hidden", "true");
+      const hasCustomProducts = hasTeamStoreCustomProducts(data, customProducts);
+      setTeamStoreDebug({
+        team: team,
+        sectionSelector: CUSTOM_PRODUCTS_SECTION_SELECTOR,
+        sectionFound: Boolean(document.querySelector(CUSTOM_PRODUCTS_SECTION_SELECTOR)),
+        customProductsCount: customProducts.length,
+        customProductsAdded: teamData.customProductsAdded,
+        inferredFromRenderedProducts: hasCustomProducts && !customProducts.length && teamData.customProductsAdded !== true,
+        shouldHideSection: hasCustomProducts
+      });
+      if (hasCustomProducts) {
+        hideCustomProductsSection();
       }
 
       const includeStockColors = !!data.includeStockColors;
@@ -469,6 +480,142 @@
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#39;");
+    }
+
+    // TBG custom code: Hidden debug panel for team-store storefront checks.
+    function createTeamStoreDebugPanel() {
+      const url = new URL(window.location.href);
+      const debugRequested =
+        url.searchParams.get("tbgTeamStoreDebug") === "1" ||
+        url.hash.indexOf("tbgTeamStoreDebug=1") !== -1 ||
+        getTeamStoreDebugStorage() === "1";
+      const panel = document.createElement("pre");
+
+      panel.setAttribute("data-tbg-team-store-debug", "true");
+      panel.style.cssText = [
+        "position:fixed",
+        "right:12px",
+        "bottom:12px",
+        "z-index:2147483647",
+        "max-width:min(420px,calc(100vw - 24px))",
+        "max-height:45vh",
+        "overflow:auto",
+        "margin:0",
+        "padding:12px",
+        "border:1px solid #2f6fed",
+        "border-radius:8px",
+        "background:#101828",
+        "color:#f9fafb",
+        "font:12px/1.45 monospace",
+        "white-space:pre-wrap",
+        "box-shadow:0 12px 30px rgba(16,24,40,.35)",
+        debugRequested ? "display:block" : "display:none"
+      ].join(";");
+      panel.textContent = "TBG team-store debug: waiting for data...";
+      document.body.appendChild(panel);
+
+      window.TBGTeamStoreDebug = {
+        show: function () {
+          panel.style.display = "block";
+          setTeamStoreDebugStorage("1");
+        },
+        hide: function () {
+          panel.style.display = "none";
+          setTeamStoreDebugStorage("");
+        }
+      };
+
+      return panel;
+    }
+
+    // TBG custom code: Update debug panel without exposing it unless enabled.
+    function setTeamStoreDebug(details) {
+      if (!debugPanel) return;
+      teamStoreDebugDetails = {
+        ...teamStoreDebugDetails,
+        ...details
+      };
+
+      debugPanel.textContent = JSON.stringify(
+        {
+          label: "TBG team-store debug",
+          updatedAt: new Date().toISOString(),
+          ...teamStoreDebugDetails
+        },
+        null,
+        2
+      );
+    }
+
+    // TBG custom code: Keep debug storage defensive for privacy-restricted browsers.
+    function getTeamStoreDebugStorage() {
+      try {
+        return localStorage.getItem("tbg_team_store_debug");
+      } catch (_error) {
+        return "";
+      }
+    }
+
+    // TBG custom code: Keep debug storage defensive for privacy-restricted browsers.
+    function setTeamStoreDebugStorage(value) {
+      try {
+        if (value) {
+          localStorage.setItem("tbg_team_store_debug", value);
+        } else {
+          localStorage.removeItem("tbg_team_store_debug");
+        }
+      } catch (_error) {}
+    }
+
+    // TBG custom code: Infer custom products from explicit API fields and rendered product metadata.
+    function hasTeamStoreCustomProducts(data, customProducts) {
+      if (Array.isArray(customProducts) && customProducts.length > 0) return true;
+      if (data?.team?.customProductsAdded === true) return true;
+
+      const allProducts = [
+        ...(data?.products?.matchedCollectionProducts || []),
+        ...((data?.products?.productPairs || []).flatMap((pair) =>
+          [pair.baseLayer, pair.neckGuard].filter(Boolean)
+        ))
+      ];
+
+      return allProducts.some((product) => {
+        const title = String(product?.title || "").toLowerCase();
+        const productType = String(product?.productType || "").toLowerCase();
+        return title.includes("custom") || productType.includes("custom");
+      });
+    }
+
+    // TBG custom code: The target section can be parsed after this script starts, so retry briefly.
+    function hideCustomProductsSection(attempt) {
+      const nextAttempt = attempt || 1;
+      const section = document.querySelector(CUSTOM_PRODUCTS_SECTION_SELECTOR);
+
+      if (section) {
+        section.hidden = true;
+        section.setAttribute("aria-hidden", "true");
+        section.style.setProperty("display", "none", "important");
+        setTeamStoreDebug({
+          sectionSelector: CUSTOM_PRODUCTS_SECTION_SELECTOR,
+          sectionFound: true,
+          sectionHidden: true,
+          hideAttempt: nextAttempt
+        });
+        return;
+      }
+
+      setTeamStoreDebug({
+        sectionSelector: CUSTOM_PRODUCTS_SECTION_SELECTOR,
+        sectionFound: false,
+        sectionHidden: false,
+        hideAttempt: nextAttempt
+      });
+
+      if (nextAttempt < 40) {
+        window.setTimeout(function () {
+          hideCustomProductsSection(nextAttempt + 1);
+        }, 150);
+      }
     }
 
     function parseOrderWindowDate(value, isEndDate) {
