@@ -174,14 +174,6 @@
     font-size: clamp(0.4rem,0.5rem, 0.5rem);
   }
 
-  #cus_upsell_banner.mobile,
-  .cus_free-shipping.mobile {
-    display: grid;
-  }
-  #cus_upsell_banner.desktop,
-  .cus_free-shipping.desktop {
-    display: none;
-  }
   .cart__item-title {
     font-size:14px;
     line-height: 0.5;
@@ -270,15 +262,6 @@
     }
     .cart__item-title {
       font-size:18px;
-    }
-    #cus_upsell_banner.mobile,
-    .cus_free-shipping.mobile {
-      display: none;
-    }
-    #cus_upsell_banner.desktop,
-    .cus_free-shipping.desktop {
-      display: flex;
-      width: clamp(340px, 30vw, 480px);
     }
     .mobile.cart-item-card__price-info {
       display: none;
@@ -582,56 +565,6 @@
                 render 'free-shipping-bar', minimum_amount: minimum_amount
               endif
             -%}
-          </div>
-
-          <style>
-                      /* TBG Custom Code */
-            #cus_upsell_banner {
-              display: flex;
-              flex-direction: column;
-              border-radius: var(--rounded-button);
-              overflow: clip;
-              background: linear-gradient(to right, #A1DA74, #D6EB76, #E9FB4B);
-              padding: 0.875rem 0.75rem;
-              gap: 0.875rem;
-            }
-
-            .cus_message {
-              text-align: center;
-            }
-
-            .upsellMsgHeading {
-              font-size: clamp(13px, 3.8vw, 18px);
-              line-height: 1.18;
-              text-align: center;
-              margin: 0;
-              text-wrap: balance;
-            }
-
-            #cus_button {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-            }
-            /* End TBG Custom Code */
-          </style>
-
-          <div id="cus_upsell_banner" class="mobile">
-            <div class="cus_message">
-              <h2 class="upsellMsgHeading heading leading-none title-sm">
-                ADD A SECOND SHIRT AND SAVE 10%<br>
-                OR ADD A THIRD SHIRT TO SAVE 20%
-              </h2>
-            </div>
-            <div id="cus_button">
-              {%- render 'button',
-                label: 'SHOP BATTLEGEAR',
-                link: '/collections/cut-resistant-battlegear',
-                style: 'primary',
-                size: 'xs',
-                textSize: '12px'
-              -%}
-            </div>
           </div>
           <form class="cart__form" action="{{ routes.cart_url }}" method="POST" id="cart">
             <cart-items class="cart__items block" data-section-id="{{ section.id }}">
@@ -1497,17 +1430,6 @@
                   render 'free-shipping-bar', minimum_amount: minimum_amount
                 endif
               -%}
-            </div>
-            <div id="cus_upsell_banner" style="margin-bottom: 0.65rem;" class="desktop">
-              <div class="cus_message">
-                <h2 class="upsellMsgHeading heading leading-none title-sm">
-                  ADD A SECOND SHIRT AND SAVE 10%<br>
-                  OR ADD A THIRD SHIRT TO SAVE 20%
-                </h2>
-              </div>
-              <div id="cus_button">
-                {%- render 'button', label: 'SHOP BATTLEGEAR', link: '#', style: 'primary', size: 'xs' -%}
-              </div>
             </div>
             <div class="desktopVer cart__sidebar flex flex-col gap-4 md:gap-6">
               {% comment %} TBG custom Code {% endcomment %}
