@@ -282,6 +282,7 @@
       "blocks": {
         "logo_cWMNeC": {
           "type": "logo",
+          "disabled": true,
           "settings": {
             "height": 80,
             "link": ""
