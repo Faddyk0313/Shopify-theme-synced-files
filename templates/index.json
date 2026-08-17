@@ -136,6 +136,7 @@
         },
         "spacing_gqWAtP": {
           "type": "spacing",
+          "disabled": true,
           "settings": {
             "height": 0,
             "height_mobile": 56
