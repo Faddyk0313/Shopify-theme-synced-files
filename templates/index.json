@@ -171,7 +171,7 @@
         "content_position": "md:items-center md:justify-start",
         "text_alignment": "left",
         "image_mobile": "shopify://shop_images/3.0_banner_mobile_94e1e255-a951-4349-889f-56ab77e50296.png",
-        "image_height_mobile": "adapt",
+        "image_height_mobile": "500px",
         "content_position_mobile": "items-start justify-center",
         "text_alignment_mobile": "center",
         "color_text": "#000000",
