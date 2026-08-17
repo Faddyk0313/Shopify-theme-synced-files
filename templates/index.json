@@ -129,17 +129,16 @@
         },
         "spacing_GfrRAp": {
           "type": "spacing",
-          "disabled": true,
           "settings": {
             "height": 0,
-            "height_mobile": 120
+            "height_mobile": 24
           }
         },
         "spacing_gqWAtP": {
           "type": "spacing",
           "settings": {
             "height": 0,
-            "height_mobile": 116
+            "height_mobile": 108
           }
         },
         "button_LQkjMt": {
