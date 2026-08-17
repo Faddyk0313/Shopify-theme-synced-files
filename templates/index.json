@@ -129,6 +129,7 @@
         },
         "spacing_GfrRAp": {
           "type": "spacing",
+          "disabled": true,
           "settings": {
             "height": 0,
             "height_mobile": 120
@@ -136,7 +137,6 @@
         },
         "spacing_gqWAtP": {
           "type": "spacing",
-          "disabled": true,
           "settings": {
             "height": 0,
             "height_mobile": 56
@@ -146,7 +146,7 @@
           "type": "button",
           "settings": {
             "button_label": "SHOP NOW",
-            "button_link": "shopify://collections/battlegear-3-0",
+            "button_link": "shopify://products/cut-resistant-baselayer-3-0-whiteout-camo",
             "button_style": "secondary",
             "button_size": "sm",
             "button_external": false,
