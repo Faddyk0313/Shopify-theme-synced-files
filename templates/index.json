@@ -107,14 +107,14 @@
         "spacing_tt6UHK": {
           "type": "spacing",
           "settings": {
-            "height": 0,
-            "height_mobile": 4
+            "height": 44,
+            "height_mobile": 20
           }
         },
         "image_8e49hm": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/3.0_miami_vice.svg",
+            "image": "shopify://shop_images/3.0_BATTLEGEAR_SVG.svg",
             "image_width": "custom",
             "image_max_width": 350,
             "image_max_width_mobile": 280
@@ -145,7 +145,7 @@
           "type": "button",
           "settings": {
             "button_label": "SHOP NOW",
-            "button_link": "shopify://products/cut-resistant-baselayer-3-0-miami-vice",
+            "button_link": "shopify://collections/battlegear-3-0",
             "button_style": "secondary",
             "button_size": "sm",
             "button_external": false,
@@ -164,12 +164,12 @@
       "name": "MIAMI VICE BANNER",
       "settings": {
         "transparent_header": true,
-        "image": "shopify://shop_images/3.0_MIAMI_homepage_desktop.webp",
+        "image": "shopify://shop_images/Banner_3.0_desk.png",
         "image_height": "adapt",
         "content_width": "small",
         "content_position": "md:items-center md:justify-start",
         "text_alignment": "left",
-        "image_mobile": "shopify://shop_images/MIAMI_VICE_MOBILE_BANNER_2.webp",
+        "image_mobile": "shopify://shop_images/3.0_banner_mobile_94e1e255-a951-4349-889f-56ab77e50296.png",
         "image_height_mobile": "adapt",
         "content_position_mobile": "items-start justify-center",
         "text_alignment_mobile": "center",
