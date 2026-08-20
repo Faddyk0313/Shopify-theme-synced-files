@@ -177,6 +177,7 @@
         },
         "item_N9BVh3": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/miamiVICE--3-2_1.jpg",
             "hide_image": false,
@@ -186,6 +187,7 @@
         },
         "item_mAK9P8": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Camorightcolor.jpg",
             "hide_image": false,
@@ -204,6 +206,7 @@
         },
         "item_cbDarg": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/WHITEOUT_CAMO_3251a6a2-7bd0-49dd-94e9-8f82c46dd571.png",
             "hide_image": false,
@@ -566,7 +569,8 @@
         "padding_bottom": 32,
         "divider": false,
         "narrow": true,
-        "rounded": false
+        "rounded": false,
+        "background_color": ""
       }
     }
   },
