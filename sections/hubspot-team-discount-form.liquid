@@ -1,0 +1,957 @@
+{%- liquid
+  assign step_blocks = section.blocks | where: 'type', 'step'
+  assign total_steps = step_blocks.size
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {%- render 'section-variables', section: section -%}
+  }
+</style>
+
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+  <div class="page-width{% if section.settings.narrow %} page-width--narrow{% endif %} relative">
+    {%- render 'section-heading', section: section -%}
+
+    {%- if total_steps == 0 -%}
+      {%- if request.design_mode -%}
+        <p>{{ 'Add at least one Step block to render this form.' }}</p>
+      {%- endif -%}
+    {%- else -%}
+      <hubspot-form
+        class="hs-form"
+        data-portal-id="{{ section.settings.portal_id }}"
+        data-form-guid="{{ section.settings.form_guid }}"
+        data-page-name="{{ page_title | default: shop.name | escape }}"
+        data-error-message="{{ section.settings.error_message | escape }}"
+        data-loading-label="{{ section.settings.loading_label | escape }}"
+        data-branch-rules="{{ section.settings.branch_rules | escape }}"
+        data-consent-mode="{{ section.settings.consent_mode }}"
+        data-consent-subscription-id="{{ section.settings.consent_subscription_id }}"
+        data-consent-text="{{ section.settings.consent_text | escape }}"
+      >
+        <form novalidate>
+          {%- for step in step_blocks -%}
+            {%- liquid
+              assign index = forloop.index
+              assign is_first = false
+              assign is_last = false
+              if forloop.first
+                assign is_first = true
+              endif
+              if forloop.last
+                assign is_last = true
+              endif
+            -%}
+            {%- render 'hubspot-form-step',
+              step: step,
+              section: section,
+              index: index,
+              total: total_steps,
+              is_first: is_first,
+              is_last: is_last
+            -%}
+          {%- endfor -%}
+
+          {%- comment -%}Spam trap: hidden from people, tempting to bots. Never sent to HubSpot.{%- endcomment -%}
+          <div class="sr-only" aria-hidden="true">
+            <label for="HsTrap-{{ section.id }}">{{ 'Leave this field empty' }}</label>
+            <input type="text" id="HsTrap-{{ section.id }}" name="website_hp" tabindex="-1" autocomplete="off" data-honeypot>
+          </div>
+        </form>
+
+        <div class="hs-form__success rte" data-success hidden>
+          {%- if section.settings.success_heading != blank -%}
+            <h3 class="{{ section.settings.step_heading_size | default: 'title-sm' }}">{{ section.settings.success_heading }}</h3>
+          {%- endif -%}
+          {{ section.settings.success_message }}
+        </div>
+      </hubspot-form>
+
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Team Discount Form",
+  "tag": "section",
+  "class": "hs-form-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "HubSpot"
+    },
+    {
+      "type": "paragraph",
+      "content": "Submits to the HubSpot form with this GUID, so HubSpot runs that form's own workflows, notifications and contact/company updates. Field names must match HubSpot exactly."
+    },
+    {
+      "type": "text",
+      "id": "portal_id",
+      "label": "Portal ID",
+      "default": "46588550"
+    },
+    {
+      "type": "text",
+      "id": "form_guid",
+      "label": "Form GUID",
+      "default": "7d807dfc-0b9f-4c9c-b2c2-b922f297063c"
+    },
+    {
+      "type": "header",
+      "content": "Branching logic"
+    },
+    {
+      "type": "textarea",
+      "id": "branch_rules",
+      "label": "Step skip rules",
+      "info": "One rule per line: fieldName in \"value a\",\"value b\" => goto 3. Combine two conditions with \"and\".",
+      "default": "ts_team_sales_persona in \"I am the decision maker for team purchases\",\"I influence or help coordinate purchases\" and ts_custom_interest in \"Yes\" => goto 3\nts_team_sales_persona in \"I am the decision maker for team purchases\",\"I influence or help coordinate purchases\" and ts_custom_interest in \"No\" => goto 4\nts_team_sales_persona in \"I am a parent/player/supporter\" => goto 4"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "Next button",
+      "default": "Next"
+    },
+    {
+      "type": "text",
+      "id": "prev_label",
+      "label": "Previous button",
+      "default": "Previous"
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Submit button",
+      "default": "Submit"
+    },
+    {
+      "type": "text",
+      "id": "loading_label",
+      "label": "Submitting label",
+      "default": "Submitting…"
+    },
+    {
+      "type": "header",
+      "content": "After submit"
+    },
+    {
+      "type": "text",
+      "id": "success_heading",
+      "label": "Success heading",
+      "default": "READY FOR BATTLE!"
+    },
+    {
+      "type": "richtext",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "<p>Your organization's discount launch is being prepared.<br/>We're finalizing the details and will confirm activation shortly.</p>"
+    },
+    {
+      "type": "text",
+      "id": "error_message",
+      "label": "Error message",
+      "default": "We couldn't submit your form. Please try again or email TeamSales@titanbattlegear.com."
+    },
+    {
+      "type": "header",
+      "content": "Consent"
+    },
+    {
+      "type": "select",
+      "id": "consent_mode",
+      "label": "Consent mode",
+      "default": "legitimate_interest",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "legitimate_interest",
+          "label": "Legitimate interest"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "consent_subscription_id",
+      "label": "Subscription type ID",
+      "default": "370138111",
+      "info": "Numeric HubSpot subscription ID. Required for legitimate interest."
+    },
+    {
+      "type": "textarea",
+      "id": "consent_text",
+      "label": "Consent text",
+      "default": "Titan Battlegear needs the contact information you provide to us to contact you about our products and services. You may unsubscribe from these communications at any time. For information on how to unsubscribe, as well as our privacy practices and commitment to protecting your privacy, please review our Privacy Policy.",
+      "info": "Must match the text configured in HubSpot exactly — it is stored as the legal basis."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "step_heading_size",
+      "label": "Step heading size",
+      "default": "title-sm",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "Small"
+        },
+        {
+          "value": "title-md",
+          "label": "Medium"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "Large"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "default": "title-md",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "Small"
+        },
+        {
+          "value": "title-md",
+          "label": "Medium"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "Large"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "Extra large"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag",
+      "default": "h2",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "div",
+          "label": "Div"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "default": "text-left md:items-end md:flex-row",
+      "options": [
+        {
+          "value": "text-left md:items-end md:flex-row",
+          "label": "Left"
+        },
+        {
+          "value": "text-center md:items-center",
+          "label": "Center"
+        },
+        {
+          "value": "text-right md:items-end md:flex-row-reverse",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "Background",
+      "default": "#171717"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_background",
+      "label": "Background gradient"
+    },
+    {
+      "type": "color",
+      "id": "color_button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "color",
+      "id": "color_button_background",
+      "label": "Button background"
+    },
+    {
+      "type": "color_background",
+      "id": "color_button_gradient",
+      "label": "Button gradient"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 72
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "Show divider",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "narrow",
+      "label": "Narrow width",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "label": "Rounded",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "One block per step, in order. Fields are assigned to a step by number."
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Step heading"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Intro text"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "richtext",
+          "id": "footnote",
+          "label": "Footnote"
+        }
+      ]
+    },
+    {
+      "type": "field",
+      "name": "Field",
+      "settings": [
+        {
+          "type": "range",
+          "id": "step",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "label": "Step",
+          "default": 1
+        },
+        {
+          "type": "text",
+          "id": "hs_name",
+          "label": "HubSpot internal name",
+          "info": "EXACT internal property name (e.g. firstname). A wrong value rejects the whole submission."
+        },
+        {
+          "type": "select",
+          "id": "object_type",
+          "label": "HubSpot object",
+          "default": "0-1",
+          "options": [
+            {
+              "value": "0-1",
+              "label": "Contact"
+            },
+            {
+              "value": "0-2",
+              "label": "Company"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "type",
+          "label": "Field type",
+          "default": "text",
+          "options": [
+            {
+              "value": "text",
+              "label": "Text"
+            },
+            {
+              "value": "email",
+              "label": "Email"
+            },
+            {
+              "value": "tel",
+              "label": "Phone"
+            },
+            {
+              "value": "date",
+              "label": "Date"
+            },
+            {
+              "value": "dropdown",
+              "label": "Dropdown"
+            },
+            {
+              "value": "file",
+              "label": "File (read-only)"
+            },
+            {
+              "value": "hidden",
+              "label": "Hidden"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label"
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "Required",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "hidden",
+          "label": "Hidden field",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "half_width",
+          "label": "Half width",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder"
+        },
+        {
+          "type": "text",
+          "id": "help_text",
+          "label": "Help text"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Dropdown options",
+          "info": "One per line: hubspotValue|Visible label. The value is what HubSpot stores."
+        },
+        {
+          "type": "text",
+          "id": "default_value",
+          "label": "Default value"
+        },
+        {
+          "type": "text",
+          "id": "autocomplete",
+          "label": "autocomplete attribute"
+        },
+        {
+          "type": "text",
+          "id": "min_digits",
+          "label": "Min digits (phone)"
+        },
+        {
+          "type": "text",
+          "id": "max_digits",
+          "label": "Max digits (phone)"
+        },
+        {
+          "type": "header",
+          "content": "Conditional display"
+        },
+        {
+          "type": "text",
+          "id": "show_when_field",
+          "label": "Show when this field…",
+          "info": "HubSpot internal name of the controlling field."
+        },
+        {
+          "type": "text",
+          "id": "show_when_values",
+          "label": "…is one of",
+          "info": "Comma-separated HubSpot values."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 50,
+  "presets": [
+    {
+      "name": "Team Discount Form",
+      "category": "Forms",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "heading": "ACTIVATE YOUR TEAM'S 25% DISCOUNT",
+            "content": "<p>We offer a 7-day, organization-wide 25% discount to help teams gear up for the season with Titan's industry-leading cut resistant base layers.</p><p>Complete the form below so we can connect with the appropriate person in your program and coordinate the discount window for your organization.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "heading": "HELP US REACH THE RIGHT PERSON",
+            "content": "<p>To activate the discount window, we need to coordinate with the person who can distribute the discount organization-wide.</p><p>If that's not you, share their details below and we'll take it from there.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "heading": "CUSTOM TEAM BATTLEGEAR DETAILS",
+            "content": "<p>We partner with organizations looking to raise the standard for player safety while outfitting their teams in custom Battlegear that reflects who they are and what they stand for.</p><ul><li>50-piece minimum order (MOQ)</li><li><strong>Logo usage approval + Vector logo required</strong> (.ai/.pdf/.eps/.svg)</li><li>Choose between a <strong>hosted team store</strong> (individual player ordering) or <strong>bulk invoicing</strong> (ship to organization)</li><li>Includes a <strong>25% sitewide discount window</strong> for your entire organization during a 2-week ordering period</li></ul><p><strong>To guarantee delivery before season start, orders must be finalized by June 1.</strong></p>",
+            "footnote": "<p>* Single-invoice bulk team order also available</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "heading": "COORDINATE YOUR TEAM'S DISCOUNT LAUNCH",
+            "content": "<p>If you're managing the launch, you can confirm preferred timing below. If not, we'll connect with the appropriate leader and finalize the activation.</p>"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "ts_intake_source",
+            "object_type": "0-1",
+            "type": "text",
+            "label": "Intake source",
+            "required": false,
+            "hidden": true,
+            "default_value": "Team Discount Form"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "firstname",
+            "object_type": "0-1",
+            "type": "text",
+            "label": "First Name",
+            "required": true,
+            "hidden": false,
+            "half_width": true
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "lastname",
+            "object_type": "0-1",
+            "type": "text",
+            "label": "Last Name",
+            "required": true,
+            "hidden": false,
+            "half_width": true
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "email",
+            "object_type": "0-1",
+            "type": "email",
+            "label": "Email",
+            "required": true,
+            "hidden": false,
+            "half_width": true
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "mobilephone",
+            "object_type": "0-1",
+            "type": "tel",
+            "label": "Mobile Phone Number",
+            "required": true,
+            "hidden": false,
+            "half_width": true,
+            "min_digits": "7",
+            "max_digits": "20"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "ts_organization_role",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "What’s your role with the team/organization?",
+            "required": true,
+            "hidden": false,
+            "half_width": true,
+            "options": "Parent|Parent\nPlayer|Player\nCoach|Coach\nDirector|Director\nTeam Admin|Team Admin\nTeam Manager|Team Manager\nDealer|Dealer\nOther|Other"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "ts_team_sales_persona",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "What best describes your role in team purchasing?",
+            "required": true,
+            "hidden": false,
+            "half_width": true,
+            "options": "I am the decision maker for team purchases|I am the decision maker for team purchases\nI influence or help coordinate purchases|I influence or help coordinate purchases\nI am a parent/player/supporter|I am a parent/player/supporter"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "ts_custom_interest",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "Are you also interested in Custom Cut-Resistant Baselayers for your team?",
+            "required": true,
+            "hidden": false,
+            "options": "Yes|Yes\nNo|No\nMaybe|Maybe"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "name",
+            "object_type": "0-2",
+            "type": "text",
+            "label": "Team Name",
+            "required": true,
+            "hidden": false,
+            "half_width": true
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "ts_company_org_type",
+            "object_type": "0-2",
+            "type": "dropdown",
+            "label": "Team Level",
+            "required": true,
+            "hidden": false,
+            "half_width": true,
+            "options": "Youth|Youth\nHigh School/College|High School/College\nJunior/Pro|Junior/Pro\nOther|Other"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "city",
+            "object_type": "0-2",
+            "type": "text",
+            "label": "City",
+            "required": true,
+            "hidden": false,
+            "half_width": true
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "state",
+            "object_type": "0-2",
+            "type": "text",
+            "label": "State/Region",
+            "required": true,
+            "hidden": false,
+            "half_width": true
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "website",
+            "object_type": "0-2",
+            "type": "text",
+            "label": "Team Website",
+            "required": false,
+            "hidden": false
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 2,
+            "hs_name": "ts_dm_known",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "Do you know who makes purchasing decisions for your team or organization?",
+            "required": true,
+            "hidden": false,
+            "half_width": true,
+            "options": "Yes|Yes\nNo|No\nNot Sure|I can find out"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 2,
+            "hs_name": "ts_referred_dm_role",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "What is their role in the organization?",
+            "required": false,
+            "hidden": false,
+            "half_width": true,
+            "options": "Director|Director\nTeam Manager|Team Manager\nTeam Admin|Team Admin\nCoach|Coach\nDealer|Dealer\nOther|Other"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 2,
+            "hs_name": "ts_referred_dm_name",
+            "object_type": "0-1",
+            "type": "text",
+            "label": "First Name",
+            "required": false,
+            "hidden": false,
+            "half_width": true
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 2,
+            "hs_name": "ts_referred_dm_last_name",
+            "object_type": "0-1",
+            "type": "text",
+            "label": "Last Name",
+            "required": false,
+            "hidden": false,
+            "half_width": true
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 2,
+            "hs_name": "ts_referred_dm_email",
+            "object_type": "0-1",
+            "type": "text",
+            "label": "Email",
+            "required": false,
+            "hidden": false,
+            "half_width": true
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 2,
+            "hs_name": "ts_referred_dm_phone",
+            "object_type": "0-1",
+            "type": "tel",
+            "label": "Mobile Phone Number",
+            "required": false,
+            "hidden": false,
+            "half_width": true,
+            "min_digits": "7",
+            "max_digits": "20"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 2,
+            "hs_name": "ts_dm_intro_permission",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "Would you be willing to introduce us via email?",
+            "required": false,
+            "hidden": false,
+            "options": "Yes|Yes\nNo|No\nUnsure|Unsure",
+            "help_text": "A short introduction significantly speeds up the process."
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 3,
+            "hs_name": "ts_desired_delivery_date",
+            "object_type": "0-1",
+            "type": "date",
+            "label": "Target Delivery Date",
+            "required": false,
+            "hidden": false,
+            "half_width": true
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 3,
+            "hs_name": "ts_lead_ordering_method",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "Preferred Ordering Method",
+            "required": false,
+            "hidden": false,
+            "half_width": true,
+            "options": "Titan-Hosted Team Store|Titan-Hosted Team Store\nSingle Invoice (Bulk Shipping)|Single Invoice (Bulk Shipping)\nDealer or Org Hosted Store|Dealer or Org Hosted Store\nUnknown|Unknown"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 3,
+            "hs_name": "ts_lead_source",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "Team Sales Lead Source",
+            "required": false,
+            "hidden": true,
+            "options": "Team Sales Form|Team Sales Form\nOther|Other",
+            "default_value": "Team Sales Form"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 3,
+            "hs_name": "ts_is_decision_maker",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "Is Decision Maker?",
+            "required": false,
+            "hidden": true,
+            "options": "Yes|Yes\nNo|No\nUnknown|Unknown",
+            "default_value": "Yes"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 4,
+            "hs_name": "ts_team_discount_start",
+            "object_type": "0-2",
+            "type": "date",
+            "label": "Preferred Discount Start Date",
+            "required": false,
+            "hidden": false,
+            "half_width": true
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 4,
+            "hs_name": "ts_discount_distribution_method",
+            "object_type": "0-2",
+            "type": "dropdown",
+            "label": "Discount Distribution Method",
+            "required": false,
+            "hidden": false,
+            "half_width": true,
+            "options": "We will email the code to our organization|We will email the code to our organization\nPlease provide a shareable flyer with QR code|Please provide a shareable flyer with QR code"
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "footer",
+      "header",
+      "custom.overlay"
+    ]
+  }
+}
+{% endschema %}

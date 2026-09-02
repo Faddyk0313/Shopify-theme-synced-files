@@ -1,0 +1,106 @@
+/*! Native HubSpot multi-step forms
+ *  Layout only -- inputs, labels, buttons and alerts all reuse theme.css.
+ */
+
+.hs-form {
+  display: block;
+}
+
+.hs-form__step {
+  display: grid;
+  gap: var(--sp-6);
+}
+
+.hs-form__step-heading {
+  margin: 0;
+}
+
+.hs-form__step-heading:focus-visible {
+  outline: none;
+}
+
+.hs-form__step-content,
+.hs-form__step-footnote {
+  display: grid;
+  gap: var(--sp-3);
+}
+
+/* Two-up field rows. `.field--full` already spans the row in theme.css. */
+.hs-form__fields > .field--half {
+  flex: 1 1 100%;
+  width: 100%;
+}
+
+@media screen and (min-width: 750px) {
+  .hs-form__fields > .field--half {
+    flex: 1 1 calc(50% - (var(--sp-6) / 2));
+    width: calc(50% - (var(--sp-6) / 2));
+  }
+}
+
+.hs-form__help {
+  margin-block-start: var(--sp-2);
+}
+
+.hs-form__step-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* File inputs are disabled: HubSpot's JSON API cannot carry an upload. */
+.hs-form input[type='file'] {
+  height: auto;
+  padding-block: var(--sp-3);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.hs-form__progress {
+  display: grid;
+  gap: var(--sp-2);
+}
+
+.hs-form__progress-track {
+  display: block;
+  height: var(--sp-1d5);
+  border-radius: var(--inputs-radius, 0);
+  background-color: rgb(var(--color-foreground) / 0.15);
+  overflow: hidden;
+}
+
+.hs-form__progress-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #b4e100 0%, #16b700 100%);
+  transition: width var(--animation-smooth, 0.3s ease) 0.1s;
+}
+
+.hs-form__nav {
+  margin-block-start: var(--sp-2);
+}
+
+.hs-form .field.has-error .input,
+.hs-form .field.has-error .select,
+.hs-form .field.has-error .textarea,
+.hs-form .input.invalid,
+.hs-form .select.invalid {
+  border-color: rgb(var(--color-error-text, 190 30 45));
+}
+
+.hs-form__success {
+  display: grid;
+  gap: var(--sp-4);
+}
+
+.hs-form__consent {
+  margin-block-start: var(--sp-5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hs-form__progress-fill {
+    transition: none;
+  }
+}

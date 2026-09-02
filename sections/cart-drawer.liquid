@@ -359,6 +359,18 @@
       font-family: 'Armourxbd';
       text-transform: uppercase;
     }
+    /* TBG Custom Code */
+    .tbg-final-sale {
+      font-family: var(--font-body-family, inherit);
+      font-weight: 700;
+      font-size: 0.85em;
+      color: #e02b20;
+      text-transform: none;
+      letter-spacing: normal;
+      white-space: nowrap;
+      margin-left: 0.4em;
+    }
+    /* End TBG Custom Code */
     .cart-item-card__quantity-input {
       display: flex;
       align-items: center;
@@ -796,10 +808,24 @@
                                     {%- if section.settings.show_vendor -%}
                                       <p class="text-xs text-opacity">{{ item.product.vendor }}</p>
                                     {%- endif -%}
+                                    {%- comment -%} TBG Custom Code {%- endcomment -%}
+                                    {%- liquid
+                                      assign tbg_is_last_chance = false
+                                      for product_collection in item.product.collections
+                                        if product_collection.handle == 'last-chance' or product_collection.id == 358732595378
+                                          assign tbg_is_last_chance = true
+                                          break
+                                        endif
+                                      endfor
+                                    -%}
+                                    {%- comment -%} End TBG Custom Code {%- endcomment -%}
                                     <a href="{{ item.url }}" class="cart__item-title horizontal-product__title reversed-link font-medium text-base leading-tight">
                                       {% assign title_parts = item.product.title | split: ' - ' %}
                                       {{ title_parts[0] | escape }}<br>
                                       {{ title_parts[1] | escape }}
+                                      {%- if tbg_is_last_chance -%}
+                                        <span class="tbg-final-sale">Final Sale</span>
+                                      {%- endif -%}
                                     </a>
                                   {%- else -%}
                                     <p class="font-medium text-base leading-tight">{{ item.product.title | escape }}</p>

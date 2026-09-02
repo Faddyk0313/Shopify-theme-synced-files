@@ -47,6 +47,21 @@
   }
 
   /* TBG Custom Code */
+  .h1.heading .split-words.block {
+    display: inline;
+  }
+
+  .tbg-final-sale {
+    font-family: var(--font-body-family, inherit) !important;
+    font-weight: 700;
+    font-size: 0.75em;
+    color: #e02b20;
+    text-transform: none;
+    letter-spacing: normal;
+    white-space: nowrap;
+    margin-left: 0.5em;
+  }
+
   .tbg-payment-terms-source {
     position: relative;
     min-height: 0;
@@ -149,6 +164,16 @@
   | append: product.id
 -%}
 
+{%- liquid
+  assign tbg_is_last_chance = false
+  for product_collection in product.collections
+    if product_collection.handle == 'last-chance' or product_collection.id == 358732595378
+      assign tbg_is_last_chance = true
+      break
+    endif
+  endfor
+-%}
+
 {% assign title_parts = product.title | split: ' - ' %}
 {% assign title_without_last = '' %}
 {% for part in title_parts %}
@@ -201,6 +226,9 @@
             {% endif %}
           {% endif %}
         </split-words>
+        {%- if tbg_is_last_chance -%}
+          <span class="tbg-final-sale">Final Sale</span>
+        {%- endif -%}
       </h1>
     </div>
   </div>

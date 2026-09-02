@@ -51,6 +51,13 @@
     <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
 
+    {%- comment -%}
+      Native HubSpot forms. Deferred and tiny; the custom element is inert unless a
+      <hubspot-form> is on the page, and the stylesheet is scoped to .hs-form.
+    {%- endcomment -%}
+    <link rel="stylesheet" href="{{ 'hubspot-form.css' | asset_url }}" media="print" fetchpriority="low" onload="this.media='all'">
+    <script src="{{ 'hubspot-form.js' | asset_url }}" defer="defer"></script>
+
     {%- if settings.enable_tab_attention -%}
       <script src="{{ 'tab-attention.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}

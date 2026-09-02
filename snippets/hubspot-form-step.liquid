@@ -1,0 +1,97 @@
+{%- doc -%}
+  Renders one step of a multi-step HubSpot form.
+
+  Wraps the step's heading, rich text, fields and navigation. Visibility is
+  controlled at runtime by assets/hubspot-form.js via the `hidden` attribute.
+
+  @param {object} step - The `step` block for this step
+  @param {object} section - The parent section
+  @param {number} index - 1-based step number
+  @param {number} total - Total number of steps
+  @param {boolean} is_first - Whether this is the first step
+  @param {boolean} is_last - Whether this is the final step
+
+  @example
+  {% render 'hubspot-form-step', step: step, section: section, index: 1, total: 4 %}
+{%- enddoc -%}
+
+<div class="hs-form__step" data-step="{{ index }}" {% unless is_first %}hidden{% endunless %}>
+  {%- if step.settings.heading != blank -%}
+    <h3 class="hs-form__step-heading {{ section.settings.step_heading_size | default: 'title-sm' }}" tabindex="-1" data-step-heading>
+      {{- step.settings.heading -}}
+    </h3>
+  {%- endif -%}
+
+  {%- if step.settings.content != blank -%}
+    <div class="hs-form__step-content rte">{{ step.settings.content }}</div>
+  {%- endif -%}
+
+  <div class="field field--full" data-alert hidden></div>
+
+  <div class="hs-form__fields flex flex-wrap gap-4d5 md:gap-6">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'field' and block.settings.step == index -%}
+        {%- render 'hubspot-form-field', block: block, section: section -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  {%- if step.settings.image != blank -%}
+    <div class="hs-form__step-media">
+      {%- liquid
+        assign step_image = step.settings.image
+        assign sizes = '(min-width: 990px) 720px, 100vw'
+        assign widths = '400,600,800,1000,1200,1400,1600'
+      -%}
+      {{- step_image | image_url: width: step_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, is: 'lazy-image', class: 'w-full h-auto' -}}
+    </div>
+  {%- endif -%}
+
+  {%- if step.settings.footnote != blank -%}
+    <div class="hs-form__step-footnote rte text-sm">{{ step.settings.footnote }}</div>
+  {%- endif -%}
+
+  {%- comment -%}
+    Legitimate-interest notice sits on the final step, as in the HubSpot form.
+  {%- endcomment -%}
+  {%- if is_last and section.settings.consent_mode == 'legitimate_interest' and section.settings.consent_text != blank -%}
+    <p class="hs-form__consent text-sm opacity-70">{{ section.settings.consent_text }}</p>
+  {%- endif -%}
+
+  <div class="hs-form__progress" aria-hidden="true">
+    <span class="hs-form__progress-count text-sm" data-progress-count>{{ index }}/{{ total }}</span>
+    <span class="hs-form__progress-track">
+      <span class="hs-form__progress-fill" data-progress-fill></span>
+    </span>
+  </div>
+
+  <div class="hs-form__nav flex flex-wrap items-center gap-4">
+    {%- unless is_first -%}
+      <button type="button" class="button button--secondary" data-prev>
+        <span class="btn-text">{{ section.settings.prev_label | default: 'Previous' }}</span>
+      </button>
+    {%- endunless -%}
+
+    <button
+      type="button"
+      class="button button--primary button--fixed"
+      is="hover-button"
+      data-next
+      {% if is_last %}hidden{% endif %}
+    >
+      <span class="btn-fill" data-fill></span>
+      <span class="btn-text">{{ section.settings.next_label | default: 'Next' }}</span>
+    </button>
+
+    <button
+      type="submit"
+      class="button button--primary button--fixed"
+      is="hover-button"
+      data-submit
+      {% unless is_last %}hidden{% endunless %}
+    >
+      <span class="btn-fill" data-fill></span>
+      <span class="btn-text">{{ section.settings.submit_label | default: 'Submit' }}</span>
+    </button>
+  </div>
+</div>

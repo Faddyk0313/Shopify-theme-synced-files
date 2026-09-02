@@ -1,0 +1,166 @@
+{%- doc -%}
+  Renders a single HubSpot form field using the theme's native input styling.
+
+  Shared by the HubSpot form sections. Emits the HubSpot internal property name and
+  objectTypeId as data attributes so assets/hubspot-form.js can build the submission
+  payload without re-deriving anything from labels.
+
+  @param {object} block - A `field` block from a HubSpot form section
+  @param {object} section - The parent section (used for unique ids)
+
+  @example
+  {% render 'hubspot-form-field', block: block, section: section %}
+{%- enddoc -%}
+
+{%- liquid
+  assign field_id = 'HsField-' | append: section.id | append: '-' | append: block.id
+  assign hs_name = block.settings.hs_name | strip
+  assign object_type = block.settings.object_type | default: '0-1'
+  assign label = block.settings.label
+  assign field_type = block.settings.type
+
+  assign width_class = ' field--full'
+  if block.settings.half_width
+    assign width_class = ' field--half'
+  endif
+
+  assign conditional = false
+  if block.settings.show_when_field != blank
+    assign conditional = true
+  endif
+-%}
+
+{%- comment -%}
+  Hidden fields carry a fixed value and never render an input the visitor can see.
+  They are still sent to HubSpot, matching the embed's hidden-field behaviour.
+{%- endcomment -%}
+{%- if block.settings.hidden or field_type == 'hidden' -%}
+  <input
+    type="hidden"
+    data-hs-field
+    data-hs-name="{{ hs_name }}"
+    data-hs-object="{{ object_type }}"
+    data-hs-type="hidden"
+    name="{{ object_type }}/{{ hs_name }}"
+    value="{{ block.settings.default_value | escape }}"
+  >
+
+{%- else -%}
+  <div
+    class="field{{ width_class }}"
+    data-field-wrapper
+    data-hs-name-ref="{{ hs_name }}"
+    {% if conditional %}
+      data-show-when-field="{{ block.settings.show_when_field | strip | escape }}"
+      data-show-when-values="{{ block.settings.show_when_values | escape }}"
+      hidden
+    {% endif %}
+    {{ block.shopify_attributes }}
+  >
+    {%- case field_type -%}
+      {%- when 'dropdown' -%}
+        {%- assign option_lines = block.settings.options | newline_to_br | split: '<br />' -%}
+        <select
+          class="select is-floating"
+          id="{{ field_id }}"
+          data-hs-field
+          data-hs-name="{{ hs_name }}"
+          data-hs-object="{{ object_type }}"
+          data-hs-type="dropdown"
+          {% if block.settings.required %}required{% else %}is="custom-select"{% endif %}
+        >
+          <option value="" disabled selected>{{ 'Select one...' }}</option>
+          {%- for line in option_lines -%}
+            {%- assign line_2 = line | strip -%}
+            {%- if line_2 != blank -%}
+              {%- assign parts = line_2 | split: '|' -%}
+              {%- assign opt_value = parts[0] | strip -%}
+              {%- if parts.size > 1 -%}
+                {%- assign opt_label = parts[1] | strip -%}
+              {%- else -%}
+                {%- assign opt_label = opt_value -%}
+              {%- endif -%}
+              <option value="{{ opt_value | escape }}">{{ opt_label }}</option>
+            {%- endif -%}
+          {%- endfor -%}
+        </select>
+        {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none' -%}
+        <label class="label is-floating" for="{{ field_id }}">
+          {{- label -}}
+          {%- if block.settings.required -%}<span aria-hidden="true">*</span>{%- endif -%}
+        </label>
+
+      {%- when 'file' -%}
+        {%- comment -%}
+          HubSpot's JSON submission API cannot accept file uploads, so this input is
+          rendered disabled with an explanatory note rather than silently dropping data.
+        {%- endcomment -%}
+        <label class="label" for="{{ field_id }}">{{ label }}</label>
+        <input
+          class="input"
+          type="file"
+          id="{{ field_id }}"
+          disabled
+          aria-describedby="{{ field_id }}-help"
+        >
+
+      {%- when 'date' -%}
+        <input
+          class="input is-floating"
+          type="date"
+          id="{{ field_id }}"
+          data-hs-field
+          data-hs-name="{{ hs_name }}"
+          data-hs-object="{{ object_type }}"
+          data-hs-type="date"
+          placeholder=" "
+          {% if block.settings.required %}required{% endif %}
+        >
+        <label class="label is-floating" for="{{ field_id }}">
+          {{- label -}}
+          {%- if block.settings.required -%}<span aria-hidden="true">*</span>{%- endif -%}
+        </label>
+
+      {%- else -%}
+        {%- liquid
+          case field_type
+            when 'email'
+              assign input_type = 'email'
+              assign autocomplete = 'email'
+            when 'tel'
+              assign input_type = 'tel'
+              assign autocomplete = 'tel'
+            else
+              assign input_type = 'text'
+              assign autocomplete = block.settings.autocomplete
+          endcase
+
+          assign placeholder = block.settings.placeholder | default: label
+        -%}
+        <input
+          class="input is-floating"
+          type="{{ input_type }}"
+          id="{{ field_id }}"
+          data-hs-field
+          data-hs-name="{{ hs_name }}"
+          data-hs-object="{{ object_type }}"
+          data-hs-type="{{ field_type }}"
+          {% if block.settings.min_digits != blank %}data-min-digits="{{ block.settings.min_digits }}"{% endif %}
+          {% if block.settings.max_digits != blank %}data-max-digits="{{ block.settings.max_digits }}"{% endif %}
+          {% if autocomplete != blank %}autocomplete="{{ autocomplete }}"{% endif %}
+          {% if field_type == 'email' %}spellcheck="false" autocapitalize="off"{% endif %}
+          value="{{ block.settings.default_value | escape }}"
+          placeholder="{{ placeholder | escape }}"
+          {% if block.settings.required %}required{% endif %}
+        >
+        <label class="label is-floating" for="{{ field_id }}">
+          {{- label -}}
+          {%- if block.settings.required -%}<span aria-hidden="true">*</span>{%- endif -%}
+        </label>
+    {%- endcase -%}
+
+    {%- if block.settings.help_text != blank -%}
+      <p class="hs-form__help text-sm opacity-70" id="{{ field_id }}-help">{{ block.settings.help_text }}</p>
+    {%- endif -%}
+  </div>
+{%- endif -%}
