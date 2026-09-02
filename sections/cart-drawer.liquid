@@ -822,7 +822,7 @@
                                     {%- comment -%} End TBG Custom Code {%- endcomment -%}
                                     <a href="{{ item.url }}" class="cart__item-title horizontal-product__title reversed-link font-medium text-base leading-tight">
                                       {% assign title_parts = item.product.title | split: ' - ' %}
-                                      {{ title_parts[0] | escape }}<br>
+                                      {{ title_parts[0] | escape }} {% if title_parts[1] %} <br> {% endif %}
                                       {{ title_parts[1] | escape }}
                                       {%- if tbg_is_last_chance -%}
                                         <span class="tbg-final-sale">Final Sale</span>
