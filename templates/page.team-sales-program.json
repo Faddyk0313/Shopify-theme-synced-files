@@ -130,52 +130,6 @@
         "rounded": false
       }
     },
-    "scrolling_text_xpjTin": {
-      "type": "scrolling-text",
-      "blocks": {
-        "image_GwyxJH": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/truck_icon_d829828e-64c0-4758-8810-ac2b445544d2.png",
-            "height": 0,
-            "link": "",
-            "accessibility_info": "",
-            "external": false
-          }
-        },
-        "text_BtKpLB": {
-          "type": "text",
-          "settings": {
-            "text": "CUSTOM TEAM ORDER RESERVATIONS ARE FILLING UP FAST - <strong>REGISTER TODAY</strong>",
-            "text_size": 16,
-            "text_font": "body",
-            "highlighted_text": "full_text",
-            "highlighted_scribble": "sketch-underline"
-          }
-        }
-      },
-      "block_order": [
-        "image_GwyxJH",
-        "text_BtKpLB"
-      ],
-      "disabled": true,
-      "settings": {
-        "direction": "left",
-        "speed": 18,
-        "grid_horizontal": 60,
-        "enable_twin": false,
-        "enable_parallax": false,
-        "color_text": "#000000",
-        "color_background": "#e2fb31",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "padding_top": 12,
-        "padding_bottom": 12,
-        "divider": false,
-        "rounded": false
-      }
-    },
     "image_with_text_KVaz8F": {
       "type": "image-with-text",
       "blocks": {
@@ -1819,14 +1773,14 @@
         "padding_bottom": 120,
         "divider": false,
         "narrow": true,
-        "rounded": false
+        "rounded": false,
+        "background_color": ""
       }
     }
   },
   "order": [
     "image_with_text_overlay_iHzycc",
     "rich_text_yKELwF",
-    "scrolling_text_xpjTin",
     "image_with_text_KVaz8F",
     "image_with_text_Mardxg",
     "rich_text_3RHMtg",
