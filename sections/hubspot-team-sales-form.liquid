@@ -26,6 +26,7 @@
         data-form-guid="{{ section.settings.form_guid }}"
         data-page-name="{{ page_title | default: shop.name | escape }}"
         data-error-message="{{ section.settings.error_message | escape }}"
+        data-required-message="{{ section.settings.required_message | escape }}"
         data-loading-label="{{ section.settings.loading_label | escape }}"
         data-branch-rules="{{ section.settings.branch_rules | escape }}"
         data-gate-field="{{ section.settings.gate_field }}"
@@ -162,6 +163,13 @@
       "id": "success_message",
       "label": "Success message",
       "default": "<p>Your custom team program request has been received.<br/>Our team will review your details, confirm ordering structure, and follow up with next steps shortly.</p>"
+    },
+    {
+      "type": "text",
+      "id": "required_message",
+      "label": "Missing fields message",
+      "default": "Please complete the highlighted fields.",
+      "info": "Shown once when more than one field needs attention. Individual fields are highlighted inline."
     },
     {
       "type": "text",
@@ -520,6 +528,13 @@
           "info": "Fields are laid out in a 2-column grid. Choose Full to span both columns."
         },
         {
+          "type": "checkbox",
+          "id": "label_outside",
+          "label": "Show label above field",
+          "default": false,
+          "info": "Long question labels clip when floated inside the input. Enable for labels longer than about 45 characters."
+        },
+        {
           "type": "text",
           "id": "placeholder",
           "label": "Placeholder"
@@ -619,7 +634,8 @@
             "label": "Intake sourceField",
             "required": false,
             "hidden": true,
-            "default_value": "Team Sales Form"
+            "default_value": "Team Sales Form",
+            "span": "1"
           }
         },
         {
@@ -701,7 +717,8 @@
             "required": true,
             "hidden": false,
             "options": "I am the decision maker for team purchases|I am the decision maker for team purchases\nI influence or help coordinate purchases|I influence or help coordinate purchases\nI am a parent/player/supporter|I am a parent/player/supporter",
-            "span": "2"
+            "span": "2",
+            "label_outside": true
           }
         },
         {
@@ -795,7 +812,8 @@
             "required": true,
             "hidden": false,
             "options": "Yes|Yes\nNo|No\nNot Sure|I can find out",
-            "span": "2"
+            "span": "2",
+            "label_outside": true
           }
         },
         {
@@ -878,7 +896,8 @@
             "hidden": false,
             "options": "Yes|Yes\nNo|No\nUnsure|Unsure",
             "help_text": "A short introduction significantly speeds up the process.",
-            "span": "2"
+            "span": "2",
+            "label_outside": true
           }
         },
         {
@@ -892,7 +911,8 @@
             "required": true,
             "hidden": false,
             "options": "Yes|Yes, I can approve logo usage\nRefer|I can connect you with the person who can approve\nNot Sure|Not sure — someone else may need to approve\nNo|No",
-            "span": "2"
+            "span": "2",
+            "label_outside": true
           }
         },
         {
@@ -909,7 +929,8 @@
             "placeholder": "name@organization.com",
             "show_when_field": "ts_logo_authorization",
             "show_when_values": "Refer,Not Sure,No",
-            "span": "2"
+            "span": "2",
+            "label_outside": true
           }
         },
         {
@@ -968,7 +989,8 @@
             "required": false,
             "hidden": true,
             "options": "Team Sales Form|Team Sales Form\nOther|Other",
-            "default_value": "Team Sales Form"
+            "default_value": "Team Sales Form",
+            "span": "1"
           }
         },
         {
@@ -982,7 +1004,8 @@
             "required": false,
             "hidden": true,
             "options": "Yes|Yes\nNo|No\nUnknown|Unknown",
-            "default_value": "Yes"
+            "default_value": "Yes",
+            "span": "1"
           }
         }
       ]

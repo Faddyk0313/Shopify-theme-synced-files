@@ -4,7 +4,7 @@
 
 .hs-form {
   display: block;
-  background-color: rgb(var(--color-background));
+  background-color: #f2f2f2;
   color: rgb(var(--color-foreground));
   border-radius: var(--card-radius, 0);
   padding: var(--sp-6);
@@ -87,18 +87,34 @@
   }
 }
 
+/* The wrapper keeps theme.css's `.field` (position:relative + border tokens) so the
+   native floating-label machinery works untouched. */
 .hs-field {
-  display: grid;
-  gap: var(--sp-2);
   min-width: 0;
 }
 
-/* Labels above the control: the questions are full sentences and clip when floated. */
-.hs-field__label {
+/* While step 1 is gated, the gate field is the only thing shown, so it is pulled to
+   the front of the grid. Unlocking removes `.is-gated` and it settles back into the
+   position it was authored in -- one input throughout, never a duplicate. */
+.hs-form__step.is-gated .hs-form__fields > .hs-field--gate {
+  order: -1;
+  grid-column: 1 / -1;
+}
+
+/* Long question labels sit above their control -- floating them clips on mobile. */
+.hs-field--label-outside {
+  display: grid;
+  gap: var(--sp-2);
+}
+
+.hs-field--label-outside > .hs-field__label {
+  position: static;
+  transform: none;
   display: block;
   font-size: var(--text-sm, 0.875rem);
   line-height: 1.35;
   opacity: 0.85;
+  pointer-events: auto;
 }
 
 .hs-field__required {
@@ -106,14 +122,8 @@
   margin-inline-start: 0.15em;
 }
 
-/* The control keeps `.field` so theme.css input/select styling still applies. */
-.hs-field__control {
-  position: relative;
-  min-width: 0;
-}
-
-.hs-field__control .input,
-.hs-field__control .select {
+.hs-field .input,
+.hs-field .select {
   width: 100%;
 }
 
@@ -177,12 +187,18 @@
   margin-block-start: var(--sp-2);
 }
 
-.hs-form .field.has-error .input,
-.hs-form .field.has-error .select,
-.hs-form .field.has-error .textarea,
+/* theme.css ships no `.invalid` rule, so the inline flag is styled here. This is what
+   carries the "which field" information now that the alert is a single summary line. */
 .hs-form .input.invalid,
-.hs-form .select.invalid {
+.hs-form .select.invalid,
+.hs-form .textarea.invalid {
   border-color: rgb(var(--color-error-text, 190 30 45));
+  --border-opacity: 1;
+}
+
+.hs-form .hs-field.has-error > .hs-field__label {
+  color: rgb(var(--color-error-text, 190 30 45));
+  opacity: 1;
 }
 
 .hs-form__success {

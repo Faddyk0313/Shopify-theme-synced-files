@@ -169,6 +169,12 @@
       const unlocked = EMAIL_RE.test(value);
       const gateWrapper = gate.closest('[data-field-wrapper]');
 
+      // The gate field is visually pulled to the front only while the step is locked;
+      // once unlocked it returns to its authored position in the grid. Handled with
+      // CSS `order` so there is exactly one input for this HubSpot property.
+      gateWrapper?.classList.add('hs-field--gate');
+      this.stepEl(1)?.classList.toggle('is-gated', !unlocked);
+
       this.querySelectorAll('[data-step="1"] [data-field-wrapper]').forEach((wrapper) => {
         if (wrapper === gateWrapper) return;
 
@@ -317,6 +323,7 @@
           return;
         }
 
+
         if (!value) return;
 
         if (field.dataset.hsType === 'email' && !EMAIL_RE.test(value)) {
@@ -334,7 +341,13 @@
       });
 
       if (errors.length) {
-        this.showAlert(stepEl, errors);
+        // The theme flags bad fields inline with `.invalid` and shows a single short
+        // summary (see sections/contact-form.liquid), so specifics stay on the fields.
+        const summary =
+          errors.length === 1
+            ? errors[0]
+            : this.dataset.requiredMessage || 'Please complete the highlighted fields.';
+        this.showAlert(stepEl, summary);
         firstInvalid?.focus();
         return false;
       }
@@ -344,19 +357,18 @@
     }
 
     labelFor(field, wrapper) {
-      const label = wrapper?.querySelector('.label');
-      const text = label?.textContent?.replace(/\*$/, '').trim();
+      const label = wrapper?.querySelector('.hs-field__label');
+      const text = label?.textContent?.replace(/\*\s*$/, '').trim();
       return text || field.dataset.hsName || 'This field';
     }
 
-    showAlert(stepEl, messages) {
+    showAlert(stepEl, message) {
       const slot = stepEl.querySelector('[data-alert]');
       if (!slot) return;
 
-      const list = messages.map((message) => `<li>${message}</li>`).join('');
       slot.innerHTML =
-        `<div class="alert alert--error flex items-start gap-3 text-sm md:text-base leading-tight">` +
-        `<ul class="grid gap-1" role="list">${list}</ul></div>`;
+        '<div class="alert alert--error flex items-start gap-3 text-sm md:text-base leading-tight">' +
+        `<span>${message}</span></div>`;
       slot.hidden = false;
     }
 
@@ -580,7 +592,7 @@
 
     showError(message) {
       const stepEl = this.stepEl(this.current);
-      if (stepEl && message) this.showAlert(stepEl, [message]);
+      if (stepEl && message) this.showAlert(stepEl, message);
     }
 
     setLoading(isLoading) {
