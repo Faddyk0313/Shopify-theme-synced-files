@@ -58,13 +58,6 @@
     <p class="hs-form__consent text-sm opacity-70">{{ section.settings.consent_text }}</p>
   {%- endif -%}
 
-  <div class="hs-form__progress" aria-hidden="true">
-    <span class="hs-form__progress-count text-sm" data-progress-count>{{ index }}/{{ total }}</span>
-    <span class="hs-form__progress-track">
-      <span class="hs-form__progress-fill" data-progress-fill></span>
-    </span>
-  </div>
-
   <div class="hs-form__nav flex flex-wrap items-center gap-4">
     {%- unless is_first -%}
       <button type="button" class="button button--secondary" data-prev>
@@ -93,5 +86,12 @@
       <span class="btn-fill" data-fill></span>
       <span class="btn-text">{{ section.settings.submit_label | default: 'Submit' }}</span>
     </button>
+  </div>
+
+  <div class="hs-form__progress" data-progress aria-hidden="true">
+    <span class="hs-form__progress-track">
+      <span class="hs-form__progress-fill" data-progress-fill></span>
+    </span>
+    <span class="hs-form__progress-count text-sm" data-progress-count>{{ index }}/{{ total }}</span>
   </div>
 </div>

@@ -17,7 +17,9 @@
   const MIN_ELAPSED_MS = 2000;
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const Base = window.BaseElement || HTMLElement;
+  // `class BaseElement` in theme.js is a global binding but is NOT a window property,
+  // so it must be referenced directly rather than via window.
+  const Base = typeof BaseElement !== 'undefined' ? BaseElement : HTMLElement;
 
   class HubSpotForm extends Base {
     connectedCallback() {
@@ -34,6 +36,7 @@
       this.rules = this.parseRules(this.dataset.branchRules);
       this.visited = [];
       this.current = 1;
+      this.gateField = this.dataset.gateField || '';
 
       this.loadTracker();
 
@@ -43,8 +46,8 @@
         if (event.target.closest('[data-prev]')) this.onPrev();
       });
       // Re-evaluate conditional fields as the visitor fills the form.
-      this.on(this, 'change', () => this.applyFieldRules());
-      this.on(this, 'input', () => this.applyFieldRules());
+      this.on(this, 'change', () => this.refresh());
+      this.on(this, 'input', () => this.refresh());
 
       this.renderStep(1, { focus: false });
       this.syncNavigation();
@@ -128,6 +131,7 @@
 
       this.updateProgress(target, index);
       this.applyFieldRules();
+      if (index === 1) this.applyGate();
       this.clearAlert(target);
 
       if (focus) {
@@ -144,6 +148,47 @@
 
       if (count) count.textContent = `${index}/${total}`;
       if (fill) fill.style.width = `${(index / total) * 100}%`;
+    }
+
+    /**
+     * Progressive disclosure for the first step: until the gate field (the email) has
+     * a plausible value, the rest of step 1 stays hidden so the form opens as a single
+     * question. Gated wrappers are marked so validation and the payload skip them.
+     */
+    applyGate() {
+      if (!this.gateField) return;
+
+      const gate = this.querySelector(`[data-hs-name="${this.gateField}"]`);
+      if (!gate) return;
+
+      const value = (gate.value || '').trim();
+      const unlocked = EMAIL_RE.test(value);
+      const gateWrapper = gate.closest('[data-field-wrapper]');
+
+      this.querySelectorAll('[data-step="1"] [data-field-wrapper]').forEach((wrapper) => {
+        if (wrapper === gateWrapper) return;
+
+        const wasHidden = wrapper.hidden;
+        wrapper.hidden = !unlocked;
+        // Tag only the transition so the reveal animation runs once, not per keystroke.
+        if (wasHidden && !wrapper.hidden) {
+          wrapper.classList.add('is-revealed');
+          wrapper.addEventListener(
+            'animationend',
+            () => wrapper.classList.remove('is-revealed'),
+            { once: true }
+          );
+        }
+      });
+
+      const stepEl = this.stepEl(1);
+      if (!stepEl) return;
+
+      // Nothing to advance to until the visitor has given us an email.
+      stepEl.querySelectorAll('[data-next], [data-submit]').forEach((button) => {
+        button.hidden = !unlocked;
+      });
+      stepEl.querySelector('[data-progress]')?.toggleAttribute('hidden', !unlocked);
     }
 
     /** Fields on a hidden conditional wrapper are excluded from validation and payload. */
@@ -220,6 +265,15 @@
 
       if (next) next.hidden = !hasNext;
       if (submit) submit.hidden = hasNext;
+
+      if (this.current === 1) this.applyGate();
+    }
+
+    /** Re-evaluates conditional fields, the first-step gate and the nav in one pass. */
+    refresh() {
+      this.applyFieldRules();
+      if (this.current === 1) this.applyGate();
+      this.syncNavigation();
     }
 
     /* ------------------------------------------------------------- validation */

@@ -28,6 +28,7 @@
         data-error-message="{{ section.settings.error_message | escape }}"
         data-loading-label="{{ section.settings.loading_label | escape }}"
         data-branch-rules="{{ section.settings.branch_rules | escape }}"
+        data-gate-field="{{ section.settings.gate_field }}"
         data-consent-mode="{{ section.settings.consent_mode }}"
         data-consent-subscription-id="{{ section.settings.consent_subscription_id }}"
         data-consent-text="{{ section.settings.consent_text | escape }}"
@@ -110,6 +111,13 @@
       "label": "Step skip rules",
       "info": "One rule per line: fieldName in \"value a\",\"value b\" => goto 3. Combine two conditions with \"and\".",
       "default": "ts_team_sales_persona in \"I am the decision maker for team purchases\",\"I influence or help coordinate purchases\" and ts_custom_interest in \"Yes\" => goto 3\nts_team_sales_persona in \"I am the decision maker for team purchases\",\"I influence or help coordinate purchases\" and ts_custom_interest in \"No\" => goto 4\nts_team_sales_persona in \"I am a parent/player/supporter\" => goto 4"
+    },
+    {
+      "type": "text",
+      "id": "gate_field",
+      "label": "Reveal step 1 after this field",
+      "default": "email",
+      "info": "HubSpot internal name of the field that unlocks the rest of step 1. Leave blank to show all of step 1 at once."
     },
     {
       "type": "header",
@@ -609,6 +617,18 @@
           "type": "field",
           "settings": {
             "step": 1,
+            "hs_name": "email",
+            "object_type": "0-1",
+            "type": "email",
+            "label": "Email",
+            "required": true,
+            "hidden": false
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
             "hs_name": "firstname",
             "object_type": "0-1",
             "type": "text",
@@ -626,19 +646,6 @@
             "object_type": "0-1",
             "type": "text",
             "label": "Last Name",
-            "required": true,
-            "hidden": false,
-            "half_width": true
-          }
-        },
-        {
-          "type": "field",
-          "settings": {
-            "step": 1,
-            "hs_name": "email",
-            "object_type": "0-1",
-            "type": "email",
-            "label": "Email",
             "required": true,
             "hidden": false,
             "half_width": true

@@ -772,7 +772,7 @@
                                 {%- endif -%}
                               {%- endfor -%}
 
-                              {%- if prod.type == 'Neck Guard' -%}
+                              {%- if prod.type contains 'Neck Guard' -%}
                                 {%- assign neckguard_items = neckguard_items | append: prod_item -%}
                               {%- elsif is_last_chance -%}
                                 {%- assign last_chance_items = last_chance_items | append: prod_item -%}
@@ -785,7 +785,7 @@
                       {%- endpaginate -%}
 
                       {{ current_item }}
-                      {%- if product.template_suffix == 'neck-guards' -%}
+                      {%- if product.template_suffix == 'neck-guards' or product.template_suffix == 'neckguard-3-0' -%}
                         {{ neckguard_items }}
                       {%- else -%}
                         {{ other_items }}
