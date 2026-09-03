@@ -41,11 +41,11 @@
 
 /* Only fields the JS has just revealed animate; a plain :not([hidden]) rule would
    replay the animation on every keystroke, since input events re-run the gate. */
-.hs-form__fields > .field.is-revealed {
+.hs-form__fields > .hs-field.is-revealed {
   animation: hs-form-step-in var(--animation-smooth, 0.3s ease);
 }
 
-.hs-form .field[hidden],
+.hs-form .hs-field[hidden],
 .hs-form [hidden] {
   display: none;
 }
@@ -67,17 +67,60 @@
   gap: var(--sp-3);
 }
 
-/* Two-up field rows. `.field--full` already spans the row in theme.css. */
-.hs-form__fields > .field--half {
-  flex: 1 1 100%;
-  width: 100%;
+/* A real 2-column grid: every field is the same width, and a field can be widened
+   by spanning both columns. Single column on small screens. */
+.hs-form__fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-5);
+  align-items: start;
 }
 
 @media screen and (min-width: 750px) {
-  .hs-form__fields > .field--half {
-    flex: 1 1 calc(50% - (var(--sp-6) / 2));
-    width: calc(50% - (var(--sp-6) / 2));
+  .hs-form__fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-5) var(--sp-6);
   }
+
+  .hs-form__fields > .hs-field--span-2 {
+    grid-column: 1 / -1;
+  }
+}
+
+.hs-field {
+  display: grid;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+
+/* Labels above the control: the questions are full sentences and clip when floated. */
+.hs-field__label {
+  display: block;
+  font-size: var(--text-sm, 0.875rem);
+  line-height: 1.35;
+  opacity: 0.85;
+}
+
+.hs-field__required {
+  color: rgb(var(--color-error-text, 190 30 45));
+  margin-inline-start: 0.15em;
+}
+
+/* The control keeps `.field` so theme.css input/select styling still applies. */
+.hs-field__control {
+  position: relative;
+  min-width: 0;
+}
+
+.hs-field__control .input,
+.hs-field__control .select {
+  width: 100%;
+}
+
+.hs-field__help {
+  margin: 0;
+  opacity: 0.7;
+  line-height: 1.35;
 }
 
 .hs-form__help {
@@ -101,6 +144,11 @@
 .hs-form__progress {
   display: grid;
   gap: var(--sp-2);
+  margin-block-start: var(--sp-2);
+}
+
+.hs-form__progress-count {
+  opacity: 0.7;
 }
 
 .hs-form__progress-track {
@@ -121,6 +169,11 @@
 }
 
 .hs-form__nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-4);
   margin-block-start: var(--sp-2);
 }
 

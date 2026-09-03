@@ -28,7 +28,7 @@
 
   <div class="field field--full" data-alert hidden></div>
 
-  <div class="hs-form__fields flex flex-wrap gap-4d5 md:gap-6">
+  <div class="hs-form__fields">
     {%- for block in section.blocks -%}
       {%- if block.type == 'field' and block.settings.step == index -%}
         {%- render 'hubspot-form-field', block: block, section: section -%}
@@ -58,7 +58,14 @@
     <p class="hs-form__consent text-sm opacity-70">{{ section.settings.consent_text }}</p>
   {%- endif -%}
 
-  <div class="hs-form__nav flex flex-wrap items-center gap-4">
+  <div class="hs-form__progress" data-progress aria-hidden="true">
+    <span class="hs-form__progress-track">
+      <span class="hs-form__progress-fill" data-progress-fill></span>
+    </span>
+    <span class="hs-form__progress-count text-sm" data-progress-count>{{ index }}/{{ total }}</span>
+  </div>
+
+  <div class="hs-form__nav">
     {%- unless is_first -%}
       <button type="button" class="button button--secondary" data-prev>
         <span class="btn-text">{{ section.settings.prev_label | default: 'Previous' }}</span>
@@ -86,12 +93,5 @@
       <span class="btn-fill" data-fill></span>
       <span class="btn-text">{{ section.settings.submit_label | default: 'Submit' }}</span>
     </button>
-  </div>
-
-  <div class="hs-form__progress" data-progress aria-hidden="true">
-    <span class="hs-form__progress-track">
-      <span class="hs-form__progress-fill" data-progress-fill></span>
-    </span>
-    <span class="hs-form__progress-count text-sm" data-progress-count>{{ index }}/{{ total }}</span>
   </div>
 </div>

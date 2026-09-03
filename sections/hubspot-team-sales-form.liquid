@@ -503,10 +503,21 @@
           "default": false
         },
         {
-          "type": "checkbox",
-          "id": "half_width",
-          "label": "Half width",
-          "default": false
+          "type": "select",
+          "id": "span",
+          "label": "Width",
+          "default": "1",
+          "options": [
+            {
+              "value": "1",
+              "label": "Half (1 column)"
+            },
+            {
+              "value": "2",
+              "label": "Full (2 columns)"
+            }
+          ],
+          "info": "Fields are laid out in a 2-column grid. Choose Full to span both columns."
         },
         {
           "type": "text",
@@ -620,7 +631,8 @@
             "type": "email",
             "label": "Email",
             "required": true,
-            "hidden": false
+            "hidden": false,
+            "span": "1"
           }
         },
         {
@@ -633,7 +645,7 @@
             "label": "First Name",
             "required": true,
             "hidden": false,
-            "half_width": true
+            "span": "1"
           }
         },
         {
@@ -646,7 +658,7 @@
             "label": "Last Name",
             "required": true,
             "hidden": false,
-            "half_width": true
+            "span": "1"
           }
         },
         {
@@ -659,9 +671,9 @@
             "label": "Mobile Phone Number",
             "required": true,
             "hidden": false,
-            "half_width": true,
             "min_digits": "7",
-            "max_digits": "20"
+            "max_digits": "20",
+            "span": "1"
           }
         },
         {
@@ -674,8 +686,8 @@
             "label": "What’s your role with the team/organization?",
             "required": true,
             "hidden": false,
-            "half_width": true,
-            "options": "Parent|Parent\nPlayer|Player\nCoach|Coach\nDirector|Director\nTeam Admin|Team Admin\nTeam Manager|Team Manager\nDealer|Dealer\nOther|Other"
+            "options": "Parent|Parent\nPlayer|Player\nCoach|Coach\nDirector|Director\nTeam Admin|Team Admin\nTeam Manager|Team Manager\nDealer|Dealer\nOther|Other",
+            "span": "2"
           }
         },
         {
@@ -688,8 +700,8 @@
             "label": "What best describes your role in team purchasing?",
             "required": true,
             "hidden": false,
-            "half_width": true,
-            "options": "I am the decision maker for team purchases|I am the decision maker for team purchases\nI influence or help coordinate purchases|I influence or help coordinate purchases\nI am a parent/player/supporter|I am a parent/player/supporter"
+            "options": "I am the decision maker for team purchases|I am the decision maker for team purchases\nI influence or help coordinate purchases|I influence or help coordinate purchases\nI am a parent/player/supporter|I am a parent/player/supporter",
+            "span": "2"
           }
         },
         {
@@ -702,7 +714,7 @@
             "label": "Team Name",
             "required": true,
             "hidden": false,
-            "half_width": true
+            "span": "1"
           }
         },
         {
@@ -715,8 +727,8 @@
             "label": "Team Level",
             "required": false,
             "hidden": false,
-            "half_width": true,
-            "options": "Youth|Youth\nHigh School/College|High School/College\nJunior/Pro|Junior/Pro\nOther|Other"
+            "options": "Youth|Youth\nHigh School/College|High School/College\nJunior/Pro|Junior/Pro\nOther|Other",
+            "span": "1"
           }
         },
         {
@@ -729,7 +741,8 @@
             "label": "How many teams are in your organization?",
             "required": true,
             "hidden": false,
-            "options": "1|1-5\n2-4|2-4\n5-8|5-8\n9-15|9-15\n16-25|16-25\n25+|25+\nNot Sure|Not Sure"
+            "options": "1|1-5\n2-4|2-4\n5-8|5-8\n9-15|9-15\n16-25|16-25\n25+|25+\nNot Sure|Not Sure",
+            "span": "2"
           }
         },
         {
@@ -742,7 +755,7 @@
             "label": "City",
             "required": true,
             "hidden": false,
-            "half_width": true
+            "span": "1"
           }
         },
         {
@@ -755,7 +768,7 @@
             "label": "State/Region",
             "required": true,
             "hidden": false,
-            "half_width": true
+            "span": "1"
           }
         },
         {
@@ -767,7 +780,8 @@
             "type": "text",
             "label": "Team Website",
             "required": false,
-            "hidden": false
+            "hidden": false,
+            "span": "2"
           }
         },
         {
@@ -780,8 +794,8 @@
             "label": "Do you know who makes purchasing decisions for your team or organization?",
             "required": true,
             "hidden": false,
-            "half_width": true,
-            "options": "Yes|Yes\nNo|No\nNot Sure|I can find out"
+            "options": "Yes|Yes\nNo|No\nNot Sure|I can find out",
+            "span": "2"
           }
         },
         {
@@ -794,8 +808,8 @@
             "label": "What is their role in the organization?",
             "required": false,
             "hidden": false,
-            "half_width": true,
-            "options": "Director|Director\nTeam Manager|Team Manager\nTeam Admin|Team Admin\nCoach|Coach\nDealer|Dealer\nOther|Other"
+            "options": "Director|Director\nTeam Manager|Team Manager\nTeam Admin|Team Admin\nCoach|Coach\nDealer|Dealer\nOther|Other",
+            "span": "2"
           }
         },
         {
@@ -808,7 +822,7 @@
             "label": "First Name",
             "required": false,
             "hidden": false,
-            "half_width": true
+            "span": "1"
           }
         },
         {
@@ -821,7 +835,7 @@
             "label": "Last Name",
             "required": false,
             "hidden": false,
-            "half_width": true
+            "span": "1"
           }
         },
         {
@@ -834,9 +848,9 @@
             "label": "Mobile Phone Number",
             "required": false,
             "hidden": false,
-            "half_width": true,
             "min_digits": "7",
-            "max_digits": "20"
+            "max_digits": "20",
+            "span": "1"
           }
         },
         {
@@ -849,7 +863,7 @@
             "label": "Email",
             "required": false,
             "hidden": false,
-            "half_width": true
+            "span": "1"
           }
         },
         {
@@ -863,7 +877,8 @@
             "required": false,
             "hidden": false,
             "options": "Yes|Yes\nNo|No\nUnsure|Unsure",
-            "help_text": "A short introduction significantly speeds up the process."
+            "help_text": "A short introduction significantly speeds up the process.",
+            "span": "2"
           }
         },
         {
@@ -876,7 +891,8 @@
             "label": "Do you have authorization rights to distribute your Team or Organization logo?",
             "required": true,
             "hidden": false,
-            "options": "Yes|Yes, I can approve logo usage\nRefer|I can connect you with the person who can approve\nNot Sure|Not sure — someone else may need to approve\nNo|No"
+            "options": "Yes|Yes, I can approve logo usage\nRefer|I can connect you with the person who can approve\nNot Sure|Not sure — someone else may need to approve\nNo|No",
+            "span": "2"
           }
         },
         {
@@ -892,7 +908,8 @@
             "help_text": "We'll only use this to coordinate logo authorization.",
             "placeholder": "name@organization.com",
             "show_when_field": "ts_logo_authorization",
-            "show_when_values": "Refer,Not Sure,No"
+            "show_when_values": "Refer,Not Sure,No",
+            "span": "2"
           }
         },
         {
@@ -905,7 +922,8 @@
             "label": "Team Logo Upload",
             "required": false,
             "hidden": false,
-            "help_text": "If you don't have final approval yet, no problem — upload what you have and we'll guide you through next steps."
+            "help_text": "If you don't have final approval yet, no problem — upload what you have and we'll guide you through next steps.",
+            "span": "2"
           }
         },
         {
@@ -918,9 +936,9 @@
             "label": "Target Delivery Date",
             "required": false,
             "hidden": false,
-            "half_width": true,
             "show_when_field": "ts_team_sales_persona",
-            "show_when_values": "I am the decision maker for team purchases,I influence or help coordinate purchases"
+            "show_when_values": "I am the decision maker for team purchases,I influence or help coordinate purchases",
+            "span": "1"
           }
         },
         {
@@ -933,10 +951,10 @@
             "label": "Preferred Ordering Method",
             "required": false,
             "hidden": false,
-            "half_width": true,
             "options": "Titan-Hosted Team Store|Titan-Hosted Team Store\nSingle Invoice (Bulk Shipping)|Single Invoice (Bulk Shipping)\nDealer or Org Hosted Store|Dealer or Org Hosted Store\nUnknown|Unknown",
             "show_when_field": "ts_team_sales_persona",
-            "show_when_values": "I am the decision maker for team purchases,I influence or help coordinate purchases"
+            "show_when_values": "I am the decision maker for team purchases,I influence or help coordinate purchases",
+            "span": "2"
           }
         },
         {

@@ -37,6 +37,7 @@
       this.visited = [];
       this.current = 1;
       this.gateField = this.dataset.gateField || '';
+      this.gateUnlocked = !this.gateField;
 
       this.loadTracker();
 
@@ -131,7 +132,8 @@
 
       this.updateProgress(target, index);
       this.applyFieldRules();
-      if (index === 1) this.applyGate();
+      this.applyGate();
+      this.syncNavigation();
       this.clearAlert(target);
 
       if (focus) {
@@ -157,6 +159,8 @@
      */
     applyGate() {
       if (!this.gateField) return;
+
+      if (this.current !== 1) return;
 
       const gate = this.querySelector(`[data-hs-name="${this.gateField}"]`);
       if (!gate) return;
@@ -184,10 +188,9 @@
       const stepEl = this.stepEl(1);
       if (!stepEl) return;
 
-      // Nothing to advance to until the visitor has given us an email.
-      stepEl.querySelectorAll('[data-next], [data-submit]').forEach((button) => {
-        button.hidden = !unlocked;
-      });
+      // Nothing to advance to until the visitor has given us an email. Only the button
+      // syncNavigation chose for this step is revealed -- never both.
+      this.gateUnlocked = unlocked;
       stepEl.querySelector('[data-progress]')?.toggleAttribute('hidden', !unlocked);
     }
 
@@ -263,16 +266,17 @@
       const next = stepEl.querySelector('[data-next]');
       const submit = stepEl.querySelector('[data-submit]');
 
-      if (next) next.hidden = !hasNext;
-      if (submit) submit.hidden = hasNext;
+      // On the gated first step, hide both until the gate opens.
+      const locked = this.current === 1 && this.gateField && !this.gateUnlocked;
 
-      if (this.current === 1) this.applyGate();
+      if (next) next.hidden = locked || !hasNext;
+      if (submit) submit.hidden = locked || hasNext;
     }
 
     /** Re-evaluates conditional fields, the first-step gate and the nav in one pass. */
     refresh() {
       this.applyFieldRules();
-      if (this.current === 1) this.applyGate();
+      this.applyGate();
       this.syncNavigation();
     }
 
