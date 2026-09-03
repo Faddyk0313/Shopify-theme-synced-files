@@ -58,6 +58,9 @@
   outline: none;
 }
 
+.hs-form__step-content p {
+  margin: 0 !important;
+}
 .hs-form__step-content,
 .hs-form__step-footnote {
   display: grid;
