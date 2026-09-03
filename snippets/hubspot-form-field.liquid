@@ -5,10 +5,15 @@
   objectTypeId as data attributes so assets/hubspot-form.js can build the submission
   payload without re-deriving anything from labels.
 
-  Labels use the theme's native floating pattern by default. Fields whose label is a
-  long question ("What best describes your role in team purchasing?") set
-  `label_outside`, which renders the label above the control instead -- floating those
-  clips the text on mobile.
+  Fields set to full width (`span: 2`) are laid out at one column when their label
+  fits, and expand to both columns only when it overflows -- measured at runtime by
+  assets/hubspot-form.js. Set `span_fixed` to keep a field full width unconditionally.
+
+  Labels use the theme's native floating pattern at every breakpoint. Fields whose
+  label is a long question ("What best describes your role in team purchasing?") set
+  `label_outside`, which on mobile only stacks the label above the control -- those
+  labels float fine on desktop but clip on narrow screens. Purely a CSS concern; the
+  markup is identical at all widths.
 
   @param {object} block - A `field` block from a HubSpot form section
   @param {object} section - The parent section (used for unique ids)
@@ -27,14 +32,22 @@
 
   assign span = block.settings.span | default: '1'
   assign wrapper_class = 'field hs-field hs-field--span-' | append: span
+
+  # Full-width fields opt into measurement instead of taking both columns outright:
+  # assets/hubspot-form.js keeps them at one column while the label still fits and
+  # only expands them back to two when it actually overflows. Fields that must never
+  # shrink (file input, textual blocks) opt out with `span_fixed`.
+  if span == '2' and block.settings.span_fixed != true and field_type != 'file'
+    assign wrapper_class = wrapper_class | append: ' hs-field--autofit'
+  endif
+
   if outside
     assign wrapper_class = wrapper_class | append: ' hs-field--label-outside'
   endif
 
+  # `label_outside` is a responsive hint only: the floating markup is emitted at every
+  # width and CSS stacks the label above the control on mobile. Structure never changes.
   assign float_class = ' is-floating'
-  if outside
-    assign float_class = ''
-  endif
 
   assign conditional = false
   if block.settings.show_when_field != blank
@@ -68,20 +81,6 @@
     {% endif %}
     {{ block.shopify_attributes }}
   >
-    {%- comment -%}
-      When the label sits outside it must come first in the DOM; the floating variant
-      must come *after* its control, because theme.css floats it with a following
-      sibling selector (`:is(.input,.textarea):not(:placeholder-shown) ~ .label`).
-    {%- endcomment -%}
-    {%- if outside -%}
-      <label class="label hs-field__label" for="{{ field_id }}">
-        {{- label -}}
-        {%- if block.settings.required -%}
-          <span class="hs-field__required" aria-hidden="true">*</span>
-        {%- endif -%}
-      </label>
-    {%- endif -%}
-
     {%- case field_type -%}
       {%- when 'dropdown' -%}
         {%- assign option_lines = block.settings.options | newline_to_br | split: '<br />' -%}
@@ -116,9 +115,7 @@
           HubSpot's JSON submission API cannot accept file uploads, so this input is
           rendered disabled rather than silently dropping the visitor's file.
         {%- endcomment -%}
-        {%- unless outside -%}
-          <label class="label hs-field__label" for="{{ field_id }}">{{ label }}</label>
-        {%- endunless -%}
+        <label class="label hs-field__label" for="{{ field_id }}">{{ label }}</label>
         <input
           class="input"
           type="file"
@@ -176,7 +173,7 @@
     {%- endcase -%}
 
     {%- comment -%}Floating label: must follow the control for theme.css's sibling selector.{%- endcomment -%}
-    {%- unless outside or field_type == 'file' -%}
+    {%- unless field_type == 'file' -%}
       <label class="label is-floating hs-field__label" for="{{ field_id }}">
         {{- label -}}
         {%- if block.settings.required -%}

@@ -52,6 +52,13 @@
 
       this.renderStep(1, { focus: false });
       this.syncNavigation();
+      this.watchLabelFit();
+    }
+
+    disconnectedCallback() {
+      super.disconnectedCallback?.();
+      this.fitObserver?.disconnect();
+      this.fitObserver = null;
     }
 
     /* ------------------------------------------------------------------ setup */
@@ -135,6 +142,7 @@
       this.applyGate();
       this.syncNavigation();
       this.clearAlert(target);
+      this.measureLabelFit();
 
       if (focus) {
         const heading = target.querySelector('[data-step-heading]');
@@ -284,6 +292,79 @@
       this.applyFieldRules();
       this.applyGate();
       this.syncNavigation();
+      this.measureLabelFit();
+    }
+
+    /* ----------------------------------------------------------- label fitting */
+
+    /**
+     * Half-width is the default even for the long question labels. A label only earns
+     * the full two columns when it actually stops fitting, which depends on the
+     * rendered width -- so it is measured rather than hard-coded. `.hs-field--fits-1`
+     * (set on every candidate up front) is what makes the CSS honour span 1 at all;
+     * `.hs-field--overflows` puts the field back to full width.
+     *
+     * Measuring means temporarily assuming the narrow layout, otherwise a field that
+     * is currently full width always reports "fits" and never shrinks back.
+     */
+    watchLabelFit() {
+      this.fitCandidates = Array.from(
+        this.querySelectorAll('.hs-field--autofit')
+      ).filter((wrapper) => wrapper.querySelector('.hs-field__label'));
+
+      if (!this.fitCandidates.length) return;
+
+      this.fitCandidates.forEach((wrapper) => wrapper.classList.add('hs-field--fits-1'));
+
+      const measure = () => this.measureLabelFit();
+
+      if ('ResizeObserver' in window) {
+        this.fitObserver = new ResizeObserver(() => {
+          // Reading layout inside the callback would loop; defer to the next frame.
+          cancelAnimationFrame(this.fitFrame);
+          this.fitFrame = requestAnimationFrame(measure);
+        });
+        this.fitCandidates.forEach((wrapper) => this.fitObserver.observe(wrapper));
+        this.registerCleanup?.(() => this.fitObserver?.disconnect());
+      } else {
+        this.on(window, 'resize', measure);
+      }
+
+      measure();
+      // Web fonts land after first paint and change the measurement.
+      document.fonts?.ready.then(measure).catch(() => {});
+    }
+
+    measureLabelFit() {
+      if (!this.fitCandidates?.length) return;
+
+      // Assume the narrow layout for all candidates first, so each is measured at the
+      // width it would have if it stayed at one column.
+      this.fitCandidates.forEach((wrapper) => wrapper.classList.remove('hs-field--overflows'));
+
+      const overflowing = this.fitCandidates.filter((wrapper) => {
+        if (wrapper.hidden || !wrapper.offsetParent) return false;
+
+        const label = wrapper.querySelector('.hs-field__label');
+
+        // theme.css scales a floated label to 0.70, so `scrollWidth` would report a
+        // filled field as fitting and the field would shrink mid-interaction. Measure
+        // the text at its unscaled size instead, so the decision does not depend on
+        // whether the visitor has typed anything yet.
+        const range = document.createRange();
+        range.selectNodeContents(label);
+        const text = range.getBoundingClientRect().width;
+        range.detach?.();
+
+        // The measured rect is already scaled by the float transform; divide it back
+        // out so the same threshold applies empty or filled.
+        const matrix = new DOMMatrixReadOnly(getComputedStyle(label).transform);
+        const unscaled = matrix.a > 0 ? text / matrix.a : text;
+
+        return unscaled > label.clientWidth + 1;
+      });
+
+      overflowing.forEach((wrapper) => wrapper.classList.add('hs-field--overflows'));
     }
 
     /* ------------------------------------------------------------- validation */

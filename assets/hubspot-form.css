@@ -85,6 +85,25 @@
   .hs-form__fields > .hs-field--span-2 {
     grid-column: 1 / -1;
   }
+
+  /* Autofit: a full-width field sits at one column while its label fits, and only
+     takes both columns back when the JS measures an overflow. `--fits-1` is added by
+     the JS, so with scripting off these fields keep their authored full width. */
+  .hs-form__fields > .hs-field--span-2.hs-field--fits-1 {
+    grid-column: auto;
+  }
+
+  .hs-form__fields > .hs-field--span-2.hs-field--fits-1.hs-field--overflows {
+    grid-column: 1 / -1;
+  }
+
+  /* A pinned floating label must not wrap while it is being measured, otherwise it
+     would always "fit" by growing taller and the field would never expand. */
+  .hs-field--autofit > .hs-field__label.is-floating {
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+  }
 }
 
 /* The wrapper keeps theme.css's `.field` (position:relative + border tokens) so the
@@ -101,20 +120,55 @@
   grid-column: 1 / -1;
 }
 
-/* Long question labels sit above their control -- floating them clips on mobile. */
-.hs-field--label-outside {
-  display: grid;
-  gap: var(--sp-2);
-}
+/* Long question labels ("What best describes your role in team purchasing?") float
+   fine on desktop, where the field is wide, but clip on narrow screens. Below the
+   grid breakpoint they are unpinned from inside the input and stacked above it.
+   The markup is identical at every width -- only this rule changes. */
+@media screen and (max-width: 749px) {
+  .hs-field--label-outside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+  }
 
-.hs-field--label-outside > .hs-field__label {
-  position: static;
-  transform: none;
-  display: block;
-  font-size: var(--text-sm, 0.875rem);
-  line-height: 1.35;
-  opacity: 0.85;
-  pointer-events: auto;
+  /* Order lifts the label above its control without moving it in the DOM, so
+     theme.css's following-sibling floating selectors stay valid. */
+  .hs-field--label-outside > .hs-field__label.is-floating {
+    order: -1;
+    position: static;
+    height: auto;
+    margin-inline-start: 0;
+    inset-inline-start: auto;
+    opacity: 0.85;
+    pointer-events: auto;
+    display: block;
+    font-size: var(--text-sm, 0.875rem);
+    line-height: 1.35;
+    white-space: normal;
+  }
+
+  /* Neutralise the float transform, which would otherwise shift the stacked label. */
+  .hs-field--label-outside > .hs-field__label.is-floating,
+  .hs-field--label-outside .select[required]:valid ~ .hs-field__label.is-floating,
+  .hs-field--label-outside :is(.input, .textarea):focus ~ .hs-field__label.is-floating,
+  .hs-field--label-outside :is(.input, .textarea):not(:placeholder-shown) ~ .hs-field__label.is-floating {
+    --tw-translate-y: 0;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    transform: none;
+  }
+
+  /* Without a floating label overhead the input needs no extra top padding. */
+  .hs-field--label-outside .input.is-floating,
+  .hs-field--label-outside .select.is-floating {
+    height: var(--input-height);
+    padding-block-start: 0;
+  }
+
+  .hs-field--label-outside .input.is-floating::placeholder {
+    color: inherit;
+    opacity: 0.5;
+  }
 }
 
 .hs-field__required {

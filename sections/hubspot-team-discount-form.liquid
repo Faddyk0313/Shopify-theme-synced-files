@@ -531,10 +531,17 @@
         },
         {
           "type": "checkbox",
-          "id": "label_outside",
-          "label": "Show label above field",
+          "id": "span_fixed",
+          "label": "Never shrink to 1 column",
           "default": false,
-          "info": "Long question labels clip when floated inside the input. Enable for labels longer than about 45 characters."
+          "info": "Full-width fields sit at 1 column while the label fits and expand only when it overflows. Check this to keep 2 columns always."
+        },
+        {
+          "type": "checkbox",
+          "id": "label_outside",
+          "label": "Stack label above field on mobile",
+          "default": false,
+          "info": "Long question labels clip inside the input on narrow screens. Desktop is unaffected."
         },
         {
           "type": "text",
@@ -801,7 +808,7 @@
             "label": "Team Website",
             "required": false,
             "hidden": false,
-            "span": "2"
+            "span": "1"
           }
         },
         {
