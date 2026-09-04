@@ -192,81 +192,6 @@
         "parallax_direction": "vertical"
       }
     },
-    "image_with_text_gXCUVk": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading_aA4BMF": {
-          "type": "heading",
-          "settings": {
-            "heading": "Image with text",
-            "heading_size": "title-md",
-            "heading_tag": "h2",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle",
-            "highlighted_reveal": false
-          }
-        },
-        "text_wFHwEm": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
-            "text_font": "body",
-            "text_size": "subtext-md",
-            "text_max_size": 32,
-            "text_line_height": 1.6,
-            "text_letter_spacing": 0,
-            "text_capitalize": false,
-            "secondary_color": false,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "button_TViVct": {
-          "type": "button",
-          "settings": {
-            "button_label": "Button label",
-            "button_link": "",
-            "button_style": "primary",
-            "button_size": "md",
-            "button_external": false,
-            "button_icon": true
-          }
-        }
-      },
-      "block_order": [
-        "heading_aA4BMF",
-        "text_wFHwEm",
-        "button_TViVct"
-      ],
-      "disabled": true,
-      "name": "t:sections.image-with-text.name",
-      "settings": {
-        "image_height": "650px",
-        "image_width": "large",
-        "layout": "text_first",
-        "text_alignment": "left",
-        "content_position": "align-self-center",
-        "image_height_mobile": "auto",
-        "text_alignment_mobile": "left",
-        "color_text": "",
-        "color_background": "",
-        "gradient_background": "",
-        "color_background_2": "",
-        "gradient_background_2": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "divider": false,
-        "full_width": true,
-        "rounded": false,
-        "enable_parallax": true,
-        "parallax_direction": "vertical"
-      }
-    },
     "image_with_text_overlay_9ze9nz": {
       "type": "image-with-text-overlay",
       "blocks": {
@@ -1788,7 +1713,6 @@
   "order": [
     "image_with_text_overlay_XyHULG",
     "image_with_text_overlay_7W36g4",
-    "image_with_text_gXCUVk",
     "image_with_text_overlay_9ze9nz",
     "logo_list_nBVhDN",
     "size_based_products_6ab66e",
