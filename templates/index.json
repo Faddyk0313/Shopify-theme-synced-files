@@ -192,40 +192,43 @@
         "parallax_direction": "vertical"
       }
     },
-    "image_with_text_overlay_9ze9nz": {
+    "image_with_text_overlay_6KcqR3": {
       "type": "image-with-text-overlay",
       "blocks": {
-        "spacing_ptgAi9": {
+        "spacing_drKNhC": {
           "type": "spacing",
+          "disabled": true,
           "settings": {
             "height": 0,
             "height_mobile": 12
           }
         },
-        "image_6nKp3t": {
+        "image_jbWf8D": {
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/LABOR_DAY_BONUS.svg",
             "image_width": "custom",
-            "image_max_width": 440,
+            "image_max_width": 420,
             "image_max_width_mobile": 300
           }
         },
-        "spacing_LMfGYE": {
+        "spacing_ydn3Uz": {
           "type": "spacing",
+          "disabled": true,
+          "settings": {
+            "height": 0,
+            "height_mobile": 32
+          }
+        },
+        "spacing_4MctVY": {
+          "type": "spacing",
+          "disabled": true,
           "settings": {
             "height": 0,
             "height_mobile": 100
           }
         },
-        "spacing_3WGjxe": {
-          "type": "spacing",
-          "settings": {
-            "height": 0,
-            "height_mobile": 24
-          }
-        },
-        "button_UpzgcR": {
+        "button_CXy4YH": {
           "type": "button",
           "settings": {
             "button_label": "SHOP BATTLEGEAR 3.0",
@@ -233,36 +236,36 @@
             "button_style": "primary",
             "button_size": "sm",
             "button_external": false,
-            "button_icon": true
+            "button_icon": false
           }
         }
       },
       "block_order": [
-        "spacing_ptgAi9",
-        "image_6nKp3t",
-        "spacing_LMfGYE",
-        "spacing_3WGjxe",
-        "button_UpzgcR"
+        "spacing_drKNhC",
+        "image_jbWf8D",
+        "spacing_ydn3Uz",
+        "spacing_4MctVY",
+        "button_CXy4YH"
       ],
       "disabled": true,
-      "name": "USAH COLLECTION",
+      "name": "LABOR DAY OPTION 2",
       "settings": {
         "transparent_header": false,
-        "image": "shopify://shop_images/Banner_3.0_desk.webp",
+        "image": "shopify://shop_images/Banner_3.0_desk_2.webp",
         "image_height": "adapt",
-        "content_width": "small",
+        "content_width": "large",
         "content_position": "md:items-center md:justify-start",
         "text_alignment": "center",
         "image_mobile": "shopify://shop_images/3.0_banner_LABOR_DAY_mobile.webp",
-        "image_height_mobile": "500px",
+        "image_height_mobile": "600px",
         "content_position_mobile": "items-start justify-center",
         "text_alignment_mobile": "center",
         "color_text": "#ffffff",
-        "color_background": "#FFFFFF",
+        "color_background": "#ffffff",
         "gradient_background": "",
         "color_highlight": "#e2fb31",
         "gradient_highlight": "",
-        "color_button_text": "#ffffff",
+        "color_button_text": "#FFFFFF",
         "color_button_background": "#000000",
         "color_button_gradient": "",
         "color_overlay": "#171717",
@@ -1713,7 +1716,7 @@
   "order": [
     "image_with_text_overlay_XyHULG",
     "image_with_text_overlay_7W36g4",
-    "image_with_text_overlay_9ze9nz",
+    "image_with_text_overlay_6KcqR3",
     "logo_list_nBVhDN",
     "size_based_products_6ab66e",
     "featured_collection_8C74HH",
