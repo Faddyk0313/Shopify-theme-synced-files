@@ -161,6 +161,7 @@
         "spacing_gqWAtP",
         "button_LQkjMt"
       ],
+      "disabled": true,
       "name": "MIAMI VICE BANNER",
       "settings": {
         "transparent_header": true,
@@ -247,7 +248,6 @@
         "spacing_4MctVY",
         "button_CXy4YH"
       ],
-      "disabled": true,
       "name": "LABOR DAY OPTION 2",
       "settings": {
         "transparent_header": false,
@@ -265,7 +265,7 @@
         "gradient_background": "",
         "color_highlight": "#e2fb31",
         "gradient_highlight": "",
-        "color_button_text": "#FFFFFF",
+        "color_button_text": "#ffffff",
         "color_button_background": "#000000",
         "color_button_gradient": "",
         "color_overlay": "#171717",
