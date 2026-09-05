@@ -215,10 +215,9 @@
         },
         "spacing_ydn3Uz": {
           "type": "spacing",
-          "disabled": true,
           "settings": {
             "height": 0,
-            "height_mobile": 32
+            "height_mobile": 24
           }
         },
         "spacing_4MctVY": {
