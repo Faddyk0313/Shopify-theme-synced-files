@@ -11,8 +11,10 @@
 -%}
 
 <style>
-  #shopify-section-{{ section.id }} .banner__box .button.no-mt {
-    margin-top: 25px;
+  @media screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }} .banner__box .button.no-mt {
+      margin-top: 25px;
+    }
   }
   #shopify-section-{{ section.id }} {
     --section-padding-top: {{ section.settings.padding_top }}px;
