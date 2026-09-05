@@ -11,6 +11,9 @@
 -%}
 
 <style>
+  #shopify-section-{{ section.id }} .banner__box .button.no-mt {
+    margin-top: 25px;
+  }
   #shopify-section-{{ section.id }} {
     --section-padding-top: {{ section.settings.padding_top }}px;
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -176,7 +179,7 @@
                         style: block.settings.button_style,
                         external: block.settings.button_external,
                         show_icon: block.settings.button_icon,
-                        classes: 'button--fixed',
+                        classes: 'button--fixed no-mt',
                         shopify_attributes: block.shopify_attributes
                       -%}
                     {%- endif -%}
