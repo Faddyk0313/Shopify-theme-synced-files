@@ -317,7 +317,15 @@
         "logo_gte4mJ": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/official_partner_of_usa_hockey_icon_df673b60-667f-4add-b4c0-8e6c69eca8b4.svg",
+            "image": "shopify://shop_images/USAH_PARTNER.svg",
+            "height": 80,
+            "link": "shopify://pages/usa-hockey"
+          }
+        },
+        "logo_DqV3A8": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/USHL_PARTNER.svg",
             "height": 80,
             "link": "shopify://pages/usa-hockey"
           }
@@ -325,7 +333,7 @@
         "logo_A37pVi": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/official_partner_of_PWHL_icon_5617f3fe-b1fa-4b35-81d3-ab209655649f.svg",
+            "image": "shopify://shop_images/PWHL_PARTNER.svg",
             "height": 80,
             "link": ""
           }
@@ -353,6 +361,7 @@
         "logo_bXHpfG",
         "logo_qQVDHF",
         "logo_gte4mJ",
+        "logo_DqV3A8",
         "logo_A37pVi",
         "logo_jEYXJw",
         "logo_fhz9ah"
