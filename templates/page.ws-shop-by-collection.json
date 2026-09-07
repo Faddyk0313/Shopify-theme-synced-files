@@ -1046,7 +1046,7 @@
       "type": "featured-collection",
       "name": "Neck Guards",
       "settings": {
-        "collection": "battlegear-neck-guard",
+        "collection": "neck-guard",
         "products": [],
         "product_limit": 12,
         "columns": 5,
