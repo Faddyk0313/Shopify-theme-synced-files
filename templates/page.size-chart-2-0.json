@@ -278,7 +278,7 @@
           "disabled": true,
           "settings": {
             "button_label": "Shop Neck Guards",
-            "button_link": "shopify://collections/battlegear-2-0-neck-guard",
+            "button_link": "shopify://collections/battlegear-neck-guard",
             "button_style": "primary",
             "button_size": "sm",
             "button_external": false,
