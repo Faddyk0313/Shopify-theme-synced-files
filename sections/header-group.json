@@ -31,7 +31,7 @@
           "name": "USA HOCKEY",
           "settings": {
             "icon": "trophy",
-            "text": "Official Supplier of <strong>USA Hockey, USHL &</strong> <strong>PWHL</strong>",
+            "text": "Official Supplier of <strong>USA Hockey &</strong> <strong>PWHL</strong>",
             "link": "shopify://pages/usa-hockey",
             "hide_icon_mobile": true,
             "text_mobile": "Official Supplier of <strong>USA Hockey & PWHL</strong>",
