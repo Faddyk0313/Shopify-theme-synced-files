@@ -144,7 +144,7 @@
           "type": "liquid",
           "name": "3 Product Highlight Icons",
           "settings": {
-            "liquid": "<style>\n/* TBG Custom Code */\n.usa-hockey-img {\n  padding-top: 10px;\n}\n/* End TBG Custom Code */\n</style>\n\n<!-- TBG Custom Code -->\n<img\n  class=\"usa-hockey-img\"\n  src=\"https://cdn.shopify.com/s/files/1/0635/2401/2210/files/pdp_3_icons_march_2026_2cfd7b0c-762c-424e-a336-c1ab356002f1.svg?v=1780486469\"\n  alt=\"\"\n>\n<!-- End TBG Custom Code -->"
+            "liquid": "<style>\n/* TBG Custom Code */\n.usa-hockey-img {\n  padding-top: 10px;\n}\n/* End TBG Custom Code */\n</style>\n\n<!-- TBG Custom Code -->\n<img\n  class=\"usa-hockey-img\"\n  src=\"https://cdn.shopify.com/s/files/1/0635/2401/2210/files/pdp_3_icons_march_2026_2cfd7b0c-762c-424e-a336-c1ab356002f1.svg?v=1788794028\"\n  alt=\"\"\n>\n<!-- End TBG Custom Code -->"
           }
         },
         "liquid_XMxet3": {
