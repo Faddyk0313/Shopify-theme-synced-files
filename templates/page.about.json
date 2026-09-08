@@ -146,30 +146,6 @@
             "show_when_values": ""
           }
         },
-        "field_RAtFL8": {
-          "type": "field",
-          "settings": {
-            "step": 1,
-            "hs_name": "email",
-            "object_type": "0-1",
-            "type": "email",
-            "label": "Email",
-            "required": true,
-            "hidden": false,
-            "span": "1",
-            "span_fixed": false,
-            "label_outside": false,
-            "placeholder": "",
-            "help_text": "",
-            "options": "",
-            "default_value": "",
-            "autocomplete": "",
-            "min_digits": "",
-            "max_digits": "",
-            "show_when_field": "",
-            "show_when_values": ""
-          }
-        },
         "field_DJGFVC": {
           "type": "field",
           "settings": {
@@ -202,6 +178,30 @@
             "object_type": "0-1",
             "type": "text",
             "label": "Last Name",
+            "required": true,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_RAtFL8": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "email",
+            "object_type": "0-1",
+            "type": "email",
+            "label": "Email",
             "required": true,
             "hidden": false,
             "span": "1",
@@ -777,9 +777,9 @@
         "step_bWNJbW",
         "step_w9V3kj",
         "field_WjNKj7",
-        "field_RAtFL8",
         "field_DJGFVC",
         "field_RC9Hem",
+        "field_RAtFL8",
         "field_UtEWQc",
         "field_gJHdUW",
         "field_4Y9iDw",
