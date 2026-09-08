@@ -69,43 +69,6 @@
         "rounded": false
       }
     },
-    "featured_collection_aK9Hap": {
-      "type": "featured-collection",
-      "name": "t:sections.featured-collection.name",
-      "settings": {
-        "collection": "baselayer-3-0",
-        "products": [],
-        "product_limit": 25,
-        "columns": 4,
-        "new_version2": true,
-        "carousel_on_desktop": false,
-        "show_view_all": false,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "heading": "Featured collection",
-        "heading_size": "title-md",
-        "heading_alignment": "text-left md:items-end md:flex-row",
-        "heading_tag": "h2",
-        "subheading": "",
-        "description": "",
-        "highlighted_text": "none",
-        "highlighted_scribble": "circle",
-        "highlighted_reveal": false,
-        "color_text": "",
-        "color_background": "",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 72,
-        "padding_bottom": 72,
-        "divider": false,
-        "full_width": false,
-        "rounded": false
-      }
-    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -218,7 +181,6 @@
   },
   "order": [
     "rich_text_tafEiT",
-    "featured_collection_aK9Hap",
     "footer",
     "footer-copyright"
   ]
