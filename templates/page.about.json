@@ -1,1 +1,1402 @@
-{"sections":{"main":{"type":"main-page","disabled":true,"settings":{"heading_size":"title-xl tracking-heading","heading_tag":"h1","text_size":"text-base","padding_top":72,"padding_bottom":120,"divider":false,"narrow":true,"rounded":false}},"image-with-text-overlay":{"type":"image-with-text-overlay","blocks":{"text":{"type":"text","settings":{"text":"<p><em><strong>Add a tagline<\/strong><\/em><\/p>","text_font":"body","text_size":"subtext-lg","text_max_size":32,"secondary_color":false,"highlighted_text":"text","highlighted_scribble":"circle"}},"heading":{"type":"heading","settings":{"heading":"Image with text overlay","heading_size":"title-xl tracking-heading","heading_tag":"h2","highlighted_text":"none","highlighted_scribble":"circle"}}},"block_order":["text","heading"],"settings":{"transparent_header":true,"image":"","image_height":"750px","content_width":"large","content_position":"md:items-end md:justify-start","text_alignment":"left","image_height_mobile":"auto","content_position_mobile":"items-end justify-start","text_alignment_mobile":"left","color_text":"#ffffff","color_highlight":"#e0a580","gradient_highlight":"","color_button_text":"#171717","color_button_background":"#ffffff","color_button_gradient":"","color_overlay":"#000000","overlay_opacity":50,"padding_top":0,"padding_bottom":0,"divider":false,"full_width":true,"rounded":true,"enable_parallax":true,"parallax_direction":"vertical"}},"images-with-text":{"type":"images-with-text","blocks":{"heading":{"type":"heading","settings":{"heading":"Our <em>Journey<\/em>","heading_size":"title-md","heading_tag":"h2","highlighted_text":"scribble","highlighted_scribble":"basic-underline"}},"text":{"type":"text","settings":{"text":"<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<br\/><br\/>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store. Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>","text_font":"body","text_size":"subtext-md","text_max_size":32,"secondary_color":false,"highlighted_text":"none","highlighted_scribble":"circle"}},"button":{"type":"button","settings":{"button_label":"Our History","button_link":"","button_size":"md","button_icon":true}}},"block_order":["heading","text","button"],"settings":{"image":"","image_2":"","image_ratio":"portrait","image_width":"medium","layout":"image_first","text_alignment":"left","text_alignment_mobile":"left","color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":120,"padding_bottom":100,"divider":false,"full_width":false,"rounded":true,"enable_parallax":true}},"portfolio":{"type":"portfolio","blocks":{"profile-1":{"type":"profile","settings":{"image":"","heading":"Example heading","text":"<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<br\/><br\/>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store. Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>","color_text":"#ffffff","color_background":"#000000"}},"profile-2":{"type":"profile","settings":{"image":"","heading":"Example heading","text":"<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<br\/><br\/>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store. Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>","color_text":"#ffffff","color_background":"#000000"}},"profile-3":{"type":"profile","settings":{"image":"","heading":"Example heading","text":"<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<br\/><br\/>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store. Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>","color_text":"#ffffff","color_background":"#000000"}}},"block_order":["profile-1","profile-2","profile-3"],"settings":{"columns":4,"layout":"grid","image_ratio":"portrait","image_ratio_mobile":"portrait","columns_mobile":"1","swipe_on_mobile":true,"heading":"Talk about your <em>brand<\/em>","heading_size":"title-md","heading_alignment":"text-left justify-start","heading_tag":"h2","subheading":"Add a tagline","description":"<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>","highlighted_text":"scribble","highlighted_scribble":"circle","color_text":"","color_background":"","gradient_background":"","color_highlight":"#ccd8b5","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":72,"padding_bottom":72,"divider":false,"full_width":false,"rounded":false}},"scrolling-text":{"type":"scrolling-text","blocks":{"text":{"type":"text","settings":{"text":"<em><strong>Free shipping and returns<\/strong><\/em>","text_size":160,"text_font":"body","highlighted_text":"stencil","highlighted_scribble":"circle"}}},"block_order":["text"],"settings":{"direction":"left","speed":20,"grid_horizontal":70,"enable_twin":false,"enable_parallax":true,"color_text":"","color_background":"","gradient_background":"","padding_top":72,"padding_bottom":72,"divider":false,"rounded":false}},"testimonials":{"type":"testimonials","blocks":{"testimonial":{"type":"testimonial","settings":{"icon":"quote","text":"<p>Add customer reviews and testimonials to showcase your store’s happy customers.<\/p>","author":"Author's name","image_ratio":"rounded"}}},"block_order":["testimonial"],"settings":{"heading":"","heading_size":"title-md","heading_alignment":"text-center md:items-center","heading_tag":"h2","subheading":"","description":"","button_label":"","button_link":"","button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle","color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":84,"padding_bottom":120,"divider":false,"rounded":false}},"timeline":{"type":"timeline","blocks":{"content-1":{"type":"content","settings":{"image":"","subheading":"2015","heading":"Image with text","heading_tag":"h2","text":"<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>","button_label":"","button_link":"","button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle"}},"content-2":{"type":"content","settings":{"image":"","subheading":"2017","heading":"Image with text","heading_tag":"h2","text":"<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>","button_label":"","button_link":"","button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle"}},"content-3":{"type":"content","settings":{"image":"","subheading":"2018","heading":"Image with text","heading_tag":"h2","text":"<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>","button_label":"","button_link":"","button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle"}},"content-4":{"type":"content","settings":{"image":"","subheading":"2019","heading":"Image with text","heading_tag":"h2","text":"<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>","button_label":"","button_link":"","button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle"}},"content-5":{"type":"content","settings":{"image":"","subheading":"2021","heading":"Image with text","heading_tag":"h2","text":"<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>","button_label":"","button_link":"","button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle"}},"content-6":{"type":"content","settings":{"image":"","subheading":"2022","heading":"Image with text","heading_tag":"h2","text":"<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>","button_label":"","button_link":"","button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle"}},"content-7":{"type":"content","settings":{"image":"","subheading":"2024","heading":"Image with text","heading_tag":"h2","text":"<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>","button_label":"","button_link":"","button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle"}}},"block_order":["content-1","content-2","content-3","content-4","content-5","content-6","content-7"],"settings":{"image_ratio":"portrait","image_ratio_mobile":"wide","heading":"Our History","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_tag":"h2","subheading":"","description":"","highlighted_text":"none","highlighted_scribble":"circle","color_text":"#ffffff","color_background":"#171717","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"rgba(0,0,0,0)","color_button_background":"rgba(0,0,0,0)","color_button_gradient":"","padding_top":72,"padding_bottom":72,"divider":false,"full_width":false,"rounded":true}},"rich-text":{"type":"rich-text","blocks":{"text":{"type":"text","settings":{"text":"<p>Our Partners<\/p>","text_font":"body","text_size":"subtext-md","text_max_size":32,"secondary_color":false,"highlighted_text":"none","highlighted_scribble":"circle"}},"heading":{"type":"heading","settings":{"heading":"Elite audio from Top <em>Brands<\/em>","heading_size":"title-md","heading_tag":"h2","highlighted_text":"scribble","highlighted_scribble":"squiggle-underline"}}},"block_order":["text","heading"],"settings":{"text_alignment":"center","text_alignment_mobile":"center","heading":"","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_tag":"h2","subheading":"","description":"","button_label":"","button_link":"","button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle","color_text":"","color_background":"#fafafa","gradient_background":"","color_highlight":"#c5e8b8","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":120,"padding_bottom":20,"divider":false,"narrow":true,"rounded":true}},"logo-list":{"type":"logo-list","blocks":{"logo-1":{"type":"logo","settings":{"image":"","height":60,"link":""}},"logo-2":{"type":"logo","settings":{"image":"","height":60,"link":""}},"logo-3":{"type":"logo","settings":{"image":"","height":60,"link":""}},"logo-4":{"type":"logo","settings":{"image":"","height":60,"link":""}},"logo-5":{"type":"logo","settings":{"image":"","height":60,"link":""}},"logo-6":{"type":"logo","settings":{"image":"","height":60,"link":""}},"logo-7":{"type":"logo","settings":{"image":"","height":60,"link":""}}},"block_order":["logo-1","logo-2","logo-3","logo-4","logo-5","logo-6","logo-7"],"settings":{"layout":"marquee","grid_horizontal":120,"direction":"right","speed":10,"heading":"","heading_size":"title-md","heading_alignment":"text-center md:items-center","heading_tag":"h2","subheading":"","description":"","button_label":"","button_link":"","button_icon":true,"highlighted_text":"none","highlighted_scribble":"circle","color_text":"","color_background":"#fafafa","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":60,"padding_bottom":120,"divider":false,"full_width":true,"rounded":true}}},"order":["main","image-with-text-overlay","images-with-text","portfolio","scrolling-text","testimonials","timeline","rich-text","logo-list"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_size": "title-xl tracking-heading",
+        "heading_alignment": "text-left",
+        "heading_tag": "h1",
+        "text_size": "text-base",
+        "padding_top": 72,
+        "padding_bottom": 120,
+        "divider": false,
+        "narrow": true,
+        "rounded": false,
+        "background_color": ""
+      }
+    },
+    "image-with-text-overlay": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p><em><strong>Add a tagline</strong></em></p>",
+            "text_font": "body",
+            "text_size": "subtext-lg",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "text",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Image with text overlay",
+            "heading_size": "title-xl tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        }
+      },
+      "block_order": [
+        "text",
+        "heading"
+      ],
+      "settings": {
+        "transparent_header": true,
+        "image_height": "750px",
+        "content_width": "large",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "left",
+        "image_height_mobile": "auto",
+        "content_position_mobile": "items-end justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#000000",
+        "overlay_opacity": 50,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": true,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
+      }
+    },
+    "hubspot_team_sales_form_hTXBkq": {
+      "type": "hubspot-team-sales-form",
+      "blocks": {
+        "step_eQPn9e": {
+          "type": "step",
+          "settings": {
+            "heading": "START YOUR CUSTOM TEAM PROGRAM",
+            "content": "<p>Built for organizations looking to raise the standard for player safety.</p><p>Outfit your teams in custom Titan Battlegear that reflects who you are and what you stand for.</p>",
+            "footnote": ""
+          }
+        },
+        "step_pCYX8H": {
+          "type": "step",
+          "settings": {
+            "heading": "HELP US REACH THE RIGHT PERSON",
+            "content": "<p>If someone else handles team purchasing, share what you know and we'll take it from there.</p><p>If someone else approves purchases, please share their contact details below.<br/>If you're unsure, no problem — share what you can and we'll help identify the right person.</p>",
+            "footnote": ""
+          }
+        },
+        "step_bWNJbW": {
+          "type": "step",
+          "settings": {
+            "heading": "TEAM BRANDING AND APPROVAL",
+            "content": "<p>Let's confirm logo permissions to keep your rollout smooth.</p>",
+            "footnote": ""
+          }
+        },
+        "step_w9V3kj": {
+          "type": "step",
+          "settings": {
+            "heading": "CUSTOM TEAM BATTLGEAR DETAILS",
+            "content": "<p>Titan's Custom Team BattleGear Program is designed for streamlined organization-wide rollout.</p><ul><li>50-piece minimum</li><li>Logo approval + Vector logo required (.ai/.pdf/.eps/.svg)</li><li>Choose Titan-hosted team store or single-invoice bulk order</li><li>Includes a dedicated 25% organization-wide discount window</li></ul><p><strong>To guarantee preseason delivery, orders must be finalized by May 1.</strong></p>",
+            "footnote": "<p>* Single-invoice bulk team order also available</p>"
+          }
+        },
+        "field_WjNKj7": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "ts_intake_source",
+            "object_type": "0-1",
+            "type": "text",
+            "label": "Intake sourceField",
+            "required": false,
+            "hidden": true,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "Team Sales Form",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_RAtFL8": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "email",
+            "object_type": "0-1",
+            "type": "email",
+            "label": "Email",
+            "required": true,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_DJGFVC": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "firstname",
+            "object_type": "0-1",
+            "type": "text",
+            "label": "First Name",
+            "required": true,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_RC9Hem": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "lastname",
+            "object_type": "0-1",
+            "type": "text",
+            "label": "Last Name",
+            "required": true,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_UtEWQc": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "mobilephone",
+            "object_type": "0-1",
+            "type": "tel",
+            "label": "Mobile Phone Number",
+            "required": true,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "7",
+            "max_digits": "20",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_gJHdUW": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "ts_organization_role",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "What’s your role with the team/organization?",
+            "required": true,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "Parent|Parent\nPlayer|Player\nCoach|Coach\nDirector|Director\nTeam Admin|Team Admin\nTeam Manager|Team Manager\nDealer|Dealer\nOther|Other",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_4Y9iDw": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "ts_team_sales_persona",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "What best describes your role in team purchasing?",
+            "required": true,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": false,
+            "label_outside": true,
+            "placeholder": "",
+            "help_text": "",
+            "options": "I am the decision maker for team purchases|I am the decision maker for team purchases\nI influence or help coordinate purchases|I influence or help coordinate purchases\nI am a parent/player/supporter|I am a parent/player/supporter",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_gGmia4": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "name",
+            "object_type": "0-2",
+            "type": "text",
+            "label": "Team Name",
+            "required": true,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_JNmxT3": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "ts_company_org_type",
+            "object_type": "0-2",
+            "type": "dropdown",
+            "label": "Team Level",
+            "required": false,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "Youth|Youth\nHigh School/College|High School/College\nJunior/Pro|Junior/Pro\nOther|Other",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_mFahxB": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "ts_num_of_teams",
+            "object_type": "0-2",
+            "type": "dropdown",
+            "label": "How many teams are in your organization?",
+            "required": true,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "1|1-5\n2-4|2-4\n5-8|5-8\n9-15|9-15\n16-25|16-25\n25+|25+\nNot Sure|Not Sure",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_QTnxPt": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "city",
+            "object_type": "0-2",
+            "type": "text",
+            "label": "City",
+            "required": true,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_ahenzD": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "state",
+            "object_type": "0-2",
+            "type": "text",
+            "label": "State/Region",
+            "required": true,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_kKKrVJ": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "website",
+            "object_type": "0-2",
+            "type": "text",
+            "label": "Team Website",
+            "required": false,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_BjYgne": {
+          "type": "field",
+          "settings": {
+            "step": 2,
+            "hs_name": "ts_dm_known",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "Do you know who makes purchasing decisions for your team or organization?",
+            "required": true,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": false,
+            "label_outside": true,
+            "placeholder": "",
+            "help_text": "",
+            "options": "Yes|Yes\nNo|No\nNot Sure|I can find out",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_gFmQcP": {
+          "type": "field",
+          "settings": {
+            "step": 2,
+            "hs_name": "ts_referred_dm_role",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "What is their role in the organization?",
+            "required": false,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "Director|Director\nTeam Manager|Team Manager\nTeam Admin|Team Admin\nCoach|Coach\nDealer|Dealer\nOther|Other",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_zYCGjy": {
+          "type": "field",
+          "settings": {
+            "step": 2,
+            "hs_name": "ts_referred_dm_name",
+            "object_type": "0-1",
+            "type": "text",
+            "label": "First Name",
+            "required": false,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_8MaLpw": {
+          "type": "field",
+          "settings": {
+            "step": 2,
+            "hs_name": "ts_referred_dm_last_name",
+            "object_type": "0-1",
+            "type": "text",
+            "label": "Last Name",
+            "required": false,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_NqcwXL": {
+          "type": "field",
+          "settings": {
+            "step": 2,
+            "hs_name": "ts_referred_dm_phone",
+            "object_type": "0-1",
+            "type": "tel",
+            "label": "Mobile Phone Number",
+            "required": false,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "7",
+            "max_digits": "20",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_YQzLcJ": {
+          "type": "field",
+          "settings": {
+            "step": 2,
+            "hs_name": "ts_referred_dm_email",
+            "object_type": "0-1",
+            "type": "text",
+            "label": "Email",
+            "required": false,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_PwaVDQ": {
+          "type": "field",
+          "settings": {
+            "step": 2,
+            "hs_name": "ts_dm_intro_permission",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "Would you be willing to introduce us via email?",
+            "required": false,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": false,
+            "label_outside": true,
+            "placeholder": "",
+            "help_text": "A short introduction significantly speeds up the process.",
+            "options": "Yes|Yes\nNo|No\nUnsure|Unsure",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_xdJCAt": {
+          "type": "field",
+          "settings": {
+            "step": 3,
+            "hs_name": "ts_logo_authorization",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "Do you have authorization rights to distribute your Team or Organization logo?",
+            "required": true,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": false,
+            "label_outside": true,
+            "placeholder": "",
+            "help_text": "",
+            "options": "Yes|Yes, I can approve logo usage\nRefer|I can connect you with the person who can approve\nNot Sure|Not sure — someone else may need to approve\nNo|No",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_GrDA8N": {
+          "type": "field",
+          "settings": {
+            "step": 3,
+            "hs_name": "logo_referral",
+            "object_type": "0-1",
+            "type": "text",
+            "label": "If someone else approves logo usage, please share their email (if known)",
+            "required": false,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": false,
+            "label_outside": true,
+            "placeholder": "name@organization.com",
+            "help_text": "We'll only use this to coordinate logo authorization.",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "ts_logo_authorization",
+            "show_when_values": "Refer,Not Sure,No"
+          }
+        },
+        "field_6e4WLe": {
+          "type": "field",
+          "settings": {
+            "step": 3,
+            "hs_name": "ts_logo_upload",
+            "object_type": "0-1",
+            "type": "file",
+            "label": "Team Logo Upload",
+            "required": false,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "If you don't have final approval yet, no problem — upload what you have and we'll guide you through next steps.",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_Nn8tCx": {
+          "type": "field",
+          "settings": {
+            "step": 4,
+            "hs_name": "ts_desired_delivery_date",
+            "object_type": "0-1",
+            "type": "date",
+            "label": "Target Delivery Date",
+            "required": false,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "ts_team_sales_persona",
+            "show_when_values": "I am the decision maker for team purchases,I influence or help coordinate purchases"
+          }
+        },
+        "field_j36E4T": {
+          "type": "field",
+          "settings": {
+            "step": 4,
+            "hs_name": "ts_lead_ordering_method",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "Preferred Ordering Method",
+            "required": false,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "Titan-Hosted Team Store|Titan-Hosted Team Store\nSingle Invoice (Bulk Shipping)|Single Invoice (Bulk Shipping)\nDealer or Org Hosted Store|Dealer or Org Hosted Store\nUnknown|Unknown",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "ts_team_sales_persona",
+            "show_when_values": "I am the decision maker for team purchases,I influence or help coordinate purchases"
+          }
+        },
+        "field_3XmCqm": {
+          "type": "field",
+          "settings": {
+            "step": 4,
+            "hs_name": "ts_lead_source",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "Team Sales Lead Source",
+            "required": false,
+            "hidden": true,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "Team Sales Form|Team Sales Form\nOther|Other",
+            "default_value": "Team Sales Form",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_Uk3GhC": {
+          "type": "field",
+          "settings": {
+            "step": 4,
+            "hs_name": "ts_is_decision_maker",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "Is Decision Maker?",
+            "required": false,
+            "hidden": true,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "Yes|Yes\nNo|No\nUnknown|Unknown",
+            "default_value": "Yes",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        }
+      },
+      "block_order": [
+        "step_eQPn9e",
+        "step_pCYX8H",
+        "step_bWNJbW",
+        "step_w9V3kj",
+        "field_WjNKj7",
+        "field_RAtFL8",
+        "field_DJGFVC",
+        "field_RC9Hem",
+        "field_UtEWQc",
+        "field_gJHdUW",
+        "field_4Y9iDw",
+        "field_gGmia4",
+        "field_JNmxT3",
+        "field_mFahxB",
+        "field_QTnxPt",
+        "field_ahenzD",
+        "field_kKKrVJ",
+        "field_BjYgne",
+        "field_gFmQcP",
+        "field_zYCGjy",
+        "field_8MaLpw",
+        "field_NqcwXL",
+        "field_YQzLcJ",
+        "field_PwaVDQ",
+        "field_xdJCAt",
+        "field_GrDA8N",
+        "field_6e4WLe",
+        "field_Nn8tCx",
+        "field_j36E4T",
+        "field_3XmCqm",
+        "field_Uk3GhC"
+      ],
+      "name": "Team Sales Form",
+      "settings": {
+        "portal_id": "46588550",
+        "form_guid": "d7bcd3f3-9615-4cde-a94c-0ca255d083ff",
+        "branch_rules": "from 1: ts_team_sales_persona in \"I am the decision maker for team purchases\",\"I influence or help coordinate purchases\" => goto 3",
+        "gate_field": "email",
+        "next_label": "Next",
+        "prev_label": "Previous",
+        "submit_label": "Submit",
+        "loading_label": "Submitting…",
+        "success_heading": "YOU'RE ALL SET!",
+        "success_message": "<p>Your custom team program request has been received.<br/>Our team will review your details, confirm ordering structure, and follow up with next steps shortly.</p>",
+        "required_message": "Please complete the highlighted fields.",
+        "error_message": "We couldn't submit your form. Please try again or email TeamSales@titanbattlegear.com.",
+        "consent_mode": "none",
+        "consent_subscription_id": "",
+        "consent_text": "",
+        "step_heading_size": "title-sm",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_tag": "h2",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "subheading": "",
+        "description": "",
+        "color_text": "#000000",
+        "color_background": "#171717",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 28,
+        "padding_bottom": 24,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "images-with-text": {
+      "type": "images-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Our <em>Journey</em>",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "scribble",
+            "highlighted_scribble": "basic-underline",
+            "highlighted_reveal": false
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<br/><br/>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store. Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Our History",
+            "button_link": "",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "image_ratio": "portrait",
+        "image_width": "medium",
+        "layout": "image_first",
+        "text_alignment": "left",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 120,
+        "padding_bottom": 100,
+        "divider": false,
+        "full_width": false,
+        "rounded": true,
+        "enable_parallax": true
+      }
+    },
+    "portfolio": {
+      "type": "portfolio",
+      "blocks": {
+        "profile-1": {
+          "type": "profile",
+          "settings": {
+            "heading": "Example heading",
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<br/><br/>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store. Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#000000"
+          }
+        },
+        "profile-2": {
+          "type": "profile",
+          "settings": {
+            "heading": "Example heading",
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<br/><br/>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store. Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#000000"
+          }
+        },
+        "profile-3": {
+          "type": "profile",
+          "settings": {
+            "heading": "Example heading",
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<br/><br/>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store. Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "profile-1",
+        "profile-2",
+        "profile-3"
+      ],
+      "settings": {
+        "columns": 4,
+        "carousel_on_desktop": false,
+        "layout": "grid",
+        "image_ratio": "portrait",
+        "image_ratio_mobile": "portrait",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "Talk about your <em>brand</em>",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left justify-start",
+        "heading_tag": "h2",
+        "subheading": "Add a tagline",
+        "description": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "scribble",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "#ccd8b5",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "scrolling-text": {
+      "type": "scrolling-text",
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<em><strong>Free shipping and returns</strong></em>",
+            "text_size": 160,
+            "text_font": "body",
+            "highlighted_text": "stencil",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "text"
+      ],
+      "settings": {
+        "direction": "left",
+        "speed": 20,
+        "grid_horizontal": 70,
+        "enable_twin": false,
+        "enable_parallax": true,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "rounded": false
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "quote",
+            "text": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>",
+            "author": "Author's name",
+            "author_info": "",
+            "author_url": "",
+            "image_ratio": "rounded",
+            "image_height": 30,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 84,
+        "padding_bottom": 120,
+        "divider": false,
+        "rounded": false
+      }
+    },
+    "timeline": {
+      "type": "timeline",
+      "blocks": {
+        "content-1": {
+          "type": "content",
+          "settings": {
+            "subheading": "2015",
+            "heading": "Image with text",
+            "heading_tag": "h2",
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "content-2": {
+          "type": "content",
+          "settings": {
+            "subheading": "2017",
+            "heading": "Image with text",
+            "heading_tag": "h2",
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "content-3": {
+          "type": "content",
+          "settings": {
+            "subheading": "2018",
+            "heading": "Image with text",
+            "heading_tag": "h2",
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "content-4": {
+          "type": "content",
+          "settings": {
+            "subheading": "2019",
+            "heading": "Image with text",
+            "heading_tag": "h2",
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "content-5": {
+          "type": "content",
+          "settings": {
+            "subheading": "2021",
+            "heading": "Image with text",
+            "heading_tag": "h2",
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "content-6": {
+          "type": "content",
+          "settings": {
+            "subheading": "2022",
+            "heading": "Image with text",
+            "heading_tag": "h2",
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "content-7": {
+          "type": "content",
+          "settings": {
+            "subheading": "2024",
+            "heading": "Image with text",
+            "heading_tag": "h2",
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        }
+      },
+      "block_order": [
+        "content-1",
+        "content-2",
+        "content-3",
+        "content-4",
+        "content-5",
+        "content-6",
+        "content-7"
+      ],
+      "settings": {
+        "show_navigation": true,
+        "layout": "image_first",
+        "image_ratio": "portrait",
+        "image_ratio_mobile": "wide",
+        "heading": "Our History",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "#ffffff",
+        "color_background": "#171717",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "rgba(0,0,0,0)",
+        "color_button_background": "rgba(0,0,0,0)",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": true
+      }
+    },
+    "rich-text": {
+      "type": "rich-text",
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Our Partners</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Elite audio from Top <em>Brands</em>",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "scribble",
+            "highlighted_scribble": "squiggle-underline",
+            "highlighted_reveal": false
+          }
+        }
+      },
+      "block_order": [
+        "text",
+        "heading"
+      ],
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "#fafafa",
+        "gradient_background": "",
+        "color_highlight": "#c5e8b8",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 120,
+        "padding_bottom": 20,
+        "divider": false,
+        "narrow": true,
+        "rounded": true
+      }
+    },
+    "logo-list": {
+      "type": "logo-list",
+      "blocks": {
+        "logo-1": {
+          "type": "logo",
+          "settings": {
+            "height": 60,
+            "link": ""
+          }
+        },
+        "logo-2": {
+          "type": "logo",
+          "settings": {
+            "height": 60,
+            "link": ""
+          }
+        },
+        "logo-3": {
+          "type": "logo",
+          "settings": {
+            "height": 60,
+            "link": ""
+          }
+        },
+        "logo-4": {
+          "type": "logo",
+          "settings": {
+            "height": 60,
+            "link": ""
+          }
+        },
+        "logo-5": {
+          "type": "logo",
+          "settings": {
+            "height": 60,
+            "link": ""
+          }
+        },
+        "logo-6": {
+          "type": "logo",
+          "settings": {
+            "height": 60,
+            "link": ""
+          }
+        },
+        "logo-7": {
+          "type": "logo",
+          "settings": {
+            "height": 60,
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo-1",
+        "logo-2",
+        "logo-3",
+        "logo-4",
+        "logo-5",
+        "logo-6",
+        "logo-7"
+      ],
+      "settings": {
+        "layout": "marquee",
+        "grid_horizontal": 120,
+        "direction": "right",
+        "speed": 10,
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "#fafafa",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 60,
+        "padding_bottom": 120,
+        "divider": false,
+        "full_width": true,
+        "rounded": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image-with-text-overlay",
+    "hubspot_team_sales_form_hTXBkq",
+    "images-with-text",
+    "portfolio",
+    "scrolling-text",
+    "testimonials",
+    "timeline",
+    "rich-text",
+    "logo-list"
+  ]
+}
