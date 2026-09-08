@@ -161,7 +161,6 @@
         "spacing_gqWAtP",
         "button_LQkjMt"
       ],
-      "disabled": true,
       "name": "MIAMI VICE BANNER",
       "settings": {
         "transparent_header": true,
@@ -247,6 +246,7 @@
         "spacing_4MctVY",
         "button_CXy4YH"
       ],
+      "disabled": true,
       "name": "LABOR DAY OPTION 2",
       "settings": {
         "transparent_header": false,
