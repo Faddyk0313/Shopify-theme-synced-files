@@ -52,10 +52,80 @@
         "rounded": false,
         "background_color": ""
       }
+    },
+    "images_with_text_Ubp7qJ": {
+      "type": "images-with-text",
+      "blocks": {
+        "heading_iJQx9f": {
+          "type": "heading",
+          "settings": {
+            "heading": "Image with text",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_aJULTe": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Titan’s Factory Outlet is the destination for players looking to grab Titan’s industry leading A9 cut-resistant protection, patented stretch collar tech, unique colorways and designs, all at a bargain price.</p><p>Titan’s factories are held to the highest standards of excellence, a bar so high, it’s missed from time to time. These production units that do not pass our stringent quality control checks for purely aesthetic blemishes and defects are made available to our customers at deep discounts.</p><p>You can rest assured the products will perform to the highest safety standards, as any safety failure results in immediate destruction. These items have minor visual issues such as logo placement slightly off center, uneven/crooked stitches, tiny holes or fabric pulls, discoloration, or minor sizing issues.</p><p>Please note, these items are listed as final sale, and are not returnable. As always all orders over $100 receive free shipping, so make sure to stock up on a few items to unlock extra savings.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button_KTxw8b": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_iJQx9f",
+        "text_aJULTe",
+        "button_KTxw8b"
+      ],
+      "name": "t:sections.images-with-text.name",
+      "settings": {
+        "image_ratio": "portrait",
+        "image_width": "medium",
+        "layout": "image_first",
+        "text_alignment": "left",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": true
+      }
     }
   },
   "order": [
     "1788905456cbecf3c8",
-    "main-page"
+    "main-page",
+    "images_with_text_Ubp7qJ"
   ]
 }
