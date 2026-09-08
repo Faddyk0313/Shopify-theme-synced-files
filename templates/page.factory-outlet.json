@@ -9,8 +9,37 @@
  */
 {
   "sections": {
+    "1788905456cbecf3c8": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_6919984_BGehr6": {
+          "type": "ai_gen_block_6919984",
+          "settings": {
+            "text": "FACTORY OUTLET",
+            "image": "shopify://shop_images/fixed_made_in_usa_1.webp",
+            "background_color": "#BDD200",
+            "text_fallback_color": "#171717",
+            "heading_font": "inter_n7",
+            "alignment": "center",
+            "image_position": "center",
+            "text_size": 210,
+            "mobile_text_size": 64,
+            "letter_spacing": 6,
+            "padding_vertical": 15,
+            "padding_horizontal": 25,
+            "desktop_width_percent": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_6919984_BGehr6"
+      ],
+      "settings": {}
+    },
     "main-page": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "heading_size": "title-lg tracking-heading",
         "heading_alignment": "text-center",
@@ -20,20 +49,13 @@
         "padding_bottom": 32,
         "divider": false,
         "narrow": true,
-        "rounded": false
-      }
-    },
-    "titan_movement_form_g9pc6Y": {
-      "type": "titan-movement-form",
-      "name": "Titan Movement",
-      "settings": {
-        "padding_top": 16,
-        "padding_bottom": 48
+        "rounded": false,
+        "background_color": ""
       }
     }
   },
   "order": [
-    "main-page",
-    "titan_movement_form_g9pc6Y"
+    "1788905456cbecf3c8",
+    "main-page"
   ]
 }
