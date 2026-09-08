@@ -75,10 +75,10 @@
       "settings": {
         "collection": "baselayer-3-0",
         "products": [],
-        "product_limit": 6,
+        "product_limit": 25,
         "columns": 4,
-        "new_version2": false,
-        "carousel_on_desktop": true,
+        "new_version2": true,
+        "carousel_on_desktop": false,
         "show_view_all": false,
         "columns_mobile": "1",
         "swipe_on_mobile": true,
