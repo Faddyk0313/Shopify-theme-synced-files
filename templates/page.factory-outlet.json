@@ -17,16 +17,16 @@
           "settings": {
             "text": "FACTORY OUTLET",
             "image": "shopify://shop_images/fixed_made_in_usa_1.webp",
-            "background_color": "#E2FB31",
+            "background_color": "#e2fb31",
             "text_fallback_color": "#171717",
             "heading_font": "inter_n7",
             "alignment": "center",
             "image_position": "center",
             "text_size": 210,
             "mobile_text_size": 64,
-            "letter_spacing": 6,
+            "letter_spacing": 10,
             "padding_vertical": 15,
-            "padding_horizontal": 25,
+            "padding_horizontal": 0,
             "desktop_width_percent": 100
           },
           "blocks": {}
