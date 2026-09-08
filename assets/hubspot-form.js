@@ -81,9 +81,11 @@
     }
 
     /**
-     * Branch rules use one line per rule:
-     *   <fieldName> in "value a","value b" => goto <step>
-     *   <fieldName> in "value" and <otherField> in "value" => goto <step>
+     * Branch rules use one line per rule, mirroring HubSpot's Logic tab, where every
+     * rule is scoped to the step it fires *from*:
+     *   from <step>: <fieldName> in "value a","value b" => goto <step>
+     *   from <step>: <field> in "v" and <otherField> in "w" => goto <step>
+     * `from` may be omitted, in which case the rule applies from step 1.
      */
     parseRules(raw) {
       if (!raw) return [];
@@ -99,7 +101,16 @@
           const target = parseInt(targetPart.replace(/[^0-9]/g, ''), 10);
           if (!target) return null;
 
-          const conditions = conditionPart
+          // Optional "from N:" prefix scopes the rule to one step (HubSpot's From step).
+          let scope = conditionPart;
+          let from = 1;
+          const fromMatch = scope.match(/^\s*from\s+(\d+)\s*:/i);
+          if (fromMatch) {
+            from = parseInt(fromMatch[1], 10);
+            scope = scope.slice(fromMatch[0].length);
+          }
+
+          const conditions = scope
             .split(/\band\b/)
             .map((chunk) => {
               const match = chunk.trim().match(/^(\S+)\s+in\s+(.+)$/i);
@@ -114,7 +125,7 @@
             })
             .filter(Boolean);
 
-          return conditions.length ? { conditions, target } : null;
+          return conditions.length ? { conditions, target, from } : null;
         })
         .filter(Boolean);
     }
@@ -228,6 +239,10 @@
       const values = this.currentValues();
 
       for (const rule of this.rules) {
+        // A rule fires only from the step it is scoped to, so the same condition can
+        // route differently depending on where the visitor is.
+        if (rule.from !== this.current) continue;
+
         const matches = rule.conditions.every((condition) =>
           condition.values.includes(values[condition.field])
         );

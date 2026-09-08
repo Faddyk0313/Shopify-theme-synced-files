@@ -110,8 +110,8 @@
       "type": "textarea",
       "id": "branch_rules",
       "label": "Step skip rules",
-      "info": "One rule per line: fieldName in \"value a\",\"value b\" => goto 3. Combine two conditions with \"and\".",
-      "default": "ts_team_sales_persona in \"I am the decision maker for team purchases\",\"I influence or help coordinate purchases\" => goto 3"
+      "info": "One rule per line, mirroring HubSpot's Logic tab: from <step>: field in \"value a\",\"value b\" => goto <step>. Combine two conditions with \"and\". A rule only fires from the step it names.",
+      "default": "from 1: ts_team_sales_persona in \"I am the decision maker for team purchases\",\"I influence or help coordinate purchases\" => goto 3"
     },
     {
       "type": "text",

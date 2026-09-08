@@ -110,8 +110,8 @@
       "type": "textarea",
       "id": "branch_rules",
       "label": "Step skip rules",
-      "info": "One rule per line: fieldName in \"value a\",\"value b\" => goto 3. Combine two conditions with \"and\".",
-      "default": "ts_team_sales_persona in \"I am the decision maker for team purchases\",\"I influence or help coordinate purchases\" and ts_custom_interest in \"Yes\" => goto 3\nts_team_sales_persona in \"I am the decision maker for team purchases\",\"I influence or help coordinate purchases\" and ts_custom_interest in \"No\" => goto 4\nts_team_sales_persona in \"I am a parent/player/supporter\" => goto 4"
+      "info": "One rule per line, mirroring HubSpot's Logic tab: from <step>: field in \"value a\",\"value b\" => goto <step>. Combine two conditions with \"and\". A rule only fires from the step it names.",
+      "default": "from 1: ts_team_sales_persona in \"I am the decision maker for team purchases\",\"I influence or help coordinate purchases\" and ts_custom_interest in \"Yes\" => goto 3\nfrom 1: ts_team_sales_persona in \"I am the decision maker for team purchases\",\"I influence or help coordinate purchases\" and ts_custom_interest in \"No\" => goto 4\nfrom 2: ts_team_sales_persona in \"I am a parent/player/supporter\" => goto 4"
     },
     {
       "type": "text",
@@ -615,7 +615,8 @@
           "type": "step",
           "settings": {
             "heading": "HELP US REACH THE RIGHT PERSON",
-            "content": "<p>To activate the discount window, we need to coordinate with the person who can distribute the discount organization-wide.</p><p>If that's not you, share their details below and we'll take it from there.</p>"
+            "content": "<p>To activate the discount window, we need to coordinate with the person who can distribute the discount organization-wide.</p><p>If that's not you, share their details below and we'll take it from there.</p>",
+            "footnote": "<p><strong>If you selected “Yes,” copy and paste the template below and CC us.</strong></p><p>––––––––––––––––––––––––––––––––––––––––</p><p><strong>CC: TeamSales@titanbattlegear.com</strong></p><p>Hi [Name],</p><p>I recently connected with Titan Battlegear about offering our organization a 7-day, site-wide 25% discount for all parents and players.</p><p>Titan has built the most protective baselayer on the market, and this would give all families in our program a chance to gear up at a meaningful savings.</p><p>They can set up a dedicated week-long discount window for us to distribute to the organization.</p><p>I’ve CC’d them here to make the introduction easy.</p><p>Would you be open to coordinating a discount week for the team?</p><p>Thanks,</p><p>[Your Name]</p><p>––––––––––––––––––––––––––––––––––––––––</p>"
           }
         },
         {
