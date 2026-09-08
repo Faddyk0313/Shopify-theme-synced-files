@@ -17,7 +17,7 @@
           "settings": {
             "text": "FACTORY OUTLET",
             "image": "shopify://shop_images/fixed_made_in_usa_1.webp",
-            "background_color": "#BDD200",
+            "background_color": "#E2FB31",
             "text_fallback_color": "#171717",
             "heading_font": "inter_n7",
             "alignment": "center",
