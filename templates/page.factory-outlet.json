@@ -59,7 +59,7 @@
         "heading_iJQx9f": {
           "type": "heading",
           "settings": {
-            "heading": "Image with text",
+            "heading": "Major Protection, Minor Defect",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "highlighted_text": "none",
@@ -81,28 +81,18 @@
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
-        },
-        "button_KTxw8b": {
-          "type": "button",
-          "settings": {
-            "button_label": "Button label",
-            "button_link": "",
-            "button_style": "primary",
-            "button_size": "md",
-            "button_external": false,
-            "button_icon": true
-          }
         }
       },
       "block_order": [
         "heading_iJQx9f",
-        "text_aJULTe",
-        "button_KTxw8b"
+        "text_aJULTe"
       ],
       "name": "t:sections.images-with-text.name",
       "settings": {
+        "image": "shopify://shop_images/IMG_9348.jpg",
+        "image_2": "shopify://shop_images/IMG_9396.jpg",
         "image_ratio": "portrait",
-        "image_width": "medium",
+        "image_width": "small",
         "layout": "image_first",
         "text_alignment": "left",
         "text_alignment_mobile": "left",
