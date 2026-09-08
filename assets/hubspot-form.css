@@ -183,6 +183,7 @@
 
 .hs-field__help {
   margin: 0;
+  margin-top: 10px;
   opacity: 0.7;
   line-height: 1.35;
 }
