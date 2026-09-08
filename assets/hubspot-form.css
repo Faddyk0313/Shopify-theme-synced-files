@@ -64,7 +64,10 @@
 .hs-form__step-content,
 .hs-form__step-footnote {
   display: grid;
-  gap: var(--sp-3);
+  gap: var(--sp-2);
+}
+.hs-form__step-footnote p {
+  margin: 0 !important;
 }
 
 /* A real 2-column grid: every field is the same width, and a field can be widened
