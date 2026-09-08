@@ -61,7 +61,7 @@
           "settings": {
             "heading": "Major Protection, Minor Defect",
             "heading_size": "title-sm",
-            "heading_tag": "h2",
+            "heading_tag": "h5",
             "highlighted_text": "none",
             "highlighted_scribble": "circle",
             "highlighted_reveal": false
