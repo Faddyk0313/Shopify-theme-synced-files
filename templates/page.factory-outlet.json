@@ -148,12 +148,50 @@
         "full_width": false,
         "rounded": false
       }
+    },
+    "featured_collection_kKFLRQ": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.name",
+      "settings": {
+        "collection": "rinkwear",
+        "products": [],
+        "product_limit": 25,
+        "columns": 5,
+        "new_version2": true,
+        "carousel_on_desktop": false,
+        "show_view_all": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "heading": "RINKWEAR",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h5",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
     }
   },
   "order": [
     "1788905456cbecf3c8",
     "main-page",
     "images_with_text_Ubp7qJ",
-    "featured_collection_g3bBMh"
+    "featured_collection_g3bBMh",
+    "featured_collection_kKFLRQ"
   ]
 }
