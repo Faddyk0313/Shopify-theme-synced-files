@@ -34,11 +34,7 @@
                   {% comment %} TBG CUSTOM CODE {% endcomment %}
                   <a href="{{ policy.url }}" class="block reversed-link">
                     {% liquid
-                      if policy.title == 'Refund policy'
-                        echo 'Return Policy'
-                      else
                         echo policy.title
-                      endif
                     %}
                   </a>
                 </small>
