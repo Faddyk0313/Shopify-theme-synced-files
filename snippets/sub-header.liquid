@@ -178,10 +178,10 @@
 -%}
 
 {%- liquid
-  assign tbg_is_last_chance = false
+  assign tbg_is_last_chanceOrDefect = false
   for product_collection in product.collections
-    if product_collection.handle == 'last-chance' or product_collection.id == 358732595378
-      assign tbg_is_last_chance = true
+    if product_collection.id == 358732595378 or product_collection.id == 370575081650
+      assign tbg_is_last_chanceOrDefect = true
       break
     endif
   endfor
@@ -239,7 +239,7 @@
             {% endif %}
           {% endif %}
         </split-words>
-        {%- if tbg_is_last_chance -%}
+        {%- if tbg_is_last_chanceOrDefect -%}
           <span class="tbg-final-sale">Final Sale</span>
         {%- endif -%}
       </h1>
