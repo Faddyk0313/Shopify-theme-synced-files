@@ -9,33 +9,33 @@
 {% comment %} TBG CUSTOM CODE {% endcomment %}
 {% if section.settings.new_version2 == true %}
 <style>
-  .card.product-card {
+  #shopify-section-{{ section.id }} .card.product-card {
     background-color: #f2f2f2;
     border-radius: 15px;
     overflow: clip;
   }
-  .product-card__content {
+  #shopify-section-{{ section.id }} .product-card__content {
     padding-inline: 1rem !important;
   }
-  .product-card__details {
+  #shopify-section-{{ section.id }} .product-card__details {
     display: flex !important;
     flex-direction: row ;
   }
-  .product-card__details .cusPrice.price__regular small {
+  #shopify-section-{{ section.id }} .product-card__details .cusPrice.price__regular small {
     display: none !important;
   }
-  .product-card__details .cusPrice.price__regular {
-    font-size: 19px !important;
+  #shopify-section-{{ section.id }} .product-card__details .cusPrice.price__regular {
+    font-size: 18px !important;
     font-weight: 700 !important;
     font-family: 'Armourxbd' !important;
     color: #171717 !important;
     white-space: nowrap !important;
   }
-  .product-card__details p {
+  #shopify-section-{{ section.id }} .product-card__details p {
     text-align: start;
   }
-  .product-card__details .product-card__title {
-    font-size: 19px !important;
+  #shopify-section-{{ section.id }} .product-card__details .product-card__title {
+    font-size: 18px !important;
     font-family: 'Armourxbd' !important;
     text-transform: uppercase !important;
     letter-spacing: 0.5px !important;
