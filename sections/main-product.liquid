@@ -547,7 +547,28 @@
                 >
                 <ul class="related-products-carousel__list swatches swatches--round-slight swatches--variant flex items-start flex-wrap gap-4">
                   {%- comment -%}TBG custom code{%- endcomment -%}
+                  {%- liquid
+                    assign is_factory_mistakes = false
+                    for tag in product.tags
+                      assign tag_down = tag | downcase
+                      if tag_down == 'factory mistakes'
+                        assign is_factory_mistakes = true
+                        break
+                      endif
+                    endfor
+                    assign factory_mistakes_collection = blank
+                    for col in product.collections
+                      if col.id == 370575081650
+                        assign is_factory_mistakes = true
+                        assign factory_mistakes_collection = col
+                        break
+                      endif
+                    endfor
+                  -%}
                   {%- assign curated_related_products = product.metafields['custom']['product_variations'].value -%}
+                  {%- if is_factory_mistakes -%}
+                    {%- assign curated_related_products = blank -%}
+                  {%- endif -%}
                   {%- if curated_related_products != blank -%}
                     {%- for prod in curated_related_products -%}
                       {%- assign available_sizes = '' -%}
@@ -614,9 +635,16 @@
                         </li>
                       {%- endif -%}
                     {%- endfor -%}
-                  {%- elsif block.settings.collection != blank -%}
+                  {%- elsif is_factory_mistakes or block.settings.collection != blank -%}
                     {%- assign target_collection = collections[block.settings.collection] -%}
-                    {%- if product.template_suffix == 'rinkwear-feb-2025' -%}
+                    {%- if is_factory_mistakes -%}
+                      {%- if factory_mistakes_collection != blank -%}
+                        {%- assign target_collection = factory_mistakes_collection -%}
+                      {%- else -%}
+                        {%- assign target_collection = collections['factory-mistakes'] -%}
+                      {%- endif -%}
+                    {%- endif -%}
+                    {%- if is_factory_mistakes == false and product.template_suffix == 'rinkwear-feb-2025' -%}
                       {%- case product.type -%}
                         {%- when 'Hat' -%}
                           {%- assign target_collection = collections['hats'] -%}
