@@ -24,54 +24,48 @@
   -%}
 
   {%- if size_option_index > 0 -%}
-    {%- liquid
-      assign rendered_sizes = ''
-      assign pills = ''
+    {%- capture pills -%}
+      {%- assign rendered_sizes = '' -%}
+      {%- for variant in product.variants -%}
+        {%- liquid
+          case size_option_index
+            when 1
+              assign size_value = variant.option1
+            when 2
+              assign size_value = variant.option2
+            when 3
+              assign size_value = variant.option3
+          endcase
 
-      for variant in product.variants
-        case size_option_index
-          when 1
-            assign size_value = variant.option1
-          when 2
-            assign size_value = variant.option2
-          when 3
-            assign size_value = variant.option3
-        endcase
+          assign size_value = size_value | strip
+          assign size_key = '|' | append: size_value | append: '|'
 
-        assign size_value = size_value | strip
-        if size_value == blank
-          continue
-        endif
+          assign show_pill = true
+          if size_value == blank
+            assign show_pill = false
+          endif
+          unless variant.available
+            assign show_pill = false
+          endunless
+          if rendered_sizes contains size_key
+            assign show_pill = false
+          endif
+        -%}
+        {%- if show_pill -%}
+          {%- liquid
+            assign rendered_sizes = rendered_sizes | append: size_key
 
-        unless variant.available
-          continue
-        endunless
+            assign pill_url = variant.url | within: collection
+            if settings.product_disable_collection_portion
+              assign pill_url = variant.url
+            endif
+          -%}
+          <a class="product-card__size-pill" href="{{ pill_url }}" title="{{ size_value | escape }}">{{ size_value | escape }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
 
-        if variant.inventory_management != null and variant.inventory_policy == 'deny' and variant.inventory_quantity <= 0
-          continue
-        endif
-
-        assign size_key = '|' | append: size_value | append: '|'
-        if rendered_sizes contains size_key
-          continue
-        endif
-        assign rendered_sizes = rendered_sizes | append: size_key
-
-        assign pill_url = variant.url | within: collection
-        if settings.product_disable_collection_portion
-          assign pill_url = variant.url
-        endif
-
-        assign escaped_size = size_value | escape
-      -%}
-      {%- capture pill -%}
-        <a class="product-card__size-pill" href="{{ pill_url }}" title="{{ escaped_size }}">{{ escaped_size }}</a>
-      {%- endcapture -%}
-      {%- liquid
-        assign pills = pills | append: pill
-      endfor
-    -%}
-
+    {%- assign pills = pills | strip -%}
     {%- if pills != blank -%}
       <div class="product-card__size-pills flex flex-wrap items-center gap-1 w-full">
         {{ pills }}
