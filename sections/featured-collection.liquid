@@ -42,7 +42,16 @@
     margin: 0 !important;
     line-height: 1.3 !important;
   }
+  #shopify-section-{{ section.id }} .product-card__size-pills {
+    justify-content: flex-start;
+  }
 
+</style>
+{% else %}
+<style>
+  #shopify-section-{{ section.id }} .product-card__size-pills {
+    justify-content: center;
+  }
 </style>
 {% endif %}
 
