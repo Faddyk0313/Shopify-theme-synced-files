@@ -138,8 +138,8 @@
         "swipe_on_mobile": false,
         "color_text": "",
         "color_background": "#e2fb31",
-        "padding_top": 12,
-        "padding_bottom": 12,
+        "padding_top": 20,
+        "padding_bottom": 24,
         "divider": false,
         "full_width": false,
         "rounded": false
