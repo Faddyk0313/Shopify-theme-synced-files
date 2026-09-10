@@ -149,7 +149,7 @@
       "type": "featured-collection",
       "name": "t:sections.featured-collection.name",
       "settings": {
-        "collection": "baselayer-3-0",
+        "collection": "",
         "products": [],
         "product_limit": 25,
         "columns": 5,
@@ -186,7 +186,7 @@
       "type": "featured-collection",
       "name": "t:sections.featured-collection.name",
       "settings": {
-        "collection": "rinkwear",
+        "collection": "",
         "products": [],
         "product_limit": 25,
         "columns": 5,
