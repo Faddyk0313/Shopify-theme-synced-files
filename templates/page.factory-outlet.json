@@ -112,6 +112,39 @@
         "enable_parallax": true
       }
     },
+    "size_based_products_rcAqE4": {
+      "type": "size-based-products",
+      "name": "Size-Based Products",
+      "settings": {
+        "heading": "SHOP BY SIZE",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "tagline": "In Stock, Ready to Ship",
+        "button-text": "Select your size",
+        "preselected_size": "",
+        "heading_2": "IN STOCK BATTLEGEAR IN SIZE",
+        "source_collections": [],
+        "heading_size_2": "title-md",
+        "heading_alignment_2": "text-left md:items-end md:flex-row",
+        "heading_tag_2": "h2",
+        "heading_2_template": "{size} BATTLEGEAR IN STOCK",
+        "show_size_in_heading": true,
+        "subheading_2": "",
+        "color_background_carousel": "#f2f2f2",
+        "columns": 5,
+        "carousel_on_desktop": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "color_text": "",
+        "color_background": "#e2fb31",
+        "padding_top": 12,
+        "padding_bottom": 12,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
     "featured_collection_g3bBMh": {
       "type": "featured-collection",
       "name": "t:sections.featured-collection.name",
@@ -157,7 +190,7 @@
         "products": [],
         "product_limit": 25,
         "columns": 5,
-        "new_version2": true,
+        "new_version2": false,
         "carousel_on_desktop": false,
         "show_view_all": false,
         "columns_mobile": "2",
@@ -191,6 +224,7 @@
     "1788905456cbecf3c8",
     "main-page",
     "images_with_text_Ubp7qJ",
+    "size_based_products_rcAqE4",
     "featured_collection_g3bBMh",
     "featured_collection_kKFLRQ"
   ]
