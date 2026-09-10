@@ -59,6 +59,16 @@
             if settings.product_disable_collection_portion
               assign pill_url = variant.url
             endif
+
+            comment
+              TBG CUSTOM CODE: size_selected=true tells the PDP auto-select script this is an
+              explicit size choice, so it must not override it with the localStorage userSize.
+            endcomment
+            if pill_url contains '?'
+              assign pill_url = pill_url | append: '&size_selected=true'
+            else
+              assign pill_url = pill_url | append: '?size_selected=true'
+            endif
           -%}
           <a class="product-card__size-pill" href="{{ pill_url }}" title="{{ size_value | escape }}">{{ size_value | escape }}</a>
         {%- endif -%}
