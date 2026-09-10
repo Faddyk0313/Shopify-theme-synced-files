@@ -49,6 +49,14 @@
 {%- liquid
   assign collection = section.settings.collection
   assign products = section.settings.products | default: collection.products
+
+  comment
+    TBG CUSTOM CODE: only show in-stock size pills on the factory-outlet page template
+  endcomment
+  assign show_size_pills = false
+  if template.suffix == 'factory-outlet'
+    assign show_size_pills = true
+  endif
 -%}
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
   <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
@@ -124,7 +132,8 @@
               save_type: settings.product_save_type,
               show_icon_list: settings.product_icon_list,
               show_collection_name: true,
-              showShortTitle: true
+              showShortTitle: true,
+              show_size_pills: show_size_pills
             -%}
           {% else %}
             {%- render 'product-card',
@@ -149,7 +158,8 @@
               show_sold_out: settings.product_sold_out,
               show_save_amount: settings.product_save_amount,
               save_type: settings.product_save_type,
-              show_icon_list: settings.product_icon_list
+              show_icon_list: settings.product_icon_list,
+              show_size_pills: show_size_pills
             -%}
           {% endif %}
         {%- else -%}
