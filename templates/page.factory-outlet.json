@@ -149,7 +149,7 @@
       "type": "featured-collection",
       "name": "t:sections.featured-collection.name",
       "settings": {
-        "collection": "",
+        "collection": "factory-mistakes",
         "products": [],
         "product_limit": 25,
         "columns": 5,
