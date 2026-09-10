@@ -124,7 +124,9 @@
         "button-text": "Select your size",
         "preselected_size": "",
         "heading_2": "IN STOCK BATTLEGEAR IN SIZE",
-        "source_collections": [],
+        "source_collections": [
+          "factory-mistakes"
+        ],
         "heading_size_2": "title-md",
         "heading_alignment_2": "text-left md:items-end md:flex-row",
         "heading_tag_2": "h2",
