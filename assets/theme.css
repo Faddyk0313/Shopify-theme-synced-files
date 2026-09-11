@@ -3039,6 +3039,12 @@ summary {
   height: var(--sp-6);
 }
 
+/* TBG CUSTOM CODE */
+.icon-2lg {
+  width: var(--sp-7);
+  height: var(--sp-7);
+}
+
 .icon-xl {
   width: var(--sp-8);
   height: var(--sp-8);
