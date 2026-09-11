@@ -114,6 +114,122 @@
         "parallax_direction": "vertical"
       }
     },
+    "portfolio_custom_gKX8zG": {
+      "type": "portfolio-custom",
+      "blocks": {
+        "profile_AMF8MV": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/mistake_photo_1.png",
+            "icon_size": 58,
+            "heading": "<p>Off-Center Logo</p>",
+            "description": "",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        },
+        "profile_RiMQd8": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/Mistake_photo_2.png",
+            "icon": "shopify://shop_images/comfort.svg",
+            "icon_size": 54,
+            "heading": "<p>75%<br/>LIGHTER</p>",
+            "description": "<p><strong>TITANOTEX™ AERO STRETCH</strong></p><p>Our lightest, most advanced cut-resistant technology maximizes air flow, and removes bulk from your baselayer.</p>",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        },
+        "profile_8E7Pma": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/aj_on_and_off.png",
+            "icon": "shopify://shop_images/up_and_down_arrow.svg",
+            "icon_size": 54,
+            "heading": "<p>EASIER<br/>ON/OFF</p>",
+            "description": "<p><strong>TITANOTEX™ AERO STRETCH</strong></p><p>25% more stretch enables the collar to effortlessly expand and recover over your head.</p>",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        },
+        "profile_Aj8yJX": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/tech_2_206b17d5-6051-4d44-a7d6-dea393579846.png",
+            "icon": "shopify://shop_images/titanotex_aero_181f01f0-d378-4e30-8026-b5fdd25543cf.svg",
+            "icon_size": 52,
+            "heading": "<p>MAXIMUM</p><p>CUT RESISTANCE</p>",
+            "description": "<p><strong>TITANOTEX™ CUT-RESISTANT TECH</strong></p><p>Rated up to ANSI A9 (scale of A1-A9), while other brands average A3.</p>",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        },
+        "profile_H9y8in": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/tech_4_7d9ac665-5dd7-4c19-9d14-5419ea71ee01.png",
+            "icon": "shopify://shop_images/arcguar_logo.svg",
+            "icon_size": 52,
+            "heading": "<p>FULL<br/>COVERAGE</p>",
+            "description": "<p><strong>Patented Arc~Guard™ Collar</strong></p><p>Anatomically contoured to protect the carotid and jugular without bunching.</p>",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        },
+        "profile_e8jmb3": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/tech_6_490391e4-5fdf-4b86-8c7f-303f089b6315.png",
+            "icon": "shopify://shop_images/usa_logo.svg",
+            "icon_size": 52,
+            "heading": "<p>MADE IN<br/>THE USA</p>",
+            "description": "<p>Built locally <strong>(MN, NJ, FL)</strong>, with the best materials. Protection that doesn't need a passport.</p>",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        }
+      },
+      "block_order": [
+        "profile_AMF8MV",
+        "profile_RiMQd8",
+        "profile_8E7Pma",
+        "profile_Aj8yJX",
+        "profile_H9y8in",
+        "profile_e8jmb3"
+      ],
+      "disabled": true,
+      "name": "Tech Specs",
+      "settings": {
+        "columns": 5,
+        "carousel_on_desktop": true,
+        "layout": "default",
+        "image_ratio": "portrait",
+        "image_ratio_mobile": "adapt",
+        "custom_image_height": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "disable_modal_opening": true,
+        "color_text": "",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "divider": false,
+        "full_width": true,
+        "rounded": false
+      }
+    },
     "custom_rich_text_LqtrLA": {
       "type": "custom-rich-text",
       "blocks": {
@@ -374,6 +490,7 @@
     "1788905456cbecf3c8",
     "main-page",
     "image_with_text_overlay_YJPGLF",
+    "portfolio_custom_gKX8zG",
     "custom_rich_text_LqtrLA",
     "images_with_text_Ubp7qJ",
     "image_with_text_Y3MW3L",
