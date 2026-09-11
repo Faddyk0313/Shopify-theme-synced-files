@@ -97,10 +97,10 @@
           assign words_collection    = down_collection | split: " "
         endif
 
-        # TBG: allow page metafield to override breadcrumb link
-        assign breadcrumb_page = product.metafields.custom.collection_breadcrumb_link.value
-        if breadcrumb_page != blank and breadcrumb_page.url != blank
-          assign breadcrumb_url = breadcrumb_page.url
+        # TBG: allow metafield to override breadcrumb link
+        assign breadcrumb_override = product.metafields.custom.collection_breadcrumb_link.value | strip
+        if breadcrumb_override != blank
+          assign breadcrumb_url = breadcrumb_override
         else
           assign breadcrumb_url = collection.url | default: '/'
         endif
