@@ -96,6 +96,14 @@
           assign down_collection     = raw_collection_title | downcase
           assign words_collection    = down_collection | split: " "
         endif
+
+        # TBG: allow page metafield to override breadcrumb link
+        assign breadcrumb_page = product.metafields.custom.collection_breadcrumb_link.value
+        if breadcrumb_page != blank and breadcrumb_page.url != blank
+          assign breadcrumb_url = breadcrumb_page.url
+        else
+          assign breadcrumb_url = collection.url | default: '/'
+        endif
       -%}
       {% if collection != nil %}
         {% capture collection_title %}
@@ -106,7 +114,7 @@
       {% endif %}
 
       <li class="flex items-center gap-4 md:gap-6">
-        <a class="reversed-link" href="{{ collection.url | default: '/' }}">
+        <a class="reversed-link" href="{{ breadcrumb_url }}">
           {% if collection != nil %} 
             {{ collection_title }} 
           {% else %} 
