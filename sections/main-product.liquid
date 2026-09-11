@@ -870,17 +870,19 @@
                 {% endif %}
               {% endfor %}
 
-              <div class="estimated-shipping-message" style="margin-block: 1rem;">
-                <p
-                  id="estimatedShippingMsg"
-                  style="
-                    color: {{ block.settings.text_color }}; /* text-transform: uppercase; font-weight: 700; */
-                    {% if block.settings.bold_text %} font-weight: 700; {% endif %}
-                  "
-                >
-                  {{ product.metafields.custom.estimated_shipping2 }}
-                </p>
-              </div>
+              {% if product.metafields.custom.estimated_shipping2 != blank %}
+                <div class="estimated-shipping-message" style="margin-block: 1rem;">
+                  <p
+                    id="estimatedShippingMsg"
+                    style="
+                      color: {{ block.settings.text_color }}; /* text-transform: uppercase; font-weight: 700; */
+                      {% if block.settings.bold_text %} font-weight: 700; {% endif %}
+                    "
+                  >
+                    {{ product.metafields.custom.estimated_shipping2 }}
+                  </p>
+                </div>
+              {% endif %}
               <script>
                 window.product_state1 = '{{ product_state1 }}';
               </script>
