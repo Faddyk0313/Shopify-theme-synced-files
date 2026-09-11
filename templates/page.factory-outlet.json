@@ -57,6 +57,15 @@
     "image_with_text_overlay_YJPGLF": {
       "type": "image-with-text-overlay",
       "blocks": {
+        "image_RVhM3X": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/factory_mistakes_svg.svg",
+            "image_width": "custom",
+            "image_max_width": 420,
+            "image_max_width_mobile": 270
+          }
+        },
         "heading_Wz4MBA": {
           "type": "heading",
           "disabled": true,
@@ -71,6 +80,7 @@
         }
       },
       "block_order": [
+        "image_RVhM3X",
         "heading_Wz4MBA"
       ],
       "name": "factory banner",
