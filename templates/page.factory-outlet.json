@@ -60,7 +60,7 @@
         "image_RVhM3X": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/factory_mistakes_svg.svg",
+            "image": "shopify://shop_images/factory_mistakes_Svg_2.svg",
             "image_width": "custom",
             "image_max_width": 420,
             "image_max_width_mobile": 270
@@ -112,6 +112,79 @@
         "rounded": false,
         "enable_parallax": false,
         "parallax_direction": "vertical"
+      }
+    },
+    "custom_rich_text_LqtrLA": {
+      "type": "custom-rich-text",
+      "blocks": {
+        "heading_QdW4Fp": {
+          "type": "heading",
+          "settings": {
+            "heading": "MAJOR PROTECTION, MINOR DEFECT",
+            "heading_size": "title-lg tracking-heading",
+            "heading_size_mobile_px": 48,
+            "heading_size_desktop_px": 44,
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_pkwJgi": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Titan’s Factory Mistakes is the destination to secure Titan’s industry leading A9 cut-resistant protection, patented stretch collar, unique colors and designs, all at bargain prices.</p><p>Titan’s factory partners are held to the highest standards of excellence, a bar so high it’s missed from time-to-time. Production units that fail our stringent quality control for visual blemishes and defects are made available at deeply discounted prices.</p><p>Rest assured the products perform to the highest safety standards, as any safety failure results in immediate destruction. Items may have issues such as off-center logo placements, uneven stitches, tiny holes, fabric pulls, discoloration, or minor fit inconsistencies.</p><p>These items are final sale. As always, orders over $100 receive free shipping, so stock up to unlock extra savings.</p>",
+            "text_max_width_mobile": 560,
+            "text_max_width_desktop": 1100,
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_QdW4Fp",
+        "text_pkwJgi"
+      ],
+      "disabled": true,
+      "name": "Custom Rich Text",
+      "settings": {
+        "text_alignment": "left",
+        "text_alignment_mobile": "left",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "combined_heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
       }
     },
     "images_with_text_Ubp7qJ": {
@@ -180,7 +253,7 @@
         "text_KAYfUr": {
           "type": "text",
           "settings": {
-            "text": "<h2>MAJOR PROTECTION,<br/>MINOR DEFECT </h2><p>Titan’s Factory Mistakes is the destination to secure Titan’s industry leading A9 cut-resistant protection, patented stretch collar, unique colors and designs, all at bargain prices.</p><p>Titan’s factory partners are held to the highest standards of excellence, a bar so high it’s missed from time-to-time. Production units that fail our stringent quality control for visual blemishes and defects are made available at deeply discounted prices.</p><p>Rest assured the products perform to the highest safety standards, as any safety failure results in immediate destruction. Items may have issues such as off-center logo placements, uneven stitches, tiny holes, fabric pulls, discoloration, or minor fit inconsistencies.</p><p>These items are final sale. As always, orders over $100 receive free shipping, so stock up to unlock extra savings.</p>",
+            "text": "<p>Titan’s Factory Mistakes is the destination to secure Titan’s industry leading A9 cut-resistant protection, patented stretch collar, unique colors and designs, all at bargain prices.</p><p>Titan’s factory partners are held to the highest standards of excellence, a bar so high it’s missed from time-to-time. Production units that fail our stringent quality control for visual blemishes and defects are made available at deeply discounted prices.</p><p>Rest assured the products perform to the highest safety standards, as any safety failure results in immediate destruction. Items may have issues such as off-center logo placements, uneven stitches, tiny holes, fabric pulls, discoloration, or minor fit inconsistencies.</p><p>These items are final sale. As always, orders over $100 receive free shipping, so stock up to unlock extra savings.</p>",
             "text_font": "body",
             "text_size": "subtext-md",
             "text_max_size": 32,
@@ -301,6 +374,7 @@
     "1788905456cbecf3c8",
     "main-page",
     "image_with_text_overlay_YJPGLF",
+    "custom_rich_text_LqtrLA",
     "images_with_text_Ubp7qJ",
     "image_with_text_Y3MW3L",
     "size_based_products_rcAqE4",
