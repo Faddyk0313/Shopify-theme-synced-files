@@ -59,6 +59,7 @@
       "blocks": {
         "image_RVhM3X": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/factory_mistakes_svg.svg",
             "image_width": "custom",
@@ -86,12 +87,12 @@
       "name": "factory banner",
       "settings": {
         "transparent_header": true,
-        "image": "shopify://shop_images/FACTORY_MISTAKES_BANNER_DESCKTOP.webp",
-        "image_height": "adapt",
+        "image": "shopify://shop_images/fixed_made_in_usa_1.webp",
+        "image_height": "400px",
         "content_width": "small",
         "content_position": "md:items-center md:justify-start",
         "text_alignment": "center",
-        "image_mobile": "shopify://shop_images/FACTORY_MISTAKES_BANNER_MOBILE.webp",
+        "image_mobile": "shopify://shop_images/FACTORY_MISTAKES_BANNER_MOBILE.png",
         "image_height_mobile": "400px",
         "content_position_mobile": "items-end justify-center",
         "text_alignment_mobile": "center",
@@ -117,6 +118,15 @@
     "custom_rich_text_LqtrLA": {
       "type": "custom-rich-text",
       "blocks": {
+        "image_bKJAJW": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/factory_mistakes_svg.svg",
+            "image_width": "custom",
+            "image_max_width": 420,
+            "image_max_width_mobile": 260
+          }
+        },
         "heading_QdW4Fp": {
           "type": "heading",
           "disabled": true,
@@ -150,6 +160,7 @@
         }
       },
       "block_order": [
+        "image_bKJAJW",
         "heading_QdW4Fp",
         "text_pkwJgi"
       ],
@@ -180,7 +191,7 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 20,
+        "padding_top": 32,
         "padding_bottom": 28,
         "divider": false,
         "narrow": false,
