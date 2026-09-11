@@ -87,6 +87,7 @@
         "heading_iJQx9f",
         "text_aJULTe"
       ],
+      "disabled": true,
       "name": "t:sections.images-with-text.name",
       "settings": {
         "image": "shopify://shop_images/Asset_7.png",
@@ -110,6 +111,68 @@
         "full_width": true,
         "rounded": false,
         "enable_parallax": true
+      }
+    },
+    "image_with_text_Y3MW3L": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_fF4AP8": {
+          "type": "heading",
+          "settings": {
+            "heading": "MAJOR PROTECTION, MINOR DEFECT",
+            "heading_size": "title-sm",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "text_KAYfUr": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Titan’s Factory Mistakes is the destination to secure Titan’s industry leading A9 cut-resistant protection, patented stretch collar, unique colors and designs, all at bargain prices.</p><p>Titan’s factory partners are held to the highest standards of excellence, a bar so high it’s missed from time-to-time. Production units that fail our stringent quality control for visual blemishes and defects are made available at deeply discounted prices.</p><p>Rest assured the products perform to the highest safety standards, as any safety failure results in immediate destruction. Items may have issues such as off-center logo placements, uneven stitches, tiny holes, fabric pulls, discoloration, or minor fit inconsistencies.</p><p>These items are final sale. As always, orders over $100 receive free shipping, so stock up to unlock extra savings.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_fF4AP8",
+        "text_KAYfUr"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Mistake_photo_2.png",
+        "image_height": "500px",
+        "image_width": "medium",
+        "layout": "image_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "image_height_mobile": "300px",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_background": "",
+        "gradient_background": "",
+        "color_background_2": "#171717",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
       }
     },
     "size_based_products_rcAqE4": {
@@ -189,6 +252,7 @@
     "1788905456cbecf3c8",
     "main-page",
     "images_with_text_Ubp7qJ",
+    "image_with_text_Y3MW3L",
     "size_based_products_rcAqE4",
     "featured_collection_g3bBMh"
   ]
