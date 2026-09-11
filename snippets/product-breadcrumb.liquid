@@ -98,7 +98,7 @@
         endif
 
         # TBG: allow metafield to override breadcrumb link
-        assign breadcrumb_override = product.metafields.custom.collection_breadcrumb_link.value | strip
+        assign breadcrumb_override = product.metafields.custom.collection_breadcrumb_link_2.value | strip
         if breadcrumb_override != blank
           assign breadcrumb_url = breadcrumb_override
         else
