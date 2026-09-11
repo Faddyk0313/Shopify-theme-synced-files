@@ -59,6 +59,7 @@
       "blocks": {
         "heading_Wz4MBA": {
           "type": "heading",
+          "disabled": true,
           "settings": {
             "heading": "FACTORY MISTAKES",
             "heading_size": "title-lg tracking-heading",
@@ -72,7 +73,7 @@
       "block_order": [
         "heading_Wz4MBA"
       ],
-      "name": "MIAMI VICE BANNER",
+      "name": "factory banner",
       "settings": {
         "transparent_header": true,
         "image": "shopify://shop_images/FACTORY_MISTAKES_BANNER_DESCKTOP.webp",
