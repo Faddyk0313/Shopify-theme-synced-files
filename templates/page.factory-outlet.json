@@ -87,7 +87,6 @@
         "heading_iJQx9f",
         "text_aJULTe"
       ],
-      "disabled": true,
       "name": "t:sections.images-with-text.name",
       "settings": {
         "image": "shopify://shop_images/Asset_7.png",
@@ -116,21 +115,10 @@
     "image_with_text_Y3MW3L": {
       "type": "image-with-text",
       "blocks": {
-        "heading_fF4AP8": {
-          "type": "heading",
-          "settings": {
-            "heading": "MAJOR PROTECTION, MINOR DEFECT",
-            "heading_size": "title-sm",
-            "heading_tag": "h2",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle",
-            "highlighted_reveal": false
-          }
-        },
         "text_KAYfUr": {
           "type": "text",
           "settings": {
-            "text": "<p>Titan’s Factory Mistakes is the destination to secure Titan’s industry leading A9 cut-resistant protection, patented stretch collar, unique colors and designs, all at bargain prices.</p><p>Titan’s factory partners are held to the highest standards of excellence, a bar so high it’s missed from time-to-time. Production units that fail our stringent quality control for visual blemishes and defects are made available at deeply discounted prices.</p><p>Rest assured the products perform to the highest safety standards, as any safety failure results in immediate destruction. Items may have issues such as off-center logo placements, uneven stitches, tiny holes, fabric pulls, discoloration, or minor fit inconsistencies.</p><p>These items are final sale. As always, orders over $100 receive free shipping, so stock up to unlock extra savings.</p>",
+            "text": "<h2>MAJOR PROTECTION,<br/>MINOR DEFECT </h2><p>Titan’s Factory Mistakes is the destination to secure Titan’s industry leading A9 cut-resistant protection, patented stretch collar, unique colors and designs, all at bargain prices.</p><p>Titan’s factory partners are held to the highest standards of excellence, a bar so high it’s missed from time-to-time. Production units that fail our stringent quality control for visual blemishes and defects are made available at deeply discounted prices.</p><p>Rest assured the products perform to the highest safety standards, as any safety failure results in immediate destruction. Items may have issues such as off-center logo placements, uneven stitches, tiny holes, fabric pulls, discoloration, or minor fit inconsistencies.</p><p>These items are final sale. As always, orders over $100 receive free shipping, so stock up to unlock extra savings.</p>",
             "text_font": "body",
             "text_size": "subtext-md",
             "text_max_size": 32,
@@ -144,13 +132,12 @@
         }
       },
       "block_order": [
-        "heading_fF4AP8",
         "text_KAYfUr"
       ],
       "settings": {
         "image": "shopify://shop_images/Mistake_photo_2.png",
-        "image_height": "500px",
-        "image_width": "medium",
+        "image_height": "450px",
+        "image_width": "small",
         "layout": "image_first",
         "text_alignment": "left",
         "content_position": "align-self-center",
