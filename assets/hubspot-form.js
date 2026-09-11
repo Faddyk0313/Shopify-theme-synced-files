@@ -535,7 +535,7 @@
       return raw;
     }
 
-    buildPayload(hutk) {
+    buildPayload(hutk, { skipValidation = false } = {}) {
       const payload = {
         submittedAt: Date.now(),
         fields: this.collectFields(),
@@ -546,6 +546,7 @@
       };
 
       if (hutk) payload.context.hutk = hutk;
+      if (skipValidation) payload.skipValidation = true;
 
       if (this.dataset.consentMode === 'legitimate_interest') {
         payload.legalConsentOptions = {
@@ -595,6 +596,20 @@
           return;
         }
 
+        // Branching means some required fields live on steps this visitor never saw.
+        // The embed endpoint tolerates that; the submissions API rejects it. Only when
+        // every complaint is a required field we deliberately skipped do we retry with
+        // validation off -- real problems (bad email, unknown option) still surface.
+        if (result.status === 400 && this.onlyUnreachedRequiredErrors(result.json)) {
+          const retry = await this.post(this.buildPayload(hutk, { skipValidation: true }));
+          if (retry.ok) {
+            this.onSuccess(retry.json);
+            return;
+          }
+          this.onFailure(retry);
+          return;
+        }
+
         this.onFailure(result);
       } catch (error) {
         console.error('[hubspot-form] submission failed', error);
@@ -618,6 +633,23 @@
 
     hasErrorType(json, type) {
       return Boolean(json?.errors?.some((error) => error.errorType === type));
+    }
+
+    /**
+     * True when every error is a REQUIRED_FIELD naming a field that was never rendered
+     * for this visitor -- i.e. it sits on a step their branch skipped.
+     */
+    onlyUnreachedRequiredErrors(json) {
+      const errors = json?.errors;
+      if (!Array.isArray(errors) || !errors.length) return false;
+
+      const sent = new Set(this.collectFields().map((field) => field.name));
+
+      return errors.every((error) => {
+        if (error.errorType !== 'REQUIRED_FIELD') return false;
+        const match = /fields\.([A-Za-z0-9_]+)/.exec(error.message || '');
+        return Boolean(match) && !sent.has(match[1]);
+      });
     }
 
     onSuccess(json) {

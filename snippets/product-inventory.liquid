@@ -58,7 +58,17 @@
         {%- endif -%}
       {%- elsif product_variant.incoming and block.settings.show_inventory_transfer -%}
         <div class="alert alert--info inline-flex items-center gap-3">
-          {%- render 'icon', icon: 'ellipse', size: 'xs', class: 'shrink-0' -%}
+          {%- liquid
+              if product_variant.next_incoming_date
+                if product_variant.available
+                  render 'icon', icon: 'ellipse', size: 'xs', class: 'shrink-0'
+                else
+                  render 'icon', icon: 'ellipse', size: 'xs', class: 'shrink-0'
+                endif
+              else
+                render 'icon', icon: 'inventory-on-the-way', size: 'xs', class: 'shrink-0'
+              endif
+            -%}
           <span class="text-sm font-medium leading-tight">
             {%- liquid
               if product_variant.next_incoming_date
