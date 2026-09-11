@@ -57,16 +57,22 @@
           </div> {% endcomment %}
         {%- endif -%}
       {%- elsif product_variant.incoming and block.settings.show_inventory_transfer -%}
-        <div class="alert alert--info inline-flex items-center gap-3">
+        <div 
+          class="alert alert--info inline-flex items-center gap-3"
+          {% unless product_variant.next_incoming_date %}
+            style="
+              color: black !imporatnt;
+              background-color: #DCDCDC !imporatnt;
+              border-radius: 5px !imporatnt;
+              padding: 4px 11px !imporatnt;
+            "
+          {% endunless %}
+        >
           {%- liquid
               if product_variant.next_incoming_date
-                if product_variant.available
-                  render 'icon', icon: 'ellipse', size: 'xs', class: 'shrink-0'
-                else
-                  render 'icon', icon: 'ellipse', size: 'xs', class: 'shrink-0'
-                endif
+                render 'icon', icon: 'ellipse', size: 'xs', class: 'shrink-0'
               else
-                render 'icon', icon: 'inventory-on-the-way', size: 'xs', class: 'shrink-0'
+                render 'icon', icon: 'inventory-on-the-way', size: 'sm', class: 'shrink-0'
               endif
             -%}
           <span class="text-sm font-medium leading-tight">
