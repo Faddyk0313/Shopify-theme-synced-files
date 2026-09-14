@@ -100,12 +100,14 @@
       "settings": {
         "collection": "",
         "products": [
+          "cut-resistant-baselayer-3-0-sticker-pack",
           "yth-dryland-short-sticker-pack",
           "yth-stickerpack-tee-black",
           "yth-stickerpack-hoodie-black",
           "sr-dryland-short-sticker-pack",
           "sr-stickerpack-hoodie-black",
-          "sr-stickerpack-tee-black"
+          "sr-stickerpack-tee-black",
+          "coach-stickers-player-accomplishment-helmet-stickers"
         ],
         "product_limit": 25,
         "columns": 4,
