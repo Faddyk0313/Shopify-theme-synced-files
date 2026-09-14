@@ -16,16 +16,16 @@
           "type": "spacing",
           "settings": {
             "height": 0,
-            "height_mobile": 12
+            "height_mobile": 32
           }
         },
         "image_PXaXT7": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/sticker_pack_svg_collection_lockup.svg",
+            "image": "shopify://shop_images/sticker_pack_home_page_svg.svg",
             "image_width": "custom",
-            "image_max_width": 210,
-            "image_max_width_mobile": 160
+            "image_max_width": 530,
+            "image_max_width_mobile": 370
           }
         },
         "spacing_WNNqbL": {
