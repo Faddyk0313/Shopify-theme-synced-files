@@ -201,12 +201,10 @@
   height: auto;
 }
 
-/* File inputs are disabled: HubSpot's JSON API cannot carry an upload. */
+/* File inputs size to their content and keep the label stacked above. */
 .hs-form input[type='file'] {
   height: auto;
   padding-block: var(--sp-3);
-  cursor: not-allowed;
-  opacity: 0.6;
 }
 
 .hs-form__progress {

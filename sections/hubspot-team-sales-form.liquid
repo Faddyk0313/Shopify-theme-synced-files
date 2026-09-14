@@ -30,6 +30,7 @@
         data-loading-label="{{ section.settings.loading_label | escape }}"
         data-branch-rules="{{ section.settings.branch_rules | escape }}"
         data-gate-field="{{ section.settings.gate_field }}"
+        data-upload-endpoint="{{ section.settings.upload_endpoint }}"
         data-consent-mode="{{ section.settings.consent_mode }}"
         data-consent-subscription-id="{{ section.settings.consent_subscription_id }}"
         data-consent-text="{{ section.settings.consent_text | escape }}"
@@ -119,6 +120,16 @@
       "label": "Reveal step 1 after this field",
       "default": "email",
       "info": "HubSpot internal name of the field that unlocks the rest of step 1. Leave blank to show all of step 1 at once."
+    },
+    {
+      "type": "header",
+      "content": "File upload"
+    },
+    {
+      "type": "text",
+      "id": "upload_endpoint",
+      "label": "Logo upload endpoint",
+      "info": "Relay that stores the logo in HubSpot File Manager and returns its URL. HubSpot's forms API is JSON-only and cannot carry files. Leave blank to disable uploads."
     },
     {
       "type": "header",
@@ -950,7 +961,7 @@
             "label": "Team Logo Upload",
             "required": false,
             "hidden": false,
-            "help_text": "If you don't have final approval yet, no problem — upload what you have and we'll guide you through next steps.",
+            "help_text": "If you don't have final approval yet, no problem — upload what you have and we'll guide you through next steps. Max 4MB — for larger artwork, send your logo to us after submitting.",
             "span": "2"
           }
         },

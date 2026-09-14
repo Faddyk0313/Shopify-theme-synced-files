@@ -8,13 +8,17 @@
  * Field identity lives entirely in the markup as data attributes:
  *   data-hs-name    HubSpot internal property name
  *   data-hs-object  objectTypeId ("0-1" contact, "0-2" company)
- *   data-hs-type    text | email | tel | date | dropdown | hidden
+ *   data-hs-type    text | email | tel | date | dropdown | file | hidden
  */
 (() => {
   const SUBMIT_ENDPOINT = 'https://api.hsforms.com/submissions/v3/integration/submit';
   const HUTK_WAIT_MS = 1500;
   const HUTK_POLL_MS = 100;
   const MIN_ELAPSED_MS = 2000;
+  // Must match MAX_UPLOAD_BYTES in the relay (api/hubspot-logo-upload). Vercel Hobby
+  // caps serverless request bodies at ~4.5MB, so oversized files are rejected here --
+  // before the visitor waits on an upload that the platform would refuse anyway.
+  const MAX_UPLOAD_BYTES = 4 * 1024 * 1024;
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   // `class BaseElement` in theme.js is a global binding but is NOT a window property,
@@ -47,7 +51,10 @@
         if (event.target.closest('[data-prev]')) this.onPrev();
       });
       // Re-evaluate conditional fields as the visitor fills the form.
-      this.on(this, 'change', () => this.refresh());
+      this.on(this, 'change', (event) => {
+        if (event.target.dataset?.hsType === 'file') this.checkFileSize(event.target);
+        this.refresh();
+      });
       this.on(this, 'input', () => this.refresh());
 
       this.renderStep(1, { focus: false });
@@ -392,6 +399,31 @@
       });
     }
 
+    /**
+     * Flags an oversized file the moment it is chosen. Real submissions include .ai/.eps
+     * masters over 5MB, and the relay (Vercel Hobby, ~4.5MB body limit) cannot take them,
+     * so telling the visitor at selection time beats failing at submit.
+     */
+    checkFileSize(field) {
+      const wrapper = field.closest('[data-field-wrapper]');
+      const file = field.files?.[0];
+      const tooBig = Boolean(file && file.size > MAX_UPLOAD_BYTES);
+
+      field.classList.toggle('invalid', tooBig);
+      wrapper?.classList.toggle('has-error', tooBig);
+
+      const stepEl = field.closest('[data-step]');
+      if (tooBig) {
+        const mb = Math.floor(MAX_UPLOAD_BYTES / (1024 * 1024));
+        const label = this.labelFor(field, wrapper);
+        this.showAlert(stepEl, `${label} must be smaller than ${mb}MB.`);
+      } else {
+        this.clearAlert(stepEl);
+      }
+
+      return !tooBig;
+    }
+
     validateStep(index) {
       const stepEl = this.stepEl(index);
       if (!stepEl) return true;
@@ -419,11 +451,23 @@
           return;
         }
 
+        // A file input's value is a fake path ("C:\\fakepath\\logo.png"); the real
+        // check is on .files, handled below.
+
 
         if (!value) return;
 
         if (field.dataset.hsType === 'email' && !EMAIL_RE.test(value)) {
           fail(`${label} must be a valid email address.`);
+          return;
+        }
+
+        if (field.dataset.hsType === 'file') {
+          const file = field.files?.[0];
+          if (file && file.size > MAX_UPLOAD_BYTES) {
+            const mb = Math.floor(MAX_UPLOAD_BYTES / (1024 * 1024));
+            fail(`${label} must be smaller than ${mb}MB.`);
+          }
           return;
         }
 
@@ -507,6 +551,19 @@
         if (!reachable.has(Number(stepEl.dataset.step))) return;
 
         this.visibleFields(stepEl).forEach((field) => {
+          // Files are uploaded separately; uploadedFiles holds the resulting URL.
+          if (field.dataset.hsType === 'file') {
+            const url = this.uploadedFiles?.get(field.dataset.hsName);
+            if (url) {
+              fields.push({
+                objectTypeId: field.dataset.hsObject || '0-1',
+                name: field.dataset.hsName,
+                value: url
+              });
+            }
+            return;
+          }
+
           const value = this.serializeValue(field);
           if (value === '' || value === null) return;
 
@@ -533,6 +590,67 @@
       }
 
       return raw;
+    }
+
+    /**
+     * Uploads every selected file to the relay and remembers the URL it returns, which
+     * collectFields() then submits as that field's value. HubSpot's forms API is
+     * JSON-only, so the file cannot travel with the submission itself.
+     *
+     * Returns false when an upload fails, so the submission is abandoned rather than
+     * silently recording a contact with the logo missing.
+     */
+    async uploadFiles() {
+      const endpoint = this.dataset.uploadEndpoint;
+      this.uploadedFiles = new Map();
+
+      const reachable = new Set([...this.visited, this.current]);
+      const pending = [];
+
+      this.steps.forEach((stepEl) => {
+        if (!reachable.has(Number(stepEl.dataset.step))) return;
+
+        this.visibleFields(stepEl).forEach((field) => {
+          if (field.dataset.hsType !== 'file') return;
+          const file = field.files?.[0];
+          if (file) pending.push({ field, file });
+        });
+      });
+
+      if (!pending.length) return true;
+
+      if (!endpoint) {
+        console.error('[hubspot-form] a file was selected but no upload endpoint is set');
+        this.showError('We could not upload your file. Please try again.');
+        return false;
+      }
+
+      for (const { field, file } of pending) {
+        const body = new FormData();
+        body.append('file', file, file.name);
+
+        let json = null;
+        try {
+          const response = await fetch(endpoint, { method: 'POST', body });
+          json = await response.json().catch(() => null);
+
+          if (!response.ok || !json?.url) {
+            console.error('[hubspot-form] upload rejected', response.status, json);
+            this.showError(json?.message || 'We could not upload your file. Please try again.');
+            field.classList.add('invalid');
+            field.closest('[data-field-wrapper]')?.classList.add('has-error');
+            return false;
+          }
+        } catch (error) {
+          console.error('[hubspot-form] upload failed', error);
+          this.showError('We could not upload your file. Please try again.');
+          return false;
+        }
+
+        this.uploadedFiles.set(field.dataset.hsName, json.url);
+      }
+
+      return true;
     }
 
     buildPayload(hutk, { skipValidation = false } = {}) {
@@ -576,6 +694,9 @@
       this.setLoading(true);
 
       try {
+        // Files go to File Manager first; the submission carries the returned URLs.
+        if (!(await this.uploadFiles())) return;
+
         const hutk = await this.waitForHutk();
         const result = await this.post(this.buildPayload(hutk));
 

@@ -112,16 +112,26 @@
 
       {%- when 'file' -%}
         {%- comment -%}
-          HubSpot's JSON submission API cannot accept file uploads, so this input is
-          rendered disabled rather than silently dropping the visitor's file.
+          A file input has no value to float a label against, so the label sits above the
+          control instead of using the theme's floating pattern.
+
+          The file is not sent to HubSpot's forms API, which is JSON-only. It is uploaded
+          to HubSpot File Manager through the relay named by `upload_endpoint` on the
+          section, and the URL that comes back is submitted as this field's value --
+          `ts_logo_upload` is a text property holding a URL. See assets/hubspot-form.js.
         {%- endcomment -%}
         <label class="label hs-field__label" for="{{ field_id }}">{{ label }}</label>
         <input
           class="input"
           type="file"
           id="{{ field_id }}"
-          disabled
+          data-hs-field
+          data-hs-name="{{ hs_name }}"
+          data-hs-object="{{ object_type }}"
+          data-hs-type="file"
+          accept=".png,.jpg,.jpeg,.gif,.webp,.svg,.pdf,.ai,.eps"
           {% if block.settings.help_text != blank %}aria-describedby="{{ field_id }}-help"{% endif %}
+          {% if block.settings.required %}required{% endif %}
         >
 
       {%- when 'date' -%}
