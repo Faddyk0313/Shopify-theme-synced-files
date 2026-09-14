@@ -70,6 +70,7 @@
         },
         "est_shipping_msg_mnjxT7": {
           "type": "est-shipping-msg",
+          "disabled": true,
           "settings": {
             "bold_text": true,
             "text_color": "#00adee"
@@ -77,6 +78,7 @@
         },
         "inventory": {
           "type": "inventory",
+          "disabled": true,
           "settings": {
             "inventory_threshold": 15,
             "show_inventory_transfer": true,
@@ -86,6 +88,7 @@
         },
         "variant_qty_buy_row_cyBRie": {
           "type": "variant_qty_buy_row",
+          "disabled": true,
           "settings": {
             "show_variant_labels": false,
             "picker_type": "dropdown",
