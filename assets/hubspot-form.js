@@ -220,10 +220,10 @@
       const stepEl = this.stepEl(1);
       if (!stepEl) return;
 
-      // Nothing to advance to until the visitor has given us an email. Only the button
-      // syncNavigation chose for this step is revealed -- never both.
+      // The gate only staggers the fields -- progress and navigation stay visible from
+      // the start, so the step reads as step 1 of N and Next validates the gate field.
       this.gateUnlocked = unlocked;
-      stepEl.querySelector('[data-progress]')?.toggleAttribute('hidden', !unlocked);
+      stepEl.querySelector('[data-progress]')?.removeAttribute('hidden');
     }
 
     /** Fields on a hidden conditional wrapper are excluded from validation and payload. */
@@ -273,6 +273,15 @@
     }
 
     onNext() {
+      // Step 1's gate hides the rest of its fields, which validateStep skips. Flag the
+      // gate field itself so Next cannot jump past fields the visitor never saw.
+      if (this.current === 1 && this.gateField && !this.gateUnlocked) {
+        this.validateStep(1);
+        const gate = this.querySelector(`[data-hs-name="${this.gateField}"]`);
+        gate?.focus();
+        return;
+      }
+
       if (!this.validateStep(this.current)) return;
 
       const target = this.nextStep();
@@ -302,11 +311,8 @@
       const next = stepEl.querySelector('[data-next]');
       const submit = stepEl.querySelector('[data-submit]');
 
-      // On the gated first step, hide both until the gate opens.
-      const locked = this.current === 1 && this.gateField && !this.gateUnlocked;
-
-      if (next) next.hidden = locked || !hasNext;
-      if (submit) submit.hidden = locked || hasNext;
+      if (next) next.hidden = !hasNext;
+      if (submit) submit.hidden = hasNext;
     }
 
     /** Re-evaluates conditional fields, the first-step gate and the nav in one pass. */
