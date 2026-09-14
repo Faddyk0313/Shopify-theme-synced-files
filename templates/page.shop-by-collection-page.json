@@ -92,7 +92,6 @@
     },
     "featured_collection_WXjHCR": {
       "type": "featured-collection",
-      "disabled": true,
       "custom_css": [
         "@media (max-width: 768px) {.title-md {font-size: var(--title-sm); /* Adjust to your desired small size variable */ }}",
         ".product-card__bottom.flex.items-center.gap-2 {display: none !important;}"
@@ -104,7 +103,6 @@
           "sr-dryland-short-sticker-pack",
           "sr-stickerpack-hoodie-black",
           "sr-stickerpack-tee-black",
-          "jr-sticks-tee",
           "yth-dryland-short-sticker-pack",
           "yth-stickerpack-hoodie-black",
           "yth-stickerpack-tee-black"
