@@ -1689,30 +1689,6 @@
             "show_when_values": ""
           }
         },
-        "field_P8CpCm": {
-          "type": "field",
-          "settings": {
-            "step": 2,
-            "hs_name": "",
-            "object_type": "0-1",
-            "type": "dropdown",
-            "label": "",
-            "required": false,
-            "hidden": false,
-            "span": "2",
-            "span_fixed": true,
-            "label_outside": true,
-            "placeholder": "",
-            "help_text": "If you selected “Yes,” copy and paste the template below and CC us.--------------------------------------------CC: TeamSales@titanbattlegear.comHi [Name],I recently connected with Titan Battlegear about their Custom Team Battlegear Program, which is designed to improve player safety and streamline team ordering.Titan has built the most protective baselayer on the market, allowing our players to compete safely while wearing gear that reflects who we are as a program. I’ve CC’d their team here to make the introduction easy and help us explore whether this could be a good fit.Would you be open to a brief call to learn more?Thanks,[Parent Name]--------------------------------------------",
-            "options": "",
-            "default_value": "",
-            "autocomplete": "",
-            "min_digits": "",
-            "max_digits": "",
-            "show_when_field": "",
-            "show_when_values": ""
-          }
-        },
         "field_LkEMdm": {
           "type": "field",
           "settings": {
@@ -1907,7 +1883,6 @@
         "field_P3cCBT",
         "field_r78Q8p",
         "field_6qzapp",
-        "field_P8CpCm",
         "field_LkEMdm",
         "field_CLNeFA",
         "field_TmK6Vd",
@@ -1916,6 +1891,7 @@
         "field_gb3itt",
         "field_hmXUyk"
       ],
+      "disabled": true,
       "name": "Team Sales Form",
       "settings": {
         "portal_id": "46588550",
@@ -1961,7 +1937,6 @@
     },
     "custom_liquid_ijgnyq": {
       "type": "custom-liquid",
-      "disabled": true,
       "name": "t:sections.custom-liquid.name",
       "settings": {
         "liquid": "<script src=\"https://js.hsforms.net/forms/embed/46588550.js\" defer></script>\n<div class=\"hs-form-frame\" data-region=\"na1\" data-form-id=\"d7bcd3f3-9615-4cde-a94c-0ca255d083ff\" data-portal-id=\"46588550\"></div>",
