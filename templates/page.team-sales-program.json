@@ -1184,7 +1184,7 @@
             "image_heading": "",
             "image_alt": "",
             "image_link": "",
-            "footnote": ""
+            "footnote": "<p><strong>If you selected “Yes,” copy and paste the template below and CC us.</strong></p><p>--------------------------------------------</p><p><strong>CC: TeamSales@titanbattlegear.com</strong></p><p>Hi [Name],</p><p>I recently connected with Titan Battlegear about their Custom Team Battlegear Program, which is designed to improve player safety and streamline team ordering.</p><p>Titan has built the most protective baselayer on the market, allowing our players to compete safely while wearing gear that reflects who we are as a program. I’ve CC’d their team here to make the introduction easy and help us explore whether this could be a good fit.</p><p>Would you be open to a brief call to learn more?</p><p>Thanks,<br/>[Parent Name]</p><p>--------------------------------------------</p>"
           }
         },
         "step_4XeBgn": {
@@ -1193,6 +1193,7 @@
             "heading": "TEAM BRANDING AND APPROVAL",
             "content": "<p>Let's confirm logo permissions to keep your rollout smooth.</p>",
             "image_heading": "",
+            "image": "shopify://shop_images/TITAN_HOSTED_TEAM_STORE_BANNER_3-1.webp",
             "image_alt": "",
             "image_link": "",
             "footnote": ""
@@ -1204,8 +1205,9 @@
             "heading": "CUSTOM TEAM BATTLGEAR DETAILS",
             "content": "<p>Titan's Custom Team BattleGear Program is designed for streamlined organization-wide rollout.</p><ul><li>50-piece minimum</li><li>Logo approval + Vector logo required (.ai/.pdf/.eps/.svg)</li><li>Choose Titan-hosted team store or single-invoice bulk order</li><li>Includes a dedicated 25% organization-wide discount window</li></ul><p><strong>To guarantee preseason delivery, orders must be finalized by May 1.</strong></p>",
             "image_heading": "Titan Offered - Team Ordering Methods",
+            "image": "shopify://shop_images/color_fan_team_sales_form.webp",
             "image_alt": "",
-            "image_link": "",
+            "image_link": "https://www.titanbattlegear.com/collections/team-colors",
             "footnote": "<p>* Single-invoice bulk team order also available</p>"
           }
         },
