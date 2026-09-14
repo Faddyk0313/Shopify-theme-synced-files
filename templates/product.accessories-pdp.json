@@ -27,6 +27,7 @@
         },
         "subheader_imYWCj": {
           "type": "subheader",
+          "disabled": true,
           "settings": {}
         },
         "title": {
@@ -61,6 +62,7 @@
         },
         "related_size_products_x3JqMf": {
           "type": "related_size_products",
+          "disabled": true,
           "settings": {
             "heading": "Color:",
             "collection": "rinkwear"
@@ -151,6 +153,7 @@
         },
         "liquid_XMxet3": {
           "type": "liquid",
+          "disabled": true,
           "settings": {
             "liquid": "{% capture 'meta_data' %}\n{% for variant in product.variants %}\n  {{ variant.id}}: '{{ variant.metafields.custom.estimated_shipping2 | raw }}' {%- comment -%} Replace it with your NAMESPACE.KEY value {%- endcomment -%}\n  {% unless forloop.last %},{% endunless %}\n{% endfor %}\n{% endcapture %}\n\n<script>\n  let metaData = { {{ meta_data }} };\n  \n  document.addEventListener(\"DOMContentLoaded\", function() {\n    var selector = document.querySelector('input[name=id]');\n    var meta = document.querySelector('#test');\n\n    // Function to update metafield data\n    function updateMetaField() {\n      let variant_id = selector ? selector.value : null;\n      if(variant_id && metaData[variant_id]) {\n        meta.innerHTML = metaData[variant_id];\n      } else {\n        meta.innerHTML = \"\";\n      }\n    }\n\n    // Initial load for pre-selected variant\n    updateMetaField();\n\n    // Update on variant change\n    if(selector) {\n      selector.addEventListener('change', function() {\n        updateMetaField();\n      });\n    }\n  });\n</script>"
           }
@@ -175,6 +178,7 @@
         },
         "liquid_R48WJG": {
           "type": "liquid",
+          "disabled": true,
           "settings": {
             "liquid": "<p id=\"test\"></p>"
           }
@@ -299,6 +303,7 @@
     },
     "all_customer_reviews_section_zFJw7J": {
       "type": "all-customer-reviews-section",
+      "disabled": true,
       "name": "All Reviews Paginated",
       "settings": {
         "heading": "MOST RECENT",
@@ -404,6 +409,7 @@
         "collection_8tMH9r",
         "collection_b8mmRh"
       ],
+      "disabled": true,
       "settings": {
         "product_limit": 12,
         "columns": 5,
