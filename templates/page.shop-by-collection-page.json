@@ -90,6 +90,56 @@
         "parallax_direction": "vertical"
       }
     },
+    "featured_collection_WXjHCR": {
+      "type": "featured-collection",
+      "disabled": true,
+      "custom_css": [
+        "@media (max-width: 768px) {.title-md {font-size: var(--title-sm); /* Adjust to your desired small size variable */ }}",
+        ".product-card__bottom.flex.items-center.gap-2 {display: none !important;}"
+      ],
+      "name": "STICKER PACK PRODUCTS",
+      "settings": {
+        "collection": "",
+        "products": [
+          "sr-dryland-short-sticker-pack",
+          "sr-stickerpack-hoodie-black",
+          "sr-stickerpack-tee-black",
+          "jr-sticks-tee",
+          "yth-dryland-short-sticker-pack",
+          "yth-stickerpack-hoodie-black",
+          "yth-stickerpack-tee-black"
+        ],
+        "product_limit": 25,
+        "columns": 4,
+        "new_version2": false,
+        "carousel_on_desktop": false,
+        "show_view_all": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 28,
+        "padding_bottom": 48,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
     "image_with_text_overlay_WedhY3": {
       "type": "image-with-text-overlay",
       "blocks": {
@@ -154,7 +204,7 @@
         "parallax_direction": "vertical"
       }
     },
-    "featured_collection_WXjHCR": {
+    "featured_collection_qxCd8T": {
       "type": "featured-collection",
       "custom_css": [
         "@media (max-width: 768px) {.title-md {font-size: var(--title-sm); /* Adjust to your desired small size variable */ }}",
@@ -817,8 +867,9 @@
   "order": [
     "main-page",
     "image_with_text_overlay_kPUDTw",
-    "image_with_text_overlay_WedhY3",
     "featured_collection_WXjHCR",
+    "image_with_text_overlay_WedhY3",
+    "featured_collection_qxCd8T",
     "image_with_text_overlay_KzzDdD",
     "featured_collection_gYEKdL",
     "image_with_text_overlay_JAQfPj",
