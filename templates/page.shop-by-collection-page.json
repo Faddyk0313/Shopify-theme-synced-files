@@ -100,12 +100,12 @@
       "settings": {
         "collection": "",
         "products": [
+          "yth-dryland-short-sticker-pack",
+          "yth-stickerpack-tee-black",
+          "yth-stickerpack-hoodie-black",
           "sr-dryland-short-sticker-pack",
           "sr-stickerpack-hoodie-black",
-          "sr-stickerpack-tee-black",
-          "yth-dryland-short-sticker-pack",
-          "yth-stickerpack-hoodie-black",
-          "yth-stickerpack-tee-black"
+          "sr-stickerpack-tee-black"
         ],
         "product_limit": 25,
         "columns": 4,
