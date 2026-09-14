@@ -36,14 +36,28 @@
     {%- endfor -%}
   </div>
 
-  {%- if step.settings.image != blank -%}
+  {%- if step.settings.image != blank or step.settings.image_heading != blank -%}
     <div class="hs-form__step-media">
-      {%- liquid
-        assign step_image = step.settings.image
-        assign sizes = '(min-width: 990px) 720px, 100vw'
-        assign widths = '400,600,800,1000,1200,1400,1600'
-      -%}
-      {{- step_image | image_url: width: step_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, is: 'lazy-image', class: 'w-full h-auto' -}}
+      {%- if step.settings.image_heading != blank -%}
+        <h4 class="hs-form__step-media-heading {{ section.settings.step_media_heading_size | default: 'title-sm' }}">
+          {{- step.settings.image_heading -}}
+        </h4>
+      {%- endif -%}
+
+      {%- if step.settings.image != blank -%}
+        {%- liquid
+          assign step_image = step.settings.image
+          assign sizes = '(min-width: 990px) 720px, 100vw'
+          assign widths = '400,600,800,1000,1200,1400,1600'
+        -%}
+        {%- if step.settings.image_link != blank -%}
+          <a href="{{ step.settings.image_link }}"{% if step.settings.image_alt != blank %} aria-label="{{ step.settings.image_alt | escape }}"{% endif %}>
+            {{- step_image | image_url: width: step_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, is: 'lazy-image', class: 'w-full h-auto', alt: step.settings.image_alt -}}
+          </a>
+        {%- else -%}
+          {{- step_image | image_url: width: step_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, is: 'lazy-image', class: 'w-full h-auto', alt: step.settings.image_alt -}}
+        {%- endif -%}
+      {%- endif -%}
     </div>
   {%- endif -%}
 

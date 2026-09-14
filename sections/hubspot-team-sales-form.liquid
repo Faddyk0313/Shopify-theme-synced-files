@@ -70,6 +70,35 @@
             <h3 class="{{ section.settings.step_heading_size | default: 'title-sm' }}">{{ section.settings.success_heading }}</h3>
           {%- endif -%}
           {{ section.settings.success_message }}
+
+          {%- if section.settings.success_image != blank or section.settings.success_image_heading != blank -%}
+            <div class="hs-form__success-media">
+              {%- if section.settings.success_image_heading != blank -%}
+                <h3 class="{{ section.settings.step_heading_size | default: 'title-sm' }}">
+                  {{- section.settings.success_image_heading -}}
+                </h3>
+              {%- endif -%}
+
+              {%- if section.settings.success_image_text != blank -%}
+                {{ section.settings.success_image_text }}
+              {%- endif -%}
+
+              {%- if section.settings.success_image != blank -%}
+                {%- liquid
+                  assign success_image = section.settings.success_image
+                  assign success_sizes = '(min-width: 990px) 720px, 100vw'
+                  assign success_widths = '400,600,800,1000,1200,1400,1600'
+                -%}
+                {%- if section.settings.success_image_link != blank -%}
+                  <a href="{{ section.settings.success_image_link }}"{% if section.settings.success_image_alt != blank %} aria-label="{{ section.settings.success_image_alt | escape }}"{% endif %}>
+                    {{- success_image | image_url: width: success_image.width | image_tag: loading: 'lazy', sizes: success_sizes, widths: success_widths, is: 'lazy-image', class: 'w-full h-auto', alt: section.settings.success_image_alt -}}
+                  </a>
+                {%- else -%}
+                  {{- success_image | image_url: width: success_image.width | image_tag: loading: 'lazy', sizes: success_sizes, widths: success_widths, is: 'lazy-image', class: 'w-full h-auto', alt: section.settings.success_image_alt -}}
+                {%- endif -%}
+              {%- endif -%}
+            </div>
+          {%- endif -%}
         </div>
       </hubspot-form>
 
@@ -178,6 +207,35 @@
     },
     {
       "type": "text",
+      "id": "success_image_heading",
+      "label": "Success image heading",
+      "default": "SHOP TEAM STOCK COLORWAYS"
+    },
+    {
+      "type": "richtext",
+      "id": "success_image_text",
+      "label": "Success image text",
+      "default": "<p>Explore our stock team colorways — delivering the same industry-leading protection in colors that reflect your program's identity.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "success_image",
+      "label": "Success image",
+      "info": "Upload the stock colorway fan image (baselayer + neck guard)."
+    },
+    {
+      "type": "text",
+      "id": "success_image_alt",
+      "label": "Success image alt text",
+      "default": "Titan BattleGear stock team colorways showing a range of available team colors in cut resistant baselayers and neck guards."
+    },
+    {
+      "type": "url",
+      "id": "success_image_link",
+      "label": "Success image link"
+    },
+    {
+      "type": "text",
       "id": "required_message",
       "label": "Missing fields message",
       "default": "Please complete the highlighted fields.",
@@ -229,6 +287,26 @@
       "type": "select",
       "id": "step_heading_size",
       "label": "Step heading size",
+      "default": "title-sm",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "Small"
+        },
+        {
+          "value": "title-md",
+          "label": "Medium"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "Large"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "step_media_heading_size",
+      "label": "Step image heading size",
       "default": "title-sm",
       "options": [
         {
@@ -423,9 +501,24 @@
           "label": "Intro text"
         },
         {
+          "type": "inline_richtext",
+          "id": "image_heading",
+          "label": "Image heading"
+        },
+        {
           "type": "image_picker",
           "id": "image",
           "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text"
+        },
+        {
+          "type": "url",
+          "id": "image_link",
+          "label": "Image link"
         },
         {
           "type": "richtext",
@@ -640,6 +733,7 @@
           "settings": {
             "heading": "CUSTOM TEAM BATTLGEAR DETAILS",
             "content": "<p>Titan's Custom Team BattleGear Program is designed for streamlined organization-wide rollout.</p><ul><li>50-piece minimum</li><li>Logo approval + Vector logo required (.ai/.pdf/.eps/.svg)</li><li>Choose Titan-hosted team store or single-invoice bulk order</li><li>Includes a dedicated 25% organization-wide discount window</li></ul><p><strong>To guarantee preseason delivery, orders must be finalized by May 1.</strong></p>",
+            "image_heading": "Titan Offered - Team Ordering Methods",
             "footnote": "<p>* Single-invoice bulk team order also available</p>"
           }
         },

@@ -195,10 +195,27 @@
   margin-block-start: var(--sp-2);
 }
 
-.hs-form__step-media img {
+.hs-form__step-media,
+.hs-form__success-media {
+  display: grid;
+  gap: var(--sp-4);
+  margin-block-start: var(--sp-6);
+}
+
+.hs-form__step-media img,
+.hs-form__success-media img {
   display: block;
   width: 100%;
   height: auto;
+}
+
+.hs-form__step-media a,
+.hs-form__success-media a {
+  display: block;
+}
+
+.hs-form__success-media p {
+  margin: 0 !important;
 }
 
 /* File inputs size to their content and keep the label stacked above. */
