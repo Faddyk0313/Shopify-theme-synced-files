@@ -88,7 +88,7 @@
         "color_highlight": "#e2fb31",
         "gradient_highlight": "",
         "color_button_text": "#ffffff",
-        "color_button_background": "#FF008B",
+        "color_button_background": "#ff008b",
         "color_button_gradient": "",
         "color_overlay": "#171717",
         "overlay_opacity": 0,
@@ -161,7 +161,7 @@
         "spacing_gqWAtP",
         "button_LQkjMt"
       ],
-      "name": "MIAMI VICE BANNER",
+      "name": "Whiteout Camo Banner",
       "settings": {
         "transparent_header": true,
         "image": "shopify://shop_images/Banner_3.0_desk.png",
