@@ -1193,7 +1193,6 @@
             "heading": "TEAM BRANDING AND APPROVAL",
             "content": "<p>Let's confirm logo permissions to keep your rollout smooth.</p>",
             "image_heading": "",
-            "image": "shopify://shop_images/TITAN_HOSTED_TEAM_STORE_BANNER_3-1.webp",
             "image_alt": "",
             "image_link": "",
             "footnote": ""
@@ -1205,7 +1204,7 @@
             "heading": "CUSTOM TEAM BATTLGEAR DETAILS",
             "content": "<p>Titan's Custom Team BattleGear Program is designed for streamlined organization-wide rollout.</p><ul><li>50-piece minimum</li><li>Logo approval + Vector logo required (.ai/.pdf/.eps/.svg)</li><li>Choose Titan-hosted team store or single-invoice bulk order</li><li>Includes a dedicated 25% organization-wide discount window</li></ul><p><strong>To guarantee preseason delivery, orders must be finalized by May 1.</strong></p>",
             "image_heading": "Titan Offered - Team Ordering Methods",
-            "image": "shopify://shop_images/color_fan_team_sales_form.webp",
+            "image": "shopify://shop_images/TITAN_HOSTED_TEAM_STORE_BANNER_3-1.webp",
             "image_alt": "",
             "image_link": "https://www.titanbattlegear.com/collections/team-colors",
             "footnote": "<p>* Single-invoice bulk team order also available</p>"
@@ -1893,7 +1892,6 @@
         "field_gb3itt",
         "field_hmXUyk"
       ],
-      "disabled": true,
       "name": "Team Sales Form",
       "settings": {
         "portal_id": "46588550",
@@ -1909,8 +1907,9 @@
         "success_message": "<p>Your custom team program request has been received.<br/>Our team will review your details, confirm ordering structure, and follow up with next steps shortly.</p>",
         "success_image_heading": "SHOP TEAM STOCK COLORWAYS",
         "success_image_text": "<p>Explore our stock team colorways — delivering the same industry-leading protection in colors that reflect your program's identity.</p>",
+        "success_image": "shopify://shop_images/color_fan_team_sales_form.webp",
         "success_image_alt": "Titan BattleGear stock team colorways showing a range of available team colors in cut resistant baselayers and neck guards.",
-        "success_image_link": "",
+        "success_image_link": "https://www.titanbattlegear.com/collections/team-colors",
         "required_message": "Please complete the highlighted fields.",
         "error_message": "We couldn't submit your form. Please try again or email TeamSales@titanbattlegear.com.",
         "consent_mode": "none",
@@ -1939,6 +1938,7 @@
     },
     "custom_liquid_ijgnyq": {
       "type": "custom-liquid",
+      "disabled": true,
       "name": "t:sections.custom-liquid.name",
       "settings": {
         "liquid": "<script src=\"https://js.hsforms.net/forms/embed/46588550.js\" defer></script>\n<div class=\"hs-form-frame\" data-region=\"na1\" data-form-id=\"d7bcd3f3-9615-4cde-a94c-0ca255d083ff\" data-portal-id=\"46588550\"></div>",
