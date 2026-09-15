@@ -557,11 +557,14 @@
                       endif
                     endfor
                     assign factory_mistakes_collection = blank
+                    assign drinkwear_collection = blank
                     for col in product.collections
                       if col.id == 370575081650
                         assign is_factory_mistakes = true
                         assign factory_mistakes_collection = col
-                        break
+                      endif
+                      if col.id == 353886994610
+                        assign drinkwear_collection = col
                       endif
                     endfor
                   -%}
@@ -635,7 +638,7 @@
                         </li>
                       {%- endif -%}
                     {%- endfor -%}
-                  {%- elsif is_factory_mistakes or block.settings.collection != blank -%}
+                  {%- elsif is_factory_mistakes or drinkwear_collection != blank or block.settings.collection != blank -%}
                     {%- assign target_collection = collections[block.settings.collection] -%}
                     {%- if is_factory_mistakes -%}
                       {%- if factory_mistakes_collection != blank -%}
@@ -644,7 +647,10 @@
                         {%- assign target_collection = collections['factory-mistakes'] -%}
                       {%- endif -%}
                     {%- endif -%}
-                    {%- if is_factory_mistakes == false and product.template_suffix == 'rinkwear-feb-2025' -%}
+                    {%- if is_factory_mistakes == false and drinkwear_collection != blank -%}
+                      {%- assign target_collection = drinkwear_collection -%}
+                    {%- endif -%}
+                    {%- if is_factory_mistakes == false and drinkwear_collection == blank and product.template_suffix == 'rinkwear-feb-2025' -%}
                       {%- case product.type -%}
                         {%- when 'Hat' -%}
                           {%- assign target_collection = collections['hats'] -%}
