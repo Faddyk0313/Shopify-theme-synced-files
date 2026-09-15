@@ -288,8 +288,8 @@
           "type": "step",
           "settings": {
             "heading": "CUSTOM TEAM BATTLEGEAR DETAILS",
-            "content": "<p>We partner with organizations looking to raise the standard for player safety while outfitting their teams in custom Battlegear that reflects who they are and what they stand for.</p><ul><li>50-piece minimum order (MOQ)</li><li><strong>Logo usage approval + Vector logo required</strong> (.ai/.pdf/.eps/.svg)</li><li>Choose between a <strong>hosted team store</strong> (individual player ordering) or <strong>bulk invoicing</strong> (ship to organization)</li><li>Includes a <strong>25% sitewide discount window</strong> for your entire organization during a 2-week ordering period</li></ul><p><strong>To guarantee delivery before season start, orders must be finalized by June 1.</strong></p>",
-            "image_heading": "Titan Offered - Team Ordering Methods",
+            "content": "<p>We partner with organizations looking to raise the standard for player safety while outfitting their teams in custom Battlegear that reflects who they are and what they stand for.</p><ul><li>50-piece minimum order (MOQ)</li><li><strong>Logo usage approval + Vector logo required</strong> (.ai/.pdf/.eps/.svg)</li><li>Choose between a <strong>hosted team store</strong> (individual player ordering) or <strong>bulk invoicing</strong> (ship to organization)</li><li>Includes a <strong>25% sitewide discount window</strong> for your entire organization during a 2-week ordering period </li></ul><p><strong>To guarantee delivery before season start, orders must be finalized by June 1.</strong></p>",
+            "image_heading": "",
             "image": "shopify://shop_images/TITAN_HOSTED_TEAM_STORE_BANNER_3-1.webp",
             "image_alt": "",
             "image_link": "",
@@ -964,6 +964,7 @@
         "field_rAddCN",
         "field_PHBtTD"
       ],
+      "disabled": true,
       "name": "Team Discount Form",
       "settings": {
         "portal_id": "46588550",
@@ -1009,7 +1010,6 @@
     },
     "custom_liquid_ijgnyq": {
       "type": "custom-liquid",
-      "disabled": true,
       "name": "t:sections.custom-liquid.name",
       "settings": {
         "liquid": "<script src=\"https://js.hsforms.net/forms/embed/46588550.js\" defer></script>\n<div class=\"hs-form-frame\" data-region=\"na1\" data-form-id=\"7d807dfc-0b9f-4c9c-b2c2-b922f297063c\" data-portal-id=\"46588550\"></div>",
