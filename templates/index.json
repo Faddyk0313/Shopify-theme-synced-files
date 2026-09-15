@@ -913,6 +913,7 @@
         "image_qCdR67",
         "text_6th9Qp"
       ],
+      "disabled": true,
       "name": "FROZEN ROCKET BANNER",
       "settings": {
         "transparent_header": false,
@@ -946,11 +947,12 @@
     },
     "featured_collection_GBFe6r": {
       "type": "featured-collection",
+      "disabled": true,
       "custom_css": [
         "@media (max-width: 768px) {.title-md {font-size: var(--title-sm); /* Adjust to your desired small size variable */ }}",
         ".product-card__bottom.flex.items-center.gap-2 {display: none !important;}"
       ],
-      "name": "USA HOCKEY PRODUCTS",
+      "name": "Frozen Rocket Products",
       "settings": {
         "collection": "",
         "products": [
@@ -1026,6 +1028,7 @@
         "image_4frnLB",
         "text_ReXaNE"
       ],
+      "disabled": true,
       "name": "USA ANNIVERSARY BANNER",
       "settings": {
         "transparent_header": false,
@@ -1059,6 +1062,7 @@
     },
     "featured_collection_XNVhWa": {
       "type": "featured-collection",
+      "disabled": true,
       "custom_css": [
         "@media (max-width: 768px) {.title-md {font-size: var(--title-sm); /* Adjust to your desired small size variable */ }}",
         ".product-card__bottom.flex.items-center.gap-2 {display: none !important;}"
