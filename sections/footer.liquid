@@ -4,153 +4,141 @@
       --section-padding-bottom: {{ section.settings.padding_bottom }}px;
       {%- render 'section-variables', section: section -%}
     }
-  {% comment %} TBG custom Code {% endcomment %}
-    @media screen and (min-width: 1280px) {
-      .footer {
-        grid-template-columns: 1fr 0.3fr !important;
-      }
-    }
-
+    {% comment %} TBG custom Code {% endcomment %}
     .footer__socials {
       align-self: start !important;
     }
 
-    @media screen and (min-width: 1280px) {
-      .footer__socials {
-        align-self: center !important;
+    .custom_footer-contact {
+      padding-left: 15px;
+      min-width: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .custom_footer-contact h4 {
+      /* font-size: 1.3rem; */
+      margin-bottom: 0.5rem;
+    }
+
+    .custom_footer-contact p {
+      /* font-size: 0.95rem; */
+      margin: 0.3rem 0;
+      text-align: center;
+    }
+
+    .contact-icons {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+      justify-content: center;
+    }
+
+    .contact-icons div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .reversed-link {
+      background-position: var(--transform-origin-end) calc(99%) !important;
+    }
+    .reversed-link:hover {
+      background-position: var(--transform-origin-start) calc(99%) !important;
+    }
+
+    @media (max-width: 500px) {
+      .custom_footer-contact {
+        align-items: center;
+      }
+
+      .custom_footer-contact p {
+        text-align: center;
+      }
+
+      .contact-icons {
+        justify-content: center;
       }
     }
 
-      @media (min-width: 1280px ) {
-        .footer__left {
-          padding-right: 50px;
-        }
-        .footer__right {
-          padding-inline-start: 20px !important;
-          padding-left: 20px !important;
-          padding-right: 0px !important;
-        }
-        .custom_footer-contact {
-               padding-left: 15px;
-           }
-      }
-      {% comment %} @media (min-width: 1680px ) {
-        .footer__left {
-          padding-right: 50px;
-        }
-        .footer__right {
-          padding-inline: 50px !important;
-        }
-      } {% endcomment %}
-       .custom_footer-contact {
-              padding-left: 15px;
-              min-width: 300px;
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-          }
-
-          .custom_footer-contact h4 {
-              /* font-size: 1.3rem; */
-              margin-bottom: 0.5rem;
-          }
-
-          .custom_footer-contact p {
-              /* font-size: 0.95rem; */
-              margin: 0.3rem 0;
-              text-align: center;
-          }
-
-          .contact-icons {
-              display: flex;
-              gap: 2rem;
-              flex-wrap: wrap;
-              margin: 1rem 0;
-              justify-content: center;
-          }
-
-          .contact-icons div {
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              font-size: 0.9rem;
-          }
-
-          
-      @media (max-width: 500px) {
-        .custom_footer-contact {
-              align-items: center;
-          }
-  
-          .custom_footer-contact p {
-              text-align: center;
-          }
-  
-          .contact-icons {
-              justify-content: center;
-          }
-      }
-      @media (max-width: 1280px) {
-        .custom_footer-contact {
-              align-items: start;
-          }
-
-          .custom_footer-contact p {
-              text-align: start;
-          }
-
-          .contact-icons {
-              justify-content: start;
-          }
-
-          .contact-icons div {
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              font-size: 0.9rem;
-          }
-      }
-      @media screen and (min-width: 768px) {
-        .footer__accordions > * {
-          width: fit-content !important;
-        }
-        .footer__accordions summary span {
-          word-break: keep-all;
-          white-space: nowrap;
-        }
+    @media (max-width: 1280px) {
+      .custom_footer-contact {
+        align-items: start;
       }
 
-      .reversed-link {
-        background-position: var(--transform-origin-end) calc(99%) !important;
-      }
-      .reversed-link:hover {
-        background-position: var(--transform-origin-start) calc(99%) !important;
+      .custom_footer-contact p {
+        text-align: start;
       }
 
-      @media screen and (min-width: 1680px) {
-        .footer {
-          grid-template-columns: 1fr 0.4fr !important;
-        }
-        .footer__accordions {
-          gap: var(--sp-14);
-        }
-        .footer__right {
-          padding-inline: clamp(var(--sp-10), 8.421vw, var(--sp-40) 10rem) !important;
-        }
+      .contact-icons {
+        justify-content: start;
       }
-      @media screen and (min-width: 1800px) {
-        .footer {
-          grid-template-columns: 1fr 0.5fr !important;
-        }
-        .footer__accordions {
-          gap: var(--sp-16);
-        }
-        .footer__right {
-          padding-inline: clamp(var(--sp-10), 8.421vw, var(--sp-40) 10rem) !important;
-        }
+
+      .contact-icons div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 0.9rem;
       }
-      {% comment %} TBG custom Code {% endcomment %}
+    }
+
+    @media screen and (min-width: 768px) {
+      .footer__accordions > * {
+        width: fit-content !important;
+      }
+      .footer__accordions summary span {
+        word-break: keep-all;
+        white-space: nowrap;
+      }
+    }
+
+    @media screen and (min-width: 1280px) {
+      .footer {
+        grid-template-columns: 1fr 0.3fr !important;
+      }
+      .footer__socials {
+        align-self: center !important;
+      }
+      .footer__left {
+        padding-right: 50px;
+      }
+      .footer__right {
+        padding-inline-start: 20px !important;
+        padding-left: 20px !important;
+        padding-right: 0px !important;
+      }
+      .custom_footer-contact {
+        padding-left: 15px;
+      }
+    }
+
+    @media screen and (min-width: 1680px) {
+      .footer {
+        grid-template-columns: 1fr 0.4fr !important;
+      }
+      .footer__accordions {
+        gap: var(--sp-14);
+      }
+      .footer__right {
+        padding-inline: clamp(var(--sp-10), 8.421vw, var(--sp-40) 10rem) !important;
+      }
+    }
+
+    @media screen and (min-width: 1800px) {
+      .footer {
+        grid-template-columns: 1fr 0.5fr !important;
+      }
+      .footer__accordions {
+        gap: var(--sp-16);
+      }
+      .footer__right {
+        padding-inline: clamp(var(--sp-10), 8.421vw, var(--sp-40) 10rem) !important;
+      }
+    }
 </style>
 
 {%- liquid
@@ -412,18 +400,22 @@
         {%- endif -%}
 
         {% comment %} TBG custom Code {% endcomment %}
-        {% comment %} {%- if section.settings.show_social -%}
-          <div class="footer__socials flex align-self-end justify-start md:justify-end xl:justify-start">
-            {%- render 'social-icons', size: 'lg', gap: '7' -%}
-          </div>
-        {%- endif -%} {% endcomment %}
+        {% comment %}
+          {%- if section.settings.show_social -%}
+            <div class="footer__socials flex align-self-end justify-start md:justify-end xl:justify-start">
+              {%- render 'social-icons', size: 'lg', gap: '7' -%}
+            </div>
+          {%- endif -%}
+        {% endcomment %}
         {% comment %} TBG custom Code {% endcomment %}
 
-        {% comment %} TBG CUSTOM CODE {%- if section.settings.show_social -%}
-          <div class="footer__socials flex align-self-end justify-start md:justify-end xl:justify-start">
-            {%- render 'social-icons', size: 'lg', gap: '7' -%}
-          </div>
-        {%- endif -%} {% endcomment %}
+        {% comment %}
+          TBG CUSTOM CODE {%- if section.settings.show_social -%}
+            <div class="footer__socials flex align-self-end justify-start md:justify-end xl:justify-start">
+              {%- render 'social-icons', size: 'lg', gap: '7' -%}
+            </div>
+          {%- endif -%}
+        {% endcomment %}
 
         {%- if shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}
           <div class="follow-on-shop">
