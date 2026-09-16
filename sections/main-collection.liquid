@@ -121,6 +121,7 @@
 
   assign description = section.blocks | where: 'type', 'description' | first
   assign subcollections = section.blocks | where: 'type', 'subcollections' | first
+  assign heading_block = section.blocks | where: 'type', 'heading' | first
 
   assign enable_sorting = section.settings.enable_sorting
   assign enable_filtering = section.settings.enable_filtering
@@ -141,6 +142,46 @@
 
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
   <div class="collection page-width{% if section.settings.full_width %} page-width--full{% endif %} relative{% if enable_filtering %} with-{{ filter_type }}{% endif %}">
+    {%- if heading_block != blank and heading_block.settings.heading != blank -%}
+      {% comment %} TBG CUSTOM CODE {% endcomment %}
+      <style>
+        #shopify-section-{{ section.id }} .desktopEL {
+          display: none;
+        }
+        @media (min-width: 1024px) {
+          #shopify-section-{{ section.id }} .mobileEl {
+            display: none !important;
+          }
+          #shopify-section-{{ section.id }} .desktopEL {
+            display: block !important;
+          }
+        }
+      </style>
+      {%- assign heading_text_mobile = heading_block.settings.heading | replace: '-br-', '<br>' -%}
+      {%- assign heading_text_desktop = heading_block.settings.heading | replace: '-br-', '' -%}
+      <div class="collection__heading md:text-{{ heading_block.settings.heading_alignment }} text-{{ heading_block.settings.heading_alignment_mobile }}" {{ heading_block.shopify_attributes }}>
+        <{{ heading_block.settings.heading_tag }} class="mobileEl heading leading-none {{ heading_block.settings.heading_size }}">
+          {%- render 'heading-content',
+            content: heading_text_mobile,
+            style: heading_block.settings.highlighted_text,
+            scribble: heading_block.settings.highlighted_scribble,
+            reveal: heading_block.settings.highlighted_reveal,
+            delay: 1
+          -%}
+        </{{ heading_block.settings.heading_tag }}>
+        <{{ heading_block.settings.heading_tag }} class="desktopEL heading leading-none {{ heading_block.settings.heading_size }}">
+          {%- render 'heading-content',
+            content: heading_text_desktop,
+            style: heading_block.settings.highlighted_text,
+            scribble: heading_block.settings.highlighted_scribble,
+            reveal: heading_block.settings.highlighted_reveal,
+            delay: 1
+          -%}
+        </{{ heading_block.settings.heading_tag }}>
+      </div>
+      {% comment %} End TBG CUSTOM CODE {% endcomment %}
+    {%- endif -%}
+
     {%- if description != blank and collection.description != blank -%}
       <div class="rte collection__description" {{ description.shopify_attributes }}>
         {{- collection.description -}}
@@ -882,6 +923,182 @@
     }
   ],
   "blocks": [
+    {
+      "type": "heading",
+      "name": "t:sections.global.blocks.heading.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "t:sections.global.settings.heading.label",
+          "default": "Collection"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "title-sm",
+              "label": "t:sections.global.settings.heading_size.options__1.label"
+            },
+            {
+              "value": "title-md",
+              "label": "t:sections.global.settings.heading_size.options__2.label"
+            },
+            {
+              "value": "title-lg tracking-heading",
+              "label": "t:sections.global.settings.heading_size.options__3.label"
+            },
+            {
+              "value": "title-xl tracking-heading",
+              "label": "t:sections.global.settings.heading_size.options__4.label"
+            }
+          ],
+          "default": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.label"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "options": [
+            {
+              "value": "h1",
+              "label": "t:sections.global.settings.heading_tag.options__1.label"
+            },
+            {
+              "value": "h2",
+              "label": "t:sections.global.settings.heading_tag.options__2.label"
+            },
+            {
+              "value": "h3",
+              "label": "t:sections.global.settings.heading_tag.options__3.label"
+            },
+            {
+              "value": "h4",
+              "label": "t:sections.global.settings.heading_tag.options__4.label"
+            },
+            {
+              "value": "h5",
+              "label": "t:sections.global.settings.heading_tag.options__5.label"
+            },
+            {
+              "value": "h6",
+              "label": "t:sections.global.settings.heading_tag.options__6.label"
+            },
+            {
+              "value": "div",
+              "label": "t:sections.global.settings.heading_tag.options__7.label"
+            },
+            {
+              "value": "span",
+              "label": "t:sections.global.settings.heading_tag.options__8.label"
+            },
+            {
+              "value": "p",
+              "label": "t:sections.global.settings.heading_tag.options__9.label"
+            }
+          ],
+          "default": "h1",
+          "label": "t:sections.global.settings.heading_tag.label",
+          "info": "t:sections.global.settings.heading_tag.info"
+        },
+        {
+          "type": "text_alignment",
+          "id": "heading_alignment",
+          "default": "left",
+          "label": "t:sections.global.settings.text_alignment.label"
+        },
+        {
+          "type": "text_alignment",
+          "id": "heading_alignment_mobile",
+          "default": "left",
+          "label": "t:sections.global.settings.text_alignment_mobile.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.global.settings.header__highlight.content",
+          "info": "t:sections.global.settings.header__highlight.info"
+        },
+        {
+          "type": "select",
+          "id": "highlighted_text",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.global.settings.highlighted_text.options__1.label"
+            },
+            {
+              "value": "text",
+              "label": "t:sections.global.settings.highlighted_text.options__2.label"
+            },
+            {
+              "value": "full_text",
+              "label": "t:sections.global.settings.highlighted_text.options__3.label"
+            },
+            {
+              "value": "half_text",
+              "label": "t:sections.global.settings.highlighted_text.options__4.label"
+            },
+            {
+              "value": "underline",
+              "label": "t:sections.global.settings.highlighted_text.options__5.label"
+            },
+            {
+              "value": "marker",
+              "label": "t:sections.global.settings.highlighted_text.options__6.label"
+            },
+            {
+              "value": "stencil",
+              "label": "t:sections.global.settings.highlighted_text.options__7.label"
+            },
+            {
+              "value": "scribble",
+              "label": "t:sections.global.settings.highlighted_text.options__8.label"
+            }
+          ],
+          "default": "none",
+          "label": "t:sections.global.settings.highlighted_text.label"
+        },
+        {
+          "visible_if": "{{ block.settings.highlighted_text == 'scribble' }}",
+          "type": "select",
+          "id": "highlighted_scribble",
+          "options": [
+            {
+              "value": "circle",
+              "label": "t:sections.global.settings.highlighted_scribble.options__1.label"
+            },
+            {
+              "value": "basic-underline",
+              "label": "t:sections.global.settings.highlighted_scribble.options__2.label"
+            },
+            {
+              "value": "sketch-underline",
+              "label": "t:sections.global.settings.highlighted_scribble.options__3.label"
+            },
+            {
+              "value": "squiggle-underline",
+              "label": "t:sections.global.settings.highlighted_scribble.options__4.label"
+            },
+            {
+              "value": "squiggle-underline-2",
+              "label": "t:sections.global.settings.highlighted_scribble.options__5.label"
+            }
+          ],
+          "default": "circle",
+          "label": "t:sections.global.settings.highlighted_scribble.label",
+          "info": "t:sections.global.settings.highlighted_scribble.info"
+        },
+        {
+          "visible_if": "{{ block.settings.highlighted_text != 'none' }}",
+          "type": "checkbox",
+          "id": "highlighted_reveal",
+          "label": "t:sections.global.settings.highlighted_reveal.label",
+          "default": false
+        }
+      ]
+    },
     {
       "type": "description",
       "name": "t:sections.main-collection.blocks.description.name",
