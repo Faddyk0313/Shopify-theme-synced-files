@@ -792,6 +792,8 @@
         "enable_sorting": true,
         "show_on_model": false,
         "buttons_style": "secondary",
+        "baselayer_button_size": "button--sm",
+        "baselayer_button_font_size": 14,
         "padding_top": 40,
         "padding_bottom": 72,
         "divider": false,
