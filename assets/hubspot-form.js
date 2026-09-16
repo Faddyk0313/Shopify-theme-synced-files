@@ -659,29 +659,29 @@
       return true;
     }
 
-    buildPayload(hutk, { skipValidation = false } = {}) {
+    /**
+     * Groups the collected fields by HubSpot object so the relay can upsert a contact
+     * and a company separately. The Forms API took a flat `fields` array with an
+     * objectTypeId per entry; the CRM API needs one property bag per object.
+     */
+    buildPayload(hutk) {
+      const contact = {};
+      const company = {};
+
+      this.collectFields().forEach(({ objectTypeId, name, value }) => {
+        if (objectTypeId === '0-2') company[name] = value;
+        else contact[name] = value;
+      });
+
       const payload = {
-        submittedAt: Date.now(),
-        fields: this.collectFields(),
-        context: {
-          pageUri: window.location.href,
-          pageName: this.dataset.pageName || document.title
-        }
+        formName: this.dataset.formName || this.dataset.pageName || '',
+        contact,
+        company,
+        pageUri: window.location.href,
+        pageName: this.dataset.pageName || document.title
       };
 
-      if (hutk) payload.context.hutk = hutk;
-      if (skipValidation) payload.skipValidation = true;
-
-      if (this.dataset.consentMode === 'legitimate_interest') {
-        payload.legalConsentOptions = {
-          legitimateInterest: {
-            value: true,
-            subscriptionTypeId: parseInt(this.dataset.consentSubscriptionId, 10),
-            legalBasis: 'LEAD',
-            text: this.dataset.consentText || ''
-          }
-        };
-      }
+      if (hutk) payload.hutk = hutk;
 
       return payload;
     }
@@ -711,32 +711,6 @@
           return;
         }
 
-        // A stale cookie rejects the whole submission; retrying without it still
-        // captures the lead, only losing page-view attribution.
-        if (result.status === 400 && this.hasErrorType(result.json, 'INVALID_HUTK')) {
-          const retry = await this.post(this.buildPayload(null));
-          if (retry.ok) {
-            this.onSuccess(retry.json);
-            return;
-          }
-          this.onFailure(retry);
-          return;
-        }
-
-        // Branching means some required fields live on steps this visitor never saw.
-        // The embed endpoint tolerates that; the submissions API rejects it. Only when
-        // every complaint is a required field we deliberately skipped do we retry with
-        // validation off -- real problems (bad email, unknown option) still surface.
-        if (result.status === 400 && this.onlyUnreachedRequiredErrors(result.json)) {
-          const retry = await this.post(this.buildPayload(hutk, { skipValidation: true }));
-          if (retry.ok) {
-            this.onSuccess(retry.json);
-            return;
-          }
-          this.onFailure(retry);
-          return;
-        }
-
         this.onFailure(result);
       } catch (error) {
         console.error('[hubspot-form] submission failed', error);
@@ -747,89 +721,45 @@
     }
 
     async post(payload) {
-      const url = `${SUBMIT_ENDPOINT}/${this.dataset.portalId}/${this.dataset.formGuid}`;
-      const config = window.theme?.utils?.fetchConfig
-        ? window.theme.utils.fetchConfig('json')
-        : { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' } };
+      const url = this.dataset.submitEndpoint;
+      if (!url) {
+        console.error('[hubspot-form] no submit endpoint configured');
+        return { ok: false, status: 0, json: null };
+      }
 
-      const response = await fetch(url, { ...config, body: JSON.stringify(payload) });
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
       const json = await response.json().catch(() => null);
 
-      return { ok: response.ok, status: response.status, json };
-    }
-
-    hasErrorType(json, type) {
-      return Boolean(json?.errors?.some((error) => error.errorType === type));
-    }
-
-    /**
-     * True when every error is a REQUIRED_FIELD naming a field that was never rendered
-     * for this visitor -- i.e. it sits on a step their branch skipped.
-     */
-    onlyUnreachedRequiredErrors(json) {
-      const errors = json?.errors;
-      if (!Array.isArray(errors) || !errors.length) return false;
-
-      const sent = new Set(this.collectFields().map((field) => field.name));
-
-      return errors.every((error) => {
-        if (error.errorType !== 'REQUIRED_FIELD') return false;
-        const match = /fields\.([A-Za-z0-9_]+)/.exec(error.message || '');
-        return Boolean(match) && !sent.has(match[1]);
-      });
+      // The relay reports failure in the body as well as the status code.
+      return { ok: response.ok && json?.success !== false, status: response.status, json };
     }
 
     onSuccess(json) {
-      if (json?.redirectUri) {
-        window.location.assign(json.redirectUri);
-        return;
+      if (json?.contactId) {
+        this.dataset.contactId = json.contactId;
       }
 
-      this.showSuccess(json?.inlineMessage);
-      this.dispatchEvent(new CustomEvent('hubspot-form:success', { bubbles: true }));
+      this.showSuccess(null);
+      this.dispatchEvent(
+        new CustomEvent('hubspot-form:success', { bubbles: true, detail: json || {} })
+      );
     }
 
     onFailure(result) {
-      const json = result.json;
-      const errors = Array.isArray(json?.errors) ? json.errors : [];
+      const message = result.json?.error;
+      console.error('[hubspot-form] submission failed', result.status, result.json);
 
-      // These two mean the theme's field config disagrees with HubSpot's form
-      // definition -- a configuration bug, not something the visitor can fix.
-      const configError = errors.find((error) =>
-        ['FIELD_NOT_IN_FORM_DEFINITION', 'VALUE_NOT_IN_FIELD_DEFINITION'].includes(
-          error.errorType
-        )
+      // The relay returns a readable message for validation problems (400) and a
+      // generic one for anything upstream; fall back to the section's own copy.
+      this.showError(
+        result.status === 400 && message ? message : this.dataset.errorMessage
       );
 
-      if (configError) {
-        console.error('[hubspot-form] form configuration mismatch', errors);
-        this.showError(this.dataset.errorMessage);
-      } else if (this.hasErrorType(json, 'BLOCKED_EMAIL')) {
-        this.showError('Please use a different email address.');
-      } else if (errors.length) {
-        console.error('[hubspot-form] validation rejected', errors);
-        this.showError(this.friendlyErrors(errors));
-      } else {
-        console.error('[hubspot-form] submission failed', result.status, json);
-        this.showError(this.dataset.errorMessage);
-      }
-
       this.dispatchEvent(new CustomEvent('hubspot-form:error', { bubbles: true }));
-    }
-
-    friendlyErrors(errors) {
-      const messages = errors.map((error) => {
-        switch (error.errorType) {
-          case 'REQUIRED_FIELD':
-            return 'Please complete all required fields.';
-          case 'INVALID_EMAIL':
-            return 'Please enter a valid email address.';
-          default:
-            return null;
-        }
-      });
-
-      return [...new Set(messages.filter(Boolean))].join(' ') || this.dataset.errorMessage;
     }
 
     showSuccess(inlineMessage) {

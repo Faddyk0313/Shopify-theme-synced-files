@@ -25,6 +25,8 @@
         data-portal-id="{{ section.settings.portal_id }}"
         data-form-guid="{{ section.settings.form_guid }}"
         data-page-name="{{ page_title | default: shop.name | escape }}"
+        data-submit-endpoint="{{ section.settings.submit_endpoint }}"
+        data-form-name="{{ section.settings.form_name | escape }}"
         data-error-message="{{ section.settings.error_message | escape }}"
         data-required-message="{{ section.settings.required_message | escape }}"
         data-loading-label="{{ section.settings.loading_label | escape }}"
@@ -130,6 +132,20 @@
       "id": "form_guid",
       "label": "Form GUID",
       "default": "7d807dfc-0b9f-4c9c-b2c2-b922f297063c"
+    },
+    {
+      "type": "text",
+      "id": "submit_endpoint",
+      "label": "Submit endpoint",
+      "default": "https://hocky-name-generator-seven.vercel.app/api/hubspot-form-submit",
+      "info": "Relay that writes the submission to HubSpot's CRM API. The private-app token lives there, never in the theme."
+    },
+    {
+      "type": "text",
+      "id": "form_name",
+      "label": "Form name",
+      "default": "Team Discount Form",
+      "info": "Stored on the contact as ts_intake_source, matching what the HubSpot form used to stamp."
     },
     {
       "type": "header",
