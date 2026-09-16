@@ -159,7 +159,7 @@
       </style>
       {%- assign heading_text_mobile = heading_block.settings.heading | replace: '-br-', '<br>' -%}
       {%- assign heading_text_desktop = heading_block.settings.heading | replace: '-br-', '' -%}
-      <div class="collection__heading md:text-{{ heading_block.settings.heading_alignment }} text-{{ heading_block.settings.heading_alignment_mobile }}" {{ heading_block.shopify_attributes }}>
+      <div class="collection__heading md:text-{{ heading_block.settings.heading_alignment }} text-{{ heading_block.settings.heading_alignment_mobile }}" style="padding-top: {{ heading_block.settings.padding_top }}px;padding-bottom: {{ heading_block.settings.padding_bottom }}px;" {{ heading_block.shopify_attributes }}>
         <{{ heading_block.settings.heading_tag }} class="mobileEl heading leading-none {{ heading_block.settings.heading_size }}">
           {%- render 'heading-content',
             content: heading_text_mobile,
@@ -1014,6 +1014,26 @@
           "id": "heading_alignment_mobile",
           "default": "left",
           "label": "t:sections.global.settings.text_alignment_mobile.label"
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "min": 0,
+          "max": 120,
+          "step": 4,
+          "unit": "px",
+          "label": "t:sections.global.settings.padding_top.label",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "min": 0,
+          "max": 120,
+          "step": 4,
+          "unit": "px",
+          "label": "t:sections.global.settings.padding_bottom.label",
+          "default": 24
         },
         {
           "type": "header",
