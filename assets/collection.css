@@ -579,8 +579,3 @@
     justify-content: flex-start;
   }
 }
-
-/* Standalone row on collections that have no heading block. */
-.baselayer-heading-row--standalone {
-  margin-block-end: clamp(var(--sp-5), 1.473vw, var(--sp-7));
-}

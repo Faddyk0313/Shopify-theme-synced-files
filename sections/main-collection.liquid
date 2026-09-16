@@ -254,24 +254,6 @@
       {% comment %} End TBG CUSTOM CODE {% endcomment %}
     {%- endif -%}
 
-    {%- comment -%}
-      TBG CUSTOM CODE - collections without a heading block (e.g. neck-guard, which falls
-      back to the default collection template) still need the 2.0 / 3.0 buttons, so render
-      them standalone here. The heading-row copy above covers the with-heading case.
-    {%- endcomment -%}
-    {%- if baselayer_toggle_enabled -%}
-      {%- unless heading_block != blank and heading_block.settings.heading != blank -%}
-        <div class="baselayer-heading-row baselayer-heading-row--standalone flex justify-start lg:justify-end">
-          {%- render 'baselayer-filter',
-            label: baselayer_label,
-            active: baselayer_param,
-            size_class: section.settings.baselayer_button_size,
-            font_size: section.settings.baselayer_button_font_size
-          -%}
-        </div>
-      {%- endunless -%}
-    {%- endif -%}
-
     {%- if description != blank and collection.description != blank -%}
       <div class="rte collection__description" {{ description.shopify_attributes }}>
         {{- collection.description -}}
@@ -339,6 +321,23 @@
                   </button>
                 </div>
               {%- endif -%}
+            {%- endif -%}
+
+            {%- comment -%}
+              TBG CUSTOM CODE - collections without a heading block (e.g. neck-guard, which
+              falls back to the default collection template) have nowhere to put the
+              2.0 / 3.0 buttons, so they sit in the topbar beside the filter toggle.
+              The heading-row copy above covers the with-heading case.
+            {%- endcomment -%}
+            {%- if baselayer_toggle_enabled -%}
+              {%- unless heading_block != blank and heading_block.settings.heading != blank -%}
+                {%- render 'baselayer-filter',
+                  label: baselayer_label,
+                  active: baselayer_param,
+                  size_class: section.settings.baselayer_button_size,
+                  font_size: section.settings.baselayer_button_font_size
+                -%}
+              {%- endunless -%}
             {%- endif -%}
 
             {%- if subcollections != blank -%}
