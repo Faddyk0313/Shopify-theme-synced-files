@@ -969,6 +969,8 @@
       "settings": {
         "portal_id": "46588550",
         "form_guid": "7d807dfc-0b9f-4c9c-b2c2-b922f297063c",
+        "submit_endpoint": "https://hocky-name-generator-seven.vercel.app/api/hubspot-form-submit",
+        "form_name": "Team Discount Form",
         "branch_rules": "from 1: ts_team_sales_persona in \"I am the decision maker for team purchases\",\"I influence or help coordinate purchases\" and ts_custom_interest in \"Yes\" => goto 3\nfrom 1: ts_team_sales_persona in \"I am the decision maker for team purchases\",\"I influence or help coordinate purchases\" and ts_custom_interest in \"No\" => goto 4\nfrom 2: ts_team_sales_persona in \"I am a parent/player/supporter\" => goto 4",
         "gate_field": "email",
         "next_label": "Next",
