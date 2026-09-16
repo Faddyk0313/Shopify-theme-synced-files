@@ -160,7 +160,8 @@
       as "pageurl" on a normal page load; on a section-render request (?section_id=) it
       may be empty, so request.url is the fallback. Between them the query is available.
     endcomment
-    assign baselayer_page_url = content_for_header | split: '"pageurl":"' | last | split: '"' | first
+    assign baselayer_cfh_url = content_for_header | split: '"pageurl":"' | last | split: '"' | first
+    assign baselayer_page_url = baselayer_cfh_url
     unless baselayer_page_url contains '?'
       assign baselayer_page_url = request.url
     endunless
@@ -257,6 +258,42 @@
             </button>
           {%- endfor -%}
         </baselayer-filter>
+
+        {%- comment -%}
+          TBG CUSTOM CODE - TEMPORARY DEBUG PANEL.
+          Hidden from live users. To reveal it, append &bldebug=1 to the URL,
+          or run this in the browser console:
+            document.querySelector('#BaselayerDebug').hidden = false
+          REMOVE THIS BLOCK ONCE THE FILTER IS CONFIRMED WORKING.
+        {%- endcomment -%}
+        <div
+          id="BaselayerDebug"
+          hidden
+          style="position:fixed;bottom:0;left:0;z-index:99999;max-width:100%;max-height:50vh;overflow:auto;background:#111;color:#0f0;font:12px/1.5 monospace;padding:12px;white-space:pre-wrap;word-break:break-all;"
+        >
+<strong style="color:#ff0">BASELAYER DEBUG</strong>
+content_for_header empty?   : {% if content_for_header == blank %}YES (section render){% else %}no{% endif %}
+cfh pageurl                 : [{{ baselayer_cfh_url }}]
+request.url                 : [{{ request.url }}]
+request.path                : [{{ request.path }}]
+chosen page_url             : [{{ baselayer_page_url }}]
+derived query               : [{{ baselayer_query }}]
+baselayer_param             : [{{ baselayer_param }}]
+show_2 / show_3             : {{ baselayer_show_2 }} / {{ baselayer_show_3 }}
+toggle_enabled              : {{ baselayer_toggle_enabled }}
+collection.handle           : [{{ collection.handle }}]
+products in loop            : {{ collection.products.size }}
+        </div>
+        <script>
+          (function () {
+            try {
+              if (new URL(window.location.href).searchParams.get('bldebug') === '1') {
+                var el = document.getElementById('BaselayerDebug');
+                if (el) el.hidden = false;
+              }
+            } catch (e) {}
+          })();
+        </script>
       </div>
       {%- endif -%}
       {% comment %} End TBG CUSTOM CODE {% endcomment %}
