@@ -566,8 +566,11 @@
 
 /*! TBG CUSTOM CODE - Baselayer 2.0 / 3.0 quick-filter buttons */
 
+/* Colours, borders and hover fill come from the theme's .button--primary /
+   .button--secondary styles. Only size-related values are overridden here. */
 .baselayer-filter__item {
   text-transform: none;
+  font-size: var(--baselayer-button-font-size, var(--text-sm));
 }
 
 /* Beside the heading on desktop, below it and left-aligned on mobile. */

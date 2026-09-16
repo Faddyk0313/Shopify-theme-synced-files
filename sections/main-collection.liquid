@@ -160,8 +160,7 @@
       as "pageurl" on a normal page load; on a section-render request (?section_id=) it
       may be empty, so request.url is the fallback. Between them the query is available.
     endcomment
-    assign baselayer_cfh_url = content_for_header | split: '"pageurl":"' | last | split: '"' | first
-    assign baselayer_page_url = baselayer_cfh_url
+    assign baselayer_page_url = content_for_header | split: '"pageurl":"' | last | split: '"' | first
     unless baselayer_page_url contains '?'
       assign baselayer_page_url = request.url
     endunless
@@ -209,9 +208,9 @@
           The block's own padding moves to this wrapper so the merchant's configured
           spacing still surrounds the pair.
         {%- endcomment -%}
-        <div class="baselayer-heading-row flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 lg:gap-8" style="padding-top: {{ heading_block.settings.padding_top }}px;padding-bottom: {{ heading_block.settings.padding_bottom }}px;">
+        <div class="baselayer-heading-row flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-8" style="padding-top: {{ heading_block.settings.padding_top }}px;padding-bottom: {{ heading_block.settings.padding_bottom }}px;">
       {%- endif -%}
-      <div class="collection__heading{% if baselayer_toggle_enabled %} lg:grow{% endif %} md:text-{{ heading_block.settings.heading_alignment }} text-{{ heading_block.settings.heading_alignment_mobile }}"{% unless baselayer_toggle_enabled %} style="padding-top: {{ heading_block.settings.padding_top }}px;padding-bottom: {{ heading_block.settings.padding_bottom }}px;"{% endunless %} {{ heading_block.shopify_attributes }}>
+      <div class="collection__heading md:text-{{ heading_block.settings.heading_alignment }} text-{{ heading_block.settings.heading_alignment_mobile }}"{% unless baselayer_toggle_enabled %} style="padding-top: {{ heading_block.settings.padding_top }}px;padding-bottom: {{ heading_block.settings.padding_bottom }}px;"{% endunless %} {{ heading_block.shopify_attributes }}>
         <{{ heading_block.settings.heading_tag }} class="mobileEl heading leading-none {{ heading_block.settings.heading_size }}">
           {%- render 'heading-content',
             content: heading_text_mobile,
@@ -238,6 +237,7 @@
           role="group"
           aria-label="Filter by Baselayer version"
           data-section-id="{{ section.id }}"
+          style="--baselayer-button-font-size: {{ section.settings.baselayer_button_font_size }}px;"
         >
           {%- assign baselayer_options = '2,3' | split: ',' -%}
           {%- for baselayer_value in baselayer_options -%}
@@ -249,7 +249,7 @@
             -%}
             <button
               type="button"
-              class="baselayer-filter__item tab__item button button--small whitespace-nowrap{% if baselayer_is_active %} button--primary{% else %} button--secondary{% endif %}"
+              class="baselayer-filter__item button{% if section.settings.baselayer_button_size != blank %} {{ section.settings.baselayer_button_size }}{% endif %} whitespace-nowrap{% if baselayer_is_active %} button--primary{% else %} button--secondary{% endif %}"
               is="hover-button"
               data-baselayer-value="{{ baselayer_value }}"
               aria-pressed="{% if baselayer_is_active %}true{% else %}false{% endif %}"
@@ -260,42 +260,6 @@
           {%- endfor -%}
         </baselayer-filter>
 
-        {%- comment -%}
-          TBG CUSTOM CODE - TEMPORARY DEBUG PANEL.
-          Hidden from live users. To reveal it, append &bldebug=1 to the URL,
-          or run this in the browser console:
-            document.querySelector('#BaselayerDebug').hidden = false
-          REMOVE THIS BLOCK ONCE THE FILTER IS CONFIRMED WORKING.
-        {%- endcomment -%}
-        <div
-          id="BaselayerDebug"
-          hidden
-          style="position:fixed;bottom:0;left:0;z-index:99999;max-width:100%;max-height:50vh;overflow:auto;background:#111;color:#0f0;font:12px/1.5 monospace;padding:12px;white-space:pre-wrap;word-break:break-all;"
-        >
-<strong style="color:#ff0">BASELAYER DEBUG</strong>
-content_for_header empty?   : {% if content_for_header == blank %}YES (section render){% else %}no{% endif %}
-cfh pageurl                 : [{{ baselayer_cfh_url }}]
-request.url                 : [{{ request.url }}]
-request.path                : [{{ request.path }}]
-chosen page_url             : [{{ baselayer_page_url }}]
-derived query               : [{{ baselayer_query }}]
-baselayer_param             : [{{ baselayer_param }}]
-collection.sort_by          : [{{ collection.sort_by }}]
-show_2 / show_3             : {{ baselayer_show_2 }} / {{ baselayer_show_3 }}
-toggle_enabled              : {{ baselayer_toggle_enabled }}
-collection.handle           : [{{ collection.handle }}]
-products in loop            : {{ collection.products.size }}
-        </div>
-        <script>
-          (function () {
-            try {
-              if (new URL(window.location.href).searchParams.get('bldebug') === '1') {
-                var el = document.getElementById('BaselayerDebug');
-                if (el) el.hidden = false;
-              }
-            } catch (e) {}
-          })();
-        </script>
       </div>
       {%- endif -%}
       {% comment %} End TBG CUSTOM CODE {% endcomment %}
@@ -1037,6 +1001,44 @@ products in loop            : {{ collection.products.size }}
       ],
       "default": "secondary",
       "label": "t:sections.main-collection.settings.buttons_style.label"
+    },
+    {
+      "type": "header",
+      "content": "Baselayer 2.0 / 3.0 buttons"
+    },
+    {
+      "type": "paragraph",
+      "content": "Only shown on the 'cut-resistant-baselayer' collection. Colours and borders follow the theme's standard button styles."
+    },
+    {
+      "type": "select",
+      "id": "baselayer_button_size",
+      "options": [
+        {
+          "value": "button--small",
+          "label": "Small"
+        },
+        {
+          "value": "",
+          "label": "Medium"
+        },
+        {
+          "value": "button--sm",
+          "label": "Large"
+        }
+      ],
+      "default": "button--small",
+      "label": "Button size"
+    },
+    {
+      "type": "range",
+      "id": "baselayer_button_font_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 14
     },
     {
       "type": "header",
