@@ -1892,10 +1892,13 @@
         "field_gb3itt",
         "field_hmXUyk"
       ],
+      "disabled": true,
       "name": "Team Sales Form",
       "settings": {
         "portal_id": "46588550",
         "form_guid": "d7bcd3f3-9615-4cde-a94c-0ca255d083ff",
+        "submit_endpoint": "https://hocky-name-generator-seven.vercel.app/api/hubspot-form-submit",
+        "form_name": "Team Sales Form",
         "branch_rules": "from 1: ts_team_sales_persona in \"I am the decision maker for team purchases\",\"I influence or help coordinate purchases\" => goto 3",
         "gate_field": "email",
         "upload_endpoint": "https://hocky-name-generator-seven.vercel.app/api/hubspot-logo-upload",
@@ -1938,7 +1941,6 @@
     },
     "custom_liquid_ijgnyq": {
       "type": "custom-liquid",
-      "disabled": true,
       "name": "t:sections.custom-liquid.name",
       "settings": {
         "liquid": "<script src=\"https://js.hsforms.net/forms/embed/46588550.js\" defer></script>\n<div class=\"hs-form-frame\" data-region=\"na1\" data-form-id=\"d7bcd3f3-9615-4cde-a94c-0ca255d083ff\" data-portal-id=\"46588550\"></div>",
