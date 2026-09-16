@@ -29,11 +29,13 @@
       <input type="hidden" name="page" value="" />
 
       {%- comment -%}
-        TBG CUSTOM CODE - Baselayer 2.0 / 3.0 toggle (cut-resistant-baselayer collection).
-        Carried as a hidden field so the selection survives sidebar filter and sort
-        changes, which rebuild the URL purely from this form's data.
+        TBG CUSTOM CODE - 2.0 / 3.0 product toggle. Carried as a hidden field so the
+        selection survives sidebar filter and sort changes, which rebuild the URL
+        purely from this form's data. Keep these handles in sync with the `case`
+        block in sections/main-collection.liquid.
       {%- endcomment -%}
-      {%- if results.handle == 'cut-resistant-baselayer' -%}
+      {%- assign baselayer_handles = 'cut-resistant-baselayer,neck-guard' | split: ',' -%}
+      {%- if baselayer_handles contains results.handle -%}
         {%- liquid
           assign baselayer_current = ''
           assign baselayer_page_url = content_for_header | split: '"pageurl":"' | last | split: '"' | first

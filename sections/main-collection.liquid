@@ -140,16 +140,26 @@
   endfor
 
   comment
-    TBG CUSTOM CODE - Baselayer 2.0 / 3.0 toggle buttons (cut-resistant-baselayer collection only).
-    Products with type 'Baselayer 3.0' are 3.0; every other product is treated as 2.0.
+    TBG CUSTOM CODE - 2.0 / 3.0 product toggle buttons.
+    Enabled per collection handle below. Products whose type matches the configured
+    3.0 type are "3.0"; every other product in the collection is treated as "2.0".
     The `bl` request param is submitted through the existing facet form, so the theme's
     AJAX section-render + fade/stagger animation applies for free.
-    Both active or both inactive == show everything.
+    Neither active == show everything.
   endcomment
   assign baselayer_toggle_enabled = false
-  if collection.handle == 'cut-resistant-baselayer'
-    assign baselayer_toggle_enabled = true
-  endif
+  assign baselayer_label = ''
+  assign baselayer_type_3 = ''
+  case collection.handle
+    when 'cut-resistant-baselayer'
+      assign baselayer_toggle_enabled = true
+      assign baselayer_label = 'Baselayer'
+      assign baselayer_type_3 = 'baselayer 3.0'
+    when 'neck-guard'
+      assign baselayer_toggle_enabled = true
+      assign baselayer_label = 'Neck Guard'
+      assign baselayer_type_3 = 'neck guard 3.0'
+  endcase
 
   assign baselayer_show_2 = true
   assign baselayer_show_3 = true
@@ -231,38 +241,35 @@
         </{{ heading_block.settings.heading_tag }}>
       </div>
       {%- if baselayer_toggle_enabled -%}
-        {%- comment -%} TBG CUSTOM CODE - Baselayer 2.0 / 3.0 quick filter buttons {%- endcomment -%}
-        <baselayer-filter
-          class="baselayer-filter flex flex-wrap items-center gap-3 shrink-0"
-          role="group"
-          aria-label="Filter by Baselayer version"
-          data-section-id="{{ section.id }}"
-          style="--baselayer-button-font-size: {{ section.settings.baselayer_button_font_size }}px;"
-        >
-          {%- assign baselayer_options = '2,3' | split: ',' -%}
-          {%- for baselayer_value in baselayer_options -%}
-            {%- liquid
-              assign baselayer_is_active = false
-              if baselayer_param == baselayer_value
-                assign baselayer_is_active = true
-              endif
-            -%}
-            <button
-              type="button"
-              class="baselayer-filter__item button{% if section.settings.baselayer_button_size != blank %} {{ section.settings.baselayer_button_size }}{% endif %} whitespace-nowrap{% if baselayer_is_active %} button--primary{% else %} button--secondary{% endif %}"
-              is="hover-button"
-              data-baselayer-value="{{ baselayer_value }}"
-              aria-pressed="{% if baselayer_is_active %}true{% else %}false{% endif %}"
-            >
-              <span class="btn-fill" data-fill></span>
-              <span class="btn-text">Baselayer {{ baselayer_value }}.0</span>
-            </button>
-          {%- endfor -%}
-        </baselayer-filter>
+        {%- comment -%} TBG CUSTOM CODE - 2.0 / 3.0 quick filter buttons {%- endcomment -%}
+        {%- render 'baselayer-filter',
+          label: baselayer_label,
+          active: baselayer_param,
+          size_class: section.settings.baselayer_button_size,
+          font_size: section.settings.baselayer_button_font_size
+        -%}
 
       </div>
       {%- endif -%}
       {% comment %} End TBG CUSTOM CODE {% endcomment %}
+    {%- endif -%}
+
+    {%- comment -%}
+      TBG CUSTOM CODE - collections without a heading block (e.g. neck-guard, which falls
+      back to the default collection template) still need the 2.0 / 3.0 buttons, so render
+      them standalone here. The heading-row copy above covers the with-heading case.
+    {%- endcomment -%}
+    {%- if baselayer_toggle_enabled -%}
+      {%- unless heading_block != blank and heading_block.settings.heading != blank -%}
+        <div class="baselayer-heading-row baselayer-heading-row--standalone flex justify-start lg:justify-end">
+          {%- render 'baselayer-filter',
+            label: baselayer_label,
+            active: baselayer_param,
+            size_class: section.settings.baselayer_button_size,
+            font_size: section.settings.baselayer_button_font_size
+          -%}
+        </div>
+      {%- endunless -%}
     {%- endif -%}
 
     {%- if description != blank and collection.description != blank -%}
@@ -346,7 +353,7 @@
                 <p id="ProductCount" class="grow text-base lg:text-lg" role="status">
                   {%- liquid
                     comment
-                      TBG CUSTOM CODE - when a Baselayer button is active the count must
+                      TBG CUSTOM CODE - when a 2.0/3.0 button is active the count must
                       reflect only the matching products, since Shopify's own counts
                       don't know about the `bl` param.
                     endcomment
@@ -354,7 +361,7 @@
                       assign baselayer_visible_count = 0
                       for product in collection.products
                         assign baselayer_loop_type = product.type | downcase | strip
-                        if baselayer_loop_type == 'baselayer 3.0'
+                        if baselayer_loop_type == baselayer_type_3
                           if baselayer_show_3
                             assign baselayer_visible_count = baselayer_visible_count | plus: 1
                           endif
@@ -519,13 +526,13 @@
               {%- for product in collection.products -%}
                 {%- liquid
                   comment
-                    TBG CUSTOM CODE - Baselayer 2.0 / 3.0 toggle. Skip products that don't
-                    match the active button. 'Baselayer 3.0' type == 3.0, anything else == 2.0.
+                    TBG CUSTOM CODE - 2.0 / 3.0 toggle. Skip products that don't match the
+                    active button. The configured 3.0 product type == 3.0, anything else == 2.0.
                   endcomment
                   if baselayer_toggle_enabled and baselayer_param != blank
                     assign baselayer_product_type = product.type | downcase | strip
                     assign baselayer_is_three = false
-                    if baselayer_product_type == 'baselayer 3.0'
+                    if baselayer_product_type == baselayer_type_3
                       assign baselayer_is_three = true
                     endif
                     if baselayer_is_three and baselayer_show_3 == false
@@ -1004,11 +1011,11 @@
     },
     {
       "type": "header",
-      "content": "Baselayer 2.0 / 3.0 buttons"
+      "content": "2.0 / 3.0 filter buttons"
     },
     {
       "type": "paragraph",
-      "content": "Only shown on the 'cut-resistant-baselayer' collection. Colours and borders follow the theme's standard button styles."
+      "content": "Shown on the Cut-Resistant Baselayer and Neck Guard collections. Colours and borders follow the theme's standard button styles."
     },
     {
       "type": "select",

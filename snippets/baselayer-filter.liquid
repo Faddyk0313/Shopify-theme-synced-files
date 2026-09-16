@@ -1,0 +1,44 @@
+{%- doc -%}
+  TBG CUSTOM CODE - Renders the 2.0 / 3.0 product toggle buttons.
+
+  Checkbox-like behaviour: the active button can be clicked again to clear it.
+  Neither active means "show everything". The selection travels in the `bl` query
+  param, which is read back in sections/main-collection.liquid.
+
+  @param {string} label - Product name shown on the buttons (e.g. 'Baselayer')
+  @param {string} active - Currently active value ('2', '3', or blank)
+  @param {string} [size_class] - Theme button size class (e.g. 'button--small')
+  @param {number} [font_size] - Button font size in px
+
+  @example
+  {% render 'baselayer-filter', label: 'Neck Guard', active: baselayer_param %}
+{%- enddoc -%}
+
+<baselayer-filter
+  class="baselayer-filter flex flex-wrap items-center gap-3 shrink-0"
+  role="group"
+  aria-label="Filter by {{ label }} version"
+  {% if font_size != blank %}
+    style="--baselayer-button-font-size: {{ font_size }}px;"
+  {% endif %}
+>
+  {%- assign baselayer_options = '2,3' | split: ',' -%}
+  {%- for baselayer_value in baselayer_options -%}
+    {%- liquid
+      assign is_active = false
+      if active == baselayer_value
+        assign is_active = true
+      endif
+    -%}
+    <button
+      type="button"
+      class="baselayer-filter__item button{% if size_class != blank %} {{ size_class }}{% endif %} whitespace-nowrap{% if is_active %} button--primary{% else %} button--secondary{% endif %}"
+      is="hover-button"
+      data-baselayer-value="{{ baselayer_value }}"
+      aria-pressed="{% if is_active %}true{% else %}false{% endif %}"
+    >
+      <span class="btn-fill" data-fill></span>
+      <span class="btn-text">{{ label }} {{ baselayer_value }}.0</span>
+    </button>
+  {%- endfor -%}
+</baselayer-filter>
