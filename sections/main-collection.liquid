@@ -166,10 +166,11 @@
       assign baselayer_page_url = request.url
     endunless
     comment
-      Normalize separators to '&' so the first param matches the same way as the rest,
-      and keep the leading '&' so 'bl=' can't match the tail of another param name.
+      content_for_header is JSON, so '&' arrives escaped as '\u0026' - unescape it first
+      or the query can't be split into params. Keep a leading '&' so 'bl=' can't match
+      the tail of another param name (e.g. 'tbl=').
     endcomment
-    assign baselayer_query = baselayer_page_url | split: '?' | last | prepend: '&'
+    assign baselayer_query = baselayer_page_url | split: '?' | last | replace: '\u0026', '&' | prepend: '&'
     if baselayer_query contains '&bl='
       assign baselayer_param = baselayer_query | split: '&bl=' | last | split: '&' | first
     endif
@@ -279,6 +280,7 @@ request.path                : [{{ request.path }}]
 chosen page_url             : [{{ baselayer_page_url }}]
 derived query               : [{{ baselayer_query }}]
 baselayer_param             : [{{ baselayer_param }}]
+collection.sort_by          : [{{ collection.sort_by }}]
 show_2 / show_3             : {{ baselayer_show_2 }} / {{ baselayer_show_3 }}
 toggle_enabled              : {{ baselayer_toggle_enabled }}
 collection.handle           : [{{ collection.handle }}]

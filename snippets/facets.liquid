@@ -40,7 +40,11 @@
           unless baselayer_page_url contains '?'
             assign baselayer_page_url = request.url
           endunless
-          assign baselayer_query = baselayer_page_url | split: '?' | last | prepend: '&'
+          comment
+            content_for_header is JSON, so '&' arrives escaped as '\u0026' - unescape
+            it before splitting the query into params.
+          endcomment
+          assign baselayer_query = baselayer_page_url | split: '?' | last | replace: '\u0026', '&' | prepend: '&'
           if baselayer_query contains '&bl='
             assign baselayer_current = baselayer_query | split: '&bl=' | last | split: '&' | first
           endif
