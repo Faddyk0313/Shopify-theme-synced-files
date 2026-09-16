@@ -138,6 +138,48 @@
       break
     endif
   endfor
+
+  comment
+    TBG CUSTOM CODE - Baselayer 2.0 / 3.0 toggle buttons (cut-resistant-baselayer collection only).
+    Products with type 'Baselayer 3.0' are 3.0; every other product is treated as 2.0.
+    The `bl` request param is submitted through the existing facet form, so the theme's
+    AJAX section-render + fade/stagger animation applies for free.
+    Both active or both inactive == show everything.
+  endcomment
+  assign baselayer_toggle_enabled = false
+  if collection.handle == 'cut-resistant-baselayer'
+    assign baselayer_toggle_enabled = true
+  endif
+
+  assign baselayer_show_2 = true
+  assign baselayer_show_3 = true
+  assign baselayer_param = ''
+  if baselayer_toggle_enabled
+    comment
+      Liquid has no query-param object. content_for_header exposes the full request URL
+      as "pageurl" on a normal page load; on a section-render request (?section_id=) it
+      may be empty, so request.url is the fallback. Between them the query is available.
+    endcomment
+    assign baselayer_page_url = content_for_header | split: '"pageurl":"' | last | split: '"' | first
+    unless baselayer_page_url contains '?'
+      assign baselayer_page_url = request.url
+    endunless
+    comment
+      Normalize separators to '&' so the first param matches the same way as the rest,
+      and keep the leading '&' so 'bl=' can't match the tail of another param name.
+    endcomment
+    assign baselayer_query = baselayer_page_url | split: '?' | last | prepend: '&'
+    if baselayer_query contains '&bl='
+      assign baselayer_param = baselayer_query | split: '&bl=' | last | split: '&' | first
+    endif
+    if baselayer_param == '2'
+      assign baselayer_show_3 = false
+    elsif baselayer_param == '3'
+      assign baselayer_show_2 = false
+    else
+      assign baselayer_param = ''
+    endif
+  endif
 -%}
 
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
@@ -159,7 +201,15 @@
       </style>
       {%- assign heading_text_mobile = heading_block.settings.heading | replace: '-br-', '<br>' -%}
       {%- assign heading_text_desktop = heading_block.settings.heading | replace: '-br-', '' -%}
-      <div class="collection__heading md:text-{{ heading_block.settings.heading_alignment }} text-{{ heading_block.settings.heading_alignment_mobile }}" style="padding-top: {{ heading_block.settings.padding_top }}px;padding-bottom: {{ heading_block.settings.padding_bottom }}px;" {{ heading_block.shopify_attributes }}>
+      {%- if baselayer_toggle_enabled -%}
+        {%- comment -%}
+          TBG CUSTOM CODE - heading and the Baselayer buttons share a row on desktop.
+          The block's own padding moves to this wrapper so the merchant's configured
+          spacing still surrounds the pair.
+        {%- endcomment -%}
+        <div class="baselayer-heading-row flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 lg:gap-8" style="padding-top: {{ heading_block.settings.padding_top }}px;padding-bottom: {{ heading_block.settings.padding_bottom }}px;">
+      {%- endif -%}
+      <div class="collection__heading{% if baselayer_toggle_enabled %} lg:grow{% endif %} md:text-{{ heading_block.settings.heading_alignment }} text-{{ heading_block.settings.heading_alignment_mobile }}"{% unless baselayer_toggle_enabled %} style="padding-top: {{ heading_block.settings.padding_top }}px;padding-bottom: {{ heading_block.settings.padding_bottom }}px;"{% endunless %} {{ heading_block.shopify_attributes }}>
         <{{ heading_block.settings.heading_tag }} class="mobileEl heading leading-none {{ heading_block.settings.heading_size }}">
           {%- render 'heading-content',
             content: heading_text_mobile,
@@ -179,6 +229,36 @@
           -%}
         </{{ heading_block.settings.heading_tag }}>
       </div>
+      {%- if baselayer_toggle_enabled -%}
+        {%- comment -%} TBG CUSTOM CODE - Baselayer 2.0 / 3.0 quick filter buttons {%- endcomment -%}
+        <baselayer-filter
+          class="baselayer-filter flex flex-wrap items-center gap-3 shrink-0"
+          role="group"
+          aria-label="Filter by Baselayer version"
+          data-section-id="{{ section.id }}"
+        >
+          {%- assign baselayer_options = '2,3' | split: ',' -%}
+          {%- for baselayer_value in baselayer_options -%}
+            {%- liquid
+              assign baselayer_is_active = false
+              if baselayer_param == baselayer_value
+                assign baselayer_is_active = true
+              endif
+            -%}
+            <button
+              type="button"
+              class="baselayer-filter__item tab__item button button--small whitespace-nowrap{% if baselayer_is_active %} button--primary{% else %} button--secondary{% endif %}"
+              is="hover-button"
+              data-baselayer-value="{{ baselayer_value }}"
+              aria-pressed="{% if baselayer_is_active %}true{% else %}false{% endif %}"
+            >
+              <span class="btn-fill" data-fill></span>
+              <span class="btn-text">Baselayer {{ baselayer_value }}.0</span>
+            </button>
+          {%- endfor -%}
+        </baselayer-filter>
+      </div>
+      {%- endif -%}
       {% comment %} End TBG CUSTOM CODE {% endcomment %}
     {%- endif -%}
 
@@ -262,7 +342,27 @@
               <div class=" flex justify-between items-center w-full xl:w-fit">
                 <p id="ProductCount" class="grow text-base lg:text-lg" role="status">
                   {%- liquid
-                    if collection.results_count
+                    comment
+                      TBG CUSTOM CODE - when a Baselayer button is active the count must
+                      reflect only the matching products, since Shopify's own counts
+                      don't know about the `bl` param.
+                    endcomment
+                    if baselayer_toggle_enabled and baselayer_param != blank
+                      assign baselayer_visible_count = 0
+                      for product in collection.products
+                        assign baselayer_loop_type = product.type | downcase | strip
+                        if baselayer_loop_type == 'baselayer 3.0'
+                          if baselayer_show_3
+                            assign baselayer_visible_count = baselayer_visible_count | plus: 1
+                          endif
+                        else
+                          if baselayer_show_2
+                            assign baselayer_visible_count = baselayer_visible_count | plus: 1
+                          endif
+                        endif
+                      endfor
+                      echo 'collections.general.product_count_simple' | t: count: baselayer_visible_count
+                    elsif collection.results_count
                       echo 'general.search.results_with_count' | t: terms: collection.terms, count: collection.results_count
                     elsif collection.products_count == collection.all_products_count
                       echo 'collections.general.product_count_simple' | t: count: collection.products_count
@@ -415,6 +515,26 @@
               {%- capture card_sizes -%}(max-width: 639px) calc(100vw / {{ section.settings.columns_mobile }}), calc(min({{ settings.page_width }}px, 100vw) / {{ section.settings.columns }}){%- endcapture -%}
               {%- for product in collection.products -%}
                 {%- liquid
+                  comment
+                    TBG CUSTOM CODE - Baselayer 2.0 / 3.0 toggle. Skip products that don't
+                    match the active button. 'Baselayer 3.0' type == 3.0, anything else == 2.0.
+                  endcomment
+                  if baselayer_toggle_enabled and baselayer_param != blank
+                    assign baselayer_product_type = product.type | downcase | strip
+                    assign baselayer_is_three = false
+                    if baselayer_product_type == 'baselayer 3.0'
+                      assign baselayer_is_three = true
+                    endif
+                    if baselayer_is_three and baselayer_show_3 == false
+                      continue
+                    endif
+                    unless baselayer_is_three
+                      if baselayer_show_2 == false
+                        continue
+                      endif
+                    endunless
+                  endif
+
                   for block in section.blocks
                     if block.type == 'promotion' or block.type == 'promotion_video'
                       if forloop.parentloop.index != block.settings.position

@@ -563,3 +563,16 @@
   visibility: visible;
   pointer-events: auto;
 }
+
+/*! TBG CUSTOM CODE - Baselayer 2.0 / 3.0 quick-filter buttons */
+
+.baselayer-filter__item {
+  text-transform: none;
+}
+
+/* Beside the heading on desktop, below it and left-aligned on mobile. */
+@media screen and (max-width: 1023px) {
+  .baselayer-filter {
+    justify-content: flex-start;
+  }
+}

@@ -28,6 +28,29 @@
     <div class="details" data-filter data-index="{{ context }}-page" hidden>
       <input type="hidden" name="page" value="" />
 
+      {%- comment -%}
+        TBG CUSTOM CODE - Baselayer 2.0 / 3.0 toggle (cut-resistant-baselayer collection).
+        Carried as a hidden field so the selection survives sidebar filter and sort
+        changes, which rebuild the URL purely from this form's data.
+      {%- endcomment -%}
+      {%- if results.handle == 'cut-resistant-baselayer' -%}
+        {%- liquid
+          assign baselayer_current = ''
+          assign baselayer_page_url = content_for_header | split: '"pageurl":"' | last | split: '"' | first
+          unless baselayer_page_url contains '?'
+            assign baselayer_page_url = request.url
+          endunless
+          assign baselayer_query = baselayer_page_url | split: '?' | last | prepend: '&'
+          if baselayer_query contains '&bl='
+            assign baselayer_current = baselayer_query | split: '&bl=' | last | split: '&' | first
+          endif
+          unless baselayer_current == '2' or baselayer_current == '3'
+            assign baselayer_current = ''
+          endunless
+        -%}
+        <input type="hidden" name="bl" value="{{ baselayer_current }}" data-baselayer-input />
+      {%- endif -%}
+
       {%- if results.current_type != blank or results.current_vendor != blank -%}
         <input type="hidden" name="q" value="{{ results.current_vendor | default: results.current_type | escape }}" />
       {%- endif -%}

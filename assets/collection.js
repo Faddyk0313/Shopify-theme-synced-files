@@ -71,7 +71,8 @@ if (!customElements.get('facet-form')) {
         url.search = '';
         searchParams.forEach((value, key) => url.searchParams.append(key, value));
 
-        ['page', 'filter.v.price.gte', 'filter.v.price.lte'].forEach((item) => {
+        // 'bl' is the TBG Baselayer 2.0/3.0 toggle; empty means "show all".
+        ['page', 'bl', 'filter.v.price.gte', 'filter.v.price.lte'].forEach((item) => {
           if (url.searchParams.get(item) === '') {
             url.searchParams.delete(item);
           }
@@ -735,5 +736,102 @@ if (!customElements.get('sub-collections')) {
         window.location.href = this.value;
       }
     }, { extends: 'select' }
+  );
+}
+
+/* TBG CUSTOM CODE
+ * Baselayer 2.0 / 3.0 quick-filter buttons (cut-resistant-baselayer collection).
+ *
+ * Checkbox-like toggles: clicking an inactive button activates it, clicking the
+ * active one clears it. Neither active (or, conceptually, both) means "show all".
+ * The selection is carried in the `bl` query param and applied by Liquid in
+ * main-collection.liquid.
+ *
+ * Rendering is delegated to the existing facet-form so the AJAX section render,
+ * fade/stagger animation, product count and sort state all behave exactly like
+ * the sidebar filters. The buttons themselves are re-rendered from the response,
+ * which keeps their active state in sync.
+ */
+if (!customElements.get('baselayer-filter')) {
+  customElements.define(
+    'baselayer-filter',
+    class BaselayerFilter extends BaseElement {
+      connectedCallback() {
+        super.connectedCallback();
+
+        this.on(this, 'click', this.onClick);
+      }
+
+      get facetForm() {
+        return document.querySelector('form[is="facet-form"]');
+      }
+
+      get activeValue() {
+        const active = this.querySelector('[data-baselayer-value][aria-pressed="true"]');
+        return active ? active.getAttribute('data-baselayer-value') : '';
+      }
+
+      onClick(event) {
+        const button = event.target.closest('[data-baselayer-value]');
+        if (!button || !this.contains(button)) return;
+
+        const value = button.getAttribute('data-baselayer-value');
+        // Toggle off when the already-active button is clicked.
+        const nextValue = this.activeValue === value ? '' : value;
+
+        this.setActive(nextValue);
+        this.render(nextValue);
+      }
+
+      setActive(value) {
+        this.querySelectorAll('[data-baselayer-value]').forEach((button) => {
+          const isActive = button.getAttribute('data-baselayer-value') === value && value !== '';
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+          button.classList.toggle('button--primary', isActive);
+          button.classList.toggle('button--secondary', !isActive);
+        });
+      }
+
+      buildUrl(value) {
+        const form = this.facetForm;
+        // Start from the facet form's own URL so active sidebar filters and sort
+        // are preserved; fall back to the current location when it isn't present.
+        const url = form ? form.buildUrl() : new URL(window.location.href);
+
+        if (value) {
+          url.searchParams.set('bl', value);
+        } else {
+          url.searchParams.delete('bl');
+        }
+
+        url.searchParams.set('section_id', theme.utils.sectionId(this));
+        return url;
+      }
+
+      render(value) {
+        const form = this.facetForm;
+
+        // Keep the hidden field in sync so later sidebar/sort changes, which rebuild
+        // the URL purely from form data, carry the selection along.
+        document
+          .querySelectorAll('form[is="facet-form"] [data-baselayer-input]')
+          .forEach((input) => {
+            input.value = value;
+          });
+
+        if (form) {
+          // Reuse the facet form's render pipeline (animation + partial updates).
+          form.dirty = true;
+          form.renderSection(this.buildUrl(value).toString());
+          return;
+        }
+
+        // No facet form on the page (filtering + sorting both disabled): fall back
+        // to a plain navigation so the buttons still work.
+        const fallback = this.buildUrl(value);
+        fallback.searchParams.delete('section_id');
+        window.location.href = fallback.toString();
+      }
+    }
   );
 }
