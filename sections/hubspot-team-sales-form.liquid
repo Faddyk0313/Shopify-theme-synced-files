@@ -69,16 +69,16 @@
 
         <div class="hs-form__success rte" data-success hidden>
           {%- if section.settings.success_heading != blank -%}
-            <h3 class="{{ section.settings.step_heading_size | default: 'title-sm' }}">{{ section.settings.success_heading }}</h3>
+            <{{section.settings.step_heading_tag}} class="{{ section.settings.step_heading_size | default: 'title-sm' }}">{{ section.settings.success_heading }}</{{step_heading_tag}}>
           {%- endif -%}
           {{ section.settings.success_message }}
 
           {%- if section.settings.success_image != blank or section.settings.success_image_heading != blank -%}
             <div class="hs-form__success-media">
               {%- if section.settings.success_image_heading != blank -%}
-                <h3 class="{{ section.settings.step_heading_size | default: 'title-sm' }}">
+                <{{section.settings.step_heading_tag}} class="{{ section.settings.step_heading_size | default: 'title-sm' }}">
                   {{- section.settings.success_image_heading -}}
-                </h3>
+                </{{section.settings.step_heading_tag}}>
               {%- endif -%}
 
               {%- if section.settings.success_image_text != blank -%}
@@ -298,6 +298,30 @@
     {
       "type": "header",
       "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "step_heading_tag",
+      "label": "Heading tag",
+      "default": "h2",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "div",
+          "label": "Div"
+        }
+      ]
     },
     {
       "type": "select",

@@ -112,15 +112,24 @@
 
       {%- when 'file' -%}
         {%- comment -%}
-          A file input has no value to float a label against, so the label sits above the
-          control instead of using the theme's floating pattern.
+          A file input has no value to float a label against, so the label -- and its
+          help text -- sit above the control instead of using the theme's floating
+          pattern.
 
           The file is not sent to HubSpot's forms API, which is JSON-only. It is uploaded
           to HubSpot File Manager through the relay named by `upload_endpoint` on the
           section, and the URL that comes back is submitted as this field's value --
           `ts_logo_upload` is a text property holding a URL. See assets/hubspot-form.js.
         {%- endcomment -%}
-        <label class="label hs-field__label" for="{{ field_id }}">{{ label }}</label>
+        <label class="label hs-field__label" for="{{ field_id }}">
+          {{- label -}}
+          {%- if block.settings.required -%}
+            <span class="hs-field__required" aria-hidden="true">*</span>
+          {%- endif -%}
+        </label>
+        {%- if block.settings.help_text != blank -%}
+          <p class="hs-field__help text-sm" id="{{ field_id }}-help">{{ block.settings.help_text }}</p>
+        {%- endif -%}
         <input
           class="input"
           type="file"
@@ -192,7 +201,8 @@
       </label>
     {%- endunless -%}
 
-    {%- if block.settings.help_text != blank -%}
+    {%- comment -%}File fields print their own help text above the control.{%- endcomment -%}
+    {%- if block.settings.help_text != blank and field_type != 'file' -%}
       <p class="hs-field__help text-sm" id="{{ field_id }}-help">{{ block.settings.help_text }}</p>
     {%- endif -%}
   </div>
