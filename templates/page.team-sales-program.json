@@ -1752,7 +1752,7 @@
             "span_fixed": false,
             "label_outside": false,
             "placeholder": "",
-            "help_text": "If you don't have final approval yet, no problem — upload what you have and we'll guide you through next steps. Max 4MB — for larger artwork, send your logo to us after submitting.",
+            "help_text": "If you don't have final approval yet, no problem — upload what you have and we'll guide you through next steps. Max 4MB.",
             "options": "",
             "default_value": "",
             "autocomplete": "",
@@ -1892,7 +1892,6 @@
         "field_gb3itt",
         "field_hmXUyk"
       ],
-      "disabled": true,
       "name": "Team Sales Form",
       "settings": {
         "portal_id": "46588550",
