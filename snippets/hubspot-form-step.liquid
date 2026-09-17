@@ -81,7 +81,8 @@
 
   <div class="hs-form__nav">
     {%- unless is_first -%}
-      <button type="button" class="button button--secondary" data-prev>
+      <button type="button" class="button button--secondary button--fixed" is="hover-button" data-prev>
+        <span class="btn-fill" data-fill></span>
         <span class="btn-text">{{ section.settings.prev_label | default: 'Previous' }}</span>
       </button>
     {%- endunless -%}
