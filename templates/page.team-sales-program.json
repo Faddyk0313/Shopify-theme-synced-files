@@ -1892,6 +1892,7 @@
         "field_gb3itt",
         "field_hmXUyk"
       ],
+      "disabled": true,
       "name": "Team Sales Form",
       "settings": {
         "portal_id": "46588550",
