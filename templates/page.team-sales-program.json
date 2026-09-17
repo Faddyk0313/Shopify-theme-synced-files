@@ -1180,7 +1180,7 @@
           "type": "step",
           "settings": {
             "heading": "HELP US REACH THE RIGHT PERSON",
-            "content": "<p>If someone else handles team purchasing, share what you know and we'll take it from there.</p><p>If someone else approves purchases, please share their contact details below.<br/>If you're unsure, no problem — share what you can and we'll help identify the right person.</p>",
+            "content": "<p>If someone else handles team purchasing, share what you know and we'll take it from there.</p>",
             "image_heading": "",
             "image_alt": "",
             "image_link": "",
@@ -1536,7 +1536,7 @@
             "span_fixed": false,
             "label_outside": true,
             "placeholder": "",
-            "help_text": "",
+            "help_text": "If someone else approves purchases, please share their contact details below.If you're unsure, no problem — share what you can and we'll help identify the right person.",
             "options": "Yes|Yes\nNo|No\nNot Sure|I can find out",
             "default_value": "",
             "autocomplete": "",
