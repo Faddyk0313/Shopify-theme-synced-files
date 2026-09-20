@@ -372,6 +372,7 @@
         "collection": "",
         "products": [
           "cut-resistant-baselayer-3-0-sticker-pack",
+          "cut-resistant-baselayer-3-0-galaxy-splatter",
           "cut-resistant-baselayer-3-0-early-riser",
           "cut-resistant-baselayer-3-0-whiteout-camo",
           "cut-resistant-baselayer-3-0-blackout-camo",
@@ -470,7 +471,6 @@
         "collection": "",
         "products": [
           "cut-resistant-baselayer-3-0-red",
-          "cut-resistant-baselayer-3-0-galaxy-splatter",
           "cut-resistant-baselayer-3-0-orange",
           "cut-resistant-baselayer-3-0-pink-frost"
         ],
@@ -757,6 +757,8 @@
         "enable_sorting": true,
         "show_on_model": false,
         "buttons_style": "secondary",
+        "baselayer_button_size": "button--small",
+        "baselayer_button_font_size": 14,
         "padding_top": 36,
         "padding_bottom": 72,
         "divider": false,
