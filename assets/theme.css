@@ -17107,6 +17107,6 @@ body.tbg-strict-on .inventoryAvailable { display: none !important; }
   display: none !important;
 }
 
-gorgias-chat-container {
+#gorgias-chat-container {
   display: none;
 }
