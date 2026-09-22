@@ -17106,3 +17106,7 @@ body.tbg-strict-on .inventoryAvailable { display: none !important; }
 #shopify-buyer-consent {
   display: none !important;
 }
+
+gorgias-chat-container {
+  display: none;
+}
