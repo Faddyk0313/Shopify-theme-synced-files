@@ -197,6 +197,7 @@
         },
         "item_Jm3YLh": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/1000066_EarlyRiser_front.png",
             "hide_image": false,
@@ -216,6 +217,7 @@
         },
         "item_TM8m6X": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/1000164_galaxysplatter_main.png",
             "hide_image": false,
@@ -229,70 +231,17 @@
             "image": "shopify://shop_images/red_302ee0c7-5a36-4b90-a81a-8ac95f158d1c.jpg",
             "hide_image": false,
             "heading": "<h3>Red - 3.0</h3>",
-            "text": "<p>Coming Soon</p>"
+            "text": "<p>In QC</p>"
           }
         },
         "item_mbTidh": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/mistery_pdp_image.png",
             "hide_image": false,
             "heading": "<h3>Limited Edition Drop - 3.0</h3>",
             "text": "<p>Season Start</p>"
-          }
-        },
-        "item_pgNQhE": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/KELLY_636ac4da-0989-40e1-bff3-b707d9e6846e.png",
-            "hide_image": false,
-            "heading": "<h3>Kelly - 3.0</h3>",
-            "text": "<p>Coming This Fall</p>"
-          }
-        },
-        "item_ji4wf8": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/FOREST_34e7bef4-9cb0-4945-b1d4-6ad1df83f9cf.png",
-            "hide_image": false,
-            "heading": "<h3>Forest - 3.0</h3>",
-            "text": "<p>Coming This Fall</p>"
-          }
-        },
-        "item_hgtp3f": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/MAROON_ed249f21-0410-49a5-81eb-52539e80c99e.png",
-            "hide_image": false,
-            "heading": "<h3>Maroon - 3.0</h3>",
-            "text": "<p>Coming This Fall</p>"
-          }
-        },
-        "item_QmCh4r": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/GOLD_6229d2cb-f419-42c1-a4f1-e3f659847366.png",
-            "hide_image": false,
-            "heading": "<h3>Team Gold - 3.0</h3>",
-            "text": "<p>Coming This Fall</p>"
-          }
-        },
-        "item_C7FRJH": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/ORANGE_3c220b1d-784e-4878-801c-813e4c5bce31.png",
-            "hide_image": false,
-            "heading": "<h3>Orange - 3.0</h3>",
-            "text": "<p>Coming This Fall</p>"
-          }
-        },
-        "item_Uiqtc9": {
-          "type": "item",
-          "settings": {
-            "image": "shopify://shop_images/CAROLINA.png",
-            "hide_image": false,
-            "heading": "<h3>Carolina - 3.0</h3>",
-            "text": "<p>Coming This Fall</p>"
           }
         },
         "item_RCAg8x": {
@@ -301,7 +250,70 @@
             "image": "shopify://shop_images/PINK_FROST.png",
             "hide_image": false,
             "heading": "<h3>Pink Frost - 3.0</h3>",
-            "text": "<p>Coming This Fall</p>"
+            "text": "<p>In Sewing</p>"
+          }
+        },
+        "item_C7FRJH": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/ORANGE_3c220b1d-784e-4878-801c-813e4c5bce31.png",
+            "hide_image": false,
+            "heading": "<h3>Orange - 3.0</h3>",
+            "text": "<p>In Sewing</p>"
+          }
+        },
+        "item_ji4wf8": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/FOREST_34e7bef4-9cb0-4945-b1d4-6ad1df83f9cf.png",
+            "hide_image": false,
+            "heading": "<h3>Forest - 3.0</h3>",
+            "text": "<p>Coming Soon</p>"
+          }
+        },
+        "item_WrtcdP": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/PURPLE-2.png",
+            "hide_image": false,
+            "heading": "<h3>Purple - 3.0</h3>",
+            "text": "<p>Coming Soon</p>"
+          }
+        },
+        "item_pgNQhE": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/KELLY_636ac4da-0989-40e1-bff3-b707d9e6846e.png",
+            "hide_image": false,
+            "heading": "<h3>Kelly - 3.0</h3>",
+            "text": "<p>Coming Soon</p>"
+          }
+        },
+        "item_hgtp3f": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/MAROON_ed249f21-0410-49a5-81eb-52539e80c99e.png",
+            "hide_image": false,
+            "heading": "<h3>Maroon - 3.0</h3>",
+            "text": "<p>Coming Soon</p>"
+          }
+        },
+        "item_Uiqtc9": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/CAROLINA.png",
+            "hide_image": false,
+            "heading": "<h3>Carolina - 3.0</h3>",
+            "text": "<p>Coming Soon</p>"
+          }
+        },
+        "item_QmCh4r": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/GOLD_6229d2cb-f419-42c1-a4f1-e3f659847366.png",
+            "hide_image": false,
+            "heading": "<h3>Team Gold - 3.0</h3>",
+            "text": "<p>Coming Soon</p>"
           }
         },
         "item_gVQWbN": {
@@ -310,7 +322,7 @@
             "image": "shopify://shop_images/mistery_pdp_image.png",
             "hide_image": false,
             "heading": "<h3>Limited Edition Drop - 3.0</h3>",
-            "text": "<p>Fall</p>"
+            "text": "<p>Nov 15</p>"
           }
         }
       },
@@ -328,13 +340,14 @@
         "item_TM8m6X",
         "item_GyzRU6",
         "item_mbTidh",
-        "item_pgNQhE",
-        "item_ji4wf8",
-        "item_hgtp3f",
-        "item_QmCh4r",
-        "item_C7FRJH",
-        "item_Uiqtc9",
         "item_RCAg8x",
+        "item_C7FRJH",
+        "item_ji4wf8",
+        "item_WrtcdP",
+        "item_pgNQhE",
+        "item_hgtp3f",
+        "item_Uiqtc9",
+        "item_QmCh4r",
         "item_gVQWbN"
       ],
       "name": "SS - Timeline #3",
