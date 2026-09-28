@@ -23,9 +23,9 @@
         "image_4TdzmK": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/3.0_BATTLEGEAR_SVG.svg",
+            "image": "shopify://shop_images/YTH_NECK_GUARDS_HEADER.svg",
             "image_width": "custom",
-            "image_max_width": 540,
+            "image_max_width": 430,
             "image_max_width_mobile": 330
           }
         },
