@@ -144,7 +144,7 @@
           "type": "liquid",
           "name": "DITCH VELCRO",
           "settings": {
-            "liquid": "<style>\n/* TBG Custom Code */\n.ditch-velcro-wrapper {\n  margin-top: 20px;\n}\n\n.ditch-velcro-img {\n  border-radius: 5px;\n  display: block;\n}\n/* End TBG Custom Code */\n</style>\n\n<!-- TBG Custom Code -->\n<div class=\"ditch-velcro-wrapper\">\n  <img\n    class=\"ditch-velcro-img\"\n    src=\"https://cdn.shopify.com/s/files/1/0635/2401/2210/files/DITCH_VELCRO_banner_pdp_3.0.png?v=1779985924\"\n    alt=\"Ditch velcro\"\nloading=\"lazy\" is=\"lazy-image\" \n  >\n</div>\n<!-- End TBG Custom Code -->"
+            "liquid": "<style>\n/* TBG Custom Code */\n.ditch-velcro-wrapper {\n  margin-top: 20px;\n}\n\n.ditch-velcro-img {\n  border-radius: 5px;\n  display: block;\n}\n/* End TBG Custom Code */\n</style>\n\n<!-- TBG Custom Code -->\n<div class=\"ditch-velcro-wrapper\">\n  <img\n    class=\"ditch-velcro-img\"\n    src=\"https://cdn.shopify.com/s/files/1/0635/2401/2210/files/DITCH_VELCRO_banner_yth_pdp.webp?v=1790635853\"\n    alt=\"Ditch velcro\"\nloading=\"lazy\" is=\"lazy-image\" \n  >\n</div>\n<!-- End TBG Custom Code -->"
           }
         },
         "liquid_GANK4B": {
