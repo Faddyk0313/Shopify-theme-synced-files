@@ -370,12 +370,12 @@
       "name": "3.0 Banner",
       "settings": {
         "transparent_header": true,
-        "image": "shopify://shop_images/3.0_banner_desktop.png",
+        "image": "shopify://shop_images/ALL_YTH_DESKTOP.webp",
         "image_height": "adapt",
         "content_width": "small",
         "content_position": "md:items-center md:justify-start",
         "text_alignment": "left",
-        "image_mobile": "shopify://shop_images/3.0_banner_mobile_581c74c8-5c77-4e2b-a3a6-3d48067f5d5c.png",
+        "image_mobile": "shopify://shop_images/ALL_YTH_MOBILE.webp",
         "image_height_mobile": "adapt",
         "content_position_mobile": "items-start justify-center",
         "text_alignment_mobile": "center",
@@ -417,6 +417,7 @@
           "settings": {
             "title_size": "product-title-md",
             "title_size_mobile": "product-title-md",
+            "title_tag": "h2",
             "show_price": true,
             "show_rating": true
           }
@@ -806,6 +807,8 @@
         "enable_sorting": true,
         "show_on_model": false,
         "buttons_style": "secondary",
+        "baselayer_button_size": "button--small",
+        "baselayer_button_font_size": 14,
         "padding_top": 36,
         "padding_bottom": 72,
         "divider": false,
