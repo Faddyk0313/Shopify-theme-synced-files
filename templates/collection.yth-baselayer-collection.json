@@ -203,7 +203,7 @@
         "profile_AQUPMG": {
           "type": "profile",
           "settings": {
-            "image": "shopify://shop_images/tech_1_b54f6942-8c26-4fcd-bf2a-2de6e24a618b.png",
+            "image": "shopify://shop_images/ditch_velcro_YTH.webp",
             "icon": "shopify://shop_images/spc.svg",
             "icon_size": 58,
             "heading": "<p>Ditch</p><p>Velcro</p>",
@@ -242,7 +242,7 @@
         "profile_xPbijN": {
           "type": "profile",
           "settings": {
-            "image": "shopify://shop_images/tech_2_206b17d5-6051-4d44-a7d6-dea393579846.png",
+            "image": "shopify://shop_images/max_cut_resistence_YTH.webp",
             "icon": "shopify://shop_images/titanotex_aero_181f01f0-d378-4e30-8026-b5fdd25543cf.svg",
             "icon_size": 52,
             "heading": "<p>MAXIMUM</p><p>CUT RESISTANCE</p>",
@@ -255,7 +255,7 @@
         "profile_nfwxhg": {
           "type": "profile",
           "settings": {
-            "image": "shopify://shop_images/tech_4_7d9ac665-5dd7-4c19-9d14-5419ea71ee01.png",
+            "image": "shopify://shop_images/full_coverage_yth.webp",
             "icon": "shopify://shop_images/arcguar_logo.svg",
             "icon_size": 52,
             "heading": "<p>FULL<br/>COVERAGE</p>",
