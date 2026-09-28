@@ -22,20 +22,10 @@
             "highlighted_scribble": "circle",
             "highlighted_reveal": false
           }
-        },
-        "image_NhFWGM": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/icon_website_USA_novelcro.svg",
-            "image_width": "custom",
-            "image_max_width": 200,
-            "image_max_width_mobile": 100
-          }
         }
       },
       "block_order": [
-        "heading_8ptPLt",
-        "image_NhFWGM"
+        "heading_8ptPLt"
       ],
       "custom_css": [
         "h1 {font-family: TITANFONT;}"
