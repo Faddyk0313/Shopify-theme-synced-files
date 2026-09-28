@@ -333,10 +333,10 @@
         "image_CLmUF6": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/shop_all_yth_a47cd927-81f5-4e69-97d9-69e1335b2e02.svg",
+            "image": "shopify://shop_images/shop_all_senior.svg",
             "image_width": "custom",
             "image_max_width": 240,
-            "image_max_width_mobile": 140
+            "image_max_width_mobile": 160
           }
         },
         "button_4nnMp6": {
@@ -370,12 +370,12 @@
       "name": "3.0 Banner",
       "settings": {
         "transparent_header": true,
-        "image": "shopify://shop_images/ALL_YTH_DESKTOP.webp",
+        "image": "shopify://shop_images/ALL_SR_DESKTOP.webp",
         "image_height": "adapt",
         "content_width": "small",
         "content_position": "md:items-center md:justify-start",
         "text_alignment": "left",
-        "image_mobile": "shopify://shop_images/ALL_YTH_MOBILE.webp",
+        "image_mobile": "shopify://shop_images/ALL_SR_MOBILE.webp",
         "image_height_mobile": "adapt",
         "content_position_mobile": "items-start justify-center",
         "text_alignment_mobile": "center",
