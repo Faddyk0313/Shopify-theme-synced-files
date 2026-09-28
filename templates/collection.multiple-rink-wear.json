@@ -136,28 +136,12 @@
         "heading_jpEARD": {
           "type": "heading",
           "settings": {
-            "heading": "RINKWEAR",
+            "heading": "<em>YOUTH</em> RINKWEAR",
             "heading_size": "title-xl tracking-heading",
             "heading_tag": "h2",
-            "highlighted_text": "none",
+            "highlighted_text": "marker",
             "highlighted_scribble": "circle",
             "highlighted_reveal": false
-          }
-        },
-        "text_D8aHzh": {
-          "type": "text",
-          "disabled": true,
-          "settings": {
-            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
-            "text_font": "body",
-            "text_size": "subtext-md",
-            "text_max_size": 32,
-            "text_line_height": 1.6,
-            "text_letter_spacing": 0,
-            "text_capitalize": false,
-            "secondary_color": false,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
           }
         },
         "button_QRK6eh": {
@@ -175,7 +159,6 @@
       },
       "block_order": [
         "heading_jpEARD",
-        "text_D8aHzh",
         "button_QRK6eh"
       ],
       "name": "Rich text",
@@ -258,12 +241,12 @@
       ],
       "settings": {
         "transparent_header": false,
-        "image": "shopify://shop_images/banner_3_2df45b13-b9d9-4240-b99a-aa3c2cbe77cb.png",
+        "image": "shopify://shop_images/senior_rinkwear_shirt_banner_copy.webp",
         "image_height": "adapt",
         "content_width": "small",
         "content_position": "md:items-end md:justify-start",
         "text_alignment": "left",
-        "image_mobile": "shopify://shop_images/rinkwear_mobile_5.png",
+        "image_mobile": "shopify://shop_images/yth_neck_guards_mobile_copy_2.webp",
         "image_height_mobile": "adapt",
         "content_position_mobile": "items-end justify-center",
         "text_alignment_mobile": "center",
