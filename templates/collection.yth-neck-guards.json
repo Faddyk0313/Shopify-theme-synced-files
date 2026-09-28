@@ -9,40 +9,67 @@
  */
 {
   "sections": {
-    "image_with_text_overlay_LmqN6L": {
+    "image_with_text_overlay_TfgJXb": {
       "type": "image-with-text-overlay",
       "blocks": {
-        "heading_8ptPLt": {
-          "type": "heading",
+        "spacing_gVce3Q": {
+          "type": "spacing",
+          "disabled": true,
           "settings": {
-            "heading": "<strong> CUT-RESISTANT NECK GUARDS</strong>",
-            "heading_size": "title-lg tracking-heading",
-            "heading_tag": "h1",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle",
-            "highlighted_reveal": false
+            "height": 0,
+            "height_mobile": 24
+          }
+        },
+        "image_4TdzmK": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/3.0_BATTLEGEAR_SVG.svg",
+            "image_width": "custom",
+            "image_max_width": 540,
+            "image_max_width_mobile": 330
+          }
+        },
+        "button_RE47Lb": {
+          "type": "button",
+          "settings": {
+            "button_label": "3.0 Release Schedule",
+            "button_link": "shopify://pages/production-tracker",
+            "button_style": "link",
+            "button_size": "sm",
+            "button_external": false,
+            "button_icon": true
+          }
+        },
+        "subheading_g9K967": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "save on 2.0 while supplies last",
+            "subheading_size": "subtitle-lg",
+            "secondary_color": true
           }
         }
       },
       "block_order": [
-        "heading_8ptPLt"
+        "spacing_gVce3Q",
+        "image_4TdzmK",
+        "button_RE47Lb",
+        "subheading_g9K967"
       ],
-      "custom_css": [
-        "h1 {font-family: TITANFONT;}"
-      ],
+      "name": "3.0 COMING SOON ",
       "settings": {
-        "transparent_header": false,
-        "image": "{{ collection.image }}",
+        "transparent_header": true,
+        "image": "shopify://shop_images/yth_neck_guards_desktop.webp",
         "image_height": "adapt",
-        "content_width": "large",
-        "content_position": "md:items-end md:justify-start",
+        "content_width": "small",
+        "content_position": "md:items-center md:justify-start",
         "text_alignment": "left",
-        "image_mobile": "shopify://shop_images/stand_alone_collar.png",
-        "image_height_mobile": "adapt",
+        "image_mobile": "shopify://shop_images/yth_neck_guards_mobile.webp",
+        "image_height_mobile": "500px",
         "content_position_mobile": "items-end justify-center",
-        "text_alignment_mobile": "center",
+        "text_alignment_mobile": "left",
         "color_text": "#ffffff",
-        "color_background": "",
+        "color_background": "#000000",
         "gradient_background": "",
         "color_highlight": "#e2fb31",
         "gradient_highlight": "",
@@ -360,7 +387,7 @@
     }
   },
   "order": [
-    "image_with_text_overlay_LmqN6L",
+    "image_with_text_overlay_TfgJXb",
     "main-collection-banner",
     "main-collection",
     "rich_text_8DKypp",
