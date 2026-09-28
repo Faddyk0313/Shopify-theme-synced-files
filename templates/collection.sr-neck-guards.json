@@ -23,9 +23,9 @@
         "image_4TdzmK": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/YTH_NECK_GUARDS_HEADER.svg",
+            "image": "shopify://shop_images/SR_NECK_GUARDS_HEADER_copy_c34468d5-ee3c-4bac-bcdf-09dc956f31be.svg",
             "image_width": "custom",
-            "image_max_width": 430,
+            "image_max_width": 410,
             "image_max_width_mobile": 330
           }
         },
@@ -56,15 +56,15 @@
         "button_RE47Lb",
         "subheading_g9K967"
       ],
-      "name": "3.0 COMING SOON ",
+      "name": "SR CUT RESISTANT NECK GUARDS",
       "settings": {
         "transparent_header": true,
-        "image": "shopify://shop_images/yth_neck_guards_desktop.webp",
+        "image": "shopify://shop_images/sr_neck_guards_desktop.webp",
         "image_height": "adapt",
         "content_width": "small",
         "content_position": "md:items-center md:justify-start",
         "text_alignment": "left",
-        "image_mobile": "shopify://shop_images/yth_neck_guards_mobile.webp",
+        "image_mobile": "shopify://shop_images/sr_neck_guards_desktop_1.webp",
         "image_height_mobile": "500px",
         "content_position_mobile": "items-end justify-center",
         "text_alignment_mobile": "left",
