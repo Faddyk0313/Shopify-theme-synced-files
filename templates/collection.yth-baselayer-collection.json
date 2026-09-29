@@ -22,10 +22,24 @@
         "image_73Rt4T": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/YTH_BATTLEGEAR_HEADER.svg",
+            "image": "shopify://shop_images/YTH_BASELAYER_HEADER.svg",
             "image_width": "custom",
-            "image_max_width": 540,
-            "image_max_width_mobile": 330
+            "image_max_width": 420,
+            "image_max_width_mobile": 240
+          }
+        },
+        "spacing_6Xh8KL": {
+          "type": "spacing",
+          "settings": {
+            "height": 40,
+            "height_mobile": 120
+          }
+        },
+        "spacing_dbAhak": {
+          "type": "spacing",
+          "settings": {
+            "height": 40,
+            "height_mobile": 72
           }
         },
         "button_LA9bnw": {
@@ -52,6 +66,8 @@
       "block_order": [
         "spacing_pdNrAw",
         "image_73Rt4T",
+        "spacing_6Xh8KL",
+        "spacing_dbAhak",
         "button_LA9bnw",
         "subheading_iDrEVg"
       ],
@@ -66,7 +82,7 @@
         "image_mobile": "shopify://shop_images/YTH_3.0_banner_mobile.webp",
         "image_height_mobile": "adapt",
         "content_position_mobile": "items-start justify-center",
-        "text_alignment_mobile": "left",
+        "text_alignment_mobile": "center",
         "color_text": "#ffffff",
         "color_background": "#000000",
         "gradient_background": "",
