@@ -476,10 +476,10 @@
         "image_AeEqKN": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Titanotex_aero_explained_copy.svg",
+            "image": "shopify://shop_images/YTH_NECK_GUARDS_HEADER_15a718a0-bdd5-46f3-b545-27918c21ba05.svg",
             "image_width": "custom",
-            "image_max_width": 420,
-            "image_max_width_mobile": 300
+            "image_max_width": 280,
+            "image_max_width_mobile": 220
           }
         }
       },
@@ -489,12 +489,12 @@
       "name": "t:sections.image-with-text-overlay.name",
       "settings": {
         "transparent_header": false,
-        "image": "shopify://shop_images/sr_neck_guards_desktop.webp",
+        "image": "shopify://shop_images/yth_neck_guards_desktop.webp",
         "image_height": "adapt",
         "content_width": "large",
         "content_position": "md:items-end md:justify-start",
         "text_alignment": "left",
-        "image_mobile": "shopify://shop_images/sr_neck_guards_desktop_1.webp",
+        "image_mobile": "shopify://shop_images/yth_neck_guards_mobile.webp",
         "image_height_mobile": "300px",
         "content_position_mobile": "items-end justify-start",
         "text_alignment_mobile": "left",
