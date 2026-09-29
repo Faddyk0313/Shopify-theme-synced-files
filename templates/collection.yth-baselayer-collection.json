@@ -71,7 +71,7 @@
         "button_LA9bnw",
         "subheading_iDrEVg"
       ],
-      "name": "3.0 COMING SOON ",
+      "name": "header banner",
       "settings": {
         "transparent_header": true,
         "image": "shopify://shop_images/YHT3.0_banner_desktop.webp",
@@ -100,6 +100,42 @@
         "rounded": false,
         "enable_parallax": false,
         "parallax_direction": "vertical"
+      }
+    },
+    "main-collection": {
+      "type": "main-collection",
+      "blocks": {
+        "subcollections_TWbxhq": {
+          "type": "subcollections",
+          "disabled": true,
+          "settings": {
+            "menu": "subcollections",
+            "show_count": false
+          }
+        }
+      },
+      "block_order": [
+        "subcollections_TWbxhq"
+      ],
+      "settings": {
+        "products_per_page": 50,
+        "columns": 5,
+        "columns_mobile": "2",
+        "pagination": "infinite",
+        "enable_filtering": true,
+        "filter_type": "sidebar",
+        "filter_collapsed": false,
+        "filter_color_swatches": true,
+        "enable_sorting": true,
+        "show_on_model": false,
+        "buttons_style": "secondary",
+        "baselayer_button_size": "button--small",
+        "baselayer_button_font_size": 14,
+        "padding_top": 36,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
       }
     },
     "featured_product_mKayji": {
@@ -748,42 +784,6 @@
         "rounded": false,
         "enable_parallax": true,
         "parallax_direction": "vertical"
-      }
-    },
-    "main-collection": {
-      "type": "main-collection",
-      "blocks": {
-        "subcollections_TWbxhq": {
-          "type": "subcollections",
-          "disabled": true,
-          "settings": {
-            "menu": "subcollections",
-            "show_count": false
-          }
-        }
-      },
-      "block_order": [
-        "subcollections_TWbxhq"
-      ],
-      "settings": {
-        "products_per_page": 50,
-        "columns": 5,
-        "columns_mobile": "2",
-        "pagination": "infinite",
-        "enable_filtering": true,
-        "filter_type": "sidebar",
-        "filter_collapsed": false,
-        "filter_color_swatches": true,
-        "enable_sorting": true,
-        "show_on_model": false,
-        "buttons_style": "secondary",
-        "baselayer_button_size": "button--small",
-        "baselayer_button_font_size": 14,
-        "padding_top": 36,
-        "padding_bottom": 72,
-        "divider": false,
-        "full_width": false,
-        "rounded": false
       }
     },
     "recently-viewed": {
