@@ -366,6 +366,53 @@
         "rounded": false
       }
     },
+    "image_with_text_overlay_xghjzD": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "image_YN3eaz": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/SR_NECK_GUARDS_HEADER_copy_c34468d5-ee3c-4bac-bcdf-09dc956f31be.svg",
+            "image_width": "custom",
+            "image_max_width": 280,
+            "image_max_width_mobile": 220
+          }
+        }
+      },
+      "block_order": [
+        "image_YN3eaz"
+      ],
+      "name": "t:sections.image-with-text-overlay.name",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/sr_neck_guards_desktop.webp",
+        "image_height": "adapt",
+        "content_width": "large",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/sr_neck_guards_desktop_1.webp",
+        "image_height_mobile": "300px",
+        "content_position_mobile": "items-end justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
     "rich_text_i6Ry8e": {
       "type": "rich-text",
       "blocks": {
@@ -782,6 +829,7 @@
     "featured_product_mKayji",
     "portfolio_custom_nTJygx",
     "main-collection",
+    "image_with_text_overlay_xghjzD",
     "rich_text_i6Ry8e",
     "featured_collection_CMKrtc",
     "image_with_text_overlay_ijJQBF",
