@@ -31,14 +31,14 @@
         "spacing_6Xh8KL": {
           "type": "spacing",
           "settings": {
-            "height": 40,
+            "height": 0,
             "height_mobile": 120
           }
         },
         "spacing_dbAhak": {
           "type": "spacing",
           "settings": {
-            "height": 40,
+            "height": 0,
             "height_mobile": 72
           }
         },
@@ -100,42 +100,6 @@
         "rounded": false,
         "enable_parallax": false,
         "parallax_direction": "vertical"
-      }
-    },
-    "main-collection": {
-      "type": "main-collection",
-      "blocks": {
-        "subcollections_TWbxhq": {
-          "type": "subcollections",
-          "disabled": true,
-          "settings": {
-            "menu": "subcollections",
-            "show_count": false
-          }
-        }
-      },
-      "block_order": [
-        "subcollections_TWbxhq"
-      ],
-      "settings": {
-        "products_per_page": 50,
-        "columns": 5,
-        "columns_mobile": "2",
-        "pagination": "infinite",
-        "enable_filtering": true,
-        "filter_type": "sidebar",
-        "filter_collapsed": false,
-        "filter_color_swatches": true,
-        "enable_sorting": true,
-        "show_on_model": false,
-        "buttons_style": "secondary",
-        "baselayer_button_size": "button--small",
-        "baselayer_button_font_size": 14,
-        "padding_top": 36,
-        "padding_bottom": 72,
-        "divider": false,
-        "full_width": false,
-        "rounded": false
       }
     },
     "portfolio_custom_nTJygx": {
@@ -251,6 +215,42 @@
         "padding_bottom": 28,
         "divider": false,
         "full_width": true,
+        "rounded": false
+      }
+    },
+    "main-collection": {
+      "type": "main-collection",
+      "blocks": {
+        "subcollections_TWbxhq": {
+          "type": "subcollections",
+          "disabled": true,
+          "settings": {
+            "menu": "subcollections",
+            "show_count": false
+          }
+        }
+      },
+      "block_order": [
+        "subcollections_TWbxhq"
+      ],
+      "settings": {
+        "products_per_page": 50,
+        "columns": 5,
+        "columns_mobile": "2",
+        "pagination": "infinite",
+        "enable_filtering": true,
+        "filter_type": "sidebar",
+        "filter_collapsed": false,
+        "filter_color_swatches": true,
+        "enable_sorting": true,
+        "show_on_model": false,
+        "buttons_style": "secondary",
+        "baselayer_button_size": "button--small",
+        "baselayer_button_font_size": 14,
+        "padding_top": 36,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
         "rounded": false
       }
     },
