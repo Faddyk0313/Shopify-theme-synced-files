@@ -410,7 +410,7 @@
         "show_view_all": false,
         "columns_mobile": "2",
         "swipe_on_mobile": true,
-        "heading": "ORDER NOW",
+        "heading": "CUT-RESISTANT BASELAYER",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_tag": "h2",
@@ -538,6 +538,7 @@
       "block_order": [
         "image_VGyGWe"
       ],
+      "disabled": true,
       "name": "t:sections.image-with-text-overlay.name",
       "settings": {
         "transparent_header": false,
@@ -567,51 +568,6 @@
         "rounded": false,
         "enable_parallax": false,
         "parallax_direction": "vertical"
-      }
-    },
-    "featured_collection_GyKyie": {
-      "type": "featured-collection",
-      "name": "t:sections.featured-collection.name",
-      "settings": {
-        "collection": "",
-        "products": [
-          "cut-resistant-baselayer-3-0-kelly",
-          "cut-resistant-baselayer-3-0-maroon",
-          "cut-resistant-baselayer-3-0-purple",
-          "cut-resistant-baselayer-3-0-forest",
-          "cut-resistant-baselayer-3-0-carolina",
-          "cut-resistant-baselayer-3-0-team-gold",
-          "cut-resistant-baselayer-3-0-p-h-limited-edition-drops-11-15"
-        ],
-        "product_limit": 25,
-        "columns": 5,
-        "new_version2": false,
-        "carousel_on_desktop": false,
-        "show_view_all": false,
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "heading": "COMING LATER",
-        "heading_size": "title-md",
-        "heading_alignment": "text-left md:items-end md:flex-row",
-        "heading_tag": "h2",
-        "subheading": "",
-        "description": "",
-        "highlighted_text": "none",
-        "highlighted_scribble": "circle",
-        "highlighted_reveal": false,
-        "color_text": "",
-        "color_background": "rgba(0,0,0,0)",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 72,
-        "padding_bottom": 72,
-        "divider": false,
-        "full_width": false,
-        "rounded": false
       }
     },
     "image_with_text_overlay_VaKKLG": {
@@ -828,7 +784,6 @@
     "image_with_text_overlay_ijJQBF",
     "featured_collection_6kH43T",
     "image_with_text_overlay_yxA8bY",
-    "featured_collection_GyKyie",
     "image_with_text_overlay_VaKKLG",
     "main-collection-banner",
     "main-collection",
