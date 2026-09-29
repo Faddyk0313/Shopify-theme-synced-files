@@ -383,6 +383,7 @@
     },
     "featured_collection_CMKrtc": {
       "type": "featured-collection",
+      "disabled": true,
       "name": "t:sections.featured-collection.name",
       "settings": {
         "collection": "",
@@ -764,7 +765,6 @@
       "block_order": [
         "subcollections_TWbxhq"
       ],
-      "disabled": true,
       "settings": {
         "products_per_page": 50,
         "columns": 5,
@@ -824,6 +824,7 @@
   },
   "order": [
     "image_with_text_overlay_ARrb3R",
+    "main-collection",
     "featured_product_mKayji",
     "portfolio_custom_nTJygx",
     "rich_text_i6Ry8e",
@@ -834,7 +835,6 @@
     "featured_collection_GyKyie",
     "image_with_text_overlay_VaKKLG",
     "main-collection-banner",
-    "main-collection",
     "recently-viewed"
   ]
 }
