@@ -486,16 +486,15 @@
       "block_order": [
         "image_AeEqKN"
       ],
-      "disabled": true,
       "name": "t:sections.image-with-text-overlay.name",
       "settings": {
         "transparent_header": false,
-        "image": "shopify://shop_images/3.0_banner_desktop_aero.png",
+        "image": "shopify://shop_images/sr_neck_guards_desktop.webp",
         "image_height": "adapt",
         "content_width": "large",
         "content_position": "md:items-end md:justify-start",
         "text_alignment": "left",
-        "image_mobile": "shopify://shop_images/3.0_banner_mobile_aero.png",
+        "image_mobile": "shopify://shop_images/sr_neck_guards_desktop_1.webp",
         "image_height_mobile": "300px",
         "content_position_mobile": "items-end justify-start",
         "text_alignment_mobile": "left",
@@ -520,7 +519,6 @@
     },
     "featured_collection_6kH43T": {
       "type": "featured-collection",
-      "disabled": true,
       "name": "t:sections.featured-collection.name",
       "settings": {
         "collection": "",
@@ -536,7 +534,7 @@
         "show_view_all": false,
         "columns_mobile": "2",
         "swipe_on_mobile": true,
-        "heading": "COMING SOON",
+        "heading": "",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_tag": "h2",
