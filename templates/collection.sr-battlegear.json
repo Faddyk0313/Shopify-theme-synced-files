@@ -9,26 +9,40 @@
  */
 {
   "sections": {
-    "image_with_text_overlay_ARrb3R": {
+    "image_with_text_overlay_mXC8cG": {
       "type": "image-with-text-overlay",
       "blocks": {
-        "spacing_pdNrAw": {
+        "spacing_qhcfCE": {
           "type": "spacing",
           "settings": {
             "height": 0,
             "height_mobile": 24
           }
         },
-        "image_73Rt4T": {
+        "image_nwckpb": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/3.0_BATTLEGEAR_SVG.svg",
+            "image": "shopify://shop_images/SR_BATTLEGEAR_HEADER.svg",
             "image_width": "custom",
-            "image_max_width": 540,
-            "image_max_width_mobile": 330
+            "image_max_width": 420,
+            "image_max_width_mobile": 240
           }
         },
-        "button_LA9bnw": {
+        "spacing_nfx6eq": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 120
+          }
+        },
+        "spacing_mQdqAY": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 72
+          }
+        },
+        "button_FfkYgb": {
           "type": "button",
           "settings": {
             "button_label": "3.0 Release Schedule",
@@ -39,7 +53,7 @@
             "button_icon": true
           }
         },
-        "subheading_iDrEVg": {
+        "subheading_6hgNzJ": {
           "type": "subheading",
           "disabled": true,
           "settings": {
@@ -50,12 +64,14 @@
         }
       },
       "block_order": [
-        "spacing_pdNrAw",
-        "image_73Rt4T",
-        "button_LA9bnw",
-        "subheading_iDrEVg"
+        "spacing_qhcfCE",
+        "image_nwckpb",
+        "spacing_nfx6eq",
+        "spacing_mQdqAY",
+        "button_FfkYgb",
+        "subheading_6hgNzJ"
       ],
-      "name": "3.0 COMING SOON ",
+      "name": "header banner",
       "settings": {
         "transparent_header": true,
         "image": "shopify://shop_images/3.0_banner_desktop.png",
@@ -66,7 +82,7 @@
         "image_mobile": "shopify://shop_images/3.0_banner_mobile_581c74c8-5c77-4e2b-a3a6-3d48067f5d5c.png",
         "image_height_mobile": "adapt",
         "content_position_mobile": "items-start justify-center",
-        "text_alignment_mobile": "left",
+        "text_alignment_mobile": "center",
         "color_text": "#ffffff",
         "color_background": "#000000",
         "gradient_background": "",
@@ -804,7 +820,7 @@
     }
   },
   "order": [
-    "image_with_text_overlay_ARrb3R",
+    "image_with_text_overlay_mXC8cG",
     "featured_product_mKayji",
     "portfolio_custom_nTJygx",
     "rich_text_i6Ry8e",
