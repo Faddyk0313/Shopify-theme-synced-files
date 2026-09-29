@@ -22,7 +22,7 @@
         "image_nwckpb": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/SR_BATTLEGEAR_HEADER.svg",
+            "image": "shopify://shop_images/YTH_BATTLEGEAR_HEADER_d446deed-2d07-4714-afb6-124b0a8b3a0f.svg",
             "image_width": "custom",
             "image_max_width": 420,
             "image_max_width_mobile": 240
@@ -74,12 +74,12 @@
       "name": "header banner",
       "settings": {
         "transparent_header": true,
-        "image": "shopify://shop_images/3.0_banner_desktop.png",
+        "image": "shopify://shop_images/YHT3.0_banner_desktop.webp",
         "image_height": "adapt",
         "content_width": "small",
         "content_position": "md:items-center md:justify-start",
         "text_alignment": "left",
-        "image_mobile": "shopify://shop_images/3.0_banner_mobile_581c74c8-5c77-4e2b-a3a6-3d48067f5d5c.png",
+        "image_mobile": "shopify://shop_images/YTH_3.0_banner_mobile.webp",
         "image_height_mobile": "adapt",
         "content_position_mobile": "items-start justify-center",
         "text_alignment_mobile": "center",
