@@ -390,7 +390,7 @@
         "collection": "",
         "products": [
           "cut-resistant-baselayer-3-0-sticker-pack",
-          "cut-resistant-baselayer-3-0-galaxy-splatter",
+          "yth-cut-resistant-baselayer-3-0-galaxy-splatter",
           "cut-resistant-baselayer-3-0-early-riser",
           "cut-resistant-baselayer-3-0-black",
           "cut-resistant-baselayer-3-0-whiteout-camo",
@@ -491,8 +491,8 @@
         "collection": "",
         "products": [
           "cut-resistant-baselayer-3-0-red",
-          "cut-resistant-baselayer-3-0-orange",
-          "cut-resistant-baselayer-3-0-pink-frost"
+          "yth-cut-resistant-baselayer-3-0-orange",
+          "yth-cut-resistant-baselayer-3-0-pink-frost"
         ],
         "product_limit": 25,
         "columns": 5,
@@ -580,10 +580,10 @@
       "settings": {
         "collection": "",
         "products": [
-          "cut-resistant-baselayer-3-0-kelly",
+          "yth-cut-resistant-baselayer-3-0-kelly",
           "yth-cut-resistant-baselayer-3-0-maroon",
           "cut-resistant-baselayer-3-0-purple",
-          "cut-resistant-baselayer-3-0-forest",
+          "yth-cut-resistant-baselayer-3-0-forest",
           "yth-cut-resistant-baselayer-3-0-carolina",
           "cut-resistant-baselayer-3-0-team-gold",
           "cut-resistant-baselayer-3-0-p-h-limited-edition-drops-11-15"
