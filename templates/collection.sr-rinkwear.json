@@ -294,7 +294,7 @@
         ".product-card__bottom.flex.items-center.gap-2 {display: none !important;}"
       ],
       "settings": {
-        "collection": "graphic-yth-tee",
+        "collection": "sr-graphic-tee",
         "products": [],
         "product_limit": 25,
         "columns": 5,
@@ -409,7 +409,7 @@
         ".product-card__bottom.flex.items-center.gap-2 {display: none !important;}"
       ],
       "settings": {
-        "collection": "graphic-yth-hoodie",
+        "collection": "sr-graphic-hoodie",
         "products": [],
         "product_limit": 25,
         "columns": 5,
@@ -570,7 +570,7 @@
       "type": "featured-collection",
       "name": "Featured collection",
       "settings": {
-        "collection": "shorts",
+        "collection": "sr-shorts",
         "products": [],
         "product_limit": 25,
         "columns": 5,
