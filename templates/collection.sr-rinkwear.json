@@ -758,21 +758,9 @@
     "featured_collection_Yq4J78": {
       "type": "featured-collection",
       "settings": {
-        "collection": "",
-        "products": [
-          "battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-black-long",
-          "battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-miami-long",
-          "battlegear-2-0-cut-resistant-hockey-neck-guard-shirt-blackout-camo-long",
-          "bg-2-0-ls-neck-guard-shirt-digi-camo",
-          "miami-night-bg-2-0-ls-stretch-procurve",
-          "bg-2-0-ls-neck-guard-shirt-preppy-pucks",
-          "bg-2-0-ls-neck-guard-shirt-galaxy-splatter",
-          "bg-2-0-ls-neck-guard-shirt-canvas-splatter",
-          "early-riser-sbg-2-0-stretch-procurve",
-          "early-riser-bg-2-0-stretch-procurve-copy",
-          "bg-2-0-ls-neck-guard-shirt-pink-frost"
-        ],
-        "product_limit": 11,
+        "collection": "sr-cut-resistant-baselayer",
+        "products": [],
+        "product_limit": 25,
         "columns": 5,
         "new_version2": false,
         "carousel_on_desktop": true,
