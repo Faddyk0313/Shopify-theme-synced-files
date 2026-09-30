@@ -144,7 +144,7 @@
           "type": "button",
           "settings": {
             "button_label": "SHOP NOW",
-            "button_link": "shopify://products/cut-resistant-baselayer-3-0-whiteout-camo",
+            "button_link": "shopify://products/yth-cut-resistant-baselayer-3-0-whiteout-camo",
             "button_style": "secondary",
             "button_size": "sm",
             "button_external": false,
@@ -352,13 +352,13 @@
       "settings": {
         "collection": "",
         "products": [
-          "cut-resistant-baselayer-3-0-sticker-pack",
-          "cut-resistant-baselayer-3-0-miami-vice",
-          "cut-resistant-baselayer-3-0-black",
-          "cut-resistant-baselayer-3-0-royal",
-          "cut-resistant-neck-guard-3-0-black",
+          "yth-cut-resistant-baselayer-3-0-stickerpack",
+          "yth-cut-resistant-baselayer-3-0-miami-vice",
+          "yth-cut-resistant-baselayer-3-0-black",
+          "yth-cut-resistant-baselayer-3-0-royal",
+          "yth-cut-resistant-neck-guard-3-0-black",
           "cut-resistant-baselayer-3-0-early-riser",
-          "cut-resistant-baselayer-3-0-whiteout-camo",
+          "yth-cut-resistant-baselayer-3-0-whiteout-camo",
           "cut-resistant-neck-guard-3-0-white",
           "yth-dryland-short-rl-vert",
           "cut-resistant-baselayer-3-0-white",
@@ -958,7 +958,7 @@
       "settings": {
         "collection": "",
         "products": [
-          "cut-resistant-baselayer-3-0-frozen-rocket",
+          "yth-cut-resistant-baselayer-3-0-frozen-rocket",
           "yth-dryland-short-frozen-rocket",
           "yth-frozen-rocket-tee-bold-blue",
           "yth-frozen-rocket-hoodie-white",
@@ -1073,7 +1073,7 @@
       "settings": {
         "collection": "",
         "products": [
-          "cut-resistant-baselayer-3-0-usa-hockey-white",
+          "yth-cut-resistant-baselayer-3-0-usa-hockey-white",
           "yth-dryland-short-team-usa-royal",
           "yth-usa-hockey-victory-tee-white",
           "yth-usa-hockey-arch-tee-red",

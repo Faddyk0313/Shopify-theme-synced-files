@@ -489,7 +489,7 @@
       "disabled": true,
       "name": "t:sections.featured-product.name",
       "settings": {
-        "product": "cut-resistant-baselayer-3-0-black",
+        "product": "yth-cut-resistant-baselayer-3-0-black",
         "enable_sticky_info": true,
         "media_size": 50,
         "gallery_layout": "thumbnail",

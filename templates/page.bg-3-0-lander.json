@@ -211,11 +211,11 @@
       "settings": {
         "collection": "",
         "products": [
-          "cut-resistant-baselayer-3-0-black",
+          "yth-cut-resistant-baselayer-3-0-black",
           "cut-resistant-baselayer-3-0-white",
-          "cut-resistant-baselayer-3-0-red",
-          "cut-resistant-baselayer-3-0-royal",
-          "cut-resistant-baselayer-3-0-navy"
+          "yth-cut-resistant-baselayer-3-0-red",
+          "yth-cut-resistant-baselayer-3-0-royal",
+          "yth-cut-resistant-baselayer-3-0-navy"
         ],
         "columns": 5,
         "carousel_on_desktop": false,
@@ -301,8 +301,8 @@
         "products": [
           "cut-resistant-baselayer-3-0-miami-vice",
           "yth-cut-resistant-baselayer-3-0-galaxy-splatter",
-          "cut-resistant-baselayer-3-0-blackout-camo",
-          "cut-resistant-baselayer-3-0-whiteout-camo",
+          "yth-cut-resistant-baselayer-3-0-blackout-camo",
+          "yth-cut-resistant-baselayer-3-0-whiteout-camo",
           "cut-resistant-baselayer-3-0-early-riser"
         ],
         "columns": 5,
