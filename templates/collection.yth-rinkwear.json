@@ -294,7 +294,7 @@
         ".product-card__bottom.flex.items-center.gap-2 {display: none !important;}"
       ],
       "settings": {
-        "collection": "yth-graphic-tee",
+        "collection": "yth-graphic-tees",
         "products": [],
         "product_limit": 25,
         "columns": 5,
@@ -409,7 +409,7 @@
         ".product-card__bottom.flex.items-center.gap-2 {display: none !important;}"
       ],
       "settings": {
-        "collection": "yth-graphic-hoodie",
+        "collection": "yth-graphic-hoodies",
         "products": [],
         "product_limit": 25,
         "columns": 5,

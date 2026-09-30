@@ -294,7 +294,7 @@
         ".product-card__bottom.flex.items-center.gap-2 {display: none !important;}"
       ],
       "settings": {
-        "collection": "sr-graphic-tee",
+        "collection": "sr-graphic-tees",
         "products": [],
         "product_limit": 25,
         "columns": 5,
@@ -409,7 +409,7 @@
         ".product-card__bottom.flex.items-center.gap-2 {display: none !important;}"
       ],
       "settings": {
-        "collection": "sr-graphic-hoodie",
+        "collection": "sr-graphic-hoodies",
         "products": [],
         "product_limit": 25,
         "columns": 5,
