@@ -12,8 +12,18 @@
     "image_with_text_overlay_LmqN6L": {
       "type": "image-with-text-overlay",
       "blocks": {
+        "image_NfWpCJ": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/MY_SIZE_IN_STOCK.svg",
+            "image_width": "custom",
+            "image_max_width": 310,
+            "image_max_width_mobile": 190
+          }
+        },
         "heading_8ptPLt": {
           "type": "heading",
+          "disabled": true,
           "settings": {
             "heading": "{{ collection.title }}",
             "heading_size": "title-lg tracking-heading",
@@ -25,6 +35,7 @@
         }
       },
       "block_order": [
+        "image_NfWpCJ",
         "heading_8ptPLt"
       ],
       "custom_css": [
