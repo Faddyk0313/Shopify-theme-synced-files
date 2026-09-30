@@ -521,11 +521,8 @@
       "type": "featured-collection",
       "name": "t:sections.featured-collection.name",
       "settings": {
-        "collection": "",
-        "products": [
-          "hockey-cut-resistant-neck-guard-black",
-          "hockey-cut-resistant-neck-guard-white"
-        ],
+        "collection": "yth-cut-resistant-neck-guards",
+        "products": [],
         "product_limit": 25,
         "columns": 5,
         "new_version2": false,
