@@ -622,6 +622,7 @@
     },
     "size_based_products_Xfjitc": {
       "type": "size-based-products",
+      "disabled": true,
       "name": "Size-Based Products",
       "settings": {
         "heading": "SHOP BY SIZE",
