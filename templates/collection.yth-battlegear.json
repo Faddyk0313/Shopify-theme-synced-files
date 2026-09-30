@@ -74,7 +74,7 @@
       "name": "header banner",
       "settings": {
         "transparent_header": true,
-        "image": "shopify://shop_images/YHT3.0_banner_desktop.webp",
+        "image": "shopify://shop_images/YHT3.0_banner_desktop_74f3d137-478f-47ec-b064-a6d2dacd4718.webp",
         "image_height": "adapt",
         "content_width": "small",
         "content_position": "md:items-center md:justify-start",
