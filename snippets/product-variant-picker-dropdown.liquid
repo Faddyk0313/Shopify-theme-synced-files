@@ -158,43 +158,69 @@
             {%- assign tbg_has_stock = false -%}
             {%- assign tbg_has_continue = false -%}
 
+            {%- comment -%}TBG Custom Code: hide values whose variants are all -LEGACY SKUs{%- endcomment -%}
+            {%- assign tbg_has_non_legacy = false -%}
+            {%- assign tbg_matched_any = false -%}
+
             {%- case forloop.parentloop.index0 -%}
               {%- when 0 -%}
                 {%- for v in product.variants -%}
                   {%- if v.option1 == value -%}
-                    {%- assign tbg_total_qty = tbg_total_qty | plus: v.inventory_quantity -%}
-                    {%- if v.inventory_quantity > 0 -%}{%- assign tbg_has_stock = true -%}{%- endif -%}
-                    {%- if v.inventory_policy == 'continue' -%}
-                      {%- assign tbg_has_continue = true -%}
-                    {%- endif -%}
+                    {%- assign tbg_matched_any = true -%}
+                    {%- assign tbg_sku = v.sku | default: '' | upcase -%}
+                    {%- unless tbg_sku contains '-LEGACY' -%}
+                      {%- assign tbg_has_non_legacy = true -%}
+                      {%- assign tbg_total_qty = tbg_total_qty | plus: v.inventory_quantity -%}
+                      {%- if v.inventory_quantity > 0 -%}{%- assign tbg_has_stock = true -%}{%- endif -%}
+                      {%- if v.inventory_policy == 'continue' -%}
+                        {%- assign tbg_has_continue = true -%}
+                      {%- endif -%}
+                    {%- endunless -%}
                   {%- endif -%}
                 {%- endfor -%}
               {%- when 1 -%}
                 {%- for v in product.variants -%}
                   {%- if v.option2 == value -%}
-                    {%- assign tbg_total_qty = tbg_total_qty | plus: v.inventory_quantity -%}
-                    {%- if v.inventory_quantity > 0 -%}{%- assign tbg_has_stock = true -%}{%- endif -%}
-                    {%- if v.inventory_policy == 'continue' -%}
-                      {%- assign tbg_has_continue = true -%}
-                    {%- endif -%}
+                    {%- assign tbg_matched_any = true -%}
+                    {%- assign tbg_sku = v.sku | default: '' | upcase -%}
+                    {%- unless tbg_sku contains '-LEGACY' -%}
+                      {%- assign tbg_has_non_legacy = true -%}
+                      {%- assign tbg_total_qty = tbg_total_qty | plus: v.inventory_quantity -%}
+                      {%- if v.inventory_quantity > 0 -%}{%- assign tbg_has_stock = true -%}{%- endif -%}
+                      {%- if v.inventory_policy == 'continue' -%}
+                        {%- assign tbg_has_continue = true -%}
+                      {%- endif -%}
+                    {%- endunless -%}
                   {%- endif -%}
                 {%- endfor -%}
               {%- when 2 -%}
                 {%- for v in product.variants -%}
                   {%- if v.option3 == value -%}
-                    {%- assign tbg_total_qty = tbg_total_qty | plus: v.inventory_quantity -%}
-                    {%- if v.inventory_quantity > 0 -%}{%- assign tbg_has_stock = true -%}{%- endif -%}
-                    {%- if v.inventory_policy == 'continue' -%}
-                      {%- assign tbg_has_continue = true -%}
-                    {%- endif -%}
+                    {%- assign tbg_matched_any = true -%}
+                    {%- assign tbg_sku = v.sku | default: '' | upcase -%}
+                    {%- unless tbg_sku contains '-LEGACY' -%}
+                      {%- assign tbg_has_non_legacy = true -%}
+                      {%- assign tbg_total_qty = tbg_total_qty | plus: v.inventory_quantity -%}
+                      {%- if v.inventory_quantity > 0 -%}{%- assign tbg_has_stock = true -%}{%- endif -%}
+                      {%- if v.inventory_policy == 'continue' -%}
+                        {%- assign tbg_has_continue = true -%}
+                      {%- endif -%}
+                    {%- endunless -%}
                   {%- endif -%}
                 {%- endfor -%}
             {%- endcase -%}
+
+            {%- comment -%}TBG Custom Code: skip rendering legacy-only values (unless currently selected){%- endcomment -%}
+            {%- assign tbg_skip_value = false -%}
+            {%- if tbg_matched_any and tbg_has_non_legacy == false and option.selected_value != value -%}
+              {%- assign tbg_skip_value = true -%}
+            {%- endif -%}
 
             {%- if tbg_total_qty <= 0 and tbg_has_stock == false and tbg_has_continue == false -%}
               {%- assign tbg_out = 'true' -%}
             {%- endif -%}
             <!-- End TBG Custom Code -->
+            {%- unless tbg_skip_value -%}
             <option
               value="{{ value | escape }}"
               data-option-value-id="{{ value.id }}"
@@ -211,6 +237,7 @@
             >
               {{ value }}
             </option>
+            {%- endunless -%}
           {%- endfor -%}
         </select>
 
@@ -264,6 +291,8 @@
           variants = [];
         }
       }
+      // TBG Custom Code: ignore legacy variants entirely
+      variants = variants.filter((v) => !toSafeString(v && v.sku).toUpperCase().includes('-LEGACY'));
       VARIANT_CACHE.set(root, variants);
       return variants;
     }
