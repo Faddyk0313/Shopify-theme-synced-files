@@ -77,7 +77,7 @@
             "picker_type": "dropdown",
             "enable_color_swatches": true,
             "color_swatch_type": "color",
-            "size_chart": "size-chart-battlegear-2-0",
+            "size_chart": "youth-baselayer-size-chart",
             "show_quantity_selector": true,
             "show_price": false,
             "show_dynamic_checkout": true,
