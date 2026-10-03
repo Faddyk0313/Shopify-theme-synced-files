@@ -691,6 +691,7 @@
         {%- assign last_chance_collection_id = 343124541618 -%}
 
         {%- assign other_products_markup = '' -%}
+        {%- assign sale_products_markup = '' -%}
         {%- assign last_chance_products_markup = '' -%}
         {%- assign neckguard_products_markup = '' -%}
         {%- assign rendered_product_ids = '' -%}
@@ -819,10 +820,18 @@
                   {%- endif -%}
                 {%- endfor -%}
 
+                {%- comment -%} On sale = any variant has a compare-at price above its price {%- endcomment -%}
+                {%- assign is_on_sale = false -%}
+                {%- if product.compare_at_price > product.price -%}
+                  {%- assign is_on_sale = true -%}
+                {%- endif -%}
+
                 {%- if is_neckguard -%}
                   {%- assign neckguard_products_markup = neckguard_products_markup | append: product_card_markup -%}
                 {%- elsif is_last_chance -%}
                   {%- assign last_chance_products_markup = last_chance_products_markup | append: product_card_markup -%}
+                {%- elsif is_on_sale -%}
+                  {%- assign sale_products_markup = sale_products_markup | append: product_card_markup -%}
                 {%- else -%}
                   {%- assign other_products_markup = other_products_markup | append: product_card_markup -%}
                 {%- endif -%}
@@ -833,6 +842,7 @@
         {%- endfor -%}
 
         {{- other_products_markup -}}
+        {{- sale_products_markup -}}
         {{- last_chance_products_markup -}}
         {{- neckguard_products_markup -}}
       </motion-list>
