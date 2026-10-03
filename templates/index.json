@@ -353,6 +353,8 @@
         "collection": "",
         "products": [
           "yth-cut-resistant-baselayer-3-0-stickerpack",
+          "yth-cut-resistant-baselayer-3-0-black",
+          "yth-cut-resistant-baselayer-3-0-red",
           "sr-cut-resistant-baselayer-3-0-black",
           "yth-cut-resistant-neck-guard-3-0-black",
           "yth-rink-rat-tee-ice-blue-blank",
@@ -367,10 +369,9 @@
           "yth-victory-tee-heather-gray",
           "sr-dryland-short-whiteout-camo",
           "yth-cut-resistant-baselayer-3-0-galaxy-splatter",
-          "yth-cut-resistant-baselayer-3-0-black",
           "yth-cut-resistant-baselayer-3-0-miami-vice"
         ],
-        "product_limit": 12,
+        "product_limit": 18,
         "columns": 5,
         "new_version2": false,
         "carousel_on_desktop": true,
