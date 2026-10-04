@@ -44,6 +44,7 @@
         },
         "button_FfkYgb": {
           "type": "button",
+          "disabled": true,
           "settings": {
             "button_label": "3.0 Release Schedule",
             "button_link": "shopify://pages/production-tracker",
