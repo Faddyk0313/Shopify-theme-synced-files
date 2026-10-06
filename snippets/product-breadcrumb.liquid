@@ -78,6 +78,11 @@
       {%- liquid
         assign excluded_collections = 'sheyenne-mustangs-team-store,florida-jr-panthers-team-store,not-on-sale-non-3-0-products,on-sale,collection-goalie,beer-league,collection-2xl-3xl,backorder-discount-smart-collection-copy,my-size-in-stock,halloween,new-drops,instock,all-products,gold-hockey-neck-guard,white-hockey-neck-guard,blue-hockey-neck-guard,yellow-hockey-neck-guard,gray-hockey-neck-guard,black-hockey-neck-guard,future-drops,novelty,team-colors,inline-core-colors,cut-resistant-battlegear,purple-hockey-neck-guards,orange-hockey-neck-guards,red-hockey-neck-guard,pink-hockey-neck-guard,maroon-hockey-neck-guards,green-hockey-neck-guard,preorder-smart-collection' | split: ','
 
+        # Ignore a URL-context collection that's in the excluded list
+        if collection != blank and excluded_collections contains collection.handle
+          assign collection = blank
+        endif
+
         if collection == blank
           # Find first collection that's not in excluded list
           assign collection = nil
