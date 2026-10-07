@@ -84,7 +84,7 @@
         }
       </style>
     {% endif %}
-    {% if template.name == 'product' and (template.suffix == 'non-index-pdp' or template.suffix == 'custom-team-pdp') %}
+    {% if template.name == 'product' and template.suffix == 'non-index-pdp' or template.suffix == 'custom-team-pdp' %}
       <meta name="robots" content="noindex, nofollow">
     {% endif %}
 
@@ -165,7 +165,7 @@
       </script>
     {%- endif -%}
 
-    {%- if request.page_type == 'page' and (page.handle == 'store-locator' or page.handle == 'titan-labs') -%}
+    {%- if request.page_type == 'page' and page.handle == 'store-locator' or page.handle == 'titan-labs' -%}
       <style>
         .page.rte {
           min-height: 70vh;
@@ -948,3 +948,20 @@
     {%- endif -%}
   </body>
 </html>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% if template.name == 'product' and (template.suffix == 'non-index-pdp'
+    or template.suffix == 'custom-team-pdp') %}"
+  to: "{% if template.name == 'product' and template.suffix == 'non-index-pdp' or
+    template.suffix == 'custom-team-pdp' %}"
+  position: 3556..3670
+- from: "{%- if request.page_type == 'page' and (page.handle == 'store-locator' or
+    page.handle == 'titan-labs') -%}"
+  to: "{%- if request.page_type == 'page' and page.handle == 'store-locator' or page.handle
+    == 'titan-labs' -%}"
+  position: 6605..6709
+{% endcomment %}
