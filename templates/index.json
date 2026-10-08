@@ -197,7 +197,7 @@
       "name": "Whiteout Camo Banner",
       "settings": {
         "transparent_header": true,
-        "image": "shopify://shop_images/2homepage_banner_october.png",
+        "image": "shopify://shop_images/homepage_banner_october.png",
         "image_height": "adapt",
         "content_width": "small",
         "content_position": "md:items-center md:justify-start",
