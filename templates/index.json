@@ -126,10 +126,10 @@
         "image_8e49hm": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/3.0_BATTLEGEAR_SVG.svg",
+            "image": "shopify://shop_images/BUILT_FOR_BATTLE.svg",
             "image_width": "custom",
             "image_max_width": 350,
-            "image_max_width_mobile": 280
+            "image_max_width_mobile": 160
           }
         },
         "spacing_kdt7HV": {
@@ -156,7 +156,7 @@
         "button_LQkjMt": {
           "type": "button",
           "settings": {
-            "button_label": "SHOP YTH",
+            "button_label": "SHOP YOUTH",
             "button_link": "shopify://collections/yth-cut-resistant-baselayer",
             "button_style": "secondary",
             "button_size": "sm",
@@ -164,10 +164,17 @@
             "button_icon": false
           }
         },
+        "spacing_b7a9kq": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 16
+          }
+        },
         "button_YBr9yx": {
           "type": "button",
           "settings": {
-            "button_label": "SHOP SR",
+            "button_label": "SHOP SENIOR",
             "button_link": "shopify://collections/sr-cut-resistant-baselayer",
             "button_style": "secondary",
             "button_size": "sm",
@@ -184,17 +191,18 @@
         "spacing_GfrRAp",
         "spacing_gqWAtP",
         "button_LQkjMt",
+        "spacing_b7a9kq",
         "button_YBr9yx"
       ],
       "name": "Whiteout Camo Banner",
       "settings": {
         "transparent_header": true,
-        "image": "shopify://shop_images/Banner_3.0_desk.png",
+        "image": "shopify://shop_images/homepage_banner_october.webp",
         "image_height": "adapt",
         "content_width": "small",
         "content_position": "md:items-center md:justify-start",
         "text_alignment": "left",
-        "image_mobile": "shopify://shop_images/3.0_banner_mobile_94e1e255-a951-4349-889f-56ab77e50296.png",
+        "image_mobile": "shopify://shop_images/homepage_banner_october_mobile.webp",
         "image_height_mobile": "500px",
         "content_position_mobile": "items-start justify-center",
         "text_alignment_mobile": "center",
