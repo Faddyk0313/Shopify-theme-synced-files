@@ -126,10 +126,10 @@
         "image_8e49hm": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/BUILT_FOR_BATTLE.svg",
+            "image": "shopify://shop_images/BUILT_FOR_BATTLE_2.svg",
             "image_width": "custom",
-            "image_max_width": 350,
-            "image_max_width_mobile": 160
+            "image_max_width": 440,
+            "image_max_width_mobile": 300
           }
         },
         "spacing_kdt7HV": {
