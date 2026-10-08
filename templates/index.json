@@ -69,6 +69,7 @@
         "spacing_dextkm",
         "button_fHNQ7J"
       ],
+      "disabled": true,
       "name": "Sticker pack",
       "settings": {
         "transparent_header": true,
@@ -103,6 +104,18 @@
     "image_with_text_overlay_7W36g4": {
       "type": "image-with-text-overlay",
       "blocks": {
+        "heading_TKn9Nm": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "not all neck guards are created equal",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
         "spacing_tt6UHK": {
           "type": "spacing",
           "settings": {
@@ -113,7 +126,7 @@
         "image_8e49hm": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/whiteout_camo_home_page.svg",
+            "image": "shopify://shop_images/3.0_BATTLEGEAR_SVG.svg",
             "image_width": "custom",
             "image_max_width": 350,
             "image_max_width_mobile": 280
@@ -143,24 +156,36 @@
         "button_LQkjMt": {
           "type": "button",
           "settings": {
-            "button_label": "SHOP NOW",
-            "button_link": "shopify://products/yth-cut-resistant-baselayer-3-0-whiteout-camo",
+            "button_label": "SHOP YTH",
+            "button_link": "shopify://collections/yth-cut-resistant-baselayer",
             "button_style": "secondary",
             "button_size": "sm",
             "button_external": false,
-            "button_icon": true
+            "button_icon": false
+          }
+        },
+        "button_YBr9yx": {
+          "type": "button",
+          "settings": {
+            "button_label": "SHOP SR",
+            "button_link": "shopify://collections/sr-cut-resistant-baselayer",
+            "button_style": "secondary",
+            "button_size": "sm",
+            "button_external": false,
+            "button_icon": false
           }
         }
       },
       "block_order": [
+        "heading_TKn9Nm",
         "spacing_tt6UHK",
         "image_8e49hm",
         "spacing_kdt7HV",
         "spacing_GfrRAp",
         "spacing_gqWAtP",
-        "button_LQkjMt"
+        "button_LQkjMt",
+        "button_YBr9yx"
       ],
-      "disabled": true,
       "name": "Whiteout Camo Banner",
       "settings": {
         "transparent_header": true,
