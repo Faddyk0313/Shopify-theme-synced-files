@@ -42,17 +42,6 @@
             "height_mobile": 72
           }
         },
-        "button_LA9bnw": {
-          "type": "button",
-          "settings": {
-            "button_label": "3.0 Release Schedule",
-            "button_link": "shopify://pages/production-tracker",
-            "button_style": "link",
-            "button_size": "sm",
-            "button_external": false,
-            "button_icon": true
-          }
-        },
         "subheading_iDrEVg": {
           "type": "subheading",
           "disabled": true,
@@ -68,7 +57,6 @@
         "image_73Rt4T",
         "spacing_6Xh8KL",
         "spacing_dbAhak",
-        "button_LA9bnw",
         "subheading_iDrEVg"
       ],
       "name": "header banner",
