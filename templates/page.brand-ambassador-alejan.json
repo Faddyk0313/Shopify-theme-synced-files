@@ -150,6 +150,79 @@
         "rounded": false
       }
     },
+    "timeline_h8zJDa": {
+      "type": "timeline",
+      "blocks": {
+        "content_J4Djgi": {
+          "type": "content",
+          "settings": {
+            "subheading": "NHL",
+            "heading": "CHASE REID",
+            "heading_tag": "h2",
+            "text": "<p>Chase Reid is one of hockey’s rising young defensemen, a member of the Seattle Kraken organization, and a Titan athlete. The Chesterfield, Michigan native was selected seventh overall by Seattle in the 2026 NHL Draft after a standout season with the Sault Ste. Marie Greyhounds of the Ontario Hockey League.<br/></p><p>A right-shot defenseman known for his skating, hockey sense, mobility and two-way ability, Reid recorded 48 points (18 goals, 30 assists) in 45 games during the 2025–26 OHL season. He led Greyhounds defensemen in scoring, earned a spot on the OHL First All-Star Team, and was ranked No. 2 among North American skaters in NHL Central Scouting’s final 2026 rankings. He also represented Team USA at the 2026 IIHF World Junior Championship, recording four points in five games.<br/></p><p>Reid’s path has been anything but ordinary. Originally a forward, he moved to defense as a young player and developed through the Michigan hockey system. After being released by his USHL team and starting the 2024–25 season in the NAHL, he earned an opportunity with the Greyhounds and posted 40 points in 39 games, landing on the OHL First All-Rookie Team.</p><p></p><p>That willingness to adapt and keep pushing is what makes Reid a natural fit for Titan. His game is built on speed, confidence and competing hard in every zone, and Titan exists so players can play that way without compromise, on the belief that performance and protection should go hand in hand.<br/></p><p>As a Titan athlete, Reid joins a growing group of elite players who share that belief and represent the next generation helping advance the way athletes approach safety on the ice.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "content_wQbGnY": {
+          "type": "content",
+          "settings": {
+            "subheading": "2021",
+            "heading": "Example heading",
+            "heading_tag": "h2",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        }
+      },
+      "block_order": [
+        "content_J4Djgi",
+        "content_wQbGnY"
+      ],
+      "disabled": true,
+      "name": "t:sections.timeline.name",
+      "settings": {
+        "show_navigation": true,
+        "layout": "image_first",
+        "image_ratio": "portrait",
+        "image_ratio_mobile": "wide",
+        "heading": "Timeline",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
     "image_with_text_jENyrW": {
       "type": "image-with-text",
       "blocks": {
@@ -1432,6 +1505,7 @@
     "main-page",
     "image_with_text_overlay_qh8wKg",
     "rich_text_AknWLy",
+    "timeline_h8zJDa",
     "image_with_text_jENyrW",
     "image_with_text_overlay_kctTEz",
     "rich_text_3apjKq",
