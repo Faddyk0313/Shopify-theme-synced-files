@@ -180,7 +180,7 @@
       ],
       "name": "TEAM DISCOUNT",
       "settings": {
-        "image": "shopify://shop_images/discount_team_web_3c331140-a2fd-4c2a-9e8a-d49dc52f64ac.png",
+        "image": "shopify://shop_images/discount_team_web_2026.png",
         "image_height": "adapt",
         "image_width": "small",
         "layout": "text_first",
@@ -989,6 +989,7 @@
         "consent_mode": "legitimate_interest",
         "consent_subscription_id": "370138111",
         "consent_text": "Titan Battlegear needs the contact information you provide to us to contact you about our products and services. You may unsubscribe from these communications at any time. For information on how to unsubscribe, as well as our privacy practices and commitment to protecting your privacy, please review our Privacy Policy.",
+        "step_heading_tag": "h2",
         "step_heading_size": "title-sm",
         "step_media_heading_size": "title-sm",
         "heading": "",
