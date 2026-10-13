@@ -117,6 +117,7 @@
         "heading_jnNEpy",
         "text_atNi4A"
       ],
+      "disabled": true,
       "name": "MODULE 1",
       "settings": {
         "text_alignment": "left",
@@ -150,61 +151,53 @@
         "rounded": false
       }
     },
-    "timeline_h8zJDa": {
-      "type": "timeline",
+    "portfolio_VmbLFQ": {
+      "type": "portfolio",
       "blocks": {
-        "content_J4Djgi": {
-          "type": "content",
+        "profile_ggCVhb": {
+          "type": "profile",
           "settings": {
-            "subheading": "NHL",
+            "image": "shopify://shop_images/Chase_Reid_hat_fixed.jpg",
             "heading": "CHASE REID",
-            "heading_tag": "h2",
-            "text": "<p>Chase Reid is one of hockey’s rising young defensemen, a member of the Seattle Kraken organization, and a Titan athlete. The Chesterfield, Michigan native was selected seventh overall by Seattle in the 2026 NHL Draft after a standout season with the Sault Ste. Marie Greyhounds of the Ontario Hockey League.<br/></p><p>A right-shot defenseman known for his skating, hockey sense, mobility and two-way ability, Reid recorded 48 points (18 goals, 30 assists) in 45 games during the 2025–26 OHL season. He led Greyhounds defensemen in scoring, earned a spot on the OHL First All-Star Team, and was ranked No. 2 among North American skaters in NHL Central Scouting’s final 2026 rankings. He also represented Team USA at the 2026 IIHF World Junior Championship, recording four points in five games.<br/></p><p>Reid’s path has been anything but ordinary. Originally a forward, he moved to defense as a young player and developed through the Michigan hockey system. After being released by his USHL team and starting the 2024–25 season in the NAHL, he earned an opportunity with the Greyhounds and posted 40 points in 39 games, landing on the OHL First All-Rookie Team.</p><p></p><p>That willingness to adapt and keep pushing is what makes Reid a natural fit for Titan. His game is built on speed, confidence and competing hard in every zone, and Titan exists so players can play that way without compromise, on the belief that performance and protection should go hand in hand.<br/></p><p>As a Titan athlete, Reid joins a growing group of elite players who share that belief and represent the next generation helping advance the way athletes approach safety on the ice.</p>",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": true,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle",
-            "highlighted_reveal": false
+            "text": "<p>Chase Reid is one of hockey’s rising young defensemen, a member of the Seattle Kraken organization, and a Titan athlete. The Chesterfield, Michigan native was selected seventh overall by Seattle in the 2026 NHL Draft after a standout season with the Sault Ste. Marie Greyhounds of the Ontario Hockey League.</p><p>A right-shot defenseman known for his skating, hockey sense, mobility and two-way ability, Reid recorded 48 points (18 goals, 30 assists) in 45 games during the 2025–26 OHL season. He led Greyhounds defensemen in scoring, earned a spot on the OHL First All-Star Team, and was ranked No. 2 among North American skaters in NHL Central Scouting’s final 2026 rankings. He also represented Team USA at the 2026 IIHF World Junior Championship, recording four points in five games.</p><p>Reid’s path has been anything but ordinary. Originally a forward, he moved to defense as a young player and developed through the Michigan hockey system. After being released by his USHL team and starting the 2024–25 season in the NAHL, he earned an opportunity with the Greyhounds and posted 40 points in 39 games, landing on the OHL First All-Rookie Team.</p><p>That willingness to adapt and keep pushing is what makes Reid a natural fit for Titan. His game is built on speed, confidence and competing hard in every zone, and Titan exists so players can play that way without compromise, on the belief that performance and protection should go hand in hand.<br/></p><p>As a Titan athlete, Reid joins a growing group of elite players who share that belief and represent the next generation helping advance the way athletes approach safety on the ice.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
           }
         },
-        "content_wQbGnY": {
-          "type": "content",
+        "profile_G9pM8B": {
+          "type": "profile",
           "settings": {
-            "subheading": "2021",
-            "heading": "Example heading",
-            "heading_tag": "h2",
-            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": true,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle",
-            "highlighted_reveal": false
+            "image": "shopify://shop_images/james_hagens_titan_ambassador.png",
+            "heading": "JAMES HAGENS",
+            "text": "<p>At Titan BattleGear, we align with athletes who define the next era of hockey. <strong>James Hagens</strong> is one of them.</p><p>Now officially drafted by the <strong>Boston Bruins</strong>, Hagens has already transitioned from elite prospect to proven winner on the biggest stages in the sport. His selection by one of the NHL’s most storied franchises was the natural next step for a player who has consistently delivered under pressure, against top competition, and on the international stage.</p><p>Before turning pro, Hagens built one of the most dominant junior resumes in recent history. After developing through the <strong>USA Hockey National Team Development Program</strong>, he announced himself globally at the <strong>IIHF U18 World Championship</strong>, where he recorded 22 points in seven games. That performance shattered a long standing tournament scoring record and cemented his reputation as a generational offensive talent.</p><p>Hagens followed that up with a gold medal run at the World Juniors, centering the top line for <strong>Team USA</strong>. Competing against the best young players in the world, he played a central role in Team USA’s championship run, combining elite playmaking, pace, and composure in the highest pressure moments the tournament offers.</p><p>Those traits are exactly why James Hagens is Titan BattleGear’s premier athlete. His game is built on speed, deception, edge work, and relentless compete level. That demands equipment that does not compromise protection, comfort, or performance. Titan exists to meet that standard. When Hagens steps on the ice wearing Titan, it is a direct reflection of our mission to engineer the safest, most advanced protective apparel in hockey.</p><p>James Hagens represents the future of the game.<br/><br/>Titan BattleGear exists to protect it.</p><p>Together, we conquer.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
           }
         }
       },
       "block_order": [
-        "content_J4Djgi",
-        "content_wQbGnY"
+        "profile_ggCVhb",
+        "profile_G9pM8B"
       ],
-      "disabled": true,
-      "name": "t:sections.timeline.name",
+      "name": "t:sections.portfolio.name",
       "settings": {
-        "show_navigation": true,
-        "layout": "image_first",
+        "columns": 3,
+        "carousel_on_desktop": false,
+        "layout": "grid",
         "image_ratio": "portrait",
-        "image_ratio_mobile": "wide",
-        "heading": "Timeline",
+        "image_ratio_mobile": "portrait",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "<strong>THE FIRST LINE</strong>",
         "heading_size": "title-md",
-        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_alignment": "text-left justify-start",
         "heading_tag": "h2",
         "subheading": "",
-        "description": "",
+        "description": "<p><strong>OUR SELECTIVE ROSTER OF ATHLETES, CREATORS & COACHES WHO HELP SHAPE THE FUTURE OF TITAN.</strong></p>",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
         "highlighted_text": "none",
         "highlighted_scribble": "circle",
         "highlighted_reveal": false,
@@ -270,6 +263,7 @@
         "text_FBmUJF",
         "button_LirXUY"
       ],
+      "disabled": true,
       "name": "Image with text",
       "settings": {
         "image": "shopify://shop_images/james_hagens_titan_ambassador.png",
@@ -1505,7 +1499,7 @@
     "main-page",
     "image_with_text_overlay_qh8wKg",
     "rich_text_AknWLy",
-    "timeline_h8zJDa",
+    "portfolio_VmbLFQ",
     "image_with_text_jENyrW",
     "image_with_text_overlay_kctTEz",
     "rich_text_3apjKq",
