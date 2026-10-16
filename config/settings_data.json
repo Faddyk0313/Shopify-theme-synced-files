@@ -276,6 +276,11 @@
         "type": "shopify://apps/redo/blocks/redo_app_embed/c613644b-6df4-4d11-b336-43a5c06745a1",
         "disabled": false,
         "settings": {}
+      },
+      "15225590024933042035": {
+        "type": "shopify://apps/le-pixel/blocks/app-embed/ed69facb-49c9-4e93-9d56-146cc0aa96f6",
+        "disabled": false,
+        "settings": {}
       }
     }
   },
