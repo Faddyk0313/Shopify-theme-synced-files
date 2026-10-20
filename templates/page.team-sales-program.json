@@ -1897,7 +1897,7 @@
       "settings": {
         "portal_id": "46588550",
         "form_guid": "d7bcd3f3-9615-4cde-a94c-0ca255d083ff",
-        "submit_endpoint": "https://hocky-name-generator-seven.vercel.app/api/hubspot-form-submit",
+        "submit_endpoint": "https://hocky-name-generator-git-twenty-disc-7cbe7f-fahd-khans-projects.vercel.app/api/twenty-form-submit",
         "form_name": "Team Sales Form",
         "branch_rules": "from 1: ts_team_sales_persona in \"I am the decision maker for team purchases\",\"I influence or help coordinate purchases\" => goto 3",
         "gate_field": "email",
@@ -1918,6 +1918,7 @@
         "consent_mode": "none",
         "consent_subscription_id": "",
         "consent_text": "",
+        "step_heading_tag": "h2",
         "step_heading_size": "title-sm",
         "step_media_heading_size": "title-sm",
         "heading": "",
