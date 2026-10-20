@@ -387,6 +387,7 @@
         "products": [
           "yth-cut-resistant-baselayer-3-0-orange",
           "yth-cut-resistant-baselayer-3-0-black",
+          "yth-cut-resistant-baselayer-3-0-miami-vice",
           "yth-cut-resistant-baselayer-3-0-stickerpack",
           "yth-cut-resistant-baselayer-3-0-red",
           "sr-cut-resistant-baselayer-3-0-black",
@@ -401,9 +402,8 @@
           "sr-dryland-short-short-1",
           "yth-victory-tee-heather-gray",
           "sr-dryland-short-whiteout-camo",
-          "yth-cut-resistant-baselayer-3-0-whiteout-camo",
           "yth-cut-resistant-baselayer-3-0-galaxy-splatter",
-          "yth-cut-resistant-baselayer-3-0-miami-vice"
+          "yth-cut-resistant-baselayer-3-0-whiteout-camo"
         ],
         "product_limit": 18,
         "columns": 5,
