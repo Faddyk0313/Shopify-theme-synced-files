@@ -214,7 +214,7 @@
   display: block;
 }
 
-.hs-form__success-media p {
+.hs-form__success-media p, h2 {
   margin: 0 !important;
 }
 
