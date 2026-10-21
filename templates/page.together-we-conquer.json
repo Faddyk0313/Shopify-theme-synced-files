@@ -231,6 +231,7 @@
       "block_order": [
         "heading_wEAdWf"
       ],
+      "disabled": true,
       "settings": {
         "text_alignment": "center",
         "text_alignment_mobile": "center",
@@ -274,30 +275,6 @@
             "image_alt": "",
             "image_link": "",
             "footnote": ""
-          }
-        },
-        "field_yRktGq": {
-          "type": "field",
-          "settings": {
-            "step": 1,
-            "hs_name": "email",
-            "object_type": "0-1",
-            "type": "email",
-            "label": "Email",
-            "required": true,
-            "hidden": false,
-            "span": "2",
-            "span_fixed": false,
-            "label_outside": false,
-            "placeholder": "",
-            "help_text": "",
-            "options": "",
-            "default_value": "",
-            "autocomplete": "email",
-            "min_digits": "",
-            "max_digits": "",
-            "show_when_field": "",
-            "show_when_values": ""
           }
         },
         "field_HH4Yxc": {
@@ -348,6 +325,30 @@
             "show_when_values": ""
           }
         },
+        "field_yRktGq": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "email",
+            "object_type": "0-1",
+            "type": "email",
+            "label": "Email",
+            "required": true,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "email",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
         "field_UeYkFR": {
           "type": "field",
           "settings": {
@@ -366,6 +367,30 @@
             "options": "",
             "default_value": "",
             "autocomplete": "tel",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_dx3PEC": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "titan_moment",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "Titan Moment",
+            "required": true,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "Titan Snipe|Titan Snipe - for the ultimate shots\nTitan Dangle|Titan Dangle - for the filthy moves\nTitan Hatty|Titan Hatty - for the hat trick heroes\nTitan PlayMaker|Titan PlayMaker - for the game-changing assists",
+            "default_value": "",
+            "autocomplete": "",
             "min_digits": "",
             "max_digits": "",
             "show_when_field": "",
@@ -444,30 +469,6 @@
             "show_when_values": ""
           }
         },
-        "field_dx3PEC": {
-          "type": "field",
-          "settings": {
-            "step": 1,
-            "hs_name": "titan_moment",
-            "object_type": "0-1",
-            "type": "dropdown",
-            "label": "Titan Moment",
-            "required": true,
-            "hidden": false,
-            "span": "2",
-            "span_fixed": false,
-            "label_outside": false,
-            "placeholder": "",
-            "help_text": "",
-            "options": "Titan Snipe|Titan Snipe - for the ultimate shots\nTitan Dangle|Titan Dangle - for the filthy moves\nTitan Hatty|Titan Hatty - for the hat trick heroes\nTitan PlayMaker|Titan PlayMaker - for the game-changing assists",
-            "default_value": "",
-            "autocomplete": "",
-            "min_digits": "",
-            "max_digits": "",
-            "show_when_field": "",
-            "show_when_values": ""
-          }
-        },
         "field_9G8z3d": {
           "type": "field",
           "settings": {
@@ -503,7 +504,7 @@
             "required": false,
             "hidden": false,
             "span": "2",
-            "span_fixed": false,
+            "span_fixed": true,
             "label_outside": false,
             "placeholder": "",
             "help_text": "",
@@ -527,7 +528,7 @@
             "required": true,
             "hidden": false,
             "span": "2",
-            "span_fixed": false,
+            "span_fixed": true,
             "label_outside": false,
             "placeholder": "",
             "help_text": "Media Release Statement — By submitting your Titan Moments video, you grant Titan BattleGear the right to use your content & story in promotional materials, social media, and other publications without compensation.",
@@ -591,14 +592,14 @@
       },
       "block_order": [
         "step_GAAqkJ",
-        "field_yRktGq",
         "field_HH4Yxc",
         "field_RFBUgK",
+        "field_yRktGq",
         "field_UeYkFR",
+        "field_dx3PEC",
         "field_NhewxU",
         "field_MR4FNV",
         "field_GKFg3j",
-        "field_dx3PEC",
         "field_9G8z3d",
         "field_7UgyWX",
         "field_U8N8dW",
