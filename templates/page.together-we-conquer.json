@@ -263,6 +263,24 @@
         "rounded": false
       }
     },
+    "custom_liquid_AQjqP6": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "settings": {
+        "liquid": "<script charset=\"utf-8\" type=\"text/javascript\" src=\"//js.hsforms.net/forms/embed/v2.js\"></script>\n<script>\n  hbspt.forms.create({\n    portalId: \"46588550\",\n    formId: \"6fc1645b-d17b-483e-9b99-7644fff3c0ab\",\n    region: \"na1\"\n  });\n</script>",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
     "hubspot_intake_form_6Jeq6X": {
       "type": "hubspot-intake-form",
       "blocks": {
@@ -652,23 +670,6 @@
         "rounded": false
       }
     },
-    "custom_liquid_AQjqP6": {
-      "type": "custom-liquid",
-      "settings": {
-        "liquid": "<script charset=\"utf-8\" type=\"text/javascript\" src=\"//js.hsforms.net/forms/embed/v2.js\"></script>\n<script>\n  hbspt.forms.create({\n    portalId: \"46588550\",\n    formId: \"6fc1645b-d17b-483e-9b99-7644fff3c0ab\",\n    region: \"na1\"\n  });\n</script>",
-        "color_text": "",
-        "color_background": "",
-        "gradient_background": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 72,
-        "padding_bottom": 72,
-        "divider": false,
-        "narrow": false,
-        "rounded": false
-      }
-    },
     "collage_gXiGc9": {
       "type": "collage",
       "blocks": {
@@ -898,6 +899,7 @@
       "block_order": [
         "heading_AGzjwC"
       ],
+      "disabled": true,
       "settings": {
         "text_alignment": "center",
         "text_alignment_mobile": "center",
@@ -947,6 +949,420 @@
         "rounded": true
       }
     },
+    "hubspot_intake_form_iNfxa9": {
+      "type": "hubspot-intake-form",
+      "blocks": {
+        "step_WMqP4R": {
+          "type": "step",
+          "settings": {
+            "heading": "SUBMIT YOUR TOGETHER WE CONQUER MOMENT",
+            "content": "<p>Share the moment that says it all. Selected photos are featured across Titan BattleGear.</p>",
+            "image_heading": "",
+            "image_alt": "",
+            "image_link": "",
+            "footnote": ""
+          }
+        },
+        "field_LdWmLk": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "firstname",
+            "object_type": "0-1",
+            "type": "text",
+            "label": "First Name",
+            "required": false,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "given-name",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_6JJHAD": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "lastname",
+            "object_type": "0-1",
+            "type": "text",
+            "label": "Last Name",
+            "required": false,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "family-name",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_KWUnWC": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "email",
+            "object_type": "0-1",
+            "type": "email",
+            "label": "Email",
+            "required": true,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "email",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_r3XaCi": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "phone",
+            "object_type": "0-1",
+            "type": "tel",
+            "label": "Phone Number",
+            "required": false,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "tel",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_nTJ4ER": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "company",
+            "object_type": "0-2",
+            "type": "text",
+            "label": "Team Name",
+            "required": true,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_ahXc96": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "event_name_single_line",
+            "object_type": "0-1",
+            "type": "text",
+            "label": "Event Name",
+            "required": false,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_7jHz3w": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "date_of_event",
+            "object_type": "0-1",
+            "type": "date",
+            "label": "Event Date",
+            "required": false,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_eEqGEr": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "location_of_event",
+            "object_type": "0-1",
+            "type": "text",
+            "label": "Event Location",
+            "required": false,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_7GKDXn": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "your_story",
+            "object_type": "0-1",
+            "type": "text",
+            "label": "Details about your Together We Conquer moment",
+            "required": true,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": true,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_dGWQQn": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "upload_images",
+            "object_type": "0-1",
+            "type": "file",
+            "label": "Upload Images",
+            "required": false,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "JPG or PNG, up to 4MB.",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_wYxVhr": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "social_media_handles",
+            "object_type": "0-1",
+            "type": "text",
+            "label": "Social Media Handles",
+            "required": false,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": true,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_z9XewF": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "consent_checkbox",
+            "object_type": "0-1",
+            "type": "dropdown",
+            "label": "Photo & Story Release",
+            "required": true,
+            "hidden": false,
+            "span": "2",
+            "span_fixed": true,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "Photo Release Statement — By submitting your Together We Conquer moment, you grant Titan Battlegear the right to use your image & story in promotional materials, social media, and other publications without compensation.",
+            "options": "Yes\nNo",
+            "default_value": "Yes",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_WEpeWF": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "customer_tag",
+            "object_type": "0-1",
+            "type": "hidden",
+            "label": "Customer tag",
+            "required": false,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "B2C",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        },
+        "field_KxwwDh": {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "ts_lead_source",
+            "object_type": "0-1",
+            "type": "hidden",
+            "label": "Lead source",
+            "required": false,
+            "hidden": false,
+            "span": "1",
+            "span_fixed": false,
+            "label_outside": false,
+            "placeholder": "",
+            "help_text": "",
+            "options": "",
+            "default_value": "Photo Submission",
+            "autocomplete": "",
+            "min_digits": "",
+            "max_digits": "",
+            "show_when_field": "",
+            "show_when_values": ""
+          }
+        }
+      },
+      "block_order": [
+        "step_WMqP4R",
+        "field_LdWmLk",
+        "field_6JJHAD",
+        "field_KWUnWC",
+        "field_r3XaCi",
+        "field_nTJ4ER",
+        "field_ahXc96",
+        "field_7jHz3w",
+        "field_eEqGEr",
+        "field_7GKDXn",
+        "field_dGWQQn",
+        "field_wYxVhr",
+        "field_z9XewF",
+        "field_WEpeWF",
+        "field_KxwwDh"
+      ],
+      "name": "Photo Submission",
+      "settings": {
+        "portal_id": "46588550",
+        "form_guid": "cb8fdecb-e75a-4011-8bf7-f4c87cd23fed",
+        "submit_endpoint": "https://hocky-name-generator-git-twenty-disc-7cbe7f-fahd-khans-projects.vercel.app/api/twenty-photo-submission",
+        "form_name": "Photo Submission",
+        "branch_rules": "",
+        "gate_field": "",
+        "upload_endpoint": "https://hocky-name-generator-seven.vercel.app/api/hubspot-logo-upload",
+        "next_label": "Next",
+        "prev_label": "Previous",
+        "submit_label": "Submit",
+        "loading_label": "Submitting…",
+        "success_heading": "Thank you!",
+        "success_message": "<p>Thank you! We’ve received your story and will review it soon. Together, we conquer!</p>",
+        "success_image_heading": "SHOP TEAM STOCK COLORWAYS",
+        "success_image_text": "<p>Explore our stock team colorways — delivering the same industry-leading protection in colors that reflect your program's identity.</p>",
+        "success_image_alt": "Titan BattleGear stock team colorways showing a range of available team colors in cut resistant baselayers and neck guards.",
+        "success_image_link": "",
+        "required_message": "Please complete the highlighted fields.",
+        "error_message": "We couldn't submit your form. Please try again or email TeamSales@titanbattlegear.com.",
+        "consent_mode": "none",
+        "consent_subscription_id": "",
+        "consent_text": "",
+        "step_heading_tag": "h2",
+        "step_heading_size": "title-sm",
+        "step_media_heading_size": "title-sm",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_tag": "h2",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "subheading": "",
+        "description": "",
+        "color_text": "#000000",
+        "color_background": "#FFFFFF",
+        "gradient_background": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 28,
+        "padding_bottom": 72,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
     "custom_liquid_PULi6W": {
       "type": "custom-liquid",
       "settings": {
@@ -970,12 +1386,13 @@
     "image_with_text_overlay_hEnBk9",
     "collage_U7xqEj",
     "highlight_text_378kQg",
-    "hubspot_intake_form_6Jeq6X",
     "custom_liquid_AQjqP6",
+    "hubspot_intake_form_6Jeq6X",
     "collage_gXiGc9",
     "image_with_text_PQQ6Tg",
     "highlight_text_fV9yKQ",
     "custom_liquid_k9PKhQ",
+    "hubspot_intake_form_iNfxa9",
     "custom_liquid_PULi6W"
   ]
 }
