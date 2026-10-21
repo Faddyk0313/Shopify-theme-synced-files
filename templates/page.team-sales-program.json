@@ -1105,6 +1105,7 @@
     },
     "3d_prod_config_HdGjaa": {
       "type": "3d-prod-config",
+      "disabled": true,
       "name": "3d Shirt Configurator",
       "settings": {
         "padding_top": 72,
@@ -1892,7 +1893,6 @@
         "field_gb3itt",
         "field_hmXUyk"
       ],
-      "disabled": true,
       "name": "Team Sales Form",
       "settings": {
         "portal_id": "46588550",
@@ -1942,6 +1942,7 @@
     },
     "custom_liquid_ijgnyq": {
       "type": "custom-liquid",
+      "disabled": true,
       "name": "t:sections.custom-liquid.name",
       "settings": {
         "liquid": "<script src=\"https://js.hsforms.net/forms/embed/46588550.js\" defer></script>\n<div class=\"hs-form-frame\" data-region=\"na1\" data-form-id=\"d7bcd3f3-9615-4cde-a94c-0ca255d083ff\" data-portal-id=\"46588550\"></div>",
