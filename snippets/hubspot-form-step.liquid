@@ -72,12 +72,18 @@
     <p class="hs-form__consent text-sm opacity-70">{{ section.settings.consent_text }}</p>
   {%- endif -%}
 
-  <div class="hs-form__progress" data-progress aria-hidden="true">
-    <span class="hs-form__progress-track">
-      <span class="hs-form__progress-fill" data-progress-fill></span>
-    </span>
-    <span class="hs-form__progress-count text-sm" data-progress-count>{{ index }}/{{ total }}</span>
-  </div>
+  {%- comment -%}
+    A single-step form has nothing to count, so the bar only earns its place on a
+    multi-step one. `show_progress` lets a section opt out even when it has steps.
+  {%- endcomment -%}
+  {%- if total > 1 and section.settings.show_progress != false -%}
+    <div class="hs-form__progress" data-progress aria-hidden="true">
+      <span class="hs-form__progress-track">
+        <span class="hs-form__progress-fill" data-progress-fill></span>
+      </span>
+      <span class="hs-form__progress-count text-sm" data-progress-count>{{ index }}/{{ total }}</span>
+    </div>
+  {%- endif -%}
 
   <div class="hs-form__nav">
     {%- unless is_first -%}

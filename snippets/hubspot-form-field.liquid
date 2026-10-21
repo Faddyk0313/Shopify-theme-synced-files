@@ -143,6 +143,47 @@
           {% if block.settings.required %}required{% endif %}
         >
 
+      {%- when 'checkbox' -%}
+        {%- comment -%}
+          HubSpot's single_checkbox. The label sits beside the box, not floating above
+          it, so it is emitted here rather than by the shared label block below.
+          An unchecked box submits nothing, matching HubSpot.
+        {%- endcomment -%}
+        <div class="hs-field__checkbox">
+          <input
+            class="checkbox"
+            type="checkbox"
+            id="{{ field_id }}"
+            data-hs-field
+            data-hs-name="{{ hs_name }}"
+            data-hs-object="{{ object_type }}"
+            data-hs-type="checkbox"
+            value="{{ block.settings.default_value | default: 'Yes' | escape }}"
+            {% if block.settings.help_text != blank %}aria-describedby="{{ field_id }}-help"{% endif %}
+            {% if block.settings.required %}required{% endif %}
+          >
+          <label class="hs-field__checkbox-label" for="{{ field_id }}">
+            {{- label -}}
+            {%- if block.settings.required -%}
+              <span class="hs-field__required" aria-hidden="true">*</span>
+            {%- endif -%}
+          </label>
+        </div>
+
+      {%- when 'textarea' -%}
+        <textarea
+          class="input{{ float_class }} hs-field__textarea"
+          id="{{ field_id }}"
+          rows="{{ block.settings.rows | default: 4 }}"
+          data-hs-field
+          data-hs-name="{{ hs_name }}"
+          data-hs-object="{{ object_type }}"
+          data-hs-type="textarea"
+          placeholder=" "
+          {% if block.settings.help_text != blank %}aria-describedby="{{ field_id }}-help"{% endif %}
+          {% if block.settings.required %}required{% endif %}
+        ></textarea>
+
       {%- when 'date' -%}
         <input
           class="input{{ float_class }}"
@@ -192,7 +233,7 @@
     {%- endcase -%}
 
     {%- comment -%}Floating label: must follow the control for theme.css's sibling selector.{%- endcomment -%}
-    {%- unless field_type == 'file' -%}
+    {%- unless field_type == 'file' or field_type == 'checkbox' -%}
       <label class="label is-floating hs-field__label" for="{{ field_id }}">
         {{- label -}}
         {%- if block.settings.required -%}

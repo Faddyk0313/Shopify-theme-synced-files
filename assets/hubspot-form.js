@@ -440,7 +440,12 @@
       this.visibleFields(stepEl).forEach((field) => {
         const wrapper = field.closest('[data-field-wrapper]');
         const label = this.labelFor(field, wrapper);
-        const value = (field.value || '').trim();
+        // A checkbox carries its value attribute whether or not it is ticked, so the
+        // emptiness test below has to read .checked instead.
+        const value =
+          field.dataset.hsType === 'checkbox'
+            ? (field.checked ? field.value || 'Yes' : '')
+            : (field.value || '').trim();
 
         wrapper?.classList.remove('has-error');
         field.classList.remove('invalid');
@@ -462,6 +467,7 @@
 
 
         if (!value) return;
+        if (field.dataset.hsType === 'checkbox') return;
 
         if (field.dataset.hsType === 'email' && !EMAIL_RE.test(value)) {
           fail(`${label} must be a valid email address.`);
@@ -585,6 +591,12 @@
     }
 
     serializeValue(field) {
+      // A single checkbox submits its value only when ticked -- an unticked box sends
+      // nothing at all, as in the HubSpot embed.
+      if (field.dataset.hsType === 'checkbox') {
+        return field.checked ? field.value || 'Yes' : '';
+      }
+
       const raw = (field.value || '').trim();
       if (!raw) return '';
 

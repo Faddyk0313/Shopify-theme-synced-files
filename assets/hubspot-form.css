@@ -288,3 +288,33 @@
     transition: none;
   }
 }
+
+/* ---------------------------------------------------------------- checkbox */
+/*
+  HubSpot's single_checkbox: box and label on one line, label to the right.
+  Unlike every other field here the label does not float, so the wrapper opts out
+  of the relative/floating layout the inputs use.
+*/
+.hs-field__checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3, 0.75rem);
+}
+
+.hs-field__checkbox .checkbox {
+  flex: none;
+  margin-block-start: 0.15em;
+}
+
+.hs-field__checkbox-label {
+  line-height: 1.35;
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------- textarea */
+.hs-field .hs-field__textarea {
+  width: 100%;
+  min-height: 7.5rem;
+  resize: vertical;
+  padding-block: var(--sp-4, 1rem);
+}

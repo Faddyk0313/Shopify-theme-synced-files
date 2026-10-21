@@ -157,14 +157,21 @@
       "id": "branch_rules",
       "label": "Step skip rules",
       "info": "One rule per line, mirroring HubSpot's Logic tab: from <step>: field in \"value a\",\"value b\" => goto <step>. Combine two conditions with \"and\". A rule only fires from the step it names.",
-      "default": "from 1: ts_team_sales_persona in \"I am the decision maker for team purchases\",\"I influence or help coordinate purchases\" => goto 3"
+      "default": ""
     },
     {
       "type": "text",
       "id": "gate_field",
       "label": "Reveal step 1 after this field",
-      "default": "email",
-      "info": "HubSpot internal name of the field that unlocks the rest of step 1. Leave blank to show all of step 1 at once."
+      "default": "",
+      "info": "HubSpot internal name of the field that unlocks the rest of step 1. Leave blank to show the whole step at once \u2014 what a single-screen form wants."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_progress",
+      "label": "Show progress bar",
+      "default": true,
+      "info": "Only applies to multi-step forms. A single-step form never shows it."
     },
     {
       "type": "header",
@@ -635,6 +642,14 @@
             {
               "value": "hidden",
               "label": "Hidden"
+            },
+            {
+              "value": "checkbox",
+              "label": "Checkbox"
+            },
+            {
+              "value": "textarea",
+              "label": "Paragraph text"
             }
           ]
         },
@@ -758,18 +773,6 @@
           "type": "field",
           "settings": {
             "step": 1,
-            "hs_name": "email",
-            "type": "email",
-            "label": "Email",
-            "required": true,
-            "span": "2",
-            "autocomplete": "email"
-          }
-        },
-        {
-          "type": "field",
-          "settings": {
-            "step": 1,
             "hs_name": "firstname",
             "type": "text",
             "label": "First Name",
@@ -794,11 +797,23 @@
           "type": "field",
           "settings": {
             "step": 1,
+            "hs_name": "email",
+            "type": "email",
+            "label": "Email",
+            "required": true,
+            "span": "1",
+            "autocomplete": "email"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
             "hs_name": "phone",
             "type": "tel",
             "label": "Phone Number",
             "required": false,
-            "span": "2",
+            "span": "1",
             "autocomplete": "tel"
           }
         },
@@ -810,8 +825,19 @@
             "type": "text",
             "label": "Team Name",
             "required": true,
-            "span": "2",
+            "span": "1",
             "object_type": "0-2"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "event_name_single_line",
+            "type": "text",
+            "label": "Event Name",
+            "required": false,
+            "span": "1"
           }
         },
         {
@@ -840,22 +866,12 @@
           "type": "field",
           "settings": {
             "step": 1,
-            "hs_name": "event_name_single_line",
-            "type": "text",
-            "label": "Event Name",
-            "required": false,
-            "span": "2"
-          }
-        },
-        {
-          "type": "field",
-          "settings": {
-            "step": 1,
             "hs_name": "your_story",
-            "type": "text",
+            "type": "textarea",
             "label": "Details about your Together We Conquer moment",
             "required": true,
-            "span": "2"
+            "span": "2",
+            "span_fixed": true
           }
         },
         {
@@ -867,7 +883,7 @@
             "label": "Upload Images",
             "required": false,
             "span": "2",
-            "help_text": "JPG or PNG, up to 4MB."
+            "span_fixed": true
           }
         },
         {
@@ -878,7 +894,8 @@
             "type": "text",
             "label": "Social Media Handles",
             "required": false,
-            "span": "2"
+            "span": "2",
+            "span_fixed": true
           }
         },
         {
@@ -886,13 +903,13 @@
           "settings": {
             "step": 1,
             "hs_name": "consent_checkbox",
-            "type": "dropdown",
+            "type": "checkbox",
             "label": "Photo & Story Release",
             "required": true,
             "span": "2",
-            "options": "Yes\nNo",
-            "default_value": "Yes",
-            "help_text": "Photo Release Statement \u2014 By submitting your Together We Conquer moment, you grant Titan Battlegear the right to use your image & story in promotional materials, social media, and other publications without compensation."
+            "span_fixed": true,
+            "help_text": "Photo Release Statement \u2014 By submitting your Together We Conquer moment, you grant Titan Battlegear the right to use your image & story in promotional materials, social media, and other publications without compensation.",
+            "default_value": "Yes"
           }
         },
         {
@@ -926,10 +943,11 @@
         "submit_endpoint": "https://hocky-name-generator-seven.vercel.app/api/twenty-photo-submission",
         "upload_endpoint": "https://hocky-name-generator-seven.vercel.app/api/hubspot-logo-upload",
         "branch_rules": "",
-        "gate_field": "email",
+        "gate_field": "",
         "consent_mode": "none",
         "success_heading": "Thank you!",
-        "success_message": "<p>Thank you! We&rsquo;ve received your story and will review it soon. Together, we conquer!</p>"
+        "success_message": "<p>Thank you! We&rsquo;ve received your story and will review it soon. Together, we conquer!</p>",
+        "show_progress": false
       }
     },
     {
@@ -941,18 +959,6 @@
           "settings": {
             "heading": "ENTER THE TITAN MOMENTS GIVEAWAY",
             "content": "<p>Pick your moment, upload your shot, and you're in.</p>"
-          }
-        },
-        {
-          "type": "field",
-          "settings": {
-            "step": 1,
-            "hs_name": "email",
-            "type": "email",
-            "label": "Email",
-            "required": true,
-            "span": "2",
-            "autocomplete": "email"
           }
         },
         {
@@ -983,12 +989,36 @@
           "type": "field",
           "settings": {
             "step": 1,
+            "hs_name": "email",
+            "type": "email",
+            "label": "Email",
+            "required": true,
+            "span": "1",
+            "autocomplete": "email"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
             "hs_name": "phone",
             "type": "tel",
             "label": "Phone Number",
             "required": false,
-            "span": "2",
+            "span": "1",
             "autocomplete": "tel"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "titan_moment",
+            "type": "dropdown",
+            "label": "Titan Moment",
+            "required": true,
+            "span": "1",
+            "options": "Titan Snipe|Titan Snipe - for the ultimate shots\nTitan Dangle|Titan Dangle - for the filthy moves\nTitan Hatty|Titan Hatty - for the hat trick heroes\nTitan PlayMaker|Titan PlayMaker - for the game-changing assists"
           }
         },
         {
@@ -999,7 +1029,7 @@
             "type": "text",
             "label": "Team Name",
             "required": true,
-            "span": "2",
+            "span": "1",
             "object_type": "0-2"
           }
         },
@@ -1029,24 +1059,12 @@
           "type": "field",
           "settings": {
             "step": 1,
-            "hs_name": "titan_moment",
-            "type": "dropdown",
-            "label": "Titan Moment",
-            "required": true,
-            "span": "2",
-            "options": "Titan Snipe|Titan Snipe - for the ultimate shots\nTitan Dangle|Titan Dangle - for the filthy moves\nTitan Hatty|Titan Hatty - for the hat trick heroes\nTitan PlayMaker|Titan PlayMaker - for the game-changing assists"
-          }
-        },
-        {
-          "type": "field",
-          "settings": {
-            "step": 1,
             "hs_name": "upload_images",
             "type": "file",
             "label": "Upload Highlight Reel/Video",
             "required": true,
             "span": "2",
-            "help_text": "Up to 4MB."
+            "span_fixed": true
           }
         },
         {
@@ -1057,7 +1075,8 @@
             "type": "text",
             "label": "Social Media Handles",
             "required": false,
-            "span": "2"
+            "span": "2",
+            "span_fixed": true
           }
         },
         {
@@ -1065,13 +1084,13 @@
           "settings": {
             "step": 1,
             "hs_name": "consent_checkbox",
-            "type": "dropdown",
+            "type": "checkbox",
             "label": "Media & Story Release",
             "required": true,
             "span": "2",
-            "options": "Yes\nNo",
-            "default_value": "Yes",
-            "help_text": "Media Release Statement \u2014 By submitting your Titan Moments video, you grant Titan BattleGear the right to use your content & story in promotional materials, social media, and other publications without compensation."
+            "span_fixed": true,
+            "help_text": "Media Release Statement \u2014 By submitting your Titan Moments video, you grant Titan BattleGear the right to use your content & story in promotional materials, social media, and other publications without compensation.",
+            "default_value": "Yes"
           }
         },
         {
@@ -1105,10 +1124,11 @@
         "submit_endpoint": "https://hocky-name-generator-seven.vercel.app/api/twenty-giveaway",
         "upload_endpoint": "https://hocky-name-generator-seven.vercel.app/api/hubspot-logo-upload",
         "branch_rules": "",
-        "gate_field": "email",
+        "gate_field": "",
         "consent_mode": "none",
         "success_heading": "Thank you!",
-        "success_message": "<p>Thank you! We&rsquo;ve received your story and will review it soon. Together, we conquer!</p>"
+        "success_message": "<p>Thank you! We&rsquo;ve received your story and will review it soon. Together, we conquer!</p>",
+        "show_progress": false
       }
     }
   ],
