@@ -1,0 +1,1123 @@
+{%- liquid
+  assign step_blocks = section.blocks | where: 'type', 'step'
+  assign total_steps = step_blocks.size
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {%- render 'section-variables', section: section -%}
+  }
+</style>
+
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+  <div class="page-width{% if section.settings.narrow %} page-width--narrow{% endif %} relative">
+    {%- render 'section-heading', section: section -%}
+
+    {%- if total_steps == 0 -%}
+      {%- if request.design_mode -%}
+        <p>{{ 'Add at least one Step block to render this form.' }}</p>
+      {%- endif -%}
+    {%- else -%}
+      <hubspot-form
+        class="hs-form"
+        data-portal-id="{{ section.settings.portal_id }}"
+        data-form-guid="{{ section.settings.form_guid }}"
+        data-page-name="{{ page_title | default: shop.name | escape }}"
+        data-submit-endpoint="{{ section.settings.submit_endpoint }}"
+        data-form-name="{{ section.settings.form_name | escape }}"
+        data-error-message="{{ section.settings.error_message | escape }}"
+        data-required-message="{{ section.settings.required_message | escape }}"
+        data-loading-label="{{ section.settings.loading_label | escape }}"
+        data-branch-rules="{{ section.settings.branch_rules | escape }}"
+        data-gate-field="{{ section.settings.gate_field }}"
+        data-upload-endpoint="{{ section.settings.upload_endpoint }}"
+        data-consent-mode="{{ section.settings.consent_mode }}"
+        data-consent-subscription-id="{{ section.settings.consent_subscription_id }}"
+        data-consent-text="{{ section.settings.consent_text | escape }}"
+      >
+        <form novalidate>
+          {%- for step in step_blocks -%}
+            {%- liquid
+              assign index = forloop.index
+              assign is_first = false
+              assign is_last = false
+              if forloop.first
+                assign is_first = true
+              endif
+              if forloop.last
+                assign is_last = true
+              endif
+            -%}
+            {%- render 'hubspot-form-step',
+              step: step,
+              section: section,
+              index: index,
+              total: total_steps,
+              is_first: is_first,
+              is_last: is_last
+            -%}
+          {%- endfor -%}
+
+          {%- comment -%}Spam trap: hidden from people, tempting to bots. Never sent to HubSpot.{%- endcomment -%}
+          <div class="sr-only" aria-hidden="true">
+            <label for="HsTrap-{{ section.id }}">{{ 'Leave this field empty' }}</label>
+            <input type="text" id="HsTrap-{{ section.id }}" name="website_hp" tabindex="-1" autocomplete="off" data-honeypot>
+          </div>
+        </form>
+
+        <div class="hs-form__success rte" data-success hidden>
+          {%- if section.settings.success_heading != blank -%}
+            <{{ section.settings.step_heading_tag }} class="{{ section.settings.step_heading_size | default: 'title-sm' }}">{{ section.settings.success_heading }}</{{ section.settings.step_heading_tag }}>
+          {%- endif -%}
+          {{ section.settings.success_message }}
+
+          {%- if section.settings.success_image != blank or section.settings.success_image_heading != blank -%}
+            <div class="hs-form__success-media">
+              {%- if section.settings.success_image_heading != blank -%}
+                <{{ section.settings.step_heading_tag }} class="{{ section.settings.step_heading_size | default: 'title-sm' }}">
+                  {{- section.settings.success_image_heading -}}
+                </{{section.settings.step_heading_tag}}>
+              {%- endif -%}
+
+              {%- if section.settings.success_image_text != blank -%}
+                {{ section.settings.success_image_text }}
+              {%- endif -%}
+
+              {%- if section.settings.success_image != blank -%}
+                {%- liquid
+                  assign success_image = section.settings.success_image
+                  assign success_sizes = '(min-width: 990px) 720px, 100vw'
+                  assign success_widths = '400,600,800,1000,1200,1400,1600'
+                -%}
+                {%- if section.settings.success_image_link != blank -%}
+                  <a href="{{ section.settings.success_image_link }}"{% if section.settings.success_image_alt != blank %} aria-label="{{ section.settings.success_image_alt | escape }}"{% endif %}>
+                    {{- success_image | image_url: width: success_image.width | image_tag: loading: 'lazy', sizes: success_sizes, widths: success_widths, is: 'lazy-image', class: 'w-full h-auto', alt: section.settings.success_image_alt -}}
+                  </a>
+                {%- else -%}
+                  {{- success_image | image_url: width: success_image.width | image_tag: loading: 'lazy', sizes: success_sizes, widths: success_widths, is: 'lazy-image', class: 'w-full h-auto', alt: section.settings.success_image_alt -}}
+                {%- endif -%}
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </hubspot-form>
+
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Intake Form",
+  "tag": "section",
+  "class": "hs-form-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "HubSpot"
+    },
+    {
+      "type": "paragraph",
+      "content": "Generic intake form. Pick a preset, then point \"Submit endpoint\" at the relay route for that form. Field names must stay HubSpot-shaped: the relay maps them to Twenty, and the HubSpot fallback route still reads them."
+    },
+    {
+      "type": "text",
+      "id": "portal_id",
+      "label": "Portal ID",
+      "default": "46588550"
+    },
+    {
+      "type": "text",
+      "id": "form_guid",
+      "label": "Form GUID",
+      "default": "d7bcd3f3-9615-4cde-a94c-0ca255d083ff"
+    },
+    {
+      "type": "text",
+      "id": "submit_endpoint",
+      "label": "Submit endpoint",
+      "default": "https://hocky-name-generator-seven.vercel.app/api/hubspot-form-submit",
+      "info": "Relay route for this form (\u2026/api/twenty-photo-submission, \u2026/api/twenty-giveaway). The API key lives there, never in the theme."
+    },
+    {
+      "type": "text",
+      "id": "form_name",
+      "label": "Form name",
+      "default": "Team Sales Form",
+      "info": "Stored on the contact as ts_intake_source, matching what the HubSpot form used to stamp."
+    },
+    {
+      "type": "header",
+      "content": "Branching logic"
+    },
+    {
+      "type": "textarea",
+      "id": "branch_rules",
+      "label": "Step skip rules",
+      "info": "One rule per line, mirroring HubSpot's Logic tab: from <step>: field in \"value a\",\"value b\" => goto <step>. Combine two conditions with \"and\". A rule only fires from the step it names.",
+      "default": "from 1: ts_team_sales_persona in \"I am the decision maker for team purchases\",\"I influence or help coordinate purchases\" => goto 3"
+    },
+    {
+      "type": "text",
+      "id": "gate_field",
+      "label": "Reveal step 1 after this field",
+      "default": "email",
+      "info": "HubSpot internal name of the field that unlocks the rest of step 1. Leave blank to show all of step 1 at once."
+    },
+    {
+      "type": "header",
+      "content": "File upload"
+    },
+    {
+      "type": "text",
+      "id": "upload_endpoint",
+      "label": "Logo upload endpoint",
+      "default": "https://hocky-name-generator-seven.vercel.app/api/hubspot-logo-upload",
+      "info": "Relay that stores the logo in HubSpot File Manager and returns its URL. HubSpot's forms API is JSON-only and cannot carry files. Leave blank to disable uploads."
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "Next button",
+      "default": "Next"
+    },
+    {
+      "type": "text",
+      "id": "prev_label",
+      "label": "Previous button",
+      "default": "Previous"
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Submit button",
+      "default": "Submit"
+    },
+    {
+      "type": "text",
+      "id": "loading_label",
+      "label": "Submitting label",
+      "default": "Submitting\u2026"
+    },
+    {
+      "type": "header",
+      "content": "After submit"
+    },
+    {
+      "type": "text",
+      "id": "success_heading",
+      "label": "Success heading",
+      "default": "YOU'RE ALL SET!"
+    },
+    {
+      "type": "richtext",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "<p>Your custom team program request has been received.<br/>Our team will review your details, confirm ordering structure, and follow up with next steps shortly.</p>"
+    },
+    {
+      "type": "text",
+      "id": "success_image_heading",
+      "label": "Success image heading",
+      "default": "SHOP TEAM STOCK COLORWAYS"
+    },
+    {
+      "type": "richtext",
+      "id": "success_image_text",
+      "label": "Success image text",
+      "default": "<p>Explore our stock team colorways \u2014 delivering the same industry-leading protection in colors that reflect your program's identity.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "success_image",
+      "label": "Success image",
+      "info": "Upload the stock colorway fan image (baselayer + neck guard)."
+    },
+    {
+      "type": "text",
+      "id": "success_image_alt",
+      "label": "Success image alt text",
+      "default": "Titan BattleGear stock team colorways showing a range of available team colors in cut resistant baselayers and neck guards."
+    },
+    {
+      "type": "url",
+      "id": "success_image_link",
+      "label": "Success image link"
+    },
+    {
+      "type": "text",
+      "id": "required_message",
+      "label": "Missing fields message",
+      "default": "Please complete the highlighted fields.",
+      "info": "Shown once when more than one field needs attention. Individual fields are highlighted inline."
+    },
+    {
+      "type": "text",
+      "id": "error_message",
+      "label": "Error message",
+      "default": "We couldn't submit your form. Please try again or email TeamSales@titanbattlegear.com."
+    },
+    {
+      "type": "header",
+      "content": "Consent"
+    },
+    {
+      "type": "select",
+      "id": "consent_mode",
+      "label": "Consent mode",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "legitimate_interest",
+          "label": "Legitimate interest"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "consent_subscription_id",
+      "label": "Subscription type ID",
+      "info": "Numeric HubSpot subscription ID. Required for legitimate interest."
+    },
+    {
+      "type": "textarea",
+      "id": "consent_text",
+      "label": "Consent text",
+      "info": "Must match the text configured in HubSpot exactly \u2014 it is stored as the legal basis."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "step_heading_tag",
+      "label": "Heading tag",
+      "default": "h2",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "div",
+          "label": "Div"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "step_heading_size",
+      "label": "Step heading size",
+      "default": "title-sm",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "Small"
+        },
+        {
+          "value": "title-md",
+          "label": "Medium"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "Large"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "step_media_heading_size",
+      "label": "Step image heading size",
+      "default": "title-sm",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "Small"
+        },
+        {
+          "value": "title-md",
+          "label": "Medium"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "Large"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "default": "title-md",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "Small"
+        },
+        {
+          "value": "title-md",
+          "label": "Medium"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "Large"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "Extra large"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading tag",
+      "default": "h2",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "div",
+          "label": "Div"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "default": "text-left md:items-end md:flex-row",
+      "options": [
+        {
+          "value": "text-left md:items-end md:flex-row",
+          "label": "Left"
+        },
+        {
+          "value": "text-center md:items-center",
+          "label": "Center"
+        },
+        {
+          "value": "text-right md:items-end md:flex-row-reverse",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "Background",
+      "default": "#171717"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_background",
+      "label": "Background gradient"
+    },
+    {
+      "type": "color",
+      "id": "color_button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "color",
+      "id": "color_button_background",
+      "label": "Button background"
+    },
+    {
+      "type": "color_background",
+      "id": "color_button_gradient",
+      "label": "Button gradient"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 72
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "Show divider",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "narrow",
+      "label": "Narrow width",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "label": "Rounded",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "One block per step, in order. Fields are assigned to a step by number."
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Step heading"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Intro text"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "image_heading",
+          "label": "Image heading"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text"
+        },
+        {
+          "type": "url",
+          "id": "image_link",
+          "label": "Image link"
+        },
+        {
+          "type": "richtext",
+          "id": "footnote",
+          "label": "Footnote"
+        }
+      ]
+    },
+    {
+      "type": "field",
+      "name": "Field",
+      "settings": [
+        {
+          "type": "range",
+          "id": "step",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "label": "Step",
+          "default": 1
+        },
+        {
+          "type": "text",
+          "id": "hs_name",
+          "label": "HubSpot internal name",
+          "info": "EXACT internal property name (e.g. firstname). A wrong value rejects the whole submission."
+        },
+        {
+          "type": "select",
+          "id": "object_type",
+          "label": "HubSpot object",
+          "default": "0-1",
+          "options": [
+            {
+              "value": "0-1",
+              "label": "Contact"
+            },
+            {
+              "value": "0-2",
+              "label": "Company"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "type",
+          "label": "Field type",
+          "default": "text",
+          "options": [
+            {
+              "value": "text",
+              "label": "Text"
+            },
+            {
+              "value": "email",
+              "label": "Email"
+            },
+            {
+              "value": "tel",
+              "label": "Phone"
+            },
+            {
+              "value": "date",
+              "label": "Date"
+            },
+            {
+              "value": "dropdown",
+              "label": "Dropdown"
+            },
+            {
+              "value": "file",
+              "label": "File (read-only)"
+            },
+            {
+              "value": "hidden",
+              "label": "Hidden"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label"
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "Required",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "hidden",
+          "label": "Hidden field",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "span",
+          "label": "Width",
+          "default": "1",
+          "options": [
+            {
+              "value": "1",
+              "label": "Half (1 column)"
+            },
+            {
+              "value": "2",
+              "label": "Full (2 columns)"
+            }
+          ],
+          "info": "Fields are laid out in a 2-column grid. Choose Full to span both columns."
+        },
+        {
+          "type": "checkbox",
+          "id": "span_fixed",
+          "label": "Never shrink to 1 column",
+          "default": false,
+          "info": "Full-width fields sit at 1 column while the label fits and expand only when it overflows. Check this to keep 2 columns always."
+        },
+        {
+          "type": "checkbox",
+          "id": "label_outside",
+          "label": "Stack label above field on mobile",
+          "default": false,
+          "info": "Long question labels clip inside the input on narrow screens. Desktop is unaffected."
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder"
+        },
+        {
+          "type": "text",
+          "id": "help_text",
+          "label": "Help text"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Dropdown options",
+          "info": "One per line: hubspotValue|Visible label. The value is what HubSpot stores."
+        },
+        {
+          "type": "text",
+          "id": "default_value",
+          "label": "Default value"
+        },
+        {
+          "type": "text",
+          "id": "autocomplete",
+          "label": "autocomplete attribute"
+        },
+        {
+          "type": "text",
+          "id": "min_digits",
+          "label": "Min digits (phone)"
+        },
+        {
+          "type": "text",
+          "id": "max_digits",
+          "label": "Max digits (phone)"
+        },
+        {
+          "type": "header",
+          "content": "Conditional display"
+        },
+        {
+          "type": "text",
+          "id": "show_when_field",
+          "label": "Show when this field\u2026",
+          "info": "HubSpot internal name of the controlling field."
+        },
+        {
+          "type": "text",
+          "id": "show_when_values",
+          "label": "\u2026is one of",
+          "info": "Comma-separated HubSpot values."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 50,
+  "presets": [
+    {
+      "name": "Photo Submission",
+      "category": "Forms",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "heading": "SUBMIT YOUR TOGETHER WE CONQUER MOMENT",
+            "content": "<p>Share the moment that says it all. Selected photos are featured across Titan BattleGear.</p>"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "email",
+            "type": "email",
+            "label": "Email",
+            "required": true,
+            "span": "2",
+            "autocomplete": "email"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "firstname",
+            "type": "text",
+            "label": "First Name",
+            "required": false,
+            "span": "1",
+            "autocomplete": "given-name"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "lastname",
+            "type": "text",
+            "label": "Last Name",
+            "required": false,
+            "span": "1",
+            "autocomplete": "family-name"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "phone",
+            "type": "tel",
+            "label": "Phone Number",
+            "required": false,
+            "span": "2",
+            "autocomplete": "tel"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "company",
+            "type": "text",
+            "label": "Team Name",
+            "required": true,
+            "span": "2",
+            "object_type": "0-2"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "date_of_event",
+            "type": "date",
+            "label": "Event Date",
+            "required": false,
+            "span": "1"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "location_of_event",
+            "type": "text",
+            "label": "Event Location",
+            "required": false,
+            "span": "1"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "event_name_single_line",
+            "type": "text",
+            "label": "Event Name",
+            "required": false,
+            "span": "2"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "your_story",
+            "type": "text",
+            "label": "Details about your Together We Conquer moment",
+            "required": true,
+            "span": "2"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "upload_images",
+            "type": "file",
+            "label": "Upload Images",
+            "required": false,
+            "span": "2",
+            "help_text": "JPG or PNG, up to 4MB."
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "social_media_handles",
+            "type": "text",
+            "label": "Social Media Handles",
+            "required": false,
+            "span": "2"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "consent_checkbox",
+            "type": "dropdown",
+            "label": "Photo & Story Release",
+            "required": true,
+            "span": "2",
+            "options": "Yes\nNo",
+            "default_value": "Yes",
+            "help_text": "Photo Release Statement \u2014 By submitting your Together We Conquer moment, you grant Titan Battlegear the right to use your image & story in promotional materials, social media, and other publications without compensation."
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "customer_tag",
+            "type": "hidden",
+            "label": "Customer tag",
+            "required": false,
+            "span": "1",
+            "default_value": "B2C"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "ts_lead_source",
+            "type": "hidden",
+            "label": "Lead source",
+            "required": false,
+            "span": "1",
+            "default_value": "Photo Submission"
+          }
+        }
+      ],
+      "settings": {
+        "form_guid": "cb8fdecb-e75a-4011-8bf7-f4c87cd23fed",
+        "form_name": "Photo Submission",
+        "submit_endpoint": "https://hocky-name-generator-seven.vercel.app/api/twenty-photo-submission",
+        "upload_endpoint": "https://hocky-name-generator-seven.vercel.app/api/hubspot-logo-upload",
+        "branch_rules": "",
+        "gate_field": "email",
+        "consent_mode": "none",
+        "success_heading": "Thank you!",
+        "success_message": "<p>Thank you! We&rsquo;ve received your story and will review it soon. Together, we conquer!</p>"
+      }
+    },
+    {
+      "name": "Titan Moments Giveaway",
+      "category": "Forms",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "heading": "ENTER THE TITAN MOMENTS GIVEAWAY",
+            "content": "<p>Pick your moment, upload your shot, and you're in.</p>"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "email",
+            "type": "email",
+            "label": "Email",
+            "required": true,
+            "span": "2",
+            "autocomplete": "email"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "firstname",
+            "type": "text",
+            "label": "First Name",
+            "required": false,
+            "span": "1",
+            "autocomplete": "given-name"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "lastname",
+            "type": "text",
+            "label": "Last Name",
+            "required": false,
+            "span": "1",
+            "autocomplete": "family-name"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "phone",
+            "type": "tel",
+            "label": "Phone Number",
+            "required": false,
+            "span": "2",
+            "autocomplete": "tel"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "company",
+            "type": "text",
+            "label": "Team Name",
+            "required": true,
+            "span": "2",
+            "object_type": "0-2"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "date_of_event",
+            "type": "date",
+            "label": "Event Date",
+            "required": false,
+            "span": "1"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "location_of_event",
+            "type": "text",
+            "label": "Event Location",
+            "required": false,
+            "span": "1"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "titan_moment",
+            "type": "dropdown",
+            "label": "Titan Moment",
+            "required": true,
+            "span": "2",
+            "options": "Titan Snipe|Titan Snipe - for the ultimate shots\nTitan Dangle|Titan Dangle - for the filthy moves\nTitan Hatty|Titan Hatty - for the hat trick heroes\nTitan PlayMaker|Titan PlayMaker - for the game-changing assists"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "upload_images",
+            "type": "file",
+            "label": "Upload Highlight Reel/Video",
+            "required": true,
+            "span": "2",
+            "help_text": "Up to 4MB."
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "social_media_handles",
+            "type": "text",
+            "label": "Social Media Handles",
+            "required": false,
+            "span": "2"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "consent_checkbox",
+            "type": "dropdown",
+            "label": "Media & Story Release",
+            "required": true,
+            "span": "2",
+            "options": "Yes\nNo",
+            "default_value": "Yes",
+            "help_text": "Media Release Statement \u2014 By submitting your Titan Moments video, you grant Titan BattleGear the right to use your content & story in promotional materials, social media, and other publications without compensation."
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "customer_tag",
+            "type": "hidden",
+            "label": "Customer tag",
+            "required": false,
+            "span": "1",
+            "default_value": "B2C"
+          }
+        },
+        {
+          "type": "field",
+          "settings": {
+            "step": 1,
+            "hs_name": "ts_lead_source",
+            "type": "hidden",
+            "label": "Lead source",
+            "required": false,
+            "span": "1",
+            "default_value": "Titan Moments Giveaway"
+          }
+        }
+      ],
+      "settings": {
+        "form_guid": "6fc1645b-d17b-483e-9b99-7644fff3c0ab",
+        "form_name": "Titan Moments Giveaway",
+        "submit_endpoint": "https://hocky-name-generator-seven.vercel.app/api/twenty-giveaway",
+        "upload_endpoint": "https://hocky-name-generator-seven.vercel.app/api/hubspot-logo-upload",
+        "branch_rules": "",
+        "gate_field": "email",
+        "consent_mode": "none",
+        "success_heading": "Thank you!",
+        "success_message": "<p>Thank you! We&rsquo;ve received your story and will review it soon. Together, we conquer!</p>"
+      }
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "footer",
+      "header",
+      "custom.overlay"
+    ]
+  }
+}
+{% endschema %}
