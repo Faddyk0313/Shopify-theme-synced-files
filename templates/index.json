@@ -138,7 +138,7 @@
           "type": "spacing",
           "settings": {
             "height": 0,
-            "height_mobile": 120
+            "height_mobile": 84
           }
         },
         "button_MA74NP": {
@@ -150,6 +150,13 @@
             "button_size": "sm",
             "button_external": false,
             "button_icon": false
+          }
+        },
+        "spacing_zgFbD9": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 16
           }
         },
         "button_CeG6zb": {
@@ -171,6 +178,7 @@
         "spacing_BLRd8U",
         "spacing_K4QAqk",
         "button_MA74NP",
+        "spacing_zgFbD9",
         "button_CeG6zb"
       ],
       "name": "PINK FROST",
@@ -182,7 +190,7 @@
         "content_position": "md:items-center md:justify-start",
         "text_alignment": "left",
         "image_mobile": "shopify://shop_images/PINK_FROST_MOBILE_BANNER.webp",
-        "image_height_mobile": "adapt",
+        "image_height_mobile": "600px",
         "content_position_mobile": "items-start justify-center",
         "text_alignment_mobile": "center",
         "color_text": "#000000",
