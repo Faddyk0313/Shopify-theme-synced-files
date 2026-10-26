@@ -458,59 +458,61 @@
             </div>
           </x-modal>
         </div>
-        <div class="flex-shrink-0 flex flex-row items-center gap-4 md:gap-8" style="justify-content: center;">
-          {%- assign group_keys = 'youth,senior' | split: ',' -%}
-          {%- for group in group_keys -%}
-            {%- if group == 'youth' -%}
-              {%- assign group_label = section.settings.youth_button_text | default: 'Shop Youth' -%}
-              {%- assign group_sizes = 'YTH-XS,YTH-SM,YTH-MD,YTH-LG,YTH-XL' | split: ',' -%}
-              {%- assign group_title = 'Youth Size' -%}
-            {%- else -%}
-              {%- assign group_label = section.settings.senior_button_text | default: 'Shop Senior' -%}
-              {%- assign group_sizes = 'SR-SM,SR-MD,SR-LG,SR-XL,SR-2XL,SR-3XL' | split: ',' -%}
-              {%- assign group_title = 'Senior Size' -%}
-            {%- endif -%}
-            <div
-              class="custom-size-selector-{{ section.id }}"
-              data-group="{{ group }}"
-              data-default-label="{{ group_label | escape }}"
-              style="position: relative"
-            >
-              <div class="trigger" id="size-trigger-{{ section.id }}-{{ group }}">{{ group_label }}</div>
-              <div class="options" id="size-options-{{ section.id }}-{{ group }}">
-                <div class="head">
-                  <div class="title">{{ group_title }}</div>
-                  <button class="close-btn" type="button" data-close="{{ group }}">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <line x1="18" y1="6" x2="6" y2="18" />
-                      <line x1="6" y1="6" x2="18" y2="18" />
-                    </svg>
-                  </button>
-                </div>
-                {%- for size in group_sizes -%}
-                  <div
-                    class="option"
-                    data-size="{{ size }}"
-                    {% if section.settings.preselected_size == size %}
-                      data-preselected="true"
-                    {% endif %}
-                  >
-                    {{ size }}
+        <div class="flex-shrink-0 flex flex-col items-center gap-4 md:gap-8" style="justify-content: center;">
+          <div class="flex items-center gap-4 md:gap-8" style="justify-content: center;">
+            {%- assign group_keys = 'youth,senior' | split: ',' -%}
+            {%- for group in group_keys -%}
+              {%- if group == 'youth' -%}
+                {%- assign group_label = section.settings.youth_button_text | default: 'Shop Youth' -%}
+                {%- assign group_sizes = 'YTH-XS,YTH-SM,YTH-MD,YTH-LG,YTH-XL' | split: ',' -%}
+                {%- assign group_title = 'Youth Size' -%}
+              {%- else -%}
+                {%- assign group_label = section.settings.senior_button_text | default: 'Shop Senior' -%}
+                {%- assign group_sizes = 'SR-SM,SR-MD,SR-LG,SR-XL,SR-2XL,SR-3XL' | split: ',' -%}
+                {%- assign group_title = 'Senior Size' -%}
+              {%- endif -%}
+              <div
+                class="custom-size-selector-{{ section.id }}"
+                data-group="{{ group }}"
+                data-default-label="{{ group_label | escape }}"
+                style="position: relative"
+              >
+                <div class="trigger" id="size-trigger-{{ section.id }}-{{ group }}">{{ group_label }}</div>
+                <div class="options" id="size-options-{{ section.id }}-{{ group }}">
+                  <div class="head">
+                    <div class="title">{{ group_title }}</div>
+                    <button class="close-btn" type="button" data-close="{{ group }}">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                      </svg>
+                    </button>
                   </div>
-                {%- endfor -%}
+                  {%- for size in group_sizes -%}
+                    <div
+                      class="option"
+                      data-size="{{ size }}"
+                      {% if section.settings.preselected_size == size %}
+                        data-preselected="true"
+                      {% endif %}
+                    >
+                      {{ size }}
+                    </div>
+                  {%- endfor -%}
+                </div>
               </div>
-            </div>
-          {%- endfor -%}
+            {%- endfor -%}
+          </div>
           <p id="cus_count_prods" class="font-medium text-gray-600"></p>
         </div>
       </div>
