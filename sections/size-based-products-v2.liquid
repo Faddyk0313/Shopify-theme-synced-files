@@ -106,7 +106,7 @@
   .sizeContainer .title-wrapper {
     justify-content: center;
   }
-  #size-products-carousel {
+  #size-products-carousel-{{ section.id }} {
     display: none;
   }
 
@@ -310,13 +310,13 @@
           <button
             type="button"
             class="link text-sm leading-tight cursor-pointer"
-            aria-controls="SizeChart"
+            aria-controls="SizeChart-{{ section.id }}"
             aria-expanded="false"
           >
             Size chart
           </button>
           <x-modal
-            id="SizeChart"
+            id="SizeChart-{{ section.id }}"
             class="x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
             role="dialog"
             aria-modal="true"
@@ -325,7 +325,7 @@
           >
             <overlay-element
               class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none"
-              aria-controls="SizeChart"
+              aria-controls="SizeChart-{{ section.id }}"
               aria-expanded="false"
             ></overlay-element>
             <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
@@ -335,7 +335,7 @@
                   class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center"
                   type="button"
                   is="hover-button"
-                  aria-controls="SizeChart"
+                  aria-controls="SizeChart-{{ section.id }}"
                   aria-expanded="false"
                   aria-label="Close"
                 >
@@ -521,7 +521,7 @@
               </div>
             {%- endfor -%}
           </div>
-          <p id="cus_count_prods" class="font-medium text-gray-600"></p>
+          <p id="cus_count_prods-{{ section.id }}" class="font-medium text-gray-600"></p>
         </div>
       </div>
     </div>
@@ -536,7 +536,7 @@
 </div>
 
 <section
-  id="size-products-carousel"
+  id="size-products-carousel-{{ section.id }}"
   class="section--padding page-width{% if section.settings.full_width %} page-width--full{% endif %} relative"
   style="background-color: {{ section.settings.color_background_carousel | default: 'white' }}; padding-bottom: 0 !important;"
 >
@@ -581,7 +581,7 @@
                 external: section.settings.button_external,
                 show_icon: section.settings.button_icon
               -%}
-            </p> 
+            </p>
           {%- endif -%}
 
           {%- liquid
@@ -985,7 +985,7 @@
       closeAllDropdowns();
 
       // Show the carousel section
-      const sizeProductsCarousel = document.getElementById('size-products-carousel');
+      const sizeProductsCarousel = document.getElementById('size-products-carousel-{{ section.id }}');
       sizeProductsCarousel.style.display = 'block';
 
       // Hide containers
@@ -1010,7 +1010,7 @@
         }
       });
 
-      const countElement = document.querySelector('#cus_count_prods');
+      const countElement = document.querySelector('#cus_count_prods-{{ section.id }}');
       if (countElement) {
         countElement.innerText = visibleCount + ' Products';
       }
@@ -1022,7 +1022,7 @@
 
         // Smooth scroll to the carousel section (only if not initial load)
         if (!isInitialLoad) {
-          const carouselSection = document.getElementById('size-products-carousel');
+          const carouselSection = document.getElementById('size-products-carousel-{{ section.id }}');
           if (carouselSection) {
             setTimeout(function() {
               carouselSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1171,19 +1171,22 @@
 </script>
 
 <script>
-  // Track size selector clicks Posthog Metric
-  document.addEventListener('click', function(e) {  
-    if (e.target.closest('.template-collection .size-selection-container .options .option')) {  
-      posthog.capture('Size Selector Option Clicked', {  
-        page_type: 'collection'  
-      });  
-    }  
-  });  
+  // Track size selector clicks Posthog Metric (register once per page)
+  if (!window.__sizeSelectorPosthogBound) {
+    window.__sizeSelectorPosthogBound = true;
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('.template-collection .size-selection-container .options .option')) {
+        posthog.capture('Size Selector Option Clicked', {
+          page_type: 'collection'
+        });
+      }
+    });
+  }
 </script>
 
 {% schema %}
 {
-  "name": "Size-Based Products v2",
+  "name": "Size-Based Products",
   "settings": [
     {
       "type": "header",
@@ -1571,7 +1574,7 @@
   ],
   "presets": [
     {
-      "name": "Shop By Size, v2"
+      "name": "Shop By Size, Size-Based Products"
     }
   ],
   "disabled_on": {
