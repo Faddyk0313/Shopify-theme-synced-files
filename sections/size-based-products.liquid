@@ -294,6 +294,8 @@
             <h3 class="text-lg font-medium mb-2">{{ section.settings.tagline }}</h3>
           </div>
         {% endcomment %}
+        {%- assign size_chart_page = pages[section.settings.size_chart_page] -%}
+        {%- assign size_chart_title = size_chart_page.title | default: 'Battlegear 2.0 Size Chart' -%}
         <div style="align-self: center;" class="size-chart-btn flex items-center gap-2">
           <svg
             class="icon icon-ruler icon-xs stroke-1"
@@ -318,7 +320,7 @@
             class="x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
             role="dialog"
             aria-modal="true"
-            aria-label="Battlegear 2.0 Size Chart"
+            aria-label="{{ size_chart_title | escape }}"
             hidden=""
           >
             <overlay-element
@@ -328,7 +330,7 @@
             ></overlay-element>
             <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
               <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
-                <span class="drawer__title heading title-md">Battlegear 2.0 Size Chart</span>
+                <span class="drawer__title heading title-md">{{ size_chart_title }}</span>
                 <button
                   class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center"
                   type="button"
@@ -353,6 +355,11 @@
               </gesture-element>
               <div class="drawer__content opacity-0 invisible flex flex-col h-full grow shrink">
                 <div class="drawer__scrollable relative flex flex-col gap-5 md:gap-7 grow shrink">
+                  {%- if size_chart_page != blank and size_chart_page.content != blank -%}
+                    <div class="sizechartContent rte">
+                      {{ size_chart_page.content }}
+                    </div>
+                  {%- else -%}
                   <div class="sizechartContent">
                     <div class="cusheader" style="margint-top: 0 !important;">
                       <p class="heading">Step 1:</p>
@@ -453,6 +460,7 @@
                       <p>*Neck is the primary measurement for sizing</p>
                     </div>
                   </div>
+                  {%- endif -%}
                 </div>
               </div>
             </div>
@@ -1272,6 +1280,12 @@
       "type": "text",
       "id": "button-text",
       "label": "Button Text"
+    },
+    {
+      "type": "page",
+      "id": "size_chart_page",
+      "label": "Size Chart Page",
+      "info": "Select a page to show inside the size chart modal. Leave empty to use the built-in chart."
     },
     {
       "type": "text",
