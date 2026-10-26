@@ -95,6 +95,13 @@
   .custom-size-selector-{{ section.id }} .options .option.selected {
     color: gray;
   }
+  .custom-size-selector-{{ section.id }} .options .head {
+    gap: 3rem;
+  }
+  .custom-size-selector-{{ section.id }} .options {
+    min-width: 100%;
+    white-space: nowrap;
+  }
 
   .sizeContainer .title-wrapper {
     justify-content: center;
@@ -452,129 +459,58 @@
           </x-modal>
         </div>
         <div class="flex-shrink-0 flex flex-row items-center gap-4 md:gap-8" style="justify-content: center;">
-          <div class="custom-size-selector-{{ section.id }}" style="position: relative">
-            <div class="trigger" id="size-trigger-{{ section.id }}">{{ section.settings['button-text'] }}</div>
-            <div class="options" id="size-options-{{ section.id }}">
-              <div class="head">
-                <div class="title">Size</div>
-                <button class="close-btn" id="close-btn-{{ section.id }}" type="button">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+          {%- assign group_keys = 'youth,senior' | split: ',' -%}
+          {%- for group in group_keys -%}
+            {%- if group == 'youth' -%}
+              {%- assign group_label = section.settings.youth_button_text | default: 'Shop Youth' -%}
+              {%- assign group_sizes = 'YTH-XS,YTH-SM,YTH-MD,YTH-LG,YTH-XL' | split: ',' -%}
+              {%- assign group_title = 'Youth Size' -%}
+            {%- else -%}
+              {%- assign group_label = section.settings.senior_button_text | default: 'Shop Senior' -%}
+              {%- assign group_sizes = 'SR-SM,SR-MD,SR-LG,SR-XL,SR-2XL,SR-3XL' | split: ',' -%}
+              {%- assign group_title = 'Senior Size' -%}
+            {%- endif -%}
+            <div
+              class="custom-size-selector-{{ section.id }}"
+              data-group="{{ group }}"
+              data-default-label="{{ group_label | escape }}"
+              style="position: relative"
+            >
+              <div class="trigger" id="size-trigger-{{ section.id }}-{{ group }}">{{ group_label }}</div>
+              <div class="options" id="size-options-{{ section.id }}-{{ group }}">
+                <div class="head">
+                  <div class="title">{{ group_title }}</div>
+                  <button class="close-btn" type="button" data-close="{{ group }}">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <line x1="18" y1="6" x2="6" y2="18" />
+                      <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                  </button>
+                </div>
+                {%- for size in group_sizes -%}
+                  <div
+                    class="option"
+                    data-size="{{ size }}"
+                    {% if section.settings.preselected_size == size %}
+                      data-preselected="true"
+                    {% endif %}
                   >
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                </button>
-              </div>
-              <div
-                class="option"
-                data-size="YTH-XS"
-                {% if section.settings.preselected_size == 'YTH-XS' %}
-                  data-preselected="true"
-                {% endif %}
-              >
-                YTH-XS
-              </div>
-              <div
-                class="option"
-                data-size="YTH-SM"
-                {% if section.settings.preselected_size == 'YTH-SM' %}
-                  data-preselected="true"
-                {% endif %}
-              >
-                YTH-SM
-              </div>
-              <div
-                class="option"
-                data-size="YTH-MD"
-                {% if section.settings.preselected_size == 'YTH-MD' %}
-                  data-preselected="true"
-                {% endif %}
-              >
-                YTH-MD
-              </div>
-              <div
-                class="option"
-                data-size="YTH-LG"
-                {% if section.settings.preselected_size == 'YTH-LG' %}
-                  data-preselected="true"
-                {% endif %}
-              >
-                YTH-LG
-              </div>
-              <div
-                class="option"
-                data-size="YTH-XL"
-                {% if section.settings.preselected_size == 'YTH-XL' %}
-                  data-preselected="true"
-                {% endif %}
-              >
-                YTH-XL
-              </div>
-              <div
-                class="option"
-                data-size="SR-SM"
-                {% if section.settings.preselected_size == 'SR-SM' %}
-                  data-preselected="true"
-                {% endif %}
-              >
-                SR-SM
-              </div>
-              <div
-                class="option"
-                data-size="SR-MD"
-                {% if section.settings.preselected_size == 'SR-MD' %}
-                  data-preselected="true"
-                {% endif %}
-              >
-                SR-MD
-              </div>
-              <div
-                class="option"
-                data-size="SR-LG"
-                {% if section.settings.preselected_size == 'SR-LG' %}
-                  data-preselected="true"
-                {% endif %}
-              >
-                SR-LG
-              </div>
-              <div
-                class="option"
-                data-size="SR-XL"
-                {% if section.settings.preselected_size == 'SR-XL' %}
-                  data-preselected="true"
-                {% endif %}
-              >
-                SR-XL
-              </div>
-              <div
-                class="option"
-                data-size="SR-2XL"
-                {% if section.settings.preselected_size == 'SR-2XL' %}
-                  data-preselected="true"
-                {% endif %}
-              >
-                SR-2XL
-              </div>
-              <div
-                class="option"
-                data-size="SR-3XL"
-                {% if section.settings.preselected_size == 'SR-3XL' %}
-                  data-preselected="true"
-                {% endif %}
-              >
-                SR-3XL
+                    {{ size }}
+                  </div>
+                {%- endfor -%}
               </div>
             </div>
-          </div>
+          {%- endfor -%}
           <p id="cus_count_prods" class="font-medium text-gray-600"></p>
         </div>
       </div>
@@ -854,9 +790,9 @@
   document.addEventListener('DOMContentLoaded', function () {
     const productsContainer = document.getElementById('size-products-{{ section.id }}');
     const noProductsElement = document.getElementById('no-products-{{ section.id }}');
-    const trigger = document.getElementById('size-trigger-{{ section.id }}');
-    const optionsContainer = document.getElementById('size-options-{{ section.id }}');
-    const closeBtn = document.getElementById('close-btn-{{ section.id }}');
+    const selectors = Array.prototype.slice.call(
+      document.querySelectorAll('.custom-size-selector-{{ section.id }}[data-group]')
+    );
     const sizeOptions = document.querySelectorAll('.custom-size-selector-{{ section.id }} .option');
 
     // Variable to store the currently selected size
@@ -864,25 +800,48 @@
     // Flag to track if this is the initial page load
     let isInitialLoad = true;
 
-    // Toggle dropdown open
-    trigger.addEventListener('click', function() {
-      optionsContainer.classList.add('show');
-    });
+    function closeAllDropdowns() {
+      selectors.forEach(function (sel) {
+        const opts = sel.querySelector('.options');
+        if (opts) opts.classList.remove('show');
+      });
+    }
 
-    // Close dropdown
-    closeBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      optionsContainer.classList.remove('show');
-    });
+    selectors.forEach(function (sel) {
+      const trigger = sel.querySelector('.trigger');
+      const optionsContainer = sel.querySelector('.options');
+      const closeBtn = sel.querySelector('.close-btn');
 
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function (e) {
-      const customSelector = document.querySelector('.custom-size-selector-{{ section.id }}');
-      if (customSelector && !customSelector.contains(e.target)) {
-        optionsContainer.classList.remove('show');
+      // Toggle dropdown open (only one open at a time)
+      trigger.addEventListener('click', function () {
+        const wasOpen = optionsContainer.classList.contains('show');
+        closeAllDropdowns();
+        if (!wasOpen) optionsContainer.classList.add('show');
+      });
+
+      // Close dropdown
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          optionsContainer.classList.remove('show');
+        });
       }
     });
 
+    // Close dropdowns when clicking outside any selector
+    document.addEventListener('click', function (e) {
+      const inside = selectors.some(function (sel) {
+        return sel.contains(e.target);
+      });
+      if (!inside) closeAllDropdowns();
+    });
+
+    // Reset every trigger label back to its default text
+    function resetTriggerLabels() {
+      selectors.forEach(function (sel) {
+        sel.querySelector('.trigger').textContent = sel.getAttribute('data-default-label');
+      });
+    }
     // Function to add variant parameter to product links
     function updateProductLinks() {
       if (!currentSelectedSize) return;
@@ -982,7 +941,12 @@
 
       // Update the display text and carousel heading
       if (selectedSize) {
-        trigger.textContent = selectedSize;
+        // Label only the dropdown that owns this size; reset the other
+        resetTriggerLabels();
+        const owningSelector = selectors.filter(function (sel) {
+          return sel.querySelector('.option[data-size="' + selectedSize + '"]');
+        })[0];
+        if (owningSelector) owningSelector.querySelector('.trigger').textContent = selectedSize;
 
         // Update carousel heading with selected size
         const carouselHeading = document.getElementById('carousel-heading-{{ section.id }}');
@@ -998,7 +962,7 @@
           }
         {% endif %}
       } else {
-        trigger.textContent = '{{ section.settings["button-text"] }}';
+        resetTriggerLabels();
 
         // Reset carousel heading to original
         const carouselHeading = document.getElementById('carousel-heading-{{ section.id }}');
@@ -1008,7 +972,7 @@
       }
 
       // Close dropdown after selection
-      optionsContainer.classList.remove('show');
+      closeAllDropdowns();
 
       // Show the carousel section
       const sizeProductsCarousel = document.getElementById('size-products-carousel');
@@ -1306,6 +1270,18 @@
       "type": "text",
       "id": "button-text",
       "label": "Button Text"
+    },
+    {
+      "type": "text",
+      "id": "youth_button_text",
+      "label": "Youth Dropdown Text",
+      "default": "Shop Youth"
+    },
+    {
+      "type": "text",
+      "id": "senior_button_text",
+      "label": "Senior Dropdown Text",
+      "default": "Shop Senior"
     },
     {
       "type": "select",
