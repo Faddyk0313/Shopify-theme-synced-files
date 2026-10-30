@@ -145,7 +145,7 @@
           "type": "button",
           "settings": {
             "button_label": "SHOP YOUTH",
-            "button_link": "shopify://collections/yth-cut-resistant-baselayer",
+            "button_link": "shopify://collections/youth-battlegear",
             "button_style": "secondary",
             "button_size": "sm",
             "button_external": false,
