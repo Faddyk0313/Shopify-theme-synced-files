@@ -964,7 +964,6 @@
         "field_rAddCN",
         "field_PHBtTD"
       ],
-      "disabled": true,
       "name": "Team Discount Form",
       "settings": {
         "portal_id": "46588550",
@@ -1013,6 +1012,7 @@
     },
     "custom_liquid_ijgnyq": {
       "type": "custom-liquid",
+      "disabled": true,
       "name": "t:sections.custom-liquid.name",
       "settings": {
         "liquid": "<script src=\"https://js.hsforms.net/forms/embed/46588550.js\" defer></script>\n<div class=\"hs-form-frame\" data-region=\"na1\" data-form-id=\"7d807dfc-0b9f-4c9c-b2c2-b922f297063c\" data-portal-id=\"46588550\"></div>",
