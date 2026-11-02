@@ -181,6 +181,7 @@
         "spacing_zgFbD9",
         "button_CeG6zb"
       ],
+      "disabled": true,
       "name": "PINK FROST",
       "settings": {
         "transparent_header": true,
@@ -305,7 +306,6 @@
         "spacing_b7a9kq",
         "button_YBr9yx"
       ],
-      "disabled": true,
       "name": "MAIN HERO BANNER",
       "settings": {
         "transparent_header": true,
