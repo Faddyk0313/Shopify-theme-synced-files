@@ -173,11 +173,33 @@
             "color_text": "#ffffff",
             "color_background": "#171717"
           }
+        },
+        "profile_Vt8tMF": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/BEN_GEIGER_ORGANIC.png",
+            "heading": "BEN GEIGER",
+            "text": "<p><strong>Defenseman | Northfield, Minnesota | NTDP U18 Team</strong> A big, right-shot defenseman from Northfield, Minnesota, Ben Geiger is establishing himself as a dependable presence on the blue line with the U.S. National Under-18 Team. Standing 6-foot-3, Geiger combines size, strength and mobility with a strong understanding of the game. He is particularly effective in his own zone, using his reach, positioning and physicality to close gaps, disrupt opposing attacks and win battles along the boards.<br/><br/>Geiger’s game extends well beyond defending. He has demonstrated an ability to move the puck efficiently, make smart breakout passes and contribute offensively from the blue line. His offensive instincts were evident during his time at Northfield High School, where he recorded 61 points (22 goals, 39 assists) in 30 games during the 2024–25 season. Now competing against some of the country’s top young talent in the NTDP, Geiger continues to develop the all-around game that makes him an exciting prospect for the next level. He is committed to the University of Minnesota.<br/><br/>Geiger brings the size, toughness and competitive mindset that align naturally with Titan BattleGear’s commitment to advancing hockey performance and protection. He joins fellow NTDP standouts Sam Pandolfo and Braden Horton, alongside James Hagens and Chase Reid, in leading the charge on the ice and in the locker room. Together, they represent a new generation of players who understand that performance and protection should go hand in hand.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        },
+        "profile_CeTcFm": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/BRADEN_HORTON_ORGANIC.png",
+            "heading": "BRADEN HORTON",
+            "text": "<p><strong>Forward | Souderton, Pennsylvania | NTDP U18 Team</strong> A relentless competitor with a physical edge and an instinct for making an impact, Braden Horton is bringing his hard-nosed style of play to the U.S. National Under-18 Team. The Souderton, Pennsylvania native stands 6-foot-2 and plays with the energy and determination that make him a difficult opponent to contain. Whether battling along the boards, driving the net or creating opportunities off the rush, Horton consistently looks to make his presence felt and give his team an advantage.<br/><br/>Horton combines his physical approach with an ability to contribute offensively. He is particularly effective in the corners and along the cycle, using his strength and puck protection to create space for himself and his teammates. His willingness to engage in battles, finish checks and play with pace makes him an impactful presence across the ice. After developing with Shattuck-St. Mary’s, Horton earned a place in USA Hockey’s National Team Development Program, where he continues to compete against the country’s top prospects. He is committed to Penn State University.<br/><br/>Horton’s competitive mentality and willingness to put himself on the line for his teammates make him a natural fit with Titan BattleGear. Built for players who bring intensity and commitment to every shift, Titan shares his belief that preparation and protection are essential parts of the game. Horton joins fellow NTDP standouts Ben Geiger and Sam Pandolfo, alongside James Hagens and Chase Reid, in leading the charge on the ice and in the locker room. Together, they are helping shape a new generation of hockey leaders who put performance, protection and their teammates first.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
         }
       },
       "block_order": [
         "profile_ggCVhb",
-        "profile_G9pM8B"
+        "profile_G9pM8B",
+        "profile_Vt8tMF",
+        "profile_CeTcFm"
       ],
       "name": "t:sections.portfolio.name",
       "settings": {
