@@ -193,13 +193,24 @@
             "color_text": "#ffffff",
             "color_background": "#171717"
           }
+        },
+        "profile_jMKwJM": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/SAM_PANDOLFO_ORGANIC.png",
+            "heading": "SAM PANDOLFO",
+            "text": "<p><strong>Forward | Winchester, Massachusetts | NTDP U18 Team</strong> A powerful forward with an impressive combination of size, skill and hockey sense, Sam Pandolfo is making his mark with the U.S. National Under-18 Team. The Winchester, Massachusetts native stands 6-foot-5 and brings a commanding presence to the ice, using his size and strength to create opportunities, protect the puck and make plays in traffic. A left-shot forward, Pandolfo has the versatility to contribute in multiple offensive situations while maintaining a strong commitment to the defensive side of the game.<br/><br/>Pandolfo’s game is built around more than physical presence. He has shown an ability to read developing plays, find passing lanes and create opportunities for teammates through smart puck movement and strong positioning. His combination of power and playmaking makes him a difficult matchup for opposing defenders, particularly around the net and along the boards. After developing with the Rivers School and Boston Jr. Eagles, Pandolfo earned his place in USA Hockey’s National Team Development Program. He is committed to Boston University, where he will continue his development at the collegiate level.<br/><br/>Pandolfo’s approach to the game reflects the values at the heart of Titan BattleGear: strength, preparation, confidence and a commitment to playing the game the right way. He joins fellow NTDP standouts Ben Geiger and Braden Horton, alongside James Hagens and Chase Reid, in leading the charge on the ice and in the locker room. Together, this group represents the next generation of hockey leaders who recognize that protecting the game starts with protecting the players who play it.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
         }
       },
       "block_order": [
         "profile_ggCVhb",
         "profile_G9pM8B",
         "profile_Vt8tMF",
-        "profile_CeTcFm"
+        "profile_CeTcFm",
+        "profile_jMKwJM"
       ],
       "name": "t:sections.portfolio.name",
       "settings": {
