@@ -214,8 +214,8 @@
       ],
       "name": "t:sections.portfolio.name",
       "settings": {
-        "columns": 2,
-        "carousel_on_desktop": false,
+        "columns": 4,
+        "carousel_on_desktop": true,
         "layout": "default",
         "image_ratio": "portrait",
         "image_ratio_mobile": "portrait",
