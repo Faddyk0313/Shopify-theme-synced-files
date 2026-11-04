@@ -58,6 +58,71 @@
         "image_X6jYw4",
         "text_KcJdcL"
       ],
+      "disabled": true,
+      "name": "PUCK HUNTER BANNER",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/Puck_Hunter_desktop_banner.webp",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-center md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/Puck_Hunter_mobile_banner.webp",
+        "image_height_mobile": "adapt",
+        "content_position_mobile": "items-start justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "#00adee",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "image_with_text_overlay_HRTNaV": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "image_Ndgrxi": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/sticker_pack_svg_collection_lockup.svg",
+            "image_width": "custom",
+            "image_max_width": 230,
+            "image_max_width_mobile": 160
+          }
+        },
+        "text_7xHCGB": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>At <strong>Titan Labs </strong>we don’t just create gear; we create confidence. Our commitment to innovation, protection, and performance ensures you’re always ready for the fight ahead.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "image_Ndgrxi",
+        "text_7xHCGB"
+      ],
       "name": "Sticker Pack ",
       "settings": {
         "transparent_header": false,
@@ -99,7 +164,7 @@
       "settings": {
         "collection": "",
         "products": [
-          "cut-resistant-baselayer-3-0-sticker-pack",
+          "yth-cut-resistant-baselayer-3-0-stickerpack",
           "yth-dryland-short-sticker-pack",
           "yth-stickerpack-tee-black",
           "yth-stickerpack-hoodie-black",
@@ -213,7 +278,7 @@
       "settings": {
         "collection": "",
         "products": [
-          "cut-resistant-baselayer-3-0-frozen-rocket",
+          "yth-cut-resistant-baselayer-3-0-frozen-rocket",
           "yth-dryland-short-frozen-rocket",
           "yth-frozen-rocket-tee-bold-blue",
           "yth-frozen-rocket-hoodie-white",
@@ -866,6 +931,7 @@
   "order": [
     "main-page",
     "image_with_text_overlay_kPUDTw",
+    "image_with_text_overlay_HRTNaV",
     "featured_collection_WXjHCR",
     "image_with_text_overlay_WedhY3",
     "featured_collection_qxCd8T",
