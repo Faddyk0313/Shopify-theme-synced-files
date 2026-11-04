@@ -70,178 +70,180 @@
   >
 
 {%- else -%}
-  <div
-    class="{{ wrapper_class }}"
-    data-field-wrapper
-    data-hs-name-ref="{{ hs_name }}"
-    {% if conditional %}
-      data-show-when-field="{{ block.settings.show_when_field | strip | escape }}"
-      data-show-when-values="{{ block.settings.show_when_values | escape }}"
-      hidden
-    {% endif %}
-    {{ block.shopify_attributes }}
-  >
-    {%- case field_type -%}
-      {%- when 'dropdown' -%}
-        {%- assign option_lines = block.settings.options | newline_to_br | split: '<br />' -%}
-        <select
-          class="select{{ float_class }}"
-          id="{{ field_id }}"
-          data-hs-field
-          data-hs-name="{{ hs_name }}"
-          data-hs-object="{{ object_type }}"
-          data-hs-type="dropdown"
-          {% if block.settings.required %}required{% else %}is="custom-select"{% endif %}
-        >
-          <option value="" disabled selected hidden></option>
-          {%- for line in option_lines -%}
-            {%- assign line_2 = line | strip -%}
-            {%- if line_2 != blank -%}
-              {%- assign parts = line_2 | split: '|' -%}
-              {%- assign opt_value = parts[0] | strip -%}
-              {%- if parts.size > 1 -%}
-                {%- assign opt_label = parts[1] | strip -%}
-              {%- else -%}
-                {%- assign opt_label = opt_value -%}
-              {%- endif -%}
-              <option value="{{ opt_value | escape }}">{{ opt_label }}</option>
-            {%- endif -%}
-          {%- endfor -%}
-        </select>
-        {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none' -%}
-
-      {%- when 'file' -%}
-        {%- comment -%}
-          A file input has no value to float a label against, so the label -- and its
-          help text -- sit above the control instead of using the theme's floating
-          pattern.
-
-          The file is not sent to HubSpot's forms API, which is JSON-only. It is uploaded
-          to HubSpot File Manager through the relay named by `upload_endpoint` on the
-          section, and the URL that comes back is submitted as this field's value --
-          `ts_logo_upload` is a text property holding a URL. See assets/hubspot-form.js.
-        {%- endcomment -%}
-        <label class="label hs-field__label" for="{{ field_id }}">
-          {{- label -}}
-          {%- if block.settings.required -%}
-            <span class="hs-field__required" aria-hidden="true">*</span>
-          {%- endif -%}
-        </label>
-        {%- if block.settings.help_text != blank -%}
-          <p class="hs-field__help text-sm" id="{{ field_id }}-help">{{ block.settings.help_text }}</p>
-        {%- endif -%}
-        <input
-          class="input"
-          type="file"
-          id="{{ field_id }}"
-          data-hs-field
-          data-hs-name="{{ hs_name }}"
-          data-hs-object="{{ object_type }}"
-          data-hs-type="file"
-          accept=".png,.jpg,.jpeg,.gif,.webp,.svg,.pdf,.ai,.eps"
-          {% if block.settings.help_text != blank %}aria-describedby="{{ field_id }}-help"{% endif %}
-          {% if block.settings.required %}required{% endif %}
-        >
-
-      {%- when 'checkbox' -%}
-        {%- comment -%}
-          HubSpot's single_checkbox. The label sits beside the box, not floating above
-          it, so it is emitted here rather than by the shared label block below.
-          An unchecked box submits nothing, matching HubSpot.
-        {%- endcomment -%}
-        <div class="hs-field__checkbox">
-          <input
-            class="checkbox"
-            type="checkbox"
+  <div class="flex flex-col justify-center">
+    <div
+      class="{{ wrapper_class }}"
+      data-field-wrapper
+      data-hs-name-ref="{{ hs_name }}"
+      {% if conditional %}
+        data-show-when-field="{{ block.settings.show_when_field | strip | escape }}"
+        data-show-when-values="{{ block.settings.show_when_values | escape }}"
+        hidden
+      {% endif %}
+      {{ block.shopify_attributes }}
+    >
+      {%- case field_type -%}
+        {%- when 'dropdown' -%}
+          {%- assign option_lines = block.settings.options | newline_to_br | split: '<br />' -%}
+          <select
+            class="select{{ float_class }}"
             id="{{ field_id }}"
             data-hs-field
             data-hs-name="{{ hs_name }}"
             data-hs-object="{{ object_type }}"
-            data-hs-type="checkbox"
-            value="{{ block.settings.default_value | default: 'Yes' | escape }}"
-            {% if block.settings.help_text != blank %}aria-describedby="{{ field_id }}-help"{% endif %}
-            {% if block.settings.required %}required{% endif %}
+            data-hs-type="dropdown"
+            {% if block.settings.required %}required{% else %}is="custom-select"{% endif %}
           >
-          <label class="hs-field__checkbox-label" for="{{ field_id }}">
+            <option value="" disabled selected hidden></option>
+            {%- for line in option_lines -%}
+              {%- assign line_2 = line | strip -%}
+              {%- if line_2 != blank -%}
+                {%- assign parts = line_2 | split: '|' -%}
+                {%- assign opt_value = parts[0] | strip -%}
+                {%- if parts.size > 1 -%}
+                  {%- assign opt_label = parts[1] | strip -%}
+                {%- else -%}
+                  {%- assign opt_label = opt_value -%}
+                {%- endif -%}
+                <option value="{{ opt_value | escape }}">{{ opt_label }}</option>
+              {%- endif -%}
+            {%- endfor -%}
+          </select>
+          {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none' -%}
+
+        {%- when 'file' -%}
+          {%- comment -%}
+            A file input has no value to float a label against, so the label -- and its
+            help text -- sit above the control instead of using the theme's floating
+            pattern.
+
+            The file is not sent to HubSpot's forms API, which is JSON-only. It is uploaded
+            to HubSpot File Manager through the relay named by `upload_endpoint` on the
+            section, and the URL that comes back is submitted as this field's value --
+            `ts_logo_upload` is a text property holding a URL. See assets/hubspot-form.js.
+          {%- endcomment -%}
+          <label class="label hs-field__label" for="{{ field_id }}">
             {{- label -}}
             {%- if block.settings.required -%}
               <span class="hs-field__required" aria-hidden="true">*</span>
             {%- endif -%}
           </label>
-        </div>
+          {%- if block.settings.help_text != blank -%}
+            <p class="hs-field__help text-sm" id="{{ field_id }}-help">{{ block.settings.help_text }}</p>
+          {%- endif -%}
+          <input
+            class="input"
+            type="file"
+            id="{{ field_id }}"
+            data-hs-field
+            data-hs-name="{{ hs_name }}"
+            data-hs-object="{{ object_type }}"
+            data-hs-type="file"
+            accept=".png,.jpg,.jpeg,.gif,.webp,.svg,.pdf,.ai,.eps"
+            {% if block.settings.help_text != blank %}aria-describedby="{{ field_id }}-help"{% endif %}
+            {% if block.settings.required %}required{% endif %}
+          >
 
-      {%- when 'textarea' -%}
-        <textarea
-          class="input{{ float_class }} hs-field__textarea"
-          id="{{ field_id }}"
-          rows="{{ block.settings.rows | default: 4 }}"
-          data-hs-field
-          data-hs-name="{{ hs_name }}"
-          data-hs-object="{{ object_type }}"
-          data-hs-type="textarea"
-          placeholder=" "
-          {% if block.settings.help_text != blank %}aria-describedby="{{ field_id }}-help"{% endif %}
-          {% if block.settings.required %}required{% endif %}
-        ></textarea>
+        {%- when 'checkbox' -%}
+          {%- comment -%}
+            HubSpot's single_checkbox. The label sits beside the box, not floating above
+            it, so it is emitted here rather than by the shared label block below.
+            An unchecked box submits nothing, matching HubSpot.
+          {%- endcomment -%}
+          <div class="hs-field__checkbox">
+            <input
+              class="checkbox"
+              type="checkbox"
+              id="{{ field_id }}"
+              data-hs-field
+              data-hs-name="{{ hs_name }}"
+              data-hs-object="{{ object_type }}"
+              data-hs-type="checkbox"
+              value="{{ block.settings.default_value | default: 'Yes' | escape }}"
+              {% if block.settings.help_text != blank %}aria-describedby="{{ field_id }}-help"{% endif %}
+              {% if block.settings.required %}required{% endif %}
+            >
+            <label class="hs-field__checkbox-label" for="{{ field_id }}">
+              {{- label -}}
+              {%- if block.settings.required -%}
+                <span class="hs-field__required" aria-hidden="true">*</span>
+              {%- endif -%}
+            </label>
+          </div>
 
-      {%- when 'date' -%}
-        <input
-          class="input{{ float_class }}"
-          type="date"
-          id="{{ field_id }}"
-          data-hs-field
-          data-hs-name="{{ hs_name }}"
-          data-hs-object="{{ object_type }}"
-          data-hs-type="date"
-          placeholder=" "
-          {% if block.settings.required %}required{% endif %}
-        >
+        {%- when 'textarea' -%}
+          <textarea
+            class="input{{ float_class }} hs-field__textarea"
+            id="{{ field_id }}"
+            rows="{{ block.settings.rows | default: 4 }}"
+            data-hs-field
+            data-hs-name="{{ hs_name }}"
+            data-hs-object="{{ object_type }}"
+            data-hs-type="textarea"
+            placeholder=" "
+            {% if block.settings.help_text != blank %}aria-describedby="{{ field_id }}-help"{% endif %}
+            {% if block.settings.required %}required{% endif %}
+          ></textarea>
 
-      {%- else -%}
-        {%- liquid
-          case field_type
-            when 'email'
-              assign input_type = 'email'
-              assign autocomplete = 'email'
-            when 'tel'
-              assign input_type = 'tel'
-              assign autocomplete = 'tel'
-            else
-              assign input_type = 'text'
-              assign autocomplete = block.settings.autocomplete
-          endcase
+        {%- when 'date' -%}
+          <input
+            class="input{{ float_class }}"
+            type="date"
+            id="{{ field_id }}"
+            data-hs-field
+            data-hs-name="{{ hs_name }}"
+            data-hs-object="{{ object_type }}"
+            data-hs-type="date"
+            placeholder=" "
+            {% if block.settings.required %}required{% endif %}
+          >
 
-          assign placeholder = block.settings.placeholder | default: label
-        -%}
-        <input
-          class="input{{ float_class }}"
-          type="{{ input_type }}"
-          id="{{ field_id }}"
-          data-hs-field
-          data-hs-name="{{ hs_name }}"
-          data-hs-object="{{ object_type }}"
-          data-hs-type="{{ field_type }}"
-          {% if block.settings.min_digits != blank %}data-min-digits="{{ block.settings.min_digits }}"{% endif %}
-          {% if block.settings.max_digits != blank %}data-max-digits="{{ block.settings.max_digits }}"{% endif %}
-          {% if autocomplete != blank %}autocomplete="{{ autocomplete }}"{% endif %}
-          {% if field_type == 'email' %}spellcheck="false" autocapitalize="off"{% endif %}
-          {% if block.settings.help_text != blank %}aria-describedby="{{ field_id }}-help"{% endif %}
-          value="{{ block.settings.default_value | escape }}"
-          placeholder="{{ placeholder | escape }}"
-          {% if block.settings.required %}required{% endif %}
-        >
-    {%- endcase -%}
+        {%- else -%}
+          {%- liquid
+            case field_type
+              when 'email'
+                assign input_type = 'email'
+                assign autocomplete = 'email'
+              when 'tel'
+                assign input_type = 'tel'
+                assign autocomplete = 'tel'
+              else
+                assign input_type = 'text'
+                assign autocomplete = block.settings.autocomplete
+            endcase
 
-    {%- comment -%}Floating label: must follow the control for theme.css's sibling selector.{%- endcomment -%}
-    {%- unless field_type == 'file' or field_type == 'checkbox' -%}
-      <label class="label is-floating hs-field__label" for="{{ field_id }}">
-        {{- label -}}
-        {%- if block.settings.required -%}
-          <span class="hs-field__required" aria-hidden="true">*</span>
-        {%- endif -%}
-      </label>
-    {%- endunless -%}
+            assign placeholder = block.settings.placeholder | default: label
+          -%}
+          <input
+            class="input{{ float_class }}"
+            type="{{ input_type }}"
+            id="{{ field_id }}"
+            data-hs-field
+            data-hs-name="{{ hs_name }}"
+            data-hs-object="{{ object_type }}"
+            data-hs-type="{{ field_type }}"
+            {% if block.settings.min_digits != blank %}data-min-digits="{{ block.settings.min_digits }}"{% endif %}
+            {% if block.settings.max_digits != blank %}data-max-digits="{{ block.settings.max_digits }}"{% endif %}
+            {% if autocomplete != blank %}autocomplete="{{ autocomplete }}"{% endif %}
+            {% if field_type == 'email' %}spellcheck="false" autocapitalize="off"{% endif %}
+            {% if block.settings.help_text != blank %}aria-describedby="{{ field_id }}-help"{% endif %}
+            value="{{ block.settings.default_value | escape }}"
+            placeholder="{{ placeholder | escape }}"
+            {% if block.settings.required %}required{% endif %}
+          >
+      {%- endcase -%}
 
+      {%- comment -%}Floating label: must follow the control for theme.css's sibling selector.{%- endcomment -%}
+      {%- unless field_type == 'file' or field_type == 'checkbox' -%}
+        <label class="label is-floating hs-field__label" for="{{ field_id }}">
+          {{- label -}}
+          {%- if block.settings.required -%}
+            <span class="hs-field__required" aria-hidden="true">*</span>
+          {%- endif -%}
+        </label>
+      {%- endunless -%}
+
+    </div>
     {%- comment -%}File fields print their own help text above the control.{%- endcomment -%}
     {%- if block.settings.help_text != blank and field_type != 'file' -%}
       <p class="hs-field__help text-sm" id="{{ field_id }}-help">{{ block.settings.help_text }}</p>
