@@ -260,13 +260,6 @@
         "disabled": false,
         "settings": {}
       },
-      "15491642209532502609": {
-        "type": "shopify://apps/brand-ambassador-commission/blocks/ambassador-safelink-tracker/019d9a59-52d5-7b52-aab8-10340ad507b9",
-        "disabled": false,
-        "settings": {
-          "app_url": "https://brandambassadorcommission.vercel.app"
-        }
-      },
       "17676059084223943535": {
         "type": "shopify://apps/triplewhale/blocks/triple_pixel_snippet/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
         "disabled": false,
@@ -281,6 +274,13 @@
         "type": "shopify://apps/le-pixel/blocks/app-embed/ed69facb-49c9-4e93-9d56-146cc0aa96f6",
         "disabled": false,
         "settings": {}
+      },
+      "15491642209532502609": {
+        "type": "shopify://apps/brand-ambassador-commission/blocks/ambassador-safelink-tracker/019d9a59-52d5-7b52-aab8-10340ad507b9",
+        "disabled": true,
+        "settings": {
+          "app_url": "https://brandambassadorcommission.vercel.app"
+        }
       }
     }
   },
