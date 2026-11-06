@@ -197,8 +197,8 @@
   {%- endif -%} {% endcomment %}
 
   {%- if show_sold_out -%}
-    {%- assign product_type_downcase = product.type | downcase -%}
-    {%- unless product.available or product_type_downcase == 'neck guard 3.0' or product_type_downcase == 'baselayer 3.0' -%}
+    {%- capture product_is_elevate_core -%}{%- render 'elevate-core', product: product -%}{%- endcapture -%}
+    {%- unless product.available or product_is_elevate_core == 'true' -%}
       <span class="badge{% if vertical_badges %} badge--vertical{% endif %} badge--soldout flex items-center gap-1d5 font-bold leading-none rounded-full"
         {% if badge_styles != blank %}
           style="{{ badge_styles }}"

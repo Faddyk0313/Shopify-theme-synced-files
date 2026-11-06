@@ -149,16 +149,13 @@
   endcomment
   assign baselayer_toggle_enabled = false
   assign baselayer_label = ''
-  assign baselayer_type_3 = ''
   case collection.handle
     when 'cut-resistant-baselayer'
       assign baselayer_toggle_enabled = true
       assign baselayer_label = 'Baselayer'
-      assign baselayer_type_3 = 'baselayer 3.0'
     when 'neck-guard'
       assign baselayer_toggle_enabled = true
       assign baselayer_label = 'Neck Guard'
-      assign baselayer_type_3 = 'neck guard 3.0'
   endcase
 
   assign baselayer_show_2 = true
@@ -359,8 +356,10 @@
                     if baselayer_toggle_enabled and baselayer_param != blank
                       assign baselayer_visible_count = 0
                       for product in collection.products
-                        assign baselayer_loop_type = product.type | downcase | strip
-                        if baselayer_loop_type == baselayer_type_3
+                        capture baselayer_loop_is_three
+                          render 'elevate-core', product: product
+                        endcapture
+                        if baselayer_loop_is_three == 'true'
                           if baselayer_show_3
                             assign baselayer_visible_count = baselayer_visible_count | plus: 1
                           endif
@@ -526,12 +525,14 @@
                 {%- liquid
                   comment
                     TBG CUSTOM CODE - 2.0 / 3.0 toggle. Skip products that don't match the
-                    active button. The configured 3.0 product type == 3.0, anything else == 2.0.
+                    active button. Elevate core (snippet elevate-core, by tags) == 3.0, anything else == 2.0.
                   endcomment
                   if baselayer_toggle_enabled and baselayer_param != blank
-                    assign baselayer_product_type = product.type | downcase | strip
+                    capture baselayer_product_is_three
+                      render 'elevate-core', product: product
+                    endcapture
                     assign baselayer_is_three = false
-                    if baselayer_product_type == baselayer_type_3
+                    if baselayer_product_is_three == 'true'
                       assign baselayer_is_three = true
                     endif
                     if baselayer_is_three and baselayer_show_3 == false

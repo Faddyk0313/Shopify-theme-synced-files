@@ -426,7 +426,8 @@
                 </div>
               {% endif %}
 
-              {% if product.type != 'Neck Guard 3.0' and product.type != 'Baselayer 3.0' %}
+              {%- capture product_is_elevate_core -%}{%- render 'elevate-core', product: product -%}{%- endcapture -%}
+              {% if product_is_elevate_core != 'true' %}
                 <div class="restockMsg" style="margin-block: 1rem; display: none;">
                   <p
                     id="restockMsgEl"
