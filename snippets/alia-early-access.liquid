@@ -1,0 +1,29 @@
+{% comment %}
+  BFCM26 early-access pop-up (Alia manual-open campaign).
+  - Any page loaded with ?early-access opens the pop-up, then drops the param.
+  - Any link whose href contains "early-access" opens the pop-up in place.
+  ALIA_CAMPAIGN_ID: swap to the "BFCM26 manual open" campaign ID once Dahaus publishes it.
+  (36740 = "BAU - Design Refresh", used only for testing.)
+{% endcomment %}
+<script>
+  (function () {
+    var ALIA_CAMPAIGN_ID = 36740;
+    function openAlia() {
+      window.alia = window.alia || [];
+      window.alia.push({ type: 'open', campaignID: ALIA_CAMPAIGN_ID, ignoreTargeting: true });
+    }
+    var params = new URLSearchParams(window.location.search);
+    if (params.has('early-access')) {
+      openAlia();
+      params.delete('early-access');
+      var q = params.toString();
+      history.replaceState(null, '', window.location.pathname + (q ? '?' + q : '') + window.location.hash);
+    }
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href*="early-access"]');
+      if (!a) return;
+      e.preventDefault();
+      openAlia();
+    });
+  })();
+</script>
