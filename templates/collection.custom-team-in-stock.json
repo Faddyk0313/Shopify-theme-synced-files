@@ -37,6 +37,7 @@
         "heading_yVG43r",
         "image_T9khqV"
       ],
+      "disabled": true,
       "custom_css": [
         "h1 {font-family: TITANFONT;}"
       ],
@@ -53,6 +54,100 @@
         "text_alignment_mobile": "center",
         "color_text": "#ffffff",
         "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "#e2fb31",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "image_with_text_overlay_D9W8fn": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "spacing_bRUdeh": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 24
+          }
+        },
+        "image_wWiPj7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/SR_BATTLEGEAR_HEADER.svg",
+            "image_width": "custom",
+            "image_max_width": 420,
+            "image_max_width_mobile": 240
+          }
+        },
+        "spacing_cwnkBX": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 120
+          }
+        },
+        "spacing_GL9tbe": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 92
+          }
+        },
+        "button_8MWjf8": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_label": "3.0 Release Schedule",
+            "button_link": "shopify://pages/production-tracker",
+            "button_style": "link",
+            "button_size": "sm",
+            "button_external": false,
+            "button_icon": true
+          }
+        },
+        "subheading_Jm6Cdp": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "save on 2.0 while supplies last",
+            "subheading_size": "subtitle-lg",
+            "secondary_color": true
+          }
+        }
+      },
+      "block_order": [
+        "spacing_bRUdeh",
+        "image_wWiPj7",
+        "spacing_cwnkBX",
+        "spacing_GL9tbe",
+        "button_8MWjf8",
+        "subheading_Jm6Cdp"
+      ],
+      "name": "header banner",
+      "settings": {
+        "transparent_header": true,
+        "image": "shopify://shop_images/Banner_TEAMWORKS_desk.webp",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-center md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/Banner_TEAMWORKS_mobile.webp",
+        "image_height_mobile": "adapt",
+        "content_position_mobile": "items-start justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "#000000",
         "gradient_background": "",
         "color_highlight": "#e2fb31",
         "gradient_highlight": "",
@@ -166,6 +261,8 @@
         "enable_sorting": true,
         "show_on_model": false,
         "buttons_style": "secondary",
+        "baselayer_button_size": "button--small",
+        "baselayer_button_font_size": 14,
         "padding_top": 36,
         "padding_bottom": 72,
         "divider": false,
@@ -211,6 +308,7 @@
   },
   "order": [
     "image_with_text_overlay_VaKKLG",
+    "image_with_text_overlay_D9W8fn",
     "main-collection-banner",
     "main-collection",
     "recently-viewed"
