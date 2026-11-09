@@ -84,7 +84,7 @@
         "image_wWiPj7": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/SR_BATTLEGEAR_HEADER.svg",
+            "image": "shopify://shop_images/in_stock_custom_team.svg",
             "image_width": "custom",
             "image_max_width": 420,
             "image_max_width_mobile": 240
