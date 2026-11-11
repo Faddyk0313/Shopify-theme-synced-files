@@ -1901,7 +1901,7 @@
         "form_name": "Team Sales Form",
         "branch_rules": "from 1: ts_team_sales_persona in \"I am the decision maker for team purchases\",\"I influence or help coordinate purchases\" => goto 3",
         "gate_field": "email",
-        "upload_endpoint": "https://hocky-name-generator-seven.vercel.app/api/hubspot-logo-upload",
+        "upload_endpoint": "https://hocky-name-generator-seven.vercel.app/api/twenty-logo-upload",
         "next_label": "Next",
         "prev_label": "Previous",
         "submit_label": "Submit",
