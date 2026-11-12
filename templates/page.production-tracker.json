@@ -250,7 +250,7 @@
             "image": "shopify://shop_images/PINK_FROST.png",
             "hide_image": false,
             "heading": "<h3>Pink Frost - 3.0</h3>",
-            "text": "<p>In Sewing</p>"
+            "text": "<p>New In Stock</p>"
           }
         },
         "item_C7FRJH": {
@@ -259,11 +259,12 @@
             "image": "shopify://shop_images/ORANGE_3c220b1d-784e-4878-801c-813e4c5bce31.png",
             "hide_image": false,
             "heading": "<h3>Orange - 3.0</h3>",
-            "text": "<p>In Sewing</p>"
+            "text": "<p>New In Stock</p>"
           }
         },
         "item_ji4wf8": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/FOREST_34e7bef4-9cb0-4945-b1d4-6ad1df83f9cf.png",
             "hide_image": false,
@@ -273,6 +274,7 @@
         },
         "item_WrtcdP": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/PURPLE-2.png",
             "hide_image": false,
@@ -282,6 +284,7 @@
         },
         "item_pgNQhE": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/KELLY_636ac4da-0989-40e1-bff3-b707d9e6846e.png",
             "hide_image": false,
@@ -291,6 +294,7 @@
         },
         "item_hgtp3f": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/MAROON_ed249f21-0410-49a5-81eb-52539e80c99e.png",
             "hide_image": false,
@@ -300,6 +304,7 @@
         },
         "item_Uiqtc9": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/CAROLINA.png",
             "hide_image": false,
@@ -309,6 +314,7 @@
         },
         "item_QmCh4r": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/GOLD_6229d2cb-f419-42c1-a4f1-e3f659847366.png",
             "hide_image": false,
