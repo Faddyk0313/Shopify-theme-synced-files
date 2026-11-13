@@ -34,10 +34,10 @@
         "image_8e49hm": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/BUILT_FOR_BATTLE_2.svg",
+            "image": "shopify://shop_images/TEASER_PUCK_SVG.svg",
             "image_width": "custom",
             "image_max_width": 440,
-            "image_max_width_mobile": 300
+            "image_max_width_mobile": 230
           }
         },
         "spacing_kdt7HV": {
@@ -61,7 +61,107 @@
             "height_mobile": 108
           }
         },
-        "button_LQkjMt": {
+        "spacing_b7a9kq": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 16
+          }
+        }
+      },
+      "block_order": [
+        "heading_TKn9Nm",
+        "spacing_tt6UHK",
+        "image_8e49hm",
+        "spacing_kdt7HV",
+        "spacing_GfrRAp",
+        "spacing_gqWAtP",
+        "spacing_b7a9kq"
+      ],
+      "name": "TEASER PUCK",
+      "settings": {
+        "transparent_header": true,
+        "image": "shopify://shop_images/puck_hunter_TEASER_homepage_banner_desktop.webp",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-center md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/puck_hunter_TEASER_homepage_banner_MOBILE.webp",
+        "image_height_mobile": "600px",
+        "content_position_mobile": "items-start justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#000000",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_highlight": "#e2fb31",
+        "gradient_highlight": "",
+        "color_button_text": "#00b0f4",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "image_with_text_overlay_kyPMAz": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_zVAAMc": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "not all neck guards are created equal",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "spacing_D9RRdk": {
+          "type": "spacing",
+          "settings": {
+            "height": 44,
+            "height_mobile": 20
+          }
+        },
+        "image_kpCR3L": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/BUILT_FOR_BATTLE_2.svg",
+            "image_width": "custom",
+            "image_max_width": 440,
+            "image_max_width_mobile": 300
+          }
+        },
+        "spacing_6FhNyK": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 120
+          }
+        },
+        "spacing_QLyYmh": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 24
+          }
+        },
+        "spacing_fNYazG": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 108
+          }
+        },
+        "button_eFiLPK": {
           "type": "button",
           "settings": {
             "button_label": "SHOP YOUTH",
@@ -72,14 +172,14 @@
             "button_icon": false
           }
         },
-        "spacing_b7a9kq": {
+        "spacing_BE7wGF": {
           "type": "spacing",
           "settings": {
             "height": 0,
             "height_mobile": 16
           }
         },
-        "button_YBr9yx": {
+        "button_yBVAV6": {
           "type": "button",
           "settings": {
             "button_label": "SHOP SENIOR",
@@ -92,16 +192,17 @@
         }
       },
       "block_order": [
-        "heading_TKn9Nm",
-        "spacing_tt6UHK",
-        "image_8e49hm",
-        "spacing_kdt7HV",
-        "spacing_GfrRAp",
-        "spacing_gqWAtP",
-        "button_LQkjMt",
-        "spacing_b7a9kq",
-        "button_YBr9yx"
+        "heading_zVAAMc",
+        "spacing_D9RRdk",
+        "image_kpCR3L",
+        "spacing_6FhNyK",
+        "spacing_QLyYmh",
+        "spacing_fNYazG",
+        "button_eFiLPK",
+        "spacing_BE7wGF",
+        "button_yBVAV6"
       ],
+      "disabled": true,
       "name": "MAIN HERO BANNER",
       "settings": {
         "transparent_header": true,
@@ -1626,6 +1727,7 @@
   },
   "order": [
     "image_with_text_overlay_7W36g4",
+    "image_with_text_overlay_kyPMAz",
     "logo_list_nBVhDN",
     "size_based_products_v2_QNMq9f",
     "size_based_products_6ab66e",
