@@ -39,44 +39,12 @@
             "image_max_width": 440,
             "image_max_width_mobile": 230
           }
-        },
-        "spacing_kdt7HV": {
-          "type": "spacing",
-          "settings": {
-            "height": 0,
-            "height_mobile": 120
-          }
-        },
-        "spacing_GfrRAp": {
-          "type": "spacing",
-          "settings": {
-            "height": 0,
-            "height_mobile": 24
-          }
-        },
-        "spacing_gqWAtP": {
-          "type": "spacing",
-          "settings": {
-            "height": 0,
-            "height_mobile": 108
-          }
-        },
-        "spacing_b7a9kq": {
-          "type": "spacing",
-          "settings": {
-            "height": 0,
-            "height_mobile": 16
-          }
         }
       },
       "block_order": [
         "heading_TKn9Nm",
         "spacing_tt6UHK",
-        "image_8e49hm",
-        "spacing_kdt7HV",
-        "spacing_GfrRAp",
-        "spacing_gqWAtP",
-        "spacing_b7a9kq"
+        "image_8e49hm"
       ],
       "name": "TEASER PUCK",
       "settings": {
@@ -87,8 +55,8 @@
         "content_position": "md:items-center md:justify-start",
         "text_alignment": "left",
         "image_mobile": "shopify://shop_images/puck_hunter_TEASER_homepage_banner_MOBILE.webp",
-        "image_height_mobile": "600px",
-        "content_position_mobile": "items-start justify-center",
+        "image_height_mobile": "adapt",
+        "content_position_mobile": "items-end justify-start",
         "text_alignment_mobile": "center",
         "color_text": "#000000",
         "color_background": "#000000",
