@@ -950,10 +950,8 @@
       <script src="{{ 'instant-page.js' | asset_url }}" type="module" fetchpriority="low" defer="defer"></script>
     {%- endif -%}
 
-    {%- comment -%} BFCM26 Alia early-access: test page only for now; remove the if to go live sitewide {%- endcomment -%}
-    {%- if template.suffix == 'bfcm-popup-test' -%}
+    {%- comment -%} BFCM26 Alia early-access: sitewide. Any page with ?early-access (titanbattlegear.com/bfaccess redirects there) opens the pop-up {%- endcomment -%}
       {%- render 'alia-early-access' -%}
-    {%- endif -%}
   </body>
 </html>
 {% comment %}
