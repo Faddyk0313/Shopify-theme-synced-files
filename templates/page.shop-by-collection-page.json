@@ -58,7 +58,6 @@
         "image_X6jYw4",
         "text_KcJdcL"
       ],
-      "disabled": true,
       "name": "PUCK HUNTER BANNER",
       "settings": {
         "transparent_header": false,
@@ -92,7 +91,6 @@
     },
     "featured_collection_WXjHCR": {
       "type": "featured-collection",
-      "disabled": true,
       "custom_css": [
         "@media (max-width: 768px) {.title-md {font-size: var(--title-sm); /* Adjust to your desired small size variable */ }}",
         ".product-card__bottom.flex.items-center.gap-2 {display: none !important;}"
@@ -101,13 +99,15 @@
       "settings": {
         "collection": "",
         "products": [
-          "sr-dryland-short-puck-hunter",
-          "sr-puck-hunter-hoodie-black",
-          "sr-puck-hunter-neon-hoodie-neon-orange",
-          "sr-puck-hunter-tee-bone",
-          "yth-dryland-short-puck-hunter",
+          "yth-cut-resistant-baselayer-3-0-puck-hunter",
           "yth-puck-hunter-hoodie-black",
-          "yth-puck-hunter-tee-white"
+          "yth-puck-hunter-tee-white",
+          "yth-dryland-short-puck-hunter",
+          "sr-cut-resistant-baselayer-3-0-puck-hunter",
+          "sr-puck-hunter-neon-hoodie-neon-orange",
+          "sr-puck-hunter-hoodie-black",
+          "sr-puck-hunter-tee-bone",
+          "sr-dryland-short-puck-hunter"
         ],
         "product_limit": 25,
         "columns": 4,
