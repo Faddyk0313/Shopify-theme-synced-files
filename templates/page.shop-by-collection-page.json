@@ -63,7 +63,7 @@
         "transparent_header": false,
         "image": "shopify://shop_images/Puck_Hunter_desktop_banner.webp",
         "image_height": "adapt",
-        "content_width": "small",
+        "content_width": "medium",
         "content_position": "md:items-center md:justify-start",
         "text_alignment": "left",
         "image_mobile": "shopify://shop_images/Puck_Hunter_mobile_banner.webp",
