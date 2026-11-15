@@ -36,7 +36,7 @@
           "settings": {
             "image": "shopify://shop_images/puck_hunter_SVG.svg",
             "image_width": "custom",
-            "image_max_width": 360,
+            "image_max_width": 290,
             "image_max_width_mobile": 200
           }
         },
@@ -100,7 +100,7 @@
         "color_highlight": "#e2fb31",
         "gradient_highlight": "",
         "color_button_text": "#00b0f4",
-        "color_button_background": "#FF8C00",
+        "color_button_background": "#ff8c00",
         "color_button_gradient": "",
         "color_overlay": "#171717",
         "overlay_opacity": 0,
