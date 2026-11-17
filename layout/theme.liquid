@@ -736,6 +736,44 @@
             person_profiles: 'identified_only'
           });
 
+          {% comment %} TBG Custom Code {% endcomment %}
+          // T2 (PostHog Phase 2): identify logged-in customers by Shopify customer ID
+          // (same ID as the checkout pixel) and reset on logout. Both respect Shopify
+          // Customer Privacy analytics consent when that API is on the page.
+          (function () {
+            function tbgAnalyticsAllowed() {
+              try {
+                var cp = window.Shopify && window.Shopify.customerPrivacy;
+                if (cp && typeof cp.analyticsProcessingAllowed === 'function') {
+                  return cp.analyticsProcessingAllowed();
+                }
+              } catch (e) {}
+              return true;
+            }
+
+            try {
+              {%- if customer %}
+              if (tbgAnalyticsAllowed()) {
+                posthog.identify('shopify_{{ customer.id }}', { shopify_customer_id: '{{ customer.id }}' });
+              }
+              {%- endif %}
+
+              document.addEventListener(
+                'click',
+                function (e) {
+                  try {
+                    var link = e.target && e.target.closest && e.target.closest('a[href*="/account/logout"]');
+                    if (link && tbgAnalyticsAllowed() && window.posthog && typeof window.posthog.reset === 'function') {
+                      window.posthog.reset();
+                    }
+                  } catch (err) {}
+                },
+                true
+              );
+            } catch (e) {}
+          })();
+          {% comment %} End TBG Custom Code {% endcomment %}
+
           if (!document.getElementById('hs-script-loader')) {
             injectScript('//js.hs-scripts.com/46588550.js', { async: true, defer: true, id: 'hs-script-loader' });
           }
