@@ -130,7 +130,7 @@
             "image_inside_max_width_mobile": 50,
             "button_label": "HOLA",
             "button_link": "",
-            "button_style": "primary",
+            "button_style": "secondary",
             "button_external": false,
             "button_icon": false
           }
@@ -162,7 +162,7 @@
       "disabled": true,
       "name": "Slideshow BLACK FRIDAY",
       "settings": {
-        "autoplay": true,
+        "autoplay": false,
         "autoplay_speed": 4,
         "show_navigation": true,
         "image_height": "adapt",
