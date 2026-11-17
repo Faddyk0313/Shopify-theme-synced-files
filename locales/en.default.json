@@ -134,7 +134,7 @@
         "other": "{{ count }} items"
       },
       "free_shipping": {
-        "remaining_html": "Spend {{ remaining_amount }} more to reach free shipping!",
+        "remaining_html": "Spend {{ remaining_amount }} more to unlock free shipping!",
         "congratulations_html": "You are eligible for free shipping & returns!"
       },
       "note": {

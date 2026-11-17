@@ -1,0 +1,9 @@
+{%- comment -%}
+  TBG CUSTOM CODE - prints "true" when the product is Elevate core (the old 3.0 line):
+  tag line:elevate, and none of program:custom-team, grade:b, collar:pro.
+  Reads tags, not product type, so it survives the catalog rename.
+  Use: {%- capture is_elevate -%}{%- render 'elevate-core', product: product -%}{%- endcapture -%}
+{%- endcomment -%}
+{%- if product.tags contains 'line:elevate' -%}
+  {%- unless product.tags contains 'program:custom-team' or product.tags contains 'grade:b' or product.tags contains 'collar:pro' -%}true{%- endunless -%}
+{%- endif -%}
