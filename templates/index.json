@@ -100,7 +100,80 @@
         "color_highlight": "#e2fb31",
         "gradient_highlight": "",
         "color_button_text": "#000000",
-        "color_button_background": "#FF630D",
+        "color_button_background": "#ff630d",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "slideshow_nPbqmW": {
+      "type": "slideshow",
+      "blocks": {
+        "image_UUAFwp": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/BLACK_FRIDAY_DESKTOP_BANNER_2.webp",
+            "image_mobile": "shopify://shop_images/BLACK_FRIDAY_3.0_mobile_BANNER_2.webp",
+            "heading": "",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "image_inside": "shopify://shop_images/BLACK_FRIDAY_IS_LIVE.png",
+            "image_inside_width": "custom",
+            "image_inside_max_width": 380,
+            "image_inside_max_width_mobile": 50,
+            "button_label": "HOLA",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        },
+        "image_cxEgF7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/BLACK_FRIDAY_DESKTOP_BANNER_2.webp",
+            "image_mobile": "shopify://shop_images/BLACK_FRIDAY_3.0_mobile_BANNER_2.webp",
+            "heading": "Image slide",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "image_inside": "shopify://shop_images/BLACK_FRIDAY_IS_LIVE.png",
+            "image_inside_width": "custom",
+            "image_inside_max_width": 50,
+            "image_inside_max_width_mobile": 50,
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        }
+      },
+      "block_order": [
+        "image_UUAFwp",
+        "image_cxEgF7"
+      ],
+      "disabled": true,
+      "name": "Slideshow BLACK FRIDAY",
+      "settings": {
+        "autoplay": true,
+        "autoplay_speed": 4,
+        "show_navigation": true,
+        "image_height": "adapt",
+        "content_width": "small",
+        "image_height_mobile": "auto",
+        "accessibility_info": "TITAN BLACK FRIDAY",
+        "color_text": "#ffffff",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
         "color_button_gradient": "",
         "color_overlay": "#171717",
         "overlay_opacity": 0,
@@ -1733,6 +1806,7 @@
   },
   "order": [
     "image_with_text_overlay_7W36g4",
+    "slideshow_nPbqmW",
     "image_with_text_overlay_kyPMAz",
     "logo_list_nBVhDN",
     "size_based_products_v2_QNMq9f",
