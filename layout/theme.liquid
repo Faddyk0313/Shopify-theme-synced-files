@@ -740,7 +740,15 @@
           // T2 (PostHog Phase 2): identify logged-in customers by Shopify customer ID
           // (same ID as the checkout pixel) and reset on logout. Both respect Shopify
           // Customer Privacy analytics consent when that API is on the page.
+          // The store uses new customer accounts, so logout happens on
+          // account.titanbattlegear.com where this code does not run. Instead, remember
+          // which customer the storefront identified (localStorage) and reset once a
+          // page renders with nobody logged in, or with a different customer.
+          // Guest buyers identified only by the checkout pixel never set this flag,
+          // so they are not reset.
           (function () {
+            var TBG_LOGIN_KEY = 'tbg_ph_login_id';
+
             function tbgAnalyticsAllowed() {
               try {
                 var cp = window.Shopify && window.Shopify.customerPrivacy;
@@ -751,12 +759,37 @@
               return true;
             }
 
-            try {
-              {%- if customer %}
-              if (tbgAnalyticsAllowed()) {
-                posthog.identify('shopify_{{ customer.id }}', { shopify_customer_id: '{{ customer.id }}' });
+            function tbgGetLoginId() {
+              try {
+                return window.localStorage.getItem(TBG_LOGIN_KEY);
+              } catch (e) {
+                return null;
               }
-              {%- endif %}
+            }
+
+            function tbgSetLoginId(id) {
+              try {
+                if (id) {
+                  window.localStorage.setItem(TBG_LOGIN_KEY, id);
+                } else {
+                  window.localStorage.removeItem(TBG_LOGIN_KEY);
+                }
+              } catch (e) {}
+            }
+
+            try {
+              var tbgCurrentId = {% if customer %}'{{ customer.id }}'{% else %}null{% endif %};
+              var tbgPreviousId = tbgGetLoginId();
+
+              if (tbgPreviousId && tbgPreviousId !== tbgCurrentId && tbgAnalyticsAllowed()) {
+                posthog.reset();
+                tbgSetLoginId(null);
+              }
+
+              if (tbgCurrentId && tbgAnalyticsAllowed()) {
+                posthog.identify('shopify_' + tbgCurrentId, { shopify_customer_id: tbgCurrentId });
+                tbgSetLoginId(tbgCurrentId);
+              }
 
               document.addEventListener(
                 'click',
