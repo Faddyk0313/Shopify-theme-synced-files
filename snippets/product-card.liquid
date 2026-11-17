@@ -724,24 +724,32 @@
     function findVariantForUserSize(variants, userSize) {
       if (!userSize || !Array.isArray(variants)) return null;
 
-      return variants.find((variant) => {
-        const variantTitle = toSafeString(variant && variant.title);
-
-        if (variantTitle === userSize) return true;
+      // TBG custom code: match against each option value for multi-option products ("Black / SR-MD"), title otherwise.
+      function matchesSize(value) {
+        if (!value) return false;
+        if (value === userSize) return true;
 
         if (userSize.includes('/')) {
           const userParts = userSize.split('/');
-          return userParts.includes(variantTitle);
+          return userParts.includes(value);
         }
 
-        if (variantTitle.includes('/')) {
-          const parts = variantTitle.split('/');
+        if (value.includes('/')) {
+          const parts = value.split('/');
           const prefix = parts[0].substring(0, parts[0].lastIndexOf('-') + 1);
           const fullSizes = parts.map((part, index) => (index === 0 ? part : prefix + part));
           return fullSizes.includes(userSize);
         }
 
         return false;
+      }
+
+      return variants.find((variant) => {
+        if (!variant) return false;
+        const values = Array.isArray(variant.options) && variant.options.length > 1
+          ? variant.options.map(toSafeString)
+          : [toSafeString(variant.title)];
+        return values.some(matchesSize);
       }) || null;
     }
 

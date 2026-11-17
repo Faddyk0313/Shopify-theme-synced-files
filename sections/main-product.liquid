@@ -2077,11 +2077,15 @@
       "id": {{ product.id }},
       "title": {{ product.title | json }},
       "handle": {{ product.handle | json }},
+      {%- comment -%}TBG custom code: option names + selected variant so multi-option products (e.g. Color / Size) can match by Size option{%- endcomment -%}
+      "options": {{ product.options | json }},
+      "selected_or_first_available_variant": { "id": {{ product.selected_or_first_available_variant.id | json }} },
       "variants": [
         {% for variant in product.variants %}
           {
             "id": {{ variant.id }},
             "title": {{ variant.title | json }},
+            "options": {{ variant.options | json }},
             "price": {{ variant.price | json }},
             "available": {{ variant.available | json }},
             "inventory_quantity": {{ variant.inventory_quantity }},
@@ -2146,32 +2150,59 @@
       const product = JSON.parse(productEl.textContent);
       let variantToSelect = null;
 
+      // TBG Custom Code: resolve the Size option index so multi-option products (e.g. "Black / SR-MD") match by size, not full title.
+      const optionNames = Array.isArray(product.options) ? product.options.map((name) => toSafeString(name)) : [];
+      let sizeIndex = optionNames.findIndex((name) => name.toLowerCase() === 'size');
+      if (sizeIndex === -1 && optionNames.length <= 1) sizeIndex = 0;
+
+      function getVariantSize(variant) {
+        if (!variant) return '';
+        if (sizeIndex > -1 && Array.isArray(variant.options) && variant.options[sizeIndex] != null) {
+          return toSafeString(variant.options[sizeIndex]);
+        }
+        return optionNames.length > 1 ? '' : toSafeString(variant.title);
+      }
+
+      function matchesUserSize(variantSize) {
+        if (!variantSize) return false;
+
+        // Exact match
+        if (variantSize === userSize) return true;
+
+        // If userSize is range (e.g., YTH-SM/MD), match any part (YTH-SM or YTH-MD)
+        if (userSize.includes('/')) {
+          const userParts = userSize.split('/');
+          return userParts.includes(variantSize);
+        }
+
+        // If variant size is range (e.g., YTH-SM/MD) and userSize is normal (YTH-MD)
+        if (variantSize.includes('/')) {
+          const parts = variantSize.split('/');
+          // Extract prefix from first part (YTH-SM -> YTH)
+          const prefix = parts[0].substring(0, parts[0].lastIndexOf('-') + 1);
+          // Build full size names: [YTH-SM, YTH-MD]
+          const fullSizes = parts.map((p, i) => (i === 0 ? p : prefix + p));
+          return fullSizes.includes(userSize);
+        }
+
+        return false;
+      }
+
+      const currentSelectedVariantId = toSafeString(product.selected_or_first_available_variant && product.selected_or_first_available_variant.id);
+      const currentVariant = product.variants.find((v) => toSafeString(v.id) === (currentVariantParam || currentSelectedVariantId));
+
       // If user has a preferred size in localStorage, try to find a matching variant
-      if (userSize) {
-        variantToSelect = product.variants.find((v) => {
-          const variantTitle = toSafeString(v && v.title);
+      if (userSize && sizeIndex > -1) {
+        const sizeMatches = product.variants.filter((v) => matchesUserSize(getVariantSize(v)));
 
-          // Exact match
-          if (variantTitle === userSize) return true;
-
-          // If userSize is range (e.g., YTH-SM/MD), match any part (YTH-SM or YTH-MD)
-          if (userSize.includes('/')) {
-            const userParts = userSize.split('/');
-            return userParts.includes(variantTitle);
-          }
-
-          // If variant title is range (e.g., YTH-SM/MD) and userSize is normal (YTH-MD)
-          if (variantTitle.includes('/')) {
-            const parts = variantTitle.split('/');
-            // Extract prefix from first part (YTH-SM -> YTH)
-            const prefix = parts[0].substring(0, parts[0].lastIndexOf('-') + 1);
-            // Build full size names: [YTH-SM, YTH-MD]
-            const fullSizes = parts.map((p, i) => (i === 0 ? p : prefix + p));
-            return fullSizes.includes(userSize);
-          }
-
-          return false;
-        });
+        // TBG Custom Code: prefer the match that keeps the currently selected non-size options (e.g. same Color)
+        variantToSelect =
+          (currentVariant && Array.isArray(currentVariant.options)
+            ? sizeMatches.find((v) =>
+                Array.isArray(v.options) &&
+                v.options.every((value, i) => i === sizeIndex || value === currentVariant.options[i])
+              )
+            : null) || sizeMatches[0] || null;
       }
 
       // If no matching size found or no userSize in localStorage, fall back to first available
@@ -2180,13 +2211,13 @@
       }
 
       if (variantToSelect) {
+        const container = document.querySelector(`#ProductInfo-{{ section.id }}-{{ product.id }}`);
+        if (!container) return;
+
         // Force select this variant
-        const selectEl = document.querySelector(
-          `#ProductInfo-{{ section.id }}-{{ product.id }} select[name="options[Size]"]`
-        );
+        const selectEl = container.querySelector('select[name="options[Size]"]');
         if (selectEl) {
           const variantToSelectId = toSafeString(variantToSelect.id);
-          const currentSelectedVariantId = toSafeString(product.selected_or_first_available_variant && product.selected_or_first_available_variant.id);
 
           selectEl.classList.add('customActive');
 
@@ -2195,7 +2226,24 @@
             return;
           }
 
-          selectEl.value = variantToSelect.title;
+          // TBG Custom Code: set every option select to the variant's option value (not the full variant title),
+          // otherwise multi-option products get an invalid Size value and Add to Cart stays disabled.
+          const variantOptions = Array.isArray(variantToSelect.options) && variantToSelect.options.length
+            ? variantToSelect.options
+            : [variantToSelect.title];
+          const hasOptionValue = (sel, value) =>
+            Array.from(sel.options).some((opt) => opt.value === toSafeString(value));
+
+          optionNames.forEach((name, i) => {
+            if (i === sizeIndex) return;
+            const sel = container.querySelector(`select[name="options[${CSS.escape(name)}]"]`);
+            if (sel && hasOptionValue(sel, variantOptions[i])) sel.value = toSafeString(variantOptions[i]);
+          });
+
+          const sizeValue = toSafeString(sizeIndex > -1 ? variantOptions[sizeIndex] : variantToSelect.title);
+          if (!hasOptionValue(selectEl, sizeValue)) return;
+
+          selectEl.value = sizeValue;
           selectEl.dispatchEvent(new Event('change', { bubbles: true }));
         }
       }
@@ -2220,24 +2268,32 @@
       function findVariantForUserSize(variants, userSize) {
         if (!userSize || !Array.isArray(variants)) return null;
 
-        return variants.find((variant) => {
-          const variantTitle = toSafeString(variant && variant.title);
-
-          if (variantTitle === userSize) return true;
+        // TBG Custom Code: match against each option value for multi-option products ("Black / SR-MD"), title otherwise.
+        function matchesSize(value) {
+          if (!value) return false;
+          if (value === userSize) return true;
 
           if (userSize.includes('/')) {
             const userParts = userSize.split('/');
-            return userParts.includes(variantTitle);
+            return userParts.includes(value);
           }
 
-          if (variantTitle.includes('/')) {
-            const parts = variantTitle.split('/');
+          if (value.includes('/')) {
+            const parts = value.split('/');
             const prefix = parts[0].substring(0, parts[0].lastIndexOf('-') + 1);
             const fullSizes = parts.map((part, index) => (index === 0 ? part : prefix + part));
             return fullSizes.includes(userSize);
           }
 
           return false;
+        }
+
+        return variants.find((variant) => {
+          if (!variant) return false;
+          const values = Array.isArray(variant.options) && variant.options.length > 1
+            ? variant.options.map(toSafeString)
+            : [toSafeString(variant.title)];
+          return values.some(matchesSize);
         }) || null;
       }
 
