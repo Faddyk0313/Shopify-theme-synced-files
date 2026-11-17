@@ -124,7 +124,7 @@
             "heading": "",
             "heading_size": "title-lg tracking-heading",
             "heading_tag": "h2",
-            "image_inside": "shopify://shop_images/BLACK_FRIDAY_IS_LIVE.png",
+            "image_inside": "shopify://shop_images/BLACK_FRIDAY_IS_LIVE_2.webp",
             "image_inside_width": "custom",
             "image_inside_max_width": 380,
             "image_inside_max_width_mobile": 50,
@@ -135,21 +135,21 @@
             "button_icon": false
           }
         },
-        "image_cxEgF7": {
+        "image_XqwPj8": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/BLACK_FRIDAY_DESKTOP_BANNER_2.webp",
-            "image_mobile": "shopify://shop_images/BLACK_FRIDAY_3.0_mobile_BANNER_2.webp",
-            "heading": "Image slide",
+            "image": "shopify://shop_images/BLACK_FRIDAY_3.0_DESKTOP_BANNER.webp",
+            "image_mobile": "shopify://shop_images/BLACK_FRIDAY_3.0_mobile_BANNER_battlegear_3.0.webp",
+            "heading": "",
             "heading_size": "title-lg tracking-heading",
             "heading_tag": "h2",
-            "image_inside": "shopify://shop_images/BLACK_FRIDAY_IS_LIVE.png",
+            "image_inside": "shopify://shop_images/BLACK_FRIDAY_BATTLEGEAR_3.0.png",
             "image_inside_width": "custom",
-            "image_inside_max_width": 50,
+            "image_inside_max_width": 380,
             "image_inside_max_width_mobile": 50,
-            "button_label": "",
+            "button_label": "HOLA",
             "button_link": "",
-            "button_style": "primary",
+            "button_style": "secondary",
             "button_external": false,
             "button_icon": false
           }
@@ -157,7 +157,7 @@
       },
       "block_order": [
         "image_UUAFwp",
-        "image_cxEgF7"
+        "image_XqwPj8"
       ],
       "disabled": true,
       "name": "Slideshow BLACK FRIDAY",
