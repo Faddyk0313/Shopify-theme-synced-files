@@ -213,6 +213,10 @@
             "image_inside_width": "custom",
             "image_inside_max_width": 260,
             "image_inside_max_width_mobile": 200,
+            "image_inside_space": 0,
+            "image_inside_space_mobile": 0,
+            "buttons_space": 0,
+            "buttons_space_mobile": 0,
             "button_label": "",
             "button_link": "",
             "button_style": "primary",
@@ -224,7 +228,15 @@
             "button_style_2": "secondary",
             "button_size_2": "md",
             "button_external_2": false,
-            "button_icon_2": true
+            "button_icon_2": true,
+            "color_text": "#ffffff",
+            "color_highlight": "#e0a580",
+            "gradient_highlight": "",
+            "color_button_text": "#171717",
+            "color_button_background": "#ffffff",
+            "color_button_gradient": "",
+            "color_overlay": "#171717",
+            "overlay_opacity": 20
           }
         },
         "image_FkEcGa": {
@@ -251,6 +263,10 @@
             "image_inside_width": "custom",
             "image_inside_max_width": 240,
             "image_inside_max_width_mobile": 170,
+            "image_inside_space": 0,
+            "image_inside_space_mobile": 0,
+            "buttons_space": 0,
+            "buttons_space_mobile": 120,
             "button_label": "Shop now",
             "button_link": "",
             "button_style": "primary",
@@ -262,7 +278,15 @@
             "button_style_2": "secondary",
             "button_size_2": "md",
             "button_external_2": false,
-            "button_icon_2": true
+            "button_icon_2": true,
+            "color_text": "#ffffff",
+            "color_highlight": "#e0a580",
+            "gradient_highlight": "",
+            "color_button_text": "#171717",
+            "color_button_background": "#FF630D",
+            "color_button_gradient": "",
+            "color_overlay": "#171717",
+            "overlay_opacity": 20
           }
         },
         "image_FTTc73": {
@@ -286,6 +310,10 @@
             "image_inside_width": "custom",
             "image_inside_max_width": 50,
             "image_inside_max_width_mobile": 50,
+            "image_inside_space": 0,
+            "image_inside_space_mobile": 0,
+            "buttons_space": 0,
+            "buttons_space_mobile": 0,
             "button_label": "Shop now",
             "button_link": "",
             "button_style": "primary",
@@ -297,7 +325,15 @@
             "button_style_2": "secondary",
             "button_size_2": "md",
             "button_external_2": false,
-            "button_icon_2": true
+            "button_icon_2": true,
+            "color_text": "#ffffff",
+            "color_highlight": "#e0a580",
+            "gradient_highlight": "",
+            "color_button_text": "#171717",
+            "color_button_background": "#ffffff",
+            "color_button_gradient": "",
+            "color_overlay": "#171717",
+            "overlay_opacity": 20
           }
         }
       },
@@ -306,7 +342,6 @@
         "image_FkEcGa",
         "image_FTTc73"
       ],
-      "disabled": true,
       "name": "Slideshow - Custom",
       "settings": {
         "transparent_header": false,
@@ -320,15 +355,8 @@
         "image_height_mobile": "adapt",
         "accessibility_info": "Slideshow about our brand",
         "color_text": "#ffffff",
-        "color_highlight": "#e0a580",
-        "gradient_highlight": "",
         "color_background": "",
         "gradient_background": "",
-        "color_button_text": "#171717",
-        "color_button_background": "#ffffff",
-        "color_button_gradient": "",
-        "color_overlay": "#171717",
-        "overlay_opacity": 10,
         "padding_top": 0,
         "padding_bottom": 0,
         "divider": false,
