@@ -342,6 +342,7 @@
         "image_FkEcGa",
         "image_FTTc73"
       ],
+      "disabled": true,
       "name": "Slideshow - Custom",
       "settings": {
         "transparent_header": false,
