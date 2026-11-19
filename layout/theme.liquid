@@ -71,6 +71,8 @@
     <!-- TBG Custom Code -->
 
     {% render 'wsg-custom' %}
+    {%- comment -%} PostHog T5 sizing events {%- endcomment -%}
+    {%- render 'tbg-size-tracking' -%}
 
     {% if template contains 'product' and product.tags contains 'private' %}
       <meta name="robots" content="noindex, nofollow">
@@ -733,7 +735,11 @@
             cross_subdomain_cookie: false,
             persistence: 'localStorage+cookie',
             defaults: '2026-01-30',
-            person_profiles: 'identified_only'
+            person_profiles: 'identified_only',
+            // TBG Custom Code: T5 adds the landing size to product-page pageviews (snippets/tbg-size-tracking.liquid)
+            before_send: function (event) {
+              return window.tbgSizeTracking ? window.tbgSizeTracking.beforeSend(event) : event;
+            }
           });
 
           {% comment %} TBG Custom Code {% endcomment %}

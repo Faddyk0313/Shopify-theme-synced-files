@@ -1,0 +1,389 @@
+{%- comment -%}
+  TBG Custom Code: PostHog T5 sizing events (Nov 2026).
+  Events (names from the tracking spec, section 5): Size Selector Option Clicked,
+  Out Of Stock Size Clicked, Size Guide Opened, Age Group Switched.
+  Fit Finder events are added when Fit Finder exists.
+  Only real taps fire events; the theme's own size auto-select never does.
+  No personal data: product, variant, size and stock only.
+  Ad source is not copied onto events; read it from the session (sessions.$entry_*).
+  Rendered once from layout/theme.liquid (head), before any section script runs.
+{%- endcomment -%}
+{%- if template.name == 'product' and product -%}
+  {%- liquid
+    assign tbg_landing = product.selected_variant
+    assign tbg_initial = product.selected_or_first_available_variant
+    assign tbg_landing_size = nil
+    if tbg_landing
+      assign tbg_landing_size = tbg_landing.title
+      for o in tbg_landing.options
+        assign tbg_o3 = o | slice: 0, 3 | upcase
+        assign tbg_o2 = o | slice: 0, 2 | upcase
+        if tbg_o3 == 'YTH' or tbg_o2 == 'SR'
+          assign tbg_landing_size = o
+        endif
+      endfor
+    endif
+    assign tbg_sizes_total = 0
+    assign tbg_sizes_in_stock = 0
+    for v in product.variants
+      assign tbg_vsku = v.sku | default: '' | upcase
+      unless tbg_vsku contains '-LEGACY'
+        assign tbg_sizes_total = tbg_sizes_total | plus: 1
+        if v.available
+          assign tbg_sizes_in_stock = tbg_sizes_in_stock | plus: 1
+        endif
+      endunless
+    endfor
+  -%}
+  <script>
+    window.tbgPdpContext = {
+      product_id: {{ product.id | append: '' | json }},
+      initial_variant_id: {{ tbg_initial.id | append: '' | json }},
+      landing_variant_id: {% if tbg_landing %}{{ tbg_landing.id | append: '' | json }}{% else %}null{% endif %},
+      landing_size: {% if tbg_landing %}{{ tbg_landing_size | json }}{% else %}null{% endif %},
+      landing_variant_in_stock: {% if tbg_landing %}{{ tbg_landing.available | json }}{% else %}null{% endif %},
+      auto_selected_variant_id: null,
+      auto_selected_size: null,
+      auto_selected_in_stock: null,
+      sizes_total: {{ tbg_sizes_total }},
+      sizes_in_stock: {{ tbg_sizes_in_stock }}
+    };
+  </script>
+{%- endif -%}
+<script>
+  (function () {
+    if (window.tbgSizeTracking) return;
+
+    var queue = [];
+    var polling = false;
+    var tapCount = 0;
+    var lastItemClickAt = 0;
+    var lastAgeGroupOpened = null;
+    var lastSizeChartLocation = null;
+
+    function phReady() {
+      return !!(window.posthog && typeof window.posthog.capture === 'function');
+    }
+    function flush() {
+      if (!phReady()) return false;
+      while (queue.length) {
+        var item = queue.shift();
+        try { window.posthog.capture(item[0], item[1]); } catch (e) {}
+      }
+      return true;
+    }
+    function poll(tries) {
+      if (flush() || tries > 90) { polling = false; return; }
+      setTimeout(function () { poll(tries + 1); }, 1000);
+    }
+    // posthog-js loads after window load + idle, so queue until it exists.
+    function send(name, props) {
+      queue.push([name, props]);
+      if (!flush() && !polling) { polling = true; poll(0); }
+    }
+
+    function str(v) { return v === null || v === undefined || v === '' ? null : String(v); }
+    function ageGroup(size) {
+      var m = /^(YTH|SR)\b/i.exec(size || '');
+      return m ? m[1].toUpperCase() : null;
+    }
+    function sizeOf(v) {
+      if (!v) return null;
+      var opts = v.options || [];
+      for (var i = 0; i < opts.length; i++) {
+        if (/^(YTH|SR)\b/i.test(opts[i])) return opts[i];
+      }
+      return v.public_title || v.title || null;
+    }
+    function ctxFor(productId) {
+      var c = window.tbgPdpContext;
+      return c && productId && String(c.product_id) === String(productId) ? c : null;
+    }
+    function landingProps(productId) {
+      var c = ctxFor(productId);
+      if (!c) return {};
+      return {
+        landing_variant_id: c.landing_variant_id,
+        landing_size: c.landing_size,
+        landing_variant_in_stock: c.landing_variant_in_stock,
+        auto_selected_variant_id: c.auto_selected_variant_id,
+        sizes_total: c.sizes_total,
+        sizes_in_stock: c.sizes_in_stock
+      };
+    }
+    function assign(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var src = arguments[i] || {};
+        for (var k in src) if (Object.prototype.hasOwnProperty.call(src, k)) target[k] = src[k];
+      }
+      return target;
+    }
+
+    // ---- variant-picker helpers (PDP dropdown, quick view radios) ----
+    function variantsFor(picker) {
+      var s = picker && picker.querySelector('script[data-variants]');
+      if (!s) return null;
+      try { return JSON.parse(s.textContent); } catch (e) { return null; }
+    }
+    function selectedOptions(picker) {
+      var out = [];
+      picker.querySelectorAll('select[name^="options["], fieldset.product-form__input').forEach(function (el) {
+        if (el.tagName === 'SELECT') { out.push(el.value); return; }
+        var checked = el.querySelector('input[type="radio"]:checked');
+        out.push(checked ? checked.value : null);
+      });
+      return out;
+    }
+    function findVariant(variants, opts) {
+      if (!variants) return null;
+      for (var i = 0; i < variants.length; i++) {
+        var o = variants[i].options || [];
+        if (o.length !== opts.length) continue;
+        var ok = true;
+        for (var j = 0; j < o.length; j++) if (o[j] !== opts[j]) { ok = false; break; }
+        if (ok) return variants[i];
+      }
+      return null;
+    }
+    function pickerProductId(picker) {
+      var info = picker.closest('product-info');
+      if (info && info.dataset.productId) return info.dataset.productId;
+      var m = /^VariantPicker-.+-(\d+)(?:-\w+)?$/.exec(picker.id || '');
+      return m ? m[1] : (window.tbgPdpContext && window.tbgPdpContext.product_id);
+    }
+    function pickerLocation(picker) {
+      if (picker.closest('.quick-view__content, quick-view')) return 'quick_add';
+      if (ctxFor(pickerProductId(picker))) return 'pdp';
+      return 'featured';
+    }
+    function variantProps(productId, v, location) {
+      var size = sizeOf(v);
+      return {
+        product_id: str(productId),
+        variant_id: str(v.id),
+        sku: v.sku || null,
+        size: size,
+        age_group: ageGroup(size),
+        in_stock: !!v.available,
+        location: location
+      };
+    }
+
+    function backInStockState(scope) {
+      var btn = scope && scope.querySelector('.backInStock');
+      if (!btn) return null;
+      var visible = btn.offsetParent !== null && getComputedStyle(btn).display !== 'none';
+      return { shown: visible, enabled: !btn.disabled };
+    }
+    // The theme swaps the buy buttons after fetching the new variant's HTML, so poll
+    // briefly for the "Sold out - Notify me" button before sending the event.
+    function sendOutOfStock(props, scope) {
+      var start = Date.now();
+      (function check() {
+        var state = backInStockState(scope);
+        if ((state && state.shown) || Date.now() - start > 3000) {
+          send('Out Of Stock Size Clicked', assign({}, props, {
+            back_in_stock_form_shown: state ? state.shown : false,
+            back_in_stock_button_enabled: state ? state.enabled : null
+          }));
+          return;
+        }
+        setTimeout(check, 150);
+      })();
+    }
+
+    function handlePickerTap(picker) {
+      var now = Date.now();
+      // A label click also fires a click on its radio; count it once.
+      if (picker.__tbgLastTap && now - picker.__tbgLastTap < 150) return;
+      picker.__tbgLastTap = now;
+
+      var variants = variantsFor(picker);
+      if (!variants) return;
+      var prev = findVariant(variants, selectedOptions(picker));
+      var productId = pickerProductId(picker);
+      var location = pickerLocation(picker);
+      var scope = picker.closest('product-info') || picker.closest('.quick-view__content') || document;
+
+      setTimeout(function () {
+        var next = findVariant(variants, selectedOptions(picker));
+        if (!next) return;
+        tapCount += 1;
+        var prevSize = sizeOf(prev);
+        var props = assign(variantProps(productId, next, location), landingProps(productId), {
+          previous_variant_id: prev ? str(prev.id) : null,
+          previous_size: prevSize,
+          is_size_change: !!(prev && String(prev.id) !== String(next.id)),
+          tap_number: tapCount
+        });
+        send('Size Selector Option Clicked', props);
+
+        var fromAg = ageGroup(prevSize);
+        var toAg = props.age_group;
+        if (fromAg && toAg && fromAg !== toAg) {
+          send('Age Group Switched', {
+            from_age_group: fromAg,
+            to_age_group: toAg,
+            product_id: props.product_id,
+            location: location
+          });
+        }
+        if (!next.available) sendOutOfStock(props, scope);
+      }, 40);
+    }
+
+    document.addEventListener('click', function (e) {
+      if (!e.isTrusted || !e.target || !e.target.closest) return;
+      var t = e.target;
+
+      // PDP dropdown: the visible list is .tbg-custom-select__item (the native select is hidden).
+      var item = t.closest('.tbg-custom-select__item');
+      if (item) {
+        lastItemClickAt = Date.now();
+        var dPicker = item.closest('variant-picker');
+        if (dPicker) handlePickerTap(dPicker);
+        return;
+      }
+
+      // Quick view / button pickers: radio inputs with labels.
+      var label = t.closest('label');
+      var radio = label && label.control ? label.control : (t.matches && t.matches('input[type="radio"]') ? t : null);
+      if (radio && radio.matches('input[type="radio"][data-option-value-id]')) {
+        var rPicker = radio.closest('variant-picker');
+        if (rPicker) handlePickerTap(rPicker);
+        return;
+      }
+
+      // Collection / homepage "shop by size" filter.
+      var opt = t.closest('.size-selection-container .options .option');
+      if (opt) {
+        var fSize = opt.getAttribute('data-size') || (opt.textContent || '').trim();
+        send('Size Selector Option Clicked', {
+          size: fSize || null,
+          age_group: ageGroup(fSize),
+          location: 'size_filter',
+          page_type: document.body.classList.contains('template-collection') ? 'collection' : 'index'
+        });
+        return;
+      }
+
+      // Homepage Youth / Senior dropdowns.
+      var trigger = t.closest('[class^="custom-size-selector-"][data-group] .trigger, [class*=" custom-size-selector-"][data-group] .trigger');
+      if (trigger) {
+        var group = trigger.closest('[data-group]').getAttribute('data-group');
+        var ag = group === 'youth' ? 'YTH' : group === 'senior' ? 'SR' : null;
+        if (ag && lastAgeGroupOpened && lastAgeGroupOpened !== ag) {
+          send('Age Group Switched', {
+            from_age_group: lastAgeGroupOpened,
+            to_age_group: ag,
+            product_id: null,
+            location: 'size_filter'
+          });
+        }
+        if (ag) lastAgeGroupOpened = ag;
+        return;
+      }
+
+      // Remember which size chart button was used, for Size Guide Opened.
+      var chartBtn = t.closest('[aria-controls^="SizeChart"]');
+      if (chartBtn) {
+        lastSizeChartLocation = chartBtn.closest('.quick-view__content, quick-view') ? 'quick_add'
+          : chartBtn.closest('.size-selection-container') ? 'size_filter'
+          : window.tbgPdpContext ? 'pdp' : 'other';
+      }
+    }, true);
+
+    // Cart recommendations size dropdown (sold-out options are disabled there).
+    document.addEventListener('change', function (e) {
+      var t = e.target;
+      if (!t || !t.matches) return;
+
+      if (e.isTrusted && t.matches('select[data-size-select]')) {
+        var o = t.options[t.selectedIndex];
+        var cSize = o ? (o.textContent || '').trim() : null;
+        tapCount += 1;
+        send('Size Selector Option Clicked', {
+          product_id: str(t.getAttribute('data-product-id')),
+          variant_id: str(t.value),
+          sku: o ? o.getAttribute('data-sku') : null,
+          size: cSize,
+          age_group: ageGroup(cSize),
+          in_stock: o ? o.getAttribute('data-sold-out') !== 'true' : null,
+          location: /^\/cart\/?$/.test(location.pathname) ? 'cart' : 'complementary',
+          tap_number: tapCount
+        });
+        return;
+      }
+
+      // The theme's auto-select (main-product.liquid) fires a synthetic change on page load.
+      // Record what it switched to, without sending an event.
+      if (!e.isTrusted && tapCount === 0 && Date.now() - lastItemClickAt > 500 && t.matches('select[name^="options["]')) {
+        var aPicker = t.closest('variant-picker');
+        var c = window.tbgPdpContext;
+        if (!aPicker || !c || aPicker.closest('.quick-view__content, quick-view')) return;
+        setTimeout(function () {
+          var v = findVariant(variantsFor(aPicker), selectedOptions(aPicker));
+          if (v && String(v.id) !== String(c.initial_variant_id)) {
+            c.auto_selected_variant_id = String(v.id);
+            c.auto_selected_size = sizeOf(v);
+            c.auto_selected_in_stock = !!v.available;
+          }
+        }, 40);
+      }
+    }, true);
+
+    // Size chart modal opened.
+    document.addEventListener('modal:afterShow', function (e) {
+      var el = e.target;
+      if (!el || !el.id || el.id.indexOf('SizeChart') !== 0) return;
+      var c = window.tbgPdpContext;
+      var location = lastSizeChartLocation || (c ? 'pdp' : 'other');
+      lastSizeChartLocation = null;
+      send('Size Guide Opened', {
+        product_id: location === 'pdp' && c ? c.product_id : null,
+        age_group: null,
+        location: location,
+        trigger: 'button'
+      });
+    });
+
+    // "Size Chart" accordion tab on the PDP (toggle does not bubble, so listen in capture).
+    document.addEventListener('toggle', function (e) {
+      var d = e.target;
+      if (!d || d.tagName !== 'DETAILS' || !d.open) return;
+      var summary = d.querySelector('summary');
+      if (!summary || !/size\s*(chart|guide)/i.test(summary.textContent || '')) return;
+      var c = window.tbgPdpContext;
+      send('Size Guide Opened', {
+        product_id: c ? c.product_id : null,
+        age_group: null,
+        location: c ? 'pdp' : 'other',
+        trigger: 'accordion'
+      });
+    }, true);
+
+    window.tbgSizeTracking = {
+      // Called from posthog.init before_send: adds the landing size to product-page pageviews.
+      beforeSend: function (event) {
+        try {
+          var c = window.tbgPdpContext;
+          if (event && event.event === '$pageview' && c && event.properties) {
+            assign(event.properties, {
+              product_id: c.product_id,
+              landing_variant_id: c.landing_variant_id,
+              landing_size: c.landing_size,
+              landing_variant_in_stock: c.landing_variant_in_stock,
+              auto_selected_variant_id: c.auto_selected_variant_id,
+              auto_selected_size: c.auto_selected_size,
+              auto_selected_in_stock: c.auto_selected_in_stock,
+              sizes_total: c.sizes_total,
+              sizes_in_stock: c.sizes_in_stock
+            });
+          }
+        } catch (e) {}
+        return event;
+      },
+      flush: flush
+    };
+  })();
+</script>
