@@ -133,111 +133,6 @@
         "parallax_direction": "vertical"
       }
     },
-    "image_with_text_overlay_7W36g4": {
-      "type": "image-with-text-overlay",
-      "blocks": {
-        "heading_TKn9Nm": {
-          "type": "heading",
-          "disabled": true,
-          "settings": {
-            "heading": "not all neck guards are created equal",
-            "heading_size": "title-lg tracking-heading",
-            "heading_tag": "h2",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle",
-            "highlighted_reveal": false
-          }
-        },
-        "spacing_tt6UHK": {
-          "type": "spacing",
-          "settings": {
-            "height": 0,
-            "height_mobile": 20
-          }
-        },
-        "image_8e49hm": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/puck_hunter_SVG.svg",
-            "image_width": "custom",
-            "image_max_width": 290,
-            "image_max_width_mobile": 200
-          }
-        },
-        "spacing_YYX8Th": {
-          "type": "spacing",
-          "settings": {
-            "height": 0,
-            "height_mobile": 120
-          }
-        },
-        "spacing_mqAVct": {
-          "type": "spacing",
-          "settings": {
-            "height": 0,
-            "height_mobile": 120
-          }
-        },
-        "spacing_dfDF44": {
-          "type": "spacing",
-          "settings": {
-            "height": 0,
-            "height_mobile": 76
-          }
-        },
-        "button_KwJkYG": {
-          "type": "button",
-          "settings": {
-            "button_label": "SHOP NOW",
-            "button_link": "shopify://pages/shop-by-collection",
-            "button_style": "secondary",
-            "button_size": "sm",
-            "button_external": false,
-            "button_icon": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_TKn9Nm",
-        "spacing_tt6UHK",
-        "image_8e49hm",
-        "spacing_YYX8Th",
-        "spacing_mqAVct",
-        "spacing_dfDF44",
-        "button_KwJkYG"
-      ],
-      "disabled": true,
-      "name": "TEASER PUCK",
-      "settings": {
-        "transparent_header": true,
-        "image": "shopify://shop_images/puck_hunter_homepage_banner_desktop.webp",
-        "image_height": "adapt",
-        "content_width": "small",
-        "content_position": "md:items-center md:justify-start",
-        "text_alignment": "center",
-        "image_mobile": "shopify://shop_images/puck_hunter_homepage_banner_mobile.webp",
-        "image_height_mobile": "600px",
-        "content_position_mobile": "items-start justify-center",
-        "text_alignment_mobile": "center",
-        "color_text": "#000000",
-        "color_background": "#000000",
-        "gradient_background": "",
-        "color_highlight": "#e2fb31",
-        "gradient_highlight": "",
-        "color_button_text": "#000000",
-        "color_button_background": "#ff630d",
-        "color_button_gradient": "",
-        "color_overlay": "#171717",
-        "overlay_opacity": 0,
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "divider": false,
-        "full_width": true,
-        "rounded": false,
-        "enable_parallax": false,
-        "parallax_direction": "vertical"
-      }
-    },
     "slideshow_nPbqmW": {
       "type": "slideshow",
       "blocks": {
@@ -488,6 +383,111 @@
         "divider": false,
         "full_width": true,
         "edge_to_edge": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "image_with_text_overlay_7W36g4": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_TKn9Nm": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "not all neck guards are created equal",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "spacing_tt6UHK": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 20
+          }
+        },
+        "image_8e49hm": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/puck_hunter_SVG.svg",
+            "image_width": "custom",
+            "image_max_width": 290,
+            "image_max_width_mobile": 200
+          }
+        },
+        "spacing_YYX8Th": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 120
+          }
+        },
+        "spacing_mqAVct": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 120
+          }
+        },
+        "spacing_dfDF44": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 76
+          }
+        },
+        "button_KwJkYG": {
+          "type": "button",
+          "settings": {
+            "button_label": "SHOP NOW",
+            "button_link": "shopify://pages/shop-by-collection",
+            "button_style": "secondary",
+            "button_size": "sm",
+            "button_external": false,
+            "button_icon": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_TKn9Nm",
+        "spacing_tt6UHK",
+        "image_8e49hm",
+        "spacing_YYX8Th",
+        "spacing_mqAVct",
+        "spacing_dfDF44",
+        "button_KwJkYG"
+      ],
+      "disabled": true,
+      "name": "TEASER PUCK",
+      "settings": {
+        "transparent_header": true,
+        "image": "shopify://shop_images/puck_hunter_homepage_banner_desktop.webp",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-center md:justify-start",
+        "text_alignment": "center",
+        "image_mobile": "shopify://shop_images/puck_hunter_homepage_banner_mobile.webp",
+        "image_height_mobile": "600px",
+        "content_position_mobile": "items-start justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#000000",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_highlight": "#e2fb31",
+        "gradient_highlight": "",
+        "color_button_text": "#000000",
+        "color_button_background": "#ff630d",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
         "rounded": false,
         "enable_parallax": false,
         "parallax_direction": "vertical"
@@ -2113,9 +2113,9 @@
   },
   "order": [
     "image_with_text_overlay_kyPMAz",
-    "image_with_text_overlay_7W36g4",
-    "slideshow_nPbqmW",
     "slideshow_layers_BmrBHK",
+    "slideshow_nPbqmW",
+    "image_with_text_overlay_7W36g4",
     "image_with_text_overlay_x8zjfF",
     "logo_list_nBVhDN",
     "size_based_products_v2_QNMq9f",
