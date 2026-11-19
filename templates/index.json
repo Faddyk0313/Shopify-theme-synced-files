@@ -133,79 +133,6 @@
         "parallax_direction": "vertical"
       }
     },
-    "slideshow_nPbqmW": {
-      "type": "slideshow",
-      "blocks": {
-        "image_UUAFwp": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/BLACK_FRIDAY_DESKTOP_BANNER_2.webp",
-            "image_mobile": "shopify://shop_images/BLACK_FRIDAY_3.0_mobile_BANNER_2.webp",
-            "heading": "",
-            "heading_size": "title-lg tracking-heading",
-            "heading_tag": "h2",
-            "image_inside": "shopify://shop_images/BLACK_FRIDAY_IS_LIVE_2.webp",
-            "image_inside_width": "custom",
-            "image_inside_max_width": 380,
-            "image_inside_max_width_mobile": 150,
-            "button_label": "",
-            "button_link": "",
-            "button_style": "secondary",
-            "button_external": false,
-            "button_icon": false
-          }
-        },
-        "image_XqwPj8": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/BLACK_FRIDAY_3.0_DESKTOP_BANNER.webp",
-            "image_mobile": "shopify://shop_images/BLACK_FRIDAY_3.0_mobile_BANNER_battlegear_3.0.webp",
-            "heading": "",
-            "heading_size": "title-lg tracking-heading",
-            "heading_tag": "h2",
-            "image_inside": "shopify://shop_images/BLACK_FRIDAY_BATTLEGEAR_3.0.png",
-            "image_inside_width": "custom",
-            "image_inside_max_width": 380,
-            "image_inside_max_width_mobile": 50,
-            "button_label": "HOLA",
-            "button_link": "",
-            "button_style": "secondary",
-            "button_external": false,
-            "button_icon": false
-          }
-        }
-      },
-      "block_order": [
-        "image_UUAFwp",
-        "image_XqwPj8"
-      ],
-      "disabled": true,
-      "name": "Slideshow BLACK FRIDAY",
-      "settings": {
-        "autoplay": false,
-        "autoplay_speed": 4,
-        "show_navigation": true,
-        "image_height": "adapt",
-        "content_width": "small",
-        "image_height_mobile": "adapt",
-        "accessibility_info": "TITAN BLACK FRIDAY",
-        "color_text": "#ffffff",
-        "color_background": "#000000",
-        "gradient_background": "",
-        "color_button_text": "#171717",
-        "color_button_background": "#ffffff",
-        "color_button_gradient": "",
-        "color_overlay": "#171717",
-        "overlay_opacity": 0,
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "divider": false,
-        "full_width": true,
-        "rounded": false,
-        "enable_parallax": false,
-        "parallax_direction": "vertical"
-      }
-    },
     "slideshow_layers_BmrBHK": {
       "type": "slideshow-layers",
       "blocks": {
@@ -231,7 +158,7 @@
             "text_size": "subtext-md",
             "image_inside": "shopify://shop_images/BLACK_FRIDAY_IS_LIVE_2.webp",
             "image_inside_width": "custom",
-            "image_inside_max_width": 260,
+            "image_inside_max_width": 400,
             "image_inside_max_width_mobile": 200,
             "image_inside_space": 0,
             "image_inside_space_mobile": 0,
@@ -256,7 +183,7 @@
             "color_button_background": "#ffffff",
             "color_button_gradient": "",
             "color_overlay": "#171717",
-            "overlay_opacity": 20
+            "overlay_opacity": 0
           }
         },
         "image_FkEcGa": {
@@ -383,6 +310,79 @@
         "divider": false,
         "full_width": true,
         "edge_to_edge": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "slideshow_nPbqmW": {
+      "type": "slideshow",
+      "blocks": {
+        "image_UUAFwp": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/BLACK_FRIDAY_DESKTOP_BANNER_2.webp",
+            "image_mobile": "shopify://shop_images/BLACK_FRIDAY_3.0_mobile_BANNER_2.webp",
+            "heading": "",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "image_inside": "shopify://shop_images/BLACK_FRIDAY_IS_LIVE_2.webp",
+            "image_inside_width": "custom",
+            "image_inside_max_width": 380,
+            "image_inside_max_width_mobile": 150,
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": false
+          }
+        },
+        "image_XqwPj8": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/BLACK_FRIDAY_3.0_DESKTOP_BANNER.webp",
+            "image_mobile": "shopify://shop_images/BLACK_FRIDAY_3.0_mobile_BANNER_battlegear_3.0.webp",
+            "heading": "",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "image_inside": "shopify://shop_images/BLACK_FRIDAY_BATTLEGEAR_3.0.png",
+            "image_inside_width": "custom",
+            "image_inside_max_width": 380,
+            "image_inside_max_width_mobile": 50,
+            "button_label": "HOLA",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": false
+          }
+        }
+      },
+      "block_order": [
+        "image_UUAFwp",
+        "image_XqwPj8"
+      ],
+      "disabled": true,
+      "name": "Slideshow BLACK FRIDAY",
+      "settings": {
+        "autoplay": false,
+        "autoplay_speed": 4,
+        "show_navigation": true,
+        "image_height": "adapt",
+        "content_width": "small",
+        "image_height_mobile": "adapt",
+        "accessibility_info": "TITAN BLACK FRIDAY",
+        "color_text": "#ffffff",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
         "rounded": false,
         "enable_parallax": false,
         "parallax_direction": "vertical"

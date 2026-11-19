@@ -68,6 +68,7 @@
     "rounded_block": "square",
     "enable_page_transition": true,
     "enable_lazy_image": true,
+    "enable_heading_reveal": true,
     "buttons_hover": "standard",
     "buttons_border_thickness": 2,
     "buttons_border_opacity": 100,
