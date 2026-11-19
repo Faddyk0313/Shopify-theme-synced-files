@@ -5,11 +5,6 @@
     assign first_block_image = first_block.settings.image
     assign first_block_image_mobile = first_block.settings.image_mobile | default: first_block_image
   endif
-
-  assign with_gradient = false
-  if section.settings.gradient_highlight != blank and section.settings.gradient_highlight != 'rgba(0,0,0,0)'
-    assign with_gradient = true
-  endif
 -%}
 
 {%- comment -%} TBG custom code: preload LCP image of first slide {%- endcomment -%}
@@ -49,6 +44,13 @@
     }
   {% endif -%}
 
+  /* TBG custom code: per-slide colors */
+  {%- for block in section.blocks %}
+  #shopify-section-{{ section.id }} .tbg-slide-{{ block.id }} {
+    {%- render 'section-variables', section: block -%}
+  }
+  {%- endfor %}
+
   /* TBG custom code: overlay + buttons row */
   #shopify-section-{{ section.id }} .tbg-slideshow .banner__overlay {
     background: rgb(var(--color-overlay) / var(--overlay-opacity));
@@ -63,9 +65,16 @@
   #shopify-section-{{ section.id }} .tbg-slideshow .banner__box > * + * {
     margin-block-start: {{ section.settings.content_gap }}px;
   }
+  /* TBG custom code: extra empty space above image / buttons (per slide) */
+  #shopify-section-{{ section.id }} .tbg-slideshow .banner__box > * + .tbg-space-above {
+    margin-block-start: calc({{ section.settings.content_gap }}px + var(--tbg-space, 0px));
+  }
   @media screen and (max-width: 767px) {
     #shopify-section-{{ section.id }} .tbg-slideshow .banner__box > * + * {
       margin-block-start: {{ section.settings.content_gap_mobile }}px;
+    }
+    #shopify-section-{{ section.id }} .tbg-slideshow .banner__box > * + .tbg-space-above {
+      margin-block-start: calc({{ section.settings.content_gap_mobile }}px + var(--tbg-space-mobile, 0px));
     }
   }
 
@@ -130,12 +139,17 @@
             assign lazyimage = 'lazy-image'
           endif
 
+          assign with_gradient = false
+          if block.settings.gradient_highlight != blank and block.settings.gradient_highlight != 'rgba(0,0,0,0)'
+            assign with_gradient = true
+          endif
+
           assign has_content = false
           if block.settings.subheading != blank or block.settings.heading != blank or block.settings.text != blank or block.settings.image_inside != blank or block.settings.button_label != blank or block.settings.button_label_2 != blank
             assign has_content = true
           endif
         -%}
-        <div class="banner media--{{ section.settings.image_height }} mobile:media--{{ section.settings.image_height_mobile }} w-full overflow-hidden relative" data-type="image" {{ block.shopify_attributes }}>
+        <div class="tbg-slide-{{ block.id }} banner media--{{ section.settings.image_height }} mobile:media--{{ section.settings.image_height_mobile }} w-full overflow-hidden relative" data-type="image" {{ block.shopify_attributes }}>
           <media-element class="banner__media block w-full h-full overflow-hidden"{% if section.settings.enable_parallax %} data-parallax="0.3" data-parallax-dir="{{ section.settings.parallax_direction }}"{% endif %}>
             <animate-element data-animate="zoom-out" class="media media--height block w-full h-full relative overflow-hidden" paused>
               <picture class="media media--height block w-full h-full relative overflow-hidden">
@@ -185,7 +199,7 @@
                   {%- endif -%}
 
                   {%- if block.settings.image_inside != blank -%}
-                    <div class="leading-none">
+                    <div class="leading-none tbg-space-above" style="--tbg-space: {{ block.settings.image_inside_space }}px; --tbg-space-mobile: {{ block.settings.image_inside_space_mobile }}px;">
                       <figure class="media media--transparent relative inline-block">
                         {%- if block.settings.image_inside_width == 'custom' -%}
                           {%- capture style -%}--image-max-width: {{ block.settings.image_inside_max_width }}px; --image-max-width-mobile: {{ block.settings.image_inside_max_width_mobile }}px{%- endcapture -%}
@@ -202,7 +216,7 @@
                   {%- endif -%}
 
                   {%- if block.settings.button_label != blank or block.settings.button_label_2 != blank -%}
-                    <div class="tbg-buttons">
+                    <div class="tbg-buttons tbg-space-above" style="--tbg-space: {{ block.settings.buttons_space }}px; --tbg-space-mobile: {{ block.settings.buttons_space_mobile }}px;">
                       <div class="inline-flex flex-wrap items-center gap-4 pointer-events-auto">
                         {%- if block.settings.button_label != blank -%}
                           {%- render 'button',
@@ -459,25 +473,13 @@
     },
     {
       "type": "header",
-      "content": "t:sections.global.settings.header__colors.content",
-      "info": "t:sections.global.settings.header__colors.info"
+      "content": "t:sections.global.settings.header__colors.content"
     },
     {
       "type": "color",
       "id": "color_text",
-      "label": "t:sections.global.settings.color_text.label",
+      "label": "Arrows & dots color",
       "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "color_highlight",
-      "label": "t:sections.global.settings.color_highlight.label",
-      "default": "#e0a580"
-    },
-    {
-      "type": "color_background",
-      "id": "gradient_highlight",
-      "label": "t:sections.global.settings.gradient_highlight.label"
     },
     {
       "type": "color",
@@ -488,39 +490,6 @@
       "type": "color_background",
       "id": "gradient_background",
       "label": "t:sections.global.settings.gradient_background.label"
-    },
-    {
-      "type": "color",
-      "id": "color_button_text",
-      "label": "t:sections.global.settings.color_button_text.label",
-      "default": "#171717"
-    },
-    {
-      "type": "color",
-      "id": "color_button_background",
-      "label": "t:sections.global.settings.color_button_background.label",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color_background",
-      "id": "color_button_gradient",
-      "label": "t:sections.global.settings.color_button_gradient.label"
-    },
-    {
-      "type": "color",
-      "id": "color_overlay",
-      "label": "t:sections.global.settings.color_overlay.label",
-      "default": "#171717"
-    },
-    {
-      "type": "range",
-      "id": "overlay_opacity",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "%",
-      "label": "t:sections.global.settings.overlay_opacity.label",
-      "default": 20
     },
     {
       "type": "header",
@@ -1007,6 +976,50 @@
           "unit": "px"
         },
         {
+          "type": "range",
+          "id": "image_inside_space",
+          "label": "Extra space above image",
+          "min": 0,
+          "max": 200,
+          "step": 4,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "image_inside_space_mobile",
+          "label": "Extra space above image (mobile)",
+          "min": 0,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Buttons"
+        },
+        {
+          "type": "range",
+          "id": "buttons_space",
+          "label": "Extra space above buttons",
+          "min": 0,
+          "max": 200,
+          "step": 4,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "buttons_space_mobile",
+          "label": "Extra space above buttons (mobile)",
+          "min": 0,
+          "max": 120,
+          "step": 2,
+          "unit": "px",
+          "default": 0
+        },
+        {
           "type": "header",
           "content": "Button 1"
         },
@@ -1142,6 +1155,60 @@
           "id": "button_icon_2",
           "label": "t:sections.global.settings.button_icon.label",
           "default": true
+        },
+        {
+          "type": "header",
+          "content": "t:sections.global.settings.header__colors.content"
+        },
+        {
+          "type": "color",
+          "id": "color_text",
+          "label": "t:sections.global.settings.color_text.label",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "color_highlight",
+          "label": "t:sections.global.settings.color_highlight.label",
+          "default": "#e0a580"
+        },
+        {
+          "type": "color_background",
+          "id": "gradient_highlight",
+          "label": "t:sections.global.settings.gradient_highlight.label"
+        },
+        {
+          "type": "color",
+          "id": "color_button_text",
+          "label": "t:sections.global.settings.color_button_text.label",
+          "default": "#171717"
+        },
+        {
+          "type": "color",
+          "id": "color_button_background",
+          "label": "t:sections.global.settings.color_button_background.label",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color_background",
+          "id": "color_button_gradient",
+          "label": "t:sections.global.settings.color_button_gradient.label"
+        },
+        {
+          "type": "color",
+          "id": "color_overlay",
+          "label": "t:sections.global.settings.color_overlay.label",
+          "default": "#171717"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "t:sections.global.settings.overlay_opacity.label",
+          "default": 20
         }
       ]
     }
