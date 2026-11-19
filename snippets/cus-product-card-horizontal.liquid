@@ -89,6 +89,7 @@
                 name="id"
                 class="select tbg-quick-add-select cus-quickAddselect"
                 data-quick-add-select
+                data-product-id="{{ product.id }}"
                 {% if size_option_index != null %}
                   data-size-select="true"
                 {% endif %}
@@ -135,6 +136,7 @@
                     {%- if matched_variant != null -%}
                       <option
                         value="{{ matched_variant.id }}"
+                        data-sku="{{ matched_variant.sku | escape }}"
                         {% unless matched_available %}
                           data-sold-out="true"
                         {% endunless %}
@@ -150,6 +152,7 @@
                   {%- for v in product.variants -%}
                     <option
                       value="{{ v.id }}"
+                      data-sku="{{ v.sku | escape }}"
                       {% unless v.available %}
                         data-sold-out="true"
                       {% endunless %}

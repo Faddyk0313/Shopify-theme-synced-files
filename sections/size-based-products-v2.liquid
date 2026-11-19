@@ -1170,19 +1170,7 @@
   });
 </script>
 
-<script>
-  // Track size selector clicks Posthog Metric (register once per page)
-  if (!window.__sizeSelectorPosthogBound) {
-    window.__sizeSelectorPosthogBound = true;
-    document.addEventListener('click', function (e) {
-      if (e.target.closest('.template-collection .size-selection-container .options .option')) {
-        posthog.capture('Size Selector Option Clicked', {
-          page_type: 'collection'
-        });
-      }
-    });
-  }
-</script>
+{%- comment -%} TBG Custom Code: Size Selector Option Clicked for this filter now fires from snippets/tbg-size-tracking.liquid (location: size_filter, with size). {%- endcomment -%}
 
 {% schema %}
 {
