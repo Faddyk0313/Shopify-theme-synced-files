@@ -1702,7 +1702,7 @@
             "required": true,
             "hidden": false,
             "span": "2",
-            "span_fixed": false,
+            "span_fixed": true,
             "label_outside": true,
             "placeholder": "",
             "help_text": "",
