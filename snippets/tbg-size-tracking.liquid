@@ -169,11 +169,32 @@
       };
     }
 
+    // Two kinds of "Notify me": Klaviyo's injected back-in-stock button (used on live PDPs)
+    // and the theme's own .backInStock drawer button.
+    function isVisible(el) {
+      return !!el && el.offsetParent !== null && getComputedStyle(el).display !== 'none' && getComputedStyle(el).visibility !== 'hidden';
+    }
+    // Size currently selected on the main product form (for Size Guide Opened).
+    function currentPdpSize() {
+      var c = window.tbgPdpContext;
+      if (!c) return null;
+      var pickers = document.querySelectorAll('product-info[data-product-id="' + c.product_id + '"] variant-picker');
+      for (var i = 0; i < pickers.length; i++) {
+        if (pickers[i].closest('.quick-view__content, quick-view')) continue;
+        var v = findVariant(variantsFor(pickers[i]), selectedOptions(pickers[i]));
+        if (v) return sizeOf(v);
+      }
+      return null;
+    }
+
     function backInStockState(scope) {
+      var kl = document.querySelectorAll('[data-a11y-identifier^="bis-button"]');
+      for (var i = 0; i < kl.length; i++) {
+        if (isVisible(kl[i])) return { shown: true, enabled: !kl[i].disabled, type: 'klaviyo' };
+      }
       var btn = scope && scope.querySelector('.backInStock');
-      if (!btn) return null;
-      var visible = btn.offsetParent !== null && getComputedStyle(btn).display !== 'none';
-      return { shown: visible, enabled: !btn.disabled };
+      if (btn && isVisible(btn)) return { shown: true, enabled: !btn.disabled, type: 'theme' };
+      return kl.length || btn ? { shown: false, enabled: null, type: null } : null;
     }
     // The theme swaps the buy buttons after fetching the new variant's HTML, so poll
     // briefly for the "Sold out - Notify me" button before sending the event.
@@ -184,7 +205,8 @@
         if ((state && state.shown) || Date.now() - start > 3000) {
           send('Out Of Stock Size Clicked', assign({}, props, {
             back_in_stock_form_shown: state ? state.shown : false,
-            back_in_stock_button_enabled: state ? state.enabled : null
+            back_in_stock_button_enabled: state ? state.enabled : null,
+            back_in_stock_type: state ? state.type : null
           }));
           return;
         }
@@ -192,44 +214,56 @@
       })();
     }
 
-    function handlePickerTap(picker) {
+    function optionContainers(picker) {
+      return Array.prototype.slice.call(picker.querySelectorAll('select[name^="options["], fieldset.product-form__input'));
+    }
+
+    // tappedContainer: the <select> or <fieldset> of the tapped option; value: the tapped value.
+    // The new variant is worked out from the tap itself, not read back from the DOM: quick view
+    // renders a second copy of the picker with the same radio names, which clears this copy's state.
+    function handlePickerTap(picker, tappedContainer, value) {
       var now = Date.now();
       // A label click also fires a click on its radio; count it once.
       if (picker.__tbgLastTap && now - picker.__tbgLastTap < 150) return;
       picker.__tbgLastTap = now;
 
       var variants = variantsFor(picker);
-      if (!variants) return;
-      var prev = findVariant(variants, selectedOptions(picker));
+      if (!variants || value == null) return;
+      var containers = optionContainers(picker);
+      var idx = containers.indexOf(tappedContainer);
+      if (idx < 0) return;
+      var prevOpts = selectedOptions(picker);
+      var prev = findVariant(variants, prevOpts);
+      var nextOpts = prevOpts.slice();
+      nextOpts[idx] = value;
+      var next = findVariant(variants, nextOpts);
+      if (!next) return;
+
       var productId = pickerProductId(picker);
       var location = pickerLocation(picker);
       var scope = picker.closest('product-info') || picker.closest('.quick-view__content') || document;
 
-      setTimeout(function () {
-        var next = findVariant(variants, selectedOptions(picker));
-        if (!next) return;
-        tapCount += 1;
-        var prevSize = sizeOf(prev);
-        var props = assign(variantProps(productId, next, location), landingProps(productId), {
-          previous_variant_id: prev ? str(prev.id) : null,
-          previous_size: prevSize,
-          is_size_change: !!(prev && String(prev.id) !== String(next.id)),
-          tap_number: tapCount
-        });
-        send('Size Selector Option Clicked', props);
+      tapCount += 1;
+      var prevSize = sizeOf(prev);
+      var props = assign(variantProps(productId, next, location), landingProps(productId), {
+        previous_variant_id: prev ? str(prev.id) : null,
+        previous_size: prevSize,
+        is_size_change: !!(prev && String(prev.id) !== String(next.id)),
+        tap_number: tapCount
+      });
+      send('Size Selector Option Clicked', props);
 
-        var fromAg = ageGroup(prevSize);
-        var toAg = props.age_group;
-        if (fromAg && toAg && fromAg !== toAg) {
-          send('Age Group Switched', {
-            from_age_group: fromAg,
-            to_age_group: toAg,
-            product_id: props.product_id,
-            location: location
-          });
-        }
-        if (!next.available) sendOutOfStock(props, scope);
-      }, 40);
+      var fromAg = ageGroup(prevSize);
+      var toAg = props.age_group;
+      if (fromAg && toAg && fromAg !== toAg) {
+        send('Age Group Switched', {
+          from_age_group: fromAg,
+          to_age_group: toAg,
+          product_id: props.product_id,
+          location: location
+        });
+      }
+      if (!next.available) sendOutOfStock(props, scope);
     }
 
     document.addEventListener('click', function (e) {
@@ -241,7 +275,9 @@
       if (item) {
         lastItemClickAt = Date.now();
         var dPicker = item.closest('variant-picker');
-        if (dPicker) handlePickerTap(dPicker);
+        var field = item.closest('.field');
+        var dSelect = field && field.querySelector('select[name^="options["]');
+        if (dPicker && dSelect) handlePickerTap(dPicker, dSelect, item.getAttribute('data-value'));
         return;
       }
 
@@ -250,7 +286,8 @@
       var radio = label && label.control ? label.control : (t.matches && t.matches('input[type="radio"]') ? t : null);
       if (radio && radio.matches('input[type="radio"][data-option-value-id]')) {
         var rPicker = radio.closest('variant-picker');
-        if (rPicker) handlePickerTap(rPicker);
+        var fieldset = radio.closest('fieldset.product-form__input');
+        if (rPicker && fieldset) handlePickerTap(rPicker, fieldset, radio.value);
         return;
       }
 
@@ -339,9 +376,11 @@
       var c = window.tbgPdpContext;
       var location = lastSizeChartLocation || (c ? 'pdp' : 'other');
       lastSizeChartLocation = null;
+      var gSize = location === 'pdp' ? currentPdpSize() : null;
       send('Size Guide Opened', {
         product_id: location === 'pdp' && c ? c.product_id : null,
-        age_group: null,
+        age_group: ageGroup(gSize),
+        selected_size: gSize,
         location: location,
         trigger: 'button'
       });
@@ -353,10 +392,16 @@
       if (!d || d.tagName !== 'DETAILS' || !d.open) return;
       var summary = d.querySelector('summary');
       if (!summary || !/size\s*(chart|guide)/i.test(summary.textContent || '')) return;
+      // The theme's accordion animation can toggle "open" twice for one tap.
+      var now = Date.now();
+      if (d.__tbgOpenedAt && now - d.__tbgOpenedAt < 1000) return;
+      d.__tbgOpenedAt = now;
       var c = window.tbgPdpContext;
+      var aSize = c ? currentPdpSize() : null;
       send('Size Guide Opened', {
         product_id: c ? c.product_id : null,
-        age_group: null,
+        age_group: ageGroup(aSize),
+        selected_size: aSize,
         location: c ? 'pdp' : 'other',
         trigger: 'accordion'
       });
