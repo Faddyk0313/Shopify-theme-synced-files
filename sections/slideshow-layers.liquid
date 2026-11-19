@@ -59,8 +59,14 @@
   #shopify-section-{{ section.id }} .tbg-buttons .button {
     margin: 0;
   }
-  #shopify-section-{{ section.id }} .banner__box > .tbg-buttons {
-    margin-block-start: var(--sp-10);
+  /* TBG custom code: spacing between content elements */
+  #shopify-section-{{ section.id }} .tbg-slideshow .banner__box > * + * {
+    margin-block-start: {{ section.settings.content_gap }}px;
+  }
+  @media screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }} .tbg-slideshow .banner__box > * + * {
+      margin-block-start: {{ section.settings.content_gap_mobile }}px;
+    }
   }
 
   /* TBG custom code: content animation on slide change */
@@ -87,7 +93,7 @@
 </style>
 
 {%- if section.blocks.size > 0 -%}
-<div class="tbg-slideshow section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+<div class="tbg-slideshow section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}"{% comment %} TBG custom code: transparent header {% endcomment %}{% if section.settings.transparent_header %} allow-transparent-header{% endif %}>
   <div class="{% unless section.settings.full_width %}page-width {% endunless %}relative">
     {%- if section.blocks.size > 1 and section.settings.autoplay -%}
       <button
@@ -264,6 +270,13 @@
   "settings": [
     {
       "type": "checkbox",
+      "id": "transparent_header",
+      "label": "t:sections.global.settings.transparent_header.label",
+      "info": "t:sections.global.settings.transparent_header.info",
+      "default": false
+    },
+    {
+      "type": "checkbox",
       "id": "autoplay",
       "label": "t:sections.slideshow.settings.autoplay.label",
       "default": false
@@ -364,6 +377,26 @@
       ],
       "default": "small",
       "label": "t:sections.global.settings.content_width.label"
+    },
+    {
+      "type": "range",
+      "id": "content_gap",
+      "label": "Spacing between elements",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "content_gap_mobile",
+      "label": "Spacing between elements (mobile)",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 16
     },
     {
       "type": "header",
