@@ -320,26 +320,26 @@
         "parallax_direction": "vertical"
       }
     },
-    "image_with_text_overlay_H9nYcy": {
+    "image_with_text_overlay_9cVUKD": {
       "type": "image-with-text-overlay",
       "blocks": {
-        "spacing_DDwRAc": {
+        "spacing_yfwMkQ": {
           "type": "spacing",
           "settings": {
-            "height": 0,
-            "height_mobile": 0
+            "height": 24,
+            "height_mobile": 12
           }
         },
-        "image_CLmUF6": {
+        "image_zhr6xn": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/BLACK_FRIDAY_BATTLEGEAR_3.0.png",
+            "image": "shopify://shop_images/BLACK_FRIDAY_IS_LIVE_2.webp",
             "image_width": "custom",
             "image_max_width": 380,
             "image_max_width_mobile": 210
           }
         },
-        "button_4nnMp6": {
+        "button_bbxcyp": {
           "type": "button",
           "disabled": true,
           "settings": {
@@ -351,7 +351,7 @@
             "button_icon": true
           }
         },
-        "subheading_MeryXT": {
+        "subheading_3rzrXL": {
           "type": "subheading",
           "disabled": true,
           "settings": {
@@ -362,21 +362,21 @@
         }
       },
       "block_order": [
-        "spacing_DDwRAc",
-        "image_CLmUF6",
-        "button_4nnMp6",
-        "subheading_MeryXT"
+        "spacing_yfwMkQ",
+        "image_zhr6xn",
+        "button_bbxcyp",
+        "subheading_3rzrXL"
       ],
-      "name": "BF BANNER",
+      "name": "Black Friday",
       "settings": {
         "transparent_header": true,
-        "image": "shopify://shop_images/ALL_SR_DESKTOP.webp",
+        "image": "shopify://shop_images/BLACK_FRIDAY_DESKTOP_BANNER_SR.webp",
         "image_height": "adapt",
         "content_width": "small",
         "content_position": "md:items-center md:justify-start",
         "text_alignment": "left",
-        "image_mobile": "shopify://shop_images/ALL_SR_MOBILE_10cde41a-1b1e-4428-a036-0dade1f32386.webp",
-        "image_height_mobile": "500px",
+        "image_mobile": "shopify://shop_images/BLACK_FRIDAY_3.0_mobile_BANNER_SR.webp",
+        "image_height_mobile": "adapt",
         "content_position_mobile": "items-start justify-center",
         "text_alignment_mobile": "center",
         "color_text": "#ffffff",
@@ -938,7 +938,7 @@
     "image_with_text_overlay_d6BhjR",
     "image_with_text_overlay_9hBe4F",
     "image_with_text_overlay_AQTGmV",
-    "image_with_text_overlay_H9nYcy",
+    "image_with_text_overlay_9cVUKD",
     "image_with_text_overlay_rJxPnP",
     "featured_product_AnLQhJ",
     "video_with_text_overlay_3XfMhk",
