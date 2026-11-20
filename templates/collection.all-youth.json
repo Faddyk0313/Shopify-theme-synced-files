@@ -327,13 +327,13 @@
           "type": "spacing",
           "settings": {
             "height": 24,
-            "height_mobile": 0
+            "height_mobile": 12
           }
         },
         "image_CLmUF6": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/BLACK_FRIDAY_BATTLEGEAR_3.0.png",
+            "image": "shopify://shop_images/BLACK_FRIDAY_IS_LIVE_2.webp",
             "image_width": "custom",
             "image_max_width": 380,
             "image_max_width_mobile": 210
@@ -370,13 +370,13 @@
       "name": "Black Friday",
       "settings": {
         "transparent_header": true,
-        "image": "shopify://shop_images/ALL_YTH_DESKTOP.webp",
+        "image": "shopify://shop_images/BLACK_FRIDAY_DESKTOP_BANNER_2.webp",
         "image_height": "adapt",
         "content_width": "small",
         "content_position": "md:items-center md:justify-start",
         "text_alignment": "left",
-        "image_mobile": "shopify://shop_images/ALL_YTH_MOBILE.webp",
-        "image_height_mobile": "500px",
+        "image_mobile": "shopify://shop_images/BLACK_FRIDAY_3.0_mobile_BANNER_2.webp",
+        "image_height_mobile": "adapt",
         "content_position_mobile": "items-start justify-center",
         "text_alignment_mobile": "center",
         "color_text": "#ffffff",
