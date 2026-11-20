@@ -369,7 +369,7 @@
       ],
       "name": "Black Friday",
       "settings": {
-        "transparent_header": false,
+        "transparent_header": true,
         "image": "shopify://shop_images/ALL_YTH_DESKTOP.webp",
         "image_height": "adapt",
         "content_width": "small",
