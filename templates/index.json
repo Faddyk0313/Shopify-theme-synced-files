@@ -234,7 +234,7 @@
         "content_width": "small",
         "content_gap": 0,
         "content_gap_mobile": 0,
-        "image_height_mobile": "adapt",
+        "image_height_mobile": "600px",
         "accessibility_info": "Slideshow about our brand",
         "color_text": "#ffffff",
         "color_background": "#000000",
