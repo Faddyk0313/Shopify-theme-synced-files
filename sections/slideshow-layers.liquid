@@ -66,6 +66,9 @@
     margin-block-start: {{ section.settings.content_gap }}px;
   }
   /* TBG custom code: extra empty space above image / buttons (per slide) */
+  #shopify-section-{{ section.id }} .tbg-slideshow .banner__box > .tbg-space-above:first-child {
+    margin-block-start: var(--tbg-space, 0px);
+  }
   #shopify-section-{{ section.id }} .tbg-slideshow .banner__box > * + .tbg-space-above {
     margin-block-start: calc({{ section.settings.content_gap }}px + var(--tbg-space, 0px));
   }
@@ -73,8 +76,21 @@
     #shopify-section-{{ section.id }} .tbg-slideshow .banner__box > * + * {
       margin-block-start: {{ section.settings.content_gap_mobile }}px;
     }
+    #shopify-section-{{ section.id }} .tbg-slideshow .banner__box > .tbg-space-above:first-child {
+      margin-block-start: var(--tbg-space-mobile, 0px);
+    }
     #shopify-section-{{ section.id }} .tbg-slideshow .banner__box > * + .tbg-space-above {
       margin-block-start: calc({{ section.settings.content_gap_mobile }}px + var(--tbg-space-mobile, 0px));
+    }
+  }
+
+  /* TBG custom code: button group follows content alignment, also when buttons wrap */
+  #shopify-section-{{ section.id }} .tbg-buttons .tbg-buttons__row {
+    justify-content: var(--tbg-justify, flex-start);
+  }
+  @media screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }} .tbg-buttons .tbg-buttons__row {
+      justify-content: var(--tbg-justify-mobile, flex-start);
     }
   }
 
@@ -217,7 +233,12 @@
 
                   {%- if block.settings.button_label != blank or block.settings.button_label_2 != blank -%}
                     <div class="tbg-buttons tbg-space-above" style="--tbg-space: {{ block.settings.buttons_space }}px; --tbg-space-mobile: {{ block.settings.buttons_space_mobile }}px;">
-                      <div class="inline-flex flex-wrap items-center gap-4 pointer-events-auto">
+                      {%- comment -%} TBG custom code: real flex justify so wrapped buttons stay aligned {%- endcomment -%}
+                      {%- liquid
+                        assign btn_justify = block.settings.text_alignment | replace: 'left', 'flex-start' | replace: 'right', 'flex-end'
+                        assign btn_justify_mobile = block.settings.text_alignment_mobile | replace: 'left', 'flex-start' | replace: 'right', 'flex-end'
+                      -%}
+                      <div class="tbg-buttons__row flex flex-wrap items-center gap-4 pointer-events-auto" style="--tbg-justify: {{ btn_justify }}; --tbg-justify-mobile: {{ btn_justify_mobile }};">
                         {%- if block.settings.button_label != blank -%}
                           {%- render 'button',
                             label: block.settings.button_label,
