@@ -15,21 +15,22 @@
         "spacing_qhcfCE": {
           "type": "spacing",
           "settings": {
-            "height": 0,
-            "height_mobile": 24
+            "height": 24,
+            "height_mobile": 12
           }
         },
         "image_nwckpb": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/SR_BATTLEGEAR_HEADER.svg",
+            "image": "shopify://shop_images/BLACK_FRIDAY_BATTLEGEAR_3.0.png",
             "image_width": "custom",
-            "image_max_width": 420,
-            "image_max_width_mobile": 240
+            "image_max_width": 380,
+            "image_max_width_mobile": 210
           }
         },
         "spacing_nfx6eq": {
           "type": "spacing",
+          "disabled": true,
           "settings": {
             "height": 0,
             "height_mobile": 120
@@ -37,6 +38,7 @@
         },
         "spacing_mQdqAY": {
           "type": "spacing",
+          "disabled": true,
           "settings": {
             "height": 0,
             "height_mobile": 92
@@ -72,6 +74,101 @@
         "button_FfkYgb",
         "subheading_6hgNzJ"
       ],
+      "name": "BFCM header banner",
+      "settings": {
+        "transparent_header": true,
+        "image": "shopify://shop_images/3.0_banner_desktop.png",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-center md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/3.0_banner_mobile_581c74c8-5c77-4e2b-a3a6-3d48067f5d5c.png",
+        "image_height_mobile": "600px",
+        "content_position_mobile": "items-start justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_highlight": "#e2fb31",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "image_with_text_overlay_UWbYYX": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "spacing_BnT8bD": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 24
+          }
+        },
+        "image_pY9fqH": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/SR_BATTLEGEAR_HEADER.svg",
+            "image_width": "custom",
+            "image_max_width": 420,
+            "image_max_width_mobile": 240
+          }
+        },
+        "spacing_zwnwXY": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 120
+          }
+        },
+        "spacing_zw8EL8": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 92
+          }
+        },
+        "button_Kbqi8Y": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_label": "3.0 Release Schedule",
+            "button_link": "shopify://pages/production-tracker",
+            "button_style": "link",
+            "button_size": "sm",
+            "button_external": false,
+            "button_icon": true
+          }
+        },
+        "subheading_jUqz38": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "save on 2.0 while supplies last",
+            "subheading_size": "subtitle-lg",
+            "secondary_color": true
+          }
+        }
+      },
+      "block_order": [
+        "spacing_BnT8bD",
+        "image_pY9fqH",
+        "spacing_zwnwXY",
+        "spacing_zw8EL8",
+        "button_Kbqi8Y",
+        "subheading_jUqz38"
+      ],
+      "disabled": true,
       "name": "header banner",
       "settings": {
         "transparent_header": true,
@@ -864,6 +961,7 @@
   },
   "order": [
     "image_with_text_overlay_mXC8cG",
+    "image_with_text_overlay_UWbYYX",
     "featured_product_mKayji",
     "portfolio_custom_nTJygx",
     "main-collection",
