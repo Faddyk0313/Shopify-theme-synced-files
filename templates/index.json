@@ -140,9 +140,9 @@
             "image_inside_max_width": 400,
             "image_inside_max_width_mobile": 230,
             "image_inside_space": 0,
-            "image_inside_space_mobile": 0,
+            "image_inside_space_mobile": 21,
             "buttons_space": 0,
-            "buttons_space_mobile": 216,
+            "buttons_space_mobile": 207,
             "button_label": "SHOP SENIOR RINKWEAR",
             "button_link": "shopify://collections/youth-rinkwear",
             "button_style": "secondary",
@@ -191,7 +191,7 @@
             "image_inside_max_width": 400,
             "image_inside_max_width_mobile": 230,
             "image_inside_space": 0,
-            "image_inside_space_mobile": 0,
+            "image_inside_space_mobile": 27,
             "buttons_space": 0,
             "buttons_space_mobile": 216,
             "button_label": "SHOP LAST CHANCE",
@@ -223,7 +223,6 @@
         "image_cwp4Bx",
         "image_3jXE6W"
       ],
-      "disabled": true,
       "name": "Slideshow - Custom",
       "settings": {
         "transparent_header": false,
@@ -342,6 +341,7 @@
         "spacing_BE7wGF",
         "button_yBVAV6"
       ],
+      "disabled": true,
       "name": "MAIN HERO BANNER",
       "settings": {
         "transparent_header": true,
