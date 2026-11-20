@@ -135,6 +135,7 @@
       "blocks": {
         "heading_jpEARD": {
           "type": "heading",
+          "disabled": true,
           "settings": {
             "heading": "<em>YOUTH</em> RINKWEAR",
             "heading_size": "title-xl tracking-heading",
@@ -142,6 +143,15 @@
             "highlighted_text": "marker",
             "highlighted_scribble": "circle",
             "highlighted_reveal": false
+          }
+        },
+        "image_mi3fWX": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/BLACK_FRIDAY_RINKWEAR.png",
+            "image_width": "custom",
+            "image_max_width": 320,
+            "image_max_width_mobile": 210
           }
         },
         "button_QRK6eh": {
@@ -159,6 +169,7 @@
       },
       "block_order": [
         "heading_jpEARD",
+        "image_mi3fWX",
         "button_QRK6eh"
       ],
       "name": "Rich text",
@@ -180,7 +191,7 @@
         "highlighted_scribble": "circle",
         "highlighted_reveal": false,
         "color_text": "#000000",
-        "color_background": "#f2f2f2",
+        "color_background": "#000000",
         "gradient_background": "",
         "color_highlight": "",
         "gradient_highlight": "",
