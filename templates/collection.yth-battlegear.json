@@ -15,17 +15,17 @@
         "spacing_qhcfCE": {
           "type": "spacing",
           "settings": {
-            "height": 0,
-            "height_mobile": 24
+            "height": 24,
+            "height_mobile": 12
           }
         },
         "image_nwckpb": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/YTH_BATTLEGEAR_HEADER_d446deed-2d07-4714-afb6-124b0a8b3a0f.svg",
+            "image": "shopify://shop_images/BLACK_FRIDAY_BATTLEGEAR_3.0.png",
             "image_width": "custom",
-            "image_max_width": 420,
-            "image_max_width_mobile": 240
+            "image_max_width": 380,
+            "image_max_width_mobile": 210
           }
         },
         "spacing_nfx6eq": {
@@ -81,7 +81,7 @@
         "content_position": "md:items-center md:justify-start",
         "text_alignment": "left",
         "image_mobile": "shopify://shop_images/YTH_3.0_banner_mobile.webp",
-        "image_height_mobile": "adapt",
+        "image_height_mobile": "600px",
         "content_position_mobile": "items-start justify-center",
         "text_alignment_mobile": "center",
         "color_text": "#ffffff",
