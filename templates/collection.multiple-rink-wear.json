@@ -161,6 +161,7 @@
         "heading_jpEARD",
         "button_QRK6eh"
       ],
+      "disabled": true,
       "name": "Rich text",
       "settings": {
         "text_alignment": "center",
@@ -181,6 +182,81 @@
         "highlighted_reveal": false,
         "color_text": "#000000",
         "color_background": "#f2f2f2",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "rich_text_4BXrwC": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_aaEJWU": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "<em>YOUTH</em> RINKWEAR",
+            "heading_size": "title-xl tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "marker",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "image_jPaAtA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/BLACK_FRIDAY_RINKWEAR.png",
+            "image_width": "custom",
+            "image_max_width": 320,
+            "image_max_width_mobile": 210
+          }
+        },
+        "button_6tRA3N": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_aaEJWU",
+        "image_jPaAtA",
+        "button_6tRA3N"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "highlighted_reveal": false,
+        "color_text": "#000000",
+        "color_background": "#000000",
         "gradient_background": "",
         "color_highlight": "",
         "gradient_highlight": "",
@@ -912,6 +988,7 @@
     "image_with_text_overlay_LmqN6L",
     "main-collection-banner",
     "rich_text_gWFEyB",
+    "rich_text_4BXrwC",
     "image_with_text_overlay_WjDFEn",
     "custom_liquid_r8M3d3",
     "featured_collection_Kyj9yb",
