@@ -9,10 +9,102 @@
  */
 {
   "sections": {
-    "image_with_text_overlay_LmqN6L": {
+    "image_with_text_overlay_QVnGkN": {
       "type": "image-with-text-overlay",
       "blocks": {
-        "image_NfWpCJ": {
+        "heading_kz8g9t": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "not all neck guards are created equal",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "spacing_KgLaf7": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 0
+          }
+        },
+        "image_c4bcjr": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/BLACK_FRIDAY_BATTLEGEAR_3.0.png",
+            "image_width": "custom",
+            "image_max_width": 290,
+            "image_max_width_mobile": 200
+          }
+        },
+        "spacing_yFamci": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 120
+          }
+        },
+        "spacing_xp6LBk": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 120
+          }
+        },
+        "spacing_TdjGnx": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 76
+          }
+        }
+      },
+      "block_order": [
+        "heading_kz8g9t",
+        "spacing_KgLaf7",
+        "image_c4bcjr",
+        "spacing_yFamci",
+        "spacing_xp6LBk",
+        "spacing_TdjGnx"
+      ],
+      "name": "TEASER PUCK",
+      "settings": {
+        "transparent_header": true,
+        "image": "shopify://shop_images/BLACK_FRIDAY_3.0_desktop_BANNER_last_chance.webp",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-center md:justify-start",
+        "text_alignment": "center",
+        "image_mobile": "shopify://shop_images/BLACK_FRIDAY_3.0_mobile_BANNER_last_chance.webp",
+        "image_height_mobile": "600px",
+        "content_position_mobile": "items-start justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#000000",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_highlight": "#e2fb31",
+        "gradient_highlight": "",
+        "color_button_text": "#000000",
+        "color_button_background": "#ff630d",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "image_with_text_overlay_RLEkX4": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "image_PDN7pr": {
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/MY_SIZE_IN_STOCK.svg",
@@ -21,7 +113,7 @@
             "image_max_width_mobile": 190
           }
         },
-        "heading_8ptPLt": {
+        "heading_FJgGcm": {
           "type": "heading",
           "disabled": true,
           "settings": {
@@ -35,9 +127,10 @@
         }
       },
       "block_order": [
-        "image_NfWpCJ",
-        "heading_8ptPLt"
+        "image_PDN7pr",
+        "heading_FJgGcm"
       ],
+      "disabled": true,
       "custom_css": [
         "h1 {font-family: TITANFONT;}"
       ],
@@ -700,7 +793,8 @@
     }
   },
   "order": [
-    "image_with_text_overlay_LmqN6L",
+    "image_with_text_overlay_QVnGkN",
+    "image_with_text_overlay_RLEkX4",
     "video_with_text_overlay_BrRnMV",
     "image_with_text_overlay_GT9ggN",
     "video_with_text_overlay_UeHE9i",
