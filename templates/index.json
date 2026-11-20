@@ -225,7 +225,7 @@
       ],
       "name": "Slideshow - Custom",
       "settings": {
-        "transparent_header": false,
+        "transparent_header": true,
         "autoplay": true,
         "autoplay_speed": 3,
         "show_navigation": true,
@@ -237,7 +237,7 @@
         "image_height_mobile": "adapt",
         "accessibility_info": "Slideshow about our brand",
         "color_text": "#ffffff",
-        "color_background": "",
+        "color_background": "#000000",
         "gradient_background": "",
         "padding_top": 0,
         "padding_bottom": 0,
