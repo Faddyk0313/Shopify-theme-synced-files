@@ -84,6 +84,13 @@
     }
   }
 
+  /* TBG custom code: mobile slideshow dots alignment */
+  @media screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }} .tbg-slideshow .slideshow-dots {
+      justify-content: {{ section.settings.navigation_alignment_mobile | replace: 'left', 'flex-start' | replace: 'right', 'flex-end' }};
+    }
+  }
+
   /* TBG custom code: button group follows content alignment, also when buttons wrap */
   #shopify-section-{{ section.id }} .tbg-buttons .tbg-buttons__row {
     justify-content: var(--tbg-justify, flex-start);
@@ -332,6 +339,27 @@
       "id": "show_navigation",
       "label": "t:sections.slideshow.settings.show_navigation.label",
       "default": true
+    },
+    {
+      "visible_if": "{{ section.settings.show_navigation }}",
+      "type": "select",
+      "id": "navigation_alignment_mobile",
+      "label": "Dots alignment (mobile)",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
     },
     {
       "type": "select",
