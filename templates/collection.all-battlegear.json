@@ -367,7 +367,8 @@
         "button_4nnMp6",
         "subheading_MeryXT"
       ],
-      "name": "3.0 Banner",
+      "disabled": true,
+      "name": "3.0 Banner to activate",
       "settings": {
         "transparent_header": true,
         "image": "shopify://shop_images/3.0_banner_desktop.png",
@@ -386,6 +387,98 @@
         "gradient_highlight": "",
         "color_button_text": "#171717",
         "color_button_background": "#e2fb31",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "image_with_text_overlay_pyk3fq": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_DYdxz7": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "not all neck guards are created equal",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "highlighted_reveal": false
+          }
+        },
+        "spacing_VaQANz": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 0
+          }
+        },
+        "image_YBAqnX": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/BLACK_FRIDAY_LAST_CHANCE.png",
+            "image_width": "custom",
+            "image_max_width": 290,
+            "image_max_width_mobile": 200
+          }
+        },
+        "spacing_PKNdgx": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 120
+          }
+        },
+        "spacing_V4kLJM": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 120
+          }
+        },
+        "spacing_VJGQaM": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 76
+          }
+        }
+      },
+      "block_order": [
+        "heading_DYdxz7",
+        "spacing_VaQANz",
+        "image_YBAqnX",
+        "spacing_PKNdgx",
+        "spacing_V4kLJM",
+        "spacing_VJGQaM"
+      ],
+      "name": "Black Friday",
+      "settings": {
+        "transparent_header": true,
+        "image": "shopify://shop_images/BLACK_FRIDAY_3.0_desktop_BANNER_last_chance.webp",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-center md:justify-start",
+        "text_alignment": "center",
+        "image_mobile": "shopify://shop_images/BLACK_FRIDAY_3.0_mobile_BANNER_last_chance.webp",
+        "image_height_mobile": "600px",
+        "content_position_mobile": "items-start justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#000000",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_highlight": "#e2fb31",
+        "gradient_highlight": "",
+        "color_button_text": "#000000",
+        "color_button_background": "#ff630d",
         "color_button_gradient": "",
         "color_overlay": "#171717",
         "overlay_opacity": 0,
@@ -417,6 +510,7 @@
           "settings": {
             "title_size": "product-title-md",
             "title_size_mobile": "product-title-md",
+            "title_tag": "h2",
             "show_price": true,
             "show_rating": true
           }
@@ -806,6 +900,8 @@
         "enable_sorting": true,
         "show_on_model": false,
         "buttons_style": "secondary",
+        "baselayer_button_size": "button--small",
+        "baselayer_button_font_size": 14,
         "padding_top": 36,
         "padding_bottom": 72,
         "divider": false,
@@ -856,6 +952,7 @@
     "image_with_text_overlay_9hBe4F",
     "image_with_text_overlay_AQTGmV",
     "image_with_text_overlay_H9nYcy",
+    "image_with_text_overlay_pyk3fq",
     "featured_product_AnLQhJ",
     "video_with_text_overlay_3XfMhk",
     "video_with_text_overlay_yYKa9m",
