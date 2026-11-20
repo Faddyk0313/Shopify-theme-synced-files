@@ -327,16 +327,16 @@
           "type": "spacing",
           "settings": {
             "height": 0,
-            "height_mobile": 24
+            "height_mobile": 0
           }
         },
         "image_CLmUF6": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/shop_all_senior.svg",
+            "image": "shopify://shop_images/BLACK_FRIDAY_BATTLEGEAR_3.0.png",
             "image_width": "custom",
-            "image_max_width": 240,
-            "image_max_width_mobile": 160
+            "image_max_width": 380,
+            "image_max_width_mobile": 210
           }
         },
         "button_4nnMp6": {
@@ -367,6 +367,85 @@
         "button_4nnMp6",
         "subheading_MeryXT"
       ],
+      "name": "BF BANNER",
+      "settings": {
+        "transparent_header": true,
+        "image": "shopify://shop_images/ALL_SR_DESKTOP.webp",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-center md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/ALL_SR_MOBILE_10cde41a-1b1e-4428-a036-0dade1f32386.webp",
+        "image_height_mobile": "500px",
+        "content_position_mobile": "items-start justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "#000000",
+        "gradient_background": "",
+        "color_highlight": "#e2fb31",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#e2fb31",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "image_with_text_overlay_rJxPnP": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "spacing_KddaVH": {
+          "type": "spacing",
+          "settings": {
+            "height": 0,
+            "height_mobile": 24
+          }
+        },
+        "image_kjWw6U": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/shop_all_senior.svg",
+            "image_width": "custom",
+            "image_max_width": 240,
+            "image_max_width_mobile": 160
+          }
+        },
+        "button_Q6i4Wg": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_label": "SHOP 3.0",
+            "button_link": "shopify://collections/battlegear-3-0",
+            "button_style": "secondary",
+            "button_size": "sm",
+            "button_external": false,
+            "button_icon": true
+          }
+        },
+        "subheading_Yqd4Yy": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "subheading": "save on 2.0 while supplies last",
+            "subheading_size": "subtitle-lg",
+            "secondary_color": true
+          }
+        }
+      },
+      "block_order": [
+        "spacing_KddaVH",
+        "image_kjWw6U",
+        "button_Q6i4Wg",
+        "subheading_Yqd4Yy"
+      ],
+      "disabled": true,
       "name": "3.0 Banner",
       "settings": {
         "transparent_header": true,
@@ -860,6 +939,7 @@
     "image_with_text_overlay_9hBe4F",
     "image_with_text_overlay_AQTGmV",
     "image_with_text_overlay_H9nYcy",
+    "image_with_text_overlay_rJxPnP",
     "featured_product_AnLQhJ",
     "video_with_text_overlay_3XfMhk",
     "video_with_text_overlay_yYKa9m",
