@@ -229,6 +229,7 @@
         "autoplay": true,
         "autoplay_speed": 3,
         "show_navigation": true,
+        "navigation_alignment_mobile": "center",
         "image_height": "adapt",
         "content_width": "small",
         "content_gap": 0,
