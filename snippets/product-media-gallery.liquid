@@ -138,7 +138,7 @@
   >
     <div class="relative w-full h-full">
       {% comment %} TBG custom Code {% endcomment %}
-      <slider-element id="SliderGallery-{{ section_id }}-{{ product_id }}" class="slider slider--desktop slider--tablet block w-full h-full" selector=".product__media" tabindex="0" data-mobile-forward-loop data-pdp-media-gallery-tracking data-product-id="{{ product.id }}" data-product-handle="{{ product.handle | escape }}" data-product-title="{{ product.title | escape }}">
+      <slider-element id="SliderGallery-{{ section_id }}-{{ product_id }}" class="slider slider--desktop slider--tablet block w-full h-full" selector=".product__media" tabindex="0" data-mobile-forward-loop>
         <div
           class="product__media-list flex gap-1
           {%- if gallery_layout == 'columns' %} lg:grid lg:gap-4 xl:gap-5 grid-cols-2{% endif -%}
