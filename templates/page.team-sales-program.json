@@ -1115,6 +1115,12 @@
     "rich_text_qtEApy": {
       "type": "rich-text",
       "blocks": {
+        "liquid_zwdpBq": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<div id=\"tbg-team-form\" style=\"max-width: 0px; max-height: 0px; overflow: hidden;\"></div>"
+          }
+        },
         "heading_wHxYiJ": {
           "type": "heading",
           "settings": {
@@ -1128,6 +1134,7 @@
         }
       },
       "block_order": [
+        "liquid_zwdpBq",
         "heading_wHxYiJ"
       ],
       "name": "t:sections.rich-text.name",
