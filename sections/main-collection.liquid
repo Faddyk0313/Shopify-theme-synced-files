@@ -41,26 +41,42 @@
   </script>
 {%- endif -%}
 
-{%- if collection.template_suffix == 'collection-ads-march-26'
-  or collection.template_suffix == 'female-collection'
-  or collection.template_suffix == 'usa-hockey-collection-ads'
-  or collection.template_suffix == 'goalie-collection'
+{% comment %}
+  TBG CUSTOM CODE: "In stock only" ON by default on every collection.
+  - Only runs when the collection actually has the in-stock filter.
+  - 2xl-3xl and beer-league have their own blocks (in-stock + sizes), so they're skipped here.
+  - If the shopper switches it OFF, that choice is remembered for this collection for the
+    rest of the browser session (so reload / back from a product doesn't flip it back on).
+{% endcomment %}
+{%- liquid
+  assign tbg_has_in_stock_filter = false
+  for filter in collection.filters
+    if filter.param_name == 'filter.v.m.custom.variant_has_inventory'
+      assign tbg_has_in_stock_filter = true
+      break
+    endif
+  endfor
+-%}
+{%- if tbg_has_in_stock_filter
+  and collection.template_suffix != '2xl-3xl'
+  and collection.template_suffix != 'beer-league-collection'
 -%}
   <script>
     (function () {
-      var currentUrl = new URL(window.location.href);
-      var inventoryParam = 'filter.v.m.custom.variant_has_inventory';
-      var inventoryValue = '1';
-      var currentValues = currentUrl.searchParams.getAll(inventoryParam);
+      var param = 'filter.v.m.custom.variant_has_inventory';
+      var key = 'tbg:in-stock-off:' + window.location.pathname;
 
-      if (currentValues.indexOf(inventoryValue) !== -1) {
-        return;
+      function isOff() {
+        try { return sessionStorage.getItem(key) === '1'; } catch (e) { return false; }
       }
 
-      currentUrl.searchParams.delete(inventoryParam);
-      currentUrl.searchParams.append(inventoryParam, inventoryValue);
-
-      window.location.replace(currentUrl.toString());
+      // The opt-out flag is written by the facet form in assets/collection.js (updateURLHash).
+      var currentUrl = new URL(window.location.href);
+      if (!currentUrl.searchParams.has(param) && !isOff()) {
+        currentUrl.searchParams.append(param, '1');
+        currentUrl.searchParams.delete('page');
+        window.location.replace(currentUrl.toString());
+      }
     })();
   </script>
 {%- endif -%}

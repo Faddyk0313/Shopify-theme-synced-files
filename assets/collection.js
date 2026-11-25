@@ -86,6 +86,17 @@ if (!customElements.get('facet-form')) {
         const clonedUrl = new URL(url);
         clonedUrl.searchParams.delete('section_id');
         history.replaceState({}, '', clonedUrl.toString());
+
+        // TBG CUSTOM CODE: remember if the shopper switched "In stock only" off on this
+        // collection, so the default-on redirect in main-collection.liquid respects it.
+        try {
+          const key = 'tbg:in-stock-off:' + clonedUrl.pathname;
+          if (clonedUrl.searchParams.has('filter.v.m.custom.variant_has_inventory')) {
+            sessionStorage.removeItem(key);
+          } else {
+            sessionStorage.setItem(key, '1');
+          }
+        } catch (e) {}
       }
 
       beforeRenderSection() {
